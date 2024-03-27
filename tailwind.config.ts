@@ -21,6 +21,9 @@ const config: Config = {
         xl: "1600px",
         "2xl": "1920px",
       },
+      colors: {
+        "brand-color": "#4D8CFC",
+      },
     },
   },
   plugins: [],

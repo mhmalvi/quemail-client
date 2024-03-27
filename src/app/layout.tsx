@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
+
 import "./globals.css";
-import Navbar from "@/components/Navbar/Navbar";
+import Navbar from "@/components/Landing/Navbar";
 
 const montserrat = Montserrat({
-  weight: ["200", "400", "500", "700"],
   subsets: ["latin"],
-  variable: "--font-montserrat",
+  style: ["normal", "italic"],
+  weight: ["400", "700"],
 });
 
 export const metadata: Metadata = {
