@@ -1,0 +1,12 @@
+.crm-menu-desktop {
+    position: relative !important;
+    top:0;
+  }
+  
+  .crm-menu-desktop.crm-fixed {
+    position: fixed !important;
+    z-index: 100000 !important;
+  
+    /* Add other styling properties for the fixed position */
+  }
+  
