@@ -13,13 +13,16 @@ const SectionTwo = () => {
         </span>
       </h1>
       <Image src={Images.SectionTwo} alt="HeroImage" />
-      <div className="w-9/12  flex flex-wrap gap-4 justify-between">
+      <div className="lg:w-9/12 w-full flex flex-wrap gap-4 justify-between">
         {sectionTwoData.map((items, index) => {
           return (
-            <div key={index} className="flex gap-4 items-center lg:w-5/12">
+            <div
+              key={index}
+              className="flex gap-4 items-center lg:w-5/12 w-full"
+            >
               <div className="h-20 w-20 bg-slate-700 animate-pulse"></div>
-              <div className="w-9/12 flex flex-col gap-2">
-                <h1 className="text-base w-2/3 text-brand-color">
+              <div className="lg:w-9/12 w-10/12 flex flex-col gap-2">
+                <h1 className="lg:text-base text-sm lg:w-2/3 w-full text-brand-color">
                   {items.title}
                 </h1>
                 <p className="text-sm text-slate-300">{items.description}</p>
