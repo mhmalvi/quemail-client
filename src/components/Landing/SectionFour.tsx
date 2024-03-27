@@ -17,7 +17,7 @@ const SectionTwo = () => {
       </p>
       <Image src={Images.SectionFour} alt="HeroImage" />
       <button className="px-4 py-2 bg-yellow-500 text-gray-800 rounded-md font-semibold">
-        Create Free account
+        Create Free account ➟
       </button>
       <p className="p-0 m-0 text-sm text-slate-500">
         Try us free  |  No credit card required  |  Cancel anytime

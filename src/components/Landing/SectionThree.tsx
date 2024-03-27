@@ -45,7 +45,7 @@ const SectionTwo = () => {
           Get connected with our team to get your custom pricing
         </h1>
         <button className="px-4 py-2 bg-yellow-500 rounded-md text-gray-800 lg:text-base text-sm font-semibold">
-          Book a demo
+          Book a demo ➟
         </button>
       </div>
     </div>
