@@ -8,7 +8,7 @@ const SectionTwo = () => {
     <div className="w-full flex flex-col gap-4 items-center justify-center h-full">
       <h1 className="m-0 px-0 py-2 lg:text-2xl text-base text-center flex flex-col lg:gap-2 text-slate-300">
         Easier email marketing & automation that
-        <span className="text-brand-color lg:text-3xl text-xl">
+        <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-color to-brand-color-2 lg:text-3xl text-xl">
           converts contacts into customers
         </span>
       </h1>
@@ -22,7 +22,7 @@ const SectionTwo = () => {
             >
               <div className="h-20 w-20 bg-slate-700 animate-pulse"></div>
               <div className="lg:w-9/12 w-10/12 flex flex-col gap-2">
-                <h1 className="lg:text-base text-sm lg:w-2/3 w-full text-brand-color">
+                <h1 className="lg:text-base text-sm lg:w-2/3 w-full text-transparent bg-clip-text bg-gradient-to-r from-brand-color to-brand-color-2">
                   {items.title}
                 </h1>
                 <p className="text-sm text-slate-300">{items.description}</p>

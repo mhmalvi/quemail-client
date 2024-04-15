@@ -5,10 +5,10 @@ import Images from "../utils/images";
 
 const SectionOne = () => {
   return (
-    <div className="w-full flex flex-col gap-4 items-center justify-center h-screen">
+    <div className="w-full flex flex-col gap-4 items-center justify-center h-screen ">
       <h1 className="m-0 px-0 py-2 lg:text-4xl text-3xl text-center flex flex-col gap-2 text-slate-300 lg:mt-8">
         Reach your leads with
-        <span className="text-brand-color lg:text-5xl text-4xl">
+        <span className="bg-clip-text text-transparent bg-gradient-to-r from-brand-color to-brand-color-2 py-1 font-semibold lg:text-5xl text-4xl">
           Email Marketing
         </span>
       </h1>

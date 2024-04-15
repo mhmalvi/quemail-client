@@ -5,12 +5,12 @@ import Images from "../utils/images";
 const SectionSix = () => {
   return (
     <div className="w-full flex flex-col gap-4 items-center justify-center h-full py-16">
-      <div className="flex lg:flex-row flex-col flex-grow items-center w-full gap-8 p-16 rounded-md w-full bg-gradient-to-b from-blue-900 to-indigo-900">
+      <div className="flex lg:flex-row flex-col flex-grow items-center w-full gap-8 p-16 rounded-md w-full bg-gradient-to-b from-brand-color to-brand-color-2">
         <div className="lg:w-1/2 flex flex-col items-center justify-center gap-4">
           <h1 className="text-3xl text-center">
             Create engaging emails 85% faster
           </h1>
-          <button className="bg-brand-color px-8 py-2 rounded-md">
+          <button className="bg-background-color px-8 py-2 rounded-md">
             Get Started
           </button>
         </div>

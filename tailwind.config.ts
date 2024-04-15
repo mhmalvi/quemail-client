@@ -5,6 +5,7 @@ const config: Config = {
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+    "node_modules/flowbite-react/lib/esm/**/*.js",
   ],
   theme: {
     extend: {
@@ -22,10 +23,12 @@ const config: Config = {
         "2xl": "1920px",
       },
       colors: {
-        "brand-color": "#4D8CFC",
+        "brand-color": "#6f53ff",
+        "brand-color-2": "#c757ff",
+        "background-color": "#141517",
       },
     },
   },
-  plugins: [],
+  plugins: [require("flowbite/plugin")],
 };
 export default config;

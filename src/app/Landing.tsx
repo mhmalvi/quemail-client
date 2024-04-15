@@ -10,7 +10,7 @@ import "./globals.css";
 
 const Landing = () => {
   return (
-    <div className="relative bg-black flex flex-col items-center justify-between w-full h-full 2xl:px-72 xl:px-64 lg:px-36 md:px-8 px-4">
+    <div className="relative flex flex-col items-center justify-between w-full h-full 2xl:px-72 xl:px-64 lg:px-36 md:px-8 px-4">
       <SectionOne />
       <SectionTwo />
       <SectionThree />

@@ -6,7 +6,10 @@ const SectionTwo = () => {
     <div className="w-full flex flex-col gap-16 items-center justify-center h-screen">
       <h1 className="m-0 p-0 text-4xl text-center flex lg:gap-2 text-slate-300 mt-16">
         Why
-        <span className="text-brand-color ml-2"> Quemailer?</span>
+        <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-color to-brand-color-2 ml-2">
+          {" "}
+          Quemailer?
+        </span>
       </h1>
 
       <div className="lg:w-full lg:p-0 px-8 flex flex-wrap lg:gap-4 gap-y-4 justify-between">

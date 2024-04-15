@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import Images from "../utils/images";
 import Image from "next/image";
+import Link from "next/link";
 
 const Navbar = () => {
   const [openNavDrawer, setOpenNavDrawer] = useState(false);
@@ -22,7 +23,7 @@ const Navbar = () => {
   }, []);
   return (
     <>
-      <nav className="fixed flex items-center justify-between w-full 2xl:px-72 xl:px-64 lg:px-36 md:px-8 px-2 shadow-md shadow-brand-color z-20 bg-black">
+      <nav className="fixed flex items-center justify-between w-full 2xl:px-72 xl:px-64 lg:px-36 md:px-8 px-2 shadow-md shadow-brand-color z-20 bg-background-color">
         <Image
           src={Images.Logo}
           className={`w-52 m-0 p-0 z-20
@@ -47,12 +48,16 @@ const Navbar = () => {
           </li>
         </ul>
         <div className="md:flex hidden gap-8">
-          <button className="rounded-md bg-brand-color px-4 py-2">
-            Try for free
-          </button>
-          <button className="rounded-md border border-brand-color px-4 py-2">
-            Login
-          </button>
+          <Link href="/sign-up">
+            <button className="rounded-md bg-brand-color px-4 py-2">
+              Try for free
+            </button>
+          </Link>
+          <Link href="/login">
+            <button className="rounded-md border border-brand-color px-4 py-2">
+              Login
+            </button>
+          </Link>
         </div>
         <div
           className="md:hidden"
@@ -82,7 +87,7 @@ const Navbar = () => {
         </div>
       </nav>
       {openNavDrawer && (
-        <div className="fixed flex flex-col gap-16 items-center justify-center h-full w-full z-10 bg-black">
+        <div className="fixed flex flex-col gap-16 items-center justify-center h-full w-full z-10 bg-background-color">
           <ul className="flex flex-col gap-8">
             <li className="text-3xl ease-in duration-200">About Us</li>
             <li className="text-3xl ease-in duration-200">Pricing</li>
@@ -91,12 +96,16 @@ const Navbar = () => {
             <li className="text-3xl">Privacy Policy</li>
           </ul>
           <div className="flex flex-col items-center justify-center gap-8 w-full">
-            <button className="rounded-md bg-brand-color px-4 py-2 w-1/2 text-2xl">
-              Try for free
-            </button>
-            <button className="rounded-md border border-brand-color w-1/2 px-4 py-2 text-2xl">
-              Login
-            </button>
+            <Link href="/sign-up" className="w-1/2">
+              <button className="rounded-md bg-brand-color px-4 py-2 w-full text-2xl">
+                Try for free
+              </button>
+            </Link>
+            <Link href="/login" className="w-1/2">
+              <button className="rounded-md border border-brand-color w-full px-4 py-2 text-2xl">
+                Login
+              </button>
+            </Link>
           </div>
         </div>
       )}
