@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import React from "react";
-import Icons from "../utils/icons";
+import Images from "../utils/images";
 
 const QuickActions = () => {
   return (
@@ -13,20 +13,24 @@ const QuickActions = () => {
         Use these features to excel your work flow
       </p>
       <button className="rounded-md h-full flex gap-4 items-center 2xl:p-4 p-2 dark:bg-dark-glass bg-light-glass dark:border-light-black border dark:border-slate-500 dark:hover:border-brand-color hover:border-brand-color duration-100 ease-in">
-        <Image src={Icons.Add_Contact} alt="add_Contact" className="w-1/4" />
+        <Image src={Images.Add_Contact} alt="add_Contact" className="w-1/4" />
         <h1 className="dark:text-slate-300 text-dark-black text-base m-0 p-0 text-start">
           Add a contact
         </h1>
       </button>
       <button className="rounded-md h-full flex gap-4 items-center 2xl:p-4 p-2 dark:bg-dark-glass bg-light-glass dark:border-light-black border  dark:border-slate-500 dark:hover:border-brand-color hover:border-brand-color duration-100 ease-in">
-        <Image src={Icons.Import_Contact} alt="add_Contact" className="w-1/4" />
+        <Image
+          src={Images.Import_Contact}
+          alt="add_Contact"
+          className="w-1/4"
+        />
         <h1 className="dark:text-slate-300 text-dark-black text-base m-0 p-0 text-start">
           Import Contacts
         </h1>
       </button>
 
       <button className="rounded-md h-full flex gap-4 items-center 2xl:p-4 p-2 dark:bg-dark-glass bg-light-glass dark:border-light-black border  dark:border-slate-500 dark:hover:border-brand-color hover:border-brand-color duration-100 ease-in">
-        <Image src={Icons.Create_Groups} alt="add_Contact" className="w-1/4" />
+        <Image src={Images.Create_Groups} alt="add_Contact" className="w-1/4" />
         <h1 className="dark:text-slate-300 text-dark-black text-base m-0 p-0 text-start">
           Create Groups
         </h1>
@@ -34,7 +38,7 @@ const QuickActions = () => {
 
       <button className="rounded-md h-full flex gap-4 items-center 2xl:p-4 p-2 dark:bg-dark-glass bg-light-glass dark:border-light-black border  dark:border-slate-500 dark:hover:border-brand-color hover:border-brand-color duration-100 ease-in">
         <Image
-          src={Icons.Generate_Templates}
+          src={Images.Generate_Templates}
           alt="add_Contact"
           className="w-1/4"
         />
@@ -45,7 +49,7 @@ const QuickActions = () => {
 
       <button className="rounded-md h-full flex gap-4 items-center 2xl:p-4 p-2 dark:bg-dark-glass bg-light-glass dark:border-light-black border dark:border-slate-500 dark:hover:border-brand-color hover:border-brand-color duration-100 ease-in">
         <Image
-          src={Icons.Create_Campaigns}
+          src={Images.Create_Campaigns}
           alt="add_Contact"
           className="w-1/4"
         />

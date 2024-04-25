@@ -17,6 +17,11 @@ import SettingSidebar from "/public/SVG/Sidebar/Settings.svg";
 
 // Icons
 import { IoIosArrowForward } from "react-icons/io";
+import Add_Contact from "/public/icons/Add_Contact.svg";
+import Create_Campaigns from "/public/icons/Create_Campaigns.svg";
+import Create_Groups from "/public/icons/Create_Groups.svg";
+import Generate_Templates from "/public/icons/Generate_Templates.svg";
+import Import_Contact from "/public/icons/Import_Contact.svg";
 
 // Theme
 import Dark1 from "/public/Themes/Dark/1.svg";
@@ -40,6 +45,11 @@ const Images = {
   Dark1,
   Light1,
   NotAvailable,
+  Add_Contact,
+  Create_Campaigns,
+  Create_Groups,
+  Generate_Templates,
+  Import_Contact,
 };
 
 export default Images;
