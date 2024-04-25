@@ -1,5 +1,5 @@
 // Landing
-import Logo from "/public/logo.png";
+import Logo from "/public/Logo.png";
 import LogoS from "/public/SVG/SmallLogo.svg";
 import HeroImage from "/public/SVG/HeroImage.svg";
 import SectionTwo from "/public/SVG/SectionTwo.svg";
