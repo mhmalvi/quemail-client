@@ -1,33 +1,33 @@
 // Landing
-import Logo from "/public/logo.png";
-import LogoS from "/public/SVG/SmallLogo.svg";
-import HeroImage from "/public/SVG/HeroImage.svg";
-import SectionTwo from "/public/SVG/SectionTwo.svg";
-import SectionFour from "/public/SVG/SectionFour.svg";
-import SectionFive from "/public/SVG/SectionFive.svg";
+import Logo from "/logo.png";
+import LogoS from "/SVG/SmallLogo.svg";
+import HeroImage from "/SVG/HeroImage.svg";
+import SectionTwo from "/SVG/SectionTwo.svg";
+import SectionFour from "/SVG/SectionFour.svg";
+import SectionFive from "/SVG/SectionFive.svg";
 
 // Privacy Page
-import Privacy1 from "/public/SVG/PrivacyPolicy/PrivacyOne.svg";
-import Privacy2 from "/public/SVG/PrivacyPolicy/PrivacyTwo.svg";
+import Privacy1 from "/SVG/PrivacyPolicy/PrivacyOne.svg";
+import Privacy2 from "/SVG/PrivacyPolicy/PrivacyTwo.svg";
 
 // Sidebar
-import ContactSidebar from "/public/SVG/Sidebar/Contacts.svg";
-import CampaignSidebar from "/public/SVG/Sidebar/Campaigns.svg";
-import SettingSidebar from "/public/SVG/Sidebar/Settings.svg";
+import ContactSidebar from "/SVG/Sidebar/Contacts.svg";
+import CampaignSidebar from "/SVG/Sidebar/Campaigns.svg";
+import SettingSidebar from "/SVG/Sidebar/Settings.svg";
 
 // Icons
 import { IoIosArrowForward } from "react-icons/io";
-import Add_Contact from "/public/icons/Add_Contact.svg";
-import Create_Campaigns from "/public/icons/Create_Campaigns.svg";
-import Create_Groups from "/public/icons/Create_Groups.svg";
-import Generate_Templates from "/public/icons/Generate_Templates.svg";
-import Import_Contact from "/public/icons/Import_Contact.svg";
+import Add_Contact from "/icons/Add_Contact.svg";
+import Create_Campaigns from "/icons/Create_Campaigns.svg";
+import Create_Groups from "/icons/Create_Groups.svg";
+import Generate_Templates from "/icons/Generate_Templates.svg";
+import Import_Contact from "/icons/Import_Contact.svg";
 
 // Theme
-import Dark1 from "/public/Themes/Dark/1.svg";
-import Light1 from "/public/Themes/Light/1.svg";
+import Dark1 from "/Themes/Dark/1.svg";
+import Light1 from "/Themes/Light/1.svg";
 
-import NotAvailable from "/public/SVG/Home/NotAvailable.svg";
+import NotAvailable from "/SVG/Home/NotAvailable.svg";
 
 const Images = {
   Logo,
