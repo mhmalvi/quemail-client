@@ -27,4 +27,5 @@ const TemplateGenerator = () => {
     </div>
   );
 };
+export const dynamic = "force-dynamic";
 export default TemplateGenerator;
