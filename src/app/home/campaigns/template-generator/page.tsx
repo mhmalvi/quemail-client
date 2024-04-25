@@ -1,6 +1,7 @@
-"use client";
-import React, { useRef } from "react";
-// import EmailEditor, { EditorRef, EmailEditorProps } from "react-email-editor";
+// "use client";
+// import React, { useRef } from "react";
+//  import EmailEditor, { EditorRef, EmailEditorProps } from "react-email-editor";
+import Editor from "./editor";
 import "./template.css";
 const TemplateGenerator = () => {
   // const emailEditorRef = useRef<EditorRef>(null);
@@ -13,6 +14,7 @@ const TemplateGenerator = () => {
   //   });
   // };
   // const onReady: EmailEditorProps["onReady"] = (unlayer) => {};
+
   return (
     <div className="h-full flex flex-col gap-4 overflow-hidden rounded-md">
       <div className="flex items-center justify-end gap-4 ">
@@ -23,9 +25,12 @@ const TemplateGenerator = () => {
           Export HTML
         </button>
       </div>
+      <div className="w-full h-full p-4">
+        <Editor />
+      </div>
       {/* <EmailEditor ref={emailEditorRef} onReady={onReady} /> */}
     </div>
   );
 };
-export const dynamic = "force-dynamic";
+
 export default TemplateGenerator;
