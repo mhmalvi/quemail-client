@@ -9,7 +9,7 @@ import {
   Modal,
   Button,
 } from "flowbite-react";
-import NoContact from "./noContact";
+import NoContacts from "./NoContacts";
 
 const AllContacts = () => {
   const [currentPage, setCurrentPage] = useState(1);
