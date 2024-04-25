@@ -1,19 +1,19 @@
 "use client";
 import React, { useRef } from "react";
-import EmailEditor, { EditorRef, EmailEditorProps } from "react-email-editor";
+//  import EmailEditor, { EditorRef, EmailEditorProps } from "react-email-editor";
 // import Editor from "./editor";
 import "./template.css";
 const TemplateGenerator = () => {
-  const emailEditorRef = useRef<EditorRef>(null);
-  const exportHtml = () => {
-    const unlayer = emailEditorRef.current?.editor;
+  // const emailEditorRef = useRef<EditorRef>(null);
+  // const exportHtml = () => {
+  //   const unlayer = emailEditorRef.current?.editor;
 
-    unlayer?.exportHtml((data) => {
-      const { design, html } = data;
-      console.log("exportHtml", html);
-    });
-  };
-  const onReady: EmailEditorProps["onReady"] = (unlayer) => {};
+  //   unlayer?.exportHtml((data) => {
+  //     const { design, html } = data;
+  //     console.log("exportHtml", html);
+  //   });
+  // };
+  // const onReady: EmailEditorProps["onReady"] = (unlayer) => {};
 
   return (
     <div className="h-full flex flex-col gap-4 overflow-hidden rounded-md">
@@ -27,7 +27,7 @@ const TemplateGenerator = () => {
       </div>
       <div className="w-full h-full p-4">
         {/* <Editor /> */}
-        <EmailEditor ref={emailEditorRef} onReady={onReady} />
+        {/* <EmailEditor ref={emailEditorRef} onReady={onReady} /> */}
       </div>
     </div>
   );
