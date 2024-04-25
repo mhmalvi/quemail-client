@@ -7,7 +7,6 @@ import {
   Pagination,
   Table,
   Modal,
-  Button,
 } from "flowbite-react";
 
 const AllCampaigns = () => {

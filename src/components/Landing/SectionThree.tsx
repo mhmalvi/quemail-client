@@ -47,7 +47,7 @@ const SectionTwo = () => {
         <h1 className="m-0 p-0 lg:text-base text-sm text-slate-300">
           Get connected with our team to get your custom pricing
         </h1>
-        <button className="px-4 py-2 bg-yellow-500 rounded-md text-gray-800 lg:text-base text-sm font-semibold">
+        <button className="px-4 py-2 bg-yellow-300 rounded-md text-gray-800 lg:text-base text-sm font-semibold">
           Book a demo ➟
         </button>
       </div>

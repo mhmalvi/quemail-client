@@ -1,31 +1,57 @@
 "use client";
+import Image from "next/image";
 import React from "react";
-import { Homecard } from "@/components/utils/types";
+import Icons from "../utils/icons";
+
 const QuickActions = () => {
   return (
-    <div className="relative xl:w-1/4 w-1/3 bg-background-color rounded-md p-4 flex flex-col gap-4 overflow-hidden">
-      <h1 className="xl:text-xl text-base m-0 p-0 text-slate-300">
+    <div className=" xl:w-1/4 w-1/3 dark:bg-dark-glass bg-[#ffffffbf] shadow-md backdrop-blur-2xl rounded-md p-4 flex flex-col gap-4 overflow-hidden">
+      <h1 className="xl:text-xl text-base m-0 p-0 dark:text-white text-dark-black">
         Quick actions
       </h1>
-      <p className="xl:text-sm text-xs m-0 p-0 text-slate-300">
-        Unlock the full potential of Quemailer with our exclusive subscriber
-        content.
+      <p className="text-xs m-0 p-0 dark:text-slate-300 text-dark-black">
+        Use these features to excel your work flow
       </p>
-      <button className="px-4 py-2 w-full border border-gray-800/80 xl:text-base text-xs rounded-md">
-        Add a subscriber
+      <button className="rounded-md h-full flex gap-4 items-center 2xl:p-4 p-2 dark:bg-dark-glass bg-light-glass dark:border-light-black border dark:border-slate-500 dark:hover:border-brand-color hover:border-brand-color duration-100 ease-in">
+        <Image src={Icons.Add_Contact} alt="add_Contact" className="w-1/4" />
+        <h1 className="dark:text-slate-300 text-dark-black text-base m-0 p-0 text-start">
+          Add a contact
+        </h1>
       </button>
-      <p className="xl:text-sm text-xs m-0 p-0 text-slate-300">
-        Streamline your contact management process and get started with this
-        feature.
-      </p>
-      <button className="px-4 py-2 w-full border border-gray-800/80 xl:text-base text-xs rounded-md">
-        Import Contacts
+      <button className="rounded-md h-full flex gap-4 items-center 2xl:p-4 p-2 dark:bg-dark-glass bg-light-glass dark:border-light-black border  dark:border-slate-500 dark:hover:border-brand-color hover:border-brand-color duration-100 ease-in">
+        <Image src={Icons.Import_Contact} alt="add_Contact" className="w-1/4" />
+        <h1 className="dark:text-slate-300 text-dark-black text-base m-0 p-0 text-start">
+          Import Contacts
+        </h1>
       </button>
-      <p className="xl:text-sm text-xs m-0 p-0 text-slate-300">
-        Unlock the power of data-driven decision- making with Custom Reports.
-      </p>
-      <button className="px-4 py-2 w-full border border-gray-800/80 xl:text-base text-xs rounded-md">
-        Create a custom report
+
+      <button className="rounded-md h-full flex gap-4 items-center 2xl:p-4 p-2 dark:bg-dark-glass bg-light-glass dark:border-light-black border  dark:border-slate-500 dark:hover:border-brand-color hover:border-brand-color duration-100 ease-in">
+        <Image src={Icons.Create_Groups} alt="add_Contact" className="w-1/4" />
+        <h1 className="dark:text-slate-300 text-dark-black text-base m-0 p-0 text-start">
+          Create Groups
+        </h1>
+      </button>
+
+      <button className="rounded-md h-full flex gap-4 items-center 2xl:p-4 p-2 dark:bg-dark-glass bg-light-glass dark:border-light-black border  dark:border-slate-500 dark:hover:border-brand-color hover:border-brand-color duration-100 ease-in">
+        <Image
+          src={Icons.Generate_Templates}
+          alt="add_Contact"
+          className="w-1/4"
+        />
+        <h1 className="dark:text-slate-300 text-dark-black text-base m-0 p-0 text-start">
+          Generate Templates
+        </h1>
+      </button>
+
+      <button className="rounded-md h-full flex gap-4 items-center 2xl:p-4 p-2 dark:bg-dark-glass bg-light-glass dark:border-light-black border dark:border-slate-500 dark:hover:border-brand-color hover:border-brand-color duration-100 ease-in">
+        <Image
+          src={Icons.Create_Campaigns}
+          alt="add_Contact"
+          className="w-1/4"
+        />
+        <h1 className="dark:text-slate-300 text-dark-black text-base m-0 p-0 text-start">
+          Create Campaigns
+        </h1>
       </button>
     </div>
   );

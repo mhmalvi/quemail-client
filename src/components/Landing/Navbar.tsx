@@ -1,55 +1,68 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Images from "../utils/images";
 import Image from "next/image";
 import Link from "next/link";
 
 const Navbar = () => {
   const [openNavDrawer, setOpenNavDrawer] = useState(false);
-  const [isMenuFixed, setIsMenuFixed] = useState(false);
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrollY = window.scrollY;
-      // Define the scroll position where you want the menu to become fixed
-      const scrollThreshold = 0; // Adjust this value based on your needs
-      setIsMenuFixed(scrollY > scrollThreshold);
-    };
 
-    window.addEventListener("scroll", handleScroll);
+  // const [isMenuFixed, setIsMenuFixed] = useState(false);
+  // useEffect(() => {
+  //   const handleScroll = () => {
+  //     const scrollY = window.scrollY;
+  //     const scrollThreshold = 0;
+  //     setIsMenuFixed(scrollY > scrollThreshold);
+  //   };
 
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
+  //   window.addEventListener("scroll", handleScroll);
+
+  //   return () => {
+  //     window.removeEventListener("scroll", handleScroll);
+  //   };
+  // }, []);
   return (
     <>
-      <nav className="fixed flex items-center justify-between w-full 2xl:px-72 xl:px-64 lg:px-36 md:px-8 px-2 shadow-md shadow-brand-color z-20 bg-background-color">
-        <Image
-          src={Images.Logo}
-          className={`w-52 m-0 p-0 z-20
+      <nav className="fixed flex items-center justify-between w-full 2xl:px-72 xl:px-64 lg:px-36 md:px-8 px-2 shadow-md shadow-brand-color z-20 bg-dark-black">
+        <Link href="/">
+          {" "}
+          <Image
+            src={Images.Logo}
+            className={`w-52 m-0 p-0 z-20
         `}
-          alt="Logo"
-        />
+            alt="Logo"
+          />
+        </Link>
         <ul className="md:flex gap-8 hidden">
-          <li className="cursor-pointer hover:text-brand-color ease-in duration-200">
-            About Us
-          </li>
-          <li className="cursor-pointer hover:text-brand-color ease-in duration-200">
-            Pricing
-          </li>
-          <li className="cursor-pointer hover:text-brand-color ease-in duration-200">
-            Support
-          </li>
-          <li className="cursor-pointer hover:text-brand-color ease-in duration-200">
-            Contact Us
-          </li>
-          <li className="cursor-pointer hover:text-brand-color ease-in duration-200">
-            Privacy Policy
-          </li>
+          <Link href="/about-us">
+            <li className="cursor-pointer hover:text-brand-color ease-in duration-200">
+              About Us
+            </li>
+          </Link>
+          <Link href="/pricing">
+            <li className="cursor-pointer hover:text-brand-color ease-in duration-200">
+              Pricing
+            </li>
+          </Link>
+          <Link href="/support">
+            <li className="cursor-pointer hover:text-brand-color ease-in duration-200">
+              Support
+            </li>
+          </Link>
+          <Link href="/contact-us">
+            <li className="cursor-pointer hover:text-brand-color ease-in duration-200">
+              Contact Us
+            </li>
+          </Link>
+          <Link href="/privacy-policy">
+            <li className="cursor-pointer hover:text-brand-color ease-in duration-200">
+              Privacy Policy
+            </li>
+          </Link>
         </ul>
         <div className="md:flex hidden gap-8">
           <Link href="/sign-up">
-            <button className="rounded-md bg-brand-color px-4 py-2">
+            <button className="rounded-md bg-gradient-to-r from-brand-color to-button-color-2 px-4 py-2">
               Try for free
             </button>
           </Link>
@@ -97,7 +110,7 @@ const Navbar = () => {
           </ul>
           <div className="flex flex-col items-center justify-center gap-8 w-full">
             <Link href="/sign-up" className="w-1/2">
-              <button className="rounded-md bg-brand-color px-4 py-2 w-full text-2xl">
+              <button className="rounded-md bg-gradient-to-r from-brand-color to-button-color-2 px-4 py-2 w-full text-2xl">
                 Try for free
               </button>
             </Link>

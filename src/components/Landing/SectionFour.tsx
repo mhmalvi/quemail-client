@@ -16,7 +16,7 @@ const SectionTwo = () => {
         automate workflows and enhance your customer experience.
       </p>
       <Image src={Images.SectionFour} alt="HeroImage" />
-      <button className="px-4 py-2 bg-yellow-500 text-gray-800 rounded-md font-semibold">
+      <button className="px-4 py-2 bg-yellow-300 text-gray-800 rounded-md font-semibold">
         Create Free account ➟
       </button>
       <p className="p-0 m-0 text-sm text-slate-500">

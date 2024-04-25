@@ -6,7 +6,7 @@ import SectionThree from "@/components/Landing/SectionThree";
 import SectionFour from "@/components/Landing/SectionFour";
 import SectionFive from "@/components/Landing/SectionFive";
 import SectionSix from "@/components/Landing/SectionSix";
-import "./globals.css";
+import "../globals.css";
 
 const Landing = () => {
   return (

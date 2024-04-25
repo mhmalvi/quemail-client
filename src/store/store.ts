@@ -1,13 +1,21 @@
+import {
+  themeAction,
+  themeState,
+  utilState,
+} from "@/components/utils/types";
 import { create } from "zustand";
-
-interface utilState {
-  sidebarToggle: boolean;
-  openSidebar: (by: boolean) => void;
-}
 
 export const sideBarStore = create<utilState>((set) => ({
   sidebarToggle: false,
-  openSidebar: (by: boolean) =>
+  setOpenSidebar: () =>
     set((state) => ({ sidebarToggle: !state.sidebarToggle })),
-  closeSidebar: (by: boolean) => set((state) => ({ sidebarToggle: false })),
+  setCloseSidebar: () => set({ sidebarToggle: false }),
 }));
+
+
+export const themeStore = create<themeState & themeAction>((set) => ({
+  theme: "Dark1",
+  setTheme: (theme) => set(() => ({ theme: theme })),
+}));
+
+// export const navBarStore = create;
