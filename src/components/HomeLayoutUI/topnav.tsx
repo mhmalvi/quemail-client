@@ -8,11 +8,14 @@ import Link from "next/link";
 import { sideBarStore, themeStore } from "@/store/store";
 import { BsQuestionDiamondFill } from "react-icons/bs";
 import { MdNotifications } from "react-icons/md";
+import { signOut, useSession } from "next-auth/react";
+import Image from "next/image";
 
 const Topnav = () => {
   const closeSidebar = sideBarStore((state: any) => state.setCloseSidebar);
   const setTheme = themeStore((state: any) => state.setTheme);
   const [openThemeModal, setOpenThemeModal] = useState(false);
+  const { data: session, status } = useSession();
 
   const pathname = usePathname();
   const path: string = pathname;
@@ -49,6 +52,10 @@ const Topnav = () => {
     </React.Fragment>
   ));
 
+  const handleSignOut = () => {
+    signOut;
+  };
+
   return (
     <>
       <div className="relative w-full h-16 dark:bg-dark-glass bg-[#ffffffbf] dark:border-none border rounded-md flex items-center justify-between gap-8 p-4 z-40">
@@ -73,14 +80,23 @@ const Topnav = () => {
             label="Dropdown button"
             placement="bottom-start"
             renderTrigger={() => (
-              <div className="h-10 w-10 rounded-full bg-brand-color cursor-pointer"></div>
+              <div className="h-10 w-10 rounded-full bg-brand-color cursor-pointer overflow-hidden">
+                <Image
+                  src={session?.user?.image || ""}
+                  alt="user"
+                  width={100}
+                  height={100}
+                />
+              </div>
             )}
             className="dark:bg-dark-glass bg-light-glass backdrop-blur-2xl border-none z-40"
           >
             <Dropdown.Header>
-              <span className="block text-sm dark:text-slate-300 text-light-black">Bonnie Green</span>
+              <span className="block text-sm dark:text-slate-300 text-light-black">
+                {session?.user?.name}
+              </span>
               <span className="block truncate text-sm dark:text-slate-300 text-light-black font-medium">
-                bonnie@flowbite.com
+                {session?.user?.email}
               </span>
             </Dropdown.Header>
             <Link href="/home/profile/my-profile">
@@ -108,9 +124,10 @@ const Topnav = () => {
             >
               Themes
             </Dropdown.Item> */}
-            <Dropdown.Divider className="bg-light-black"/>
+            <Dropdown.Divider className="bg-light-black" />
             <Dropdown.Item
               className="dark:text-slate-300 text-light-black hover:text-slate-700"
+              onClick={signOut}
             >
               Sign out
             </Dropdown.Item>

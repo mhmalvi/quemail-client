@@ -31,6 +31,12 @@ const config: Config = {
         "light-black": "#4d4d4d",
         "dark-black": "#0b0b0b",
       },
+      keyframes: {
+        fadeIn: {
+          "0%": { transform: "translateX(-50px)" },
+          "100%": { transform: "translateX(0)" },
+        },
+      },
     },
   },
   plugins: [require("flowbite/plugin")],

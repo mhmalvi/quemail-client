@@ -5,10 +5,22 @@ import HeroImage from "/public/SVG/HeroImage.svg";
 import SectionTwo from "/public/SVG/SectionTwo.svg";
 import SectionFour from "/public/SVG/SectionFour.svg";
 import SectionFive from "/public/SVG/SectionFive.svg";
+import Circle from "/public/Circle.svg";
+import Lines from "/public/Lines.svg";
+import Google from "/public/Icons/Google.svg";
+
+// About Us
+import Mission from "/public/SVG/AboutUs/Mission.svg";
+import Vision from "/public/SVG/AboutUs/Vision.svg";
+import Story from "/public/SVG/AboutUs/Story.svg";
+import WhyUs from "/public/SVG/AboutUs/WhyUs.svg";
 
 // Privacy Page
 import Privacy1 from "/public/SVG/PrivacyPolicy/PrivacyOne.svg";
 import Privacy2 from "/public/SVG/PrivacyPolicy/PrivacyTwo.svg";
+
+// Contact
+import Contact from "/public/SVG/Contact/Contact.svg";
 
 // Sidebar
 import ContactSidebar from "/public/SVG/Sidebar/Contacts.svg";
@@ -30,6 +42,9 @@ import Light1 from "/public/Themes/Light/1.svg";
 import NotAvailable from "/public/SVG/Home/NotAvailable.svg";
 
 const Images = {
+  Google,
+  Circle,
+  Lines,
   Logo,
   LogoS,
   HeroImage,
@@ -50,6 +65,11 @@ const Images = {
   Create_Groups,
   Generate_Templates,
   Import_Contact,
+  Contact,
+  Mission,
+  Vision,
+  Story,
+  WhyUs,
 };
 
 export default Images;

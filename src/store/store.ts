@@ -12,9 +12,8 @@ export const sideBarStore = create<utilState>((set) => ({
   setCloseSidebar: () => set({ sidebarToggle: false }),
 }));
 
-
 export const themeStore = create<themeState & themeAction>((set) => ({
-  theme: "Dark1",
+  theme: "",
   setTheme: (theme) => set(() => ({ theme: theme })),
 }));
 

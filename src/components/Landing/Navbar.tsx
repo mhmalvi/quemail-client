@@ -3,9 +3,12 @@ import React, { useState } from "react";
 import Images from "../utils/images";
 import Image from "next/image";
 import Link from "next/link";
+import { useSession } from "next-auth/react";
 
 const Navbar = () => {
   const [openNavDrawer, setOpenNavDrawer] = useState(false);
+
+  const { data: session, status } = useSession();
 
   // const [isMenuFixed, setIsMenuFixed] = useState(false);
   // useEffect(() => {
@@ -60,18 +63,26 @@ const Navbar = () => {
             </li>
           </Link>
         </ul>
-        <div className="md:flex hidden gap-8">
-          <Link href="/sign-up">
-            <button className="rounded-md bg-gradient-to-r from-brand-color to-button-color-2 px-4 py-2">
-              Try for free
-            </button>
+        {status === "authenticated" ? (
+          <Link href="/home">
+            <div className="px-4 py-2 bg-gradient-to-r from-brand-color to-button-color-2 rounded-md">
+              Go to app
+            </div>
           </Link>
-          <Link href="/login">
-            <button className="rounded-md border border-brand-color px-4 py-2">
-              Login
-            </button>
-          </Link>
-        </div>
+        ) : (
+          <div className="md:flex hidden gap-8">
+            <Link href="/sign-up">
+              <button className="rounded-md bg-gradient-to-r from-brand-color to-button-color-2 px-4 py-2">
+                Try for free
+              </button>
+            </Link>
+            <Link href="/login">
+              <button className="rounded-md border border-brand-color px-4 py-2">
+                Login
+              </button>
+            </Link>
+          </div>
+        )}
         <div
           className="md:hidden"
           onClick={() => {
@@ -100,13 +111,19 @@ const Navbar = () => {
         </div>
       </nav>
       {openNavDrawer && (
-        <div className="fixed flex flex-col gap-16 items-center justify-center h-full w-full z-10 bg-background-color">
+        <div className="fixed flex flex-col gap-16 items-center justify-center h-full w-full z-10 bg-black">
           <ul className="flex flex-col gap-8">
-            <li className="text-3xl ease-in duration-200">About Us</li>
+            <Link href="/about-us">
+              <li className="text-3xl ease-in duration-200">About Us</li>
+            </Link>
             <li className="text-3xl ease-in duration-200">Pricing</li>
             <li className="text-3xl">Support</li>
-            <li className="text-3xl">Contact Us</li>
-            <li className="text-3xl">Privacy Policy</li>
+            <Link href="/contact-us">
+              <li className="text-3xl">Contact Us</li>
+            </Link>
+            <Link href="/privacy-policy">
+              <li className="text-3xl">Privacy Policy</li>
+            </Link>
           </ul>
           <div className="flex flex-col items-center justify-center gap-8 w-full">
             <Link href="/sign-up" className="w-1/2">

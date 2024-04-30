@@ -16,7 +16,9 @@ const TemplateGenerator = () => {
           Export HTML
         </button>
       </div>
-      <Editor />
+      <div className="h-full flex items-center justify-center">
+        <Editor />
+      </div>
     </div>
   );
 };
