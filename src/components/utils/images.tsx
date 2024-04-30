@@ -7,11 +7,11 @@ import SectionFour from "/public/SVG/SectionFour.svg";
 import SectionFive from "/public/SVG/SectionFive.svg";
 import Circle from "/public/Circle.svg";
 import Lines from "/public/Lines.svg";
-import Google from "/public/Icons/Google.svg";
+import Google from "/public/Icons/google.svg";
 
 // About Us
-import Mission from "/public/SVG/AboutUs/Mission.svg";
 import Vision from "/public/SVG/AboutUs/Vision.svg";
+import Mission from "/public/SVG/AboutUs/Mission.svg";
 import Story from "/public/SVG/AboutUs/Story.svg";
 import WhyUs from "/public/SVG/AboutUs/WhyUs.svg";
 

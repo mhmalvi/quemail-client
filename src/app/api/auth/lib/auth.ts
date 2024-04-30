@@ -2,6 +2,7 @@ import { NextAuthOptions } from "next-auth";
 import EmailProvider from "next-auth/providers/email";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
+import prisma from "./prisma";
 
 export const authConfig: NextAuthOptions = {
   providers: [
@@ -19,11 +20,15 @@ export const authConfig: NextAuthOptions = {
         },
         password: { label: "Password", type: "password" },
       },
-      async authorize(credentials){
-        if(!credentials || !credentials.email || !credentials.password) return null;
-        
-        return null
-      }
+      async authorize(credentials) {
+        if (!credentials || !credentials.email || !credentials.password)
+          return null;
+        const dbUser = await prisma.user.findFirst({
+          where: { email: credentials.email },
+        });
+
+        return null;
+      },
     }),
   ],
   session: { strategy: "jwt" },
