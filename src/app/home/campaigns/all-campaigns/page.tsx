@@ -39,7 +39,7 @@ const AllCampaigns = () => {
   const [openAddContactModal, setOpenAddContactModal] = useState(false);
 
   return (
-    <div className="relative w-full h-full bg-gray-800/80 rounded-md p-4 flex flex-col gap-8 overflow-hidden">
+    <div className="relative w-full h-full dark:bg-dark-glass bg-light-glass rounded-md p-4 flex flex-col gap-8 overflow-hidden">
       {/* <h1 className="text-2xl">All Contacts</h1> */}
       <div className="w-full flex items-center justify-between">
         <div className="flex items-center border rounded-md px-4 ">

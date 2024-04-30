@@ -17,19 +17,19 @@ const PrivacyPolicy = () => {
                 Privacy Policy
               </h1>
               <h1 className="md:flex hidden text-base font-normal text-slate-300">
-                Explore to know more about Quemailer’s privacy and policy.
+                Explore to know more about Quemailer&apos;s privacy and policy.
               </h1>
             </div>
             <button className="px-4 py-2 bg-gradient-to-r from-brand-color to-brand-color-2 rounded-md">
               Create Account
             </button>
           </div>
-          <div className="flex flex-col px-16 py-8 gap-8 bg-gray-800 rounded-md">
+          <div className="flex flex-col lg:px-16 lg:py-8 p-4 gap-8 bg-dark-glass rounded-md">
             <div>
-              <h1 className="m-0 p-0 bg-clip-text text-transparent bg-gradient-to-r from-brand-color to-brand-color-2 lg:text-2xl text-3xl lg:w-1/3">
+              <h1 className="m-0 p-0 bg-clip-text text-transparent bg-gradient-to-r from-brand-color to-brand-color-2 lg:text-2xl text-3xl lg:w-1/3 text-xl">
                 Summary of our Privacy Policy
               </h1>
-              <p className="m-0 p-0 text-slate-300">
+              <p className="m-0 p-0 text-slate-300 lg:text-start text-justify">
                 It covers every Queleads website that links here, and all of the
                 products and services contained on those websites. The detailed
                 policy follows the same structure as this summary and
@@ -37,10 +37,10 @@ const PrivacyPolicy = () => {
               </p>
             </div>
             <div>
-              <h1 className="m-0 p-0 bg-clip-text text-transparent bg-gradient-to-r from-brand-color to-brand-color-2 lg:text-2xl text-3xl lg:w-1/3">
+              <h1 className="m-0 p-0 bg-clip-text text-transparent bg-gradient-to-r from-brand-color to-brand-color-2 lg:text-2xl text-3xl lg:w-1/3 text-xl">
                 Our Privacy Commitment
               </h1>
-              <p className="m-0 p-0 text-slate-300">
+              <p className="m-0 p-0 text-slate-300 lg:text-start text-justify">
                 Queleads CRM has never sold your information to someone else for
                 advertising, or made money by showing you other people&apos;s
                 ads, and we never will. This has been our approach for almost 25
@@ -50,8 +50,8 @@ const PrivacyPolicy = () => {
               </p>
             </div>
           </div>
-          <div className="flex flex-col px-16 py-8 gap-8 bg-gray-800 rounded-md">
-            <div className="flex items-center gap-16">
+          <div className="flex flex-col lg:px-16 lg:py-8 p-4 gap-8 bg-dark-glass rounded-md">
+            <div className="flex lg:flex-row flex-col-reverse items-center gap-16">
               <div className="flex flex-col gap-8">
                 {/* Number One */}
                 <div className="flex flex-col gap-4">
@@ -59,10 +59,10 @@ const PrivacyPolicy = () => {
                     1. Information We Collect
                   </h1>
                   <div className="flex flex-col">
-                    <h2 className="text-base text-slate-300">
+                    <h2 className="text-base text-slate-300 ">
                       1.1 Personal Information
                     </h2>
-                    <p className="text-sm text-slate-300">
+                    <p className="text-sm text-slate-300 ">
                       We collect the following types of personal information
                       when you use Queleads CRM
                     </p>
@@ -155,7 +155,7 @@ const PrivacyPolicy = () => {
               </div>
               <Image src={Images.Privacy1} alt="Privacy Send Mail" />
             </div>
-            <div className="flex items-center gap-16">
+            <div className="flex lg:flex-row flex-col items-center gap-16">
               <Image src={Images.Privacy2} alt="Privacy Send Mail" />
               <div className="flex flex-col gap-8">
                 {/* Number Three */}
@@ -190,7 +190,7 @@ const PrivacyPolicy = () => {
                     4. Security Measures
                   </h1>
                   <div className="flex flex-col">
-                    <p className="text-sm text-slate-300">
+                    <p className="text-sm text-slate-400">
                       We implement robust security measures to protect your
                       information from unauthorized access, disclosure,
                       alteration, and destruction.
@@ -203,7 +203,7 @@ const PrivacyPolicy = () => {
                     5. Your Choices and Rights
                   </h1>
                   <div className="flex flex-col">
-                    <p className="text-sm text-slate-300">
+                    <p className="text-sm text-slate-400">
                       You have the following rights regarding your personal
                       information: Access, correct or delete your data. Opt-out
                       of marketing communications. Withdraw consent for
@@ -217,7 +217,7 @@ const PrivacyPolicy = () => {
                     6. Updates to this Privacy Policy
                   </h1>
                   <div className="flex flex-col">
-                    <p className="text-sm text-slate-300">
+                    <p className="text-sm text-slate-400">
                       We may update this Privacy Policy periodically. The latest
                       version will be posted on our website with the effective
                       date.

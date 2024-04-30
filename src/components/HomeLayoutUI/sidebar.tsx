@@ -26,17 +26,17 @@ const Sidebar = () => {
           alt="logo"
           className={`h-16 ${
             sidebarToggle ? "w-full" : "w-16"
-          } rounded-md px-4 py-2 dark:bg-dark-black bg-light-glass hover:bg-slate-500/90 ease-in duration-100 cursor-pointer`}
+          } rounded-md px-4 py-2 dark:bg-[#282828] bg-light-glass hover:bg-slate-500/90 ease-in duration-100 cursor-pointer`}
         />
       </div>
       <Dropdown
-        className="dark:bg-dark-glass bg-white backdrop-blur-2xl border-none w-1/8 ml-2"
+        className="dark:bg-[#282828] bg-white backdrop-blur-2xl border-none w-1/8 ml-2"
         label="Dropdown button"
         placement="right-start"
         renderTrigger={() => (
           <div className="relative w-full flex items-center gap-8 m-0 p-0 overflow-hidden cursor-pointer text-black dark:text-slate-300 hover:text-brand-color dark:hover:text-brand-color ease-in duration-100">
             <div
-              className={`dark:bg-light-black bg-gray-300 p-3 rounded-md overflow-hidden z-20`}
+              className={`dark:bg-[#282828] bg-gray-300 p-3 rounded-md overflow-hidden z-20`}
             >
               <Image
                 src={Images.CampaignSidebar}
@@ -94,13 +94,13 @@ const Sidebar = () => {
         </Dropdown.Item>
       </Dropdown>
       <Dropdown
-        className="dark:bg-dark-glass bg-white backdrop-blur-2xl border-none w-1/8 ml-2 "
+        className="dark:bg-[#282828] bg-white backdrop-blur-2xl border-none w-1/8 ml-2 "
         label="Dropdown button"
         placement="right-start"
         renderTrigger={() => (
           <div className="relative w-full flex items-center gap-8 m-0 p-0 overflow-hidden cursor-pointer text-black dark:text-slate-300 hover:text-brand-color dark:hover:text-brand-color ease-in duration-100">
             <div
-              className={`dark:bg-light-black bg-gray-300 p-3 rounded-md overflow-hidden z-20`}
+              className={`dark:bg-[#282828] bg-gray-300 p-3 rounded-md overflow-hidden z-20`}
             >
               <Image
                 src={Images.ContactSidebar}
@@ -139,13 +139,13 @@ const Sidebar = () => {
         </Link>
       </Dropdown>
       <Dropdown
-        className="dark:bg-dark-glass bg-white backdrop-blur-2xl border-none w-1/8 ml-2"
+        className="dark:bg-[#282828] bg-white backdrop-blur-2xl border-none w-1/8 ml-2"
         label="Dropdown button"
         placement="right-start"
         renderTrigger={() => (
           <div className="relative w-full flex items-center gap-8 m-0 p-0 overflow-hidden cursor-pointer text-black dark:text-slate-300 hover:text-brand-color dark:hover:text-brand-color ease-in duration-100">
             <div
-              className={`dark:bg-light-black bg-gray-300 p-3 rounded-md overflow-hidden z-20`}
+              className={`dark:bg-[#282828] bg-gray-300 p-3 rounded-md overflow-hidden z-20`}
             >
               <Image
                 src={Images.SettingSidebar}
