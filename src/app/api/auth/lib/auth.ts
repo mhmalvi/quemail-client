@@ -2,6 +2,10 @@ import { NextAuthOptions } from "next-auth";
 import EmailProvider from "next-auth/providers/email";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
+import { PrismaAdapter } from "@next-auth/prisma-adapter";
+import { PrismaClient } from "@prisma/client";
+
+const prisma = new PrismaClient();
 
 export const authConfig: NextAuthOptions = {
   providers: [
@@ -27,6 +31,7 @@ export const authConfig: NextAuthOptions = {
       },
     }),
   ],
+  adapter: PrismaAdapter(prisma),
   session: { strategy: "jwt" },
   callbacks: {
     async jwt({ token, account }) {

@@ -1,5 +1,3 @@
-import { JWT } from "next-auth/jwt";
-
 export interface DashboardLayoutProps {
   children: React.ReactNode;
   backgroundImage: string;
@@ -29,5 +27,5 @@ export interface googleLoginData {
   userName: string | null | undefined;
   email: string | null | undefined;
   image: string | null | undefined;
-  token: JWT | null | undefined;
+  token: string | null | undefined;
 }

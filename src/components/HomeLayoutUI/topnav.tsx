@@ -15,7 +15,7 @@ const Topnav = () => {
   const closeSidebar = sideBarStore((state: any) => state.setCloseSidebar);
   const setTheme = themeStore((state: any) => state.setTheme);
   const [openThemeModal, setOpenThemeModal] = useState(false);
-  const { data: session, status } = useSession();
+  const { data: session, update } = useSession();
 
   const pathname = usePathname();
   const path: string = pathname;
@@ -52,8 +52,15 @@ const Topnav = () => {
     </React.Fragment>
   ));
 
-  const handleSignOut = () => {
+  const handleSignOut = async () => {
     signOut;
+    // await update({
+    //   ...session,
+    //   user: {
+    //     ...session?.user,
+    //     accessToken: null,
+    //   },
+    // });
   };
 
   return (
