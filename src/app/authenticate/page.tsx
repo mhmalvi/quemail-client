@@ -1,3 +1,4 @@
+"use client";
 function extractParamsFromCurrentURL(): Map<string, string> {
   const searchParams = new URLSearchParams(window.location.search);
   const params = new Map<string, string>();
