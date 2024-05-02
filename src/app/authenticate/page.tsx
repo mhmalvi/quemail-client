@@ -18,6 +18,10 @@ console.log(params.get("param1")); // Output: value1
 console.log(params.get("param2")); // Output: value2
 
 const Authenticate = () => {
-  return <div>ok</div>;
+  return (
+    <div className="h-screen w-screen flex items-center justify-center">
+      <h1>Welcome to Quemailer</h1>
+    </div>
+  );
 };
 export default Authenticate;
