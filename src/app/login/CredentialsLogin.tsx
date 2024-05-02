@@ -12,8 +12,8 @@ const CredentialsLogin = ({
 }) => {
   const handleCredentialSubmit = () => {
     
+    console.log(credentialsData);
   }
-  console.log(credentialsData);
   return (
     <div className="w-full ">
       <form className="flex flex-col gap-4 w-full">

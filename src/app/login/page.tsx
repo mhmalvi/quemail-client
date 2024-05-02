@@ -28,10 +28,6 @@ const Login = () => {
   });
 
 
-  if (status === "authenticated") {
-    redirect("/home");
-  }
-
   const handleEmailCheck = async () => {
     setStepTwo((prevData) => ({
       ...prevData,
