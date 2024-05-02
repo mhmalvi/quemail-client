@@ -50,7 +50,7 @@ const Login = () => {
   };
 
   const handleGoogleClick = async () => {
-    const googleLoginUrl = "https://backend.quemailer.com/google/login";
+    const googleLoginUrl = "https://quemailer.com/google/login";
     window.open(googleLoginUrl, "_self");
   };
   useEffect(() => {
