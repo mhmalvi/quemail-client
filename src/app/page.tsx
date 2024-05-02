@@ -7,13 +7,25 @@ import { googleLogin } from "./api/auth";
 import { useEffect, useState } from "react";
 
 export default function Home() {
-  const [user, setUser] = useState();
+  const [user, setUser] = useState<any>();
+  const getUser = async () => {
+    try {
+      const url = `https://backend.quemailer.com/google/success`;
+      const { data }: any = await fetch(url, {
+        method: "GET",
+      });
+      setUser(data);
+      console.log(user);
+    } catch (err) {
+      console.log(err);
+    }
+  };
   useEffect(() => {
-    (async () => {
-      const res = await googleLogin();
-      console.log(res);
-    })();
+    getUser();
+    console.log("ok");
   });
+
+  console.log(user);
   return (
     <main className="flex min-h-screen flex-col items-center bg-dark-bg">
       <>

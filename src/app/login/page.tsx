@@ -1,11 +1,11 @@
 "use client";
-import React, { FormEvent, useState } from "react";
+import React, { FormEvent, useEffect, useState } from "react";
 import Image from "next/image";
 import Images from "@/components/utils/images";
 import Link from "next/link";
 import { emailCheck, googleLogin } from "../api/auth";
 import { Spinner } from "flowbite-react";
-
+import { redirect } from "next/navigation";
 import { toast } from "react-toastify";
 import {
   successNotification,
@@ -50,23 +50,15 @@ const Login = () => {
   };
 
   const handleGoogleClick = async () => {
-    let timer: NodeJS.Timeout | null = null;
     const googleLoginUrl = "https://backend.quemailer.com/google/login";
-    const newWindow = window.open(
-      googleLoginUrl,
-      "_self"
-    );
-    if (newWindow) {
-      timer = setInterval(() => {
-        if (newWindow.closed) {
-          console.log("You are authenticated");
-          if (timer) {
-            clearInterval(timer);
-          }
-        }
-      }, 500);
-    }
+    window.open(googleLoginUrl, "_self");
   };
+  useEffect(() => {
+    const authToken = localStorage.getItem('authToken');
+    if (authToken) {
+        redirect('/home');
+    }
+}, []);
 
   return (
     <div className="relative h-screen w-full flex items-center justify-center p-8">
