@@ -54,8 +54,7 @@ const Login = () => {
     const googleLoginUrl = "https://backend.quemailer.com/google/login";
     const newWindow = window.open(
       googleLoginUrl,
-      "_blank",
-      "width=500,height:600"
+      "_self"
     );
     if (newWindow) {
       timer = setInterval(() => {
