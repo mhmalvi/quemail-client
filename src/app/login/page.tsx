@@ -26,7 +26,6 @@ const Login = () => {
     loading: false,
   });
 
-
   const handleEmailCheck = async () => {
     setStepTwo((prevData) => ({
       ...prevData,
@@ -48,11 +47,26 @@ const Login = () => {
       });
       successNotification(response.statusText);
     }
-  
   };
 
   const handleGoogleClick = async () => {
-    window.open("https://backend.quemailer.com/google/login", "_self");
+    let timer: NodeJS.Timeout | null = null;
+    const googleLoginUrl = "https://backend.quemailer.com/google/login";
+    const newWindow = window.open(
+      googleLoginUrl,
+      "_blank",
+      "width=500,height:600"
+    );
+    if (newWindow) {
+      timer = setInterval(() => {
+        if (newWindow.closed) {
+          console.log("You are authenticated");
+          if (timer) {
+            clearInterval(timer);
+          }
+        }
+      }, 500);
+    }
   };
 
   return (
