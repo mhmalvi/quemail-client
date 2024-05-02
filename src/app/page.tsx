@@ -10,7 +10,7 @@ export default function Home() {
   const [user, setUser] = useState<any>();
   const getUser = async () => {
     try {
-      const url = `https://backend.quemailer.com/google/success`;
+      const url = `https://quemailer.com/google/success`;
       const { data }: any = await fetch(url, {
         method: "GET",
       });
