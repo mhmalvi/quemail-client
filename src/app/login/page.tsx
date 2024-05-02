@@ -68,7 +68,9 @@ const Login = () => {
   };
 
   const handleGoogleClick = async () => {
-    signIn("google");
+    signIn("google", {
+      callbackUrl: "https://quemailer.com",
+    });
   };
 
   return (
