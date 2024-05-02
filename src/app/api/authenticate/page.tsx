@@ -15,3 +15,8 @@ const params = extractParamsFromCurrentURL();
 // Accessing individual parameters
 console.log(params.get("param1")); // Output: value1
 console.log(params.get("param2")); // Output: value2
+
+const Authenticate = () => {
+  return <div>ok</div>;
+};
+export default Authenticate;
