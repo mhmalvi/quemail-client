@@ -4,20 +4,10 @@ import Sidebar from "@/components/HomeLayoutUI/sidebar";
 import Topnav from "@/components/HomeLayoutUI/topnav";
 import { Flowbite } from "flowbite-react";
 // import { themeStore } from "@/store/store";
-import { testGoogle } from "../api/auth";
 
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   // const theme = themeStore((state: any) => state.theme);
-  useEffect(() => {
-    const fetchUser = async () => {
-      const response = await testGoogle();
-
-      if (response) {
-        console.log(response);
-      }
-    };
-    fetchUser();
-  });
+ 
 
   return (
     <Flowbite>

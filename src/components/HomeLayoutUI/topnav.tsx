@@ -85,12 +85,12 @@ const Topnav = () => {
             placement="bottom-start"
             renderTrigger={() => (
               <div className="h-10 w-10 rounded-full bg-brand-color cursor-pointer overflow-hidden">
-                <Image
+                {/* <Image
                   src={""}
                   alt="user"
                   width={100}
                   height={100}
-                />
+                /> */}
               </div>
             )}
             className="dark:bg-dark-glass bg-light-glass backdrop-blur-2xl border-none z-40"

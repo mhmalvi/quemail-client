@@ -3,7 +3,6 @@ import React, { FormEvent, useState } from "react";
 import Image from "next/image";
 import Images from "@/components/utils/images";
 import Link from "next/link";
-import { redirect } from "next/navigation";
 import { emailCheck, googleLogin } from "../api/auth";
 import { Spinner } from "flowbite-react";
 
@@ -49,16 +48,7 @@ const Login = () => {
       });
       successNotification(response.statusText);
     }
-    // e.preventDefault();
-    // const data = new FormData(e.currentTarget);
-    // const signInResponse = await signIn("credentials", {
-    //   email: data.get("email"),
-    //   password: data.get("password"),
-    //   redirect: false,
-    // });
-    // if (signInResponse && !signInResponse.error) {
-    //   redirect("/home");
-    // }
+  
   };
 
   const handleGoogleClick = async () => {
