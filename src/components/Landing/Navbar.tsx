@@ -7,21 +7,6 @@ import Link from "next/link";
 const Navbar = () => {
   const [openNavDrawer, setOpenNavDrawer] = useState(false);
 
-
-  // const [isMenuFixed, setIsMenuFixed] = useState(false);
-  // useEffect(() => {
-  //   const handleScroll = () => {
-  //     const scrollY = window.scrollY;
-  //     const scrollThreshold = 0;
-  //     setIsMenuFixed(scrollY > scrollThreshold);
-  //   };
-
-  //   window.addEventListener("scroll", handleScroll);
-
-  //   return () => {
-  //     window.removeEventListener("scroll", handleScroll);
-  //   };
-  // }, []);
   return (
     <>
       <nav className="fixed flex items-center justify-between w-full 2xl:px-72 xl:px-64 lg:px-36 md:px-8 px-2 shadow-md shadow-brand-color z-20 bg-dark-black">
@@ -61,13 +46,7 @@ const Navbar = () => {
             </li>
           </Link>
         </ul>
-        {/* {status === "authenticated" ? (
-          <Link href="/home">
-            <div className="px-4 py-2 bg-gradient-to-r from-brand-color to-button-color-2 rounded-md">
-              Go to app
-            </div>
-          </Link>
-        ) : ( */}
+     
           <div className="md:flex hidden gap-8">
             <Link href="/sign-up">
               <button className="rounded-md bg-gradient-to-r from-brand-color to-button-color-2 px-4 py-2">
@@ -80,7 +59,6 @@ const Navbar = () => {
               </button>
             </Link>
           </div>
-        {/* )} */}
         <div
           className="md:hidden"
           onClick={() => {
