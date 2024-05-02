@@ -68,9 +68,7 @@ const Login = () => {
   };
 
   const handleGoogleClick = async () => {
-    signIn("google", {
-      callbackUrl: "/",
-    });
+    signIn("google");
   };
 
   return (
