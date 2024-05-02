@@ -8,14 +8,12 @@ import Link from "next/link";
 import { sideBarStore, themeStore } from "@/store/store";
 import { BsQuestionDiamondFill } from "react-icons/bs";
 import { MdNotifications } from "react-icons/md";
-import { signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 
 const Topnav = () => {
   const closeSidebar = sideBarStore((state: any) => state.setCloseSidebar);
   const setTheme = themeStore((state: any) => state.setTheme);
   const [openThemeModal, setOpenThemeModal] = useState(false);
-  const { data: session, update } = useSession();
 
   const pathname = usePathname();
   const path: string = pathname;
@@ -53,7 +51,6 @@ const Topnav = () => {
   ));
 
   const handleSignOut = async () => {
-    signOut;
     // await update({
     //   ...session,
     //   user: {
@@ -89,7 +86,7 @@ const Topnav = () => {
             renderTrigger={() => (
               <div className="h-10 w-10 rounded-full bg-brand-color cursor-pointer overflow-hidden">
                 <Image
-                  src={session?.user?.image || ""}
+                  src={""}
                   alt="user"
                   width={100}
                   height={100}
@@ -100,10 +97,10 @@ const Topnav = () => {
           >
             <Dropdown.Header>
               <span className="block text-sm dark:text-slate-300 text-light-black">
-                {session?.user?.name}
+                {/* {session?.user?.name} */}
               </span>
               <span className="block truncate text-sm dark:text-slate-300 text-light-black font-medium">
-                {session?.user?.email}
+                {/* {session?.user?.email} */}
               </span>
             </Dropdown.Header>
             <Link href="/home/profile/my-profile">
@@ -134,7 +131,6 @@ const Topnav = () => {
             <Dropdown.Divider className="bg-light-black" />
             <Dropdown.Item
               className="dark:text-slate-300 text-light-black hover:text-slate-700"
-              onClick={signOut}
             >
               Sign out
             </Dropdown.Item>

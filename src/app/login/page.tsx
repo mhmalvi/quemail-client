@@ -4,8 +4,7 @@ import Image from "next/image";
 import Images from "@/components/utils/images";
 import Link from "next/link";
 import { redirect } from "next/navigation";
-import { signIn, useSession } from "next-auth/react";
-import { emailCheck, googleLogin } from "../api/backend/auth";
+import { emailCheck, googleLogin } from "../api/auth";
 import { Spinner } from "flowbite-react";
 
 import { toast } from "react-toastify";
@@ -28,7 +27,6 @@ const Login = () => {
     loading: false,
   });
 
-  const { data: session, status } = useSession();
 
   if (status === "authenticated") {
     redirect("/home");
@@ -68,9 +66,7 @@ const Login = () => {
   };
 
   const handleGoogleClick = async () => {
-    signIn("google", {
-      callbackUrl: "https://quemailer.com/home",
-    });
+    window.open("https://backend.quemailer.com/google/login", "_self");
   };
 
   return (

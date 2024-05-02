@@ -1,5 +1,5 @@
 import { googleLoginData } from "@/components/utils/types";
-import { FormEvent } from "react";
+// import { FormEvent } from "react";
 
 export const googleLogin = async (data: googleLoginData) => {
   try {
@@ -34,6 +34,19 @@ export const emailCheck = async (email: string) => {
       }
     );
     return result;
+  } catch (error: any) {
+    return error.response;
+  }
+};
+
+export const testGoogle = async () => {
+  try {
+    const result = await fetch(`https://backend.quemailer.com/api/auth/user`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
   } catch (error: any) {
     return error.response;
   }

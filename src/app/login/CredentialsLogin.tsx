@@ -1,4 +1,3 @@
-import { signIn } from "next-auth/react";
 import React, { FormEvent } from "react";
 interface CredentialsProp {
   email: string;
