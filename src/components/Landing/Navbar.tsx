@@ -3,12 +3,10 @@ import React, { useState } from "react";
 import Images from "../utils/images";
 import Image from "next/image";
 import Link from "next/link";
-import { useSession } from "next-auth/react";
 
 const Navbar = () => {
   const [openNavDrawer, setOpenNavDrawer] = useState(false);
 
-  const { data: session, status } = useSession();
 
   // const [isMenuFixed, setIsMenuFixed] = useState(false);
   // useEffect(() => {
@@ -63,13 +61,13 @@ const Navbar = () => {
             </li>
           </Link>
         </ul>
-        {status === "authenticated" ? (
+        {/* {status === "authenticated" ? (
           <Link href="/home">
             <div className="px-4 py-2 bg-gradient-to-r from-brand-color to-button-color-2 rounded-md">
               Go to app
             </div>
           </Link>
-        ) : (
+        ) : ( */}
           <div className="md:flex hidden gap-8">
             <Link href="/sign-up">
               <button className="rounded-md bg-gradient-to-r from-brand-color to-button-color-2 px-4 py-2">
@@ -82,7 +80,7 @@ const Navbar = () => {
               </button>
             </Link>
           </div>
-        )}
+        {/* )} */}
         <div
           className="md:hidden"
           onClick={() => {

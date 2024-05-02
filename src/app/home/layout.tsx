@@ -4,50 +4,20 @@ import Sidebar from "@/components/HomeLayoutUI/sidebar";
 import Topnav from "@/components/HomeLayoutUI/topnav";
 import { Flowbite } from "flowbite-react";
 import { themeStore } from "@/store/store";
-import { useSession } from "next-auth/react";
-import { redirect } from "next/navigation";
-import { googleLoginData } from "@/components/utils/types";
-import { googleLogin } from "../api/backend/auth";
+import { googleLogin, testGoogle } from "../api/auth";
 
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
-  const theme = themeStore((state: any) => state.theme);
-  const { data: session, status } = useSession();
-
-  var count = 0;
+  // const theme = themeStore((state: any) => state.theme);
   useEffect(() => {
-    const data: googleLoginData = {
-      userName: session?.user?.name,
-      email: session?.user?.email,
-      image: session?.user?.image,
-      token: session?.user?.accessToken,
-    };
-    const sendCredentialsToBackend = async () => {
-      try {
-        if (count === 0) {
-          count++;
-        } else if (count === 1) {
-          const response = await googleLogin(data);
-          console.log(response);
-          count++;
-        } else {
-          return null;
-        }
-      } catch (error) {
-        console.error("Error:", error);
+    const fetchUser = async () => {
+      const response = await testGoogle();
+
+      if (response) {
+        console.log(response);
       }
     };
-    sendCredentialsToBackend();
-  }, [
-    count,
-    session?.user?.accessToken,
-    session?.user?.email,
-    session?.user?.image,
-    session?.user?.name,
-  ]);
-
-  if (status !== "authenticated") {
-    redirect("/login");
-  }
+    fetchUser();
+  });
 
   return (
     <Flowbite>
