@@ -19,7 +19,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
       userName: session?.user?.name,
       email: session?.user?.email,
       image: session?.user?.image,
-      token: session?.access_token,
+      token: session?.user?.accessToken,
     };
     const sendCredentialsToBackend = async () => {
       try {
@@ -39,7 +39,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
     sendCredentialsToBackend();
   }, [
     count,
-    session?.access_token,
+    session?.user?.accessToken,
     session?.user?.email,
     session?.user?.image,
     session?.user?.name,
