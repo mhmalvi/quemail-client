@@ -30,11 +30,11 @@ const Navbar = () => {
               Pricing
             </li>
           </Link>
-          <Link href="/support">
+          {/* <Link href="/support"> */}
             <li className="cursor-pointer hover:text-brand-color ease-in duration-200">
               Support
             </li>
-          </Link>
+          {/* </Link> */}
           <Link href="/contact-us">
             <li className="cursor-pointer hover:text-brand-color ease-in duration-200">
               Contact Us
