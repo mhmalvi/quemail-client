@@ -3,8 +3,8 @@ import React, { useEffect } from "react";
 import Sidebar from "@/components/HomeLayoutUI/sidebar";
 import Topnav from "@/components/HomeLayoutUI/topnav";
 import { Flowbite } from "flowbite-react";
-import { themeStore } from "@/store/store";
-import { googleLogin, testGoogle } from "../api/auth";
+// import { themeStore } from "@/store/store";
+import { testGoogle } from "../api/auth";
 
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   // const theme = themeStore((state: any) => state.theme);
