@@ -46,4 +46,4 @@ const AuthPage = () => {
     </Suspense>
   );
 };
-export default AuthPage;
+export default Authenticate;
