@@ -39,188 +39,179 @@ const AllCampaigns = () => {
   const [openAddContactModal, setOpenAddContactModal] = useState(false);
 
   return (
-    <>
-      {typeof window !== "undefined" && (
-        <div className="relative w-full h-full dark:bg-dark-glass bg-light-glass rounded-md p-4 flex flex-col gap-8 overflow-hidden">
-          {/* <h1 className="text-2xl">All Contacts</h1> */}
-          <div className="w-full flex items-center justify-between">
-            <div className="flex items-center border rounded-md px-4 ">
-              <FiSearch className="" />
-              <input
-                type="text"
-                placeholder="Search Campaigns"
-                className="bg-transparent border-none focus:ring-0 active:outline-none active:ring-0"
-                value={filterValue}
-                onChange={handleFilterChange}
-              />
-            </div>
-            <div className="flex gap-8 items-center">
+    
+    <div className="relative w-full h-full dark:bg-dark-glass bg-light-glass rounded-md p-4 flex flex-col gap-8 overflow-hidden">
+      {/* <h1 className="text-2xl">All Contacts</h1> */}
+      <div className="w-full flex items-center justify-between">
+        <div className="flex items-center border rounded-md px-4 ">
+          <FiSearch className="" />
+          <input
+            type="text"
+            placeholder="Search Campaigns"
+            className="bg-transparent border-none focus:ring-0 active:outline-none active:ring-0"
+            value={filterValue}
+            onChange={handleFilterChange}
+          />
+        </div>
+        <div className="flex gap-8 items-center">
+          <button
+            className="py-2 px-4 rounded-md bg-brand-color"
+            onClick={() => {
+              setOpenAddContactModal(true);
+            }}
+          >
+            Add a campaign
+          </button>
+        </div>
+      </div>
+      <div className="flex flex-col justify-between h-5/6 gap-8">
+        <div className="overflow-y-scroll h-5/6">
+          <Table hoverable striped className="bg-transparent h-5/6">
+            <Table.Head className="sticky top-0 py-0 bg-slate-700 !rounded-tl-md">
+              <Table.HeadCell className="sticky top-0 py-2 bg-transparent">
+                <Checkbox />
+              </Table.HeadCell>
+              <Table.HeadCell className="sticky top-0 py-2 bg-transparent text-slate-300">
+                Full name
+              </Table.HeadCell>
+              <Table.HeadCell className="sticky top-0 py-2 bg-transparent text-slate-300">
+                Email
+              </Table.HeadCell>
+              <Table.HeadCell className="sticky top-0 py-2 bg-transparent text-slate-300">
+                Phone
+              </Table.HeadCell>
+              <Table.HeadCell className="sticky top-0 py-2 bg-transparent text-slate-300">
+                Account
+              </Table.HeadCell>
+              <Table.HeadCell className="sticky top-0 py-2 bg-transparent text-slate-300">
+                Date Created
+              </Table.HeadCell>
+              <Table.HeadCell className="py-0 bg-transparent text-slate-300">
+                <div className="flex items-center gap-2">
+                  <h1>Action</h1>
+                  <DarkThemeToggle className="focus:ring-0 active:outline-none active:ring-0" />
+                </div>
+              </Table.HeadCell>
+            </Table.Head>
+            <Table.Body className="divide-y overflow-y-scroll">
+              {campaginList
+                .filter((campaigns) =>
+                  campaigns.fullName
+                    .toLowerCase()
+                    .includes(filterValue.toLowerCase())
+                )
+                .map((campaigns) => (
+                  <Table.Row
+                    key={campaigns.id}
+                    className="dark:border-gray-700 dark:bg-gray-800"
+                  >
+                    <Table.Cell className="">
+                      <Checkbox />
+                    </Table.Cell>
+                    <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
+                      {campaigns.fullName}
+                    </Table.Cell>
+                    <Table.Cell>{campaigns.email}</Table.Cell>
+                    <Table.Cell>{campaigns.phone}</Table.Cell>
+                    <Table.Cell>{campaigns.account}</Table.Cell>
+                    <Table.Cell>{campaigns.dateCreated}</Table.Cell>
+                    <Table.Cell className="w-full flex gap-8">
+                      <button className="font-medium text-brand-color border border-brand-color px-4 py-2 rounded-md hover:underline ">
+                        Edit
+                      </button>
+                      <button className="font-medium text-red-400 border border-red-400 px-4 py-2 rounded-md hover:underline">
+                        Delete
+                      </button>
+                    </Table.Cell>
+                  </Table.Row>
+                ))}
+            </Table.Body>
+          </Table>
+        </div>
+        <div className=" w-full flex overflow-x-auto sm:justify-center h-1/6">
+          <Pagination
+            currentPage={currentPage}
+            totalPages={3}
+            onPageChange={onPageChange}
+          />
+        </div>
+      </div>
+      <Modal dismissible show={openModal} onClose={() => setOpenModal(false)}>
+        <Modal.Header>Import Contacts</Modal.Header>
+        <Modal.Body>
+          <div className="flex flex-col gap-4 text-center">
+            <h3 className="m-0 p-0 text-lg font-normal text-gray-500 dark:text-gray-400">
+              Have existing contacts in a file?
+            </h3>
+            <h3 className="m-0 p-0 text-lg font-normal text-gray-500 dark:text-gray-400">
+              Import a CSV file of your contacts for quick import.
+            </h3>
+            <div className="flex justify-center gap-4">
               <button
-                className="py-2 px-4 rounded-md bg-brand-color"
-                onClick={() => {
-                  setOpenAddContactModal(true);
-                }}
+                className="px-4 py-2 bg-brand-color rounded-md"
+                onClick={() => setOpenModal(false)}
               >
-                Add a campaign
+                Import from file
+              </button>
+              <button
+                className="px-4 py-2 border border-brand-color text-gray-800 dark:text-slate-300 rounded-md"
+                onClick={() => setOpenModal(false)}
+              >
+                Cancel
               </button>
             </div>
           </div>
-          <div className="flex flex-col justify-between h-5/6 gap-8">
-            <div className="overflow-y-scroll h-5/6">
-              <Table hoverable striped className="bg-transparent h-5/6">
-                <Table.Head className="sticky top-0 py-0 bg-slate-700 !rounded-tl-md">
-                  <Table.HeadCell className="sticky top-0 py-2 bg-transparent">
-                    <Checkbox />
-                  </Table.HeadCell>
-                  <Table.HeadCell className="sticky top-0 py-2 bg-transparent text-slate-300">
-                    Full name
-                  </Table.HeadCell>
-                  <Table.HeadCell className="sticky top-0 py-2 bg-transparent text-slate-300">
-                    Email
-                  </Table.HeadCell>
-                  <Table.HeadCell className="sticky top-0 py-2 bg-transparent text-slate-300">
-                    Phone
-                  </Table.HeadCell>
-                  <Table.HeadCell className="sticky top-0 py-2 bg-transparent text-slate-300">
-                    Account
-                  </Table.HeadCell>
-                  <Table.HeadCell className="sticky top-0 py-2 bg-transparent text-slate-300">
-                    Date Created
-                  </Table.HeadCell>
-                  <Table.HeadCell className="py-0 bg-transparent text-slate-300">
-                    <div className="flex items-center gap-2">
-                      <h1>Action</h1>
-                      <DarkThemeToggle className="focus:ring-0 active:outline-none active:ring-0" />
-                    </div>
-                  </Table.HeadCell>
-                </Table.Head>
-                <Table.Body className="divide-y overflow-y-scroll">
-                  {campaginList
-                    .filter((campaigns) =>
-                      campaigns.fullName
-                        .toLowerCase()
-                        .includes(filterValue.toLowerCase())
-                    )
-                    .map((campaigns) => (
-                      <Table.Row
-                        key={campaigns.id}
-                        className="dark:border-gray-700 dark:bg-gray-800"
-                      >
-                        <Table.Cell className="">
-                          <Checkbox />
-                        </Table.Cell>
-                        <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
-                          {campaigns.fullName}
-                        </Table.Cell>
-                        <Table.Cell>{campaigns.email}</Table.Cell>
-                        <Table.Cell>{campaigns.phone}</Table.Cell>
-                        <Table.Cell>{campaigns.account}</Table.Cell>
-                        <Table.Cell>{campaigns.dateCreated}</Table.Cell>
-                        <Table.Cell className="w-full flex gap-8">
-                          <button className="font-medium text-brand-color border border-brand-color px-4 py-2 rounded-md hover:underline ">
-                            Edit
-                          </button>
-                          <button className="font-medium text-red-400 border border-red-400 px-4 py-2 rounded-md hover:underline">
-                            Delete
-                          </button>
-                        </Table.Cell>
-                      </Table.Row>
-                    ))}
-                </Table.Body>
-              </Table>
-            </div>
-            <div className=" w-full flex overflow-x-auto sm:justify-center h-1/6">
-              <Pagination
-                currentPage={currentPage}
-                totalPages={3}
-                onPageChange={onPageChange}
-              />
+        </Modal.Body>
+      </Modal>
+      <Modal
+        dismissible
+        show={openAddContactModal}
+        onClose={() => setOpenAddContactModal(false)}
+      >
+        <Modal.Header>Add a Contact</Modal.Header>
+        <Modal.Body>
+          <div className="flex flex-col gap-4 text-center w-full">
+            <form className="m-0 p-0 w-full text-lg flex flex-wrap flex-grow gap-4 items-center font-normal text-gray-500 dark:text-gray-400">
+              <div className="flex-auto flex flex-col ">
+                <label className="text-start text-base">First Name</label>
+                <input className="bg-transparent border border-gray-800 dark:border-slate-300 rounded-md focus:outline-none focus:ring-0 outline-none p-2" />
+              </div>
+              <div className="flex-auto flex flex-col ">
+                <label className="text-start text-base">Last Name</label>
+                <input className="bg-transparent border border-gray-800 dark:border-slate-300 rounded-md focus:outline-none focus:ring-0 outline-none p-2" />
+              </div>
+              <div className="flex-auto flex flex-col ">
+                <label className="text-start text-base">Contact</label>
+                <input className="bg-transparent border border-gray-800 dark:border-slate-300 rounded-md focus:outline-none focus:ring-0 outline-none p-2" />
+              </div>
+              <div className="flex-auto flex flex-col ">
+                <label className="text-start text-base">Email</label>
+                <input className="bg-transparent border border-gray-800 dark:border-slate-300 rounded-md focus:outline-none focus:ring-0 outline-none p-2" />
+              </div>
+              <div className="flex-auto flex flex-col ">
+                <label className="text-start text-base">Select Account</label>
+                <input className="bg-transparent border border-gray-800 dark:border-slate-300 rounded-md focus:outline-none focus:ring-0 outline-none p-2" />
+              </div>
+            </form>
+
+            <div className="flex justify-end gap-4">
+              <button
+                className="px-4 py-2 border border-brand-color text-gray-800 dark:text-slate-300 rounded-md"
+                onClick={() => setOpenAddContactModal(false)}
+              >
+                Cancel
+              </button>
+              <button
+                className="px-4 py-2 bg-brand-color rounded-mdtext-slate-300"
+                onClick={() => setOpenAddContactModal(false)}
+              >
+                Add +
+              </button>
             </div>
           </div>
-          <Modal
-            dismissible
-            show={openModal}
-            onClose={() => setOpenModal(false)}
-          >
-            <Modal.Header>Import Contacts</Modal.Header>
-            <Modal.Body>
-              <div className="flex flex-col gap-4 text-center">
-                <h3 className="m-0 p-0 text-lg font-normal text-gray-500 dark:text-gray-400">
-                  Have existing contacts in a file?
-                </h3>
-                <h3 className="m-0 p-0 text-lg font-normal text-gray-500 dark:text-gray-400">
-                  Import a CSV file of your contacts for quick import.
-                </h3>
-                <div className="flex justify-center gap-4">
-                  <button
-                    className="px-4 py-2 bg-brand-color rounded-md"
-                    onClick={() => setOpenModal(false)}
-                  >
-                    Import from file
-                  </button>
-                  <button
-                    className="px-4 py-2 border border-brand-color text-gray-800 dark:text-slate-300 rounded-md"
-                    onClick={() => setOpenModal(false)}
-                  >
-                    Cancel
-                  </button>
-                </div>
-              </div>
-            </Modal.Body>
-          </Modal>
-          <Modal
-            dismissible
-            show={openAddContactModal}
-            onClose={() => setOpenAddContactModal(false)}
-          >
-            <Modal.Header>Add a Contact</Modal.Header>
-            <Modal.Body>
-              <div className="flex flex-col gap-4 text-center w-full">
-                <form className="m-0 p-0 w-full text-lg flex flex-wrap flex-grow gap-4 items-center font-normal text-gray-500 dark:text-gray-400">
-                  <div className="flex-auto flex flex-col ">
-                    <label className="text-start text-base">First Name</label>
-                    <input className="bg-transparent border border-gray-800 dark:border-slate-300 rounded-md focus:outline-none focus:ring-0 outline-none p-2" />
-                  </div>
-                  <div className="flex-auto flex flex-col ">
-                    <label className="text-start text-base">Last Name</label>
-                    <input className="bg-transparent border border-gray-800 dark:border-slate-300 rounded-md focus:outline-none focus:ring-0 outline-none p-2" />
-                  </div>
-                  <div className="flex-auto flex flex-col ">
-                    <label className="text-start text-base">Contact</label>
-                    <input className="bg-transparent border border-gray-800 dark:border-slate-300 rounded-md focus:outline-none focus:ring-0 outline-none p-2" />
-                  </div>
-                  <div className="flex-auto flex flex-col ">
-                    <label className="text-start text-base">Email</label>
-                    <input className="bg-transparent border border-gray-800 dark:border-slate-300 rounded-md focus:outline-none focus:ring-0 outline-none p-2" />
-                  </div>
-                  <div className="flex-auto flex flex-col ">
-                    <label className="text-start text-base">
-                      Select Account
-                    </label>
-                    <input className="bg-transparent border border-gray-800 dark:border-slate-300 rounded-md focus:outline-none focus:ring-0 outline-none p-2" />
-                  </div>
-                </form>
-
-                <div className="flex justify-end gap-4">
-                  <button
-                    className="px-4 py-2 border border-brand-color text-gray-800 dark:text-slate-300 rounded-md"
-                    onClick={() => setOpenAddContactModal(false)}
-                  >
-                    Cancel
-                  </button>
-                  <button
-                    className="px-4 py-2 bg-brand-color rounded-mdtext-slate-300"
-                    onClick={() => setOpenAddContactModal(false)}
-                  >
-                    Add +
-                  </button>
-                </div>
-              </div>
-            </Modal.Body>
-          </Modal>
-        </div>
-      )}
-    </>
+        </Modal.Body>
+      </Modal>
+    </div>
   );
 };
 export default AllCampaigns;
