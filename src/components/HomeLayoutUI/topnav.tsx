@@ -51,8 +51,6 @@ const Topnav = () => {
     </React.Fragment>
   ));
 
-  const token = typeof window !== "undefined" && localStorage.getItem("token");
-
   const handleSignOut = async () => {
     // await update({
     //   ...session,
