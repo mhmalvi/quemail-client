@@ -1,6 +1,6 @@
 import React from "react";
 
 const Campaigns = () => {
-  return <div>Campaigns</div>;
+  return <>{typeof window !== "undefined" && <div>Campaigns</div>}</>;
 };
 export default Campaigns;
