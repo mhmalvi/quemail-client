@@ -8,6 +8,7 @@ const montserrat = Montserrat({
   subsets: ["latin"],
   style: ["normal", "italic"],
   weight: ["400", "700"],
+  preload: false,
 });
 
 export const metadata: Metadata = {
