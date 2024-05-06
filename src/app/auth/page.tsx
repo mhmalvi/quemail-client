@@ -11,21 +11,15 @@ const Authenticate = () => {
   const photo = searchParams.get("photo");
   const token = searchParams.get("token");
 
-  useEffect(() => {
-    if (token) {
-      Storage.setItem("id", id);
-      Storage.setItem("userName", userName);
-      Storage.setItem("email", email);
-      Storage.setItem("photo", photo);
-      Storage.setItem("token", token);
+  if (token && typeof window !== "undefined") {
+    Storage.setItem("id", id);
+    Storage.setItem("userName", userName);
+    Storage.setItem("email", email);
+    Storage.setItem("photo", photo);
+    Storage.setItem("token", token);
 
-      const timeoutId = setTimeout(() => {
-        redirect("/home");
-      }, 1000);
-
-      return () => clearTimeout(timeoutId);
-    }
-  }, [token, id, userName, email, photo]);
+    redirect("/home");
+  }
 
   return (
     <div className="h-screen w-screen flex flex-col items-center justify-center">
@@ -46,4 +40,4 @@ const AuthPage = () => {
     </Suspense>
   );
 };
-export default Authenticate;
+export default AuthPage;
