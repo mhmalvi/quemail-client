@@ -9,6 +9,7 @@ import { BsQuestionDiamondFill } from "react-icons/bs";
 import { MdNotifications } from "react-icons/md";
 import { Storage } from "../utils/localStore";
 import Image from "next/image";
+import { signOut } from "@/app/api/auth";
 
 const Topnav = () => {
   const closeSidebar = sideBarStore((state: any) => state.setCloseSidebar);
@@ -51,13 +52,14 @@ const Topnav = () => {
   ));
 
   const handleSignOut = async () => {
-    // await update({
-    //   ...session,
-    //   user: {
-    //     ...session?.user,
-    //     accessToken: null,
-    //   },
-    // });
+    const response = await signOut();
+    if (response) {
+      Storage.removeItem("token");
+      Storage.removeItem("userName");
+      Storage.removeItem("photo");
+      Storage.removeItem("email");
+      window.location.reload();
+    }
   };
 
   return (
@@ -129,7 +131,12 @@ const Topnav = () => {
               Themes
             </Dropdown.Item> */}
             <Dropdown.Divider className="bg-light-black" />
-            <Dropdown.Item className="dark:text-slate-300 text-light-black hover:text-slate-700">
+            <Dropdown.Item
+              className="dark:text-slate-300 text-light-black hover:text-slate-700"
+              onClick={() => {
+                handleSignOut();
+              }}
+            >
               Sign out
             </Dropdown.Item>
           </Dropdown>

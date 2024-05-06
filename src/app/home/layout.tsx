@@ -15,7 +15,6 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <Flowbite>
-      {/* {typeof window !== "undefined" && ( */}
         <section
           // className={`flex h-screen w-full bg-brand-color bg-cover bg-center	`}
           className={`flex h-screen w-full dark:bg-[url("/Themes/Dark/1.svg")] bg-[url("/Themes/Light/1.svg")] bg-cover bg-center	`}
@@ -28,7 +27,6 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
             {children}
           </div>
         </section>
-      {/* )} */}
     </Flowbite>
   );
 };

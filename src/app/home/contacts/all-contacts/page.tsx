@@ -10,6 +10,7 @@ import {
   Button,
 } from "flowbite-react";
 import NoContacts from "./NoContacts";
+import ImportCSV from "./ImportCSV";
 
 const AllContacts = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -37,7 +38,9 @@ const AllContacts = () => {
   const handleFilterChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setFilterValue(event.target.value);
   };
-  const [openModal, setOpenModal] = useState(false);
+  const [openModal, setOpenModal] = useState({
+    show: "",
+  });
   const [openAddContactModal, setOpenAddContactModal] = useState(false);
 
   return (
@@ -80,7 +83,9 @@ const AllContacts = () => {
             <button
               className="py-2 px-4 rounded-md border border-brand-color"
               onClick={() => {
-                setOpenModal(true);
+                setOpenModal({
+                  show: "showButtons",
+                });
               }}
             >
               Import
@@ -216,32 +221,43 @@ const AllContacts = () => {
           </Modal.Body>
         </Modal>
       </div>
-      <Modal dismissible show={openModal} onClose={() => setOpenModal(false)}>
+      <Modal
+        dismissible
+        show={openModal.show === "showButtons" || openModal.show === "importContent"}
+        onClose={() => setOpenModal({ show: "" })}
+      >
         <Modal.Header>Import Contacts</Modal.Header>
-        <Modal.Body>
-          <div className="flex flex-col gap-4 text-center">
-            <h3 className="m-0 p-0 text-lg font-normal text-gray-500 dark:text-gray-400">
-              Have existing contacts in a file?
-            </h3>
-            <h3 className="m-0 p-0 text-lg font-normal text-gray-500 dark:text-gray-400">
-              Import a CSV file of your contacts for quick import.
-            </h3>
-            <div className="flex justify-center gap-4">
-              <button
-                className="px-4 py-2 bg-brand-color rounded-md"
-                onClick={() => setOpenModal(false)}
-              >
-                Import from file
-              </button>
-              <button
-                className="px-4 py-2 border border-brand-color text-gray-800 dark:text-slate-300 rounded-md"
-                onClick={() => setOpenModal(false)}
-              >
-                Cancel
-              </button>
-            </div>
+        {openModal.show === "importContent" ? (
+          <div className="p-4">
+
+          <ImportCSV/>
           </div>
-        </Modal.Body>
+        ) : (
+          <Modal.Body>
+            <div className="flex flex-col gap-4 text-center">
+              <h3 className="m-0 p-0 text-lg font-normal text-gray-500 dark:text-gray-400">
+                Have existing contacts in a file?
+              </h3>
+              <h3 className="m-0 p-0 text-lg font-normal text-gray-500 dark:text-gray-400">
+                Import a CSV file of your contacts for quick import.
+              </h3>
+              <div className="flex justify-center gap-4">
+                <button
+                  className="px-4 py-2 bg-brand-color rounded-md"
+                  onClick={() => setOpenModal({ show: "importContent" })}
+                >
+                  Import from file
+                </button>
+                <button
+                  className="px-4 py-2 border border-brand-color text-gray-800 dark:text-slate-300 rounded-md"
+                  onClick={() => setOpenModal({ show: "" })}
+                >
+                  Cancel
+                </button>
+              </div>
+            </div>
+          </Modal.Body>
+        )}
       </Modal>
     </>
   );
