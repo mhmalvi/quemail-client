@@ -11,14 +11,20 @@ const Authenticate = () => {
 
   return (
     <div className="h-screen w-screen flex items-center justify-center">
-      <Suspense fallback={null}>
-        <h1>Welcome to Quemailer</h1>
-        <h1>UserName: {userName}</h1>
-        <h1>Email: {email}</h1>
-        <h1>Id: {id}</h1>
-        <h1>Photo: {photo}</h1>
-      </Suspense>
+      <h1>Welcome to Quemailer</h1>
+      <h1>UserName: {userName}</h1>
+      <h1>Email: {email}</h1>
+      <h1>Id: {id}</h1>
+      <h1>Photo: {photo}</h1>
     </div>
   );
 };
-export default Authenticate;
+
+const AuthPage = () => {
+  return (
+    <Suspense fallback={null}>
+      <Authenticate />
+    </Suspense>
+  );
+};
+export default AuthPage;
