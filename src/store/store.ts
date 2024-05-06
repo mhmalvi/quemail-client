@@ -29,4 +29,9 @@ export const themeStore = create<themeState & themeAction>((set) => ({
   setTheme: (theme) => set(() => ({ theme: theme })),
 }));
 
+export const contactStore = create((set) => ({
+  csvData: null,
+  setCsvData: (csvData: any) => set(() => ({ csvData: csvData })),
+}));
+
 // export const navBarStore = create;

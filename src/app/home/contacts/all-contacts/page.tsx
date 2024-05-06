@@ -11,6 +11,7 @@ import {
 } from "flowbite-react";
 import NoContacts from "./NoContacts";
 import ImportCSV from "./ImportCSV";
+import { contactStore } from "@/store/store";
 
 const AllContacts = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -42,6 +43,8 @@ const AllContacts = () => {
     show: "",
   });
   const [openAddContactModal, setOpenAddContactModal] = useState(false);
+  const csvData = contactStore((state: any) => state.csvData);
+  console.log(csvData.data[0]);
 
   return (
     <>
