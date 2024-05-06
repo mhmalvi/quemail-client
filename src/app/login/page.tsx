@@ -33,7 +33,7 @@ const Login = () => {
     }));
 
     const response = await emailCheck(credentialsData.email);
-    console.log(response);
+
     if (response.status === 404) {
       warningNotification(response.statusText);
       setStepTwo((prevData) => ({
@@ -53,12 +53,12 @@ const Login = () => {
     const googleLoginUrl = "https://backend.quemailer.com/google/login";
     window.open(googleLoginUrl, "_self");
   };
-  // useEffect(() => {
-  //   const token = localStorage.getItem("token");
-  //   if (token) {
-  //     redirect("/home");
-  //   }
-  // }, []);
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      redirect("/home");
+    }
+  }, []);
 
   return (
     <div className="relative h-screen w-full flex items-center justify-center p-8">
