@@ -11,13 +11,13 @@ const Authenticate = () => {
   const photo = searchParams.get("photo");
   const token = searchParams.get("token");
 
-  if (typeof window !== "undefined") {
+  // if (typeof window !== "undefined") {
     Storage.setItem("id", id);
     Storage.setItem("userName", userName);
     Storage.setItem("email", email);
     Storage.setItem("photo", photo);
     Storage.setItem("token", token);
-  }
+  // }
 
   if (token) {
     setTimeout(() => {
