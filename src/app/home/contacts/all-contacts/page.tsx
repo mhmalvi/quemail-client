@@ -43,8 +43,8 @@ const AllContacts = () => {
     show: "",
   });
   const [openAddContactModal, setOpenAddContactModal] = useState(false);
-  const csvData = contactStore((state: any) => state.csvData);
-  console.log(csvData.data[0]);
+  // const csvData = contactStore((state: any) => state.csvData);
+  // console.log(csvData.data[0]);
 
   return (
     <>

@@ -11,8 +11,8 @@ import {
 import { contactStore } from "@/store/store";
 
 const AllCampaigns = () => {
-  const csvData = contactStore((state: any) => state.csvData);
-  console.log(csvData);
+  // const csvData = contactStore((state: any) => state.csvData);
+  // console.log(csvData);
   const [currentPage, setCurrentPage] = useState(1);
   const [filterValue, setFilterValue] = useState("");
   const onPageChange = (page: number) => setCurrentPage(page);
