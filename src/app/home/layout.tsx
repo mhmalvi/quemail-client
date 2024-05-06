@@ -8,10 +8,10 @@ import { redirect } from "next/navigation";
 
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   // const theme = themeStore((state: any) => state.theme);
-  const token = localStorage.getItem("token");
-  if (!token) {
-    redirect("/login");
-  }
+  // const token = localStorage.getItem("token");
+  // if (!token) {
+  //   redirect("/login");
+  // }
 
   return (
     <Flowbite>
