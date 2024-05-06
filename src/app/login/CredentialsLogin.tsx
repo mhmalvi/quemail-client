@@ -5,7 +5,6 @@ import { OTPData } from "@/components/utils/types";
 import { Storage } from "@/store/store";
 import { useRouter } from "next/navigation";
 import { Spinner } from "flowbite-react";
-import { successNotification } from "@/components/utils/toast";
 
 const CredentialsLogin = ({
   setCredentialsData,
@@ -26,7 +25,6 @@ const CredentialsLogin = ({
       Storage.setItem("photo", response.user.photo);
       Storage.setItem("token", response.user.token);
       setButtonClick(false);
-      successNotification("Welcome to quemailer");
       router.push("/home");
     }
   };
