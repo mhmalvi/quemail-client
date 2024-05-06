@@ -8,14 +8,16 @@ const Authenticate = () => {
   const email = searchParams.get("email");
   const id = searchParams.get("id");
   const photo = searchParams.get("photo");
+  const token = searchParams.get("token");
 
   return (
-    <div className="h-screen w-screen flex items-center justify-center">
+    <div className="h-screen w-screen flex flex-col items-center justify-center">
       <h1>Welcome to Quemailer</h1>
       <h1>UserName: {userName}</h1>
       <h1>Email: {email}</h1>
       <h1>Id: {id}</h1>
       <h1>Photo: {photo}</h1>
+      <h1>Token: {token}</h1>
     </div>
   );
 };
