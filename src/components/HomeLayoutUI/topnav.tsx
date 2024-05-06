@@ -1,6 +1,5 @@
 "use client";
 import React, { useState } from "react";
-import "./homeLayout.css";
 import { usePathname } from "next/navigation";
 import { DarkThemeToggle, Dropdown, Modal } from "flowbite-react";
 import { MdArrowRight } from "react-icons/md";
