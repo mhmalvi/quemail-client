@@ -18,14 +18,12 @@ const Authenticate = () => {
     Storage.setItem("photo", photo);
     Storage.setItem("token", token);
   }
-  
-  useEffect(() => {
-    if (token) {
-      setTimeout(() => {
-        redirect("/home");
-      }, 3000);
-    }
-  });
+
+  if (token) {
+    setTimeout(() => {
+      redirect("/home");
+    }, 3000);
+  }
 
   return (
     <div className="h-screen w-screen flex flex-col items-center justify-center">
