@@ -8,14 +8,14 @@ import { redirect } from "next/navigation";
 
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   // const theme = themeStore((state: any) => state.theme);
-  // const token = localStorage.getItem("token");
-  // if (!token) {
-  //   redirect("/login");
-  // }
+  const token = typeof window !== "undefined" && localStorage.getItem("token");
+  if (!token) {
+    redirect("/login");
+  }
 
   return (
     <Flowbite>
-      {typeof window !== "undefined" && (
+      {/* {typeof window !== "undefined" && ( */}
         <section
           // className={`flex h-screen w-full bg-brand-color bg-cover bg-center	`}
           className={`flex h-screen w-full dark:bg-[url("/Themes/Dark/1.svg")] bg-[url("/Themes/Light/1.svg")] bg-cover bg-center	`}
@@ -28,7 +28,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
             {children}
           </div>
         </section>
-      )}
+      {/* )} */}
     </Flowbite>
   );
 };
