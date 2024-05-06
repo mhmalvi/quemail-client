@@ -19,7 +19,7 @@ const MainEditor = () => {
   const exportHtml = () => {
     unlayer?.exportHtml((data) => {
       const { design, html } = data;
-      console.log("exportHtml", html);
+      // console.log("exportHtml", html);
     });
   };
 
