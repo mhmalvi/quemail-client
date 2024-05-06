@@ -15,18 +15,20 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <Flowbite>
-      <section
-        // className={`flex h-screen w-full bg-brand-color bg-cover bg-center	`}
-        className={`flex h-screen w-full dark:bg-[url("/Themes/Dark/1.svg")] bg-[url("/Themes/Light/1.svg")] bg-cover bg-center	`}
-      >
-        <Sidebar />
-        <div
-          className={`relative p-8 flex flex-col gap-4 w-full overflow-hidden`}
+      {typeof window !== "undefined" && (
+        <section
+          // className={`flex h-screen w-full bg-brand-color bg-cover bg-center	`}
+          className={`flex h-screen w-full dark:bg-[url("/Themes/Dark/1.svg")] bg-[url("/Themes/Light/1.svg")] bg-cover bg-center	`}
         >
-          <Topnav />
-          {children}
-        </div>
-      </section>
+          <Sidebar />
+          <div
+            className={`relative p-8 flex flex-col gap-4 w-full overflow-hidden`}
+          >
+            <Topnav />
+            {children}
+          </div>
+        </section>
+      )}
     </Flowbite>
   );
 };
