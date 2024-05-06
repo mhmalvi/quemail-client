@@ -1,6 +1,7 @@
 "use client";
-import React, { Suspense } from "react";
-import { useSearchParams } from "next/navigation";
+import React, { Suspense, useEffect } from "react";
+import { redirect, useSearchParams } from "next/navigation";
+import { Storage } from "@/store/store";
 
 const Authenticate = () => {
   const searchParams = useSearchParams();
@@ -9,6 +10,22 @@ const Authenticate = () => {
   const id = searchParams.get("id");
   const photo = searchParams.get("photo");
   const token = searchParams.get("token");
+
+  if (typeof window !== "undefined") {
+    Storage.setItem("id", id);
+    Storage.setItem("userName", userName);
+    Storage.setItem("email", email);
+    Storage.setItem("photo", photo);
+    Storage.setItem("token", token);
+  }
+  
+  useEffect(() => {
+    if (token) {
+      setTimeout(() => {
+        redirect("/home");
+      }, 3000);
+    }
+  });
 
   return (
     <div className="h-screen w-screen flex flex-col items-center justify-center">
