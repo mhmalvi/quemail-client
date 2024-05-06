@@ -12,10 +12,11 @@ import {
   warningNotification,
 } from "@/components/utils/toast";
 import CredentialsLogin from "./CredentialsLogin";
+import { OTPData } from "@/components/utils/types";
 
 const Login = () => {
   const notify = () => toast("Wow so easy!");
-  const [credentialsData, setCredentialsData] = useState({
+  const [credentialsData, setCredentialsData] = useState<OTPData>({
     email: "",
     otp: "",
   });
@@ -58,13 +59,6 @@ const Login = () => {
   if (token) {
     redirect("/home");
   }
-
-  // useEffect(() => {
-  //   const token = localStorage.getItem("token");
-  //   if (token) {
-  //     redirect("/home");
-  //   }
-  // }, []);
 
   return (
     <div className="relative h-screen w-full flex items-center justify-center p-8">

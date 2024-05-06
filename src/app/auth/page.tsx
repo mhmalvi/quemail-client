@@ -7,12 +7,10 @@ const Authenticate = () => {
   const searchParams = useSearchParams();
   const userName = searchParams.get("userName");
   const email = searchParams.get("email");
-  const id = searchParams.get("id");
   const photo = searchParams.get("photo");
   const token = searchParams.get("token");
 
   if (token && typeof window !== "undefined") {
-    Storage.setItem("id", id);
     Storage.setItem("userName", userName);
     Storage.setItem("email", email);
     Storage.setItem("photo", photo);
@@ -26,7 +24,6 @@ const Authenticate = () => {
       <h1>Welcome to Quemailer</h1>
       <h1>UserName: {userName}</h1>
       <h1>Email: {email}</h1>
-      <h1>Id: {id}</h1>
       <h1>Photo: {photo}</h1>
       <h1>Token: {token}</h1>
     </div>

@@ -29,3 +29,7 @@ export interface googleLoginData {
   image: string | null | undefined;
   token: string | null | undefined;
 }
+export interface OTPData {
+  email: string;
+  otp: string;
+}

@@ -1,25 +1,37 @@
+"use client";
 import React, { FormEvent } from "react";
-interface CredentialsProp {
-  email: string;
-  otp: string;
-}
+import { verifyOTP } from "../api/auth";
+import { OTPData } from "@/components/utils/types";
+import { Storage } from "@/store/store";
+import { useRouter } from "next/navigation";
+
 const CredentialsLogin = ({
   setCredentialsData,
   credentialsData,
 }: {
-  setCredentialsData: React.Dispatch<React.SetStateAction<CredentialsProp>>;
-  credentialsData: CredentialsProp;
+  setCredentialsData: React.Dispatch<React.SetStateAction<OTPData>>;
+  credentialsData: OTPData;
 }) => {
-  const handleCredentialSubmit = () => {
-    console.log(credentialsData);
-  }
+  const router = useRouter();
+
+  const handleCredentialSubmit = async () => {
+    const response = await verifyOTP(credentialsData);
+
+    if (response.status === 200) {
+      Storage.setItem("userName", response.user.userName);
+      Storage.setItem("email", response.user.email);
+      Storage.setItem("photo", response.user.photo);
+      Storage.setItem("token", response.user.token);
+      router.push("/home");
+    }
+  };
   return (
     <div className="w-full ">
       <form className="flex flex-col gap-4 w-full">
         <div className="flex flex-col gap-2 w-full">
           <label className="text-slate-300">Add OTP</label>
           <input
-            type="text"
+            type="number"
             onChange={(e) => {
               setCredentialsData((prevData) => ({
                 ...prevData,
