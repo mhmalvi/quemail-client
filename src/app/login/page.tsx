@@ -15,7 +15,6 @@ import CredentialsLogin from "./CredentialsLogin";
 import { OTPData } from "@/components/utils/types";
 
 const Login = () => {
-  const notify = () => toast("Wow so easy!");
   const [credentialsData, setCredentialsData] = useState<OTPData>({
     email: "",
     otp: "",

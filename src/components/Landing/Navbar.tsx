@@ -6,7 +6,7 @@ import Link from "next/link";
 
 const Navbar = () => {
   const [openNavDrawer, setOpenNavDrawer] = useState(false);
-  const token = localStorage.getItem("token");
+  const token = typeof window !== "undefined" && localStorage.getItem("token");
 
   return (
     <>
