@@ -7,7 +7,7 @@ import { Flowbite } from "flowbite-react";
 
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   // const theme = themeStore((state: any) => state.theme);
- 
+  if()
 
   return (
     <Flowbite>
