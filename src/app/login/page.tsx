@@ -3,7 +3,7 @@ import React, { FormEvent, useEffect, useState } from "react";
 import Image from "next/image";
 import Images from "@/components/utils/images";
 import Link from "next/link";
-import { emailCheck, googleLogin } from "../api/auth";
+import { emailCheck } from "../api/auth";
 import { Spinner } from "flowbite-react";
 import { redirect } from "next/navigation";
 import { toast } from "react-toastify";
@@ -54,8 +54,8 @@ const Login = () => {
     window.open(googleLoginUrl, "_self");
   };
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (token) {
+    const authToken = localStorage.getItem("token");
+    if (authToken) {
       redirect("/home");
     }
   }, []);
