@@ -53,6 +53,12 @@ const Login = () => {
     const googleLoginUrl = "https://backend.quemailer.com/google/login";
     window.open(googleLoginUrl, "_self");
   };
+
+  const token = typeof window !== "undefined" && localStorage.getItem("token");
+  if (token) {
+    redirect("/home");
+  }
+
   // useEffect(() => {
   //   const token = localStorage.getItem("token");
   //   if (token) {
