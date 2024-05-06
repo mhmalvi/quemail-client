@@ -3,11 +3,15 @@ import React, { useEffect } from "react";
 import Sidebar from "@/components/HomeLayoutUI/sidebar";
 import Topnav from "@/components/HomeLayoutUI/topnav";
 import { Flowbite } from "flowbite-react";
+import { redirect } from "next/navigation";
 // import { themeStore } from "@/store/store";
 
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   // const theme = themeStore((state: any) => state.theme);
-  if()
+  const token = localStorage.getItem("token");
+  if (!token) {
+    redirect("/login");
+  }
 
   return (
     <Flowbite>
