@@ -1,26 +1,21 @@
 "use client";
 import React from "react";
-function extractParamsFromCurrentURL(): Map<string, string> {
-  if (window) {
-    const searchParams = new URLSearchParams(window.location.search);
-    const params = new Map<string, string>();
-
-    searchParams.forEach((value, key) => {
-      params.set(key, value);
-    });
-  }
-  return params;
-}
-
-const params = extractParamsFromCurrentURL();
-
-console.log(params.get("param1"));
-console.log(params.get("param2"));
+import { useSearchParams } from "next/navigation";
 
 const Authenticate = () => {
+  const searchParams = useSearchParams();
+  const userName = searchParams.get("userName");
+  const email = searchParams.get("email");
+  const id = searchParams.get("id");
+  const photo = searchParams.get("photo");
+  
   return (
     <div className="h-screen w-screen flex items-center justify-center">
       <h1>Welcome to Quemailer</h1>
+      <h1>UserName: {userName}</h1>
+      <h1>Email: {email}</h1>
+      <h1>Id: {id}</h1>
+      <h1>Photo: {photo}</h1>
     </div>
   );
 };
