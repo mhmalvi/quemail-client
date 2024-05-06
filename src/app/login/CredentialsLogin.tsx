@@ -11,7 +11,6 @@ const CredentialsLogin = ({
   credentialsData: CredentialsProp;
 }) => {
   const handleCredentialSubmit = () => {
-    
     console.log(credentialsData);
   }
   return (
