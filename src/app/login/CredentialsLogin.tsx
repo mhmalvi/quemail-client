@@ -31,7 +31,7 @@ const CredentialsLogin = ({
         <div className="flex flex-col gap-2 w-full">
           <label className="text-slate-300">Add OTP</label>
           <input
-            type="number"
+            type="string"
             onChange={(e) => {
               setCredentialsData((prevData) => ({
                 ...prevData,
