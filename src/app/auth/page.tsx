@@ -15,17 +15,14 @@ const Authenticate = () => {
     Storage.setItem("email", email);
     Storage.setItem("photo", photo);
     Storage.setItem("token", token);
-
-    redirect("/home");
+    setTimeout(() => {
+      redirect("/home");
+    }, 2000);
   }
 
   return (
     <div className="h-screen w-screen flex flex-col items-center justify-center">
       <h1>Welcome to Quemailer</h1>
-      <h1>UserName: {userName}</h1>
-      <h1>Email: {email}</h1>
-      <h1>Photo: {photo}</h1>
-      <h1>Token: {token}</h1>
     </div>
   );
 };
