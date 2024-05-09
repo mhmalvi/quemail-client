@@ -30,7 +30,11 @@ const MainEditor = () => {
       onReady={onReady}
       minHeight={"100%"}
       editorId="ok"
-      options={optionsDark}
+      options={{
+        appearance: {
+          theme: "dark",
+        },
+      }}
     />
   );
 };
