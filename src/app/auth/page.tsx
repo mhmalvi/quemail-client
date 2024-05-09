@@ -9,16 +9,14 @@ const Authenticate = () => {
   const email = searchParams.get("email");
   const photo = searchParams.get("photo");
   const token = searchParams.get("token");
-  const userIDString = searchParams.get("userID");
-
-  const userID = userIDString ? parseInt(userIDString, 10) : null;
+  const userID = searchParams.get("userID");
 
   if (token && userName && email && photo && userID) {
     Storage.setItem("userName", userName);
     Storage.setItem("email", email);
     Storage.setItem("photo", photo);
     Storage.setItem("token", token);
-    Storage.setItem("userID", +userID);
+    Storage.setItem("userID", JSON.parse(userID));
     redirect("/home");
   }
 
