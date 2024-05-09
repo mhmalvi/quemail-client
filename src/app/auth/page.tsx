@@ -17,7 +17,7 @@ const Authenticate = () => {
     Storage.setItem("email", email);
     Storage.setItem("photo", photo);
     Storage.setItem("token", token);
-    Storage.setItem("userID", +userID);
+    Storage.setItem("userID", userID);
     redirect("/home");
   }
 
