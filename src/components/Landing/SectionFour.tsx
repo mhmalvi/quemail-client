@@ -5,7 +5,7 @@ import Images from "../utils/images";
 
 const SectionTwo = () => {
   return (
-    <div className="w-full flex flex-col gap-4 items-center justify-center lg:h-screen h-full lg:py-0 py-16 z-10">
+    <div className="w-full flex flex-col gap-4 items-center justify-center lg:h-screen h-full lg:py-0 py-16">
       <h1 className="m-0 px-0 py-2 lg:text-2xl text-base text-center flex flex-col lg:gap-2 text-slate-300">
         Sync your data and growth with
         <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-color to-brand-color-2 font-semibold lg:text-3xl text-xl">

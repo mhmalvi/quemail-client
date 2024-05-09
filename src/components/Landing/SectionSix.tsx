@@ -5,7 +5,7 @@ import Images from "../utils/images";
 
 const SectionSix = () => {
   return (
-    <div className="w-full flex flex-col gap-4 items-center justify-center h-full py-16 z-10	">
+    <div className="w-full flex flex-col gap-4 items-center justify-center h-full py-16	">
       <div className="flex lg:flex-row flex-col flex-grow items-center w-full gap-8 p-16 rounded-md w-full bg-light-glass">
         <div className="lg:w-1/2 flex flex-col items-center justify-center gap-4">
           <h1 className="text-3xl text-center">

@@ -4,7 +4,7 @@ import { sectionThreeData, sectionThreePackage } from "../utils/staticData";
 
 const SectionTwo = () => {
   return (
-    <div className="w-full flex flex-col gap-16 items-center justify-center h-full z-10	">
+    <div className="w-full flex flex-col gap-16 items-center justify-center h-full ">
       <h1 className="m-0 p-0 text-4xl text-center flex lg:gap-2 text-slate-300 mt-16">
         Why
         <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-color to-brand-color-2 ml-2">
