@@ -1,25 +1,28 @@
 "use client";
-import React, { FormEvent, useEffect, useState } from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import Images from "@/components/utils/images";
 import Link from "next/link";
 import { emailCheck } from "../api/auth";
 import { Spinner } from "flowbite-react";
-import { redirect } from "next/navigation";
-import { toast } from "react-toastify";
+import { useRouter } from "next/navigation";
 import {
   successNotification,
   warningNotification,
-} from "@/components/utils/toast";
+} from "@/components/utils/utility";
 import CredentialsLogin from "./CredentialsLogin";
 import { OTPData } from "@/components/utils/types";
 
 const Login = () => {
+  const token = typeof window !== "undefined" && localStorage.getItem("token");
+  const router = useRouter();
+  if (token) {
+    router.push("/home");
+  }
   const [credentialsData, setCredentialsData] = useState<OTPData>({
     email: "",
     otp: "",
   });
-  const [showPassword, setShowPassword] = useState(false);
   const [openModal, setOpenModal] = useState(false);
   const [stepTwo, setStepTwo] = useState({
     item: false,
@@ -54,14 +57,9 @@ const Login = () => {
     window.open(googleLoginUrl, "_self");
   };
 
-  const token = typeof window !== "undefined" && localStorage.getItem("token");
-  if (token) {
-    redirect("/home");
-  }
-
   return (
     <div className="relative h-screen w-full flex items-center justify-center p-8">
-      <div className="bg-light-glass lg:w-1/4 w-full rounded-md backdrop-blur-2xl p-8 flex flex-col gap-4 items-center justify-center">
+      <div className="bg-light-glass lg:w-1/4 md:w-1/3 w-1/2 rounded-md backdrop-blur-2xl p-8 flex flex-col gap-4 items-center justify-center">
         <Link href="/">
           <Image src={Images.Logo} alt="logo" />
         </Link>

@@ -1,3 +1,4 @@
+"use client"
 import React from "react";
 import AccountDetails from "./AccountDetails";
 import ChangePassword from "./ChangePassword";

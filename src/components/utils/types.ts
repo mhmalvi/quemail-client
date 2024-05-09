@@ -8,6 +8,15 @@ export interface Homecard {
   footertext: string;
 }
 
+interface OpenModalState {
+  show: string;
+}
+
+export interface ImportCSVProps {
+  openModal: OpenModalState;
+  setOpenModal: React.Dispatch<React.SetStateAction<OpenModalState>>;
+}
+
 // Store Types
 export interface utilState {
   sidebarToggle: boolean;
