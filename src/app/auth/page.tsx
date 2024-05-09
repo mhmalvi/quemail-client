@@ -9,17 +9,18 @@ const Authenticate = () => {
   const email = searchParams.get("email");
   const photo = searchParams.get("photo");
   const token = searchParams.get("token");
-  const userID = searchParams.get("userID");
+  const userIDString = searchParams.get("userID");
+
+  const userID = userIDString ? parseInt(userIDString, 10) : null;
 
   if (token && userName && email && photo && userID) {
+    const userIDString = userID.toString();
     Storage.setItem("userName", userName);
     Storage.setItem("email", email);
     Storage.setItem("photo", photo);
     Storage.setItem("token", token);
-    Storage.setItem("userID", userID);
-    // setTimeout(() => {
+    Storage.setItem("userID", userIDString);
     redirect("/home");
-    // }, 2000);
   }
 
   return (
