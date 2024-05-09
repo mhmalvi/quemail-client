@@ -65,7 +65,7 @@ const Topnav = () => {
 
   return (
     <>
-      <div className="relative w-full h-16 dark:bg-dark-glass bg-[#ffffffbf] dark:border-none border rounded-md flex items-center justify-between gap-8 p-4 z-40 backdrop-blur-2xl">
+      <div className="relative w-full h-16 dark:bg-dark-glass bg-[#ffffffbf] dark:border-none border rounded-md flex items-center justify-between gap-8 p-4 z-40">
         <div className="flex items-center gap-4">{displayString}</div>
         <div className="flex items-center gap-4">
           <div>
