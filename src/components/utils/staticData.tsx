@@ -104,47 +104,19 @@ export const fields = [
     ],
   },
   {
-    label: "Phone",
-    key: "phone",
-    alternateMatches: ["phone number"],
+    label: "Added by",
+    key: "addedBy",
+    alternateMatches: ["first name", "first"],
     fieldType: {
       type: "input",
     },
-    example: "123-456-7890",
-    validations: [
-      {
-        rule: "required",
-        errorMessage: "Phone number is required",
-        level: "error",
-      },
-      {
-        rule: "regex",
-        // This regex might not cover all valid phone number formats, but it's a basic example.
-        pattern: /^\d{3}-\d{3}-\d{4}$/,
-        errorMessage: "Invalid phone number format",
-        level: "error",
-      },
-    ],
-  },
-  {
-    label: "Age",
-    key: "age",
-    fieldType: {
-      type: "input",
-    },
-    example: "25",
-    validations: [
-      {
-        rule: "required",
-        errorMessage: "Age is required",
-        level: "error",
-      },
-      {
-        rule: "regex",
-        pattern: /^\d+$/,
-        errorMessage: "Age must be a number",
-        level: "error",
-      },
-    ],
+    example: "Stephanie",
+    // validations: [
+    //   {
+    //     rule: "required",
+    //     errorMessage: "Name is required",
+    //     level: "error",
+    //   },
+    // ],
   },
 ] as const;
