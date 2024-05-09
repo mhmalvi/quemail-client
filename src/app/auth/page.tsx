@@ -11,15 +11,15 @@ const Authenticate = () => {
   const token = searchParams.get("token");
   const userID = searchParams.get("userID");
 
-  if (token && typeof window !== "undefined") {
+  if (token && userName && email && photo && userID) {
     Storage.setItem("userName", userName);
     Storage.setItem("email", email);
     Storage.setItem("photo", photo);
     Storage.setItem("token", token);
     Storage.setItem("userID", userID);
-    setTimeout(() => {
-      redirect("/home");
-    }, 2000);
+    // setTimeout(() => {
+    redirect("/home");
+    // }, 2000);
   }
 
   return (
