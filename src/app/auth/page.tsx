@@ -14,12 +14,11 @@ const Authenticate = () => {
   const userID = userIDString ? parseInt(userIDString, 10) : null;
 
   if (token && userName && email && photo && userID) {
-    const userIDString = userID.toString();
     Storage.setItem("userName", userName);
     Storage.setItem("email", email);
     Storage.setItem("photo", photo);
     Storage.setItem("token", token);
-    Storage.setItem("userID", userID);
+    Storage.setItem("userID", +userID);
     redirect("/home");
   }
 
