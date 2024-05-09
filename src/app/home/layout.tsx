@@ -2,8 +2,9 @@
 import React, { useEffect } from "react";
 import Sidebar from "@/components/HomeLayoutUI/sidebar";
 import Topnav from "@/components/HomeLayoutUI/topnav";
-import { Flowbite } from "flowbite-react";
+import { CustomFlowbiteTheme, Flowbite } from "flowbite-react";
 import { redirect } from "next/navigation";
+import { customTheme } from "@/components/utils/utility";
 // import { themeStore } from "@/store/store";
 
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
@@ -14,19 +15,19 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   }
 
   return (
-    <Flowbite>
-        <section
-          // className={`flex h-screen w-full bg-brand-color bg-cover bg-center	`}
-          className={`flex h-screen w-full dark:bg-[url("/Themes/Dark/1.svg")] bg-[url("/Themes/Light/1.svg")] bg-cover bg-center	`}
+    <Flowbite theme={{ theme: customTheme }}>
+      <section
+        // className={`flex h-screen w-full bg-brand-color bg-cover bg-center	`}
+        className={`flex h-screen w-full dark:bg-[url("/Themes/Dark/1.svg")] bg-[url("/Themes/Light/1.svg")] bg-cover bg-center	`}
+      >
+        <Sidebar />
+        <div
+          className={`relative p-8 flex flex-col gap-4 w-full overflow-hidden`}
         >
-          <Sidebar />
-          <div
-            className={`relative p-8 flex flex-col gap-4 w-full overflow-hidden`}
-          >
-            <Topnav />
-            {children}
-          </div>
-        </section>
+          <Topnav />
+          {children}
+        </div>
+      </section>
     </Flowbite>
   );
 };

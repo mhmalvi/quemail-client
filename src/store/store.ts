@@ -1,4 +1,8 @@
-import { themeAction, themeState, utilState } from "@/components/utils/types";
+import {
+  themeAction,
+  themeState,
+  utilState,
+} from "@/components/utils/types";
 import { create } from "zustand";
 export const Storage = {
   getItem: (key: any) => {
@@ -30,8 +34,10 @@ export const themeStore = create<themeState & themeAction>((set) => ({
 }));
 
 export const contactStore = create((set) => ({
+  hasData: false,
   csvData: null,
-  setCsvData: (csvData: any) => set(() => ({ csvData: csvData })),
+  setCsvData: (csvData: []) => set(() => ({ csvData: csvData })),
+  setHasData: (state:boolean) => set(() => ({ hasData: state })),
 }));
 
 // export const navBarStore = create;

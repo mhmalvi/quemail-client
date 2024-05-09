@@ -62,3 +62,89 @@ export const sectionFiveData = [
   "AI recommendations",
   "Transactional emails"
 ];
+
+export const fields = [
+  {
+    label: "Name",
+    key: "name",
+    alternateMatches: ["first name", "first"],
+    fieldType: {
+      type: "input",
+    },
+    example: "Stephanie",
+    validations: [
+      {
+        rule: "required",
+        errorMessage: "Name is required",
+        level: "error",
+      },
+    ],
+  },
+  {
+    label: "Email",
+    key: "email",
+    alternateMatches: ["email address"],
+    fieldType: {
+      type: "input",
+    },
+    example: "example@example.com",
+    validations: [
+      {
+        rule: "required",
+        errorMessage: "Email is required",
+        level: "error",
+      },
+      {
+        rule: "regex",
+        // This regex might not cover all valid email addresses, but it's a basic example.
+        pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+        errorMessage: "Invalid email format",
+        level: "error",
+      },
+    ],
+  },
+  {
+    label: "Phone",
+    key: "phone",
+    alternateMatches: ["phone number"],
+    fieldType: {
+      type: "input",
+    },
+    example: "123-456-7890",
+    validations: [
+      {
+        rule: "required",
+        errorMessage: "Phone number is required",
+        level: "error",
+      },
+      {
+        rule: "regex",
+        // This regex might not cover all valid phone number formats, but it's a basic example.
+        pattern: /^\d{3}-\d{3}-\d{4}$/,
+        errorMessage: "Invalid phone number format",
+        level: "error",
+      },
+    ],
+  },
+  {
+    label: "Age",
+    key: "age",
+    fieldType: {
+      type: "input",
+    },
+    example: "25",
+    validations: [
+      {
+        rule: "required",
+        errorMessage: "Age is required",
+        level: "error",
+      },
+      {
+        rule: "regex",
+        pattern: /^\d+$/,
+        errorMessage: "Age must be a number",
+        level: "error",
+      },
+    ],
+  },
+] as const;

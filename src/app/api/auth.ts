@@ -61,7 +61,6 @@ export const verifyOTP = async (data: OTPData) => {
 
 export const signOut = async () => {
   const token = typeof window !== "undefined" && localStorage.getItem("token");
-  console.log(token);
   try {
     const headers: { [key: string]: string } = {
       "Content-Type": "application/json",

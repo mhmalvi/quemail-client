@@ -1,17 +1,12 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FiSearch } from "react-icons/fi";
-import {
-  Checkbox,
-  DarkThemeToggle,
-  Pagination,
-  Table,
-  Modal,
-  Button,
-} from "flowbite-react";
+import { Checkbox, Pagination, Table, Modal } from "flowbite-react";
 import NoContacts from "./NoContacts";
 import ImportCSV from "./ImportCSV";
+
 import { contactStore } from "@/store/store";
+import { fetchContact } from "@/app/api/contact";
 
 const AllContacts = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -36,6 +31,21 @@ const AllContacts = () => {
     },
     // Add more contacts as needed
   ];
+  const [allContactList, setAllContactList] = useState();
+  useEffect(() => {
+    (async () => {
+      try {
+        const res = await fetchContact();
+        if (res.status === 200) {
+          setAllContactList(res?.contact);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    })();
+  }, []);
+
+  console.log(allContactList);
   const handleFilterChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setFilterValue(event.target.value);
   };
@@ -43,12 +53,14 @@ const AllContacts = () => {
     show: "",
   });
   const [openAddContactModal, setOpenAddContactModal] = useState(false);
-  // const csvData = contactStore((state: any) => state.csvData);
-  // console.log(csvData.data[0]);
+  const csvData = contactStore((state: any) => state.csvData);
+  const hasData = contactStore((state: any) => state.hasData);
+  const setHasData = contactStore((state: any) => state.setHasData);
 
   return (
     <>
-      {/* <div className="relative w-full h-full dark:bg-dark-glass bg-white rounded-md p-4 flex flex-col items-center justify-center gap-8 overflow-hidden">
+      <>
+        {/* <div className="relative w-full h-full dark:bg-dark-glass bg-white rounded-md p-4 flex flex-col items-center justify-center gap-8 overflow-hidden">
         <NoContact />
         <div className="flex gap-8 items-center">
           <button
@@ -69,8 +81,8 @@ const AllContacts = () => {
           </button>
         </div>
       </div> */}
-
-      <div className="relative w-full h-full dark:bg-dark-glass bg-white rounded-md p-4 flex flex-col gap-8 overflow-hidden">
+      </>
+      <div className="relative w-full h-full dark:bg-dark-glass backdrop-blur-2xl bg-white rounded-md p-4 flex flex-col gap-8 overflow-hidden">
         <div className="w-full flex items-center justify-between">
           <div className="flex items-center border rounded-md px-4 ">
             <FiSearch className="" />
@@ -82,9 +94,9 @@ const AllContacts = () => {
               onChange={handleFilterChange}
             />
           </div>
-          <div className="flex gap-8 items-center">
+          <div className="flex gap- items-center gap-4">
             <button
-              className="py-2 px-4 rounded-md border border-brand-color"
+              className="py-2 px-4 rounded-md border border-brand-color dark:text-white text-black"
               onClick={() => {
                 setOpenModal({
                   show: "showButtons",
@@ -94,7 +106,7 @@ const AllContacts = () => {
               Import
             </button>
             <button
-              className="py-2 px-4 rounded-md bg-brand-color"
+              className="py-2 px-4 rounded-md bg-brand-color dark:text-white text-black"
               onClick={() => {
                 setOpenAddContactModal(true);
               }}
@@ -104,7 +116,7 @@ const AllContacts = () => {
           </div>
         </div>
         <div className="flex flex-col justify-between h-5/6 gap-8">
-          <div className="overflow-y-scroll h-5/6">
+          <div className="h-5/6">
             <Table hoverable striped className="bg-transparent h-5/6">
               <Table.Head className="sticky top-0 py-0 bg-slate-700 !rounded-tl-md">
                 <Table.HeadCell className="sticky top-0 py-2 bg-transparent">
@@ -224,44 +236,7 @@ const AllContacts = () => {
           </Modal.Body>
         </Modal>
       </div>
-      <Modal
-        dismissible
-        show={openModal.show === "showButtons" || openModal.show === "importContent"}
-        onClose={() => setOpenModal({ show: "" })}
-      >
-        <Modal.Header>Import Contacts</Modal.Header>
-        {openModal.show === "importContent" ? (
-          <div className="p-4">
-
-          <ImportCSV/>
-          </div>
-        ) : (
-          <Modal.Body>
-            <div className="flex flex-col gap-4 text-center">
-              <h3 className="m-0 p-0 text-lg font-normal text-gray-500 dark:text-gray-400">
-                Have existing contacts in a file?
-              </h3>
-              <h3 className="m-0 p-0 text-lg font-normal text-gray-500 dark:text-gray-400">
-                Import a CSV file of your contacts for quick import.
-              </h3>
-              <div className="flex justify-center gap-4">
-                <button
-                  className="px-4 py-2 bg-brand-color rounded-md"
-                  onClick={() => setOpenModal({ show: "importContent" })}
-                >
-                  Import from file
-                </button>
-                <button
-                  className="px-4 py-2 border border-brand-color text-gray-800 dark:text-slate-300 rounded-md"
-                  onClick={() => setOpenModal({ show: "" })}
-                >
-                  Cancel
-                </button>
-              </div>
-            </div>
-          </Modal.Body>
-        )}
-      </Modal>
+      <ImportCSV openModal={openModal} setOpenModal={setOpenModal} />
     </>
   );
 };

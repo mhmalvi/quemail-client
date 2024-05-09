@@ -1,60 +1,76 @@
 "use client";
+import { importContact } from "@/app/api/contact";
+import { fields } from "@/components/utils/staticData";
+import { ImportCSVProps } from "@/components/utils/types";
+import {
+  successNotification,
+  warningNotification,
+} from "@/components/utils/utility";
 import { contactStore } from "@/store/store";
 import React, { useState } from "react";
-import { useCSVReader } from "react-papaparse";
+import { ReactSpreadsheetImport } from "react-spreadsheet-import";
 
-const ImportCSV = () => {
-  // const { CSVReader } = useCSVReader();
+const ImportCSV: React.FC<ImportCSVProps> = ({ openModal, setOpenModal }) => {
   const setCsvData = contactStore((state: any) => state.setCsvData);
   const csvData = contactStore((state: any) => state.csvData);
-  console.log(csvData);
+  const setHasData = contactStore((state: any) => state.setHasData);
+  const hasData = contactStore((state: any) => state.hasData);
+  const handleSave = async (e: {}) => {
+    const res = await importContact(e);
+    if (res?.status === 201 && csvData !== null) {
+      successNotification(res?.message);
+    } else {
+      warningNotification("Something went wrong. Try again.");
+    }
+  };
   return (
-    <></>
-    // <CSVReader
-    //   onUploadAccepted={(results: any) => {
-    //     // console.log("---------------------------");
-    //     // console.log(results);
-    //     // console.log("---------------------------");
-    //     results && setCsvData(results);
-    //   }}
-    // >
-    //   {({
-    //     getRootProps,
-    //     acceptedFile,
-    //     ProgressBar,
-    //     getRemoveFileProps,
-    //   }: any) => (
-    //     <div className="flex flex-col gap-4">
-    //       <div className="flex items-center gap-4">
-    //         <button
-    //           type="button"
-    //           {...getRootProps()}
-    //           className="w-1/5 bg-brand-color py-2 rounded-md"
-    //         >
-    //           Browse file
-    //         </button>
-    //         <div className="border border-slate-300 h-11 w-10/12 rounded-md flex items-center p-4">
-    //           {acceptedFile && acceptedFile.name}
-    //         </div>
-    //       </div>
-    //       <ProgressBar className="!bg-brand-color mt-4" />
-    //       <div className="flex w-full items-center justify-end gap-4  ">
-    //         <button
-    //           // {...getRemoveFileProps()}
-    //           className="flex items-center justify-center bg-brand-color px-4 py-2 rounded-md"
-    //         >
-    //           Edit & Save
-    //         </button>
-    //         <button
-    //           {...getRemoveFileProps()}
-    //           className="flex items-center justify-center bg-red-500 px-4 py-2 rounded-md"
-    //         >
-    //           Remove
-    //         </button>
-    //       </div>
-    //     </div>
-    //   )}
-    // </CSVReader>
+    <ReactSpreadsheetImport
+      isOpen={openModal.show === "showButtons"}
+      onClose={() => {
+        setOpenModal({ show: "" });
+        setHasData(false);
+      }}
+      onSubmit={(e) => {
+        setCsvData(e.validData);
+        handleSave(e.validData);
+      }}
+      fields={fields}
+      customTheme={{
+        components: {
+          UploadStep: {
+            baseStyle: {
+              heading: {
+                color: "#6D53FF",
+              },
+            },
+          },
+          Modal: {
+            variants: {
+              rsi: {
+                header: {
+                  borderBottom: "1px solid #6D53FF",
+                  // bg:"#0d0d0d"
+                },
+                body: {
+                  bg: "#0d0d0d45",
+                  backdropFilter: "blur(10px)",
+                },
+              },
+            },
+          },
+        },
+        colors: {
+          background: "#0d0d0d",
+          subtitleColor: "#6D53FF",
+          textColor: "#ffffff",
+          secondaryBackground: "#0d0d0d",
+          rsi: {
+            50: "#6D53FF",
+            100: "#6D53FF",
+          },
+        },
+      }}
+    />
   );
 };
 export default ImportCSV;

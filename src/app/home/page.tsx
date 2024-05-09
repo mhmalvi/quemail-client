@@ -1,7 +1,9 @@
+"use client"
+
 import React from "react";
 import HomeCard from "@/components/HomeLayoutUI/homeCard";
 import QuickActions from "@/components/HomeLayoutUI/quickAction";
-const Dashboard = async () => {
+const Home =  () => {
   return (
     <div className="relative w-full h-full dark:bg-dark-glass dark:border-none border bg-[#ffffff40] backdrop-blur-2xl rounded-md p-4 flex flex-col gap-4 overflow-hidden">
       <p className="text-sm dark:text-slate-300 text-light-black">
@@ -39,4 +41,4 @@ const Dashboard = async () => {
     </div>
   );
 };
-export default Dashboard;
+export default Home;
