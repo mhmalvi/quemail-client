@@ -11,12 +11,13 @@ const Authenticate = () => {
   const token = searchParams.get("token");
   const userID = searchParams.get("userID");
 
+  console.log(userID);
   if (token && userName && email && photo && userID) {
     Storage.setItem("userName", userName);
     Storage.setItem("email", email);
     Storage.setItem("photo", photo);
     Storage.setItem("token", token);
-    Storage.setItem("userID", JSON.parse(userID));
+    Storage.setItem("userID", +userID);
     redirect("/home");
   }
 
