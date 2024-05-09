@@ -58,13 +58,14 @@ const Topnav = () => {
       Storage.removeItem("userName");
       Storage.removeItem("photo");
       Storage.removeItem("email");
+      Storage.removeItem("userID");
       window.location.reload();
     }
   };
 
   return (
     <>
-      <div className="relative w-full h-16 dark:bg-dark-glass bg-[#ffffffbf] dark:border-none border rounded-md flex items-center justify-between gap-8 p-4 z-40">
+      <div className="relative w-full h-16 dark:bg-dark-glass bg-[#ffffffbf] dark:border-none border rounded-md flex items-center justify-between gap-8 p-4 z-40 backdrop-blur-2xl">
         <div className="flex items-center gap-4">{displayString}</div>
         <div className="flex items-center gap-4">
           <div>

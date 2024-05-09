@@ -13,7 +13,7 @@ const Sidebar = () => {
   const setOpenSidebar = sideBarStore((state: any) => state.setOpenSidebar);
   return (
     <div
-      className={`h-full px-4 flex flex-col gap-8 dark:border-none border-r dark:bg-dark-glass bg-light-glass ease-in duration-100 overflow-hidden ${
+      className={`h-full px-4 flex flex-col gap-8 dark:border-none border-r dark:bg-dark-glass bg-light-glass ease-in duration-100 overflow-hidden  ${
         sidebarToggle ? "w-1/6 " : "w-20"
       } `}
     >
