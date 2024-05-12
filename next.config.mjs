@@ -1,10 +1,19 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: [
-      "cdn.tools.unlayer.com",
-      "fonts.gstatic.com",
-      "lh3.googleusercontent.com",
+    remotePatterns: [
+      {
+        protocol:"https",
+        hostname: "cdn.tools.unlayer.com",
+      },
+      {
+        protocol:"https",
+        hostname: "fonts.gstatic.com",
+      },
+      {
+        protocol:"https",
+        hostname: "lh3.googleusercontent.com",
+      },
     ],
   },
 };

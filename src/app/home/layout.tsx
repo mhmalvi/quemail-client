@@ -2,15 +2,14 @@
 import React, { useEffect } from "react";
 import Sidebar from "@/components/HomeLayoutUI/sidebar";
 import Topnav from "@/components/HomeLayoutUI/topnav";
-import { CustomFlowbiteTheme, Flowbite } from "flowbite-react";
+import { Flowbite } from "flowbite-react";
 import { useRouter } from "next/navigation";
 import { customTheme } from "@/components/utils/utility";
 // import { themeStore } from "@/store/store";
 
 const HomeLayout = ({ children }: { children: React.ReactNode }) => {
   // const theme = themeStore((state: any) => state.theme);
-  const token =
-    typeof window !== "undefined" ? localStorage.getItem("token") : null;
+  const token = typeof window !== "undefined" && localStorage.getItem("token");
 
   const router = useRouter();
 
