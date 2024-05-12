@@ -1,4 +1,3 @@
-"use client";
 import { CustomFlowbiteTheme } from "flowbite-react";
 import { toast } from "react-toastify";
 

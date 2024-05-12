@@ -1,4 +1,3 @@
-"use client";
 // Landing
 import Logo from "/public/Logo.png";
 import LogoS from "/public/SVG/SmallLogo.svg";
@@ -35,6 +34,7 @@ import Create_Campaigns from "/public/Icons/Create_Campaigns.svg";
 import Create_Groups from "/public/Icons/Create_Groups.svg";
 import Generate_Templates from "/public/Icons/Generate_Templates.svg";
 import Import_Contact from "/public/Icons/Import_Contact.svg";
+import User_Icon from "/public/Icons/User_Icon.svg";
 
 // Theme
 import Dark1 from "/public/Themes/Dark/1.svg";
@@ -71,6 +71,7 @@ const Images = {
   Vision,
   Story,
   WhyUs,
+  User_Icon
 };
 
 export default Images;
