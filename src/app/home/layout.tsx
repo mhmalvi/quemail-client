@@ -12,25 +12,25 @@ const HomeLayout = ({ children }: { children: React.ReactNode }) => {
   const token = typeof window !== "undefined" && localStorage.getItem("token");
   const router = useRouter();
 
-  if (!token) {
-    router.push("/login");
-  }
+  useEffect(() => {
+    if (!token) {
+      router.push("/login");
+    }
+  });
 
   return (
     <Flowbite theme={{ theme: customTheme }}>
-      {token && (
-        <section
-          className={`flex h-screen w-full dark:bg-[url("/Themes/Dark/1.svg")] bg-[url("/Themes/Light/1.svg")] bg-cover bg-center	`}
+      <section
+        className={`flex h-screen w-full dark:bg-[url("/Themes/Dark/1.svg")] bg-[url("/Themes/Light/1.svg")] bg-cover bg-center	`}
+      >
+        <Sidebar />
+        <div
+          className={`relative p-8 flex flex-col gap-4 w-full overflow-hidden`}
         >
-          <Sidebar />
-          <div
-            className={`relative p-8 flex flex-col gap-4 w-full overflow-hidden`}
-          >
-            <Topnav />
-            {children}
-          </div>
-        </section>
-      )}
+          <Topnav />
+          {children}
+        </div>
+      </section>
     </Flowbite>
   );
 };
