@@ -15,22 +15,35 @@ const HomeLayout = ({ children }: { children: React.ReactNode }) => {
   const router = useRouter();
 
   useEffect(() => {
-    !token && router.push("/login");
+    if (!token) {
+      router.push("/login");
+    }
   }, [router, token]);
 
   return (
     <Flowbite theme={{ theme: customTheme }}>
-      <section
-        className={`flex h-screen w-full dark:bg-[url("/Themes/Dark/1.svg")] bg-[url("/Themes/Light/1.svg")] bg-cover bg-center	`}
-      >
-        <Sidebar />
-        <div
-          className={`relative p-8 flex flex-col gap-4 w-full overflow-hidden`}
+      {token ? (
+        <section
+          className={`flex h-screen w-full dark:bg-[url("/Themes/Dark/1.svg")] bg-[url("/Themes/Light/1.svg")] bg-cover bg-center	`}
         >
-          <Topnav />
-          {children}
+          <Sidebar />
+          <div
+            className={`relative p-8 flex flex-col gap-4 w-full overflow-hidden`}
+          >
+            <Topnav />
+            {children}
+          </div>
+        </section>
+      ) : (
+        <div className="bg-black w-full h-screen flex flex-col items-center justify-center">
+          <h1 className="text-2xl text-brand-color font-bold">
+            You don&apos;t have authorization to access this page.
+          </h1>
+          <h2 className="text-2xl text-white font-normal animate-pulse">
+            Redirecting you to login page...
+          </h2>
         </div>
-      </section>
+      )}
     </Flowbite>
   );
 };

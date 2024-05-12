@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { FiSearch } from "react-icons/fi";
 import { Checkbox, Pagination, Table, Modal } from "flowbite-react";
 import NoContacts from "./NoContacts";
-
+import ImportCSV from "./ImportCSV";
 import { contactStore } from "@/store/store";
 import { fetchContact } from "@/app/api/contact";
 import dynamic from "next/dynamic";
@@ -12,9 +12,9 @@ const AllContacts = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [filterValue, setFilterValue] = useState("");
   const onPageChange = (page: number) => setCurrentPage(page);
-  const ImportCSV = dynamic(() => import("./ImportCSV"), {
-    ssr: false,
-  });
+  // const ImportCSV = dynamic(() => import("./ImportCSV"), {
+  //   ssr: false,
+  // });
   const [allContactList, setAllContactList] = useState<[]>([]);
   useEffect(() => {
     (async () => {
