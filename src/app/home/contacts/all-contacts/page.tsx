@@ -3,35 +3,19 @@ import React, { useEffect, useState } from "react";
 import { FiSearch } from "react-icons/fi";
 import { Checkbox, Pagination, Table, Modal } from "flowbite-react";
 import NoContacts from "./NoContacts";
-import ImportCSV from "./ImportCSV";
 
 import { contactStore } from "@/store/store";
 import { fetchContact } from "@/app/api/contact";
+import dynamic from "next/dynamic";
 
 const AllContacts = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [filterValue, setFilterValue] = useState("");
   const onPageChange = (page: number) => setCurrentPage(page);
-  const contacts = [
-    {
-      id: 1,
-      fullName: "John Doe",
-      email: "john@example.com",
-      phone: "123-456-7890",
-      account: "Premium",
-      dateCreated: "2023-01-15",
-    },
-    {
-      id: 2,
-      fullName: "Jane Smith",
-      email: "jane@example.com",
-      phone: "987-654-3210",
-      account: "Basic",
-      dateCreated: "2023-02-20",
-    },
-    // Add more contacts as needed
-  ];
-  const [allContactList, setAllContactList] = useState<any>();
+  const ImportCSV = dynamic(() => import("./ImportCSV"), {
+    ssr: false,
+  });
+  const [allContactList, setAllContactList] = useState<[]>([]);
   useEffect(() => {
     (async () => {
       try {
@@ -57,7 +41,7 @@ const AllContacts = () => {
 
   return (
     <>
-      {allContactList ? (
+      {allContactList.length > 1 ? (
         <div className="relative w-full h-full dark:bg-dark-glass backdrop-blur-2xl bg-white rounded-md p-4 flex flex-col gap-8 overflow-hidden">
           <div className="w-full flex items-center justify-between">
             <div className="flex items-center border rounded-md px-4 ">
@@ -121,32 +105,32 @@ const AllContacts = () => {
                 </Table.Head>
                 <Table.Body className="divide-y overflow-y-scroll">
                   {allContactList.map((contact: any, index: any) => {
-                      return (
-                        <Table.Row
-                          key={index}
-                          className="dark:border-gray-700 dark:bg-gray-800"
-                        >
-                          <Table.Cell className="">
-                            <Checkbox />
-                          </Table.Cell>
-                          <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
-                            {contact.json.name}
-                          </Table.Cell>
-                          <Table.Cell>{contact.json.email}</Table.Cell>
-                          <Table.Cell>-</Table.Cell>
-                          <Table.Cell>{contact.json.group}</Table.Cell>
-                          <Table.Cell>-</Table.Cell>
-                          <Table.Cell className="w-full flex gap-8">
-                            <button className="font-medium text-brand-color border border-brand-color px-4 py-2 rounded-md hover:underline ">
-                              Edit
-                            </button>
-                            <button className="font-medium text-red-400 border border-red-400 px-4 py-2 rounded-md hover:underline">
-                              Delete
-                            </button>
-                          </Table.Cell>
-                        </Table.Row>
-                      );
-                    })}
+                    return (
+                      <Table.Row
+                        key={index}
+                        className="dark:border-gray-700 dark:bg-gray-800"
+                      >
+                        <Table.Cell className="">
+                          <Checkbox />
+                        </Table.Cell>
+                        <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
+                          {contact.json.name}
+                        </Table.Cell>
+                        <Table.Cell>{contact.json.email}</Table.Cell>
+                        <Table.Cell>-</Table.Cell>
+                        <Table.Cell>{contact.json.group}</Table.Cell>
+                        <Table.Cell>-</Table.Cell>
+                        <Table.Cell className="w-full flex gap-8">
+                          <button className="font-medium text-brand-color border border-brand-color px-4 py-2 rounded-md hover:underline ">
+                            Edit
+                          </button>
+                          <button className="font-medium text-red-400 border border-red-400 px-4 py-2 rounded-md hover:underline">
+                            Delete
+                          </button>
+                        </Table.Cell>
+                      </Table.Row>
+                    );
+                  })}
                 </Table.Body>
               </Table>
             </div>
@@ -211,7 +195,7 @@ const AllContacts = () => {
           </Modal>
         </div>
       ) : (
-        <div className="relative w-full h-full dark:bg-dark-glass bg-white rounded-md p-4 flex flex-col items-center justify-center gap-8 overflow-hidden">
+        <div className="relative w-full h-full dark:bg-dark-glass  backdrop-blur-2xl bg-white rounded-md p-4 flex flex-col items-center justify-center gap-8 overflow-hidden">
           <NoContacts />
           <div className="flex gap-8 items-center">
             <button
@@ -235,7 +219,9 @@ const AllContacts = () => {
           </div>
         </div>
       )}
-      <ImportCSV openModal={openModal} setOpenModal={setOpenModal} />
+      {openModal.show === "showButtons" && (
+        <ImportCSV openModal={openModal} setOpenModal={setOpenModal} />
+      )}
     </>
   );
 };
