@@ -19,6 +19,7 @@ const ImportCSV: React.FC<ImportCSVProps> = ({ openModal, setOpenModal }) => {
     const res = await importContact(e);
     if (res?.status === 201 && csvData !== null) {
       successNotification(res?.message);
+      window.location.reload();
     } else {
       warningNotification("Something went wrong. Try again.");
     }
@@ -31,6 +32,7 @@ const ImportCSV: React.FC<ImportCSVProps> = ({ openModal, setOpenModal }) => {
         setHasData(false);
       }}
       onSubmit={(e) => {
+        console.log(e);
         setCsvData(e.validData);
         handleSave(e.validData);
       }}
