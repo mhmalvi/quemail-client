@@ -1,3 +1,4 @@
+"use client";
 export interface DashboardLayoutProps {
   children: React.ReactNode;
   backgroundImage: string;
@@ -46,4 +47,3 @@ export interface credentialLoginStep {
   item: boolean;
   loading: boolean;
 }
-

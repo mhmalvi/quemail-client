@@ -1,3 +1,4 @@
+"use client";
 export const sectionTwoData = [
   {
     title: "Create community with newsletters",

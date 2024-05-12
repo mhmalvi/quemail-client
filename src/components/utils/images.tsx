@@ -1,3 +1,4 @@
+"use client";
 // Landing
 import Logo from "/public/Logo.png";
 import LogoS from "/public/SVG/SmallLogo.svg";
