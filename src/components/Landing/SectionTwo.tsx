@@ -13,7 +13,7 @@ const SectionTwo = () => {
           converts contacts into customers
         </span>
       </h1>
-      <Image src={Images.SectionTwo} alt="HeroImage" />
+      <Image src={Images && Images.SectionTwo} alt="HeroImage" />
       <div className="lg:w-9/12 w-full flex flex-wrap gap-4 justify-between">
         {sectionTwoData.map((items, index) => {
           return (

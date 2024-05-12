@@ -14,7 +14,7 @@ const Navbar = () => {
         <Link href="/">
           {" "}
           <Image
-            src={Images.Logo}
+            src={Images && Images.Logo}
             className={`w-52 m-0 p-0 z-20
         `}
             alt="Logo"
