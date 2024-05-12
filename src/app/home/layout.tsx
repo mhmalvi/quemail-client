@@ -9,14 +9,18 @@ import { customTheme } from "@/components/utils/utility";
 
 const HomeLayout = ({ children }: { children: React.ReactNode }) => {
   // const theme = themeStore((state: any) => state.theme);
-  const token = typeof window !== "undefined" && localStorage.getItem("token");
+  const token =
+    typeof window !== "undefined" ? localStorage.getItem("token") : null;
+
   const router = useRouter();
 
   useEffect(() => {
-    if (!token) {
+    if (token !== null) {
+      router.push("/home");
+    } else {
       router.push("/login");
     }
-  });
+  }, [router, token]);
 
   return (
     <Flowbite theme={{ theme: customTheme }}>

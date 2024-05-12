@@ -1,3 +1,5 @@
+"use client";
+
 import { themeAction, themeState, utilState } from "@/components/utils/types";
 import { create } from "zustand";
 export const Storage = {
