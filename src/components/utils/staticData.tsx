@@ -60,7 +60,7 @@ export const sectionFiveData = [
   "Dedicated 24/7 support",
   "Single sign-on (SSO)",
   "AI recommendations",
-  "Transactional emails"
+  "Transactional emails",
 ];
 
 export const fields = [
@@ -104,19 +104,13 @@ export const fields = [
     ],
   },
   {
-    label: "Added by",
-    key: "addedBy",
-    alternateMatches: ["first name", "first"],
+    label: "Group",
+    key: "group",
+    alternateMatches: ["group", "tag"],
     fieldType: {
       type: "input",
     },
-    example: "Stephanie",
-    // validations: [
-    //   {
-    //     rule: "required",
-    //     errorMessage: "Name is required",
-    //     level: "error",
-    //   },
-    // ],
+    example: "Group1",
+    validations: [],
   },
 ] as const;

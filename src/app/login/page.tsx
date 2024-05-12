@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Images from "@/components/utils/images";
 import Link from "next/link";
@@ -16,9 +16,12 @@ import { OTPData } from "@/components/utils/types";
 const Login = () => {
   const token = typeof window !== "undefined" && localStorage.getItem("token");
   const router = useRouter();
-  if (token) {
-    router.push("/home");
-  }
+  useEffect(() => {
+    if (token) {
+      router.push("/home");
+    }
+  }, [router, token]);
+
   const [credentialsData, setCredentialsData] = useState<OTPData>({
     email: "",
     otp: "",
