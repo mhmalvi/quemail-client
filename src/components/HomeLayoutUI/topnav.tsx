@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import { DarkThemeToggle, Dropdown, Modal } from "flowbite-react";
 import { MdArrowRight } from "react-icons/md";
@@ -10,6 +10,7 @@ import { MdNotifications } from "react-icons/md";
 import { Storage } from "../utils/localStore";
 import Image from "next/image";
 import { signOut } from "@/app/api/auth";
+import { useRouter } from "next/navigation";
 
 const Topnav = () => {
   const closeSidebar = sideBarStore((state: any) => state.setCloseSidebar);
@@ -26,6 +27,7 @@ const Topnav = () => {
     );
     return capitalizedWords.join(" ");
   });
+  const [logoutConfirm, setLogoutConfirm] = useState<boolean>(false);
 
   const displayString: JSX.Element[] = capitalizedParts.map((part, index) => (
     <React.Fragment key={index}>
@@ -50,18 +52,23 @@ const Topnav = () => {
       )}
     </React.Fragment>
   ));
-
+  const router = useRouter();
   const handleSignOut = async () => {
     const response = await signOut();
     if (response) {
+      setLogoutConfirm(true);
+    }
+  };
+  useEffect(() => {
+    if (logoutConfirm) {
       Storage.removeItem("token");
       Storage.removeItem("userName");
       Storage.removeItem("photo");
       Storage.removeItem("email");
       Storage.removeItem("userID");
-      window.location.reload();
+      router.push("/login");
     }
-  };
+  }, [logoutConfirm, router]);
 
   return (
     <>

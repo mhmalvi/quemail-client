@@ -42,3 +42,8 @@ export interface OTPData {
   email: string;
   otp: string;
 }
+export interface credentialLoginStep {
+  item: boolean;
+  loading: boolean;
+}
+
