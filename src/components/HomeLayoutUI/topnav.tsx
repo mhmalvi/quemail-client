@@ -7,7 +7,7 @@ import Link from "next/link";
 import { sideBarStore, themeStore } from "@/store/store";
 import { BsQuestionDiamondFill } from "react-icons/bs";
 import { MdNotifications } from "react-icons/md";
-import { Storage } from "../utils/localStore";
+import { Storage } from "@/store/store";
 import Image from "next/image";
 import { signOut } from "@/app/api/auth";
 import { useRouter } from "next/navigation";
