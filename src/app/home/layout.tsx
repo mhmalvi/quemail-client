@@ -5,20 +5,17 @@ import Topnav from "@/components/HomeLayoutUI/topnav";
 import { Flowbite } from "flowbite-react";
 import { useRouter } from "next/navigation";
 import { customTheme } from "@/components/utils/utility";
+import { Storage } from "@/store/store";
 // import { themeStore } from "@/store/store";
 
 const HomeLayout = ({ children }: { children: React.ReactNode }) => {
   // const theme = themeStore((state: any) => state.theme);
-  const token = typeof window !== "undefined" && localStorage.getItem("token");
+  const token = typeof window !== "undefined" && Storage.getItem("token");
 
   const router = useRouter();
 
   useEffect(() => {
-    if (token !== null) {
-      router.push("/home");
-    } else {
-      router.push("/login");
-    }
+    !token && router.push("/login");
   }, [router, token]);
 
   return (

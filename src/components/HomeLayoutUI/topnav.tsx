@@ -96,7 +96,9 @@ const Topnav = () => {
             renderTrigger={() => (
               <div className="h-10 w-10 rounded-full bg-brand-color cursor-pointer overflow-hidden">
                 <Image
-                  src={Storage.getItem("photo") || null}
+                  src={
+                    Storage.getItem("photo") ? Storage.getItem("photo") : null
+                  }
                   alt="user"
                   width={100}
                   height={100}
