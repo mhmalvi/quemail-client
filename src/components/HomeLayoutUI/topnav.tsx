@@ -11,6 +11,7 @@ import { Storage } from "@/store/store";
 import Image from "next/image";
 import { signOut } from "@/app/api/auth";
 import { useRouter } from "next/navigation";
+import Images from "../utils/images";
 
 const Topnav = () => {
   const closeSidebar = sideBarStore((state: any) => state.setCloseSidebar);
@@ -96,9 +97,7 @@ const Topnav = () => {
             renderTrigger={() => (
               <div className="h-10 w-10 rounded-full bg-brand-color cursor-pointer overflow-hidden">
                 <Image
-                  src={
-                    Storage.getItem("photo") ? Storage.getItem("photo") : null
-                  }
+                  src={Images.User_Icon}
                   alt="user"
                   width={100}
                   height={100}

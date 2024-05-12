@@ -1,4 +1,3 @@
-"use client";
 export interface DashboardLayoutProps {
   children: React.ReactNode;
   backgroundImage: string;

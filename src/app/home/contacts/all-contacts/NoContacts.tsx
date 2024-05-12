@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import Images from "@/components/utils/images";
 import Image from "next/image";
 import React from "react";
@@ -6,7 +6,9 @@ import React from "react";
 const NoContacts = () => {
   return (
     <div>
-      <Image src={Images.NotAvailable} alt="not-available" />
+      {Images.NotAvailable && (
+        <Image src={Images.NotAvailable} alt="not-available" />
+      )}
     </div>
   );
 };
