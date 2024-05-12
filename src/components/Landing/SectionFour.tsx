@@ -16,7 +16,7 @@ const SectionTwo = () => {
         Easily connect other tools with Quemailer to keep your data up-to-date,
         automate workflows and enhance your customer experience.
       </p>
-      <Image src={Images.SectionFour} alt="HeroImage" />
+      <Image src={Images && Images.SectionFour} alt="HeroImage" />
       <button className="px-4 py-2 bg-yellow-300 text-gray-800 rounded-md font-semibold">
         Create Free account ➟
       </button>

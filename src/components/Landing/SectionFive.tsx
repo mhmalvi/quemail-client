@@ -17,7 +17,7 @@ const SectionTwo = () => {
         Quemailer plans offer tailored solutions with premium support for medium
         and large companies looking to maximize their revenue.
       </p>
-      <Image src={Images.SectionFive} alt="HeroImage" />
+      <Image src={Images && Images.SectionFive} alt="HeroImage" />
       <div className="grid grid-cols-2 items-center text-center justify-center w-full gap-4">
         {sectionFiveData.map((items, index) => {
           return (

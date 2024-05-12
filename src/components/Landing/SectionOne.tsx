@@ -16,7 +16,7 @@ const SectionOne = () => {
         An affordable, easy platform to send emails, grow your list & automate
         communication.
       </p>
-      <Image src={Images.HeroImage} alt="HeroImage" />
+      <Image src={Images && Images.HeroImage} alt="HeroImage" />
       <button className="px-4 py-2 bg-yellow-300 text-gray-800 rounded-md font-semibold">
         Create Free account ➟
       </button>
