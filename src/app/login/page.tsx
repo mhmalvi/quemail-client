@@ -59,7 +59,6 @@ const Login = () => {
     const googleLoginUrl = "https://backend.quemailer.com/google/login";
     window.open(googleLoginUrl, "_self");
   };
-
   return (
     <div className="relative h-screen w-full flex items-center justify-center p-8">
       <div className="bg-light-glass lg:w-1/4 md:w-1/3 w-1/2 rounded-md backdrop-blur-2xl p-8 flex flex-col gap-4 items-center justify-center">
@@ -70,6 +69,7 @@ const Login = () => {
           <CredentialsLogin
             setCredentialsData={setCredentialsData}
             credentialsData={credentialsData}
+            setStepTwo={setStepTwo}
           />
         ) : (
           <>

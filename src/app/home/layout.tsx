@@ -7,32 +7,32 @@ import { useRouter } from "next/navigation";
 import { customTheme } from "@/components/utils/utility";
 // import { themeStore } from "@/store/store";
 
-const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
+const HomeLayout = ({ children }: { children: React.ReactNode }) => {
   // const theme = themeStore((state: any) => state.theme);
   const token = typeof window !== "undefined" && localStorage.getItem("token");
   const router = useRouter();
-  useEffect(() => {
-    if (!token) {
-      router.push("/login");
-    }
-  }, [router, token]);
+
+  if (!token) {
+    router.push("/login");
+  }
 
   return (
     <Flowbite theme={{ theme: customTheme }}>
-      <section
-        // className={`flex h-screen w-full bg-brand-color bg-cover bg-center	`}
-        className={`flex h-screen w-full dark:bg-[url("/Themes/Dark/1.svg")] bg-[url("/Themes/Light/1.svg")] bg-cover bg-center	`}
-      >
-        <Sidebar />
-        <div
-          className={`relative p-8 flex flex-col gap-4 w-full overflow-hidden`}
+      {token && (
+        <section
+          className={`flex h-screen w-full dark:bg-[url("/Themes/Dark/1.svg")] bg-[url("/Themes/Light/1.svg")] bg-cover bg-center	`}
         >
-          <Topnav />
-          {children}
-        </div>
-      </section>
+          <Sidebar />
+          <div
+            className={`relative p-8 flex flex-col gap-4 w-full overflow-hidden`}
+          >
+            <Topnav />
+            {children}
+          </div>
+        </section>
+      )}
     </Flowbite>
   );
 };
 
-export default DashboardLayout;
+export default HomeLayout;

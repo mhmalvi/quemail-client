@@ -1,24 +1,23 @@
 "use client";
 import React, { Suspense, useEffect } from "react";
-import { redirect, useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { Storage } from "@/store/store";
 
 const Authenticate = () => {
+  const router = useRouter();
   const searchParams = useSearchParams();
   const userName = searchParams.get("userName");
   const email = searchParams.get("email");
   const photo = searchParams.get("photo");
   const token = searchParams.get("token");
   const userID = searchParams.get("userID");
-
-  console.log(userID);
   if (token && userName && email && photo && userID) {
     Storage.setItem("userName", userName);
     Storage.setItem("email", email);
     Storage.setItem("photo", photo);
     Storage.setItem("token", token);
     Storage.setItem("userID", userID);
-    redirect("/home");
+    router.push("/home");
   }
 
   return (

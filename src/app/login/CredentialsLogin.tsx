@@ -1,7 +1,7 @@
 "use client";
 import React, { FormEvent, useState } from "react";
 import { verifyOTP } from "../api/auth";
-import { OTPData } from "@/components/utils/types";
+import { OTPData, credentialLoginStep } from "@/components/utils/types";
 import { Storage } from "@/store/store";
 import { useRouter } from "next/navigation";
 import { Spinner } from "flowbite-react";
@@ -9,16 +9,17 @@ import { Spinner } from "flowbite-react";
 const CredentialsLogin = ({
   setCredentialsData,
   credentialsData,
+  setStepTwo,
 }: {
   setCredentialsData: React.Dispatch<React.SetStateAction<OTPData>>;
   credentialsData: OTPData;
+  setStepTwo: React.Dispatch<React.SetStateAction<credentialLoginStep>>;
 }) => {
   const router = useRouter();
   const [buttonClick, setButtonClick] = useState(false);
   const handleCredentialSubmit = async () => {
     setButtonClick(true);
     const response = await verifyOTP(credentialsData);
-
     if (response.status === 200) {
       Storage.setItem("userName", response.user.userName);
       Storage.setItem("email", response.user.email);
@@ -26,6 +27,10 @@ const CredentialsLogin = ({
       Storage.setItem("token", response.user.token);
       Storage.setItem("userID", response.user.userID);
       setButtonClick(false);
+      setStepTwo({
+        item: false,
+        loading: false,
+      });
       router.push("/home");
     }
   };
