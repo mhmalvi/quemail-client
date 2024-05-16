@@ -67,7 +67,7 @@ const Topnav = () => {
       Storage.removeItem("photo");
       Storage.removeItem("email");
       Storage.removeItem("userID");
-      router.push("/login");
+      router.push("/");
     }
   }, [logoutConfirm, router]);
 
