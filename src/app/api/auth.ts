@@ -8,6 +8,7 @@ export const googleLogin = async () => {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
+        
       },
     });
   } catch (error: any) {

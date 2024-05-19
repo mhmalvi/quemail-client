@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FiSearch } from "react-icons/fi";
 import {
   Modal,
@@ -9,6 +9,7 @@ import {
   DarkThemeToggle,
 } from "flowbite-react";
 import Link from "next/link";
+import { fetchTemplate } from "@/app/api/template";
 const templateList = [
   {
     id: 1,
@@ -85,6 +86,12 @@ const Templates = () => {
   const handleFilterChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setFilterValue(event.target.value);
   };
+  useEffect(() => {
+    (async () => {
+      const res = fetchTemplate();
+      console.log(res);
+    })();
+  }, []);
 
   return (
     <div className="relative w-full h-full bg-gray-800/80 rounded-md p-4 flex flex-col gap-8 overflow-hidden">
