@@ -60,7 +60,7 @@ const Sidebar = () => {
         )}
       >
         <Link
-          href="/home/campaigns/templates"
+          href="/home/campaigns/new-campaign"
           className="focus:outline-none focus:ring-0 active:outline-none active:ring-0"
         >
           <Dropdown.Item className="dark:text-slate-300 text-light-black hover:text-gray-800">

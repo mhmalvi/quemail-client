@@ -11,8 +11,14 @@ const SignUp = () => {
   return (
     <div className="h-screen w-full flex items-center justify-center p-8">
       <div className="h-2/3 bg-light-glass lg:w-1/4 w-full rounded-md backdrop-blur-2xl p-8 flex flex-col gap-8 items-center justify-center">
-        <Link href="/">
-          <Image src={Images.Logo} alt="logo" />
+        <Link href="/" className="flex items-center">
+          <h1 className="m-0 p-0 text-5xl text-slate-300 ">Que</h1>
+          <Image
+            src={Images.MainLogo}
+            alt="logo"
+            className={`h-16 w-16 rounded-md ease-in duration-100`}
+          />
+          <h1 className="m-0 p-0 text-5xl text-slate-300 ">ailer</h1>
         </Link>
         <form className="flex flex-col gap-4 w-full">
           <div className="flex flex-col gap-2 w-full">

@@ -14,12 +14,15 @@ import {
 const Footer = () => {
   return (
     <div className="relative flex flex-col gap-4 items-start justify-between w-full h-full 2xl:px-72 xl:px-64 lg:px-36 md:px-8 px-2 my-8">
-      <Image
-        src={Images && Images.Logo}
-        className={`sm:w-52 w-full m-0 p-0
-        `}
-        alt="Logo"
-      />
+      <div className="flex items-center w-full sm:justify-start justify-center sm:mb-0 mb-8">
+        <h1 className="m-0 p-0 sm:text-4xl text-6xl text-slate-300 ">Que</h1>
+        <Image
+          src={Images.MainLogo}
+          alt="logo"
+          className={`h-16 sm:w-10 w-20 rounded-md ease-in duration-100`}
+        />
+        <h1 className="m-0 p-0 sm:text-4xl text-6xl text-slate-300 ">ailer</h1>
+      </div>
       <div className="w-full">
         <div className="flex sm:flex-row flex-col w-full mb-10">
           <div className="sm:w-1/3 flex flex-col sm:items-start items-center">
