@@ -42,7 +42,7 @@ const Topnav = () => {
         }
       >
         <h1
-          className="cursor-pointer text-transparent bg-clip-text bg-gradient-to-r from-gray-800 to-gray-800 dark:from-slate-300 dark:to-slate-400 hover:from-brand-color hover:to-brand-color-2 hover:dark:from-brand-color hover:dark:to-brand-color-2 duration-300 ease-in"
+          className="cursor-pointer dark:text-slate-300 text-gray-800 hover:text-brand-color dark:hover:text-brand-color font-normal duration-100 ease-in"
           onClick={closeSidebar}
         >
           {part}
@@ -73,7 +73,7 @@ const Topnav = () => {
 
   return (
     <>
-      <div className="relative w-full h-16 dark:bg-dark-glass bg-[#ffffffbf] dark:border-none border rounded-md flex items-center justify-between gap-8 p-4 z-40">
+      <div className="relative w-full h-16 shadow-md  dark:bg-dark-glass bg-[#ffffffbf] rounded-md flex items-center justify-between gap-8 p-4 z-40">
         <div className="flex items-center gap-4">{displayString}</div>
         <div className="flex items-center gap-4">
           <div>

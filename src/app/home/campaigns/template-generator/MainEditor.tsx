@@ -16,14 +16,21 @@ const MainEditor = () => {
       theme: "light",
     },
   };
-  const exportHtml = () => {
+  // const exportHtml = () => {
+  unlayer?.exportHtml((data) => {
+    const { design, html } = data;
+    console.log("exportHtml", html);
+    console.log("design", design);
+  });
+  // };
+
+  const onReady: EmailEditorProps["onReady"] = (unlayer) => {
     unlayer?.exportHtml((data) => {
       const { design, html } = data;
-      // console.log("exportHtml", html);
+      console.log("exportHtml", html);
+      console.log("design", design);
     });
   };
-
-  const onReady: EmailEditorProps["onReady"] = (unlayer) => {};
   return (
     <EmailEditor
       ref={emailEditorRef}

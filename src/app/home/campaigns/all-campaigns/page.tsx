@@ -69,30 +69,29 @@ const AllCampaigns = () => {
       </div>
       <div className="flex flex-col justify-between h-5/6 gap-8">
         <div className="overflow-y-scroll h-5/6">
-          <Table hoverable striped className="bg-transparent h-5/6">
-            <Table.Head className="sticky top-0 py-0 bg-slate-700 !rounded-tl-md">
+          <Table hoverable striped className="h-5/6">
+            <Table.Head className="sticky top-0 py-0 !rounded-tl-md">
               <Table.HeadCell className="sticky top-0 py-2 bg-transparent">
                 <Checkbox />
               </Table.HeadCell>
-              <Table.HeadCell className="sticky top-0 py-2 bg-transparent text-slate-300">
+              <Table.HeadCell className="sticky top-0 py-2 bg-transparent">
                 Full name
               </Table.HeadCell>
-              <Table.HeadCell className="sticky top-0 py-2 bg-transparent text-slate-300">
+              <Table.HeadCell className="sticky top-0 py-2 bg-transparent">
                 Email
               </Table.HeadCell>
-              <Table.HeadCell className="sticky top-0 py-2 bg-transparent text-slate-300">
+              <Table.HeadCell className="sticky top-0 py-2 bg-transparent">
                 Phone
               </Table.HeadCell>
-              <Table.HeadCell className="sticky top-0 py-2 bg-transparent text-slate-300">
+              <Table.HeadCell className="sticky top-0 py-2 bg-transparent">
                 Account
               </Table.HeadCell>
-              <Table.HeadCell className="sticky top-0 py-2 bg-transparent text-slate-300">
+              <Table.HeadCell className="sticky top-0 py-2 bg-transparent">
                 Date Created
               </Table.HeadCell>
-              <Table.HeadCell className="py-0 bg-transparent text-slate-300">
+              <Table.HeadCell className="py-0 bg-transparent">
                 <div className="flex items-center gap-2">
                   <h1>Action</h1>
-                  <DarkThemeToggle className="focus:ring-0 active:outline-none active:ring-0" />
                 </div>
               </Table.HeadCell>
             </Table.Head>
@@ -106,7 +105,7 @@ const AllCampaigns = () => {
                 .map((campaigns) => (
                   <Table.Row
                     key={campaigns.id}
-                    className="dark:border-gray-700 dark:bg-gray-800"
+                    
                   >
                     <Table.Cell className="">
                       <Checkbox />

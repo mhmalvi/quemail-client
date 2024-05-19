@@ -7,6 +7,24 @@ export interface Homecard {
   subtext: string;
   footertext: string;
 }
+export type OpenEditContactModal = {
+  show: boolean;
+  data: {
+    json: {
+      name: string;
+      email: string;
+    };
+  } | null;
+};
+
+export type EditContactData = {
+  id: number | null;
+  user_id: string | false | null;
+  json: {
+    name: string | null;
+    email: string | null;
+  };
+};
 
 interface OpenModalState {
   show: string;
@@ -22,11 +40,9 @@ export interface utilState {
   sidebarToggle: boolean;
   setOpenSidebar: (by: boolean) => void;
 }
-
 export type themeState = {
   theme: string;
 };
-
 export interface themeAction {
   setTheme: (theme: themeState["theme"]) => void;
 }
