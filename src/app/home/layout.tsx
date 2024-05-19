@@ -1,30 +1,46 @@
 "use client";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Sidebar from "@/components/HomeLayoutUI/sidebar";
 import Topnav from "@/components/HomeLayoutUI/topnav";
-import { Flowbite } from "flowbite-react";
+import { Flowbite, Spinner } from "flowbite-react";
 import { useRouter } from "next/navigation";
 import { customTheme } from "@/components/utils/utility";
 import { Storage } from "@/store/store";
 // import { themeStore } from "@/store/store";
 
 const HomeLayout = ({ children }: { children: React.ReactNode }) => {
-  // const theme = themeStore((state: any) => state.theme);
-  const token = typeof window !== "undefined" && Storage.getItem("token");
-
+  const [isLoading, setIsLoading] = useState(true);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  
   const router = useRouter();
 
   useEffect(() => {
-    if (!token) {
+    const token = Storage.getItem("token");
+    if (token) {
+      setIsAuthenticated(true);
+    } else {
       router.push("/login");
     }
-  }, [router, token]);
+    setIsLoading(false);
+  }, [router]);
+
+  if (isLoading) {
+    return (
+      <div className="bg-black w-full h-screen flex flex-col items-center justify-center">
+        <Spinner
+          color="purple"
+          aria-label="Purple spinner example"
+          size="xl"
+        />
+      </div>
+    );
+  }
 
   return (
-    <Flowbite theme={{ theme: customTheme }}>
-      {token ? (
+    isAuthenticated ? (
+      <Flowbite theme={{ theme: customTheme }}>
         <section
-          className={`flex h-screen w-full dark:bg-[url("/Themes/Dark/1.svg")] bg-[url("/Themes/Light/1.svg")] bg-cover bg-center	`}
+          className={`flex h-screen w-full dark:bg-dark-black bg-violet-50 bg-cover bg-center	`}
         >
           <Sidebar />
           <div
@@ -34,17 +50,8 @@ const HomeLayout = ({ children }: { children: React.ReactNode }) => {
             {children}
           </div>
         </section>
-      ) : (
-        <div className="bg-black w-full h-screen flex flex-col items-center justify-center">
-          <h1 className="text-2xl text-brand-color font-bold">
-            You don&apos;t have authorization to access this page.
-          </h1>
-          <h2 className="text-2xl text-white font-normal animate-pulse">
-            Redirecting you to login page...
-          </h2>
-        </div>
-      )}
-    </Flowbite>
+      </Flowbite>
+    ) : null
   );
 };
 

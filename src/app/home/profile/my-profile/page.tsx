@@ -1,12 +1,12 @@
-"use client"
+"use client";
 import React from "react";
 import AccountDetails from "./AccountDetails";
 import ChangePassword from "./ChangePassword";
 
 const MyProfile = () => {
   return (
-    <div className="relative w-full h-full bg-gray-800/80 rounded-md p-4 flex flex-col gap-4 overflow-hidden">
-      <div className="h-1/4 w-full bg-background-color rounded-md flex items-center justify-between gap-4 p-8">
+    <div className="relative w-full h-full dark:bg-dark-glass backdrop-blur-2xl bg-white rounded-md p-4 flex flex-col gap-4 overflow-hidden">
+      <div className="h-1/4 w-full bg-dark-black rounded-md flex items-center justify-between gap-4 p-8">
         <div className="flex flex-col gap-4">
           <h1 className="m-0 p-0 text-4xl">John Doe</h1>
           <p className="m-0 px-4 py-2 text-base bg-gray-800/80 rounded-md text-center">
@@ -29,7 +29,7 @@ const MyProfile = () => {
       <div className="h-full w-full flex gap-4">
         <AccountDetails />
         <ChangePassword />
-        {/* <AccountDetails /> */}
+        <AccountDetails />
       </div>
     </div>
   );

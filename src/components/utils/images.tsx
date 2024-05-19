@@ -1,6 +1,8 @@
 // Landing
 import Logo from "/public/Logo.png";
 import LogoS from "/public/SVG/SmallLogo.svg";
+import MainLogo from "/public/SVG/MainLogo.svg";
+
 import HeroImage from "/public/SVG/HeroImage.svg";
 import SectionTwo from "/public/SVG/SectionTwo.svg";
 import SectionFour from "/public/SVG/SectionFour.svg";
@@ -35,6 +37,8 @@ import Create_Groups from "/public/Icons/Create_Groups.svg";
 import Generate_Templates from "/public/Icons/Generate_Templates.svg";
 import Import_Contact from "/public/Icons/Import_Contact.svg";
 import User_Icon from "/public/Icons/User_Icon.svg";
+import Edit from "/public/Icons/edit.svg";
+import Delete from "/public/Icons/trash-bin.svg";
 
 // Theme
 import Dark1 from "/public/Themes/Dark/1.svg";
@@ -43,9 +47,12 @@ import Light1 from "/public/Themes/Light/1.svg";
 import NotAvailable from "/public/SVG/Home/NotAvailable.svg";
 
 const Images = {
+  Delete,
+  Edit,
   Google,
   Circle,
   Lines,
+  MainLogo,
   Logo,
   LogoS,
   HeroImage,
@@ -71,7 +78,7 @@ const Images = {
   Vision,
   Story,
   WhyUs,
-  User_Icon
+  User_Icon,
 };
 
 export default Images;

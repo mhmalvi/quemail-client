@@ -4,7 +4,7 @@ import React, { useState } from "react";
 const ChangePassword = () => {
   const [changeClicked, setChangeClicked] = useState(false);
   return (
-    <div className="relative w-full h-full bg-background-color rounded-md xl:p-4 flex flex-col items-center justify-center xl:gap-4 gap-0 overflow-hidden">
+    <div className="relative w-full h-full bg-dark-black rounded-md xl:p-4 flex flex-col items-center justify-center xl:gap-4 gap-0 overflow-hidden">
       {changeClicked ? (
         <form className="flex flex-col w-full p-4 xl:gap-4 gap-2">
           <div className="flex flex-col">

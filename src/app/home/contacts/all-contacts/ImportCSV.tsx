@@ -17,7 +17,7 @@ const ImportCSV: React.FC<ImportCSVProps> = ({ openModal, setOpenModal }) => {
   const hasData = contactStore((state: any) => state.hasData);
   const handleSave = async (e: {}) => {
     const res = await importContact(e);
-    if (res?.status === 201 && csvData !== null) {
+    if (res?.status === 201) {
       successNotification(res?.message);
       window.location.reload();
     } else {
