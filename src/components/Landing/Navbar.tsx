@@ -11,14 +11,14 @@ const Navbar = () => {
   return (
     <>
       <nav className="fixed flex items-center justify-between w-full 2xl:px-72 xl:px-64 lg:px-36 md:px-8 px-2 shadow-md shadow-brand-color z-20 bg-dark-black">
-        <Link href="/">
-          {" "}
+        <Link href="/" className="flex items-center">
+          <h1 className="m-0 p-0 text-4xl text-slate-300 ">Que</h1>
           <Image
-            src={Images && Images.Logo}
-            className={`w-52 m-0 p-0 z-20
-        `}
-            alt="Logo"
+            src={Images.MainLogo}
+            alt="logo"
+            className={`h-16 w-10 rounded-md ease-in duration-100`}
           />
+          <h1 className="m-0 p-0 text-4xl text-slate-300 ">ailer</h1>
         </Link>
         <ul className="md:flex gap-8 hidden">
           <Link href="/about-us">

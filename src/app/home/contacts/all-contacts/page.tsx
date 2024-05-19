@@ -12,7 +12,7 @@ import {
   Spinner,
   Popover,
 } from "flowbite-react";
-import NoContacts from "./NoContacts";
+import NoContacts from "../../../../components/HomeLayoutUI/NoContacts";
 import ImportCSV from "./ImportCSV";
 import { contactStore } from "@/store/store";
 import { destroyContact, fetchContact, updateContact } from "@/app/api/contact";
@@ -267,7 +267,7 @@ const AllContacts = () => {
                                 onClick={() => {
                                   onDelete(contact.id);
                                 }}
-                                className="px-4 py-2 bg-red-500 rounded-md text-dark-black font-semibold"
+                                className="px-4 py-2 bg-red-500 rounded-md text-white"
                               >
                                 Delete
                               </button>
@@ -275,7 +275,7 @@ const AllContacts = () => {
                                 onClick={() => {
                                   setOpenDeletePopover(null);
                                 }}
-                                className="px-4 py-2 border border-brand-color rounded-md text-slate-300 font-semibold"
+                                className="px-4 py-2 border border-brand-color rounded-md dark:text-slate-300 text-dark-black"
                               >
                                 Cancel
                               </button>
@@ -423,7 +423,7 @@ const AllContacts = () => {
                   )}
                 </button>
                 <button
-                  className="px-4 py-2 border border-brand-color rounded-md"
+                  className="px-4 py-2 border border-brand-color rounded-md dark:text-slate-300 text-dark-black"
                   onClick={() =>
                     setOpenEditContactModal({ show: false, data: null })
                   }
