@@ -26,6 +26,7 @@ import {
   successNotification,
   warningNotification,
 } from "@/components/utils/utility";
+import Groups from "./Groups";
 
 const AllContacts = () => {
   const userID =
@@ -144,15 +145,8 @@ const AllContacts = () => {
       {Images.Edit && allContactList.length > 1 ? (
         <div className="w-full h-full dark:bg-dark-glass shadow-md backdrop-blur-2xl bg-white rounded-md p-4 flex flex-col gap-8 overflow-hidden">
           <div className="w-full flex items-center justify-between">
-            <div className="flex items-center border rounded-md px-4">
-              <FiSearch />
-              <input
-                type="text"
-                placeholder="Search Contacts"
-                className="bg-transparent border-none focus:ring-0"
-                value={filterValue}
-                onChange={handleFilterChange}
-              />
+            <div className="flex items-center justify-center gap-4">
+              <Groups />
             </div>
             <div className="flex items-center gap-4">
               <button
@@ -312,7 +306,9 @@ const AllContacts = () => {
           >
             <Modal.Header>Add a Contact</Modal.Header>
             <Modal.Body>
-              <h1 className="text-brand-color bg-slate-300 px-4 py-2 rounded-md">This feature is under development</h1>
+              <h1 className="text-brand-color bg-slate-300 px-4 py-2 rounded-md">
+                This feature is under development
+              </h1>
               {/* <div className="flex flex-col gap-4 text-center w-full">
                 <form className="m-0 p-0 w-full text-lg flex flex-wrap flex-grow gap-4 items-center font-normal text-gray-500 dark:text-gray-400">
                   <div className="flex-auto flex flex-col">

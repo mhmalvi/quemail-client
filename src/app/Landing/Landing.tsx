@@ -12,7 +12,7 @@ import Image from "next/image";
 
 const Landing = () => {
   return (
-    <div className="relative flex flex-col items-center justify-between w-full gap-4 h-full 2xl:px-72 xl:px-64 lg:px-36 md:px-8 px-4">
+    <div className="relative flex flex-col items-center justify-between w-full gap-4 h-full 2xl:px-72 xl:px-64 lg:px-36 md:px-8 px-4 z-10">
       <Image
         src={Images.Circle}
         alt="background-props"

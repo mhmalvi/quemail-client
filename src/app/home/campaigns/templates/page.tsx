@@ -88,7 +88,7 @@ const Templates = () => {
   };
   useEffect(() => {
     (async () => {
-      const res = fetchTemplate();
+      const res = await fetchTemplate();
       console.log(res);
     })();
   }, []);
