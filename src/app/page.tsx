@@ -6,7 +6,7 @@ import Footer from "@/components/Landing/Footer";
 export default function Home() {
 
   return (
-    <main className="flex min-h-screen flex-col items-center bg-dark-bg">
+    <main className="flex min-h-screen flex-col items-center bg-dark-black">
       <>
         <Navbar />
         <Landing />

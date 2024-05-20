@@ -23,7 +23,6 @@ export const saveTemplate = async (data: Object) => {
 };
 export const fetchTemplate = async () => {
   const token = typeof window !== "undefined" && localStorage.getItem("token");
-  console.log(token);
   const userID =
     typeof window !== "undefined" && localStorage.getItem("userID");
   try {

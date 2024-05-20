@@ -32,4 +32,6 @@ body {
   }
 }
 
-
+.rdg {
+  --rdg-border-color: #374151 !important;
+}
