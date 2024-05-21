@@ -2,13 +2,15 @@
 import { themeStore } from "@/store/store";
 import React, { useRef, useEffect, useState } from "react";
 import EmailEditor, { EditorRef, EmailEditorProps } from "react-email-editor";
-import { saveTemplate, fetchTemplate } from "@/app/api/template";
+import { saveTemplate } from "@/app/api/template";
 import {
   successNotification,
   warningNotification,
 } from "@/components/utils/utility";
+import { useRouter } from "next/navigation";
 
 const MainEditor = () => {
+  const router = useRouter();
   const userID =
     typeof window !== "undefined" && localStorage.getItem("userID");
   const [data, setData] = useState({
@@ -35,7 +37,7 @@ const MainEditor = () => {
   const onReady: EmailEditorProps["onReady"] = (unlayer) => {
     console.log("Editor is ready");
   };
- 
+
   useEffect(() => {
     if (saveClicked) {
       const unlayer = emailEditorRef.current?.editor;
@@ -56,6 +58,7 @@ const MainEditor = () => {
         const res = await saveTemplate(data);
         if (res.status === 201) {
           successNotification(res.message);
+          router.push("/home/campaigns/templates");
         } else if (res.status === 409) {
           warningNotification(res.message);
         } else if (res.status === 422) {

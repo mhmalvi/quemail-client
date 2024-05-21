@@ -14,7 +14,7 @@ const Sidebar = () => {
   return (
     <div
       className={`h-full px-4 flex flex-col gap-8 dark:border-none border-r dark:bg-dark-glass bg-light-glass ease-in duration-100 overflow-hidden  ${
-        sidebarToggle ? "w-1/6 " : "w-20"
+        sidebarToggle ? "xl:w-1/6 w-1/4 " : "w-20"
       } `}
     >
       <div

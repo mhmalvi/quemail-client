@@ -25,6 +25,7 @@ export const fetchTemplate = async () => {
   const token = typeof window !== "undefined" && localStorage.getItem("token");
   const userID =
     typeof window !== "undefined" && localStorage.getItem("userID");
+  const parsedToken = token && JSON.parse(token);
   try {
     const result = await fetch(
       `https://backend.quemailer.com/api/template-fetch`,
@@ -32,7 +33,7 @@ export const fetchTemplate = async () => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `${token}`,
+          Authorization: parsedToken,
         },
         body: JSON.stringify({
           client_id: userID,

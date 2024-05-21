@@ -110,8 +110,9 @@ export const destroyContact = async (data: number) => {
   }
 };
 
-export const fetchGroup = async () => {
+export const fetchGroupList = async () => {
   const token = typeof window !== "undefined" && localStorage.getItem("token");
+  const parsedToken = token && JSON.parse(token);
   const userID =
     typeof window !== "undefined" && localStorage.getItem("userID");
   try {
@@ -121,10 +122,42 @@ export const fetchGroup = async () => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `${token}`,
+          Authorization: parsedToken,
         },
         body: JSON.stringify({
           user_id: userID,
+        }),
+      }
+    );
+    if (result.ok) {
+      const responseData = await result.json();
+      return responseData;
+    } else {
+      console.error("Error:", result.statusText);
+      return null;
+    }
+  } catch (error: any) {
+    return error.response;
+  }
+};
+
+export const fetchGroupItems = async (data: string | null) => {
+  const token = typeof window !== "undefined" && localStorage.getItem("token");
+  const parsedToken = token && JSON.parse(token);
+  const userID =
+    typeof window !== "undefined" && localStorage.getItem("userID");
+  try {
+    const result = await fetch(
+      `https://backend.quemailer.com/api/contact-fetch-by-group`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: parsedToken,
+        },
+        body: JSON.stringify({
+          user_id: userID,
+          group: data,
         }),
       }
     );

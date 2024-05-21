@@ -46,6 +46,33 @@ export type themeState = {
 export interface themeAction {
   setTheme: (theme: themeState["theme"]) => void;
 }
+export type TemplateType = {
+  name: string | null;
+  client_id: number | null;
+  id: number | null;
+  template: string | null;
+};
+export type GroupContactType = {
+  id: number;
+  json: {
+    name: string | null;
+    email: string | null;
+    group: string | null;
+  };
+};
+
+export type ContactStoreState = {
+  hasData: boolean;
+  csvData: any[] | null;
+  groupData: any[];
+  templateData: [TemplateType];
+  groupContacts: [GroupContactType] | null;
+  setTemplateData: (data: [TemplateType]) => void;
+  setCsvData: (csvData: any[]) => void;
+  setHasData: (state: boolean) => void;
+  setGroupData: (data: any[]) => void;
+  setGroupContacts: (data: [GroupContactType] | null) => void;
+};
 
 // API TYPES
 export interface googleLoginData {

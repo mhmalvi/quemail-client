@@ -1,26 +1,76 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Dropdown } from "flowbite-react";
-import { fetchGroup } from "@/app/api/contact";
+import { fetchGroupItems, fetchGroupList } from "@/app/api/contact";
+import { warningNotification } from "@/components/utils/utility";
+import { contactStore } from "@/store/store";
 
 const Groups = () => {
+  const groupData = contactStore((state) => state.groupData);
+  const setGroupData = contactStore((state) => state.setGroupData);
+  const groupContacts = contactStore((state) => state.groupContacts);
+  const setGroupContacts = contactStore((state) => state.setGroupContacts);
+
   useEffect(() => {
     (async () => {
-      const res = await fetchGroup();
-      console.log(res);
+      const res = await fetchGroupList();
+      if (res.status === 200) {
+        setGroupData(res.groups);
+      } else if (res.status === 422) {
+        warningNotification(res.message);
+      } else if (res.status === 404) {
+        warningNotification(res.message);
+      }
     })();
-  });
+  }, [setGroupData]);
+
+  const handleFetchGroup = async (groupName: string | null) => {
+    if (groupName !== null) {
+      const res = await fetchGroupItems(groupName);
+      if (res.status === 200) {
+        setGroupContacts(res.contacts);
+      } else if (res.status === 422) {
+        warningNotification(res.message);
+      } else if (res.status === 404) {
+        warningNotification(res.message);
+      }
+    } else {
+      setGroupContacts(null);
+    }
+  };
   return (
     <div>
       <Dropdown
-        label="Groups"
-        placement="right-start"
+        label="Groups ▼"
+        placement="bottom-start"
         renderTrigger={() => (
-          <div className="px-4 py-2 rounded-md border border-brand-color cursor-pointer overflow-hidden">
-            <h1>Groups</h1>
+          <div className="px-4 py-1 rounded-md border border-brand-color cursor-pointer overflow-hidden">
+            <h1 className="flex items-center justify-center gap-4 duration-100 ease-in text-dark-black dark:text-slate-300">
+              Groups <span className="text-xs">▼</span>
+            </h1>
           </div>
         )}
-        className="dark:bg-dark-glass bg-light-glass backdrop-blur-2xl border-none z-40"
-      ></Dropdown>
+        className="dark:bg-dark-black bg-light-glass backdrop-blur-2xl border-none z-40"
+      >
+        {groupData.map((item: string, index: number) => (
+          <Dropdown.Item
+            key={index}
+            className={`${
+              groupContacts !== null && groupContacts[0].json.group === item
+                ? "bg-brand-color"
+                : "bg-transparent"
+            } dark:text-slate-300 text-light-black hover:text-slate-700`}
+            onClick={() => handleFetchGroup(item)}
+          >
+            {item}
+          </Dropdown.Item>
+        ))}
+        <Dropdown.Item
+          className="dark:text-slate-300 text-light-black hover:text-slate-700"
+          onClick={() => handleFetchGroup(null)}
+        >
+          Clear
+        </Dropdown.Item>
+      </Dropdown>
     </div>
   );
 };

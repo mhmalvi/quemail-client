@@ -68,10 +68,9 @@ const AllContacts = () => {
   );
   const [allContactList, setAllContactList] = useState<[]>([]);
   const [totalPages, setTotalPages] = useState<number>(0);
-  const csvData = contactStore((state: any) => state.csvData);
-  const hasData = contactStore((state: any) => state.hasData);
-  const setHasData = contactStore((state: any) => state.setHasData);
 
+  const groupContacts = contactStore((state) => state.groupContacts);
+  console.log("PAGE>TSX:: ", groupContacts);
   useEffect(() => {
     (async () => {
       try {
@@ -85,10 +84,6 @@ const AllContacts = () => {
       }
     })();
   }, [currentPage]);
-
-  const handleFilterChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setFilterValue(event.target.value);
-  };
   const handleEditContact = (contact: any) => {
     setEditContactData(contact);
     setInitialEditContactData(contact);
@@ -138,7 +133,6 @@ const AllContacts = () => {
       warningNotification("Something went wrong. Please try again.");
     }
   };
-  console.log(editContactData);
 
   return (
     <>
@@ -147,6 +141,14 @@ const AllContacts = () => {
           <div className="w-full flex items-center justify-between">
             <div className="flex items-center justify-center gap-4">
               <Groups />
+              <h1 className="flex gap-2 m-0 px-4 py-2 border-l border-brand-color text-dark-black dark:text-slate-300">
+                Showing:
+                {groupContacts !== null ? (
+                  <span className="text-brand-color">{groupContacts[0].json.group}</span>
+                ) : (
+                  <span className="text-brand-color">All Contacts</span>
+                )}
+              </h1>
             </div>
             <div className="flex items-center gap-4">
               <button
@@ -185,7 +187,7 @@ const AllContacts = () => {
               </Dropdown>
             </div>
           </div>
-          <div className="flex flex-col gap-4 h-5/6 overflow-y-scroll">
+          <div className="flex flex-col gap-4 h-5/6 overflow-auto">
             <Table hoverable striped>
               <Table.Head className="sticky top-0 py-0 !rounded-tl-md">
                 <Table.HeadCell className="sticky top-0 py-2">
@@ -214,78 +216,153 @@ const AllContacts = () => {
                 </Table.HeadCell>
               </Table.Head>
               <Table.Body className="divide-y">
-                {allContactList.map((contact: any, index: any) => (
-                  <Table.Row
-                    key={index}
-                    className="dark:border-gray-700 dark:bg-gray-800"
-                  >
-                    <Table.Cell>
-                      <Checkbox />
-                    </Table.Cell>
-                    <Table.Cell className="font-medium text-gray-900 dark:text-white">
-                      {contact.json.name}
-                    </Table.Cell>
-                    <Table.Cell>{contact.json.email}</Table.Cell>
-                    <Table.Cell>-</Table.Cell>
-                    <Table.Cell>{contact.json.group}</Table.Cell>
-                    <Table.Cell>-</Table.Cell>
-                    <Table.Cell className="w-full flex items-center justify-center gap-8">
-                      <Image
-                        className="cursor-pointer"
-                        src={Images.Edit}
-                        alt="editContact"
-                        onClick={() => {
-                          handleEditContact(contact);
-                        }}
-                      />
-                      <Popover
-                        aria-labelledby="default-popover"
-                        open={openDeletePopover === contact.id}
-                        onOpenChange={() => {
-                          setOpenDeletePopover(
-                            openDeletePopover === contact.id ? null : contact.id
-                          );
-                        }}
-                        content={
-                          <div className="w-64 text-sm text-gray-500 dark:text-gray-400">
-                            <div className="border-b border-gray-200 bg-gray-100 px-3 py-2 dark:border-gray-600 dark:bg-gray-700">
-                              <h3
-                                id="default-popover"
-                                className="font-semibold text-gray-900 dark:text-white"
-                              >
-                                Are you sure you want to delete?
-                              </h3>
-                            </div>
-                            <div className="px-4 py-2 flex items-center justify-between">
-                              <button
-                                onClick={() => {
-                                  onDelete(contact.id);
-                                }}
-                                className="px-4 py-2 bg-red-500 rounded-md text-white"
-                              >
-                                Delete
-                              </button>
-                              <button
-                                onClick={() => {
-                                  setOpenDeletePopover(null);
-                                }}
-                                className="px-4 py-2 border border-brand-color rounded-md dark:text-slate-300 text-dark-black"
-                              >
-                                Cancel
-                              </button>
-                            </div>
-                          </div>
-                        }
+                {groupContacts !== null
+                  ? groupContacts.map((items, index) => (
+                      <Table.Row
+                        key={index}
+                        className="dark:border-gray-700 dark:bg-gray-800"
                       >
-                        <Image
-                          src={Images.Delete}
-                          alt="deleteContact"
-                          className="cursor-pointer"
-                        />
-                      </Popover>
-                    </Table.Cell>
-                  </Table.Row>
-                ))}
+                        <Table.Cell>
+                          <Checkbox />
+                        </Table.Cell>
+                        <Table.Cell className="font-medium text-gray-900 dark:text-white">
+                          {items.json.name}
+                        </Table.Cell>
+                        <Table.Cell>{items.json.email}</Table.Cell>
+                        <Table.Cell>-</Table.Cell>
+                        <Table.Cell>{items.json.group}</Table.Cell>
+                        <Table.Cell>-</Table.Cell>
+                        <Table.Cell className="w-full flex items-center justify-center gap-8">
+                          <Image
+                            className="cursor-pointer"
+                            src={Images.Edit}
+                            alt="editContact"
+                            onClick={() => {
+                              handleEditContact(items);
+                            }}
+                          />
+                          <Popover
+                            aria-labelledby="default-popover"
+                            open={openDeletePopover === items.id}
+                            onOpenChange={() => {
+                              setOpenDeletePopover(
+                                openDeletePopover === items.id ? null : items.id
+                              );
+                            }}
+                            content={
+                              <div className="w-64 text-sm text-gray-500 dark:text-gray-400">
+                                <div className="border-b border-gray-200 bg-gray-100 px-3 py-2 dark:border-gray-600 dark:bg-gray-700">
+                                  <h3
+                                    id="default-popover"
+                                    className="font-semibold text-gray-900 dark:text-white"
+                                  >
+                                    Are you sure you want to delete?
+                                  </h3>
+                                </div>
+                                <div className="px-4 py-2 flex items-center justify-between">
+                                  <button
+                                    onClick={() => {
+                                      onDelete(items.id);
+                                    }}
+                                    className="px-4 py-2 bg-red-500 rounded-md text-white"
+                                  >
+                                    Delete
+                                  </button>
+                                  <button
+                                    onClick={() => {
+                                      setOpenDeletePopover(null);
+                                    }}
+                                    className="px-4 py-2 border border-brand-color rounded-md dark:text-slate-300 text-dark-black"
+                                  >
+                                    Cancel
+                                  </button>
+                                </div>
+                              </div>
+                            }
+                          >
+                            <Image
+                              src={Images.Delete}
+                              alt="deleteContact"
+                              className="cursor-pointer"
+                            />
+                          </Popover>
+                        </Table.Cell>
+                      </Table.Row>
+                    ))
+                  : allContactList.map((contact: any, index: any) => (
+                      <Table.Row
+                        key={index}
+                        className="dark:border-gray-700 dark:bg-gray-800"
+                      >
+                        <Table.Cell>
+                          <Checkbox />
+                        </Table.Cell>
+                        <Table.Cell className="font-medium text-gray-900 dark:text-white">
+                          {contact.json.name}
+                        </Table.Cell>
+                        <Table.Cell>{contact.json.email}</Table.Cell>
+                        <Table.Cell>-</Table.Cell>
+                        <Table.Cell>{contact.json.group}</Table.Cell>
+                        <Table.Cell>-</Table.Cell>
+                        <Table.Cell className="w-full flex items-center justify-center gap-8">
+                          <Image
+                            className="cursor-pointer"
+                            src={Images.Edit}
+                            alt="editContact"
+                            onClick={() => {
+                              handleEditContact(contact);
+                            }}
+                          />
+                          <Popover
+                            aria-labelledby="default-popover"
+                            open={openDeletePopover === contact.id}
+                            onOpenChange={() => {
+                              setOpenDeletePopover(
+                                openDeletePopover === contact.id
+                                  ? null
+                                  : contact.id
+                              );
+                            }}
+                            content={
+                              <div className="w-64 text-sm text-gray-500 dark:text-gray-400">
+                                <div className="border-b border-gray-200 bg-gray-100 px-3 py-2 dark:border-gray-600 dark:bg-gray-700">
+                                  <h3
+                                    id="default-popover"
+                                    className="font-semibold text-gray-900 dark:text-white"
+                                  >
+                                    Are you sure you want to delete?
+                                  </h3>
+                                </div>
+                                <div className="px-4 py-2 flex items-center justify-between">
+                                  <button
+                                    onClick={() => {
+                                      onDelete(contact.id);
+                                    }}
+                                    className="px-4 py-2 bg-red-500 rounded-md text-white"
+                                  >
+                                    Delete
+                                  </button>
+                                  <button
+                                    onClick={() => {
+                                      setOpenDeletePopover(null);
+                                    }}
+                                    className="px-4 py-2 border border-brand-color rounded-md dark:text-slate-300 text-dark-black"
+                                  >
+                                    Cancel
+                                  </button>
+                                </div>
+                              </div>
+                            }
+                          >
+                            <Image
+                              src={Images.Delete}
+                              alt="deleteContact"
+                              className="cursor-pointer"
+                            />
+                          </Popover>
+                        </Table.Cell>
+                      </Table.Row>
+                    ))}
               </Table.Body>
             </Table>
           </div>
