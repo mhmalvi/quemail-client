@@ -70,7 +70,6 @@ const AllContacts = () => {
   const [totalPages, setTotalPages] = useState<number>(0);
 
   const groupContacts = contactStore((state) => state.groupContacts);
-  console.log("PAGE>TSX:: ", groupContacts);
   useEffect(() => {
     (async () => {
       try {
