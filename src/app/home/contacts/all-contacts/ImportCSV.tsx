@@ -12,10 +12,10 @@ import { ReactSpreadsheetImport } from "react-spreadsheet-import";
 import "@/app/globals.css";
 
 const ImportCSV: React.FC<ImportCSVProps> = ({ openModal, setOpenModal }) => {
-  const setCsvData = contactStore((state: any) => state.setCsvData);
-  const csvData = contactStore((state: any) => state.csvData);
-  const setHasData = contactStore((state: any) => state.setHasData);
-  const hasData = contactStore((state: any) => state.hasData);
+  const setCsvData = contactStore((state) => state.setCsvData);
+  // const csvData = contactStore((state: any) => state.csvData);
+  const setHasData = contactStore((state) => state.setHasData);
+  // const hasData = contactStore((state: any) => state.hasData);
   const handleSave = async (e: {}) => {
     const res = await importContact(e);
     if (res?.status === 201) {

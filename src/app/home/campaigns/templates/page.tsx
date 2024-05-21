@@ -1,163 +1,107 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { FiSearch } from "react-icons/fi";
-import {
-  Modal,
-  Table,
-  Checkbox,
-  Pagination,
-  DarkThemeToggle,
-} from "flowbite-react";
-import Link from "next/link";
+import { Table } from "flowbite-react";
 import { fetchTemplate } from "@/app/api/template";
-const templateList = [
-  {
-    id: 1,
-    fullName: "John Doe",
-    email: "john@example.com",
-    phone: "123-456-7890",
-    account: "Premium",
-    dateCreated: "2023-01-15",
-  },
-  {
-    id: 2,
-    fullName: "Jane Smith",
-    email: "jane@example.com",
-    phone: "987-654-3210",
-    account: "Basic",
-    dateCreated: "2023-02-20",
-  },
-  {
-    id: 3,
-    fullName: "Jine Smith",
-    email: "jane@example.com",
-    phone: "987-654-3210",
-    account: "Basic",
-    dateCreated: "2023-02-20",
-  },
-  {
-    id: 4,
-    fullName: "Jone Smith",
-    email: "jane@example.com",
-    phone: "987-654-3210",
-    account: "Basic",
-    dateCreated: "2023-02-20",
-  },
-  {
-    id: 5,
-    fullName: "June Smith",
-    email: "jane@example.com",
-    phone: "987-654-3210",
-    account: "Basic",
-    dateCreated: "2023-02-20",
-  },
-  {
-    id: 6,
-    fullName: "Jyne Smith",
-    email: "jane@example.com",
-    phone: "987-654-3210",
-    account: "Basic",
-    dateCreated: "2023-02-20",
-  },
-  {
-    id: 7,
-    fullName: "Jtne Smith",
-    email: "jane@example.com",
-    phone: "987-654-3210",
-    account: "Basic",
-    dateCreated: "2023-02-20",
-  },
-  {
-    id: 8,
-    fullName: "Jine Smith",
-    email: "jane@example.com",
-    phone: "987-654-3210",
-    account: "Basic",
-    dateCreated: "2023-02-20",
-  },
-];
+import { contactStore } from "@/store/store";
+import { TemplateType } from "@/components/utils/types";
+
 const Templates = () => {
-  const [filterValue, setFilterValue] = useState("");
-  const [openCreateTemplate, setOpenCreateTemplate] = useState(false);
-  const [showOptionsOnHover, setShowOptionsOnHover] = useState({
-    id: 0,
-    show: false,
-  });
-  const handleFilterChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setFilterValue(event.target.value);
-  };
+  const templateData = contactStore((state) => state.templateData);
+  const setTemplateData = contactStore((state) => state.setTemplateData);
+
+  const [demo, setDemo] = useState<string | null>(null);
   useEffect(() => {
     (async () => {
       const res = await fetchTemplate();
-      console.log(res);
+      if (res.status === 200) {
+        const updatedTemplateData = res.templates.map(
+          (template: TemplateType) => ({
+            name: template.name,
+            client_id: template.client_id,
+            id: template.id,
+            template: template.template,
+          })
+        );
+        setTemplateData(updatedTemplateData);
+      }
     })();
-  }, []);
-
+  }, [setTemplateData]);
   return (
-    <div className="relative w-full h-full bg-gray-800/80 rounded-md p-4 flex flex-col gap-8 overflow-hidden">
-      <div className="w-full flex items-center justify-between">
-        <div className="flex gap-4 items-center">
-          <h1>Choose a template</h1>
-          <div className="flex items-center border rounded-md px-4 ">
-            <FiSearch className="" />
-            <input
-              type="text"
-              placeholder="Search Templates"
-              className="bg-transparent border-none focus:ring-0 active:outline-none active:ring-0"
-              value={filterValue}
-              onChange={handleFilterChange}
-            />
-          </div>
-        </div>
-        <div className="flex gap-8 items-center">
-          <Link href={"./template-generator"}>
-            <button
-              className="py-2 px-4 rounded-md bg-brand-color"
-              // onClick={() => {
-              //   setOpenCreateTemplate(true);
-              // }}
-            >
-              Create Template
-            </button>
-          </Link>
-        </div>
+    <div className="w-full h-full dark:bg-dark-glass shadow-md backdrop-blur-2xl bg-white rounded-md p-4 flex gap-4 overflow-hidden">
+      <div className="w-full">
+        <Table hoverable striped>
+          <Table.Head>
+            <Table.HeadCell className="text-center w-full">
+              Template Name
+            </Table.HeadCell>
+            <Table.HeadCell className="text-center w-full">Id</Table.HeadCell>
+            <Table.HeadCell className={`text-center w-full`}>
+              Actions
+            </Table.HeadCell>
+          </Table.Head>
+          <Table.Body className="divide-y w-full rounded-l-md left-0 duration-200 ease-in overflow-auto shadow-md">
+            {templateData.map((item: TemplateType, index: number) => (
+              <Table.Row
+                key={index}
+                className="dark:border-gray-700 dark:bg-gray-800"
+              >
+                <Table.Cell
+                  className={`my-auto align-middle h-full ${
+                    demo !== null ? "w-1/2" : "w-1/3"
+                  } text-center`}
+                >
+                  <h1 className="m-0 p-0 text-center dark:text-slate-300 text-dark-black my-auto">
+                    {item.name}
+                  </h1>
+                </Table.Cell>
+                <Table.Cell
+                  className={`${
+                    demo !== null ? "w-full" : "w-1/3"
+                  } text-center`}
+                >
+                  <h1 className="text-center dark:text-slate-300 text-dark-black my-auto">
+                    {item.id}
+                  </h1>
+                </Table.Cell>
+                <Table.Cell
+                  className={`w-full text-center flex items-center justify-center gap-4 `}
+                >
+                  <button
+                    className="px-4 py-2 bg-brand-color rounded-md text-slate-300"
+                    onClick={() => {
+                      setDemo(item.template);
+                    }}
+                  >
+                    Preview
+                  </button>
+                  <button className="px-4 py-2 bg-brand-color rounded-md text-slate-300">
+                    Use
+                  </button>
+                </Table.Cell>
+              </Table.Row>
+            ))}
+          </Table.Body>
+        </Table>
       </div>
-      <div className="h-full w-full overflow-y-scroll flex flex-wrap items-center justify-between gap-4 flex-grow">
-        {templateList
-          .filter((templates) =>
-            templates.fullName.toLowerCase().includes(filterValue.toLowerCase())
-          )
-          .map((templates) => (
-            <div
-              key={templates.id}
-              className="flex flex-col items-center h-1/3 w-1/5 bg-background-color gap-4 rounded-md p-2 ease-in duration-100"
-              onMouseOver={() => {
-                setShowOptionsOnHover({
-                  id: templates.id,
-                  show: true,
-                });
-              }}
-              onMouseLeave={() => {
-                setShowOptionsOnHover({
-                  id: 0,
-                  show: false,
-                });
-              }}
-            >
-              <div className="animate-pulse bg-gray-800 rounded-t-md h-full w-full flex items-center justify-center ">
-                {showOptionsOnHover.id === templates.id &&
-                  showOptionsOnHover.show && (
-                    <div className="flex flex-col gap-4">
-                      <button className="px-4 py-2 bg-brand-color rounded-md">
-                        Apply
-                      </button>
-                      <button>Preview</button>
-                    </div>
-                  )}
-              </div>
-              <h1 className="bg-background-color ">{templates.fullName}</h1>
-            </div>
-          ))}
+      <div
+        className={`${
+          demo === null ? "w-0" : "w-2/3 border border-light-glass"
+        } relative rounded-r-md shadow-md right-0 duration-200 ease-in`}
+      >
+        <div
+          className={` ${demo !== null ? "contents" : "hidden"}`}
+          dangerouslySetInnerHTML={{ __html: `${demo}` }}
+        />
+        {demo !== null && (
+          <button
+            className="absolute top-0 right-0 bg-red-500 px-4 rounded-bl-md"
+            onClick={() => {
+              setDemo(null);
+            }}
+          >
+            close
+          </button>
+        )}
       </div>
     </div>
   );
