@@ -10,7 +10,7 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className="fixed flex items-center justify-between w-full 2xl:px-72 xl:px-64 lg:px-36 md:px-8 px-2 shadow-md shadow-brand-color z-20 bg-dark-black xl:py-0 py-2">
+      <nav className="fixed flex items-center justify-between w-full 2xl:px-72 xl:px-64 lg:px-36 md:px-8 px-2 shadow-md shadow-brand-color z-40 bg-dark-black xl:py-0 py-2">
         <Link href="/" className="flex items-center">
           <h1 className="m-0 p-0 xl:text-4xl text-2xl text-slate-300 ">Que</h1>
           <Image
@@ -18,7 +18,9 @@ const Navbar = () => {
             alt="logo"
             className={`xl:h-16 xl:w-10 h-8 w-8 rounded-md ease-in duration-100`}
           />
-          <h1 className="m-0 p-0 xl:text-4xl text-2xl text-slate-300 ">ailer</h1>
+          <h1 className="m-0 p-0 xl:text-4xl text-2xl text-slate-300 ">
+            ailer
+          </h1>
         </Link>
         <ul className="md:flex gap-8 hidden">
           <Link href="/about-us">
@@ -79,7 +81,7 @@ const Navbar = () => {
           }}
         >
           <div
-            className={`relative flex flex-col items-center justify-center gap-2 z-20`}
+            className={`relative flex flex-col items-center justify-center gap-2 z-30`}
           >
             <div
               className={`h-1.5 w-10 ease-in duration-200 ${
@@ -100,7 +102,7 @@ const Navbar = () => {
         </div>
       </nav>
       {openNavDrawer && (
-        <div className="fixed flex flex-col gap-16 items-center justify-center h-full w-full z-20 bg-dark-black">
+        <div className="fixed flex flex-col gap-16 items-center justify-center h-full w-full z-10 bg-black">
           <ul className="flex flex-col gap-8">
             <Link href="/about-us">
               <li className="text-3xl ease-in duration-200">About Us</li>
