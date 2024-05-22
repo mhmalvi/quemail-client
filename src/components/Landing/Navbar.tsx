@@ -100,7 +100,7 @@ const Navbar = () => {
         </div>
       </nav>
       {openNavDrawer && (
-        <div className="fixed flex flex-col gap-16 items-center justify-center h-full w-full z-10 bg-black">
+        <div className="fixed flex flex-col gap-16 items-center justify-center h-full w-full z-20 bg-dark-black">
           <ul className="flex flex-col gap-8">
             <Link href="/about-us">
               <li className="text-3xl ease-in duration-200">About Us</li>
