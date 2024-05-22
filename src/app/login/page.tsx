@@ -51,7 +51,7 @@ const Login = () => {
         item: true,
         loading: false,
       });
-      successNotification(response.statusText);
+      successNotification("An otp has been sent to this mail.");
     }
   };
 
