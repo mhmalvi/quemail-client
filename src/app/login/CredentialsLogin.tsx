@@ -5,6 +5,7 @@ import { OTPData, credentialLoginStep } from "@/components/utils/types";
 import { Storage } from "@/store/store";
 import { useRouter } from "next/navigation";
 import { Spinner } from "flowbite-react";
+import { warningNotification } from "@/components/utils/utility";
 
 const CredentialsLogin = ({
   setCredentialsData,
@@ -20,7 +21,8 @@ const CredentialsLogin = ({
   const handleCredentialSubmit = async () => {
     setButtonClick(true);
     const response = await verifyOTP(credentialsData);
-    if (response.status === 200) {
+    console.log(response)
+    if (response?.status === 200) {
       Storage.setItem("userName", response.user.userName);
       Storage.setItem("email", response.user.email);
       Storage.setItem("photo", response.user.photo);
@@ -32,6 +34,9 @@ const CredentialsLogin = ({
         loading: false,
       });
       router.push("/home");
+    } else if (response?.status === 404) {
+      warningNotification(response.message);
+      window.location.reload();
     }
   };
   return (

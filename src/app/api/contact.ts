@@ -14,11 +14,10 @@ export const importContact = async (data: {}) => {
         body: JSON.stringify(data),
       }
     );
-    if (result.ok) {
+    if (result) {
       const responseData = await result.json();
       return responseData;
     } else {
-      console.error("Error:", result.statusText);
       return null;
     }
   } catch (error: any) {
@@ -45,11 +44,10 @@ export const fetchContact = async (page: number) => {
         body: JSON.stringify(data),
       }
     );
-    if (result.ok) {
+    if (result) {
       const responseData = await result.json();
       return responseData;
     } else {
-      console.error("Error:", result.statusText);
       return null;
     }
   } catch (error: any) {
@@ -69,11 +67,10 @@ export const updateContact = async (data: EditContactData) => {
         body: JSON.stringify(data),
       }
     );
-    if (result.ok) {
+    if (result) {
       const responseData = await result.json();
       return responseData;
     } else {
-      console.error("Error:", result.statusText);
       return null;
     }
   } catch (error: any) {
@@ -98,11 +95,10 @@ export const destroyContact = async (data: number) => {
         }),
       }
     );
-    if (result.ok) {
+    if (result) {
       const responseData = await result.json();
       return responseData;
     } else {
-      console.error("Error:", result.statusText);
       return null;
     }
   } catch (error: any) {
@@ -129,11 +125,10 @@ export const fetchGroupList = async () => {
         }),
       }
     );
-    if (result.ok) {
+    if (result) {
       const responseData = await result.json();
       return responseData;
     } else {
-      console.error("Error:", result.statusText);
       return null;
     }
   } catch (error: any) {
@@ -161,11 +156,10 @@ export const fetchGroupItems = async (data: string | null) => {
         }),
       }
     );
-    if (result.ok) {
+    if (result) {
       const responseData = await result.json();
       return responseData;
     } else {
-      console.error("Error:", result.statusText);
       return null;
     }
   } catch (error: any) {

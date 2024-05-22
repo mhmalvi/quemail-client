@@ -10,11 +10,10 @@ export const saveTemplate = async (data: Object) => {
         body: JSON.stringify(data),
       }
     );
-    if (result.ok) {
+    if (result) {
       const responseData = await result.json();
       return responseData;
     } else {
-      console.error("Error:", result.statusText);
       return null;
     }
   } catch (error: any) {
@@ -40,11 +39,10 @@ export const fetchTemplate = async () => {
         }),
       }
     );
-    if (result.ok) {
+    if (result) {
       const responseData = await result.json();
       return responseData;
     } else {
-      console.error("Error:", result.statusText);
       return null;
     }
   } catch (error: any) {

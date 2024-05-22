@@ -1,5 +1,3 @@
-// import { FormEvent } from "react";
-
 import { OTPData } from "@/components/utils/types";
 
 export const googleLogin = async () => {
@@ -47,11 +45,10 @@ export const verifyOTP = async (data: OTPData) => {
         otp: +data.otp,
       }),
     });
-    if (result.ok) {
+    if (result) {
       const responseData = await result.json();
       return responseData;
     } else {
-      console.error("Error:", result.statusText);
       return null;
     }
   } catch (error: any) {
@@ -71,11 +68,10 @@ export const signOut = async () => {
       },
     });
 
-    if (result.ok) {
+    if (result) {
       const responseData = await result.json();
       return responseData;
     } else {
-      console.error("Error:", result.statusText);
       return null;
     }
   } catch (error: any) {
