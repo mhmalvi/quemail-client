@@ -8,7 +8,6 @@ export const googleLogin = async () => {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        
       },
     });
   } catch (error: any) {
@@ -62,18 +61,14 @@ export const verifyOTP = async (data: OTPData) => {
 
 export const signOut = async () => {
   const token = typeof window !== "undefined" && localStorage.getItem("token");
+  const parsedToken = token && JSON.parse(token);
   try {
-    const headers: { [key: string]: string } = {
-      "Content-Type": "application/json",
-    };
-
-    if (token && token !== "false") {
-      headers["Authorization"] = token;
-    }
-
     const result = await fetch(`https://backend.quemailer.com/api/logout`, {
       method: "POST",
-      headers: headers,
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: parsedToken,
+      },
     });
 
     if (result.ok) {
