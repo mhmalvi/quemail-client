@@ -52,7 +52,7 @@ const Navbar = () => {
           {token ? (
             <>
               <Link href="/home" className="">
-                <button className="rounded-md bg-gradient-to-r from-brand-color to-button-color-2 xl:px-4 xl:py-2 px-4 py-2 xl:text-base text-slate-300 w-full text-base">
+                <button className="rounded-md bg-gradient-to-r from-brand-color to-button-color-2 xl:px-4 xl:py-2 px-4 py-2 xl:text-base text-slate-300 w-full text-sm">
                   Start browsing
                 </button>
               </Link>
@@ -60,12 +60,12 @@ const Navbar = () => {
           ) : (
             <>
               <Link href="/sign-up">
-                <button className="rounded-md bg-gradient-to-r from-brand-color to-button-color-2 xl:px-4 xl:py-2 px-4 py-2 xl:text-base text-slate-300 w-full text-base">
+                <button className="rounded-md bg-gradient-to-r from-brand-color to-button-color-2 xl:px-4 xl:py-2 px-4 py-2 xl:text-base text-slate-300 w-full text-sm">
                   Try for free
                 </button>
               </Link>
               <Link href="/login">
-                <button className="rounded-md border border-brand-color xl:px-4 xl:py-2 px-4 py-2 xl:text-base text-slate-300 w-full text-base">
+                <button className="rounded-md border border-brand-color xl:px-4 xl:py-2 px-4 py-2 xl:text-base text-slate-300 w-full text-sm">
                   Login
                 </button>
               </Link>

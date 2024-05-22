@@ -8,9 +8,9 @@ const SectionTwo = () => {
   return (
     <div className="w-full flex flex-col gap-4 items-center justify-center h-full	">
       <h1 className="m-0 px-0 py-2 xl:text-2xl text-base text-center flex flex-col lg:gap-2 text-slate-300">
-        Easier email marketing & automation that
+        Easier email marketing & automation
         <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-color to-brand-color-2 xl:text-3xl text-xl">
-          converts contacts into customers
+        that converts contacts into customers
         </span>
       </h1>
       <Image
