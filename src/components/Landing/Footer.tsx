@@ -13,7 +13,7 @@ import {
 
 const Footer = () => {
   return (
-    <div className="relative flex flex-col lg:gap-4 items-start justify-between w-full h-full 2xl:px-72 xl:px-64 lg:px-36 md:px-8 px-2 my-8 z-20">
+    <div className="relative flex flex-col lg:gap-4 items-start justify-between w-full h-full 2xl:px-72 xl:px-64 lg:px-36 md:px-8 px-2 my-8 z-10">
       <div className="flex items-center w-full sm:justify-start justify-center sm:mb-0 mb-8">
         <h1 className="m-0 p-0 sm:text-4xl text-6xl text-slate-300 ">Que</h1>
         <Image
