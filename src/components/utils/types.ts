@@ -1,3 +1,5 @@
+import NewCampaign from "@/app/home/campaigns/new-campaign/page";
+
 export interface DashboardLayoutProps {
   children: React.ReactNode;
   backgroundImage: string;
@@ -23,6 +25,7 @@ export type EditContactData = {
   json: {
     name: string | null;
     email: string | null;
+    group: string | null;
   };
 };
 
@@ -52,7 +55,7 @@ export type TemplateType = {
   id: number | null;
   template: string | null;
 };
-export type GroupContactType = {
+export type ContactType = {
   id: number;
   json: {
     name: string | null;
@@ -64,14 +67,39 @@ export type GroupContactType = {
 export type ContactStoreState = {
   hasData: boolean;
   csvData: any[] | null;
-  groupData: any[];
-  templateData: [TemplateType];
-  groupContacts: [GroupContactType] | null;
+  groupData: [string] | null;
+  templateData: [TemplateType] | null;
+  groupContacts: [ContactType] | null;
+  allContactList: [ContactType] | null;
+  setAllContactList: (contactData: [ContactType] | null) => void;
   setTemplateData: (data: [TemplateType]) => void;
   setCsvData: (csvData: any[]) => void;
   setHasData: (state: boolean) => void;
-  setGroupData: (data: any[]) => void;
-  setGroupContacts: (data: [GroupContactType] | null) => void;
+  setGroupData: (data: [string] | null) => void;
+  setGroupContacts: (data: [ContactType] | null) => void;
+};
+
+export type CampaignInfoType = {
+  subject: string | null;
+  fromName: string | null;
+  fromMail: string | null;
+};
+
+export type NewCampaignType = {
+  template: string | null;
+  campaignInfo: CampaignInfoType | null;
+  recipient: [ContactType] | null;
+  schedule: string | null;
+} | null;
+export type CampaignStoreState = {
+  newCampaign: NewCampaignType | null;
+  viewRecipients: boolean;
+  setNewCampaign: (
+    data:
+      | NewCampaignType
+      | ((prev: NewCampaignType | null) => NewCampaignType | null)
+  ) => void;
+  setViewRecipients: (state: boolean) => void;
 };
 
 // API TYPES

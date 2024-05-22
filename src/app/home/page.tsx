@@ -1,15 +1,13 @@
-"use client"
+"use client";
 
 import React from "react";
 import HomeCard from "@/components/HomeLayoutUI/homeCard";
 import QuickActions from "@/components/HomeLayoutUI/quickAction";
-const Home =  () => {
+const Home = () => {
   return (
     <div className="relative w-full h-full dark:bg-dark-glass dark:border-none border bg-[#ffffff40] backdrop-blur-2xl rounded-md p-4 flex flex-col gap-4 overflow-hidden">
-      <p className="text-sm dark:text-slate-300 text-light-black">
-        Recommended next steps based on your profile...
-      </p>
-      <div className="flex gap-4 h-full">
+    
+      <div className="flex gap-4 h-full ">
         <div className="h-full w-full flex flex-col flex-grow justify-around gap-4">
           <div className="flex h-full gap-4">
             <HomeCard

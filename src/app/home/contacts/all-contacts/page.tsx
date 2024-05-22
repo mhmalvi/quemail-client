@@ -1,6 +1,5 @@
 "use client";
 import React, { useEffect, useState, useCallback } from "react";
-import { FiSearch } from "react-icons/fi";
 import {
   Checkbox,
   Pagination,
@@ -32,7 +31,6 @@ const AllContacts = () => {
   const userID =
     typeof window !== "undefined" && localStorage.getItem("userID");
   const [currentPage, setCurrentPage] = useState(1);
-  const [filterValue, setFilterValue] = useState("");
   const [selectAllChecked, setSelectAllChecked] = useState(false);
   const [updateLoading, setUpdateLoading] = useState(false);
   const onPageChange = (page: number) => setCurrentPage(page);
@@ -52,6 +50,7 @@ const AllContacts = () => {
     json: {
       name: "",
       email: "",
+      group: "",
     },
   });
   const [initialEditContactData, setInitialEditContactData] =
@@ -61,15 +60,18 @@ const AllContacts = () => {
       json: {
         name: "",
         email: "",
+        group:""
       },
     });
   const [openDeletePopover, setOpenDeletePopover] = useState<null | number>(
     null
   );
-  const [allContactList, setAllContactList] = useState<[]>([]);
+  // const [allContactList, setAllContactList] = useState<[]>([]);
   const [totalPages, setTotalPages] = useState<number>(0);
 
   const groupContacts = contactStore((state) => state.groupContacts);
+  const allContactList = contactStore((state) => state.allContactList);
+  const setAllContactList = contactStore((state) => state.setAllContactList);
   useEffect(() => {
     (async () => {
       try {
@@ -82,7 +84,7 @@ const AllContacts = () => {
         console.log(error);
       }
     })();
-  }, [currentPage]);
+  }, [currentPage, setAllContactList]);
   const handleEditContact = (contact: any) => {
     setEditContactData(contact);
     setInitialEditContactData(contact);
@@ -119,7 +121,8 @@ const AllContacts = () => {
   const hasChanges = useCallback(() => {
     return (
       editContactData.json.name !== initialEditContactData.json.name ||
-      editContactData.json.email !== initialEditContactData.json.email
+      editContactData.json.email !== initialEditContactData.json.email ||
+      editContactData.json.group !== initialEditContactData.json.group
     );
   }, [editContactData, initialEditContactData]);
 
@@ -135,7 +138,7 @@ const AllContacts = () => {
 
   return (
     <>
-      {Images.Edit && allContactList.length > 1 ? (
+      {Images.Edit && allContactList !== null ? (
         <div className="w-full h-full dark:bg-dark-glass shadow-md backdrop-blur-2xl bg-white rounded-md p-4 flex flex-col gap-8 overflow-hidden">
           <div className="w-full flex items-center justify-between">
             <div className="flex items-center justify-center gap-4">
@@ -143,7 +146,9 @@ const AllContacts = () => {
               <h1 className="flex gap-2 m-0 px-4 py-2 border-l border-brand-color text-dark-black dark:text-slate-300">
                 Showing:
                 {groupContacts !== null ? (
-                  <span className="text-brand-color">{groupContacts[0].json.group}</span>
+                  <span className="text-brand-color">
+                    {groupContacts[0].json.group}
+                  </span>
                 ) : (
                   <span className="text-brand-color">All Contacts</span>
                 )}
@@ -288,7 +293,8 @@ const AllContacts = () => {
                         </Table.Cell>
                       </Table.Row>
                     ))
-                  : allContactList.map((contact: any, index: any) => (
+                  : allContactList !== null &&
+                    allContactList.map((contact: any, index: any) => (
                       <Table.Row
                         key={index}
                         className="dark:border-gray-700 dark:bg-gray-800"
@@ -437,6 +443,7 @@ const AllContacts = () => {
                 json: {
                   name: "",
                   email: "",
+                  group: "",
                 },
               }));
               setInitialEditContactData((prevData) => ({
@@ -445,6 +452,7 @@ const AllContacts = () => {
                 json: {
                   name: "",
                   email: "",
+                  group: "",
                 },
               }));
             }}
@@ -471,6 +479,18 @@ const AllContacts = () => {
                   value={editContactData.json.email || ""}
                   onChange={(event) =>
                     handleEditContactDataChange("email", event.target.value)
+                  }
+                  required
+                />
+              </div>
+              <div>
+                <Label htmlFor="group" value="Edit group" />
+                <TextInput
+                  id="group"
+                  placeholder="Group Name"
+                  value={editContactData.json.group || ""}
+                  onChange={(event) =>
+                    handleEditContactDataChange("group", event.target.value)
                   }
                   required
                 />

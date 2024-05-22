@@ -14,7 +14,7 @@ const QuickActions = () => {
       </p>
       <button className="rounded-md h-full flex gap-4 items-center 2xl:p-4 p-2 dark:bg-dark-glass bg-light-glass dark:border-light-black border dark:border-slate-500 dark:hover:border-brand-color hover:border-brand-color duration-100 ease-in">
         {Images.Add_Contact && (
-          <Image src={Images.Add_Contact} alt="add_Contact" className="w-1/4" />
+          <Image src={Images.Add_Contact} alt="add_Contact" className="xl:w-1/4 w-1/6" />
         )}
         <h1 className="dark:text-slate-300 text-dark-black text-base m-0 p-0 text-start">
           Add a contact
@@ -25,46 +25,43 @@ const QuickActions = () => {
           <Image
             src={Images.Import_Contact}
             alt="add_Contact"
-            className="w-1/4"
+            className="xl:w-1/4 w-1/6"
           />
         )}
         <h1 className="dark:text-slate-300 text-dark-black text-base m-0 p-0 text-start">
           Import Contacts
         </h1>
       </button>
-
       <button className="rounded-md h-full flex gap-4 items-center 2xl:p-4 p-2 dark:bg-dark-glass bg-light-glass dark:border-light-black border  dark:border-slate-500 dark:hover:border-brand-color hover:border-brand-color duration-100 ease-in">
         {Images.Create_Groups && (
           <Image
             src={Images.Create_Groups}
             alt="add_Contact"
-            className="w-1/4"
+            className="xl:w-1/4 w-1/6"
           />
         )}
         <h1 className="dark:text-slate-300 text-dark-black text-base m-0 p-0 text-start">
           Create Groups
         </h1>
       </button>
-
       <button className="rounded-md h-full flex gap-4 items-center 2xl:p-4 p-2 dark:bg-dark-glass bg-light-glass dark:border-light-black border  dark:border-slate-500 dark:hover:border-brand-color hover:border-brand-color duration-100 ease-in">
         {Images.Generate_Templates && (
           <Image
             src={Images.Generate_Templates}
             alt="add_Contact"
-            className="w-1/4"
+            className="xl:w-1/4 w-1/6"
           />
         )}
         <h1 className="dark:text-slate-300 text-dark-black text-base m-0 p-0 text-start">
           Generate Templates
         </h1>
       </button>
-
       <button className="rounded-md h-full flex gap-4 items-center 2xl:p-4 p-2 dark:bg-dark-glass bg-light-glass dark:border-light-black border dark:border-slate-500 dark:hover:border-brand-color hover:border-brand-color duration-100 ease-in">
         {Images.Create_Campaigns && (
           <Image
             src={Images.Create_Campaigns}
             alt="add_Contact"
-            className="w-1/4"
+            className="xl:w-1/4 w-1/6"
           />
         )}
         <h1 className="dark:text-slate-300 text-dark-black text-base m-0 p-0 text-start">

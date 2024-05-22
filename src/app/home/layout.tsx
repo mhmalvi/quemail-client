@@ -11,7 +11,7 @@ import { Storage } from "@/store/store";
 const HomeLayout = ({ children }: { children: React.ReactNode }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  
+
   const router = useRouter();
 
   useEffect(() => {
@@ -27,32 +27,26 @@ const HomeLayout = ({ children }: { children: React.ReactNode }) => {
   if (isLoading) {
     return (
       <div className="bg-black w-full h-screen flex flex-col items-center justify-center">
-        <Spinner
-          color="purple"
-          aria-label="Purple spinner example"
-          size="xl"
-        />
+        <Spinner color="purple" aria-label="Purple spinner example" size="xl" />
       </div>
     );
   }
 
-  return (
-    isAuthenticated ? (
-      <Flowbite theme={{ theme: customTheme }}>
-        <section
-          className={`flex h-screen w-full dark:bg-dark-black bg-violet-50 bg-cover bg-center	`}
+  return isAuthenticated ? (
+    <Flowbite theme={{ theme: customTheme }}>
+      <section
+        className={`flex h-screen w-full dark:bg-dark-black bg-violet-50 bg-cover bg-center	`}
+      >
+        <Sidebar />
+        <div
+          className={`relative p-4 flex flex-col gap-4 w-full overflow-hidden`}
         >
-          <Sidebar />
-          <div
-            className={`relative p-8 flex flex-col gap-4 w-full overflow-hidden`}
-          >
-            <Topnav />
-            {children}
-          </div>
-        </section>
-      </Flowbite>
-    ) : null
-  );
+          <Topnav />
+          {children}
+        </div>
+      </section>
+    </Flowbite>
+  ) : null;
 };
 
 export default HomeLayout;

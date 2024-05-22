@@ -1,7 +1,10 @@
 "use client";
 
+import NewCampaign from "@/app/home/campaigns/new-campaign/page";
 import {
+  CampaignStoreState,
   ContactStoreState,
+  NewCampaignType,
   themeAction,
   themeState,
   utilState,
@@ -39,21 +42,37 @@ export const themeStore = create<themeState & themeAction>((set) => ({
 export const contactStore = create<ContactStoreState>((set) => ({
   hasData: false,
   csvData: null,
-  groupData: [],
-  templateData: [
-    {
-      name: null,
-      client_id: null,
-      id: null,
-      template: null,
-    },
-  ],
-  groupContacts:null,
+  allContactList: null,
+  groupData: null,
+  templateData: null,
+  groupContacts: null,
+  setAllContactList: (contactData) =>
+    set(() => ({ allContactList: contactData })),
   setCsvData: (csvData: any[]) => set(() => ({ csvData: csvData })),
   setHasData: (state: boolean) => set(() => ({ hasData: state })),
-  setGroupData: (groupData: any[]) => set(() => ({ groupData: groupData })),
+  setGroupData: (groupData) => set(() => ({ groupData: groupData })),
   setGroupContacts: (data) => set(() => ({ groupContacts: data })),
   setTemplateData: (data) => set(() => ({ templateData: data })),
 }));
 
-// export const navBarStore = create;
+export const campaignStore = create<CampaignStoreState>((set) => ({
+  
+  viewRecipients: false,
+  newCampaign: {
+    template:null,
+    campaignInfo:null,
+    recipient:null,
+    schedule:null,
+  },
+  setNewCampaign: (data) =>
+    set((state) => ({
+      newCampaign:
+        typeof data === "function"
+          ? (data as (prev: NewCampaignType | null) => NewCampaignType | null)(
+              state.newCampaign
+            )
+          : data,
+    })),
+  
+    setViewRecipients: (state) => set(() => ({ viewRecipients: state })),
+}));
