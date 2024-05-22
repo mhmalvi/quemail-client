@@ -40,7 +40,7 @@ const Templates = () => {
             </Table.HeadCell>
           </Table.Head>
           <Table.Body className="divide-y w-full rounded-l-md left-0 duration-200 ease-in overflow-auto shadow-md">
-            {templateData.map((item: TemplateType, index: number) => (
+            {templateData !== null && templateData.map((item: TemplateType, index: number) => (
               <Table.Row
                 key={index}
                 className="dark:border-gray-700 dark:bg-gray-800"

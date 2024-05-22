@@ -106,7 +106,7 @@ export const fields = [
   {
     label: "Group",
     key: "group",
-    alternateMatches: ["group", "tag"],
+    alternateMatches: ["group", "tag", "companies", "company"],
     fieldType: {
       type: "input",
     },

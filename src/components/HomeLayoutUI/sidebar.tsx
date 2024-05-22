@@ -13,13 +13,13 @@ const Sidebar = () => {
   const setOpenSidebar = sideBarStore((state: any) => state.setOpenSidebar);
   return (
     <div
-      className={`h-full px-4 flex flex-col gap-8 dark:border-none border-r dark:bg-dark-glass bg-light-glass ease-in duration-100 overflow-hidden  ${
-        sidebarToggle ? "xl:w-1/6 w-1/4 " : "w-20"
+      className={`h-full xl:px-4 px-2  flex flex-col xl:gap-8 gap-4 dark:border-none border-r dark:bg-dark-glass bg-light-glass ease-in duration-100 overflow-hidden  ${
+        sidebarToggle ? "xl:w-1/6 w-1/4 " : "xl:w-20 w-16"
       } `}
     >
       <div
         onClick={setOpenSidebar}
-        className={`w-full flex justify-center items-center mt-8 rounded-md cursor-pointer bg-dark-black duration-100 ease-in`}
+        className={`w-full flex justify-center items-center mt-4 rounded-md cursor-pointer bg-dark-black duration-100 ease-in`}
       >
         {sidebarToggle && (
           <h1 className="m-0 p-0 text-3xl text-slate-300 ">Que</h1>
@@ -27,20 +27,19 @@ const Sidebar = () => {
         <Image
           src={Images.MainLogo}
           alt="logo"
-          className={`h-16 w-8 rounded-md ease-in duration-100`}
+          className={`2xl:h-16 h-12 w-8 rounded-md ease-in duration-100`}
         />
         {sidebarToggle && (
           <h1 className="m-0 p-0 text-3xl text-slate-300 ">ailer</h1>
         )}
       </div>
       <Dropdown
-        className="dark:bg-[#282828] bg-white backdrop-blur-2xl border-none w-1/8 ml-2"
         label="Dropdown button"
         placement="right-start"
         renderTrigger={() => (
           <div className="relative w-full flex items-center gap-8 m-0 p-0 overflow-hidden cursor-pointer text-black dark:text-slate-300 hover:text-brand-color dark:hover:text-brand-color ease-in duration-100">
             <div
-              className={`bg-dark-black p-3 rounded-md overflow-hidden z-20`}
+              className={`bg-dark-black xl:p-3 px-3 py-2 rounded-md overflow-hidden z-20`}
             >
               <Image
                 src={Images.CampaignSidebar}
@@ -104,7 +103,7 @@ const Sidebar = () => {
         renderTrigger={() => (
           <div className="relative w-full flex items-center gap-8 m-0 p-0 overflow-hidden cursor-pointer text-black dark:text-slate-300 hover:text-brand-color dark:hover:text-brand-color ease-in duration-100">
             <div
-              className={`bg-dark-black p-3 rounded-md overflow-hidden z-20`}
+              className={`bg-dark-black xl:p-3 px-3 py-2 rounded-md overflow-hidden z-20`}
             >
               <Image
                 src={Images.ContactSidebar}
@@ -145,7 +144,7 @@ const Sidebar = () => {
         renderTrigger={() => (
           <div className="relative w-full flex items-center gap-8 m-0 p-0 overflow-hidden cursor-pointer text-black dark:text-slate-300 hover:text-brand-color dark:hover:text-brand-color ease-in duration-100">
             <div
-              className={`bg-dark-black p-3 rounded-md overflow-hidden z-20`}
+              className={`bg-dark-black xl:p-3 px-3 py-2 rounded-md overflow-hidden z-20`}
             >
               <Image
                 src={Images.SettingSidebar}

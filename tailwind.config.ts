@@ -18,7 +18,7 @@ const config: Config = {
         xs: "640px",
         sm: "768px",
         md: "1080px",
-        lg: "1366px",
+        lg: "1360px",
         xl: "1600px",
         "2xl": "1920px",
       },
@@ -37,7 +37,6 @@ const config: Config = {
           "100%": { transform: "translateX(0)" },
         },
       },
-     
     },
   },
   plugins: [require("flowbite/plugin")],

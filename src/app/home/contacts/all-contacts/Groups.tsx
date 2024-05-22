@@ -13,12 +13,14 @@ const Groups = () => {
   useEffect(() => {
     (async () => {
       const res = await fetchGroupList();
-      if (res.status === 200) {
+      if (res?.status === 200) {
         setGroupData(res.groups);
-      } else if (res.status === 422) {
+      } else if (res?.status === 422) {
         warningNotification(res.message);
-      } else if (res.status === 404) {
+      } else if (res?.status === 404) {
         warningNotification(res.message);
+      }else{
+        setGroupData(null)
       }
     })();
   }, [setGroupData]);
@@ -51,7 +53,7 @@ const Groups = () => {
         )}
         className="dark:bg-dark-black bg-light-glass backdrop-blur-2xl border-none z-40"
       >
-        {groupData.map((item: string, index: number) => (
+        {groupData !== null && groupData.map((item: string, index: number) => (
           <Dropdown.Item
             key={index}
             className={`${
