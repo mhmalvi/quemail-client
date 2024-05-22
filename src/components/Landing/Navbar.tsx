@@ -10,39 +10,39 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className="fixed flex items-center justify-between w-full 2xl:px-72 xl:px-64 lg:px-36 md:px-8 px-2 shadow-md shadow-brand-color z-20 bg-dark-black">
+      <nav className="fixed flex items-center justify-between w-full 2xl:px-72 xl:px-64 lg:px-36 md:px-8 px-2 shadow-md shadow-brand-color z-20 bg-dark-black xl:py-0 py-2">
         <Link href="/" className="flex items-center">
-          <h1 className="m-0 p-0 text-4xl text-slate-300 ">Que</h1>
+          <h1 className="m-0 p-0 xl:text-4xl text-2xl text-slate-300 ">Que</h1>
           <Image
             src={Images.MainLogo}
             alt="logo"
-            className={`h-16 w-10 rounded-md ease-in duration-100`}
+            className={`xl:h-16 xl:w-10 h-8 w-8 rounded-md ease-in duration-100`}
           />
-          <h1 className="m-0 p-0 text-4xl text-slate-300 ">ailer</h1>
+          <h1 className="m-0 p-0 xl:text-4xl text-2xl text-slate-300 ">ailer</h1>
         </Link>
         <ul className="md:flex gap-8 hidden">
           <Link href="/about-us">
-            <li className="cursor-pointer hover:text-brand-color ease-in duration-200">
+            <li className="xl:text-base text-sm cursor-pointer hover:text-brand-color text-slate-300 ease-in duration-200">
               About Us
             </li>
           </Link>
           <Link href="/pricing">
-            <li className="cursor-pointer hover:text-brand-color ease-in duration-200">
+            <li className="xl:text-base text-sm cursor-pointer hover:text-brand-color text-slate-300 ease-in duration-200">
               Pricing
             </li>
           </Link>
           {/* <Link href="/support"> */}
-          <li className="cursor-pointer hover:text-brand-color ease-in duration-200">
+          <li className="xl:text-base text-sm cursor-pointer hover:text-brand-color text-slate-300 ease-in duration-200">
             Support
           </li>
           {/* </Link> */}
           <Link href="/contact-us">
-            <li className="cursor-pointer hover:text-brand-color ease-in duration-200">
+            <li className="xl:text-base text-sm cursor-pointer hover:text-brand-color text-slate-300 ease-in duration-200">
               Contact Us
             </li>
           </Link>
           <Link href="/privacy-policy">
-            <li className="cursor-pointer hover:text-brand-color ease-in duration-200">
+            <li className="xl:text-base text-sm cursor-pointer hover:text-brand-color text-slate-300 ease-in duration-200">
               Privacy Policy
             </li>
           </Link>
@@ -52,7 +52,7 @@ const Navbar = () => {
           {token ? (
             <>
               <Link href="/home" className="">
-                <button className="rounded-md bg-gradient-to-r from-brand-color to-button-color-2 px-4 py-2 w-full text-base">
+                <button className="rounded-md bg-gradient-to-r from-brand-color to-button-color-2 xl:px-4 xl:py-2 px-4 py-2 xl:text-base text-slate-300 w-full text-base">
                   Start browsing
                 </button>
               </Link>
@@ -60,12 +60,12 @@ const Navbar = () => {
           ) : (
             <>
               <Link href="/sign-up">
-                <button className="rounded-md bg-gradient-to-r from-brand-color to-button-color-2 px-4 py-2">
+                <button className="rounded-md bg-gradient-to-r from-brand-color to-button-color-2 xl:px-4 xl:py-2 px-4 py-2 xl:text-base text-slate-300 w-full text-base">
                   Try for free
                 </button>
               </Link>
               <Link href="/login">
-                <button className="rounded-md border border-brand-color px-4 py-2">
+                <button className="rounded-md border border-brand-color xl:px-4 xl:py-2 px-4 py-2 xl:text-base text-slate-300 w-full text-base">
                   Login
                 </button>
               </Link>
