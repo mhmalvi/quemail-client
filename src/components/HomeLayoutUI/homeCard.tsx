@@ -10,7 +10,7 @@ const HomeCard = ({ title, subtext, footertext }: Homecard) => {
       <p className="xl:text-base text-xs m-0 p-0 dark:text-slate-300 text-light-black">
         {subtext}
       </p>
-      <div className="w-full h-1/2 bg-brand-color rounded-md"></div>
+      <div className="w-full h-1/2 border dark:border-dark-black shadow-md rounded-md"></div>
       <p className="xl:text-sm text-xs m-0 p-0 dark:text-slate-300 text-light-black">
         {footertext}
       </p>

@@ -14,7 +14,7 @@ const Sidebar = () => {
   return (
     <div
       className={`h-full xl:px-4 px-2  flex flex-col xl:gap-8 gap-4 dark:border-none border-r dark:bg-dark-glass bg-light-glass ease-in duration-100 overflow-hidden  ${
-        sidebarToggle ? "xl:w-1/6 w-1/4 " : "xl:w-20 w-16"
+        sidebarToggle ? "xl:w-1/6 w-1/5 " : "xl:w-20 w-16"
       } `}
     >
       <div
@@ -84,7 +84,7 @@ const Sidebar = () => {
           </Dropdown.Item>
         </Link>
         <Link
-          href="/home/campaigns/templates"
+          href="/home/campaigns/all-templates"
           className="focus:outline-none focus:ring-0 active:outline-none active:ring-0"
         >
           <Dropdown.Item className="dark:text-slate-300 text-light-black hover:text-gray-800">

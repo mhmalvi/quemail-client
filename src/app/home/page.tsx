@@ -28,9 +28,9 @@ const Home = () => {
               footertext="Segment and target customers based on purchase behavior using real-time data from your online store."
             />
             {/* <HomeCard
-              title="Create your first email"
-              subtext="Design high-performance emails in minutes"
-              footertext="Get started with flexible templates, drag-and-drop design tools, and our built-in, expert advice."
+              title="Connect your Store"
+              subtext="Use your customer data to create more targeted emails"
+              footertext="Segment and target customers based on purchase behavior using real-time data from your online store."
             /> */}
           </div>
         </div>

@@ -127,14 +127,13 @@ const RecipientSelection = () => {
         show={openGroupModal}
         onClose={() => setOpenGroupModal(false)}
       >
-        <Modal.Header className="dark:bg-dark-black bg-violet-50">
+        <Modal.Header className="dark:bg-dark-glass bg-violet-50 dark:text-slate-300 text-dark-black">
           Add recipients from group
         </Modal.Header>
-        <Modal.Body className="dark:bg-dark-black bg-violet-50">
+        <Modal.Body className="dark:bg-dark-black rounded-b-md bg-violet-50">
           <div className="flex flex-col gap-4 text-center">
             {groupData !== null &&
               groupData.map((items: string, index: number) => {
-                console.log(index);
                 return (
                   <div key={index}>
                     <button
