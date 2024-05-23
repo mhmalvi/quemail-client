@@ -86,7 +86,10 @@ export type CampaignInfoType = {
 };
 
 export type NewCampaignType = {
-  template: string | null;
+  template: {
+    name: string| null,
+    data:string| null
+  } | null;
   campaignInfo: CampaignInfoType | null;
   recipient: [ContactType] | null;
   schedule: string | null;

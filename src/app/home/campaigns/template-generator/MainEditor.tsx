@@ -73,7 +73,7 @@ const MainEditor = () => {
     if (saveClicked && data.template) {
       onSave();
     }
-  }, [data, data.template, saveClicked]);
+  }, [data, data.template, router, saveClicked]);
 
   return (
     <div className="h-full flex flex-col gap-4 overflow-hidden rounded-md ">
@@ -113,7 +113,7 @@ const MainEditor = () => {
           editorId="ok"
           options={{
             appearance: {
-              theme: "dark",
+              theme: "modern_dark",
             },
           }}
         />

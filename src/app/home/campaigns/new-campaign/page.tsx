@@ -3,27 +3,43 @@ import React, { useState } from "react";
 import CampaignInfo from "./CampaignInfo";
 import RecipientSelection from "./RecipientSelection";
 import Scheduler from "./Scheduler";
+import ChooseTemplate from "./ChooseTemplate/ChooseTemplate";
 import { campaignStore } from "@/store/store";
-import { Table } from "flowbite-react";
+import { Modal, Table } from "flowbite-react";
 
 const NewCampaign = () => {
   const newCampaign = campaignStore((state) => state.newCampaign);
   const viewRecipients = campaignStore((state) => state.viewRecipients);
   const setViewRecipients = campaignStore((state) => state.setViewRecipients);
+  console.log(newCampaign);
   return (
     <div className="relative w-full h-full dark:bg-dark-glass shadow-md backdrop-blur-2xl bg-white rounded-md p-4 flex flex-col gap-4 overflow-hidden">
       <div className="w-full flex items-center justify-between">
         <div className="flex items-center rounded-md gap-8">
           <h1
-            className={`xl:text-base text-sm dark:text-slate-300 text-dark-black opacity-20`}
+            className={`${
+              newCampaign?.template !== null
+                ? "text-green-500"
+                : "dark:text-slate-300 text-dark-black opacity-20"
+            } xl:text-base text-sm  `}
           >
             Template {newCampaign?.template !== null && <span>✔</span>}
           </h1>
           <h1
-            className={`xl:text-base text-sm dark:text-slate-300 text-dark-black opacity-20`}
+            className={`${
+              
+              newCampaign?.campaignInfo !== null &&
+              newCampaign?.campaignInfo?.fromMail !== "" &&
+              newCampaign?.campaignInfo?.fromName !== "" &&
+              newCampaign?.campaignInfo?.subject !== ""
+                ? "text-green-500"
+                : "dark:text-slate-300 text-dark-black opacity-20"
+            } xl:text-base text-sm  `}
           >
             Campaign Information{" "}
-            {newCampaign?.campaignInfo !== null && <span>✔</span>}
+            {newCampaign?.campaignInfo?.fromMail !== null &&
+              newCampaign?.campaignInfo?.fromName !== null &&
+              newCampaign?.campaignInfo?.subject !== null && <span>✔</span>}
           </h1>
           <h1
             className={`${
@@ -51,40 +67,22 @@ const NewCampaign = () => {
         </div>
       </div>
       <div className="flex flex-col justify-between gap-4 h-full">
-        {/* TOP */}
-        <div className="relative h-full w-full flex flex-col py-8 items-center justify-center dark:bg-dark-glass bg-violet-50 rounded-md shadow-md border dark:border-none gap-4">
-          <h1 className="xl:text-base text-sm dark:text-slate-300 text-dark-black w-1/2 text-center">
-            If you&apos;re looking to launch a new campaign, you can easily
-            create one. But you need to set up a template first.
-          </h1>
-          <div className="flex gap-4">
-            <button className="xl:py-2 xl:px-4 py-1 px-2 bg-brand-color rounded-md text-slate-300 ">
-              Select a Template
-            </button>
-            <button className="xl:py-2 xl:px-4 py-1 px-2 bg-brand-color rounded-md text-slate-300 ">
-              Create a Template
-            </button>
-          </div>
-        </div>
-        {/* BOTTOM */}
+        <ChooseTemplate />
         <div className="flex h-full gap-4">
           <CampaignInfo />
           <RecipientSelection />
           <Scheduler />
         </div>
       </div>
-      <div
-        className={`  w-full ${
-          viewRecipients ? "h-1/2" : "h-0 hidden"
-        }  absolute right-0 bottom-0 duration-300 ease-in flex items-center justify-center gap-4`}
+      <Modal
+        dismissible
+        show={viewRecipients}
+        onClose={() => setViewRecipients(false)}
       >
-        <div className="h-full bg-dark-black bottom-0 p-4 w-1/3 rounded-t-md flex flex-col gap-4 ">
-          <button
-            className="w-full px-2 py-1 border border-brand-color rounded-md"
-            onClick={() => setViewRecipients(false)}
-          >
-            Close
-          </button>
+        <Modal.Header className="dark:bg-dark-glass bg-violet-50">
+          Selected Recipients
+        </Modal.Header>
+        <Modal.Body className="dark:bg-dark-black bg-violet-50 text-slate-300">
           <Table className="w-full !h-20 overflow-y-scroll">
             <Table.Head className="sticky top-0 py-0 !rounded-tl-md w-full">
               <Table.HeadCell className="sticky top-0 py-2">
@@ -111,8 +109,8 @@ const NewCampaign = () => {
                 ))}
             </Table.Body>
           </Table>
-        </div>
-      </div>
+        </Modal.Body>
+      </Modal>
     </div>
   );
 };

@@ -44,7 +44,12 @@ import Delete from "/public/Icons/trash-bin.svg";
 import Dark1 from "/public/Themes/Dark/1.svg";
 import Light1 from "/public/Themes/Light/1.svg";
 
+// Home
 import NotAvailable from "/public/SVG/Home/NotAvailable.svg";
+import AllTemplates from "/public/SVG/Home/AllTemplates.svg";
+import TemplateGenerator from "/public/SVG/Home/TemplateGenerator.svg";
+import NewCampaign from "/public/SVG/Home/NewCampaign.svg";
+import AllCampaigns from "/public/SVG/Home/AllCampaigns.svg";
 
 const Images = {
   Delete,
@@ -68,6 +73,10 @@ const Images = {
   Dark1,
   Light1,
   NotAvailable,
+  NewCampaign,
+  AllCampaigns,
+  TemplateGenerator,
+  AllTemplates,
   Add_Contact,
   Create_Campaigns,
   Create_Groups,
