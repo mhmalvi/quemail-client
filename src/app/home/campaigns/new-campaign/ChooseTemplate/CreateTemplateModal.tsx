@@ -9,7 +9,7 @@ const CreateTemplateModal: React.FC<SelectTemplateProps> = ({
   chooseTemplate,
   setChooseTemplate,
 }) => {
-  const Editor = dynamic(() => import("../../template-generator/MainEditor"), {
+  const Editor = dynamic(() => import("../../MainEditor"), {
     ssr: false,
   });
   return (

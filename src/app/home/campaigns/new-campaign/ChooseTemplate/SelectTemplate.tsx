@@ -2,8 +2,8 @@
 import React, { useEffect } from "react";
 import { Modal, Table } from "flowbite-react";
 import { fetchTemplate } from "@/app/api/template";
-import { TemplateType } from "@/components/utils/types";
-import { campaignStore, contactStore } from "@/store/store";
+import { TemplateType, NewCampaignType } from "@/components/utils/types";
+import { campaignStore } from "@/store/store";
 
 interface SelectTemplateProps {
   chooseTemplate: string;
@@ -14,12 +14,14 @@ const SelectTemplate: React.FC<SelectTemplateProps> = ({
   chooseTemplate,
   setChooseTemplate,
 }) => {
-  const templateData = contactStore((state) => state.templateData);
-  const setTemplateData = contactStore((state) => state.setTemplateData);
+  const templateData = campaignStore((state) => state.templateData);
+  const setTemplateData = campaignStore((state) => state.setTemplateData);
+  const newCampaign = campaignStore((state) => state.newCampaign);
   const setNewCampaign = campaignStore((state) => state.setNewCampaign);
+console.log(newCampaign)
   useEffect(() => {
-    templateData === null &&
-      (async () => {
+    const fetchData = async () => {
+      try {
         const res = await fetchTemplate();
         if (res.status === 200) {
           const updatedTemplateData = res.templates.map(
@@ -31,19 +33,36 @@ const SelectTemplate: React.FC<SelectTemplateProps> = ({
             })
           );
           setTemplateData(updatedTemplateData);
+        } else {
+          console.error("Failed to fetch templates:", res.message);
         }
-      })();
+      } catch (error) {
+        console.error("Error fetching templates:", error);
+      }
+    };
+
+    if (!templateData) {
+      fetchData();
+    }
   }, [setTemplateData, templateData]);
 
-  const handleTemplateSelection = (templateName:string|null,template: string | null) => {
-    setNewCampaign((prev: any | null) => ({
-      ...prev,
-      template: {
-        name:templateName,
-        data:template
-      },
-    }));
+  const handleTemplateSelection = (
+    templateName: string | null,
+    templateHtml: string | null
+  ) => {
+    if (templateName && templateHtml) {
+      setNewCampaign((prev: any | null) => ({
+        ...prev,
+        template: {
+          name: templateName,
+          data: [templateHtml],
+        },
+      }));
+      setChooseTemplate("");
+    }
   };
+  
+
   return (
     <Modal
       dismissible
@@ -60,38 +79,31 @@ const SelectTemplate: React.FC<SelectTemplateProps> = ({
               Template Name
             </Table.HeadCell>
             <Table.HeadCell className="text-center sticky top-0 py-2">Id</Table.HeadCell>
-            <Table.HeadCell className={`text-center sticky top-0 py-2`}>
+            <Table.HeadCell className="text-center sticky top-0 py-2">
               Actions
             </Table.HeadCell>
           </Table.Head>
           <Table.Body className="divide-y w-full rounded-l-md left-0 duration-200 ease-in overflow-auto shadow-md">
-            {templateData !== null &&
+            {templateData &&
               templateData.map((item: TemplateType, index: number) => (
                 <Table.Row
                   key={index}
                   className="dark:border-gray-700 dark:bg-gray-800 w-full"
                 >
-                  <Table.Cell
-                    className={`my-auto align-middle h-full text-center`}
-                  >
+                  <Table.Cell className="my-auto align-middle h-full text-center">
                     <h1 className="m-0 p-0 text-center dark:text-slate-300 text-dark-black my-auto">
                       {item.name}
                     </h1>
                   </Table.Cell>
-                  <Table.Cell className={` text-center`}>
+                  <Table.Cell className="text-center">
                     <h1 className="text-center dark:text-slate-300 text-dark-black my-auto">
                       {item.id}
                     </h1>
                   </Table.Cell>
-                  <Table.Cell
-                    className={`w-full text-center flex items-center justify-center gap-4 `}
-                  >
+                  <Table.Cell className="w-full text-center flex items-center justify-center gap-4">
                     <button
                       className="px-4 py-2 bg-brand-color rounded-md text-slate-300"
-                      onClick={() => {
-                        handleTemplateSelection(item.name,item.template);
-                        setChooseTemplate("")
-                      }}
+                      onClick={() => handleTemplateSelection(item.name, item.template.html)}
                     >
                       Use
                     </button>
