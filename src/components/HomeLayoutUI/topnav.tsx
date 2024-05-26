@@ -104,7 +104,7 @@ const Topnav = () => {
                 />
               </div>
             )}
-            className="dark:bg-dark-glass bg-light-glass backdrop-blur-2xl border-none z-40"
+            className="dark:bg-dark-black bg-violet-50 dark:border-none border z-40"
           >
             <Dropdown.Header>
               <span className="block text-sm dark:text-slate-300 text-light-black">
@@ -133,12 +133,7 @@ const Topnav = () => {
             <Dropdown.Item className="dark:text-slate-300 text-light-black hover:text-slate-700">
               Support
             </Dropdown.Item>
-            {/* <Dropdown.Item
-              className="dark:text-slate-300 text-light-black hover:text-slate-700"
-              onClick={() => setOpenThemeModal(true)}
-            >
-              Themes
-            </Dropdown.Item> */}
+           
             <Dropdown.Divider className="bg-light-black" />
             <Dropdown.Item
               className="dark:text-slate-300 text-light-black hover:text-slate-700"

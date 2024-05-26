@@ -18,11 +18,11 @@ export const customTheme: CustomFlowbiteTheme = {
     content: {
       base: "relative h-full w-full p-4 md:h-auto",
       inner:
-        "relative flex h-[90dvh] flex-col rounded-lg bg-white shadow dark:bg-dark-glass backdrop-blur-2xl",
+        "relative flex h-full flex-col rounded-lg bg-violet-50 shadow dark:bg-[#171717]",
     },
 
     header: {
-      base: "flex items-start justify-between rounded-t p-4",
+      base: "flex items-start justify-between rounded-t xl:p-4 py-2 px-4",
     },
   },
   table: {

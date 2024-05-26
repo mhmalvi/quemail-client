@@ -27,20 +27,6 @@ const AllTemplates = () => {
   );
   const [openTemplateModal, setOpenTemplateModal] = useState(false);
 
-  // if (groupData === null) {
-  //   (async () => {
-  //     try {
-  //       const res = await fetchGroupList();
-  //       if (res?.status === 200) {
-  //         setGroupData(res.groups);
-  //       } else {
-  //         warningNotification(res.message);
-  //       }
-  //     } catch (error) {
-  //       warningNotification("No groups available yet.");
-  //     }
-  //   })();
-  // }
   useEffect(() => {
     (async () => {
       try {
@@ -118,7 +104,7 @@ const AllTemplates = () => {
                       <Image
                         src={Images.Eye}
                         alt="eye"
-                        className="cursor-pointer w-16 opacity-50"
+                        className="cursor-pointer w-16 opacity-50 fill-transparent"
                         onClick={() => {
                           setOpenTemplateModal(true);
                           setSelectedTemplate(item);

@@ -57,6 +57,7 @@ const Sidebar = () => {
             </div>
           </div>
         )}
+        className="dark:bg-dark-black dark:border-none border bg-violet-50"
       >
         <Link
           href="/home/campaigns/new-campaign"
@@ -112,6 +113,7 @@ const Sidebar = () => {
             </div>
           </div>
         )}
+        className="dark:bg-dark-black dark:border-none border bg-violet-50"
       >
         <Link
           href="/home/contacts/all-contacts"
@@ -152,6 +154,7 @@ const Sidebar = () => {
             </div>
           </div>
         )}
+        className="dark:bg-dark-black dark:border-none border bg-violet-50"
       >
         <Dropdown.Item className="dark:text-slate-300 text-light-black hover:text-gray-800">
           Account

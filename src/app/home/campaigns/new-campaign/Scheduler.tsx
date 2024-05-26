@@ -6,7 +6,7 @@ const Scheduler = () => {
     <div className="relative w-1/3 h-full flex flex-col p-4 dark:bg-dark-glass bg-violet-50 rounded-md shadow-md border dark:border-none gap-4">
       <h1 className="xl:text-xl text-brand-color font-semibold flex items-center gap-2 ">
         Schedule
-        <span className="px-2 py-1 bg-dark-black text-sm rounded-md">
+        <span className="px-2 py-1 bg-dark-black xl:text-sm text-xs rounded-md text-slate-300">
           Optional
         </span>
       </h1>
@@ -14,7 +14,7 @@ const Scheduler = () => {
         Schedule your campaign to send at a later date and time.
       </p>
       <div className="flex flex-col gap-4">
-        <button className="xl:py-2 xl:px-4 py-1 px-2 bg-brand-color rounded-md text-slate-300 ">
+        <button className="xl:py-2 xl:px-4 py-1 px-2 xl:text-base text-sm bg-brand-color rounded-md text-slate-50 ">
           Schedule
         </button>
       </div>
