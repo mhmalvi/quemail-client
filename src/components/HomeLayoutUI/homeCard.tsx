@@ -163,6 +163,7 @@ const HomeCard = () => {
           </div>
         </Modal.Body>
       </Modal>
+      {/*  */}
     </div>
   );
 };
