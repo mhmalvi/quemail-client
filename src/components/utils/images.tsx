@@ -39,7 +39,7 @@ import User_Icon from "/public/Icons/User_Icon.svg";
 import Edit from "/public/Icons/edit.svg";
 import Delete from "/public/Icons/trash-bin.svg";
 import Eye from "/public/Icons/eye.svg";
-import Copy from "/public/Icons/copy.svg";
+import Copy from "/public/Icons/Copy.svg";
 import Google from "/public/Icons/google.svg";
 import Yahoo from "/public/Icons/yahoo.svg";
 import Outlook from "/public/Icons/outlook.svg";
