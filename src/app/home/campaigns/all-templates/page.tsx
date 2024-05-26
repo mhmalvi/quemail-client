@@ -27,19 +27,37 @@ const AllTemplates = () => {
   );
   const [openTemplateModal, setOpenTemplateModal] = useState(false);
 
+  // if (groupData === null) {
+  //   (async () => {
+  //     try {
+  //       const res = await fetchGroupList();
+  //       if (res?.status === 200) {
+  //         setGroupData(res.groups);
+  //       } else {
+  //         warningNotification(res.message);
+  //       }
+  //     } catch (error) {
+  //       warningNotification("No groups available yet.");
+  //     }
+  //   })();
+  // }
   useEffect(() => {
     (async () => {
-      const res = await fetchTemplate();
-      if (res.status === 200) {
-        const updatedTemplateData = res.templates.map(
-          (template: TemplateType) => ({
-            name: template.name,
-            client_id: template.client_id,
-            id: template.id,
-            template: template.template,
-          })
-        );
-        setTemplateData(updatedTemplateData);
+      try {
+        const res = await fetchTemplate();
+        if (res.status === 200) {
+          const updatedTemplateData = res.templates.map(
+            (template: TemplateType) => ({
+              name: template.name,
+              client_id: template.client_id,
+              id: template.id,
+              template: template.template,
+            })
+          );
+          setTemplateData(updatedTemplateData);
+        }
+      } catch (error) {
+        console.log(error);
       }
     })();
   }, [setTemplateData]);
@@ -158,7 +176,7 @@ const AllTemplates = () => {
           </Table>
         </div>
       ) : (
-        <div className="relative w-full h-full shadow-md dark:bg-dark-glass backdrop-blur-2xl bg-white rounded-md p-4 flex flex-col items-center justify-center gap-8 overflow-hidden">
+        <div className="relative w-full h-full rounded-md p-4 flex flex-col items-center justify-center gap-8 overflow-hidden">
           <NoContacts />
           <div className="flex gap-8 items-center">
             <button

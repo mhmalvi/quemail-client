@@ -138,7 +138,7 @@ const AllContacts = () => {
 
   return (
     <>
-      {Images.Edit && allContactList !== null ? (
+      {Images.Edit && allContactList !== null && allContactList.length > 0 ? (
         <div className="w-full h-full dark:bg-dark-glass shadow-md backdrop-blur-2xl bg-white rounded-md p-4 flex flex-col gap-8 overflow-hidden">
           <div className="w-full flex items-center justify-between">
             <div className="flex items-center justify-center gap-4">
@@ -527,14 +527,14 @@ const AllContacts = () => {
           </Modal>
         </div>
       ) : (
-        <div className="relative w-full h-full shadow-md dark:bg-dark-glass backdrop-blur-2xl bg-white rounded-md p-4 flex flex-col items-center justify-center gap-8 overflow-hidden">
+        <div className="relative w-full h-full rounded-md p-4 flex flex-col items-center justify-center gap-8 overflow-hidden">
           <NoContacts />
           <div className="flex gap-8 items-center">
             <button
               className="py-2 px-4 rounded-md dark:text-slate-300 text-dark-black border border-brand-color"
               onClick={() => {
                 setOpenModal({
-                  show: "showButtons",
+                  show: "importContacts",
                 });
               }}
             >
@@ -551,7 +551,7 @@ const AllContacts = () => {
           </div>
         </div>
       )}
-      {openModal.show === "showButtons" && (
+      {openModal.show === "importContacts" && (
         <ImportCSV openModal={openModal} setOpenModal={setOpenModal} />
       )}
     </>

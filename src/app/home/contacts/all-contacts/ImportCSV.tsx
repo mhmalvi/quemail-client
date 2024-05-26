@@ -27,13 +27,12 @@ const ImportCSV: React.FC<ImportCSVProps> = ({ openModal, setOpenModal }) => {
   };
   return (
     <ReactSpreadsheetImport
-      isOpen={openModal.show === "showButtons"}
+      isOpen={openModal.show === "importContacts"}
       onClose={() => {
         setOpenModal({ show: "" });
         setHasData(false);
       }}
       onSubmit={(e) => {
-        console.log(e);
         setCsvData(e.validData);
         handleSave(e.validData);
       }}
