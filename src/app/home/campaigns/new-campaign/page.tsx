@@ -64,7 +64,7 @@ const NewCampaign = () => {
           <button className="xl:py-2 xl:px-4 py-1 px-2 xl:text-base text-sm dark:text-slate-300 text-dark-black rounded-md border border-brand-color ">
             Save & Exit
           </button>
-          <button className="xl:py-2 xl:px-4 py-1 px-2 xl:text-base text-sm text-slate-300 rounded-md bg-brand-color duration-300 ease-in">
+          <button className="xl:py-2 xl:px-4 py-1 px-2 xl:text-base text-sm text-slate-50 rounded-md bg-brand-color duration-300 ease-in">
             Run campaign Now
           </button>
         </div>

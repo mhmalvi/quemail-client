@@ -22,24 +22,12 @@ const Campaigns = () => {
       <button className="w-1/3 flex flex-col items-center justify-center dark:text-slate-300 text-dark-black p-2 border border-brand-color rounded-md dark:hover:bg-dark-black hover:bg-violet-50 duration-100 ease-in">
         <Link href="/home/campaigns/all-campaigns">
           <Image
-            src={Images.AllCampaigns}
-            alt="allTemplates"
-            className="w-full"
-          />
-          <h1 className="m-0 p-0 dark:text-slate-300 text-dark-black text-2xl">
-            All Campaigns
-          </h1>
-        </Link>
-      </button>
-      <button className="w-1/3 flex flex-col items-center justify-center dark:text-slate-300 text-dark-black p-2 border border-brand-color rounded-md dark:hover:bg-dark-black hover:bg-violet-50 duration-100 ease-in">
-        <Link href="/home/campaigns/template-generator">
-          <Image
             src={Images.TemplateGenerator}
             alt="allTemplates"
             className="w-full"
           />
           <h1 className="m-0 p-0 dark:text-slate-300 text-dark-black text-2xl">
-            Template Generator
+            All Campaigns
           </h1>
         </Link>
       </button>
@@ -52,6 +40,18 @@ const Campaigns = () => {
           />
           <h1 className="m-0 p-0 dark:text-slate-300 text-dark-black text-2xl">
             All Templates
+          </h1>
+        </Link>
+      </button>
+      <button className="w-1/3 flex flex-col items-center justify-center dark:text-slate-300 text-dark-black p-2 border border-brand-color rounded-md dark:hover:bg-dark-black hover:bg-violet-50 duration-100 ease-in">
+        <Link href="/home/campaigns/campaign-performance">
+          <Image
+            alt="allTemplates"
+            src={Images.AllCampaigns}
+            className="w-full"
+          />
+          <h1 className="m-0 p-0 dark:text-slate-300 text-dark-black text-2xl">
+            Campaign Performance
           </h1>
         </Link>
       </button>

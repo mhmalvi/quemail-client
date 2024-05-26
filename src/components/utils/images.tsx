@@ -9,7 +9,6 @@ import SectionFour from "/public/SVG/SectionFour.svg";
 import SectionFive from "/public/SVG/SectionFive.svg";
 import Circle from "/public/Circle.svg";
 import Lines from "/public/Lines.svg";
-import Google from "/public/Icons/google.svg";
 
 // About Us
 import Vision from "/public/SVG/AboutUs/Vision.svg";
@@ -41,6 +40,9 @@ import Edit from "/public/Icons/edit.svg";
 import Delete from "/public/Icons/trash-bin.svg";
 import Eye from "/public/Icons/eye.svg";
 import Copy from "/public/Icons/copy.svg";
+import Google from "/public/Icons/google.svg";
+import Yahoo from "/public/Icons/yahoo.svg";
+import Outlook from "/public/Icons/outlook.svg";
 
 // Theme
 import Dark1 from "/public/Themes/Dark/1.svg";
@@ -59,6 +61,8 @@ const Images = {
   Delete,
   Edit,
   Google,
+  Yahoo,
+  Outlook,
   Circle,
   Lines,
   MainLogo,

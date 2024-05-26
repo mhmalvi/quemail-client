@@ -108,12 +108,12 @@ const RecipientSelection = () => {
       <div className="flex flex-col gap-4 overflow-auto">
         {newCampaign?.recipient ? (
           <>
-            <div className="w-full flex items-center justify-between border border-slate-300 xl:py-2 xl:px-2 p-2 rounded-md">
-              <h1 className="m-0 px-2 py-0 dark:text-slate-300 text-dark-black">
+            <div className="w-full flex items-center justify-between border border-slate-300 xl:p-2 p-1 rounded-md">
+              <h1 className="m-0 px-2 py-0 dark:text-slate-300 text-dark-black xl:text-base text-sm">
                 {newCampaign.recipient.length} contact/s selected
               </h1>
               <h1
-                className="px-4 py-1 bg-brand-color text-slate-300 rounded-md cursor-pointer"
+                className="xl:px-4 xl:py-2 px-2 py-1 bg-brand-color text-slate-300 rounded-md cursor-pointer xl:text-base text-sm"
                 onClick={() => setViewRecipients(true)}
               >
                 View
@@ -121,7 +121,7 @@ const RecipientSelection = () => {
             </div>
             <div className="flex items-center justify-end">
               <button
-                className="w-1/4 px-4 py-2 bg-red-500 py-2 text-slate-50 flex items-center justify-center "
+                className="w-1/5 xl:px-4 xl:py-2 px-2 py-1 bg-red-500 py-2 text-slate-50 flex items-center justify-center xl:text-base text-sm"
                 onClick={handleClearRecipients}
               >
                 Clear
@@ -134,11 +134,11 @@ const RecipientSelection = () => {
               Who are you sending this campaign to?
             </p>
             <div className="flex flex-col gap-4">
-              <button className="px-4 py-2 bg-brand-color rounded-md text-slate-300">
+              <button className="xl:px-4 xl:py-2 px-2 py-1 xl:text-base text-sm bg-brand-color rounded-md text-slate-50">
                 Select from all contacts
               </button>
               <button
-                className="px-4 py-2 bg-brand-color rounded-md text-slate-300 disabled:opacity-20"
+                className="xl:px-4 xl:py-2 px-2 py-1 xl:text-base text-sm bg-brand-color rounded-md text-slate-50 disabled:opacity-20"
                 onClick={() => setOpenGroupModal(true)}
                 disabled={!groupData}
               >

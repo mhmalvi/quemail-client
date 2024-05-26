@@ -82,6 +82,7 @@ const MainEditor = () => {
           const res = await saveTemplate(data);
           if (res.status === 201) {
             successNotification(res.message);
+            window.location.reload();
           } else if (res.status === 409) {
             warningNotification(res.message);
           } else if (res.status === 422) {
@@ -110,7 +111,7 @@ const MainEditor = () => {
           />
           <Tooltip
             content="Copy from available shortcodes into template"
-            className="dark:bg-light-black bg-light-black"
+            className="bg-light-black"
           >
             <Dropdown
               label="Actions"
@@ -126,10 +127,15 @@ const MainEditor = () => {
               {fields.map((items: any, index: number) => {
                 return (
                   <div key={index}>
-                    <Dropdown.Item className="dark:text-slate-300 text-light-black hover:text-gray-800" onClick={()=>{
-                      navigator.clipboard.writeText(`{${items.label}}`);
-                      successNotification(`${items.label} copied to clipboard as {${items.label}}`);
-                    }}>
+                    <Dropdown.Item
+                      className="dark:text-slate-300 text-light-black hover:text-gray-800"
+                      onClick={() => {
+                        navigator.clipboard.writeText(`{${items.label}}`);
+                        successNotification(
+                          `${items.label} copied to clipboard as {${items.label}}`
+                        );
+                      }}
+                    >
                       {items?.label}
                     </Dropdown.Item>
                   </div>
@@ -153,7 +159,7 @@ const MainEditor = () => {
           </button>
         </div>
       </div>
-      <div className="h-full flex items-center justify-center">
+      <div className="xl:h-[80dvh] h-[65dvh] flex items-center justify-center">
         <EmailEditor
           ref={emailEditorRef}
           onReady={onReady}

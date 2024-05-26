@@ -19,7 +19,7 @@ const ChooseTemplate = () => {
           </h1>
           <div className="flex gap-4">
             <button
-              className="xl:py-2 xl:px-4 py-1 px-2 bg-brand-color rounded-md text-slate-300 "
+              className="xl:py-2 xl:px-4 py-1 px-2 xl:text-base text-sm bg-brand-color rounded-md text-slate-50 "
               onClick={() => {
                 setChooseTemplate("select");
               }}
@@ -27,7 +27,7 @@ const ChooseTemplate = () => {
               Select a Template
             </button>
             <button
-              className="xl:py-2 xl:px-4 py-1 px-2 bg-brand-color rounded-md text-slate-300"
+              className="xl:py-2 xl:px-4 py-1 px-2 xl:text-base text-sm bg-brand-color rounded-md text-slate-50"
               onClick={() => {
                 setChooseTemplate("create");
               }}
@@ -45,10 +45,10 @@ const ChooseTemplate = () => {
           />
         </div>
       ) : (
-        <div className="relative cursor-pointer h-full w-full flex flex-col py-8 items-center justify-center dark:bg-dark-glass bg-violet-50 rounded-md shadow-md border dark:border-none gap-4">
+        <div className="relative  h-full w-full flex flex-col py-8 items-center justify-center dark:bg-dark-glass bg-violet-50 rounded-md shadow-md border dark:border-none gap-4">
           <h1>Template Selected: {newCampaign.template.name}</h1>
-          <h1
-            className="bg-red-500 px-4 py-2 text-slate-50"
+          <button
+            className="bg-red-500 px-4 py-2 text-slate-50 xl:text-base text-sm"
             onClick={() => {
               setNewCampaign((prev: any | null) => ({
                 ...prev,
@@ -57,7 +57,7 @@ const ChooseTemplate = () => {
             }}
           >
             Clear selection
-          </h1>
+          </button>
         </div>
       )}
     </>

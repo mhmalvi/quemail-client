@@ -18,7 +18,7 @@ const SelectTemplate: React.FC<SelectTemplateProps> = ({
   const setTemplateData = campaignStore((state) => state.setTemplateData);
   const newCampaign = campaignStore((state) => state.newCampaign);
   const setNewCampaign = campaignStore((state) => state.setNewCampaign);
-console.log(newCampaign)
+
   useEffect(() => {
     const fetchData = async () => {
       try {
