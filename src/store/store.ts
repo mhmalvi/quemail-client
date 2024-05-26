@@ -44,7 +44,6 @@ export const contactStore = create<ContactStoreState>((set) => ({
   csvData: null,
   allContactList: null,
   groupData: null,
-  templateData: null,
   groupContacts: null,
   setAllContactList: (contactData) =>
     set(() => ({ allContactList: contactData })),
@@ -52,18 +51,18 @@ export const contactStore = create<ContactStoreState>((set) => ({
   setHasData: (state: boolean) => set(() => ({ hasData: state })),
   setGroupData: (groupData) => set(() => ({ groupData: groupData })),
   setGroupContacts: (data) => set(() => ({ groupContacts: data })),
-  setTemplateData: (data) => set(() => ({ templateData: data })),
 }));
 
 export const campaignStore = create<CampaignStoreState>((set) => ({
-  
   viewRecipients: false,
   newCampaign: {
-    template:null,
-    campaignInfo:null,
-    recipient:null,
-    schedule:null,
+    template: null,
+    campaignInfo: null,
+    recipient: null,
+    schedule: null,
   },
+  selectedTemplate: null,
+  templateData: null,
   setNewCampaign: (data) =>
     set((state) => ({
       newCampaign:
@@ -73,6 +72,7 @@ export const campaignStore = create<CampaignStoreState>((set) => ({
             )
           : data,
     })),
-  
-    setViewRecipients: (state) => set(() => ({ viewRecipients: state })),
+  setSelectedTemplate: (data) => set(() => ({ selectedTemplate: data })),
+  setTemplateData: (data) => set(() => ({ templateData: data })),
+  setViewRecipients: (state) => set(() => ({ viewRecipients: state })),
 }));

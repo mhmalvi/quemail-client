@@ -39,6 +39,8 @@ import Import_Contact from "/public/Icons/Import_Contact.svg";
 import User_Icon from "/public/Icons/User_Icon.svg";
 import Edit from "/public/Icons/edit.svg";
 import Delete from "/public/Icons/trash-bin.svg";
+import Eye from "/public/Icons/eye.svg";
+import Copy from "/public/Icons/copy.svg";
 
 // Theme
 import Dark1 from "/public/Themes/Dark/1.svg";
@@ -52,6 +54,8 @@ import NewCampaign from "/public/SVG/Home/NewCampaign.svg";
 import AllCampaigns from "/public/SVG/Home/AllCampaigns.svg";
 
 const Images = {
+  Copy,
+  Eye,
   Delete,
   Edit,
   Google,

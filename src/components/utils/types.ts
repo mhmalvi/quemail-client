@@ -4,11 +4,11 @@ export interface DashboardLayoutProps {
   children: React.ReactNode;
   backgroundImage: string;
 }
-export interface Homecard {
-  title: string;
-  subtext: string;
-  footertext: string;
-}
+// export interface Homecard {
+//   title: string;
+//   subtext: string;
+//   footertext: string;
+// }
 export type OpenEditContactModal = {
   show: boolean;
   data: {
@@ -53,7 +53,12 @@ export type TemplateType = {
   name: string | null;
   client_id: number | null;
   id: number | null;
-  template: string | null;
+  template: {
+    html: string | null;
+    design: {} | null;
+    chunks: {} | null;
+    amp: {} | null;
+  };
 };
 export type ContactType = {
   id: number;
@@ -68,11 +73,10 @@ export type ContactStoreState = {
   hasData: boolean;
   csvData: any[] | null;
   groupData: [string] | null;
-  templateData: [TemplateType] | null;
   groupContacts: [ContactType] | null;
   allContactList: [ContactType] | null;
   setAllContactList: (contactData: [ContactType] | null) => void;
-  setTemplateData: (data: [TemplateType]) => void;
+
   setCsvData: (csvData: any[]) => void;
   setHasData: (state: boolean) => void;
   setGroupData: (data: [string] | null) => void;
@@ -80,15 +84,15 @@ export type ContactStoreState = {
 };
 
 export type CampaignInfoType = {
-  subject: string | null;
+  subject: string | null | null;
   fromName: string | null;
   fromMail: string | null;
 };
 
 export type NewCampaignType = {
   template: {
-    name: string| null,
-    data:string| null
+    name: string | null;
+    data: string | null;
   } | null;
   campaignInfo: CampaignInfoType | null;
   recipient: [ContactType] | null;
@@ -96,12 +100,16 @@ export type NewCampaignType = {
 } | null;
 export type CampaignStoreState = {
   newCampaign: NewCampaignType | null;
+  templateData: [TemplateType] | null;
+  selectedTemplate: TemplateType | null;
   viewRecipients: boolean;
   setNewCampaign: (
     data:
       | NewCampaignType
       | ((prev: NewCampaignType | null) => NewCampaignType | null)
   ) => void;
+  setSelectedTemplate: (data: TemplateType | null) => void;
+  setTemplateData: (data: [TemplateType]) => void;
   setViewRecipients: (state: boolean) => void;
 };
 

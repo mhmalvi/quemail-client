@@ -74,15 +74,11 @@ const Sidebar = () => {
             All Campaigns
           </Dropdown.Item>
         </Link>
+        <Dropdown.Item className="dark:text-slate-300 text-light-black hover:text-gray-800">
+          Campaign Performance
+        </Dropdown.Item>
         <DropdownDivider className="bg-light-black" />
-        <Link
-          href="/home/campaigns/template-generator"
-          className="focus:outline-none focus:ring-0 active:outline-none active:ring-0"
-        >
-          <Dropdown.Item className="dark:text-slate-300 text-light-black hover:text-gray-800">
-            Template Generator
-          </Dropdown.Item>
-        </Link>
+
         <Link
           href="/home/campaigns/all-templates"
           className="focus:outline-none focus:ring-0 active:outline-none active:ring-0"
@@ -91,13 +87,8 @@ const Sidebar = () => {
             All Templates
           </Dropdown.Item>
         </Link>
-        <DropdownDivider className="bg-light-black" />
-        <Dropdown.Item className="dark:text-slate-300 text-light-black hover:text-gray-800">
-          Campaign Performance
-        </Dropdown.Item>
       </Dropdown>
       <Dropdown
-        className="dark:bg-[#282828] bg-white backdrop-blur-2xl border-none w-1/8 ml-2 "
         label="Dropdown button"
         placement="right-start"
         renderTrigger={() => (
@@ -138,7 +129,6 @@ const Sidebar = () => {
         </Link>
       </Dropdown>
       <Dropdown
-        className="dark:bg-[#282828] bg-white backdrop-blur-2xl border-none w-1/8 ml-2"
         label="Dropdown button"
         placement="right-start"
         renderTrigger={() => (

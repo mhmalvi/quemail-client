@@ -27,19 +27,23 @@ const NewCampaign = () => {
           </h1>
           <h1
             className={`${
-              
               newCampaign?.campaignInfo !== null &&
               newCampaign?.campaignInfo?.fromMail !== "" &&
               newCampaign?.campaignInfo?.fromName !== "" &&
-              newCampaign?.campaignInfo?.subject !== ""
+              newCampaign?.campaignInfo?.subject !== null &&
+              newCampaign?.campaignInfo?.subject.length !== undefined &&
+              newCampaign?.campaignInfo?.subject.length > 0
                 ? "text-green-500"
                 : "dark:text-slate-300 text-dark-black opacity-20"
             } xl:text-base text-sm  `}
           >
             Campaign Information{" "}
-            {newCampaign?.campaignInfo?.fromMail !== null &&
-              newCampaign?.campaignInfo?.fromName !== null &&
-              newCampaign?.campaignInfo?.subject !== null && <span>✔</span>}
+            {newCampaign?.campaignInfo !== null &&
+              newCampaign?.campaignInfo?.fromMail !== "" &&
+              newCampaign?.campaignInfo?.fromName !== "" &&
+              newCampaign?.campaignInfo?.subject !== null &&
+              newCampaign?.campaignInfo?.subject.length !== undefined &&
+              newCampaign?.campaignInfo?.subject.length > 0 && <span>✔</span>}
           </h1>
           <h1
             className={`${
