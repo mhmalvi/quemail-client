@@ -26,7 +26,7 @@ const RecipientSelection = () => {
             warningNotification(res.message);
           }
         } catch (error) {
-          warningNotification("Failed to fetch group data.");
+          console.log(error);
         }
       })();
     }

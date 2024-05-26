@@ -11,7 +11,6 @@ const NewCampaign = () => {
   const newCampaign = campaignStore((state) => state.newCampaign);
   const viewRecipients = campaignStore((state) => state.viewRecipients);
   const setViewRecipients = campaignStore((state) => state.setViewRecipients);
-  console.log(newCampaign);
   return (
     <div className="relative w-full h-full dark:bg-dark-glass shadow-md backdrop-blur-2xl bg-white rounded-md p-4 flex flex-col gap-4 overflow-hidden">
       <div className="w-full flex items-center justify-between">
