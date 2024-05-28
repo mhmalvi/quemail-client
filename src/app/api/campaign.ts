@@ -10,7 +10,7 @@ export const addMailInfo = async (
   const data = {
     email: email,
     appPassword: appPassword,
-    userID: userID && +userID,
+    userID: userID,
     provider: provider,
   };
   try {

@@ -40,7 +40,7 @@ const HomeCard = () => {
       <p className="xl:text-base text-xs m-0 p-0 dark:text-slate-300 text-light-black">
         Use your email to send more targeted emails
       </p>
-      <div className="bg-[url('/SVG/Home/homeCardBg.svg')] w-full h-1/2 border dark:border-dark-black/30 shadow-xl shadow-inner rounded-md flex items-center justify-center gap-4">
+      <div className="bg-[url('/SVG/Home/homeCardBg.svg')] dark:bg-transparent bg-violet-50 w-full h-1/2 border dark:border-dark-black/30 shadow-xl shadow-inner rounded-md flex items-center justify-center gap-4">
         <div
           className="bg-white xl:h-20 h-16 xl:p-4 p-2 border dark:border-dark-black/60 hover:dark:border-brand-color hover:border-brand-color xl:w-20 w-16 rounded-md shadow-md cursor-pointer hover:scale-95 duration-100 ease-in-out"
           onClick={() => {
@@ -101,7 +101,7 @@ const HomeCard = () => {
                   email: e.target.value,
                 }));
               }}
-              className="xl:px-4 px-2 xl:py-2 py-1 bg-transparent dark:text-slate-300 text-dark-black rounded-md border border-brand-color focus:ring-0 focus:outline-none active:outline-none active:ring-0"
+              className="xl:px-4 px-2 xl:py-2 py-1 bg-transparent dark:text-slate-300 text-dark-black rounded-md border dark:border-light-black focus:ring-0 focus:outline-none active:outline-none active:ring-0"
             />
           </div>
           <div className="flex flex-col justify-center">
@@ -115,7 +115,7 @@ const HomeCard = () => {
                   appPassword: e.target.value,
                 }));
               }}
-              className="xl:px-4 px-2 xl:py-2 py-1 bg-transparent dark:text-slate-300 text-dark-black rounded-md border border-brand-color focus:ring-0 focus:outline-none active:outline-none active:ring-0"
+              className="xl:px-4 px-2 xl:py-2 py-1 bg-transparent dark:text-slate-300 text-dark-black rounded-md border dark:border-light-black focus:ring-0 focus:outline-none active:outline-none active:ring-0"
             />
           </div>
           <div className="flex items-center gap-4 justify-end">
