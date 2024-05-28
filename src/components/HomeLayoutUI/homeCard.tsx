@@ -3,8 +3,12 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Images from "../utils/images";
 import { Modal, Spinner } from "flowbite-react";
-import { addMailInfo, fetchAddedMail, updateMailInfo } from "@/app/api/campaign";
-import { warningNotification } from "../utils/utility";
+import {
+  addMailInfo,
+  fetchAddedMail,
+  updateMailInfo,
+} from "@/app/api/campaign";
+import { successNotification, warningNotification } from "../utils/utility";
 
 // Define the type for mailAdded
 interface MailAdded {
@@ -37,8 +41,8 @@ const HomeCard = () => {
             ...prev,
             loading: false,
           }));
-
-          console.log(res);
+          successNotification(res.message);
+          window.location.reload();
         } else if (res.status === 422) {
           warningNotification(res.message);
         } else if (res.status === 500) {
@@ -62,8 +66,8 @@ const HomeCard = () => {
             ...prev,
             loading: false,
           }));
-
-          console.log(res);
+          successNotification(res.message);
+          window.location.reload();
         } else if (res.status === 422) {
           warningNotification(res.message);
         } else if (res.status === 500) {
