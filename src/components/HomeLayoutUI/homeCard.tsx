@@ -13,7 +13,6 @@ interface MailAdded {
     app_password: string;
     id: number;
   };
-  // Add other providers if needed
 }
 
 const HomeCard = () => {
