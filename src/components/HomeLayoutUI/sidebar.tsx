@@ -19,7 +19,7 @@ const Sidebar = () => {
     >
       <div
         onClick={setOpenSidebar}
-        className={`w-full flex justify-center items-center mt-4 rounded-md cursor-pointer bg-dark-black duration-100 ease-in`}
+        className={`overflow-hidden w-full flex justify-center items-center mt-4 rounded-md cursor-pointer bg-dark-black duration-100 ease-in`}
       >
         {sidebarToggle && (
           <h1 className="m-0 p-0 text-3xl text-slate-300 ">Que</h1>

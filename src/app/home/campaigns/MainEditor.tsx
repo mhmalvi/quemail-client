@@ -96,7 +96,7 @@ const MainEditor = () => {
   }, [data, data.template, router, saveClicked]);
 
   return (
-    <div className="h-full flex flex-col gap-4 overflow-hidden rounded-md ">
+    <div className="h-full w-full flex flex-col gap-4 overflow-hidden rounded-md ">
       <div className="flex items-center justify-between w-full pl-2">
         <div className="flex gap-4 items-center">
           <input
@@ -159,7 +159,7 @@ const MainEditor = () => {
           </button>
         </div>
       </div>
-      <div className="xl:h-[80dvh] h-[65dvh] flex items-center justify-center">
+      <div className="xl:h-[79dvh] h-[65dvh] w-screen flex items-center justify-center">
         <EmailEditor
           ref={emailEditorRef}
           onReady={onReady}

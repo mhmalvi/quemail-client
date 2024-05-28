@@ -96,7 +96,7 @@ const QuickActions = () => {
         dismissible
         onClose={() => {
           setActionClick({
-            show:""
+            show: "",
           });
         }}
         size={"7xl"}
