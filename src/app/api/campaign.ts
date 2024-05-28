@@ -81,7 +81,7 @@ export const updateMailInfo = async (
   const userID = userIDString ? parseInt(userIDString, 10) : null;
   const data = {
     email: email,
-    appPassword: appPassword,
+    app_password: appPassword,
     userID: userID,
     id: id,
   };
@@ -90,7 +90,7 @@ export const updateMailInfo = async (
     const result = await fetch(
       `https://backend.quemailer.com/api/app-password-update`,
       {
-        method: "PUT",
+        method: "POST",
         headers: {
           "Content-Type": "application/json",
           Authorization: parsedToken,
