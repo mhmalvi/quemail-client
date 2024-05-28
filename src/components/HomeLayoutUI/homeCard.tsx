@@ -1,16 +1,30 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Images from "../utils/images";
 import { Modal, Spinner } from "flowbite-react";
-import { addMailInfo } from "@/app/api/campaign";
+import { addMailInfo, fetchAddedMail, updateMailInfo } from "@/app/api/campaign";
+import { warningNotification } from "../utils/utility";
+
+// Define the type for mailAdded
+interface MailAdded {
+  google?: {
+    email: string;
+    app_password: string;
+    id: number;
+  };
+  // Add other providers if needed
+}
+
 const HomeCard = () => {
   const [emailInfo, setEmailInfo] = useState({
     email: null,
     appPassword: null,
     provider: null,
+    id: null,
     loading: false,
   });
+
   const handleAddMail = async (
     email: string | null,
     appPassword: string | null,
@@ -20,18 +34,65 @@ const HomeCard = () => {
       try {
         const res = await addMailInfo(email, appPassword, provider);
         if (res.status === 201) {
-          setEmailInfo((prev: any) => ({
+          setEmailInfo((prev) => ({
             ...prev,
             loading: false,
           }));
 
           console.log(res);
+        } else if (res.status === 422) {
+          warningNotification(res.message);
+        } else if (res.status === 500) {
+          warningNotification(res.message);
         }
       } catch (error) {
         console.log(error);
       }
     }
   };
+  const handleUpdateMail = async (
+    email: string | null,
+    appPassword: string | null,
+    id: number | null
+  ) => {
+    if (emailInfo.provider === "Google") {
+      try {
+        const res = await updateMailInfo(email, appPassword, id);
+        if (res.status === 201) {
+          setEmailInfo((prev) => ({
+            ...prev,
+            loading: false,
+          }));
+
+          console.log(res);
+        } else if (res.status === 422) {
+          warningNotification(res.message);
+        } else if (res.status === 500) {
+          warningNotification(res.message);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  };
+  const [mailAdded, setMailAdded] = useState<MailAdded | null>(null);
+
+  useEffect(() => {
+    (async () => {
+      const res = await fetchAddedMail();
+      if (res?.status === 200) {
+        console.log(res);
+        setMailAdded(res.emails);
+      } else if (res?.status === 422) {
+        warningNotification(res.message);
+      } else if (res?.status === 404) {
+        warningNotification(res.message);
+      } else {
+        console.log("Something went wrong");
+      }
+    })();
+  }, []);
+
   return (
     <div className="h-full relative dark:bg-dark-glass shadow-md bg-[#ffffffbf] backdrop-blur-2xl rounded-md p-4 flex flex-col gap-4 overflow-hidden">
       <h1 className="xl:text-xl text-base m-0 p-0 dark:text-white text-dark-black">
@@ -40,33 +101,30 @@ const HomeCard = () => {
       <p className="xl:text-base text-xs m-0 p-0 dark:text-slate-300 text-light-black">
         Use your email to send more targeted emails
       </p>
-      <div className="bg-[url('/SVG/Home/homeCardBg.svg')] dark:bg-transparent bg-violet-50 w-full h-1/2 border dark:border-dark-black/30 shadow-xl shadow-inner rounded-md flex items-center justify-center gap-4">
+      <div className="bg-[url('/SVG/Home/homeCardBg.svg')] dark:bg-transparent bg-violet-50 w-full h-1/2 border dark:border-dark-black/30 shadow-xl shadow-inner rounded-md flex items-center justify-center gap-16">
         <div
-          className="bg-white xl:h-20 h-16 xl:p-4 p-2 border dark:border-dark-black/60 hover:dark:border-brand-color hover:border-brand-color xl:w-20 w-16 rounded-md shadow-md cursor-pointer hover:scale-95 duration-100 ease-in-out"
+          className="relative bg-white xl:h-20 h-16 xl:p-4 p-2 border dark:border-dark-black/60 hover:dark:border-brand-color hover:border-brand-color xl:w-20 w-16 rounded-md shadow-md cursor-pointer hover:scale-95 duration-100 ease-in-out"
           onClick={() => {
             setEmailInfo((prev: any) => ({
               ...prev,
               provider: "Google",
+              email: mailAdded?.google?.email || null,
+              appPassword: mailAdded?.google?.app_password || null,
+              id: mailAdded?.google?.id || null,
             }));
           }}
         >
           <Image src={Images.Google} alt="Google" className="h-full" />
+          {mailAdded?.google !== null && (
+            <div className="absolute -bottom-2 -right-2 bg-green-500 w-6 h-6 flex items-center justify-center m-0 rounded-full">
+              ✔
+            </div>
+          )}
         </div>
-        <div
-          className=" bg-white xl:h-20 h-16 xl:p-4 p-2 border dark:border-dark-black/60 hover:dark:border-brand-color hover:border-brand-color xl:w-20 w-16 rounded-md shadow-md cursor-pointer hover:scale-95 duration-100 ease-in-out"
-          // onClick={() => {
-          //   setServiceClicked("Yahoo");
-          // }}
-          // disabled={true}
-        >
+        <div className=" bg-white xl:h-20 h-16 xl:p-4 p-2 border dark:border-dark-black/60 hover:dark:border-brand-color hover:border-brand-color xl:w-20 w-16 rounded-md shadow-md cursor-pointer hover:scale-95 duration-100 ease-in-out">
           <Image src={Images.Yahoo} alt="Yahoo" className="h-full" />
         </div>
-        <div
-          className=" bg-white xl:h-20 h-16 xl:p-4 p-2 border dark:border-dark-black/60 hover:dark:border-brand-color hover:border-brand-color xl:w-20 w-16 rounded-md shadow-md cursor-pointer hover:scale-95 duration-100 ease-in-out"
-          // onClick={() => {
-          //   setServiceClicked("Outlook");
-          // }}
-        >
+        <div className=" bg-white xl:h-20 h-16 xl:p-4 p-2 border dark:border-dark-black/60 hover:dark:border-brand-color hover:border-brand-color xl:w-20 w-16 rounded-md shadow-md cursor-pointer hover:scale-95 duration-100 ease-in-out">
           <Image src={Images.Outlook} alt="Outlook" className="h-full" />
         </div>
       </div>
@@ -82,6 +140,7 @@ const HomeCard = () => {
             email: null,
             appPassword: null,
             provider: null,
+            id: null,
             loading: false,
           }));
         }}
@@ -101,6 +160,7 @@ const HomeCard = () => {
                   email: e.target.value,
                 }));
               }}
+              value={emailInfo.email ?? ""}
               className="xl:px-4 px-2 xl:py-2 py-1 bg-transparent dark:text-slate-300 text-dark-black rounded-md border dark:border-light-black focus:ring-0 focus:outline-none active:outline-none active:ring-0"
             />
           </div>
@@ -115,6 +175,7 @@ const HomeCard = () => {
                   appPassword: e.target.value,
                 }));
               }}
+              value={emailInfo.appPassword ?? ""}
               className="xl:px-4 px-2 xl:py-2 py-1 bg-transparent dark:text-slate-300 text-dark-black rounded-md border dark:border-light-black focus:ring-0 focus:outline-none active:outline-none active:ring-0"
             />
           </div>
@@ -122,12 +183,18 @@ const HomeCard = () => {
             <button
               className="xl:px-4 px-2 xl:py-2 py-1 bg-brand-color text-slate-50 rounded-md disabled:opacity-20"
               onClick={() => {
-                handleAddMail(
-                  emailInfo.email,
-                  emailInfo.appPassword,
-                  emailInfo.provider
-                );
-                setEmailInfo((prev: any) => ({
+                mailAdded?.google !== null
+                  ? handleUpdateMail(
+                      emailInfo.email,
+                      emailInfo.appPassword,
+                      emailInfo?.id
+                    )
+                  : handleAddMail(
+                      emailInfo.email,
+                      emailInfo.appPassword,
+                      emailInfo.provider
+                    );
+                setEmailInfo((prev) => ({
                   ...prev,
                   loading: true,
                 }));
@@ -142,6 +209,8 @@ const HomeCard = () => {
                   aria-label="Purple spinner example"
                   size="xl"
                 />
+              ) : mailAdded?.google !== null ? (
+                "Update"
               ) : (
                 "Save"
               )}
@@ -154,6 +223,7 @@ const HomeCard = () => {
                   email: null,
                   appPassword: null,
                   provider: null,
+                  id: null,
                   loading: false,
                 }));
               }}
