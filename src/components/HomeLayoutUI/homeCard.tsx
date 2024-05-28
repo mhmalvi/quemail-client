@@ -2,9 +2,10 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Images from "../utils/images";
-import { Modal, Spinner } from "flowbite-react";
+import { Modal, Popover, Spinner } from "flowbite-react";
 import {
   addMailInfo,
+  destroyMail,
   fetchAddedMail,
   updateMailInfo,
 } from "@/app/api/campaign";
@@ -95,7 +96,26 @@ const HomeCard = () => {
       }
     })();
   }, []);
+  // const onDelete = async (data: number | null) => {
+  //   const res = await destroyTemplate(data);
+  //   if (res.status === 201) {
+  //     successNotification(res.message);
+  //     window.location.reload();
+  //   } else {
+  //     warningNotification("Something went wrong. Please try again.");
+  //   }
+  // };
+  const onRemove = async () => {
+    const res = await destroyMail(emailInfo.id);
+    if (res.status === 201) {
+      successNotification(res.message);
+      window.location.reload();
+    } else {
+      warningNotification("Something went wrong. Please try again.");
+    }
+  };
 
+  const [openDeletePopover, setOpenDeletePopover] = useState(false);
   return (
     <div className="h-full relative dark:bg-dark-glass shadow-md bg-[#ffffffbf] backdrop-blur-2xl rounded-md p-4 flex flex-col gap-4 overflow-hidden">
       <h1 className="xl:text-xl text-base m-0 p-0 dark:text-white text-dark-black">
@@ -118,7 +138,9 @@ const HomeCard = () => {
           }}
         >
           <Image src={Images.Google} alt="Google" className="h-full" />
-          {mailAdded?.google !== null && (
+          {mailAdded?.google === null ? (
+            ""
+          ) : (
             <div className="absolute -bottom-2 -right-2 bg-green-500 w-6 h-6 flex items-center justify-center m-0 rounded-full">
               ✔
             </div>
@@ -149,7 +171,51 @@ const HomeCard = () => {
         }}
       >
         <Modal.Header className=" dark:text-slate-300 text-dark-black">
-          Connect store
+          <div className="flex items-center gap-4">
+            <h1>Connect store</h1>
+            <Popover
+              aria-labelledby="default-popover"
+              open={openDeletePopover}
+              onOpenChange={() => {
+                setOpenDeletePopover(true);
+              }}
+              content={
+                <div className="w-64 text-sm text-gray-500 dark:text-gray-400">
+                  <div className="border-b border-gray-200 bg-gray-100 px-3 py-2 dark:border-gray-600 dark:bg-gray-700">
+                    <h3
+                      id="default-popover"
+                      className="font-semibold text-gray-900 dark:text-white"
+                    >
+                      Are you sure you want to delete?
+                    </h3>
+                  </div>
+                  <div className="px-4 py-2 flex items-center justify-between">
+                    <button
+                      onClick={onRemove}
+                      className="px-4 py-2 bg-red-500 rounded-md text-white"
+                    >
+                      Delete
+                    </button>
+                    <button
+                      onClick={() => {
+                        setOpenDeletePopover(false);
+                      }}
+                      className="px-4 py-2 border border-brand-color rounded-md dark:text-slate-300 text-dark-black"
+                    >
+                      Cancel
+                    </button>
+                  </div>
+                </div>
+              }
+            >
+              <button
+                className="px-2 py-1 border border-red-500 rounded-md text-sm disabled:opacity-30"
+                disabled={mailAdded?.google === null}
+              >
+                Remove
+              </button>
+            </Popover>
+          </div>
         </Modal.Header>
         <Modal.Body className=" flex flex-col gap-4">
           <div className="flex flex-col justify-center">
