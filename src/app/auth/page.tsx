@@ -1,5 +1,5 @@
 "use client";
-import React, { Suspense, useEffect } from "react";
+import React, { Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Storage } from "@/store/store";
 
@@ -11,12 +11,13 @@ const Authenticate = () => {
   const photo = searchParams.get("photo");
   const token = searchParams.get("token");
   const userID = searchParams.get("userID");
+
   if (token && userName && email && photo && userID) {
     Storage.setItem("userName", userName);
     Storage.setItem("email", email);
     Storage.setItem("photo", photo);
     Storage.setItem("token", token);
-    Storage.setItem("userID", userID);
+    Storage.setItem("userID", Number(userID));
     router.push("/home");
   }
 
@@ -34,4 +35,5 @@ const AuthPage = () => {
     </Suspense>
   );
 };
+
 export default AuthPage;
