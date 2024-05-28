@@ -5,8 +5,9 @@ export const addMailInfo = async (
 ) => {
   const token = typeof window !== "undefined" && localStorage.getItem("token");
   const parsedToken = token && JSON.parse(token);
-  const userID =
+  const userIDString =
     typeof window !== "undefined" && localStorage.getItem("userID");
+  const userID = userIDString ? parseInt(userIDString, 10) : null;
   const data = {
     email: email,
     appPassword: appPassword,
