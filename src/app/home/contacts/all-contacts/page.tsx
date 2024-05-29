@@ -37,6 +37,7 @@ const AllContacts = () => {
   const [openModal, setOpenModal] = useState({
     show: "",
   });
+  console.log(openModal);
   const [openAddContactModal, setOpenAddContactModal] =
     useState<boolean>(false);
   const [openEditContactModal, setOpenEditContactModal] =
@@ -60,7 +61,7 @@ const AllContacts = () => {
       json: {
         name: "",
         email: "",
-        group:""
+        group: "",
       },
     });
   const [openDeletePopover, setOpenDeletePopover] = useState<null | number>(
@@ -174,7 +175,7 @@ const AllContacts = () => {
                   className="dark:text-slate-300 text-black"
                   onClick={() => {
                     setOpenModal({
-                      show: "showButtons",
+                      show: "importContacts",
                     });
                   }}
                 >
@@ -386,7 +387,9 @@ const AllContacts = () => {
             show={openAddContactModal}
             onClose={() => setOpenAddContactModal(false)}
           >
-            <Modal.Header className="dark:bg-dark-glass bg-violet-50 dark:text-slate-300 text-dark-black">Add a Contact</Modal.Header>
+            <Modal.Header className="dark:bg-dark-glass bg-violet-50 dark:text-slate-300 text-dark-black">
+              Add a Contact
+            </Modal.Header>
             <Modal.Body className="dark:bg-dark-black bg-violet-50 rounded-md">
               <h1 className="text-brand-color bg-slate-300 px-4 py-2 rounded-md">
                 This feature is under development
@@ -457,7 +460,9 @@ const AllContacts = () => {
               }));
             }}
           >
-            <Modal.Header className="dark:bg-dark-glass bg-violet-50 dark:text-slate-300 text-dark-black">Edit Contact</Modal.Header>
+            <Modal.Header className="dark:bg-dark-glass bg-violet-50 dark:text-slate-300 text-dark-black">
+              Edit Contact
+            </Modal.Header>
             <Modal.Body className="dark:bg-dark-black bg-violet-50">
               <div>
                 <Label htmlFor="name" value="Edit name" />
