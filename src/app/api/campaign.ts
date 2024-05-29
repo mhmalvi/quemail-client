@@ -81,7 +81,7 @@ export const updateMailInfo = async (
   const userID = userIDString ? parseInt(userIDString, 10) : null;
   const data = {
     email: email,
-    app_password: appPassword,
+    appPassword: appPassword,
     userID: userID,
     id: id,
   };

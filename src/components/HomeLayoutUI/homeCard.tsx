@@ -158,9 +158,9 @@ const HomeCard = () => {
           <Image src={Images.Outlook} alt="Outlook" className="h-full" />
         </div>
       </div>
-      <p className="xl:text-sm text-xs m-0 p-0 dark:text-slate-300 text-light-black">
-        Segment and target customers based on purchase behavior using real-time
-        data from your online store.
+      <p className="xl:text-sm text-xs m-0 p-0 dark:text-slate-300 text-light-black ">
+        Please connect your email account to enable the sending of emails
+        through the specified system.
       </p>
       <Modal
         show={emailInfo.provider === "Google"}
