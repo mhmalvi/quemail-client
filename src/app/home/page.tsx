@@ -10,11 +10,11 @@ const Home = () => {
         <div className="h-full w-full flex flex-col flex-grow justify-around gap-4">
           <div className="flex h-full gap-4">
             <HomeCard />
-            <HomeCard />
+            {/* <HomeCard /> */}
           </div>
           <div className="flex h-full gap-4">
-            <HomeCard />
-            <HomeCard />
+            {/* <HomeCard />
+            <HomeCard /> */}
           </div>
         </div>
         <QuickActions />

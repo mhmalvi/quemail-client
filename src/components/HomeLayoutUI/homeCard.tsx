@@ -106,12 +106,17 @@ const HomeCard = () => {
   //   }
   // };
   const onRemove = async () => {
-    const res = await destroyMail(emailInfo.id);
-    if (res.status === 201) {
-      successNotification(res.message);
-      window.location.reload();
-    } else {
-      warningNotification("Something went wrong. Please try again.");
+    try {
+      const res = await destroyMail(emailInfo.id);
+
+      if (res.status === 201) {
+        successNotification(res.message);
+        window.location.reload();
+      } else {
+        warningNotification("Something went wrong. Please try again.");
+      }
+    } catch (error) {
+      console.log(error);
     }
   };
 
