@@ -15,7 +15,6 @@ const Test = () => {
           },
           body: JSON.stringify({
             to: data.to,
-            from: data.from,
             subject: data.subject,
             text: data.text,
           }),
