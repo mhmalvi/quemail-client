@@ -1,87 +1,99 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
-const Test = () => {
-  const [data, setData] = useState({ to: "", from: "", subject: "", text: "" });
-  const handleSubmit = async () => {
+function Test() {
+  const [token, setToken] = useState<string | null>(null);
+  const [to, setTo] = useState("");
+  const [subject, setSubject] = useState("");
+  const [text, setText] = useState("");
+
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const token = urlParams.get("token");
+    if (token) {
+      setToken(token);
+    }
+  }, []);
+
+  const sendEmail = async (e: any) => {
+    e.preventDefault();
+
+    if (!token) {
+      alert("You must authenticate first.");
+      return;
+    }
+
     try {
-      console.log(data);
-      const result = await fetch(
-        `https://backend.quemailer.com/google/send-email`,
+      const response = await fetch(
+        "https://backend.quemailer.com/api/auth/send-email",
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
           },
           body: JSON.stringify({
-            to: data.to,
-            subject: data.subject,
-            text: data.text,
+            to,
+            subject,
+            text,
           }),
         }
       );
-      if (result) {
-        const responseData = await result.json();
-        return responseData;
-      } else {
-        return null;
+
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
       }
-    } catch (error: any) {
-      return error.response;
+
+      const data = await response.json();
+      alert(`Email sent: ${data}`);
+    } catch (error) {
+      console.error("Error sending email", error);
+      alert("Failed to send email");
     }
   };
+
   return (
-    <div className="h-screen w-full flex flex-col gap-8 items-center justify-center bg-dark-black">
-      <div>
-        <label>To:</label>
-        <input
-          className="text-black"
-          onChange={(e) => {
-            setData((prevData) => ({
-              ...prevData,
-              to: e.target.value,
-            }));
-          }}
-        />
-      </div>
-      <div>
-        <label>From:</label>
-        <input
-          className="text-black"
-          onChange={(e) => {
-            setData((prevData) => ({
-              ...prevData,
-              from: e.target.value,
-            }));
-          }}
-        />
-      </div>
-      <div>
-        <label>subject:</label>
-        <input
-          className="text-black"
-          onChange={(e) => {
-            setData((prevData) => ({
-              ...prevData,
-              subject: e.target.value,
-            }));
-          }}
-        />
-      </div>
-      <div>
-        <label>text:</label>
-        <input
-          className="text-black"
-          onChange={(e) => {
-            setData((prevData) => ({
-              ...prevData,
-              text: e.target.value,
-            }));
-          }}
-        />
-      </div>
-      <button onClick={handleSubmit}>submit</button>
+    <div className="App">
+      <header className="App-header">
+        <h1>Send Email with Gmail API</h1>
+        {token ? (
+          <form onSubmit={sendEmail}>
+            <div>
+              <label>To:</label>
+              <input
+                type="email"
+                value={to}
+                onChange={(e) => setTo(e.target.value)}
+                required
+              />
+            </div>
+            <div>
+              <label>Subject:</label>
+              <input
+                type="text"
+                value={subject}
+                onChange={(e) => setSubject(e.target.value)}
+                required
+              />
+            </div>
+            <div>
+              <label>Message:</label>
+              <textarea
+                value={text}
+                onChange={(e) => setText(e.target.value)}
+                required
+              />
+            </div>
+            <button type="submit">Send Email</button>
+          </form>
+        ) : (
+          <a href="https://backend.quemailer.com/api/auth/user">
+            Authenticate with Google
+          </a>
+        )}
+      </header>
     </div>
   );
-};
+}
+
 export default Test;
