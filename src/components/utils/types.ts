@@ -1,4 +1,4 @@
-import NewCampaign from "@/app/home/campaigns/new-campaign/page";
+import NewCampaign from "@/app/home/campaigns/new-campaign/NewCampaign";
 
 export interface DashboardLayoutProps {
   children: React.ReactNode;

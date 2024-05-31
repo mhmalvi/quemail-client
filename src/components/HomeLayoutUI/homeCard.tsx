@@ -96,15 +96,7 @@ const HomeCard = () => {
       }
     })();
   }, []);
-  // const onDelete = async (data: number | null) => {
-  //   const res = await destroyTemplate(data);
-  //   if (res.status === 201) {
-  //     successNotification(res.message);
-  //     window.location.reload();
-  //   } else {
-  //     warningNotification("Something went wrong. Please try again.");
-  //   }
-  // };
+
   const onRemove = async () => {
     try {
       const res = await destroyMail(emailInfo.id);
@@ -146,7 +138,7 @@ const HomeCard = () => {
           {mailAdded?.google === null ? (
             ""
           ) : (
-            <div className="absolute -bottom-2 -right-2 bg-green-500 w-6 h-6 flex items-center justify-center m-0 rounded-full">
+            <div className=" absolute -bottom-2 -right-2 bg-green-500 w-6 h-6 flex items-center justify-center m-0 rounded-full">
               ✔
             </div>
           )}

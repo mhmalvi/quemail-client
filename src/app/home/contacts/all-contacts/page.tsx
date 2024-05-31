@@ -1,38 +1,17 @@
 "use client";
-import React, { useEffect, useState, useCallback } from "react";
-import {
-  Checkbox,
-  Pagination,
-  Table,
-  Modal,
-  Dropdown,
-  TextInput,
-  Label,
-  Spinner,
-  Popover,
-} from "flowbite-react";
+import React, { useEffect, useState } from "react";
+import { Pagination, Modal, Dropdown } from "flowbite-react";
 import NoContacts from "../../../../components/HomeLayoutUI/NoContacts";
 import ImportCSV from "./ImportCSV";
 import { contactStore } from "@/store/store";
-import { destroyContact, fetchContact, updateContact } from "@/app/api/contact";
+import { fetchContact } from "@/app/api/contact";
 import Images from "@/components/utils/images";
-import Image from "next/image";
-import {
-  EditContactData,
-  OpenEditContactModal,
-} from "@/components/utils/types";
-import {
-  successNotification,
-  warningNotification,
-} from "@/components/utils/utility";
+
 import Groups from "./Groups";
+import ContactTable from "./ContactTable";
 
 const AllContacts = () => {
-  const userID =
-    typeof window !== "undefined" && localStorage.getItem("userID");
   const [currentPage, setCurrentPage] = useState(1);
-  const [selectAllChecked, setSelectAllChecked] = useState(false);
-  const [updateLoading, setUpdateLoading] = useState(false);
   const onPageChange = (page: number) => setCurrentPage(page);
   const [openModal, setOpenModal] = useState({
     show: "",
@@ -40,34 +19,7 @@ const AllContacts = () => {
   console.log(openModal);
   const [openAddContactModal, setOpenAddContactModal] =
     useState<boolean>(false);
-  const [openEditContactModal, setOpenEditContactModal] =
-    useState<OpenEditContactModal>({
-      show: false,
-      data: null,
-    });
-  const [editContactData, setEditContactData] = useState<EditContactData>({
-    id: null,
-    user_id: userID,
-    json: {
-      name: "",
-      email: "",
-      group: "",
-    },
-  });
-  const [initialEditContactData, setInitialEditContactData] =
-    useState<EditContactData>({
-      id: null,
-      user_id: userID,
-      json: {
-        name: "",
-        email: "",
-        group: "",
-      },
-    });
-  const [openDeletePopover, setOpenDeletePopover] = useState<null | number>(
-    null
-  );
-  // const [allContactList, setAllContactList] = useState<[]>([]);
+
   const [totalPages, setTotalPages] = useState<number>(0);
 
   const groupContacts = contactStore((state) => state.groupContacts);
@@ -86,56 +38,6 @@ const AllContacts = () => {
       }
     })();
   }, [currentPage, setAllContactList]);
-  const handleEditContact = (contact: any) => {
-    setEditContactData(contact);
-    setInitialEditContactData(contact);
-    setOpenEditContactModal({
-      show: true,
-      data: contact,
-    });
-  };
-  const handleEditContactDataChange = (field: string, value: string) => {
-    setEditContactData((prevData) => ({
-      ...prevData,
-      json: {
-        ...prevData.json,
-        [field]: value,
-      },
-    }));
-  };
-
-  const onUpdate = async () => {
-    const res = await updateContact(editContactData);
-    if (res.status === 201) {
-      successNotification(res?.message);
-      setUpdateLoading(false);
-      setOpenEditContactModal({
-        show: false,
-        data: null,
-      });
-      window.location.reload();
-    } else {
-      warningNotification("Something went wrong. Please try again.");
-    }
-  };
-
-  const hasChanges = useCallback(() => {
-    return (
-      editContactData.json.name !== initialEditContactData.json.name ||
-      editContactData.json.email !== initialEditContactData.json.email ||
-      editContactData.json.group !== initialEditContactData.json.group
-    );
-  }, [editContactData, initialEditContactData]);
-
-  const onDelete = async (data: number) => {
-    const res = await destroyContact(data);
-    if (res.status === 201) {
-      successNotification(res.message);
-      window.location.reload();
-    } else {
-      warningNotification("Something went wrong. Please try again.");
-    }
-  };
 
   return (
     <>
@@ -192,196 +94,9 @@ const AllContacts = () => {
               </Dropdown>
             </div>
           </div>
-          <div className="flex flex-col gap-4 h-5/6 overflow-auto">
-            <Table hoverable striped>
-              <Table.Head className="sticky top-0 py-0 !rounded-tl-md">
-                <Table.HeadCell className="sticky top-0 py-2">
-                  <Checkbox
-                    checked={selectAllChecked}
-                    onChange={(e) => setSelectAllChecked(e.target.checked)}
-                  />
-                </Table.HeadCell>
-                <Table.HeadCell className="sticky top-0 py-2">
-                  Name
-                </Table.HeadCell>
-                <Table.HeadCell className="sticky top-0 py-2">
-                  Email
-                </Table.HeadCell>
-                <Table.HeadCell className="sticky top-0 py-2">
-                  Added by
-                </Table.HeadCell>
-                <Table.HeadCell className="sticky top-0 py-2">
-                  Group
-                </Table.HeadCell>
-                <Table.HeadCell className="sticky top-0 py-2">
-                  Date Added
-                </Table.HeadCell>
-                <Table.HeadCell className="sticky top-0 py-2 text-center w-full">
-                  Action
-                </Table.HeadCell>
-              </Table.Head>
-              <Table.Body className="divide-y">
-                {groupContacts !== null
-                  ? groupContacts.map((items, index) => (
-                      <Table.Row
-                        key={index}
-                        className="dark:border-gray-700 dark:bg-gray-800"
-                      >
-                        <Table.Cell>
-                          <Checkbox />
-                        </Table.Cell>
-                        <Table.Cell className="font-medium text-gray-900 dark:text-white">
-                          {items.json.name}
-                        </Table.Cell>
-                        <Table.Cell>{items.json.email}</Table.Cell>
-                        <Table.Cell>-</Table.Cell>
-                        <Table.Cell>{items.json.group}</Table.Cell>
-                        <Table.Cell>-</Table.Cell>
-                        <Table.Cell className="w-full flex items-center justify-center gap-8">
-                          <Image
-                            className="cursor-pointer"
-                            src={Images.Edit}
-                            alt="editContact"
-                            onClick={() => {
-                              handleEditContact(items);
-                            }}
-                          />
-                          <Popover
-                            aria-labelledby="default-popover"
-                            open={openDeletePopover === items.id}
-                            onOpenChange={() => {
-                              setOpenDeletePopover(
-                                openDeletePopover === items.id ? null : items.id
-                              );
-                            }}
-                            content={
-                              <div className="w-64 text-sm text-gray-500 dark:text-gray-400">
-                                <div className="border-b border-gray-200 bg-gray-100 px-3 py-2 dark:border-gray-600 dark:bg-gray-700">
-                                  <h3
-                                    id="default-popover"
-                                    className="font-semibold text-gray-900 dark:text-white"
-                                  >
-                                    Are you sure you want to delete?
-                                  </h3>
-                                </div>
-                                <div className="px-4 py-2 flex items-center justify-between">
-                                  <button
-                                    onClick={() => {
-                                      onDelete(items.id);
-                                    }}
-                                    className="px-4 py-2 bg-red-500 rounded-md text-white"
-                                  >
-                                    Delete
-                                  </button>
-                                  <button
-                                    onClick={() => {
-                                      setOpenDeletePopover(null);
-                                    }}
-                                    className="px-4 py-2 border border-brand-color rounded-md dark:text-slate-300 text-dark-black"
-                                  >
-                                    Cancel
-                                  </button>
-                                </div>
-                              </div>
-                            }
-                          >
-                            <Image
-                              src={Images.Delete}
-                              alt="deleteContact"
-                              className="cursor-pointer"
-                            />
-                          </Popover>
-                        </Table.Cell>
-                      </Table.Row>
-                    ))
-                  : allContactList !== null &&
-                    allContactList.map((contact: any, index: any) => (
-                      <Table.Row
-                        key={index}
-                        className="dark:border-gray-700 dark:bg-gray-800"
-                      >
-                        <Table.Cell>
-                          <Checkbox />
-                        </Table.Cell>
-                        <Table.Cell className="font-medium text-gray-900 dark:text-white">
-                          {contact.json.name}
-                        </Table.Cell>
-                        <Table.Cell>{contact.json.email}</Table.Cell>
-                        <Table.Cell>-</Table.Cell>
-                        <Table.Cell>{contact.json.group}</Table.Cell>
-                        <Table.Cell>-</Table.Cell>
-                        <Table.Cell className="w-full flex items-center justify-center gap-8">
-                          <Image
-                            className="cursor-pointer"
-                            src={Images.Edit}
-                            alt="editContact"
-                            onClick={() => {
-                              handleEditContact(contact);
-                            }}
-                          />
-                          <Popover
-                            aria-labelledby="default-popover"
-                            open={openDeletePopover === contact.id}
-                            onOpenChange={() => {
-                              setOpenDeletePopover(
-                                openDeletePopover === contact.id
-                                  ? null
-                                  : contact.id
-                              );
-                            }}
-                            content={
-                              <div className="w-64 text-sm text-gray-500 dark:text-gray-400">
-                                <div className="border-b border-gray-200 bg-gray-100 px-3 py-2 dark:border-gray-600 dark:bg-gray-700">
-                                  <h3
-                                    id="default-popover"
-                                    className="font-semibold text-gray-900 dark:text-white"
-                                  >
-                                    Are you sure you want to delete?
-                                  </h3>
-                                </div>
-                                <div className="px-4 py-2 flex items-center justify-between">
-                                  <button
-                                    onClick={() => {
-                                      onDelete(contact.id);
-                                    }}
-                                    className="px-4 py-2 bg-red-500 rounded-md text-white"
-                                  >
-                                    Delete
-                                  </button>
-                                  <button
-                                    onClick={() => {
-                                      setOpenDeletePopover(null);
-                                    }}
-                                    className="px-4 py-2 border border-brand-color rounded-md dark:text-slate-300 text-dark-black"
-                                  >
-                                    Cancel
-                                  </button>
-                                </div>
-                              </div>
-                            }
-                          >
-                            <Image
-                              src={Images.Delete}
-                              alt="deleteContact"
-                              className="cursor-pointer"
-                            />
-                          </Popover>
-                        </Table.Cell>
-                      </Table.Row>
-                    ))}
-              </Table.Body>
-            </Table>
-          </div>
-          <div className="w-full flex items-center justify-center rounded-md">
-            <Pagination
-              layout="pagination"
-              currentPage={currentPage}
-              totalPages={totalPages}
-              onPageChange={onPageChange}
-              previousLabel="<"
-              nextLabel=">"
-            />
-          </div>
+
+          <ContactTable onPageChange={onPageChange} currentPage={currentPage} totalPages={totalPages}/>
+
           <Modal
             dismissible
             show={openAddContactModal}
@@ -394,140 +109,6 @@ const AllContacts = () => {
               <h1 className="text-brand-color bg-slate-300 px-4 py-2 rounded-md">
                 This feature is under development
               </h1>
-              {/* <div className="flex flex-col gap-4 text-center w-full">
-                <form className="m-0 p-0 w-full text-lg flex flex-wrap flex-grow gap-4 items-center font-normal text-gray-500 dark:text-gray-400">
-                  <div className="flex-auto flex flex-col">
-                    <label className="text-start text-base">First Name</label>
-                    <input className="bg-transparent border border-gray-800 dark:border-slate-300 rounded-md focus:outline-none focus:ring-0 outline-none p-2" />
-                  </div>
-                  <div className="flex-auto flex flex-col">
-                    <label className="text-start text-base">Last Name</label>
-                    <input className="bg-transparent border border-gray-800 dark:border-slate-300 rounded-md focus:outline-none focus:ring-0 outline-none p-2" />
-                  </div>
-                  <div className="flex-auto flex flex-col">
-                    <label className="text-start text-base">Contact</label>
-                    <input className="bg-transparent border border-gray-800 dark:border-slate-300 rounded-md focus:outline-none focus:ring-0 outline-none p-2" />
-                  </div>
-                  <div className="flex-auto flex flex-col">
-                    <label className="text-start text-base">Email</label>
-                    <input className="bg-transparent border border-gray-800 dark:border-slate-300 rounded-md focus:outline-none focus:ring-0 outline-none p-2" />
-                  </div>
-                  <div className="flex-auto flex flex-col">
-                    <label className="text-start text-base">
-                      Select Account
-                    </label>
-                    <input className="bg-transparent border border-gray-800 dark:border-slate-300 rounded-md focus:outline-none focus:ring-0 outline-none p-2" />
-                  </div>
-                </form>
-                <div className="flex justify-end gap-4">
-                  <button
-                    className="px-4 py-2 border border-brand-color text-gray-800 dark:text-slate-300 rounded-md"
-                    onClick={() => setOpenAddContactModal(false)}
-                  >
-                    Cancel
-                  </button>
-                  <button
-                    className="px-4 py-2 bg-brand-color rounded-md text-slate-300"
-                    onClick={() => setOpenAddContactModal(false)}
-                  >
-                    Add +
-                  </button>
-                </div>
-              </div> */}
-            </Modal.Body>
-          </Modal>
-          <Modal
-            show={openEditContactModal.show}
-            onClose={() => {
-              setOpenEditContactModal({ show: false, data: null });
-              setEditContactData((prevData) => ({
-                ...prevData,
-                id: null,
-                json: {
-                  name: "",
-                  email: "",
-                  group: "",
-                },
-              }));
-              setInitialEditContactData((prevData) => ({
-                ...prevData,
-                id: null,
-                json: {
-                  name: "",
-                  email: "",
-                  group: "",
-                },
-              }));
-            }}
-          >
-            <Modal.Header className="dark:bg-dark-glass bg-violet-50 dark:text-slate-300 text-dark-black">
-              Edit Contact
-            </Modal.Header>
-            <Modal.Body className="dark:bg-dark-black bg-violet-50">
-              <div>
-                <Label htmlFor="name" value="Edit name" />
-                <TextInput
-                  id="name"
-                  placeholder="name@company.com"
-                  value={editContactData.json.name || ""}
-                  onChange={(event) =>
-                    handleEditContactDataChange("name", event.target.value)
-                  }
-                  required
-                />
-              </div>
-              <div>
-                <Label htmlFor="email" value="Edit email" />
-                <TextInput
-                  id="email"
-                  placeholder="name@company.com"
-                  value={editContactData.json.email || ""}
-                  onChange={(event) =>
-                    handleEditContactDataChange("email", event.target.value)
-                  }
-                  required
-                />
-              </div>
-              <div>
-                <Label htmlFor="group" value="Edit group" />
-                <TextInput
-                  id="group"
-                  placeholder="Group Name"
-                  value={editContactData.json.group || ""}
-                  onChange={(event) =>
-                    handleEditContactDataChange("group", event.target.value)
-                  }
-                  required
-                />
-              </div>
-              <div className="flex items-center justify-end mt-6 gap-4">
-                <button
-                  disabled={!hasChanges()}
-                  className="px-4 py-2 bg-brand-color rounded-md disabled:opacity-20"
-                  onClick={() => {
-                    setUpdateLoading(true);
-                    onUpdate();
-                  }}
-                >
-                  {updateLoading ? (
-                    <Spinner
-                      color="purple"
-                      aria-label="Purple spinner example"
-                      size="xl"
-                    />
-                  ) : (
-                    "Update"
-                  )}
-                </button>
-                <button
-                  className="px-4 py-2 border border-brand-color rounded-md dark:text-slate-300 text-dark-black"
-                  onClick={() =>
-                    setOpenEditContactModal({ show: false, data: null })
-                  }
-                >
-                  Cancel
-                </button>
-              </div>
             </Modal.Body>
           </Modal>
         </div>

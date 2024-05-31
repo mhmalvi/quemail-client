@@ -9,7 +9,7 @@ export const infoNotification = (e: string) => toast.info(e);
 export const customTheme: CustomFlowbiteTheme = {
   modal: {
     root: {
-      base: "fixed inset-x-0 top-0 z-50 h-screen overflow-y-auto overflow-x-hidden md:inset-0 md:h-full",
+      base: "fixed inset-x-0 top-0 z-50 h-screen w-screen overflow-y-auto overflow-x-hidden md:inset-0 md:h-full",
       show: {
         on: "flex bg-dark-glass bg-opacity-50 dark:bg-opacity-80 backdrop-blur-md",
         off: "hidden",
@@ -18,7 +18,7 @@ export const customTheme: CustomFlowbiteTheme = {
     content: {
       base: "relative h-full w-full p-4 md:h-auto",
       inner:
-        "relative flex h-full flex-col rounded-lg bg-violet-50 shadow dark:bg-[#171717]",
+        "relative flex h-full w-full flex-col rounded-lg bg-violet-50 shadow dark:bg-[#171717]",
     },
 
     header: {
