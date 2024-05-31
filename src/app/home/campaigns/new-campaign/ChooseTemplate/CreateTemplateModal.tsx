@@ -17,13 +17,13 @@ const CreateTemplateModal: React.FC<SelectTemplateProps> = ({
       dismissible
       show={chooseTemplate === "create"}
       onClose={() => setChooseTemplate("")}
-      size={"7xl"}
+      size={"9xl"}
       className="h-screen"
     >
       <Modal.Header className="dark:bg-dark-glass bg-violet-50 text-slate-300 ">
         Create a template
       </Modal.Header>
-      <Modal.Body className="dark:bg-dark-black bg-violet-50 text-slate-300 h-[calc(100vh-100px)] overflow-y-auto">
+      <Modal.Body className="dark:bg-dark-black bg-violet-50 text-slate-300 h-[calc(100vh-100px)] w-full left-0 overflow-y-auto">
         <Editor />
       </Modal.Body>
     </Modal>

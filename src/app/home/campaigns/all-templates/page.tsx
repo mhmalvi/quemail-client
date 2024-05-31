@@ -183,7 +183,7 @@ const AllTemplates = () => {
           setOpenTemplateModal(false);
           setSelectedTemplate(null);
         }}
-        size={"7xl"}
+        size={"9xl"}
         className="h-screen"
       >
         <Modal.Header className="dark:bg-dark-glass bg-violet-50 text-slate-300 ">

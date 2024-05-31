@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
 import CampaignInfo from "./CampaignInfo";
 import RecipientSelection from "./RecipientSelection";
 import Scheduler from "./Scheduler";
@@ -7,11 +7,11 @@ import ChooseTemplate from "./ChooseTemplate/ChooseTemplate";
 import { campaignStore } from "@/store/store";
 import { Modal, Table } from "flowbite-react";
 
-const NewCampaign = () => {
+export const NewCampaign = () => {
   const newCampaign = campaignStore((state) => state.newCampaign);
   const viewRecipients = campaignStore((state) => state.viewRecipients);
   const setViewRecipients = campaignStore((state) => state.setViewRecipients);
-  console.log(newCampaign);
+  console.log();
   return (
     <div className="relative w-full h-full dark:bg-dark-glass shadow-md backdrop-blur-2xl bg-white rounded-md p-4 flex flex-col gap-4 overflow-hidden">
       <div className="w-full flex items-center justify-between">
@@ -118,5 +118,3 @@ const NewCampaign = () => {
     </div>
   );
 };
-
-export default NewCampaign;

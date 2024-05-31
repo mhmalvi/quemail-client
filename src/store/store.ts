@@ -1,6 +1,6 @@
 "use client";
 
-import NewCampaign from "@/app/home/campaigns/new-campaign/page";
+import NewCampaign from "@/app/home/campaigns/new-campaign/NewCampaign";
 import {
   CampaignStoreState,
   ContactStoreState,
