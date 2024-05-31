@@ -11,20 +11,19 @@ import Groups from "./Groups";
 import ContactTable from "./ContactTable";
 
 const AllContacts = () => {
+  const groupContacts = contactStore((state) => state.groupContacts);
+  const allContactList = contactStore((state) => state.allContactList);
+  const totalPages = contactStore((state) => state.totalPages);
+  const setAllContactList = contactStore((state) => state.setAllContactList);
+  const setTotalPages = contactStore((state) => state.setTotalPages);
   const [currentPage, setCurrentPage] = useState(1);
   const onPageChange = (page: number) => setCurrentPage(page);
   const [openModal, setOpenModal] = useState({
     show: "",
   });
-  console.log(openModal);
   const [openAddContactModal, setOpenAddContactModal] =
     useState<boolean>(false);
 
-  const [totalPages, setTotalPages] = useState<number>(0);
-
-  const groupContacts = contactStore((state) => state.groupContacts);
-  const allContactList = contactStore((state) => state.allContactList);
-  const setAllContactList = contactStore((state) => state.setAllContactList);
   useEffect(() => {
     (async () => {
       try {
@@ -37,7 +36,7 @@ const AllContacts = () => {
         console.log(error);
       }
     })();
-  }, [currentPage, setAllContactList]);
+  }, [currentPage, setAllContactList, setTotalPages]);
 
   return (
     <>
@@ -95,7 +94,11 @@ const AllContacts = () => {
             </div>
           </div>
 
-          <ContactTable onPageChange={onPageChange} currentPage={currentPage} totalPages={totalPages}/>
+          <ContactTable
+            onPageChange={onPageChange}
+            currentPage={currentPage}
+            totalPages={totalPages}
+          />
 
           <Modal
             dismissible

@@ -17,17 +17,18 @@ const MainEditor = () => {
   const router = useRouter();
   const userID =
     typeof window !== "undefined" && localStorage.getItem("userID");
-  const [data, setData] = useState({
-    template: "",
-    name: "",
-    user_id: userID,
-  });
+
   const [saveClicked, setSaveClicked] = useState<boolean>(false);
   const themes = themeStore((state: any) => state.theme);
   const templateData = campaignStore((state) => state.templateData);
   const selectedTemplate = campaignStore((state) => state.selectedTemplate);
   const emailEditorRef = useRef<EditorRef>(null);
 
+  const [data, setData] = useState({
+    template: "",
+    name: selectedTemplate?.name || null,
+    user_id: userID,
+  });
   const optionsDark = {
     appearance: {
       theme: "dark",
@@ -98,7 +99,7 @@ const MainEditor = () => {
   return (
     <div className="h-full w-full flex flex-col gap-4 overflow-hidden rounded-md ">
       <div className="flex items-center justify-between w-full pl-2">
-        <div className="flex gap-4 items-center">
+        <div className="flex gap-16 items-center w-1/2">
           <input
             onChange={(e) => {
               setData((prev) => ({
@@ -106,8 +107,9 @@ const MainEditor = () => {
                 name: e.target.value,
               }));
             }}
+            defaultValue={data.name as any}
             placeholder="Enter template name here"
-            className="w-full px-4 py-1 rounded-md bg-transparent text-dark-black border dark:border-light-glass shadow-md dark:text-slate-300"
+            className="w-1/3 px-4 py-1 rounded-md bg-transparent text-dark-black border dark:border-light-glass shadow-md dark:text-slate-300"
           />
           <Tooltip
             content="Copy from available shortcodes into template"
@@ -117,11 +119,14 @@ const MainEditor = () => {
               label="Actions"
               placement="bottom-start"
               renderTrigger={() => (
-                <Image
-                  src={Images.Copy}
-                  alt="copy"
-                  className="cursor-pointer w-16 bg-brand-color p-2 rounded-md fill-dark-black"
-                />
+                <div className="cursor-pointer flex items-center gap-4 bg-brand-color px-4 py-1 rounded-md">
+                  <h1>Select dynamic headers</h1>
+                  <Image
+                    src={Images.Copy}
+                    alt="copy"
+                    className="w-8 rounded-md fill-dark-black"
+                  />
+                </div>
               )}
             >
               {fields.map((items: any, index: number) => {

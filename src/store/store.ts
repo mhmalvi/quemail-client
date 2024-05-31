@@ -1,6 +1,5 @@
 "use client";
 
-import NewCampaign from "@/app/home/campaigns/new-campaign/NewCampaign";
 import {
   CampaignStoreState,
   ContactStoreState,
@@ -45,12 +44,14 @@ export const contactStore = create<ContactStoreState>((set) => ({
   allContactList: null,
   groupData: null,
   groupContacts: null,
+  totalPages: null,
   setAllContactList: (contactData) =>
     set(() => ({ allContactList: contactData })),
   setCsvData: (csvData: any[]) => set(() => ({ csvData: csvData })),
   setHasData: (state: boolean) => set(() => ({ hasData: state })),
   setGroupData: (groupData) => set(() => ({ groupData: groupData })),
   setGroupContacts: (data) => set(() => ({ groupContacts: data })),
+  setTotalPages: (data) => set(() => ({ totalPages: data })),
 }));
 
 export const campaignStore = create<CampaignStoreState>((set) => ({
