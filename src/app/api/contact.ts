@@ -136,7 +136,9 @@ export const fetchGroupList = async () => {
   }
 };
 
-export const fetchGroupItems = async (data: string | null) => {
+export const fetchGroupItems = async (
+  data: string | null,
+) => {
   const token = typeof window !== "undefined" && localStorage.getItem("token");
   const parsedToken = token && JSON.parse(token);
   const userID =

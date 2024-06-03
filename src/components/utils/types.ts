@@ -1,4 +1,3 @@
-
 export interface DashboardLayoutProps {
   children: React.ReactNode;
   backgroundImage: string;
@@ -75,13 +74,14 @@ export type ContactStoreState = {
   groupContacts: [ContactType] | null;
   allContactList: [ContactType] | null;
   totalPages: number | null;
+  currentPage:number;
   setAllContactList: (contactData: [ContactType] | null) => void;
-
   setCsvData: (csvData: any[]) => void;
   setHasData: (state: boolean) => void;
   setGroupData: (data: [string] | null) => void;
   setGroupContacts: (data: [ContactType] | null) => void;
   setTotalPages: (data: number | null) => void;
+  setCurrentPage: (data: number) => void;
 };
 
 export type CampaignInfoType = {

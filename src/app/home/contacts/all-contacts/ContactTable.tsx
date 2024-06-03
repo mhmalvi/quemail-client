@@ -23,7 +23,7 @@ import {
 } from "@/components/utils/utility";
 import { destroyContact, updateContact } from "@/app/api/contact";
 
-const ContactTable = ({onPageChange,currentPage,totalPages}:any) => {
+const ContactTable = ({ onPageChange, currentPage, totalPages }: any) => {
   const groupContacts = contactStore((state) => state.groupContacts);
   const allContactList = contactStore((state) => state.allContactList);
   const userID =
@@ -109,7 +109,7 @@ const ContactTable = ({onPageChange,currentPage,totalPages}:any) => {
       warningNotification("Something went wrong. Please try again.");
     }
   };
-  
+
   return (
     <>
       <div className="flex flex-col gap-4 h-5/6 overflow-auto">
@@ -145,11 +145,11 @@ const ContactTable = ({onPageChange,currentPage,totalPages}:any) => {
                       <Checkbox />
                     </Table.Cell>
                     <Table.Cell className="font-medium text-gray-900 dark:text-white">
-                      {items.json.name}
+                      {/* {items.json.name} */}
                     </Table.Cell>
-                    <Table.Cell>{items.json.email}</Table.Cell>
+                    {/* <Table.Cell>{items.json.email}</Table.Cell> */}
                     <Table.Cell>-</Table.Cell>
-                    <Table.Cell>{items.json.group}</Table.Cell>
+                    {/* <Table.Cell>{items.json.group}</Table.Cell> */}
                     <Table.Cell>-</Table.Cell>
                     <Table.Cell className="w-full flex items-center justify-center gap-8">
                       <Image
@@ -286,13 +286,13 @@ const ContactTable = ({onPageChange,currentPage,totalPages}:any) => {
       </div>
       <div className="w-full flex items-center justify-center rounded-md">
         <Pagination
-              layout="pagination"
-              currentPage={currentPage}
-              totalPages={totalPages}
-              onPageChange={onPageChange}
-              previousLabel="<"
-              nextLabel=">"
-            />
+          layout="pagination"
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={onPageChange}
+          previousLabel="<"
+          nextLabel=">"
+        />
       </div>
       <Modal
         show={openEditContactModal.show}

@@ -164,7 +164,7 @@ const MainEditor = () => {
           </button>
         </div>
       </div>
-      <div className="xl:h-[79dvh] h-[65dvh] flex items-center justify-center">
+      <div className="xl:h-[78dvh] h-[65dvh] flex items-center justify-center">
         <EmailEditor
           ref={emailEditorRef}
           onReady={onReady}

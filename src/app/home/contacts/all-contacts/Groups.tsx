@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Dropdown } from "flowbite-react";
-import { fetchGroupItems, fetchGroupList } from "@/app/api/contact";
+import {
+  fetchContact,
+  fetchGroupItems,
+  fetchGroupList,
+} from "@/app/api/contact";
 import { warningNotification } from "@/components/utils/utility";
 import { contactStore } from "@/store/store";
 
@@ -9,7 +13,8 @@ const Groups = () => {
   const setGroupData = contactStore((state) => state.setGroupData);
   const groupContacts = contactStore((state) => state.groupContacts);
   const setGroupContacts = contactStore((state) => state.setGroupContacts);
-  // const setTotalPages = contactStore((state) => state.setTotalPages);
+  const setTotalPages = contactStore((state) => state.setTotalPages);
+  const currentPage = contactStore((state) => state.currentPage);
 
   useEffect(() => {
     (async () => {
@@ -30,7 +35,7 @@ const Groups = () => {
     if (groupName !== null) {
       const res = await fetchGroupItems(groupName);
       if (res.status === 200) {
-        // setTotalPages(res.contacts.length < 7 ? 1 : res.contacts.length % 8);
+        setTotalPages(res.totalPages);
         setGroupContacts(res.contacts);
       } else if (res.status === 422) {
         warningNotification(res.message);
@@ -71,7 +76,7 @@ const Groups = () => {
           ))}
         <Dropdown.Item
           className="dark:text-slate-300 text-light-black hover:text-slate-700"
-          onClick={() => handleFetchGroup(null)}
+          onClick={() => window.location.reload()}
         >
           Clear
         </Dropdown.Item>
@@ -81,3 +86,4 @@ const Groups = () => {
 };
 
 export default Groups;
+
