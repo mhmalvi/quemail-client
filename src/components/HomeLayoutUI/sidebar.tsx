@@ -165,9 +165,14 @@ const Sidebar = () => {
         <Dropdown.Item className="dark:text-slate-300 text-light-black hover:text-gray-800">
           Security
         </Dropdown.Item>
-        <Dropdown.Item className="dark:text-slate-300 text-light-black hover:text-gray-800">
-          Privacy Policy
-        </Dropdown.Item>
+        <Link
+          href="/home/privacy-policy"
+          className="focus:outline-none focus:ring-0 active:outline-none active:ring-0"
+        >
+          <Dropdown.Item className="dark:text-slate-300 text-light-black hover:text-gray-800">
+            Privacy Policy
+          </Dropdown.Item>
+        </Link>
       </Dropdown>
     </div>
   );

@@ -1,12 +1,11 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { Pagination, Modal, Dropdown } from "flowbite-react";
+import { Modal, Dropdown } from "flowbite-react";
 import NoContacts from "../../../../components/HomeLayoutUI/NoContacts";
 import ImportCSV from "./ImportCSV";
 import { contactStore } from "@/store/store";
 import { fetchContact } from "@/app/api/contact";
 import Images from "@/components/utils/images";
-
 import Groups from "./Groups";
 import ContactTable from "./ContactTable";
 
@@ -16,7 +15,8 @@ const AllContacts = () => {
   const totalPages = contactStore((state) => state.totalPages);
   const setAllContactList = contactStore((state) => state.setAllContactList);
   const setTotalPages = contactStore((state) => state.setTotalPages);
-  const [currentPage, setCurrentPage] = useState(1);
+  const currentPage = contactStore((state) => state.currentPage);
+  const setCurrentPage = contactStore((state) => state.setCurrentPage);
   const onPageChange = (page: number) => setCurrentPage(page);
   const [openModal, setOpenModal] = useState({
     show: "",

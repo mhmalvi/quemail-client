@@ -17,12 +17,17 @@ interface MailAdded {
 const CampaignInfo = () => {
   const newCampaign = campaignStore((state) => state.newCampaign);
   const setNewCampaign = campaignStore((state) => state.setNewCampaign);
+  const [mailAdded, setMailAdded] = useState<MailAdded | null>(null);
 
   const [subject, setSubject] = useState("");
   const [name, setName] = useState("");
-  const [mail, setMail] = useState("");
-
-  const handleInformation = (subject: string, name: string, mail: string) => {
+  const [mail, setMail] = useState<string | null>("");
+  console.log(newCampaign);
+  const handleInformation = (
+    subject: string,
+    name: string,
+    mail: string | null
+  ) => {
     setNewCampaign((prev: any | null) => ({
       ...prev,
       campaignInfo: {
@@ -45,13 +50,6 @@ const CampaignInfo = () => {
     handleInformation(subject, newName, mail);
   };
 
-  const handleMailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newMail = e.target.value;
-    setMail(newMail);
-    handleInformation(subject, name, newMail);
-  };
-  const [mailAdded, setMailAdded] = useState<MailAdded | null>(null);
-
   useEffect(() => {
     (async () => {
       const res = await fetchAddedMail();
@@ -67,7 +65,9 @@ const CampaignInfo = () => {
       }
     })();
   }, []);
-  console.log(mailAdded);
+  const handleItemSelect = (e: string | null) => {
+    setMail(e);
+  };
   return (
     <div className="relative w-1/3 h-full flex flex-col p-4 dark:bg-dark-glass bg-violet-50 rounded-md shadow-md border dark:border-none gap-4">
       <h1 className="xl:text-xl text-brand-color font-semibold">
@@ -105,41 +105,35 @@ const CampaignInfo = () => {
             placement="bottom-start"
             renderTrigger={() => (
               <div className="disabled:opacity-50 cursor-pointer flex items-center justify-between text-sm w-full px-4 xl:py-2 py-1 bg-transparent duration-200 ease-in-out rounded-md border dark:border-dark-glass shadow-md dark:text-slate-300 text-dark-black">
-                Select from Mail
-                <span>▼</span>
+                {mail ? (
+                  <span>{mail}</span>
+                ) : (
+                  <>
+                    Select from Mail
+                    <span>▼</span>
+                  </>
+                )}
               </div>
             )}
           >
             {mailAdded && mailAdded.google !== null && (
               <Dropdown.Item
                 className="dark:text-slate-300 text-light-black hover:text-gray-800"
-                // onClick={() => {
-                //   // navigator.clipboard.writeText(`{${items.label}}`);
-                //   successNotification(
-                //     `${items.label} copied to clipboard as {${items.label}}`
-                //   );
-                // }}
+                onClickCapture={(e: any) => {
+                  handleItemSelect(e.target.textContent);
+                }}
               >
                 {mailAdded.google?.email}
               </Dropdown.Item>
             )}
-            {/* {fields.map((items: any, index: number) => {
-                return (
-                  <div key={index}>
-                    <Dropdown.Item
-                      className="dark:text-slate-300 text-light-black hover:text-gray-800"
-                      onClick={() => {
-                        navigator.clipboard.writeText(`{${items.label}}`);
-                        successNotification(
-                          `${items.label} copied to clipboard as {${items.label}}`
-                        );
-                      }}
-                    >
-                      {items?.label}
-                    </Dropdown.Item>
-                  </div>
-                );
-              })} */}
+            <Dropdown.Item
+              className="dark:text-slate-300 text-light-black hover:text-gray-800"
+              onClick={() => {
+                setMail("");
+              }}
+            >
+              Clear
+            </Dropdown.Item>
           </Dropdown>
         ) : (
           <h1 className="text-sm dark:text-slate-300 text-dark-black">
