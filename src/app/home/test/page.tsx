@@ -1,5 +1,8 @@
 "use client";
-import { successNotification, warningNotification } from "@/components/utils/utility";
+import {
+  successNotification,
+  warningNotification,
+} from "@/components/utils/utility";
 import React, { useState } from "react";
 
 const Test = () => {
@@ -14,18 +17,22 @@ const Test = () => {
     setSuccess(null);
     try {
       console.log(data);
-      const result = await fetch(`https://backend.quemailer.com/google/send-email`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          to: data.to,
-          from: data.from,
-          subject: data.subject,
-          text: data.text,
-        }),
-      });
+      const result = await fetch(
+        `https://backend.quemailer.com/google/send-email`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            to: data.to,
+            from: data.from,
+            subject: data.subject,
+            text: data.text,
+          }),
+        }
+      );
+      console.log(result);
       if (result.ok) {
         const responseData = await result.json();
         successNotification("Email sent successfully!");
@@ -35,7 +42,7 @@ const Test = () => {
         warningNotification(`Error: ${errorData.message}`);
         return null;
       }
-    } catch (error:any) {
+    } catch (error: any) {
       warningNotification(`Error: ${error.message}`);
       return null;
     } finally {
