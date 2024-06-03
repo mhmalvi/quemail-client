@@ -23,12 +23,15 @@ import {
 } from "@/components/utils/utility";
 import { destroyContact, updateContact } from "@/app/api/contact";
 
-const ContactTable = ({ onPageChange, currentPage, totalPages }: any) => {
+const ContactTable = () => {
   const groupContacts = contactStore((state) => state.groupContacts);
   const allContactList = contactStore((state) => state.allContactList);
+  const setCurrentPage = contactStore((state) => state.setCurrentPage);
+  const currentPage = contactStore((state) => state.currentPage);
+  const totalPages = contactStore((state) => state.totalPages);
   const userID =
     typeof window !== "undefined" && localStorage.getItem("userID");
-
+  const onPageChange = (page: number) => setCurrentPage(page);
   const [selectAllChecked, setSelectAllChecked] = useState(false);
   const [updateLoading, setUpdateLoading] = useState(false);
   const [editContactData, setEditContactData] = useState<EditContactData>({
@@ -145,11 +148,11 @@ const ContactTable = ({ onPageChange, currentPage, totalPages }: any) => {
                       <Checkbox />
                     </Table.Cell>
                     <Table.Cell className="font-medium text-gray-900 dark:text-white">
-                      {/* {items.json.name} */}
+                      {items.json.name}
                     </Table.Cell>
-                    {/* <Table.Cell>{items.json.email}</Table.Cell> */}
+                    <Table.Cell>{items.json.email}</Table.Cell>
                     <Table.Cell>-</Table.Cell>
-                    {/* <Table.Cell>{items.json.group}</Table.Cell> */}
+                    <Table.Cell>{items.json.group}</Table.Cell>
                     <Table.Cell>-</Table.Cell>
                     <Table.Cell className="w-full flex items-center justify-center gap-8">
                       <Image

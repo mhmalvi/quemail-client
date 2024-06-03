@@ -12,12 +12,9 @@ import ContactTable from "./ContactTable";
 const AllContacts = () => {
   const groupContacts = contactStore((state) => state.groupContacts);
   const allContactList = contactStore((state) => state.allContactList);
-  const totalPages = contactStore((state) => state.totalPages);
   const setAllContactList = contactStore((state) => state.setAllContactList);
   const setTotalPages = contactStore((state) => state.setTotalPages);
   const currentPage = contactStore((state) => state.currentPage);
-  const setCurrentPage = contactStore((state) => state.setCurrentPage);
-  const onPageChange = (page: number) => setCurrentPage(page);
   const [openModal, setOpenModal] = useState({
     show: "",
   });
@@ -95,9 +92,7 @@ const AllContacts = () => {
           </div>
 
           <ContactTable
-            onPageChange={onPageChange}
-            currentPage={currentPage}
-            totalPages={totalPages}
+            
           />
 
           <Modal

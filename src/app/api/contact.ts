@@ -138,6 +138,7 @@ export const fetchGroupList = async () => {
 
 export const fetchGroupItems = async (
   data: string | null,
+  page: number
 ) => {
   const token = typeof window !== "undefined" && localStorage.getItem("token");
   const parsedToken = token && JSON.parse(token);
@@ -155,6 +156,8 @@ export const fetchGroupItems = async (
         body: JSON.stringify({
           user_id: userID,
           group: data,
+          page: page,
+          per_page: 8,
         }),
       }
     );
