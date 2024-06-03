@@ -38,8 +38,11 @@ const HomeLayout = ({ children }: { children: React.ReactNode }) => {
         className={`flex h-screen w-full dark:bg-dark-black bg-violet-50 bg-cover bg-center	`}
       >
         <Sidebar />
+        <div className="flex sm:hidden h-screen w-full items-center justify-center ">
+          Please use a desktop or pc to use the features.
+        </div>
         <div
-          className={`relative p-4 flex flex-col gap-4 w-full overflow-hidden`}
+          className={`hidden relative p-4 sm:flex flex-col gap-4 w-full overflow-hidden`}
         >
           <Topnav />
           {children}

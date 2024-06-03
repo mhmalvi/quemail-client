@@ -33,8 +33,9 @@ const Groups = () => {
 
   const handleFetchGroup = async (groupName: string | null) => {
     if (groupName !== null) {
-      const res = await fetchGroupItems(groupName);
+      const res = await fetchGroupItems(groupName, currentPage);
       if (res.status === 200) {
+        console.log(res)
         setTotalPages(res.totalPages);
         setGroupContacts(res.contacts);
       } else if (res.status === 422) {
@@ -86,4 +87,3 @@ const Groups = () => {
 };
 
 export default Groups;
-

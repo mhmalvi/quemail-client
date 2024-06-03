@@ -44,7 +44,7 @@ export const contactStore = create<ContactStoreState>((set) => ({
   allContactList: null,
   groupData: null,
   groupContacts: null,
-  totalPages: null,
+  totalPages: 1,
   currentPage: 1,
   setAllContactList: (contactData) =>
     set(() => ({ allContactList: contactData })),
