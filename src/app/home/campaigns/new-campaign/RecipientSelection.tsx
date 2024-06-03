@@ -35,7 +35,7 @@ const RecipientSelection = () => {
   const handleAddRecipients = async (groupName: string | null) => {
     if (groupName) {
       try {
-        const res = await fetchGroupItems(groupName);
+        const res = await fetchGroupItems(groupName, 1);
         if (res.status === 200) {
           const updateRecipients = res.contacts.map(
             (recipient: ContactType) => ({
