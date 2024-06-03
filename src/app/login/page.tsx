@@ -32,7 +32,8 @@ const Login = () => {
     loading: false,
   });
 
-  const handleEmailCheck = async () => {
+  const handleEmailCheck = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
     setStepTwo((prevData) => ({
       ...prevData,
       loading: true,
@@ -94,7 +95,10 @@ const Login = () => {
               <h1 className="m-0 p-0 text-slate-400">or</h1>
               <div className="w-full h-0.5 bg-slate-400"></div>
             </div>
-            <form className="flex flex-col gap-4 w-full">
+            <form
+              className="flex flex-col gap-4 w-full"
+              onSubmit={handleEmailCheck}
+            >
               <div className="flex flex-col gap-2 w-full">
                 <label className="text-slate-300">Email</label>
                 <input
@@ -114,9 +118,8 @@ const Login = () => {
                 </div>
               ) : (
                 <button
-                  type="button"
+                  type="submit"
                   disabled={credentialsData.email.length === 0}
-                  onClick={handleEmailCheck}
                   className="disabled:opacity-20 rounded-md w-full px-4 py-2 bg-gradient-to-r from-brand-color to-button-color-2 text-slate-300"
                 >
                   Next
