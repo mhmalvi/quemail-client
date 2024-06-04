@@ -22,8 +22,6 @@ const RecipientSelection = () => {
           const res = await fetchGroupList();
           if (res?.status === 200) {
             setGroupData(res.groups);
-          } else {
-            warningNotification(res.message);
           }
         } catch (error) {
           console.log(error);
@@ -93,7 +91,7 @@ const RecipientSelection = () => {
   };
 
   return (
-    <div className="relative w-1/3 h-full flex flex-col p-4 dark:bg-dark-glass bg-violet-50 rounded-md shadow-md border dark:border-none gap-4">
+    <div className="relative w-full h-full flex flex-col p-4 dark:bg-dark-glass bg-violet-50 rounded-md shadow-md border dark:border-none gap-4">
       <div className="xl:text-xl text-brand-color font-semibold flex items-center justify-between">
         <h1>Recipient Selection</h1>
         {newCampaign?.recipient && (
@@ -133,12 +131,13 @@ const RecipientSelection = () => {
             <p className="m-0 p-0 dark:text-slate-300 text-dark-black text-sm">
               Who are you sending this campaign to?
             </p>
-            <div className="flex flex-col gap-4">
-              <button className="xl:px-4 xl:py-2 px-2 py-1 xl:text-base text-sm bg-brand-color rounded-md text-slate-50">
+            <div className="flex flex-col items-center justify-between h-full gap-4">
+              <button className="h-full w-full xl:px-4 xl:py-2 px-2 py-1 xl:text-base text-sm bg-brand-color rounded-md text-slate-50">
                 Select from all contacts
               </button>
+              <span className="dark:text-slate-300 text-dark-black">- or -</span>
               <button
-                className="xl:px-4 xl:py-2 px-2 py-1 xl:text-base text-sm bg-brand-color rounded-md text-slate-50 disabled:opacity-20"
+                className="h-full w-full xl:px-4 xl:py-2 px-2 py-1 xl:text-base text-sm bg-brand-color rounded-md text-slate-50 disabled:opacity-20"
                 onClick={() => setOpenGroupModal(true)}
                 disabled={!groupData}
               >
