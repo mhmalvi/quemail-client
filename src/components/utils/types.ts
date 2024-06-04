@@ -108,6 +108,7 @@ export type CampaignStoreState = {
   templateData: [TemplateType] | null;
   selectedTemplate: TemplateType | null;
   viewRecipients: boolean;
+  viewSchedule: boolean;
   setNewCampaign: (
     data:
       | NewCampaignType
@@ -116,6 +117,7 @@ export type CampaignStoreState = {
   setSelectedTemplate: (data: TemplateType | null) => void;
   setTemplateData: (data: [TemplateType]) => void;
   setViewRecipients: (state: boolean) => void;
+  setViewSchedule: (state: boolean) => void;
 };
 
 // API TYPES

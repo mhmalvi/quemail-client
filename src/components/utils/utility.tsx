@@ -89,4 +89,74 @@ export const customTheme: CustomFlowbiteTheme = {
       },
     },
   },
+  datepicker: {
+    root: {
+      base: "relative w-full",
+    },
+    popup: {
+      root: {
+        base: "absolute top-10 z-50 block pt-2 w-full",
+        inline: "relative top-0 z-auto",
+        inner:
+          "inline-block rounded-lg shadow-none dark:bg-transparent bg-transparent w-full",
+      },
+      header: {
+        selectors: {
+          button: {
+            base: "rounded-lg bg-white px-5 py-2.5 text-sm font-semibold text-gray-900 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-light-glass dark:bg-dark-glass dark:text-slate-300 dark:hover:bg-light-glass",
+          },
+        },
+      },
+      footer: {
+        base: "mt-2 flex space-x-2",
+        button: {
+          base: "w-full rounded-lg px-5 py-2 text-center text-sm font-medium focus:ring-4 focus:ring-light-glass",
+          today:
+            "bg-brand-color text-white hover:bg-brand-color/80 dark:bg-brand-color dark:hover:bg-brand-color/80",
+        },
+      },
+    },
+    views: {
+      days: {
+        items: {
+          base: "grid w-full grid-cols-7",
+          item: {
+            base: "block flex-1 cursor-pointer rounded-lg border-0 text-center text-sm font-semibold leading-9 text-gray-900 hover:bg-violet-50 dark:text-white dark:hover:bg-light-black ",
+            selected: "bg-brand-color text-white hover:bg-cyan-600",
+            disabled: "text-gray-500",
+          },
+        },
+      },
+      months: {
+        items: {
+          base: "grid w-full grid-cols-4",
+          item: {
+            base: "block flex-1 cursor-pointer rounded-lg border-0 text-center text-sm font-semibold leading-9 text-gray-900 hover:bg-violet-50 dark:text-white dark:hover:bg-light-black ",
+            selected: "bg-brand-color text-white hover:bg-cyan-600",
+            disabled: "text-gray-500",
+          },
+        },
+      },
+      years: {
+        items: {
+          base: "grid w-full grid-cols-4",
+          item: {
+            base: "block flex-1 cursor-pointer rounded-lg border-0 text-center text-sm font-semibold leading-9 text-gray-900 hover:bg-violet-50 dark:text-white dark:hover:bg-light-black ",
+            selected: "bg-brand-color text-white hover:bg-cyan-600",
+            disabled: "text-gray-500",
+          },
+        },
+      },
+      decades: {
+        items: {
+          base: "grid w-full grid-cols-4",
+          item: {
+            base: "block flex-1 cursor-pointer rounded-lg border-0 text-center text-sm font-semibold leading-9 text-gray-900 hover:bg-violet-50 dark:text-white dark:hover:bg-light-black ",
+            selected: "bg-brand-color text-white hover:bg-cyan-600",
+            disabled: "text-gray-500",
+          },
+        },
+      },
+    },
+  },
 };

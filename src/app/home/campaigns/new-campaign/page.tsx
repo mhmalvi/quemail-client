@@ -5,13 +5,15 @@ import RecipientSelection from "./RecipientSelection";
 import Scheduler from "./Scheduler";
 import ChooseTemplate from "./ChooseTemplate/ChooseTemplate";
 import { campaignStore } from "@/store/store";
-import { Modal, Table } from "flowbite-react";
+import { Dropdown, Modal, Table } from "flowbite-react";
 
 const NewCampaign = () => {
   const newCampaign = campaignStore((state) => state.newCampaign);
   const viewRecipients = campaignStore((state) => state.viewRecipients);
   const setViewRecipients = campaignStore((state) => state.setViewRecipients);
-  console.log(newCampaign);
+  const setViewSchedule = campaignStore((state) => state.setViewSchedule);
+  const viewSchedule = campaignStore((state) => state.viewSchedule);
+
   return (
     <div className="relative w-full h-full dark:bg-dark-glass shadow-md backdrop-blur-2xl bg-white rounded-md p-4 flex flex-col gap-4 overflow-hidden">
       <div className="w-full flex items-center justify-between">
@@ -61,23 +63,41 @@ const NewCampaign = () => {
             Schedule {newCampaign?.schedule !== null && <span>✔</span>}
           </h1>
         </div>
-        <div className="flex gap-8 items-center">
+        <div className="flex gap-4 items-center">
           <button className="xl:py-2 xl:px-4 py-1 px-2 xl:text-base text-sm dark:text-slate-300 text-dark-black rounded-md border border-brand-color ">
             Save & Exit
           </button>
-          <button className="xl:py-2 xl:px-4 py-1 px-2 xl:text-base text-sm text-slate-50 rounded-md bg-brand-color duration-300 ease-in">
-            Run campaign Now
-          </button>
+          <Dropdown
+            label="Actions"
+            placement="bottom-start"
+            renderTrigger={() => (
+              <div className="px-4 py-2 bg-brand-color rounded-md cursor-pointer">
+                <h1 className="m-0 p-0">Start Campaign</h1>
+              </div>
+            )}
+          >
+            <Dropdown.Item>Run campaign Now</Dropdown.Item>
+            <Dropdown.Item
+              onClick={() => {
+                setViewSchedule(!viewSchedule);
+              }}
+            >
+              Schedule Campaign
+            </Dropdown.Item>
+          </Dropdown>
         </div>
       </div>
-      <div className="flex flex-col justify-between gap-4 h-full">
-        <ChooseTemplate />
-        <div className="flex h-full gap-4">
-          <CampaignInfo />
-          <RecipientSelection />
-          <Scheduler />
+      <div className="flex  justify-between gap-4 h-full">
+        <div className="flex flex-col gap-4 w-full">
+          <ChooseTemplate />
+          <div className="flex w-full h-full gap-4">
+            <CampaignInfo />
+            <RecipientSelection />
+          </div>
         </div>
+        <Scheduler />
       </div>
+
       <Modal
         dismissible
         show={viewRecipients}

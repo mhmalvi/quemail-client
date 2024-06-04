@@ -62,6 +62,7 @@ export const contactStore = create<ContactStoreState>((set) => ({
 
 export const campaignStore = create<CampaignStoreState>((set) => ({
   viewRecipients: false,
+  viewSchedule:false,
   newCampaign: {
     template: null,
     campaignInfo: null,
@@ -82,4 +83,5 @@ export const campaignStore = create<CampaignStoreState>((set) => ({
   setSelectedTemplate: (data) => set(() => ({ selectedTemplate: data })),
   setTemplateData: (data) => set(() => ({ templateData: data })),
   setViewRecipients: (state) => set(() => ({ viewRecipients: state })),
+  setViewSchedule: (state) => set(() => ({ viewSchedule: state })),
 }));

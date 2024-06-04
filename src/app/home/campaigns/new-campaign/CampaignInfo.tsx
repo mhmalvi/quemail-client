@@ -1,12 +1,15 @@
 "use client";
 import { fetchAddedMail } from "@/app/api/campaign";
+import { fields } from "@/components/utils/staticData";
 import {
   successNotification,
   warningNotification,
 } from "@/components/utils/utility";
 import { campaignStore } from "@/store/store";
-import { Dropdown } from "flowbite-react";
+import { Dropdown, Tooltip } from "flowbite-react";
 import React, { useEffect, useState } from "react";
+import Image from "next/image";
+import Images from "@/components/utils/images";
 interface MailAdded {
   google?: {
     email: string;
@@ -20,33 +23,39 @@ const CampaignInfo = () => {
   const [mailAdded, setMailAdded] = useState<MailAdded | null>(null);
 
   const [subject, setSubject] = useState("");
-  const [name, setName] = useState("");
+  const [fromName, setFromName] = useState("");
   const [mail, setMail] = useState<string | null>("");
   const handleInformation = (
     subject: string,
-    name: string,
+    fromName: string,
     mail: string | null
   ) => {
     setNewCampaign((prev: any | null) => ({
       ...prev,
       campaignInfo: {
         subject: subject,
-        fromName: name,
+        fromName: fromName,
         fromMail: mail,
       },
     }));
   };
+  console.log(newCampaign);
 
   const handleSubjectChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newSubject = e.target.value;
     setSubject(newSubject);
-    handleInformation(newSubject, name, mail);
+    handleInformation(newSubject, fromName, mail);
   };
 
   const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newName = e.target.value;
-    setName(newName);
+    setFromName(newName);
     handleInformation(subject, newName, mail);
+  };
+
+  const handleFromMailChange = (e: string | null) => {
+    setMail(e);
+    handleInformation(subject, fromName, e);
   };
 
   useEffect(() => {
@@ -63,14 +72,51 @@ const CampaignInfo = () => {
       }
     })();
   }, []);
-  const handleItemSelect = (e: string | null) => {
-    setMail(e);
-  };
+
   return (
-    <div className="relative w-1/3 h-full flex flex-col p-4 dark:bg-dark-glass bg-violet-50 rounded-md shadow-md border dark:border-none gap-4">
-      <h1 className="xl:text-xl text-brand-color font-semibold">
-        Campaign Information
-      </h1>
+    <div className="relative w-full  h-full flex flex-col p-4 dark:bg-dark-glass bg-violet-50 rounded-md shadow-md border dark:border-none gap-4">
+      <div className="flex items-center justify-between">
+        <h1 className="xl:text-xl text-brand-color font-semibold">
+          Campaign Information
+        </h1>
+        <Tooltip
+          content="Copy from available shortcodes into subject"
+          className="bg-light-black"
+        >
+          <Dropdown
+            label="Actions"
+            placement="bottom-start"
+            renderTrigger={() => (
+              <div className="cursor-pointer flex items-center gap-2 bg-brand-color px-2 py-1 rounded-md">
+                <h1 className="m-0 p-0 text-sm">Select dynamic headers</h1>
+                <Image
+                  src={Images.Copy}
+                  alt="copy"
+                  className="2xl:w-6 w-0 rounded-md dark:fill-text-slate-300 fill-dark-black"
+                />
+              </div>
+            )}
+          >
+            {fields.map((items: any, index: number) => {
+              return (
+                <div key={index}>
+                  <Dropdown.Item
+                    className="dark:text-slate-300 text-light-black hover:text-gray-800"
+                    onClick={() => {
+                      navigator.clipboard.writeText(`{${items.label}}`);
+                      successNotification(
+                        `${items.label} copied to clipboard as {${items.label}}`
+                      );
+                    }}
+                  >
+                    {items?.label}
+                  </Dropdown.Item>
+                </div>
+              );
+            })}
+          </Dropdown>
+        </Tooltip>
+      </div>
       <div className="flex flex-col">
         <label className="dark:text-slate-300 text-dark-black text-sm">
           Subject Line
@@ -78,7 +124,12 @@ const CampaignInfo = () => {
         <input
           placeholder="What is the subject?"
           className="text-sm w-full px-4 xl:py-2 py-1 bg-transparent rounded-md border dark:border-dark-glass shadow-md dark:text-slate-300 text-dark-black"
-          value={subject}
+          value={
+            newCampaign?.campaignInfo !== null &&
+            newCampaign?.campaignInfo?.subject
+              ? newCampaign?.campaignInfo.subject
+              : subject
+          }
           onChange={handleSubjectChange}
         />
       </div>
@@ -89,7 +140,12 @@ const CampaignInfo = () => {
         <input
           placeholder="Who is sending?"
           className="text-sm w-full px-4 xl:py-2 py-1 bg-transparent rounded-md border dark:border-dark-glass shadow-md dark:text-slate-300 text-dark-black"
-          value={name}
+          value={
+            newCampaign?.campaignInfo !== null &&
+            newCampaign?.campaignInfo?.fromName
+              ? newCampaign?.campaignInfo.fromName
+              : fromName
+          }
           onChange={handleNameChange}
         />
       </div>
@@ -103,8 +159,17 @@ const CampaignInfo = () => {
             placement="bottom-start"
             renderTrigger={() => (
               <div className="disabled:opacity-50 cursor-pointer flex items-center justify-between text-sm w-full px-4 xl:py-2 py-1 bg-transparent duration-200 ease-in-out rounded-md border dark:border-dark-glass shadow-md dark:text-slate-300 text-dark-black">
-                {mail ? (
-                  <span>{mail}</span>
+                {newCampaign?.campaignInfo !== null &&
+                newCampaign?.campaignInfo?.fromMail ? (
+                  <div className="flex items-center justify-between w-full">
+                    <span>
+                      {newCampaign?.campaignInfo !== null &&
+                      newCampaign?.campaignInfo?.fromMail
+                        ? newCampaign?.campaignInfo.fromMail
+                        : mail}
+                    </span>
+                    <span>-</span>
+                  </div>
                 ) : (
                   <>
                     Select from Mail
@@ -118,7 +183,7 @@ const CampaignInfo = () => {
               <Dropdown.Item
                 className="dark:text-slate-300 text-light-black hover:text-gray-800"
                 onClickCapture={(e: any) => {
-                  handleItemSelect(e.target.textContent);
+                  handleFromMailChange(e.target.textContent);
                 }}
               >
                 {mailAdded.google?.email}
