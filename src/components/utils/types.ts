@@ -74,14 +74,18 @@ export type ContactStoreState = {
   groupContacts: [ContactType] | null;
   allContactList: [ContactType] | null;
   totalPages: number;
-  currentPage:number;
+  groupTotalPages: number;
+  currentPage: number;
+  currentGroupPage: number;
   setAllContactList: (contactData: [ContactType] | null) => void;
   setCsvData: (csvData: any[]) => void;
   setHasData: (state: boolean) => void;
   setGroupData: (data: [string] | null) => void;
   setGroupContacts: (data: [ContactType] | null) => void;
   setTotalPages: (data: number) => void;
+  setGroupTotalPages: (data: number) => void;
   setCurrentPage: (data: number) => void;
+  setCurrentGroupPage: (data: number) => void;
 };
 
 export type CampaignInfoType = {

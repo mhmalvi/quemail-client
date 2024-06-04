@@ -24,7 +24,6 @@ const CredentialsLogin = ({
     event.preventDefault();
     setButtonClick(true);
     const response = await verifyOTP(credentialsData);
-    console.log(response);
     if (response?.status === 200) {
       Storage.setItem("userName", response.user.userName);
       Storage.setItem("email", response.user.email);

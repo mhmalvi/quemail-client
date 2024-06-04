@@ -85,14 +85,13 @@ const HomeCard = () => {
     (async () => {
       const res = await fetchAddedMail();
       if (res?.status === 200) {
-        console.log(res);
         setMailAdded(res.emails);
       } else if (res?.status === 422) {
         warningNotification(res.message);
       } else if (res?.status === 404) {
         warningNotification(res.message);
       } else {
-        console.log("Something went wrong");
+        warningNotification("Something went wrong");
       }
     })();
   }, []);

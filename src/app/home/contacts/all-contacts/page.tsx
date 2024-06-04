@@ -91,9 +91,7 @@ const AllContacts = () => {
             </div>
           </div>
 
-          <ContactTable
-            
-          />
+          <ContactTable />
 
           <Modal
             dismissible

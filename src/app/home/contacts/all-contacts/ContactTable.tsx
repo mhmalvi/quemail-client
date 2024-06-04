@@ -27,11 +27,17 @@ const ContactTable = () => {
   const groupContacts = contactStore((state) => state.groupContacts);
   const allContactList = contactStore((state) => state.allContactList);
   const setCurrentPage = contactStore((state) => state.setCurrentPage);
+  const setCurrentGroupPage = contactStore(
+    (state) => state.setCurrentGroupPage
+  );
   const currentPage = contactStore((state) => state.currentPage);
+  const currentGroupPage = contactStore((state) => state.currentGroupPage);
   const totalPages = contactStore((state) => state.totalPages);
+  const groupTotalPages = contactStore((state) => state.groupTotalPages);
   const userID =
     typeof window !== "undefined" && localStorage.getItem("userID");
   const onPageChange = (page: number) => setCurrentPage(page);
+  const onGroupPageChange = (page: number) => setCurrentGroupPage(page);
   const [selectAllChecked, setSelectAllChecked] = useState(false);
   const [updateLoading, setUpdateLoading] = useState(false);
   const [editContactData, setEditContactData] = useState<EditContactData>({
@@ -43,6 +49,7 @@ const ContactTable = () => {
       group: "",
     },
   });
+
   const [openEditContactModal, setOpenEditContactModal] =
     useState<OpenEditContactModal>({
       show: false,
@@ -112,7 +119,6 @@ const ContactTable = () => {
       warningNotification("Something went wrong. Please try again.");
     }
   };
-
   return (
     <>
       <div className="flex flex-col gap-4 h-5/6 overflow-auto">
@@ -291,8 +297,10 @@ const ContactTable = () => {
         <Pagination
           layout="pagination"
           currentPage={currentPage}
-          totalPages={totalPages}
-          onPageChange={onPageChange}
+          totalPages={groupContacts !== null ? groupTotalPages : totalPages}
+          onPageChange={
+            onPageChange
+          }
           previousLabel="<"
           nextLabel=">"
         />

@@ -45,7 +45,9 @@ export const contactStore = create<ContactStoreState>((set) => ({
   groupData: null,
   groupContacts: null,
   totalPages: 1,
+  groupTotalPages:1,
   currentPage: 1,
+  currentGroupPage:1,
   setAllContactList: (contactData) =>
     set(() => ({ allContactList: contactData })),
   setCsvData: (csvData: any[]) => set(() => ({ csvData: csvData })),
@@ -53,7 +55,9 @@ export const contactStore = create<ContactStoreState>((set) => ({
   setGroupData: (groupData) => set(() => ({ groupData: groupData })),
   setGroupContacts: (data) => set(() => ({ groupContacts: data })),
   setTotalPages: (data) => set(() => ({ totalPages: data })),
+  setGroupTotalPages: (data) => set(() => ({ groupTotalPages: data })),
   setCurrentPage: (data) => set(() => ({ currentPage: data })),
+  setCurrentGroupPage: (data) => set(() => ({ currentPage: data })),
 }));
 
 export const campaignStore = create<CampaignStoreState>((set) => ({

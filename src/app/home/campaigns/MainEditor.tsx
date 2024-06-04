@@ -40,7 +40,6 @@ const MainEditor = () => {
       theme: "light",
     },
   };
-  console.log();
   const onReady: EmailEditorProps["onReady"] = (unlayer) => {
     const templateDesign = templateData && templateData[0]?.template?.design;
     if (templateDesign) {
