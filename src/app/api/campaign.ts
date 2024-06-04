@@ -15,7 +15,6 @@ export const addMailInfo = async (
     provider: provider,
   };
   try {
-    console.log(data);
     const result = await fetch(
       `https://backend.quemailer.com/api/app-password-save`,
       {
@@ -86,7 +85,6 @@ export const updateMailInfo = async (
     id: id,
   };
   try {
-    console.log(data);
     const result = await fetch(
       `https://backend.quemailer.com/api/app-password-update`,
       {
@@ -120,7 +118,6 @@ export const destroyMail = async (id: number | null) => {
     id: id,
   };
   try {
-    console.log(data);
     const result = await fetch(
       `https://backend.quemailer.com/api/app-password-destroy`,
       {

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { Dropdown } from "flowbite-react";
 import {
   fetchContact,
@@ -13,8 +13,9 @@ const Groups = () => {
   const setGroupData = contactStore((state) => state.setGroupData);
   const groupContacts = contactStore((state) => state.groupContacts);
   const setGroupContacts = contactStore((state) => state.setGroupContacts);
-  const setTotalPages = contactStore((state) => state.setTotalPages);
+  const [clickedGroupName,setClickedGroupName] = useState<any>(null)
   const currentPage = contactStore((state) => state.currentPage);
+  const setGroupTotalPages = contactStore((state) => state.setGroupTotalPages);
 
   useEffect(() => {
     (async () => {
@@ -31,22 +32,31 @@ const Groups = () => {
     })();
   }, [setGroupData]);
 
-  const handleFetchGroup = async (groupName: string | null) => {
-    if (groupName !== null) {
-      const res = await fetchGroupItems(groupName, currentPage);
-      if (res.status === 200) {
-        console.log(res)
-        setTotalPages(res.totalPages);
-        setGroupContacts(res.contacts);
-      } else if (res.status === 422) {
-        warningNotification(res.message);
-      } else if (res.status === 404) {
-        warningNotification(res.message);
+  const handleFetchGroup = useCallback(
+    async (groupName: string | null) => {
+      if (groupName !== null) {
+        const res = await fetchGroupItems(groupName, currentPage);
+        if (res.status === 200) {
+          setGroupTotalPages(res.totalPages);
+          setGroupContacts(res.contacts);
+        } else if (res.status === 422) {
+          warningNotification(res.message);
+        } else if (res.status === 404) {
+          warningNotification(res.message);
+        }
+      } else {
+        setGroupContacts(null);
       }
-    } else {
-      setGroupContacts(null);
+    },
+    [currentPage, setGroupContacts, setGroupTotalPages]
+  );
+
+  useEffect(() => {
+    if (currentPage) {
+      handleFetchGroup(clickedGroupName);
     }
-  };
+  }, [clickedGroupName, currentPage, handleFetchGroup]);
+
   return (
     <div>
       <Dropdown
@@ -70,7 +80,10 @@ const Groups = () => {
                   ? "bg-brand-color"
                   : "bg-transparent"
               } dark:text-slate-300 text-light-black hover:text-slate-700`}
-              onClick={() => handleFetchGroup(item)}
+              onClick={() => {
+                handleFetchGroup(item);
+                setClickedGroupName(item);
+              }}
             >
               {item}
             </Dropdown.Item>

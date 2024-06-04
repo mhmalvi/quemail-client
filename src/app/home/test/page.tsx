@@ -16,7 +16,6 @@ const Test = () => {
     setError(null);
     setSuccess(null);
     try {
-      console.log(data);
       const result = await fetch(
         `https://backend.quemailer.com/google/send-email`,
         {
@@ -32,7 +31,6 @@ const Test = () => {
           }),
         }
       );
-      console.log(result);
       if (result.ok) {
         const responseData = await result.json();
         successNotification("Email sent successfully!");
