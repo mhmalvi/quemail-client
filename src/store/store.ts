@@ -68,6 +68,7 @@ export const campaignStore = create<CampaignStoreState>((set) => ({
     campaignInfo: null,
     recipient: null,
     schedule: null,
+    userID: null
   },
   selectedTemplate: null,
   templateData: null,

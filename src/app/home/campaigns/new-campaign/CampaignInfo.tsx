@@ -39,7 +39,6 @@ const CampaignInfo = () => {
       },
     }));
   };
-  console.log(newCampaign);
 
   const handleSubjectChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newSubject = e.target.value;
