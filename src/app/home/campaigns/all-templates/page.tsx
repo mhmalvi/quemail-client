@@ -60,7 +60,7 @@ const AllTemplates = () => {
   return (
     <div className="w-full h-full dark:bg-dark-glass shadow-md backdrop-blur-2xl bg-white rounded-md p-4 flex gap-4 overflow-hidden">
       {templateData && templateData.length > 0 ? (
-        <div className="w-full flex flex-col gap-4 border-brand-color duration-200 ease-in">
+        <div className="w-full flex flex-col gap-4 border-brand-color">
           <div className="flex items-center justify-end">
             <button
               className="px-4 py-2 bg-brand-color rounded-md"
@@ -176,23 +176,25 @@ const AllTemplates = () => {
           </div>
         </div>
       )}
-      <Modal
-        show={openTemplateModal}
-        dismissible
-        onClose={() => {
-          setOpenTemplateModal(false);
-          setSelectedTemplate(null);
-        }}
-        size={"9xl"}
-        className="h-screen"
-      >
-        <Modal.Header className="dark:bg-dark-glass bg-violet-50 text-slate-300 ">
-          Edit {templateData && templateData[0].name}
-        </Modal.Header>
-        <Modal.Body className="dark:bg-dark-black bg-violet-50 text-slate-300 h-[calc(100vh-100px)] overflow-y-auto">
-          <Editor />
-        </Modal.Body>
-      </Modal>
+      {
+        <Modal
+          show={openTemplateModal}
+          dismissible
+          onClose={() => {
+            setOpenTemplateModal(false);
+            setSelectedTemplate(null);
+          }}
+          size={"9xl"}
+          className="h-screen"
+        >
+          <Modal.Header className="dark:bg-dark-glass bg-violet-50 text-slate-300 ">
+            Edit {templateData ? templateData[0]?.name : ""}
+          </Modal.Header>
+          <Modal.Body className="dark:bg-dark-black bg-violet-50 text-slate-300 h-[calc(100vh-100px)] overflow-y-auto">
+            <Editor />
+          </Modal.Body>
+        </Modal>
+      }
     </div>
   );
 };

@@ -71,9 +71,9 @@ const NewCampaign = () => {
             label="Actions"
             placement="bottom-start"
             renderTrigger={() => (
-              <div className="px-4 py-2 bg-brand-color rounded-md cursor-pointer">
-                <h1 className="m-0 p-0">Start Campaign</h1>
-              </div>
+              <button className="xl:py-2 xl:px-4 py-1 px-2 xl:text-base text-sm dark:text-slate-300 text-dark-black rounded-md bg-brand-color ">
+                <h1 className="m-0 p-0 ">Start Campaign</h1>
+              </button>
             )}
           >
             <Dropdown.Item>Run campaign Now</Dropdown.Item>

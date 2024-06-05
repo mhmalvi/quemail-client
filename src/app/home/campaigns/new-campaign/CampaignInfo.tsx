@@ -24,7 +24,7 @@ const CampaignInfo = () => {
 
   const [subject, setSubject] = useState("");
   const [fromName, setFromName] = useState("");
-  const [mail, setMail] = useState<string | null>("");
+  const [mail, setMail] = useState<string | null>(null);
   const handleInformation = (
     subject: string,
     fromName: string,
@@ -159,14 +159,13 @@ const CampaignInfo = () => {
             placement="bottom-start"
             renderTrigger={() => (
               <div className="disabled:opacity-50 cursor-pointer flex items-center justify-between text-sm w-full px-4 xl:py-2 py-1 bg-transparent duration-200 ease-in-out rounded-md border dark:border-dark-glass shadow-md dark:text-slate-300 text-dark-black">
-                {newCampaign?.campaignInfo !== null &&
-                newCampaign?.campaignInfo?.fromMail ? (
+                {mail !== null && newCampaign?.campaignInfo?.fromMail ? (
                   <div className="flex items-center justify-between w-full">
                     <span>
-                      {newCampaign?.campaignInfo !== null &&
-                      newCampaign?.campaignInfo?.fromMail
-                        ? newCampaign?.campaignInfo.fromMail
-                        : mail}
+                      {mail !== null &&
+                        newCampaign?.campaignInfo?.fromMail &&
+                        // ? newCampaign?.campaignInfo.fromMail
+                        mail}
                     </span>
                     <span>-</span>
                   </div>
@@ -192,7 +191,7 @@ const CampaignInfo = () => {
             <Dropdown.Item
               className="dark:text-slate-300 text-light-black hover:text-gray-800"
               onClick={() => {
-                setMail("");
+                handleFromMailChange(null);
               }}
             >
               Clear
