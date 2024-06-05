@@ -178,11 +178,11 @@ const ContactTable = () => {
                           );
                         }}
                         content={
-                          <div className="w-64 text-sm text-gray-500 dark:text-gray-400">
-                            <div className="border-b border-gray-200 bg-gray-100 px-3 py-2 dark:border-gray-600 dark:bg-gray-700">
+                          <div className="w-full text-sm text-gray-500 dark:text-gray-400">
+                            <div className="border-b px-3 py-2">
                               <h3
                                 id="default-popover"
-                                className="font-semibold text-gray-900 dark:text-white"
+                                className="font-semibold text-gray-900 dark:text-slate-300"
                               >
                                 Are you sure you want to delete?
                               </h3>
@@ -192,7 +192,7 @@ const ContactTable = () => {
                                 onClick={() => {
                                   onDelete(items.id);
                                 }}
-                                className="px-4 py-2 bg-red-500 rounded-md text-white"
+                                className="px-2 py-1 bg-red-500 rounded-md text-white"
                               >
                                 Delete
                               </button>
@@ -200,7 +200,7 @@ const ContactTable = () => {
                                 onClick={() => {
                                   setOpenDeletePopover(null);
                                 }}
-                                className="px-4 py-2 border border-brand-color rounded-md dark:text-slate-300 text-dark-black"
+                                className="px-2 py-1 border border-brand-color rounded-md dark:text-slate-300 text-dark-black"
                               >
                                 Cancel
                               </button>
@@ -251,11 +251,11 @@ const ContactTable = () => {
                           );
                         }}
                         content={
-                          <div className="w-64 text-sm text-gray-500 dark:text-gray-400">
-                            <div className="border-b border-gray-200 bg-gray-100 px-3 py-2 dark:border-gray-600 dark:bg-gray-700">
+                          <div className="w-full text-sm text-gray-500 dark:text-gray-400">
+                            <div className="border-b px-3 py-2">
                               <h3
                                 id="default-popover"
-                                className="font-semibold text-gray-900 dark:text-white"
+                                className="font-semibold text-gray-900 dark:text-slate-300"
                               >
                                 Are you sure you want to delete?
                               </h3>
@@ -265,7 +265,7 @@ const ContactTable = () => {
                                 onClick={() => {
                                   onDelete(contact.id);
                                 }}
-                                className="px-4 py-2 bg-red-500 rounded-md text-white"
+                                className="px-2 py-1 bg-red-500 rounded-md text-white"
                               >
                                 Delete
                               </button>
@@ -273,7 +273,7 @@ const ContactTable = () => {
                                 onClick={() => {
                                   setOpenDeletePopover(null);
                                 }}
-                                className="px-4 py-2 border border-brand-color rounded-md dark:text-slate-300 text-dark-black"
+                                className="px-2 py-1 border border-brand-color rounded-md dark:text-slate-300 text-dark-black"
                               >
                                 Cancel
                               </button>
@@ -298,9 +298,7 @@ const ContactTable = () => {
           layout="pagination"
           currentPage={currentPage}
           totalPages={groupContacts !== null ? groupTotalPages : totalPages}
-          onPageChange={
-            onPageChange
-          }
+          onPageChange={onPageChange}
           previousLabel="<"
           nextLabel=">"
         />

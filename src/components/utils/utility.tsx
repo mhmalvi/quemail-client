@@ -27,9 +27,9 @@ export const customTheme: CustomFlowbiteTheme = {
   },
   table: {
     root: {
-      base: "w-full text-left text-sm text-gray-500 dark:text-gray-400 dark:bg-transparent",
+      base: "w-full text-left text-sm text-gray-500 dark:text-gray-400 dark:bg-transparent shadow-sm shadow-brand-color/50",
       shadow:
-        "absolute left-0 top-0 -z-10 h-full w-full rounded-lg bg-white drop-shadow-md dark:bg-transparent",
+        "absolute left-0 top-0 -z-10 h-full w-full rounded-lg bg-white dark:bg-transparent",
     },
     body: {
       base: "group/body",
@@ -157,6 +157,14 @@ export const customTheme: CustomFlowbiteTheme = {
           },
         },
       },
+    },
+  },
+  popover: {
+    base: "absolute z-20 inline-block w-max max-w-[100vw] bg-violet-50 outline-none border border-light-black rounded-lg shadow-sm dark:bg-dark-black",
+    content: "z-10 overflow-hidden rounded-[7px] ",
+    arrow: {
+      base: "absolute h-2 w-2 z-0 rotate-45 mix-blend-lighten bg-violet-50 border border-light-black dark:bg-dark-black dark:mix-blend-color",
+      placement: "-4px",
     },
   },
 };
