@@ -25,6 +25,17 @@ const ImportCSV: React.FC<ImportCSVProps> = ({ openModal, setOpenModal }) => {
       warningNotification("Something went wrong. Try again.");
     }
   };
+  function removeDuplicateEmails(data: any[]) {
+    const emailSet = new Set();
+    return data.filter((item) => {
+      if (!emailSet.has(item.email)) {
+        emailSet.add(item.email);
+        return true;
+      }
+      return false;
+    });
+  }
+
   return (
     <ReactSpreadsheetImport
       isOpen={openModal.show === "importContacts"}
@@ -33,8 +44,9 @@ const ImportCSV: React.FC<ImportCSVProps> = ({ openModal, setOpenModal }) => {
         setHasData(false);
       }}
       onSubmit={(e) => {
-        setCsvData(e.validData);
-        handleSave(e.validData);
+        const uniqueData = removeDuplicateEmails(e.validData);
+        setCsvData(uniqueData);
+        handleSave(uniqueData);
       }}
       fields={fields}
       customTheme={{
