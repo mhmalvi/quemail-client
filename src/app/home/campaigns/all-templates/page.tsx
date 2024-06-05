@@ -63,7 +63,7 @@ const AllTemplates = () => {
         <div className="w-full flex flex-col gap-4 border-brand-color">
           <div className="flex items-center justify-end">
             <button
-              className="px-4 py-2 bg-brand-color rounded-md"
+              className="px-4 py-1 bg-brand-color rounded-md xl:text-base text-sm"
               onClick={() => setOpenTemplateModal(true)}
             >
               Create a New Template
@@ -108,7 +108,7 @@ const AllTemplates = () => {
                           setSelectedTemplate(item);
                         }}
                       />
-                      <div className="px-4 py-1 m-0 border border-brand-color rounded-md">Use</div>
+                      <div className="px-4 py-1 m-0 border border-brand-color rounded-md xl:text-base text-sm">Use</div>
                       <Popover
                         aria-labelledby="default-popover"
                         open={openDeletePopover === item.id}

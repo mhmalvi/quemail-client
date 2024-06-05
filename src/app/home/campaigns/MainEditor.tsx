@@ -108,7 +108,7 @@ const MainEditor = () => {
             }}
             defaultValue={data.name as any}
             placeholder="Enter template name here"
-            className="w-1/3 px-4 py-1 rounded-md bg-transparent text-dark-black border dark:border-light-glass shadow-md dark:text-slate-300"
+            className="w-1/3 px-4 py-1 xl:text-base text-xs rounded-md bg-transparent text-dark-black border dark:border-light-glass shadow-md dark:text-slate-300 focus:ring-0 focus:outline-none"
           />
           <Tooltip
             content="Copy from available shortcodes into template"
@@ -118,12 +118,14 @@ const MainEditor = () => {
               label="Actions"
               placement="bottom-start"
               renderTrigger={() => (
-                <div className="cursor-pointer flex items-center gap-4 bg-brand-color px-4 py-1 rounded-md">
-                  <h1>Select dynamic headers</h1>
+                <div className="cursor-pointer flex items-center gap-4 bg-brand-color px-4 py-1 rounded-md ">
+                  <h1 className="m-0 p-0 xl:text-base text-xs ">
+                    Select dynamic headers
+                  </h1>
                   <Image
                     src={Images.Copy}
                     alt="copy"
-                    className="w-8 rounded-md fill-dark-black"
+                    className="xl:w-8 w-5 m-0 p-0 rounded-md fill-dark-black"
                   />
                 </div>
               )}
@@ -132,7 +134,7 @@ const MainEditor = () => {
                 return (
                   <div key={index}>
                     <Dropdown.Item
-                      className="dark:text-slate-300 text-light-black hover:text-gray-800"
+                      className="dark:text-slate-300 text-light-black hover:text-gray-800 xl:text-base text-sm"
                       onClick={() => {
                         navigator.clipboard.writeText(`{${items.label}}`);
                         successNotification(
@@ -150,7 +152,7 @@ const MainEditor = () => {
         </div>
         <div className="flex items-center justify-end gap-4 ">
           <button
-            className="px-4 py-2 bg-brand-color rounded-md disabled:opacity-20"
+            className="px-4 py-1 bg-brand-color rounded-md disabled:opacity-20 xl:text-base text-sm"
             onClick={() => {
               setSaveClicked(true);
             }}
@@ -158,12 +160,12 @@ const MainEditor = () => {
           >
             Save Template
           </button>
-          <button className="px-4 py-2 bg-brand-color rounded-md disabled:opacity-20">
+          <button className="px-4 py-1 bg-brand-color rounded-md disabled:opacity-20 xl:text-base text-sm">
             Export HTML
           </button>
         </div>
       </div>
-      <div className="xl:h-[78dvh] h-[65dvh] flex items-center justify-center">
+      <div className="xl:h-[78dvh] h-[70dvh] flex items-center justify-center">
         <EmailEditor
           ref={emailEditorRef}
           onReady={onReady}

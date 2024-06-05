@@ -64,7 +64,7 @@ const Groups = () => {
         placement="bottom-start"
         renderTrigger={() => (
           <div className="px-4 py-1 rounded-md border border-brand-color cursor-pointer overflow-hidden">
-            <h1 className="flex items-center justify-center gap-4 duration-100 ease-in text-dark-black dark:text-slate-300">
+            <h1 className="flex items-center justify-center gap-4 duration-100 ease-in text-dark-black dark:text-slate-300 xl:text-base text-sm ">
               Groups <span className="text-xs">▼</span>
             </h1>
           </div>

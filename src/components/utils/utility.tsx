@@ -9,20 +9,21 @@ export const infoNotification = (e: string) => toast.info(e);
 export const customTheme: CustomFlowbiteTheme = {
   modal: {
     root: {
-      base: "fixed inset-x-0 top-0 z-50 h-screen w-screen overflow-y-auto overflow-x-hidden md:inset-0 md:h-full",
+      base: "fixed inset-x-0 top-0 z-50 h-screen w-screen overflow-y-auto overflow-x-hidden md:inset-0 md:h-full ",
       show: {
         on: "flex bg-dark-glass bg-opacity-50 dark:bg-opacity-80 backdrop-blur-md",
         off: "hidden",
       },
     },
     content: {
-      base: "relative h-full w-full p-4 md:h-auto",
+      base: "relative h-full w-full p-4 md:h-auto rounded-md",
       inner:
-        "relative flex h-full w-full flex-col rounded-lg bg-violet-50 shadow dark:bg-[#171717]",
+        "relative flex h-full w-full flex-col rounded-md bg-violet-50 shadow ",
     },
 
     header: {
-      base: "flex items-start justify-between rounded-t xl:p-4 py-2 px-4",
+      base: "flex items-center justify-between rounded-t xl:py-2 py-1 px-4 bg-gradient-to-b from-violet-200 to-violet-200 dark:bg-gradient-to-b dark:from-light-black dark:to-light-black",
+      title: "xl:text-base text-sm font-medium text-gray-900 dark:text-white",
     },
   },
   table: {
@@ -62,15 +63,15 @@ export const customTheme: CustomFlowbiteTheme = {
       base: "xs:mt-0 mt-2 inline-flex items-center -space-x-px",
       showIcon: "inline-flex",
       previous: {
-        base: "ml-0 rounded-l-lg border border-gray-300 bg-white px-3 py-2 leading-tight text-gray-500 enabled:hover:bg-gray-100 enabled:hover:text-gray-700 dark:border-brand-color dark:bg-dark-black dark:text-gray-400 enabled:dark:hover:bg-gray-700 enabled:dark:hover:text-white",
+        base: "ml-0 rounded-l-lg border border-gray-300 bg-white px-4 xl:py-2 py-1  leading-tight text-gray-500 enabled:hover:bg-gray-100 enabled:hover:text-gray-700 dark:border-brand-color dark:bg-dark-black dark:text-gray-400 enabled:dark:hover:bg-gray-700 enabled:dark:hover:text-white",
         icon: "h-5 w-5",
       },
       next: {
-        base: "rounded-r-lg border border-gray-300 bg-white px-3 py-2 leading-tight text-gray-500 enabled:hover:bg-gray-100 enabled:hover:text-gray-700 dark:border-brand-color dark:bg-dark-black dark:text-gray-400 enabled:dark:hover:bg-gray-700 enabled:dark:hover:text-white",
+        base: "rounded-r-lg border border-gray-300 bg-white px-4 xl:py-2 py-1 leading-tight text-gray-500 enabled:hover:bg-gray-100 enabled:hover:text-gray-700 dark:border-brand-color dark:bg-dark-black dark:text-gray-400 enabled:dark:hover:bg-gray-700 enabled:dark:hover:text-white",
         icon: "h-5 w-5",
       },
       selector: {
-        base: "w-12 border border-gray-300 bg-white py-2 leading-tight text-gray-500 enabled:hover:bg-gray-100 enabled:hover:text-gray-700 dark:border-brand-color dark:bg-dark-black dark:text-gray-400 enabled:dark:hover:bg-gray-700 enabled:dark:hover:text-white",
+        base: "w-12 border border-gray-300 bg-white px-4 xl:py-2 py-1 leading-tight text-gray-500 enabled:hover:bg-gray-100 enabled:hover:text-gray-700 dark:border-brand-color dark:bg-dark-black dark:text-gray-400 enabled:dark:hover:bg-gray-700 enabled:dark:hover:text-white",
         active:
           "bg-cyan-50 text-slate-300 hover:bg-cyan-100 hover:text-cyan-700 dark:border-brand-color dark:bg-brand-color bg-dark-black dark:text-white",
         disabled: "cursor-not-allowed opacity-50",
@@ -95,7 +96,7 @@ export const customTheme: CustomFlowbiteTheme = {
     },
     popup: {
       root: {
-        base: "absolute top-10 z-50 block pt-2 w-full",
+        base: "absolute top-10 z-50 block pt-2 w-full ",
         inline: "relative top-0 z-auto",
         inner:
           "inline-block rounded-lg shadow-none dark:bg-transparent bg-transparent w-full",
@@ -103,14 +104,14 @@ export const customTheme: CustomFlowbiteTheme = {
       header: {
         selectors: {
           button: {
-            base: "rounded-lg bg-white px-5 py-2.5 text-sm font-semibold text-gray-900 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-light-glass dark:bg-dark-glass dark:text-slate-300 dark:hover:bg-light-glass",
+            base: "rounded-md bg-white px-4 xl:py-2 text-sm font-semibold text-gray-900 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-light-glass dark:bg-dark-glass dark:text-slate-300 dark:hover:bg-light-glass",
           },
         },
       },
       footer: {
         base: "mt-2 flex space-x-2",
         button: {
-          base: "w-full rounded-lg px-5 py-2 text-center text-sm font-medium focus:ring-4 focus:ring-light-glass",
+          base: "w-full rounded-md xl:px-4 xl:py-2 px-2 py-1 text-center xl:text-sm text-xs font-medium focus:ring-4 focus:ring-light-glass",
           today:
             "bg-brand-color text-white hover:bg-brand-color/80 dark:bg-brand-color dark:hover:bg-brand-color/80",
         },
@@ -121,8 +122,8 @@ export const customTheme: CustomFlowbiteTheme = {
         items: {
           base: "grid w-full grid-cols-7",
           item: {
-            base: "block flex-1 cursor-pointer rounded-lg border-0 text-center text-sm font-semibold leading-9 text-gray-900 hover:bg-violet-50 dark:text-white dark:hover:bg-light-black ",
-            selected: "bg-brand-color text-white hover:bg-cyan-600",
+            base: "block flex-1 cursor-pointer rounded-md border-0 text-center xl:text-sm text-xs font-semibold xl:leading-9 leading-5 text-gray-900 hover:bg-violet-50 dark:text-white dark:hover:bg-light-black ",
+            selected: "bg-brand-color text-white hover:bg-brand-color",
             disabled: "text-gray-500",
           },
         },
@@ -165,6 +166,22 @@ export const customTheme: CustomFlowbiteTheme = {
     arrow: {
       base: "absolute h-2 w-2 z-0 rotate-45 mix-blend-lighten bg-violet-50 border border-light-black dark:bg-dark-black dark:mix-blend-color",
       placement: "-4px",
+    },
+  },
+  tooltip: {
+    arrow: {
+      base: "absolute z-10 h-2 w-2 rotate-45",
+      style: {
+        dark: "bg-dark-glass dark:bg-dark-glass",
+        light: "bg-white",
+        auto: "bg-white dark:bg-dark-glass",
+      },
+      placement: "-4px",
+    },
+    style: {
+      dark: "bg-dark-glass text-white dark:dark-glass",
+      light: "border border-light-glass bg-white text-gray-900",
+      auto: "border border-light-glass bg-white text-gray-900 dark:border-none dark:bg-dark-glass dark:text-white",
     },
   },
 };
