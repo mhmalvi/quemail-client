@@ -1,18 +1,46 @@
 "use client";
 import React, { useState } from "react";
 import CampaignInfo from "./CampaignInfo";
+import {  NewCampaignType } from "@/components/utils/types";
 import RecipientSelection from "./RecipientSelection";
 import Scheduler from "./Scheduler";
 import ChooseTemplate from "./ChooseTemplate/ChooseTemplate";
 import { campaignStore } from "@/store/store";
 import { Dropdown, Modal, Table } from "flowbite-react";
+import { sendMail } from "@/app/api/campaign";
 
 const NewCampaign = () => {
   const newCampaign = campaignStore((state) => state.newCampaign);
+  const setNewCampaign = campaignStore((state) => state.setNewCampaign);
   const viewRecipients = campaignStore((state) => state.viewRecipients);
   const setViewRecipients = campaignStore((state) => state.setViewRecipients);
   const setViewSchedule = campaignStore((state) => state.setViewSchedule);
   const viewSchedule = campaignStore((state) => state.viewSchedule);
+
+  const startCampaign = async () => {
+    const userIDString =
+      typeof window !== "undefined" && localStorage.getItem("userID");
+    const userID = userIDString ? parseInt(userIDString, 10) : null;
+
+    const updatedCampaign: NewCampaignType = {
+      ...newCampaign,
+      userID: userID ?? null,
+      template: newCampaign?.template ?? { name: null, data: null },
+      campaignInfo: newCampaign?.campaignInfo ?? null,
+      recipient: newCampaign?.recipient ?? null,
+      schedule: newCampaign?.schedule ?? null,
+    };
+
+    setNewCampaign(updatedCampaign);
+
+    console.log(updatedCampaign); 
+    try {
+      const res = await sendMail(updatedCampaign);
+      console.log(res);
+    } catch (error) {
+      console.log(error);
+    }
+};
 
   return (
     <div className="relative w-full h-full dark:bg-dark-glass shadow-md backdrop-blur-2xl bg-white rounded-md p-4 flex flex-col gap-4 overflow-hidden">
@@ -76,7 +104,9 @@ const NewCampaign = () => {
               </button>
             )}
           >
-            <Dropdown.Item>Run campaign Now</Dropdown.Item>
+            <Dropdown.Item onClick={startCampaign}>
+              Run campaign Now
+            </Dropdown.Item>
             <Dropdown.Item
               onClick={() => {
                 setViewSchedule(!viewSchedule);

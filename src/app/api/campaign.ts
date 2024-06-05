@@ -1,3 +1,5 @@
+import { NewCampaignType } from "@/components/utils/types";
+
 export const addMailInfo = async (
   email: string | null,
   appPassword: string | null,
@@ -127,6 +129,36 @@ export const destroyMail = async (id: number | null) => {
           Authorization: parsedToken,
         },
         body: JSON.stringify(data),
+      }
+    );
+    if (result) {
+      const responseData = await result.json();
+      return responseData;
+    } else {
+      return null;
+    }
+  } catch (error: any) {
+    return error.response;
+  }
+};
+
+export const sendMail = async (data: NewCampaignType) => {
+  const token = typeof window !== "undefined" && localStorage.getItem("token");
+  const parsedToken = token && JSON.parse(token);
+  const userIDString =
+    typeof window !== "undefined" && localStorage.getItem("userID");
+  const userID = userIDString ? parseInt(userIDString, 10) : null;
+
+  try {
+    const result = await fetch(
+      `https://backend.quemailer.com/api/campaign-create`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: parsedToken,
+        },
+        body: JSON.stringify(data)
       }
     );
     if (result) {

@@ -102,6 +102,7 @@ export type NewCampaignType = {
   campaignInfo: CampaignInfoType | null;
   recipient: [ContactType] | null;
   schedule: string | null;
+  userID: number | null;
 } | null;
 export type CampaignStoreState = {
   newCampaign: NewCampaignType | null;

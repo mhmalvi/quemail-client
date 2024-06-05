@@ -1,6 +1,6 @@
 "use client";
 import { fetchGroupItems, fetchGroupList } from "@/app/api/contact";
-import { ContactType, NewCampaignType } from "@/components/utils/types";
+import { ContactType } from "@/components/utils/types";
 import { warningNotification } from "@/components/utils/utility";
 import { contactStore, campaignStore } from "@/store/store";
 import { Modal } from "flowbite-react";
