@@ -69,32 +69,30 @@ const AllTemplates = () => {
               Create a New Template
             </button>
           </div>
-          <Table hoverable striped>
+          <Table hoverable striped className="w-full rounded-md overflow-hidden">
             <Table.Head>
-              <Table.HeadCell className="text-center w-full">
+              <Table.HeadCell >
                 Template Name
               </Table.HeadCell>
-              <Table.HeadCell className="text-center w-full">Id</Table.HeadCell>
-              <Table.HeadCell className={`text-center w-full`}>
+              <Table.HeadCell>Id</Table.HeadCell>
+              <Table.HeadCell className="text-center">
                 Actions
               </Table.HeadCell>
             </Table.Head>
-            <Table.Body className="divide-y w-full rounded-l-md left-0 duration-200 ease-in overflow-auto shadow-md">
+            <Table.Body className="divide-y w-full left-0 overflow-auto dark:shadow-brand-color">
               {templateData !== null &&
                 templateData.map((item: TemplateType, index: number) => (
                   <Table.Row
                     key={index}
-                    className="dark:border-gray-700 dark:bg-gray-800"
+                    className="dark:border-gray-700 dark:bg-gray-800 overflow-hidden"
                   >
-                    <Table.Cell
-                      className={`my-auto align-middle h-full w-1/3 text-center`}
-                    >
-                      <h1 className="m-0 p-0 text-center dark:text-slate-300 text-dark-black my-auto">
+                    <Table.Cell >
+                      <h1 className="m-0 p-0 dark:text-slate-300 text-dark-black my-auto">
                         {item.name}
                       </h1>
                     </Table.Cell>
-                    <Table.Cell className={`w-1/3 text-center`}>
-                      <h1 className="text-center dark:text-slate-300 text-dark-black my-auto">
+                    <Table.Cell >
+                      <h1 className="dark:text-slate-300 text-dark-black my-auto">
                         {item.id}
                       </h1>
                     </Table.Cell>
@@ -104,12 +102,13 @@ const AllTemplates = () => {
                       <Image
                         src={Images.Eye}
                         alt="eye"
-                        className="cursor-pointer w-16 opacity-50 fill-transparent"
+                        className="cursor-pointer w-1/8 opacity-50 fill-transparent"
                         onClick={() => {
                           setOpenTemplateModal(true);
                           setSelectedTemplate(item);
                         }}
                       />
+                      <div className="px-4 py-1 m-0 border border-brand-color rounded-md">Use</div>
                       <Popover
                         aria-labelledby="default-popover"
                         open={openDeletePopover === item.id}
