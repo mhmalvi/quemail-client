@@ -75,9 +75,14 @@ const Sidebar = () => {
             All Campaigns
           </Dropdown.Item>
         </Link>
-        <Dropdown.Item className="dark:text-slate-300 text-light-black hover:text-gray-800">
-          Campaign Performance
-        </Dropdown.Item>
+        <Link
+          href="/home/campaigns/campaign-performance"
+          className="focus:outline-none focus:ring-0 active:outline-none active:ring-0"
+        >
+          <Dropdown.Item className="dark:text-slate-300 text-light-black hover:text-gray-800">
+            Campaign Performance
+          </Dropdown.Item>
+        </Link>
         <DropdownDivider className="bg-light-black" />
 
         <Link

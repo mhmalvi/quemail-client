@@ -55,7 +55,7 @@ const SelectTemplate: React.FC<SelectTemplateProps> = ({
         ...prev,
         template: {
           name: templateName,
-          data: [templateHtml],
+          data: templateHtml,
         },
       }));
       setChooseTemplate("");
