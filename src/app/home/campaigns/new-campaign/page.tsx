@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import CampaignInfo from "./CampaignInfo";
-import {  NewCampaignType } from "@/components/utils/types";
+import { NewCampaignType } from "@/components/utils/types";
 import RecipientSelection from "./RecipientSelection";
 import Scheduler from "./Scheduler";
 import ChooseTemplate from "./ChooseTemplate/ChooseTemplate";
@@ -33,14 +33,13 @@ const NewCampaign = () => {
 
     setNewCampaign(updatedCampaign);
 
-    console.log(updatedCampaign); 
     try {
       const res = await sendMail(updatedCampaign);
       console.log(res);
     } catch (error) {
       console.log(error);
     }
-};
+  };
 
   return (
     <div className="relative w-full h-full dark:bg-dark-glass shadow-md backdrop-blur-2xl bg-white rounded-md p-4 flex flex-col gap-4 overflow-hidden">
@@ -51,7 +50,7 @@ const NewCampaign = () => {
               newCampaign?.template !== null
                 ? "text-green-500"
                 : "dark:text-slate-300 text-dark-black opacity-20"
-            } xl:text-base text-sm  `}
+            } xl:text-base text-xs  `}
           >
             Template {newCampaign?.template !== null && <span>✔</span>}
           </h1>
@@ -65,7 +64,7 @@ const NewCampaign = () => {
               newCampaign?.campaignInfo?.subject.length > 0
                 ? "text-green-500"
                 : "dark:text-slate-300 text-dark-black opacity-20"
-            } xl:text-base text-sm  `}
+            } xl:text-base text-xs  `}
           >
             Campaign Information{" "}
             {newCampaign?.campaignInfo !== null &&
@@ -80,37 +79,41 @@ const NewCampaign = () => {
               newCampaign?.recipient !== null
                 ? "text-green-500"
                 : "dark:text-slate-300 text-dark-black opacity-20"
-            } xl:text-base text-sm  `}
+            } xl:text-base text-xs  `}
           >
             Recipients Selection{" "}
             {newCampaign?.recipient !== null && <span>✔</span>}
           </h1>
           <h1
-            className={`xl:text-base text-sm dark:text-slate-300 text-dark-black opacity-20`}
+            className={`xl:text-base text-xs dark:text-slate-300 text-dark-black opacity-20`}
           >
             Schedule {newCampaign?.schedule !== null && <span>✔</span>}
           </h1>
         </div>
         <div className="flex gap-4 items-center">
-          <button className="xl:py-2 xl:px-4 py-1 px-2 xl:text-base text-sm dark:text-slate-300 text-dark-black rounded-md border border-brand-color ">
+          <button className="xl:py-2 xl:px-4 py-1 px-2 xl:text-base text-xs dark:text-slate-300 text-dark-black rounded-md border border-brand-color ">
             Save & Exit
           </button>
           <Dropdown
             label="Actions"
             placement="bottom-start"
             renderTrigger={() => (
-              <button className="xl:py-2 xl:px-4 py-1 px-2 xl:text-base text-sm dark:text-slate-300 text-dark-black rounded-md bg-brand-color ">
+              <button className="xl:py-2 xl:px-4 py-1 px-2 xl:text-base text-xs text-white rounded-md bg-brand-color ">
                 <h1 className="m-0 p-0 ">Start Campaign</h1>
               </button>
             )}
           >
-            <Dropdown.Item onClick={startCampaign}>
+            <Dropdown.Item
+              onClick={startCampaign}
+              className="xl:text-base text-sm"
+            >
               Run campaign Now
             </Dropdown.Item>
             <Dropdown.Item
               onClick={() => {
                 setViewSchedule(!viewSchedule);
               }}
+              className="xl:text-base text-sm"
             >
               Schedule Campaign
             </Dropdown.Item>

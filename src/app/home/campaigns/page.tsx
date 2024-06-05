@@ -14,7 +14,7 @@ const Campaigns = () => {
             alt="allTemplates"
             className="w-full"
           />
-          <h1 className="m-0 p-0 dark:text-slate-300 text-dark-black text-2xl ">
+          <h1 className="m-0 p-0 dark:text-slate-300 text-dark-black xl:text-2xl text-xl ">
             New Campaign
           </h1>
         </Link>
@@ -26,7 +26,7 @@ const Campaigns = () => {
             alt="allTemplates"
             className="w-full"
           />
-          <h1 className="m-0 p-0 dark:text-slate-300 text-dark-black text-2xl">
+          <h1 className="m-0 p-0 dark:text-slate-300 text-dark-black xl:text-2xl text-xl">
             All Campaigns
           </h1>
         </Link>
@@ -38,7 +38,7 @@ const Campaigns = () => {
             alt="allTemplates"
             className="w-full"
           />
-          <h1 className="m-0 p-0 dark:text-slate-300 text-dark-black text-2xl">
+          <h1 className="m-0 p-0 dark:text-slate-300 text-dark-black xl:text-2xl text-xl">
             All Templates
           </h1>
         </Link>
@@ -50,7 +50,7 @@ const Campaigns = () => {
             src={Images.AllCampaigns}
             className="w-full"
           />
-          <h1 className="m-0 p-0 dark:text-slate-300 text-dark-black text-2xl">
+          <h1 className="m-0 p-0 dark:text-slate-300 text-dark-black xl:text-2xl text-xl">
             Campaign Performance
           </h1>
         </Link>

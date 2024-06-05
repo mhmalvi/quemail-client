@@ -89,7 +89,8 @@ export type ContactStoreState = {
 };
 
 export type CampaignInfoType = {
-  subject: string | null | null;
+  campaignName: string | null;
+  subject: string | null;
   fromName: string | null;
   fromMail: string | null;
 };

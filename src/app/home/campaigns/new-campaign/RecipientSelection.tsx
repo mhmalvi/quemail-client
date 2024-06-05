@@ -92,11 +92,11 @@ const RecipientSelection = () => {
 
   return (
     <div className="relative w-full h-full flex flex-col p-4 dark:bg-dark-glass bg-violet-50 rounded-md shadow-md border dark:border-none gap-4">
-      <div className="xl:text-xl text-brand-color font-semibold flex items-center justify-between">
-        <h1>Recipient Selection</h1>
+      <div className=" text-brand-color font-semibold flex items-center justify-between">
+        <h1 className="m-0 p-0 xl:text-xl text-sm">Recipient Selection</h1>
         {newCampaign?.recipient && (
           <button
-            className="font-normal text-sm dark:text-slate-300 text-dark-black border border-slate-300 px-2 py-1 rounded-md"
+            className="font-normal xl:text-sm text-xs dark:text-slate-300 text-dark-black border border-slate-300 px-2 py-1 rounded-md"
             onClick={() => setOpenGroupModal(true)}
           >
             Add More
@@ -107,11 +107,11 @@ const RecipientSelection = () => {
         {newCampaign?.recipient ? (
           <>
             <div className="w-full flex items-center justify-between border border-slate-300 xl:p-2 p-1 rounded-md">
-              <h1 className="m-0 px-2 py-0 dark:text-slate-300 text-dark-black xl:text-base text-sm">
+              <h1 className="m-0 px-2 py-0 dark:text-slate-300 text-dark-black xl:text-base text-xs">
                 {newCampaign.recipient.length} contact/s selected
               </h1>
               <h1
-                className="xl:px-4 xl:py-2 px-2 py-1 bg-brand-color text-slate-300 rounded-md cursor-pointer xl:text-base text-sm"
+                className="xl:px-4 xl:py-2 px-2 py-1 bg-brand-color text-slate-300 rounded-md cursor-pointer xl:text-base text-xs"
                 onClick={() => setViewRecipients(true)}
               >
                 View
@@ -119,7 +119,7 @@ const RecipientSelection = () => {
             </div>
             <div className="flex items-center justify-end">
               <button
-                className="w-1/5 xl:px-4 xl:py-2 px-2 py-1 bg-red-500 py-2 text-slate-50 flex items-center justify-center xl:text-base text-sm"
+                className="w-1/5 xl:px-4 xl:py-2 px-2 py-1 bg-red-500 py-2 text-slate-50 flex items-center justify-center xl:text-base text-xs"
                 onClick={handleClearRecipients}
               >
                 Clear
@@ -128,16 +128,16 @@ const RecipientSelection = () => {
           </>
         ) : (
           <div className="flex flex-col gap-4">
-            <p className="m-0 p-0 dark:text-slate-300 text-dark-black text-sm">
+            <p className="m-0 p-0 dark:text-slate-300 text-dark-black xl:text-sm text-xs">
               Who are you sending this campaign to?
             </p>
-            <div className="flex flex-col items-center justify-between h-full gap-4">
-              <button className="h-full w-full xl:px-4 xl:py-2 px-2 py-1 xl:text-base text-sm bg-brand-color rounded-md text-slate-50">
+            <div className="flex items-center justify-between h-full gap-4">
+              <button className="h-full w-full xl:px-4 xl:py-2 px-2 py-1 xl:text-base text-xs bg-brand-color rounded-md text-slate-50">
                 Select from all contacts
               </button>
-              <span className="dark:text-slate-300 text-dark-black">- or -</span>
+              <span className="dark:text-slate-300 text-dark-black xl:text-base text-xs">or</span>
               <button
-                className="h-full w-full xl:px-4 xl:py-2 px-2 py-1 xl:text-base text-sm bg-brand-color rounded-md text-slate-50 disabled:opacity-20"
+                className="h-full w-full xl:p-4 p-2 xl:text-base text-xs bg-brand-color rounded-md text-slate-50 disabled:opacity-20"
                 onClick={() => setOpenGroupModal(true)}
                 disabled={!groupData}
               >

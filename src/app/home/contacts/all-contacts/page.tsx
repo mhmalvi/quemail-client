@@ -42,7 +42,7 @@ const AllContacts = () => {
           <div className="w-full flex items-center justify-between">
             <div className="flex items-center justify-center gap-4">
               <Groups />
-              <h1 className="flex gap-2 m-0 px-4 py-2 border-l border-brand-color text-dark-black dark:text-slate-300">
+              <h1 className="flex gap-2 m-0 px-4 py-2 xl:text-base text-sm border-l border-brand-color text-dark-black dark:text-slate-300">
                 Showing:
                 {groupContacts !== null ? (
                   <span className="text-brand-color">
@@ -55,7 +55,7 @@ const AllContacts = () => {
             </div>
             <div className="flex items-center gap-4">
               <button
-                className="m-0 px-4 py-2 bg-brand-color rounded-md disabled:opacity-10"
+                className="m-0 px-4 py-1 bg-brand-color rounded-md disabled:opacity-10 xl:text-base text-sm "
                 disabled
               >
                 Add to Campaign
@@ -64,7 +64,7 @@ const AllContacts = () => {
                 label=""
                 placement="bottom"
                 renderTrigger={() => (
-                  <h1 className="px-4 py-2 bg-brand-color rounded-md cursor-pointer">
+                  <h1 className="px-4 py-1 bg-brand-color rounded-md cursor-pointer xl:text-base text-sm ">
                     Add Contacts +
                   </h1>
                 )}
