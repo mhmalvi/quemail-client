@@ -5,6 +5,8 @@ import { warningNotification } from "@/components/utils/utility";
 import { contactStore, campaignStore } from "@/store/store";
 import { Modal } from "flowbite-react";
 import React, { useEffect, useState } from "react";
+import Image from "next/image";
+import Images from "@/components/utils/images";
 
 const RecipientSelection = () => {
   const groupData = contactStore((state) => state.groupData);
@@ -132,16 +134,26 @@ const RecipientSelection = () => {
               Who are you sending this campaign to?
             </p>
             <div className="flex items-center justify-between h-full gap-4">
-              <button className="h-full w-full xl:px-4 xl:py-2 px-2 py-1 xl:text-base text-xs bg-brand-color rounded-md text-slate-50">
-                Select from all contacts
+              <button className="flex items-center h-full gap-4 w-full px-4 py-2 xl:text-base text-xs border border-brand-color rounded-md text-slate-50 hover:dark:bg-dark-black hover:bg-white duration-200 ease-in-out">
+                <h1 className="m-0 p-0 font-semibold dark:text-slate-300 text-dark-black">
+                  Select from all contacts
+                </h1>
+                <Image
+                  src={Images.Notebook}
+                  alt="notebook"
+                  className="w-1/3 "
+                />
               </button>
-              <span className="dark:text-slate-300 text-dark-black xl:text-base text-xs">or</span>
+              <span className="dark:text-slate-300 text-dark-black xl:text-base text-xs">
+                or
+              </span>
               <button
-                className="h-full w-full xl:p-4 p-2 xl:text-base text-xs bg-brand-color rounded-md text-slate-50 disabled:opacity-20"
+                className="flex items-center justify-between gap-4 full w-full px-4 py-2 xl:text-base text-xs border border-brand-color rounded-md text-slate-50 disabled:opacity-20 hover:dark:bg-dark-black hover:bg-white duration-200 ease-in-out"
                 onClick={() => setOpenGroupModal(true)}
                 disabled={!groupData}
               >
-                Select from groups
+                <h1 className="m-0 p-0 font-semibold dark:text-slate-300 text-dark-black">Select from groups</h1>
+                <Image src={Images.Groups} alt="group" className="w-1/2 " />
               </button>
             </div>
           </div>

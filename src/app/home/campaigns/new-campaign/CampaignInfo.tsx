@@ -26,6 +26,7 @@ const CampaignInfo = () => {
   const [subject, setSubject] = useState("");
   const [fromName, setFromName] = useState("");
   const [mail, setMail] = useState<string | null>(null);
+  
   const handleInformation = (
     campaignName: string,
     subject: string,
@@ -63,7 +64,7 @@ const CampaignInfo = () => {
   const handleCampaignName = (e: React.ChangeEvent<HTMLInputElement>) => {
     let campaignUniqueName = e.target.value;
     setCampaignName(campaignUniqueName);
-    handleInformation(campaignName, subject, fromName, mail);
+    handleInformation(campaignUniqueName, subject, fromName, mail);
   };
 
   useEffect(() => {
@@ -134,9 +135,9 @@ const CampaignInfo = () => {
           className="xl:text-sm text-xs w-full px-4 xl:py-2 py-1 bg-transparent rounded-md border dark:border-dark-glass shadow-md dark:text-slate-300 text-dark-black focus:ring-0 focus:outline-none"
           value={
             newCampaign?.campaignInfo !== null &&
-            newCampaign?.campaignInfo?.subject
-              ? newCampaign?.campaignInfo.subject
-              : subject
+            newCampaign?.campaignInfo?.campaignName
+              ? newCampaign?.campaignInfo.campaignName
+              : campaignName
           }
           onChange={handleCampaignName}
         />
