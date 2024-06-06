@@ -73,7 +73,7 @@ const Scheduler = () => {
         </div>
       ) : (
         <button
-          className="w-full px-2 py-1 xl:text-sm text-xs border border-brand-color rounded-md disabled:cursor-not-allowed disabled:opacity-25"
+          className="w-full px-2 py-1 xl:text-sm text-xs border border-brand-color text-dark-black dark:text-slate-300 rounded-md disabled:cursor-not-allowed disabled:opacity-25"
           disabled={date === ""}
           onClick={handleSetSchedule}
         >

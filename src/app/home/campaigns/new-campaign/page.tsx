@@ -16,19 +16,19 @@ const NewCampaign = () => {
   const setViewRecipients = campaignStore((state) => state.setViewRecipients);
   const setViewSchedule = campaignStore((state) => state.setViewSchedule);
   const viewSchedule = campaignStore((state) => state.viewSchedule);
-
+  
   const startCampaign = async () => {
     const userIDString =
       typeof window !== "undefined" && localStorage.getItem("userID");
     const userID = userIDString ? parseInt(userIDString, 10) : null;
-
+    const date = new Date().toISOString()
     const updatedCampaign: NewCampaignType = {
       ...newCampaign,
       userID: userID ?? null,
       template: newCampaign?.template ?? { name: null, data: null },
       campaignInfo: newCampaign?.campaignInfo ?? null,
       recipient: newCampaign?.recipient ?? null,
-      schedule: newCampaign?.schedule ?? null,
+      schedule: date ?? null,
     };
 
     setNewCampaign(updatedCampaign);
@@ -57,6 +57,7 @@ const NewCampaign = () => {
           <h1
             className={`${
               newCampaign?.campaignInfo !== null &&
+              newCampaign?.campaignInfo?.campaignName !== "" &&
               newCampaign?.campaignInfo?.fromMail !== "" &&
               newCampaign?.campaignInfo?.fromName !== "" &&
               newCampaign?.campaignInfo?.subject !== null &&
@@ -98,8 +99,8 @@ const NewCampaign = () => {
             label="Actions"
             placement="bottom-start"
             renderTrigger={() => (
-              <button className="xl:py-2 xl:px-4 py-1 px-2 xl:text-base text-xs text-white rounded-md bg-brand-color ">
-                <h1 className="m-0 p-0 ">Start Campaign</h1>
+              <button className="xl:py-2 xl:px-4 py-1 px-2 xl:text-base text-xs text-white rounded-md bg-brand-color hover:bg-dark-black duration-200 ease-in-out">
+                <h1 className="m-0 p-0 ">Start Campaign ▼</h1>
               </button>
             )}
           >

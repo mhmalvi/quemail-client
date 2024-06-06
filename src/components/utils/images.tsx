@@ -54,6 +54,8 @@ import AllTemplates from "/public/SVG/Home/AllTemplates.svg";
 import TemplateGenerator from "/public/SVG/Home/TemplateGenerator.svg";
 import NewCampaign from "/public/SVG/Home/NewCampaign.svg";
 import AllCampaigns from "/public/SVG/Home/AllCampaigns.svg";
+import Groups from "/public/SVG/Home/Groups.svg"
+import Notebook from "/public/SVG/Home/Notebook.svg"
 
 const Images = {
   Copy,
@@ -96,6 +98,8 @@ const Images = {
   Story,
   WhyUs,
   User_Icon,
+  Groups,
+  Notebook,
 };
 
 export default Images;
