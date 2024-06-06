@@ -16,19 +16,22 @@ const NewCampaign = () => {
   const setViewRecipients = campaignStore((state) => state.setViewRecipients);
   const setViewSchedule = campaignStore((state) => state.setViewSchedule);
   const viewSchedule = campaignStore((state) => state.viewSchedule);
-  
+
   const startCampaign = async () => {
     const userIDString =
       typeof window !== "undefined" && localStorage.getItem("userID");
     const userID = userIDString ? parseInt(userIDString, 10) : null;
-    const date = new Date().toISOString()
+    const date = new Date().toISOString();
+    const [fullDate, fullTime] = date.split("T");
+    const time = fullTime.split(".")[0];
+    const formattedDate = `${fullDate} ${time}`;
     const updatedCampaign: NewCampaignType = {
       ...newCampaign,
       userID: userID ?? null,
       template: newCampaign?.template ?? { name: null, data: null },
       campaignInfo: newCampaign?.campaignInfo ?? null,
       recipient: newCampaign?.recipient ?? null,
-      schedule: date ?? null,
+      schedule: formattedDate ?? null,
     };
 
     setNewCampaign(updatedCampaign);
