@@ -37,7 +37,20 @@ const Scheduler = () => {
   };
 
   const handleTimeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setTime(event.target.value);
+    const localTime = event.target.value;
+    const [hours, minutes] = localTime.split(":").map(Number);
+
+    const localDate = new Date();
+    localDate.setHours(hours, minutes, 0, 0);
+
+    const utcHours = localDate.getUTCHours();
+    const utcMinutes = localDate.getUTCMinutes();
+    const utcSeconds = localDate.getUTCSeconds();
+
+    const utcTime = `${String(utcHours).padStart(2, "0")}:${String(
+      utcMinutes
+    ).padStart(2, "0")}:${String(utcSeconds).padStart(2, "0")}`;
+    setTime(utcTime);
   };
   const handleSetSchedule = () => {
     setShowSchedule(true);
@@ -63,10 +76,12 @@ const Scheduler = () => {
             inline
             showClearButton={false}
             onSelectedDateChanged={(e: any) => {
-              let localDate = new Date(e.getTime() - e.getTimezoneOffset() * 60000);
+              let localDate = new Date(
+                e.getTime() - e.getTimezoneOffset() * 60000
+              );
               let date = localDate.toISOString().split("T");
               setDate(date[0]);
-          }}
+            }}
           />
         </div>
 
