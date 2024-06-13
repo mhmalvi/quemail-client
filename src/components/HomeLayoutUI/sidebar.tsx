@@ -40,9 +40,9 @@ const Sidebar = () => {
           onClick={setOpenSidebar}
         >
           <div className={`2xl:h-16 h-12 w-8 flex flex-col gap-2 items-center justify-center relative rounded-md ease-in duration-100`}>
-            <div className="h-1.5 w-8 rounded-md bg-slate-300"></div>
-            <div className="h-1.5 w-8 rounded-md bg-brand-color/50"></div>
-            <div className="h-1.5 w-8 rounded-md bg-brand-color"></div>
+            <div className="h-1.5 w-8 rounded-md bg-light-black"></div>
+            <div className="h-1.5 w-8 rounded-md bg-light-black"></div>
+            <div className="h-1.5 w-8 rounded-md bg-light-black"></div>
           </div>
         </div>
       )}
