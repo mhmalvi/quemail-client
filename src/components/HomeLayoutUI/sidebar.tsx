@@ -13,26 +13,39 @@ const Sidebar = () => {
   const setOpenSidebar = sideBarStore((state: any) => state.setOpenSidebar);
   return (
     <div
-      className={`h-full xl:px-4 px-2  flex flex-col xl:gap-8 gap-4 dark:border-none border-r dark:bg-dark-glass bg-light-glass ease-in duration-100 overflow-hidden  ${
+      className={`h-full xl:px-4 px-2 flex flex-col xl:gap-8 gap-4 dark:border-none border-r dark:bg-dark-glass bg-light-glass ease-in duration-100  ${
         sidebarToggle ? "xl:w-1/6 w-1/5 " : "xl:w-20 w-16"
       } `}
     >
-      <div
-        onClick={setOpenSidebar}
-        className={`overflow-hidden w-full flex justify-center items-center mt-4 rounded-md cursor-pointer bg-dark-black duration-100 ease-in`}
-      >
-        {sidebarToggle && (
-          <h1 className="m-0 p-0 text-3xl text-slate-300 ">Que</h1>
-        )}
-        <Image
-          src={Images.MainLogo}
-          alt="logo"
-          className={`2xl:h-16 h-12 w-8 rounded-md ease-in duration-100`}
-        />
-        {sidebarToggle && (
-          <h1 className="m-0 p-0 text-3xl text-slate-300 ">ailer</h1>
-        )}
-      </div>
+      {sidebarToggle ? (
+        <div
+          onClick={setOpenSidebar}
+          className={`overflow-hidden w-full flex justify-center items-center mt-4 rounded-md cursor-pointer bg-dark-black duration-100 ease-in`}
+        >
+          {sidebarToggle && (
+            <h1 className="m-0 p-0 text-3xl text-slate-300 ">Que</h1>
+          )}
+          <Image
+            src={Images.MainLogo}
+            alt="logo"
+            className={`2xl:h-16 h-12 w-8 rounded-md ease-in duration-100`}
+          />
+          {sidebarToggle && (
+            <h1 className="m-0 p-0 text-3xl text-slate-300 ">ailer</h1>
+          )}
+        </div>
+      ) : (
+        <div
+          className={`overflow-hidden w-full flex justify-center items-center mt-4 rounded-md cursor-pointer bg-dark-black duration-100 ease-in`}
+          onClick={setOpenSidebar}
+        >
+          <div className={`2xl:h-16 h-12 w-8 flex flex-col gap-2 items-center justify-center relative rounded-md ease-in duration-100`}>
+            <div className="h-1.5 w-8 rounded-md bg-slate-300"></div>
+            <div className="h-1.5 w-8 rounded-md bg-brand-color/50"></div>
+            <div className="h-1.5 w-8 rounded-md bg-brand-color"></div>
+          </div>
+        </div>
+      )}
       <Dropdown
         label="Dropdown button"
         placement="right-start"
