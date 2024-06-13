@@ -72,6 +72,7 @@ const NewCampaign = () => {
           >
             Campaign Information{" "}
             {newCampaign?.campaignInfo !== null &&
+            newCampaign?.campaignInfo?.campaignName !== "" &&
               newCampaign?.campaignInfo?.fromMail !== "" &&
               newCampaign?.campaignInfo?.fromName !== "" &&
               newCampaign?.campaignInfo?.subject !== null &&

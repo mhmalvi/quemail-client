@@ -2,18 +2,48 @@
 import React, { useState } from "react";
 import { Datepicker } from "flowbite-react";
 import { campaignStore } from "@/store/store";
+import { NewCampaignType } from "@/components/utils/types";
+import { sendMail } from "@/app/api/campaign";
 const Scheduler = () => {
   const [time, setTime] = useState("00:00");
   const [date, setDate] = useState("");
   const [showSchedule, setShowSchedule] = useState(false);
   const viewSchedule = campaignStore((state) => state.viewSchedule);
+  const newCampaign = campaignStore((state) => state.newCampaign);
+  const setNewCampaign = campaignStore((state) => state.setNewCampaign);
+
+  const startCampaign = async () => {
+    const userIDString =
+      typeof window !== "undefined" && localStorage.getItem("userID");
+    const userID = userIDString ? parseInt(userIDString, 10) : null;
+    const formattedDate = `${date} ${time}`;
+    const updatedCampaign: NewCampaignType = {
+      ...newCampaign,
+      userID: userID ?? null,
+      template: newCampaign?.template ?? { name: null, data: null },
+      campaignInfo: newCampaign?.campaignInfo ?? null,
+      recipient: newCampaign?.recipient ?? null,
+      schedule: formattedDate ?? null,
+    };
+
+    setNewCampaign(updatedCampaign);
+
+    try {
+      const res = await sendMail(updatedCampaign);
+      console.log(res);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const handleTimeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setTime(event.target.value);
   };
   const handleSetSchedule = () => {
     setShowSchedule(true);
+    startCampaign();
   };
+
   return (
     <div
       className={`${

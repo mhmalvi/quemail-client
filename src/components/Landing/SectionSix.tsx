@@ -8,15 +8,15 @@ const SectionSix = () => {
     <div className="w-full flex flex-col gap-4 items-center justify-center h-full py-16	">
       <div className="flex lg:flex-row flex-col flex-grow items-center w-full gap-8 p-16 rounded-md w-full bg-light-glass">
         <div className="lg:w-1/2  flex flex-col items-center justify-center gap-4">
-          <h1 className="text-3xl text-center">
+          <h1 className="text-3xl text-center text-slate-300">
             Create engaging emails 85% faster
           </h1>
-          <button className="bg-gradient-to-r from-brand-color to-brand-color-2 px-8 py-2 rounded-md">
+          <button className="bg-gradient-to-r from-brand-color to-brand-color-2 px-8 py-2 rounded-md text-slate-300">
             Get Started
           </button>
         </div>
         <div className="lg:w-2/3 flex flex-col">
-          <h1 className="p-0 m-0">
+          <h1 className="p-0 m-0 text-slate-300">
             “ I love the Quemailer email generator. It creates excellent copy
             and gives me ideas that I can edit and add to my email marketing. It
             has increased my open rates on the tested emails. ”

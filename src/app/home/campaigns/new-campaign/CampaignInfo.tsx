@@ -26,7 +26,7 @@ const CampaignInfo = () => {
   const [subject, setSubject] = useState("");
   const [fromName, setFromName] = useState("");
   const [mail, setMail] = useState<string | null>(null);
-  
+
   const handleInformation = (
     campaignName: string,
     subject: string,
@@ -97,7 +97,9 @@ const CampaignInfo = () => {
             placement="bottom-start"
             renderTrigger={() => (
               <div className="cursor-pointer flex items-center gap-2 bg-brand-color px-2 py-1 rounded-md">
-                <h1 className="m-0 p-0 xl:text-sm text-xs">Select dynamic headers</h1>
+                <h1 className="m-0 p-0 xl:text-sm text-xs">
+                  Select dynamic headers
+                </h1>
                 <Image
                   src={Images.Copy}
                   alt="copy"
@@ -131,7 +133,7 @@ const CampaignInfo = () => {
           Campaign Name
         </label>
         <input
-          placeholder="What is the subject?"
+          placeholder="Add a name of the campaign"
           className="xl:text-sm text-xs w-full px-4 xl:py-2 py-1 bg-transparent rounded-md border dark:border-dark-glass shadow-md dark:text-slate-300 text-dark-black focus:ring-0 focus:outline-none"
           value={
             newCampaign?.campaignInfo !== null &&
