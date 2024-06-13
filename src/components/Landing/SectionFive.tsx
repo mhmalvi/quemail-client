@@ -23,9 +23,9 @@ const SectionTwo = () => {
         {sectionFiveData.map((items, index) => {
           return (
             <div key={index} className="">
-              <div>
+              <p className="text-slate-300">
                 <span className="text-green-500">✔</span> {items}
-              </div>
+              </p>
             </div>
           );
         })}
