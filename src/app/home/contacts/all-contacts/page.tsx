@@ -55,7 +55,7 @@ const AllContacts = () => {
             </div>
             <div className="flex items-center gap-4">
               <button
-                className="m-0 px-4 py-1 bg-brand-color rounded-md disabled:opacity-10 xl:text-base text-sm "
+                className="m-0 px-4 py-1 bg-brand-color rounded-md disabled:opacity-10 xl:text-base text-sm text-slate-300"
                 disabled
               >
                 Add to Campaign
@@ -64,7 +64,7 @@ const AllContacts = () => {
                 label=""
                 placement="bottom"
                 renderTrigger={() => (
-                  <h1 className="px-4 py-1 bg-brand-color rounded-md cursor-pointer xl:text-base text-sm ">
+                  <h1 className="px-4 py-1 bg-brand-color rounded-md cursor-pointer xl:text-base text-sm text-slate-300">
                     Add Contacts +
                   </h1>
                 )}
