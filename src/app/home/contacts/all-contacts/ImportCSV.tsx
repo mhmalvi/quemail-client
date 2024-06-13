@@ -73,7 +73,7 @@ const ImportCSV: React.FC<ImportCSVProps> = ({ openModal, setOpenModal }) => {
               dialog: {
                 width: "75%",
                 border: "2px solid #374151",
-                height: "28%",
+                // height: "40%",
                 bg: "#0d0d0d",
               },
               closeModalButton: {

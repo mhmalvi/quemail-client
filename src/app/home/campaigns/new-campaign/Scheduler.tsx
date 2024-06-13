@@ -63,9 +63,10 @@ const Scheduler = () => {
             inline
             showClearButton={false}
             onSelectedDateChanged={(e: any) => {
-              let date = e.toISOString().split("T");
+              let localDate = new Date(e.getTime() - e.getTimezoneOffset() * 60000);
+              let date = localDate.toISOString().split("T");
               setDate(date[0]);
-            }}
+          }}
           />
         </div>
 
