@@ -61,7 +61,7 @@ const Login = () => {
     window.open(googleLoginUrl, "_self");
   };
   return (
-    <div className="relative h-screen w-full flex items-center justify-center p-8">
+    <div className="relative h-screen bg-dark-black w-full flex items-center justify-center p-8">
       <div className="bg-light-glass xl:w-1/4 md:w-1/3 w-1/2 rounded-md backdrop-blur-2xl p-8 flex flex-col gap-4 items-center justify-center">
         <Link href="/" className="flex items-center mb-8">
           <h1 className="m-0 p-0 text-5xl text-slate-300 ">Que</h1>
