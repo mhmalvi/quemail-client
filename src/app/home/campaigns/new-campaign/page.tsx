@@ -8,6 +8,13 @@ import ChooseTemplate from "./ChooseTemplate/ChooseTemplate";
 import { campaignStore } from "@/store/store";
 import { Dropdown, Modal, Table } from "flowbite-react";
 import { sendMail } from "@/app/api/campaign";
+import { COL_CONTAINER_STYLES } from "@/components/styles/flex_col_container";
+import {
+  BIG_BUTTON_STYLES,
+  BORDERED_BUTTON_STYLES,
+} from "@/components/styles/button";
+import Link from "next/link";
+import { successNotification } from "@/components/utils/utility";
 
 const NewCampaign = () => {
   const newCampaign = campaignStore((state) => state.newCampaign);
@@ -33,29 +40,52 @@ const NewCampaign = () => {
       recipient: newCampaign?.recipient ?? null,
       schedule: formattedDate ?? null,
     };
-
     setNewCampaign(updatedCampaign);
 
     try {
       const res = await sendMail(updatedCampaign);
-      console.log(res);
+      if(res.status === 200){
+        successNotification(
+          <div className="flex flex-col gap-4">
+            <h1>Campaign has started</h1>
+            <Link href="/home/campaigns/all-campaigns">
+            <button className={BORDERED_BUTTON_STYLES}>View</button>
+            </Link>
+          </div>
+        );
+        setNewCampaign({
+          userID:null,
+          template:{
+            name:null,
+            data:null,
+          },
+          campaignInfo:null,
+          recipient:null,
+          schedule:null
+        })
+      }
     } catch (error) {
       console.log(error);
     }
   };
 
   return (
-    <div className="relative w-full h-full dark:bg-dark-glass shadow-md backdrop-blur-2xl bg-white rounded-md p-4 flex flex-col gap-4 overflow-hidden">
+    <div className={COL_CONTAINER_STYLES}>
       <div className="w-full flex items-center justify-between">
         <div className="flex items-center rounded-md gap-8">
           <h1
             className={`${
-              newCampaign?.template !== null
+              newCampaign?.template !== null &&
+              newCampaign?.template.data !== null &&
+              newCampaign?.template.name !== null
                 ? "text-green-500"
                 : "dark:text-slate-300 text-dark-black opacity-20"
             } xl:text-base text-xs  `}
           >
-            Template {newCampaign?.template !== null && <span>✔</span>}
+            Template{" "}
+            {newCampaign?.template !== null &&
+              newCampaign?.template.data !== null &&
+              newCampaign?.template.name !== null && <span>✔</span>}
           </h1>
           <h1
             className={`${
@@ -70,9 +100,9 @@ const NewCampaign = () => {
                 : "dark:text-slate-300 text-dark-black opacity-20"
             } xl:text-base text-xs  `}
           >
-            Campaign Information{" "}
+            Campaign Information
             {newCampaign?.campaignInfo !== null &&
-            newCampaign?.campaignInfo?.campaignName !== "" &&
+              newCampaign?.campaignInfo?.campaignName !== "" &&
               newCampaign?.campaignInfo?.fromMail !== "" &&
               newCampaign?.campaignInfo?.fromName !== "" &&
               newCampaign?.campaignInfo?.subject !== null &&
@@ -86,43 +116,62 @@ const NewCampaign = () => {
                 : "dark:text-slate-300 text-dark-black opacity-20"
             } xl:text-base text-xs  `}
           >
-            Recipients Selection{" "}
+            Recipients Selection
             {newCampaign?.recipient !== null && <span>✔</span>}
           </h1>
           <h1
-            className={`xl:text-base text-xs dark:text-slate-300 text-dark-black opacity-20`}
+            className={`${
+              newCampaign?.schedule !== null
+                ? "text-green-500"
+                : "dark:text-slate-300 text-dark-black opacity-20"
+            } xl:text-base text-xs  `}
           >
             Schedule {newCampaign?.schedule !== null && <span>✔</span>}
           </h1>
         </div>
         <div className="flex gap-4 items-center">
-          <button className="xl:py-2 xl:px-4 py-1 px-2 xl:text-base text-xs dark:text-slate-300 text-dark-black rounded-md border border-brand-color ">
-            Save & Exit
-          </button>
-          <Dropdown
-            label="Actions"
-            placement="bottom-start"
-            renderTrigger={() => (
-              <button className="xl:py-2 xl:px-4 py-1 px-2 xl:text-base text-xs text-white rounded-md bg-brand-color hover:bg-dark-black duration-200 ease-in-out">
-                <h1 className="m-0 p-0 ">Start Campaign ▼</h1>
-              </button>
-            )}
-          >
-            <Dropdown.Item
-              onClick={startCampaign}
-              className="xl:text-base text-sm"
+          <button className={BORDERED_BUTTON_STYLES}>Save & Exit</button>
+
+          {newCampaign?.template !== null &&
+          newCampaign?.template.data !== null &&
+          newCampaign?.template.name !== null &&
+          newCampaign?.campaignInfo !== null &&
+          newCampaign?.recipient !== null &&
+          newCampaign?.campaignInfo.campaignName !== null &&
+          newCampaign?.campaignInfo.fromMail !== null &&
+          newCampaign?.campaignInfo.fromName !== null &&
+          newCampaign?.campaignInfo.subject !== null ? (
+            <Dropdown
+              label="Actions"
+              placement="bottom-start"
+              renderTrigger={() => (
+                <button className={BIG_BUTTON_STYLES}>
+                  <h1 className="m-0 p-0 ">Start Campaign ▼</h1>
+                </button>
+              )}
             >
-              Run campaign Now
-            </Dropdown.Item>
-            <Dropdown.Item
-              onClick={() => {
-                setViewSchedule(!viewSchedule);
-              }}
-              className="xl:text-base text-sm"
+              <Dropdown.Item
+                onClick={startCampaign}
+                className="xl:text-base text-sm"
+              >
+                Run campaign Now
+              </Dropdown.Item>
+              <Dropdown.Item
+                onClick={() => {
+                  setViewSchedule(!viewSchedule);
+                }}
+                className="xl:text-base text-sm"
+              >
+                Schedule Campaign
+              </Dropdown.Item>
+            </Dropdown>
+          ) : (
+            <button
+              className={`opacity-10 cursor-not-allowed ${BIG_BUTTON_STYLES}`}
             >
-              Schedule Campaign
-            </Dropdown.Item>
-          </Dropdown>
+              <h1 className="m-0 p-0 ">Start Campaign ▼</h1>
+            </button>
+          )}
         </div>
       </div>
       <div className="flex  justify-between gap-4 h-full">

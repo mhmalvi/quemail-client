@@ -4,6 +4,7 @@ import { Modal } from "flowbite-react";
 import SelectTemplate from "./SelectTemplate";
 import CreateTemplateModal from "./CreateTemplateModal";
 import { campaignStore } from "@/store/store";
+import { BIG_BUTTON_STYLES } from "@/components/styles/button";
 
 const ChooseTemplate = () => {
   const [chooseTemplate, setChooseTemplate] = useState<string>("");
@@ -11,7 +12,10 @@ const ChooseTemplate = () => {
   const setNewCampaign = campaignStore((state) => state.setNewCampaign);
   return (
     <>
-      {newCampaign?.template === undefined || newCampaign?.template === null ? (
+      {newCampaign?.template === undefined ||
+      newCampaign?.template === null ||
+      newCampaign?.template.data === null ||
+      newCampaign?.template.name === null ? (
         <div className="relative h-full w-full flex flex-col py-8 items-center justify-center dark:bg-dark-glass bg-violet-50 rounded-md shadow-md border dark:border-none gap-4 overflow-hidden">
           <h1 className="xl:text-base text-xs dark:text-slate-300 text-dark-black w-1/2 text-center">
             If you&apos;re looking to launch a new campaign, you can easily
@@ -19,7 +23,7 @@ const ChooseTemplate = () => {
           </h1>
           <div className="flex gap-4">
             <button
-              className="xl:py-2 xl:px-4 py-1 px-2 xl:text-base text-xs bg-brand-color rounded-md text-slate-50 hover:bg-dark-black duration-200 ease-in-out"
+              className={BIG_BUTTON_STYLES}
               onClick={() => {
                 setChooseTemplate("select");
               }}
@@ -27,7 +31,7 @@ const ChooseTemplate = () => {
               Select a Template
             </button>
             <button
-              className="xl:py-2 xl:px-4 py-1 px-2 xl:text-base text-xs bg-brand-color rounded-md text-slate-50 hover:bg-dark-black duration-200 ease-in-out"
+              className={BIG_BUTTON_STYLES}
               onClick={() => {
                 setChooseTemplate("create");
               }}
@@ -46,7 +50,7 @@ const ChooseTemplate = () => {
         </div>
       ) : (
         <div className="relative  h-full w-full flex flex-col py-8 items-center justify-center dark:bg-dark-glass bg-violet-50 rounded-md shadow-md border dark:border-none gap-4">
-          <h1>Template Selected: {newCampaign.template.name}</h1>
+          <h1 className="m-0 p-0 text-dark-black dark:text-slate-300">Template Selected: {newCampaign.template.name}</h1>
           <button
             className="bg-red-500 px-4 py-2 text-slate-50 xl:text-base text-sm"
             onClick={() => {

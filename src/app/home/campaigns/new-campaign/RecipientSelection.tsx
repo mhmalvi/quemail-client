@@ -93,7 +93,7 @@ const RecipientSelection = () => {
   };
 
   return (
-    <div className="relative w-full h-full flex flex-col p-4 dark:bg-dark-glass bg-violet-50 rounded-md shadow-md border dark:border-none gap-4">
+    <div className={"relative w-full h-full flex flex-col p-4 dark:bg-dark-glass bg-violet-50 rounded-md shadow-md border dark:border-none gap-4"}>
       <div className=" text-brand-color font-semibold flex items-center justify-between">
         <h1 className="m-0 p-0 xl:text-xl text-sm">Recipient Selection</h1>
         {newCampaign?.recipient && (

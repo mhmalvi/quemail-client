@@ -4,6 +4,8 @@ import { Datepicker } from "flowbite-react";
 import { campaignStore } from "@/store/store";
 import { NewCampaignType } from "@/components/utils/types";
 import { sendMail } from "@/app/api/campaign";
+import { successNotification } from "@/components/utils/utility";
+import { BORDERED_BUTTON_STYLES } from "@/components/styles/button";
 const Scheduler = () => {
   const [time, setTime] = useState("00:00");
   const [date, setDate] = useState("");
@@ -25,12 +27,27 @@ const Scheduler = () => {
       recipient: newCampaign?.recipient ?? null,
       schedule: formattedDate ?? null,
     };
-
     setNewCampaign(updatedCampaign);
-
     try {
       const res = await sendMail(updatedCampaign);
-      console.log(res);
+      if(res.status === 200){
+        successNotification(
+          <div className="flex flex-col gap-4">
+            <h1>Campaign has started</h1>
+            <button className={BORDERED_BUTTON_STYLES}>View</button>
+          </div>
+        );
+        setNewCampaign({
+          userID:null,
+          template:{
+            name:null,
+            data:null,
+          },
+          campaignInfo:null,
+          recipient:null,
+          schedule:null
+        })
+      }
     } catch (error) {
       console.log(error);
     }
@@ -112,6 +129,10 @@ const Scheduler = () => {
               setTime("00:00");
               setDate("");
               setShowSchedule(false);
+              setNewCampaign((prev: any) => ({
+                ...prev,
+                schedule: null,
+              }));
             }}
           >
             Clear

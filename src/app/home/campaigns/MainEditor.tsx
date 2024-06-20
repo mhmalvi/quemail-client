@@ -12,6 +12,7 @@ import { Dropdown, Tooltip } from "flowbite-react";
 import Image from "next/image";
 import Images from "@/components/utils/images";
 import { fields } from "@/components/utils/staticData";
+import { BIG_BUTTON_STYLES } from "@/components/styles/button";
 
 const MainEditor = () => {
   const router = useRouter();
@@ -152,7 +153,7 @@ const MainEditor = () => {
         </div>
         <div className="flex items-center justify-end gap-4 ">
           <button
-            className="px-4 py-1 bg-brand-color rounded-md disabled:opacity-20 xl:text-base text-sm"
+            className={BIG_BUTTON_STYLES}
             onClick={() => {
               setSaveClicked(true);
             }}
@@ -160,7 +161,7 @@ const MainEditor = () => {
           >
             Save Template
           </button>
-          <button className="px-4 py-1 bg-brand-color rounded-md disabled:opacity-20 xl:text-base text-sm">
+          <button className={BIG_BUTTON_STYLES}>
             Export HTML
           </button>
         </div>

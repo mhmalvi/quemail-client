@@ -1,4 +1,5 @@
 "use client";
+import { CONTAINER_STYLES } from "@/components/styles/flex_container";
 import Images from "@/components/utils/images";
 import Image from "next/image";
 import Link from "next/link";
@@ -6,7 +7,7 @@ import React from "react";
 
 const Campaigns = () => {
   return (
-    <div className="dark:bg-dark-glass rounded-md h-full p-4 shadow-md border dark:border-none bg-white flex items-center justify-center gap-16">
+    <div className={CONTAINER_STYLES}>
       <button className="w-1/3 flex flex-col items-center justify-center dark:text-slate-300 text-dark-black p-2 border border-brand-color rounded-md dark:hover:bg-dark-black hover:bg-violet-50 duration-100 ease-in">
         <Link href="/home/campaigns/new-campaign">
           <Image
