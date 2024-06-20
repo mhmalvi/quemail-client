@@ -184,4 +184,19 @@ export const customTheme: CustomFlowbiteTheme = {
       auto: "border border-light-glass bg-white text-gray-900 dark:border-none dark:bg-dark-glass dark:text-white",
     },
   },
+  listGroup: {
+    root: {
+      base: "list-none rounded-md border border-gray-200 bg-violet-50 text-left text-sm font-medium text-dark-black dark:border-gray-600 dark:bg-dark-glass dark:text-slate-300",
+    },
+    item: {
+      base: "[&>*]:first:rounded-md [&>*]:last:border-b-0",
+      link: {
+        base: "flex w-full items-center border-b border-slate-300 px-4 py-2 dark:border-brand-color",
+        active: {
+          off: "hover:bg-gray-100 hover:text-brand-color focus:text-brand-color focus:outline-none focus:ring-1 focus:ring-brand-color dark:border-brand-color dark:hover:bg-dark-glass dark:hover:text-white dark:focus:text-white dark:focus:ring-brand-color",
+          on: "bg-violet-100 text-dark-black dark:text-slate-300 dark:bg-light-black",
+        },
+      },
+    },
+  },
 };

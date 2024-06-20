@@ -22,49 +22,68 @@ const CampaignInfo = () => {
   const setNewCampaign = campaignStore((state) => state.setNewCampaign);
   const [mailAdded, setMailAdded] = useState<MailAdded | null>(null);
 
-  const [campaignName, setCampaignName] = useState("");
-  const [subject, setSubject] = useState("");
-  const [fromName, setFromName] = useState("");
-  const [mail, setMail] = useState<string | null>(null);
+  // const handleInformation = (
+  //   campaignName: string,
+  //   subject: string,
+  //   fromName: string,
+  //   mail: string | null
+  // ) => {
+  //   setNewCampaign((prev: any | null) => ({
+  //     ...prev,
+  //     campaignInfo: {
+  //       campaignName: campaignName,
+  //       subject: subject,
+  //       fromName: fromName,
+  //       fromMail: mail,
+  //     },
+  //   }));
+  // };
 
-  const handleInformation = (
-    campaignName: string,
-    subject: string,
-    fromName: string,
-    mail: string | null
-  ) => {
+  const handleSubjectChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const newSubject = e.target.value;
+    // setSubject(newSubject);
     setNewCampaign((prev: any | null) => ({
       ...prev,
       campaignInfo: {
-        campaignName: campaignName,
-        subject: subject,
-        fromName: fromName,
-        fromMail: mail,
+        ...prev.campaignInfo,
+        subject: newSubject,
       },
     }));
   };
 
-  const handleSubjectChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    const newSubject = e.target.value;
-    setSubject(newSubject);
-    handleInformation(campaignName, newSubject, fromName, mail);
-  };
-
   const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newName = e.target.value;
-    setFromName(newName);
-    handleInformation(campaignName, subject, newName, mail);
+    // setFromName(newName);
+    setNewCampaign((prev: any | null) => ({
+      ...prev,
+      campaignInfo: {
+        ...prev.campaignInfo,
+        fromName: newName,
+      },
+    }));
   };
 
   const handleFromMailChange = (e: string | null) => {
-    setMail(e);
-    handleInformation(campaignName, subject, fromName, e);
+    // setMail(e);
+    setNewCampaign((prev: any | null) => ({
+      ...prev,
+      campaignInfo: {
+        ...prev.campaignInfo,
+        fromMail: e,
+      },
+    }));
   };
 
   const handleCampaignName = (e: React.ChangeEvent<HTMLInputElement>) => {
     let campaignUniqueName = e.target.value;
-    setCampaignName(campaignUniqueName);
-    handleInformation(campaignUniqueName, subject, fromName, mail);
+    // setCampaignName(campaignUniqueName);
+    setNewCampaign((prev: any | null) => ({
+      ...prev,
+      campaignInfo: {
+        ...prev.campaignInfo,
+        campaignName: campaignUniqueName,
+      },
+    }));
   };
 
   useEffect(() => {
@@ -139,7 +158,7 @@ const CampaignInfo = () => {
             newCampaign?.campaignInfo !== null &&
             newCampaign?.campaignInfo?.campaignName
               ? newCampaign?.campaignInfo.campaignName
-              : campaignName
+              : ""
           }
           onChange={handleCampaignName}
         />
@@ -156,7 +175,7 @@ const CampaignInfo = () => {
               newCampaign?.campaignInfo !== null &&
               newCampaign?.campaignInfo?.subject
                 ? newCampaign?.campaignInfo.subject
-                : subject
+                : ""
             }
             onChange={handleSubjectChange}
             rows={4}
@@ -174,7 +193,7 @@ const CampaignInfo = () => {
                 newCampaign?.campaignInfo !== null &&
                 newCampaign?.campaignInfo?.fromName
                   ? newCampaign?.campaignInfo.fromName
-                  : fromName
+                  : ""
               }
               onChange={handleNameChange}
             />
@@ -189,13 +208,12 @@ const CampaignInfo = () => {
                 placement="bottom-start"
                 renderTrigger={() => (
                   <div className="disabled:opacity-50 cursor-pointer flex items-center justify-between text-sm w-full px-4 xl:py-2 py-1 bg-transparent duration-200 ease-in-out rounded-md border dark:border-dark-glass shadow-md dark:text-slate-300 text-dark-black">
-                    {mail !== null && newCampaign?.campaignInfo?.fromMail ? (
+                    {newCampaign?.campaignInfo?.fromMail !== null &&
+                    newCampaign?.campaignInfo?.fromMail ? (
                       <div className="flex items-center justify-between w-full">
                         <span className="dark:text-slate-300 text-dark-black">
-                          {mail !== null &&
-                            newCampaign?.campaignInfo?.fromMail &&
-                            // ? newCampaign?.campaignInfo.fromMail
-                            mail}
+                          {newCampaign?.campaignInfo?.fromMail !== null &&
+                            newCampaign?.campaignInfo?.fromMail}
                         </span>
                         <span>-</span>
                       </div>

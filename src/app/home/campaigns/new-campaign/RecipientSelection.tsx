@@ -14,8 +14,9 @@ const RecipientSelection = () => {
   const newCampaign = campaignStore((state) => state.newCampaign);
   const setNewCampaign = campaignStore((state) => state.setNewCampaign);
   const setViewRecipients = campaignStore((state) => state.setViewRecipients);
+  const clickedGroup = campaignStore((state) => state.clickedGroup);
+  const setClickedGroup = campaignStore((state) => state.setClickedGroup);
   const [openGroupModal, setOpenGroupModal] = useState<boolean>(false);
-  const [clickedGroup, setClickedGroup] = useState<number[]>([]);
 
   useEffect(() => {
     if (groupData === null) {
@@ -93,7 +94,11 @@ const RecipientSelection = () => {
   };
 
   return (
-    <div className={"relative w-full h-full flex flex-col p-4 dark:bg-dark-glass bg-violet-50 rounded-md shadow-md border dark:border-none gap-4"}>
+    <div
+      className={
+        "relative w-full h-full flex flex-col p-4 dark:bg-dark-glass bg-violet-50 rounded-md shadow-md border dark:border-none gap-4"
+      }
+    >
       <div className=" text-brand-color font-semibold flex items-center justify-between">
         <h1 className="m-0 p-0 xl:text-xl text-sm">Recipient Selection</h1>
         {newCampaign?.recipient && (
@@ -152,7 +157,9 @@ const RecipientSelection = () => {
                 onClick={() => setOpenGroupModal(true)}
                 disabled={!groupData}
               >
-                <h1 className="m-0 p-0 font-semibold dark:text-slate-300 text-dark-black">Select from groups</h1>
+                <h1 className="m-0 p-0 font-semibold dark:text-slate-300 text-dark-black">
+                  Select from groups
+                </h1>
                 <Image src={Images.Groups} alt="group" className="w-1/2 " />
               </button>
             </div>
@@ -173,10 +180,10 @@ const RecipientSelection = () => {
               <div key={index}>
                 <button
                   className="w-full px-4 py-2 rounded-md border border-slate-300 dark:text-slate-300 text-dark-black cursor-pointer disabled:cursor-not-allowed disabled:opacity-20"
-                  disabled={clickedGroup.includes(index)}
+                  disabled={clickedGroup !== null && clickedGroup.includes(index)}
                   onClick={() => {
                     handleAddRecipients(items);
-                    setClickedGroup((prev) => [...prev, index]);
+                    setClickedGroup((prev) => (prev ? [...prev, index] : [index]));
                   }}
                 >
                   {items}

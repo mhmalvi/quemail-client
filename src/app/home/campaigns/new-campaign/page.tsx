@@ -22,6 +22,7 @@ const NewCampaign = () => {
   const viewRecipients = campaignStore((state) => state.viewRecipients);
   const setViewRecipients = campaignStore((state) => state.setViewRecipients);
   const setViewSchedule = campaignStore((state) => state.setViewSchedule);
+  const setClickedGroup = campaignStore((state) => state.setClickedGroup);
   const viewSchedule = campaignStore((state) => state.viewSchedule);
 
   const startCampaign = async () => {
@@ -44,30 +45,33 @@ const NewCampaign = () => {
 
     try {
       const res = await sendMail(updatedCampaign);
-      if(res.status === 200){
+      if (res.status === 200) {
         successNotification(
-          <div className="flex flex-col gap-4">
+          <div className="flex flex-col gap-1">
             <h1>Campaign has started</h1>
             <Link href="/home/campaigns/all-campaigns">
-            <button className={BORDERED_BUTTON_STYLES}>View</button>
+              <button className="m-0 px-4 py-1 bg-brand-color text-slate-300 rounded-md">
+                View
+              </button>
             </Link>
           </div>
         );
         setNewCampaign({
-          userID:null,
-          template:{
-            name:null,
-            data:null,
+          userID: null,
+          template: {
+            name: null,
+            data: null,
           },
-          campaignInfo:{
-            campaignName:null,
-            subject:null,
-            fromMail:null,
-            fromName:null
+          campaignInfo: {
+            campaignName: null,
+            subject: null,
+            fromMail: null,
+            fromName: null,
           },
-          recipient:null,
-          schedule:null
-        })
+          recipient: null,
+          schedule: null,
+        });
+        setClickedGroup(null)
       }
     } catch (error) {
       console.log(error);
@@ -95,24 +99,28 @@ const NewCampaign = () => {
           <h1
             className={`${
               newCampaign?.campaignInfo !== null &&
-              newCampaign?.campaignInfo?.campaignName !== "" &&
-              newCampaign?.campaignInfo?.fromMail !== "" &&
-              newCampaign?.campaignInfo?.fromName !== "" &&
-              newCampaign?.campaignInfo?.subject !== null &&
-              newCampaign?.campaignInfo?.subject.length !== undefined &&
-              newCampaign?.campaignInfo?.subject.length > 0
+              newCampaign?.campaignInfo.campaignName !== "" &&
+              newCampaign?.campaignInfo.campaignName !== null &&
+              newCampaign?.campaignInfo.campaignName !== undefined &&
+              newCampaign?.campaignInfo.subject !== "" &&
+              newCampaign?.campaignInfo.subject !== undefined &&
+              newCampaign?.campaignInfo.fromName !== "" &&
+              newCampaign?.campaignInfo.fromName !== undefined &&
+              newCampaign?.campaignInfo.fromMail !== null
                 ? "text-green-500"
                 : "dark:text-slate-300 text-dark-black opacity-20"
             } xl:text-base text-xs  `}
           >
             Campaign Information
             {newCampaign?.campaignInfo !== null &&
-              newCampaign?.campaignInfo?.campaignName !== "" &&
-              newCampaign?.campaignInfo?.fromMail !== "" &&
-              newCampaign?.campaignInfo?.fromName !== "" &&
-              newCampaign?.campaignInfo?.subject !== null &&
-              newCampaign?.campaignInfo?.subject.length !== undefined &&
-              newCampaign?.campaignInfo?.subject.length > 0 && <span>✔</span>}
+              newCampaign?.campaignInfo.campaignName !== "" &&
+              newCampaign?.campaignInfo.campaignName !== null &&
+              newCampaign?.campaignInfo.campaignName !== undefined &&
+              newCampaign?.campaignInfo.subject !== "" &&
+              newCampaign?.campaignInfo.subject !== undefined &&
+              newCampaign?.campaignInfo.fromName !== "" &&
+              newCampaign?.campaignInfo.fromName !== undefined &&
+              newCampaign?.campaignInfo.fromMail !== null && <span>✔</span>}
           </h1>
           <h1
             className={`${
@@ -184,7 +192,7 @@ const NewCampaign = () => {
           <ChooseTemplate />
           <div className="flex w-full h-full gap-4">
             <CampaignInfo />
-            <RecipientSelection />
+            <RecipientSelection/>
           </div>
         </div>
         <Scheduler />
