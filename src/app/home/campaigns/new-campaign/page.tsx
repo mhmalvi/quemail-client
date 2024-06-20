@@ -59,7 +59,12 @@ const NewCampaign = () => {
             name:null,
             data:null,
           },
-          campaignInfo:null,
+          campaignInfo:{
+            campaignName:null,
+            subject:null,
+            fromMail:null,
+            fromName:null
+          },
           recipient:null,
           schedule:null
         })
