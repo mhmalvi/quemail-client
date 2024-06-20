@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { Datepicker } from "flowbite-react";
+import { Datepicker, Tooltip } from "flowbite-react";
 import { campaignStore } from "@/store/store";
 import { NewCampaignType } from "@/components/utils/types";
 import { sendMail } from "@/app/api/campaign";
@@ -30,7 +30,7 @@ const Scheduler = () => {
     setNewCampaign(updatedCampaign);
     try {
       const res = await sendMail(updatedCampaign);
-      if(res.status === 200){
+      if (res.status === 200) {
         successNotification(
           <div className="flex flex-col gap-4">
             <h1>Campaign has started</h1>
@@ -38,15 +38,15 @@ const Scheduler = () => {
           </div>
         );
         setNewCampaign({
-          userID:null,
-          template:{
-            name:null,
-            data:null,
+          userID: null,
+          template: {
+            name: null,
+            data: null,
           },
-          campaignInfo:null,
-          recipient:null,
-          schedule:null
-        })
+          campaignInfo: null,
+          recipient: null,
+          schedule: null,
+        });
       }
     } catch (error) {
       console.log(error);
@@ -102,7 +102,16 @@ const Scheduler = () => {
           />
         </div>
 
-        <form className="w-full shadow-md">
+        <form className="flex flex-col gap-4 w-full">
+          <div className="flex gap-2 items-center">
+            <p className="text-sm text-dark-black dark:text-slate-300">Select time (in UTC)</p>
+            <Tooltip
+              content="Copy from available shortcodes into template"
+              className="bg-light-black"
+            >
+              <p className="px-2 bg-brand-color m-0 rounded-full">?</p>
+            </Tooltip>
+          </div>
           <input
             type="time"
             id="time"
