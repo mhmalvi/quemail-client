@@ -111,6 +111,7 @@ export type CampaignStoreState = {
   selectedTemplate: TemplateType | null;
   viewRecipients: boolean;
   viewSchedule: boolean;
+  clickedGroup: number[] | null;
   setNewCampaign: (
     data:
       | NewCampaignType
@@ -120,6 +121,9 @@ export type CampaignStoreState = {
   setTemplateData: (data: [TemplateType]) => void;
   setViewRecipients: (state: boolean) => void;
   setViewSchedule: (state: boolean) => void;
+  setClickedGroup: (
+    state: number[] | null | ((prev: number[] | null) => number[])
+  ) => void;
 };
 
 // API TYPES
@@ -136,4 +140,19 @@ export interface OTPData {
 export interface credentialLoginStep {
   item: boolean;
   loading: boolean;
+}
+export interface CampaignListType {
+  campaignName: string;
+}
+export interface CampaignListResponse {
+  status: number | null;
+  campaigns: CampaignListType[] | null;
+  current_page: number | null;
+  total: number | null;
+  totalPages: number | null;
+  message: string | null;
+}
+export interface ShowCampaignStore {
+  campaignList: CampaignListResponse | null;
+  setCampaignList: (state: CampaignListResponse) => void;
 }

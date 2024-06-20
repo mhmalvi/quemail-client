@@ -6,6 +6,7 @@ import { NewCampaignType } from "@/components/utils/types";
 import { sendMail } from "@/app/api/campaign";
 import { successNotification } from "@/components/utils/utility";
 import { BORDERED_BUTTON_STYLES } from "@/components/styles/button";
+
 const Scheduler = () => {
   const [time, setTime] = useState("00:00");
   const [date, setDate] = useState("");
@@ -13,6 +14,7 @@ const Scheduler = () => {
   const viewSchedule = campaignStore((state) => state.viewSchedule);
   const newCampaign = campaignStore((state) => state.newCampaign);
   const setNewCampaign = campaignStore((state) => state.setNewCampaign);
+  const setClickedGroup = campaignStore((state) => state.setClickedGroup);
 
   const startCampaign = async () => {
     const userIDString =
@@ -43,15 +45,17 @@ const Scheduler = () => {
             name: null,
             data: null,
           },
-          campaignInfo:{
-            campaignName:null,
-            subject:null,
-            fromMail:null,
-            fromName:null
+          campaignInfo: {
+            campaignName: null,
+            subject: null,
+            fromMail: null,
+            fromName: null,
           },
           recipient: null,
           schedule: null,
         });
+
+        setClickedGroup(null);
       }
     } catch (error) {
       console.log(error);
@@ -109,7 +113,9 @@ const Scheduler = () => {
 
         <form className="flex flex-col gap-4 w-full">
           <div className="flex gap-2 items-center">
-            <p className="text-sm text-dark-black dark:text-slate-300">Select time (in UTC)</p>
+            <p className="text-sm text-dark-black dark:text-slate-300">
+              Select time (in UTC)
+            </p>
             <Tooltip
               content="Copy from available shortcodes into template"
               className="bg-light-black"

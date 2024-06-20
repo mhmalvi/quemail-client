@@ -1,9 +1,11 @@
 "use client";
 
 import {
+  CampaignListResponse,
   CampaignStoreState,
   ContactStoreState,
   NewCampaignType,
+  ShowCampaignStore,
   themeAction,
   themeState,
   utilState,
@@ -45,9 +47,9 @@ export const contactStore = create<ContactStoreState>((set) => ({
   groupData: null,
   groupContacts: null,
   totalPages: 1,
-  groupTotalPages:1,
+  groupTotalPages: 1,
   currentPage: 1,
-  currentGroupPage:1,
+  currentGroupPage: 1,
   setAllContactList: (contactData) =>
     set(() => ({ allContactList: contactData })),
   setCsvData: (csvData: any[]) => set(() => ({ csvData: csvData })),
@@ -62,16 +64,17 @@ export const contactStore = create<ContactStoreState>((set) => ({
 
 export const campaignStore = create<CampaignStoreState>((set) => ({
   viewRecipients: false,
-  viewSchedule:false,
+  viewSchedule: false,
   newCampaign: {
     template: null,
     campaignInfo: null,
     recipient: null,
     schedule: null,
-    userID: null
+    userID: null,
   },
   selectedTemplate: null,
   templateData: null,
+  clickedGroup: null,
   setNewCampaign: (data) =>
     set((state) => ({
       newCampaign:
@@ -85,4 +88,21 @@ export const campaignStore = create<CampaignStoreState>((set) => ({
   setTemplateData: (data) => set(() => ({ templateData: data })),
   setViewRecipients: (state) => set(() => ({ viewRecipients: state })),
   setViewSchedule: (state) => set(() => ({ viewSchedule: state })),
+  setClickedGroup: (state) =>
+    set((prevState) => ({
+      clickedGroup:
+        typeof state === "function" ? state(prevState.clickedGroup) : state,
+    })),
+}));
+
+export const showCampaignStore = create<ShowCampaignStore>((set) => ({
+  campaignList: {
+    status: null,
+    campaigns: null,
+    current_page: null,
+    total: null,
+    totalPages: null,
+    message: null,
+  },
+  setCampaignList: (state) => set(() => ({ campaignList: state })),
 }));
