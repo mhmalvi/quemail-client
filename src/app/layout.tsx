@@ -57,6 +57,7 @@ export default async function RootLayout({
           pauseOnFocusLoss
           pauseOnHover
           transition={Slide}
+          theme="dark"
         />
       </body>
     </html>

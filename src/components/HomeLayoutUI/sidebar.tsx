@@ -36,13 +36,13 @@ const Sidebar = () => {
         </div>
       ) : (
         <div
-          className={`overflow-hidden w-full flex justify-center items-center mt-4 rounded-md cursor-pointer bg-dark-black duration-100 ease-in`}
+          className={`overflow-hidden w-full flex justify-center items-center mt-4 rounded-md cursor-pointer duration-100 ease-in`}
           onClick={setOpenSidebar}
         >
-          <div className={`2xl:h-16 h-12 w-8 flex flex-col gap-2 items-center justify-center relative rounded-md ease-in duration-100`}>
-            <div className="h-1.5 w-8 rounded-md bg-light-black"></div>
-            <div className="h-1.5 w-8 rounded-md bg-light-black"></div>
-            <div className="h-1.5 w-8 rounded-md bg-light-black"></div>
+          <div className={`2xl:h-16 h-12 w-8 flex flex-col gap-1.5 items-center justify-center relative rounded-md ease-in duration-100`}>
+            <div className="h-1.5 w-10 rounded-sm bg-brand-color"></div>
+            <div className="h-1.5 w-10 rounded-sm bg-brand-color"></div>
+            <div className="h-1.5 w-10 rounded-sm bg-brand-color"></div>
           </div>
         </div>
       )}

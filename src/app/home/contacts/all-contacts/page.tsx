@@ -8,6 +8,8 @@ import { fetchContact } from "@/app/api/contact";
 import Images from "@/components/utils/images";
 import Groups from "./Groups";
 import ContactTable from "./ContactTable";
+import { COL_CONTAINER_STYLES } from "@/components/styles/flex_col_container";
+import { BIG_BUTTON_STYLES, BORDERED_BUTTON_STYLES } from "@/components/styles/button";
 
 const AllContacts = () => {
   const groupContacts = contactStore((state) => state.groupContacts);
@@ -38,7 +40,7 @@ const AllContacts = () => {
   return (
     <>
       {Images.Edit && allContactList !== null && allContactList.length > 0 ? (
-        <div className="w-full h-full dark:bg-dark-glass shadow-md backdrop-blur-2xl bg-white rounded-md p-4 flex flex-col gap-8 overflow-hidden">
+        <div className={COL_CONTAINER_STYLES}>
           <div className="w-full flex items-center justify-between">
             <div className="flex items-center justify-center gap-4">
               <Groups />
@@ -55,7 +57,7 @@ const AllContacts = () => {
             </div>
             <div className="flex items-center gap-4">
               <button
-                className="m-0 px-4 py-1 bg-brand-color rounded-md disabled:opacity-10 xl:text-base text-sm text-slate-300"
+                className={BIG_BUTTON_STYLES}
                 disabled
               >
                 Add to Campaign
@@ -64,7 +66,7 @@ const AllContacts = () => {
                 label=""
                 placement="bottom"
                 renderTrigger={() => (
-                  <h1 className="px-4 py-1 bg-brand-color rounded-md cursor-pointer xl:text-base text-sm text-slate-300">
+                  <h1 className={BIG_BUTTON_STYLES}>
                     Add Contacts +
                   </h1>
                 )}
@@ -113,7 +115,7 @@ const AllContacts = () => {
           <NoContacts />
           <div className="flex gap-8 items-center">
             <button
-              className="py-2 px-4 rounded-md dark:text-slate-300 text-dark-black border border-brand-color"
+              className={BORDERED_BUTTON_STYLES}
               onClick={() => {
                 setOpenModal({
                   show: "importContacts",
@@ -123,7 +125,7 @@ const AllContacts = () => {
               Import
             </button>
             <button
-              className="py-2 px-4 rounded-md bg-brand-color"
+              className={BIG_BUTTON_STYLES}
               onClick={() => {
                 setOpenAddContactModal(true);
               }}

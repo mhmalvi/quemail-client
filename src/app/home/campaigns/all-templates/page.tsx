@@ -12,6 +12,8 @@ import {
 } from "@/components/utils/utility";
 import dynamic from "next/dynamic";
 import NoContacts from "@/components/HomeLayoutUI/NoContacts";
+import { CONTAINER_STYLES } from "@/components/styles/flex_container";
+import { BIG_BUTTON_STYLES } from "@/components/styles/button";
 
 const AllTemplates = () => {
   const Editor = dynamic(() => import("../MainEditor"), {
@@ -58,12 +60,12 @@ const AllTemplates = () => {
     }
   };
   return (
-    <div className="w-full h-full dark:bg-dark-glass shadow-md backdrop-blur-2xl bg-white rounded-md p-4 flex gap-4 overflow-hidden">
+    <div className={CONTAINER_STYLES}>
       {templateData && templateData.length > 0 ? (
         <div className="w-full flex flex-col gap-4 border-brand-color">
           <div className="flex items-center justify-end">
             <button
-              className="px-4 py-1 bg-brand-color rounded-md xl:text-base text-sm"
+              className={BIG_BUTTON_STYLES}
               onClick={() => setOpenTemplateModal(true)}
             >
               Create a New Template
@@ -165,7 +167,7 @@ const AllTemplates = () => {
           <NoContacts />
           <div className="flex gap-8 items-center">
             <button
-              className="py-2 px-4 rounded-md bg-brand-color"
+              className={BIG_BUTTON_STYLES}
               onClick={() => {
                 setOpenTemplateModal(true);
               }}
