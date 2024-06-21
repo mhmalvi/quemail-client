@@ -197,3 +197,29 @@ export const fetchCampaign = async (data: {}) => {
     return error.response;
   }
 };
+export const fetchCampaignItems = async (data: {}) => {
+  const token = typeof window !== "undefined" && localStorage.getItem("token");
+  const parsedToken = token && JSON.parse(token);
+
+  try {
+    const result = await fetch(
+      `https://backend.quemailer.com/api/campaignwise-mail-fetch`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: parsedToken,
+        },
+        body: JSON.stringify(data),
+      }
+    );
+    if (result) {
+      const responseData = await result.json();
+      return responseData;
+    } else {
+      return null;
+    }
+  } catch (error: any) {
+    return error.response;
+  }
+};
