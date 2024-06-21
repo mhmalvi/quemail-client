@@ -1,7 +1,7 @@
 "use client";
 
 import {
-  CampaignListResponse,
+  // CampaignListResponse,
   CampaignStoreState,
   ContactStoreState,
   NewCampaignType,
@@ -104,7 +104,18 @@ export const showCampaignStore = create<ShowCampaignStore>((set) => ({
     totalPages: null,
     message: null,
   },
+  campaignItemList: {
+    message: null,
+    status: null,
+    campaigns: null,
+    total: null,
+    totalPages: null,
+    current_page: null,
+  },
   clickedCampaignId: null,
   setCampaignList: (state) => set(() => ({ campaignList: state })),
   setClickedCampaignId: (state) => set(() => ({ clickedCampaignId: state })),
+  setCampaignItemList(state) {
+    set(() => ({ campaignItemList: state }));
+  },
 }));
