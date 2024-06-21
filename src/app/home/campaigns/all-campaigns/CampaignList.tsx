@@ -12,9 +12,7 @@ import { showCampaignStore } from "@/store/store";
 const CampaignList = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [campaignsPerPage, setCampaignsPerPage] = useState<number | null>(8);
-  const [customCampaignsPerPage, setCustomCampaignsPerPage] = useState<
-    number | null
-  >(null);
+  const [totalPage,setTotalPage] = useState<number>(1)
   const campaignList = showCampaignStore((state) => state.campaignList);
   const setCampaignList = showCampaignStore((state) => state.setCampaignList);
   const [idClicked, setIdClicked] = useState<number>();
@@ -33,6 +31,7 @@ const CampaignList = () => {
         const res = await fetchCampaign(data);
         if (res.status === 200) {
           setCampaignList(res);
+          setTotalPage(res.totalPages)
         }
       } catch (err) {
         console.log(err);
@@ -128,7 +127,7 @@ const CampaignList = () => {
         <Pagination
           layout="pagination"
           currentPage={currentPage}
-          totalPages={3}
+          totalPages={totalPage}
           onPageChange={setCurrentPage}
           previousLabel="<"
           nextLabel=">"
