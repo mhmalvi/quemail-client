@@ -49,7 +49,7 @@ const CampaignList = () => {
 
   return (
     <>
-      <div className="flex items-center justify-between text-dark-black dark:text-slate-300 border-b dark:border-slate-300 border-violet-50 py-4">
+      <div className="flex items-center justify-between text-dark-black dark:text-slate-300 dark:border-slate-300 border-violet-50 ">
         <h1 className="w-full text-dark-black dark:text-slate-300">
           Campaign List
         </h1>
@@ -132,7 +132,7 @@ const CampaignList = () => {
                     }}
                     className="text-base flex items-center justify-center w-full gap-2"
                   >
-                    <p className="w-2/5 m-0 p-0 text-xs lg:text-sm truncate flex items-center justify-center">
+                    <div className="w-2/5 m-0 p-0 text-xs lg:text-sm truncate flex items-center xl:justify-center justify-start">
                       <Tooltip
                         content={item.campaignName}
                         className="bg-brand-color"
@@ -140,11 +140,11 @@ const CampaignList = () => {
                       >
                         {item.campaignName}
                       </Tooltip>
-                    </p>
+                    </div>
                     <p className="w-1/5 m-0 p-0 text-xs lg:text-sm">
                       {item.count}
                     </p>
-                    <p className="w-2/5 m-0 p-0 text-xs lg:text-sm truncate flex items-center justify-center">
+                    <div className="w-2/5 m-0 p-0 text-xs lg:text-sm truncate flex items-center xl:justify-center justify-start">
                       <Tooltip
                         content={item.fromMail}
                         className="bg-brand-color"
@@ -152,7 +152,7 @@ const CampaignList = () => {
                       >
                         {item.fromMail}
                       </Tooltip>
-                    </p>
+                    </div>
                   </ListGroup.Item>
                 </div>
               );

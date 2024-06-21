@@ -201,4 +201,18 @@ export const customTheme: CustomFlowbiteTheme = {
       },
     },
   },
+  tabs: {
+    tablist: {
+      base: "flex text-center gap-0",
+
+      tabitem: {
+        base: "flex items-center justify-center rounded-t-md px-4 py-2 text-sm font-medium first:ml-0 focus:outline-none focus:ring-0 focus:ring-cyan-300 disabled:cursor-not-allowed disabled:text-gray-400 disabled:dark:text-gray-500",
+        icon: "mr-2 h-5 w-5",
+      },
+    },
+    tabitemcontainer: {
+      base: "py-0",
+    },
+    tabpanel: "py-0",
+  },
 };

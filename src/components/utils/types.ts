@@ -141,13 +141,15 @@ export interface credentialLoginStep {
   item: boolean;
   loading: boolean;
 }
+
+// FETCHING CAMPAIGNS
 export interface CampaignListType {
   campaignName: string;
   count: number;
   fromMail: string;
-  id:number;
+  id: number;
 }
-export interface CampaignListResponse {
+interface CampaignListResponse {
   status: number | null;
   campaigns: CampaignListType[] | null;
   current_page: number | null;
@@ -155,9 +157,37 @@ export interface CampaignListResponse {
   totalPages: number | null;
   message: string | null;
 }
+export interface CampaignItemListType {
+  id: number;
+  subject: string | null;
+  fromName: string | null;
+  fromEmail: string | null;
+  recipientName: string | null;
+  recipientEmail: string | null;
+  group: string | null;
+  templateName: string | null;
+  templateData: string | null;
+  campaignID: number | null;
+  userID: number | null;
+  schedule: string | null;
+  open: number | null;
+  click: number | null;
+  bounce: number | null;
+  deliver: number | null;
+}
+interface CampaignItemListResponse {
+  message: string | null;
+  status: number | null;
+  campaigns: CampaignItemListType[] | null;
+  total: number | null;
+  totalPages: number | null;
+  current_page: number | null;
+}
 export interface ShowCampaignStore {
   campaignList: CampaignListResponse | null;
+  campaignItemList: CampaignItemListResponse | null;
   clickedCampaignId: number | null;
   setCampaignList: (state: CampaignListResponse) => void;
+  setCampaignItemList: (state: CampaignItemListResponse) => void;
   setClickedCampaignId: (state: number) => void;
 }
