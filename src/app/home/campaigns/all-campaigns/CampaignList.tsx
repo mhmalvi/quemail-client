@@ -1,21 +1,23 @@
 "use client";
 import { useState, useEffect } from "react";
 import { fetchCampaign } from "@/app/api/campaign";
-import { ListGroup, Pagination, Dropdown } from "flowbite-react";
-import { RxUpdate } from "react-icons/rx";
+import { ListGroup, Pagination, Dropdown, Tooltip } from "flowbite-react";
 import {
   CampaignListType,
-  CampaignListResponse,
 } from "@/components/utils/types";
 import { showCampaignStore } from "@/store/store";
 
 const CampaignList = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [campaignsPerPage, setCampaignsPerPage] = useState<number | null>(8);
-  const [totalPage,setTotalPage] = useState<number>(1)
+  const [totalPage, setTotalPage] = useState<number>(1);
+  const [idClicked, setIdClicked] = useState<number>();
+
   const campaignList = showCampaignStore((state) => state.campaignList);
   const setCampaignList = showCampaignStore((state) => state.setCampaignList);
-  const [idClicked, setIdClicked] = useState<number>();
+  const setClickedCampaignId = showCampaignStore(
+    (state) => state.setClickedCampaignId
+  );
 
   useEffect(() => {
     const userIDString =
@@ -31,7 +33,7 @@ const CampaignList = () => {
         const res = await fetchCampaign(data);
         if (res.status === 200) {
           setCampaignList(res);
-          setTotalPage(res.totalPages)
+          setTotalPage(res.totalPages);
         }
       } catch (err) {
         console.log(err);
@@ -42,23 +44,25 @@ const CampaignList = () => {
   const handlePerPage = (e: any) => {
     const value = Number(e.currentTarget.textContent);
     setCampaignsPerPage(value);
+    setCurrentPage(1)
   };
 
   return (
     <>
       <div className="flex items-center justify-between text-dark-black dark:text-slate-300 border-b dark:border-slate-300 border-violet-50 py-4">
-        <h1 className="w-full">Campaign List</h1>
-        <div className="w-full flex items-center justify-center">
+        <h1 className="w-full text-dark-black dark:text-slate-300">
+          Campaign List
+        </h1>
+        <div className="w-full flex items-center justify-end">
           <Dropdown
             label="Campaigns to show"
             dismissOnClick={true}
             size="sm"
             placement="bottom-end"
-            
             renderTrigger={() => (
               <div className="flex items-center justify-center gap-4">
-                <span className="text-sm px-4 py-2 bg-brand-color rounded-md cursor-pointer text-white">
-                  Campaigns per page - {campaignsPerPage}
+                <span className="2xl:text-sm md:text-xs px-4 py-2 bg-brand-color rounded-md cursor-pointer text-white">
+                  Campaigns / page - {campaignsPerPage}
                 </span>
               </div>
             )}
@@ -103,7 +107,18 @@ const CampaignList = () => {
           </Dropdown>
         </div>
       </div>
-      <ListGroup className="w-full bg-dark-glass overflow-auto">
+      <ListGroup className="relative flex flex-col w-full bg-dark-glass overflow-auto">
+        <ListGroup.Item className="sticky top-0 bg-dark-black w-full flex items-center justify-between gap-2 p-0 m-0">
+          <p className="w-2/5 m-0 p-0 text-xs lg:text-sm border-r text-slate-300">
+            Campaign Name
+          </p>
+          <p className="w-1/5 m-0 p-0 text-xs lg:text-sm border-r text-slate-300">
+            Count
+          </p>
+          <p className="w-2/5 m-0 p-0 text-xs lg:text-sm text-slate-300">
+            Campaign Name
+          </p>
+        </ListGroup.Item>
         {campaignList?.campaigns !== null &&
           campaignList?.campaigns.map(
             (item: CampaignListType, index: number) => {
@@ -113,10 +128,31 @@ const CampaignList = () => {
                     active={idClicked === index}
                     onClick={() => {
                       setIdClicked(index);
+                      setClickedCampaignId(item.id)
                     }}
-                    className="text-base "
+                    className="text-base flex items-center justify-center w-full gap-2"
                   >
-                    {item.campaignName}
+                    <p className="w-2/5 m-0 p-0 text-xs lg:text-sm truncate flex items-center justify-center">
+                      <Tooltip
+                        content={item.campaignName}
+                        className="bg-brand-color"
+                        placement="bottom"
+                      >
+                        {item.campaignName}
+                      </Tooltip>
+                    </p>
+                    <p className="w-1/5 m-0 p-0 text-xs lg:text-sm">
+                      {item.count}
+                    </p>
+                    <p className="w-2/5 m-0 p-0 text-xs lg:text-sm truncate flex items-center justify-center">
+                      <Tooltip
+                        content={item.fromMail}
+                        className="bg-brand-color"
+                        placement="bottom"
+                      >
+                        {item.fromMail}
+                      </Tooltip>
+                    </p>
                   </ListGroup.Item>
                 </div>
               );

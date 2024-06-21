@@ -193,7 +193,7 @@ export const customTheme: CustomFlowbiteTheme = {
     item: {
       base: " [&>*]:last:border-b-0",
       link: {
-        base: "flex w-full items-center border-b border-slate-300 px-4 py-2 dark:border-brand-color",
+        base: "flex w-full items-center border-b border-slate-300 px-2 py-2 dark:border-brand-color",
         active: {
           off: "hover:bg-gray-100 hover:text-brand-color focus:text-brand-color focus:outline-none focus:ring-1 focus:ring-brand-color dark:border-brand-color dark:hover:bg-dark-glass dark:hover:text-white dark:focus:text-white dark:focus:ring-brand-color",
           on: "bg-violet-100 text-dark-black dark:text-slate-300 dark:bg-light-black",
