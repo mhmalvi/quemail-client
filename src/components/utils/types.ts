@@ -143,6 +143,9 @@ export interface credentialLoginStep {
 }
 export interface CampaignListType {
   campaignName: string;
+  count: number;
+  fromMail: string;
+  id:number;
 }
 export interface CampaignListResponse {
   status: number | null;
@@ -154,5 +157,7 @@ export interface CampaignListResponse {
 }
 export interface ShowCampaignStore {
   campaignList: CampaignListResponse | null;
+  clickedCampaignId: number | null;
   setCampaignList: (state: CampaignListResponse) => void;
+  setClickedCampaignId: (state: number) => void;
 }
