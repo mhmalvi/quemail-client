@@ -113,7 +113,7 @@ const CampaignList = () => {
             Campaign Name
           </p>
           <p className="w-1/5 m-0 p-0 text-xs lg:text-sm border-r text-slate-300">
-            Count
+            No. of recipients
           </p>
           <p className="w-2/5 m-0 p-0 text-xs lg:text-sm text-slate-300">
             Campaign Name
