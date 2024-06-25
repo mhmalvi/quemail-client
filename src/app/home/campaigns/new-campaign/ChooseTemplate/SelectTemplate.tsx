@@ -27,7 +27,7 @@ const SelectTemplate: React.FC<SelectTemplateProps> = ({
           const updatedTemplateData = res.templates.map(
             (template: TemplateType) => ({
               name: template.name,
-              client_id: template.client_id,
+              userID: template.userID,
               id: template.id,
               template: template.template,
             })

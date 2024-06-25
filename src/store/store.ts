@@ -113,9 +113,14 @@ export const showCampaignStore = create<ShowCampaignStore>((set) => ({
     current_page: null,
   },
   clickedCampaignId: null,
+  campaignDetails: null,
   setCampaignList: (state) => set(() => ({ campaignList: state })),
   setClickedCampaignId: (state) => set(() => ({ clickedCampaignId: state })),
   setCampaignItemList(state) {
     set(() => ({ campaignItemList: state }));
   },
+  setCampaignDetails(state) {
+    set(() => ({ campaignDetails: state }));
+  },
 }));
+

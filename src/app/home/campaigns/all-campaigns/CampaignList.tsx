@@ -4,16 +4,8 @@ import { fetchCampaign } from "@/app/api/campaign";
 import { ListGroup, Pagination, Dropdown, Tooltip } from "flowbite-react";
 import { CampaignListType } from "@/components/utils/types";
 import { showCampaignStore } from "@/store/store";
-interface CampaignProps {
-  campaignName: string;
-  senderName: string;
-  senderEmail: string;
-  count: number;
-}
-interface CampaignDetailsInterface {
-  setCampaignDetails: Dispatch<SetStateAction<CampaignProps | null>>;
-}
-const CampaignList = ({ setCampaignDetails }: CampaignDetailsInterface) => {
+
+const CampaignList = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPage, setTotalPage] = useState<number>(1);
   const [campaignsPerPage, setCampaignsPerPage] = useState<number | null>(8);
@@ -24,6 +16,10 @@ const CampaignList = ({ setCampaignDetails }: CampaignDetailsInterface) => {
   const setClickedCampaignId = showCampaignStore(
     (state) => state.setClickedCampaignId
   );
+  const setCampaignDetails = showCampaignStore(
+    (state) => state.setCampaignDetails
+  );
+  
 
   useEffect(() => {
     const calculateCampaignsPerPage = () => {

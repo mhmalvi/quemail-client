@@ -45,6 +45,7 @@ export const fetchAddedMail = async () => {
   const userIDString =
     typeof window !== "undefined" && localStorage.getItem("userID");
   const userID = userIDString ? parseInt(userIDString, 10) : null;
+  console.log("userID: ", userID);
   try {
     const result = await fetch(
       `https://backend.quemailer.com/api/app-password-fetch`,
@@ -55,7 +56,7 @@ export const fetchAddedMail = async () => {
           Authorization: parsedToken,
         },
         body: JSON.stringify({
-          userID: userID,
+          userID: userID
         }),
       }
     );

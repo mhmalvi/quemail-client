@@ -103,57 +103,13 @@ const CampaignInfo = () => {
 
   return (
     <div className="relative w-full  h-full flex flex-col p-4 dark:bg-dark-glass bg-violet-50 rounded-md shadow-md border dark:border-none gap-4">
-      <div className="flex items-center justify-between">
-        <h1 className="xl:text-xl text-sm text-brand-color font-semibold">
-          Campaign Information
-        </h1>
-        <Tooltip
-          content="Copy from available shortcodes into subject"
-          className="bg-light-black xl:text-sm text-xs w-1/2"
-        >
-          <Dropdown
-            label="Actions"
-            placement="bottom-start"
-            renderTrigger={() => (
-              <div className="cursor-pointer flex items-center gap-2 bg-brand-color px-2 py-1 rounded-md">
-                <h1 className="m-0 p-0 xl:text-sm text-xs">
-                  Select dynamic headers
-                </h1>
-                <Image
-                  src={Images.Copy}
-                  alt="copy"
-                  className="2xl:w-6 w-0 rounded-md dark:fill-text-slate-300 fill-dark-black"
-                />
-              </div>
-            )}
-          >
-            {fields.map((items: any, index: number) => {
-              return (
-                <div key={index}>
-                  <Dropdown.Item
-                    className="dark:text-slate-300 text-light-black hover:text-gray-800 xl:text-sm text-xs "
-                    onClick={() => {
-                      navigator.clipboard.writeText(`{${items.label}}`);
-                      successNotification(
-                        `${items.label} copied to clipboard as {${items.label}}`
-                      );
-                    }}
-                  >
-                    {items?.label}
-                  </Dropdown.Item>
-                </div>
-              );
-            })}
-          </Dropdown>
-        </Tooltip>
-      </div>
       <div className="flex flex-col">
-        <label className="dark:text-slate-300 text-dark-black xl:text-sm text-xs">
+        <label className="dark:text-slate-300 text-dark-black">
           Campaign Name
         </label>
         <input
           placeholder="Add a name of the campaign"
-          className="xl:text-sm text-xs w-full px-4 xl:py-2 py-1 bg-transparent rounded-md border dark:border-dark-glass shadow-md dark:text-slate-300 text-dark-black focus:ring-0 focus:outline-none"
+          className=" w-full px-4 xl:py-2 py-1 bg-transparent rounded-md border dark:border-dark-glass shadow-md dark:text-slate-300 text-dark-black focus:ring-0 focus:outline-none"
           value={
             newCampaign?.campaignInfo !== null &&
             newCampaign?.campaignInfo?.campaignName
@@ -164,13 +120,56 @@ const CampaignInfo = () => {
         />
       </div>
       <div className="flex w-full gap-4">
-        <div className="flex flex-col w-full">
-          <label className="dark:text-slate-300 text-dark-black xl:text-sm text-xs">
-            Subject Line
-          </label>
+        <div className="flex flex-col w-full gap-4">
+          <div className="flex w-full items-center justify-between">
+            <label className="dark:text-slate-300 text-dark-black">
+              Subject Line
+            </label>
+            <div className="flex items-center justify-between">
+              <Tooltip
+                content="Copy from available shortcodes into subject"
+                className="bg-light-black xl:text-sm text-xs w-1/2"
+              >
+                <Dropdown
+                  label="Actions"
+                  placement="bottom-start"
+                  renderTrigger={() => (
+                    <div className="cursor-pointer flex items-center gap-2 bg-brand-color px-2 py-1 rounded-md">
+                      <h1 className="m-0 p-0 xl:text-sm text-xs">
+                        Select dynamic headers
+                      </h1>
+                      <Image
+                        src={Images.Copy}
+                        alt="copy"
+                        className="2xl:w-6 w-0 rounded-md dark:fill-text-slate-300 fill-dark-black"
+                      />
+                    </div>
+                  )}
+                >
+                  {fields.map((items: any, index: number) => {
+                    return (
+                      <div key={index}>
+                        <Dropdown.Item
+                          className="dark:text-slate-300 text-light-black hover:text-gray-800 xl:text-sm text-xs "
+                          onClick={() => {
+                            navigator.clipboard.writeText(`{${items.label}}`);
+                            successNotification(
+                              `${items.label} copied to clipboard as {${items.label}}`
+                            );
+                          }}
+                        >
+                          {items?.label}
+                        </Dropdown.Item>
+                      </div>
+                    );
+                  })}
+                </Dropdown>
+              </Tooltip>
+            </div>
+          </div>
           <textarea
             placeholder="What is the subject?"
-            className="xl:max-h-28 lg:max-h-20 min-h-8 aria-expanded xl:text-sm text-xs w-full px-4 xl:py-2 py-1 bg-transparent rounded-md border dark:border-dark-glass shadow-md dark:text-slate-300 text-dark-black focus:ring-0 focus:outline-none outline-brand-color"
+            className="xl:max-h-28 lg:max-h-20 min-h-8 aria-expanded w-full px-4 xl:py-2 py-1 bg-transparent rounded-md border dark:border-dark-glass shadow-md dark:text-slate-300 text-dark-black focus:ring-0 focus:outline-none outline-brand-color"
             value={
               newCampaign?.campaignInfo !== null &&
               newCampaign?.campaignInfo?.subject
@@ -183,12 +182,12 @@ const CampaignInfo = () => {
         </div>
         <div className="flex flex-col gap-4 w-full">
           <div className="flex flex-col">
-            <label className="dark:text-slate-300 text-dark-black xl:text-sm text-xs">
+            <label className="dark:text-slate-300 text-dark-black">
               From Name
             </label>
             <input
               placeholder="Who is sending?"
-              className="xl:text-sm text-xs w-full px-4 xl:py-2 py-1 bg-transparent rounded-md border dark:border-dark-glass shadow-md dark:text-slate-300 text-dark-black focus:ring-0 focus:outline-none"
+              className="w-full px-4 xl:py-2 py-1 bg-transparent rounded-md border dark:border-dark-glass shadow-md dark:text-slate-300 text-dark-black focus:ring-0 focus:outline-none"
               value={
                 newCampaign?.campaignInfo !== null &&
                 newCampaign?.campaignInfo?.fromName
@@ -199,7 +198,7 @@ const CampaignInfo = () => {
             />
           </div>
           <div className="flex flex-col">
-            <label className="dark:text-slate-300 text-dark-black xl:text-sm text-xs">
+            <label className="dark:text-slate-300 text-dark-black">
               From Mail
             </label>
             {mailAdded?.google ? (
@@ -218,7 +217,7 @@ const CampaignInfo = () => {
                         <span>-</span>
                       </div>
                     ) : (
-                      <h1 className="xl:text-sm text-xs dark:text-slate-300/75 text-dark-black/75 flex justify-between w-full">
+                      <h1 className="dark:text-slate-300/75 text-dark-black/75 flex justify-between w-full">
                         Select from Mail
                         <span>▼</span>
                       </h1>
@@ -228,7 +227,7 @@ const CampaignInfo = () => {
               >
                 {mailAdded && mailAdded.google !== null && (
                   <Dropdown.Item
-                    className="dark:text-slate-300 text-light-black hover:text-gray-800 xl:text-sm text-xs "
+                    className="dark:text-slate-300 text-light-black hover:text-gray-800"
                     onClickCapture={(e: any) => {
                       handleFromMailChange(e.target.textContent);
                     }}
@@ -237,7 +236,7 @@ const CampaignInfo = () => {
                   </Dropdown.Item>
                 )}
                 <Dropdown.Item
-                  className="dark:text-slate-300 text-light-black hover:text-gray-800 xl:text-sm text-xs"
+                  className="dark:text-slate-300 text-light-black hover:text-gray-800"
                   onClick={() => {
                     handleFromMailChange(null);
                   }}

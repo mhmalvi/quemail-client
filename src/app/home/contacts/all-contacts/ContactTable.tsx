@@ -42,7 +42,7 @@ const ContactTable = () => {
   const [updateLoading, setUpdateLoading] = useState(false);
   const [editContactData, setEditContactData] = useState<EditContactData>({
     id: null,
-    user_id: userID,
+    userID: userID,
     json: {
       name: "",
       email: "",
@@ -59,7 +59,7 @@ const ContactTable = () => {
   const [initialEditContactData, setInitialEditContactData] =
     useState<EditContactData>({
       id: null,
-      user_id: userID,
+      userID: userID,
       json: {
         name: "",
         email: "",

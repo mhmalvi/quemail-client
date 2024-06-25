@@ -91,7 +91,7 @@ export const destroyContact = async (data: number) => {
         },
         body: JSON.stringify({
           id: data,
-          user_id: userID,
+          userID: userID,
         }),
       }
     );
@@ -121,7 +121,7 @@ export const fetchGroupList = async () => {
           Authorization: parsedToken,
         },
         body: JSON.stringify({
-          user_id: userID,
+          userID: userID,
         }),
       }
     );
@@ -154,7 +154,7 @@ export const fetchGroupItems = async (
           Authorization: parsedToken,
         },
         body: JSON.stringify({
-          user_id: userID,
+          userID: userID,
           group: data,
           page: page,
           per_page: 8,

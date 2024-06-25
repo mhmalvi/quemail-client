@@ -1,22 +1,21 @@
 "use client";
 import { useState, useEffect } from "react";
 import { fetchCampaignItems } from "@/app/api/campaign";
-import { ListGroup, Pagination, Dropdown, Tabs, Tooltip } from "flowbite-react";
+import { ListGroup, Pagination, Tooltip } from "flowbite-react";
+import {
+  TbProgress,
+  TbProgressX,
+  TbProgressCheck,
+  TbChecks,
+} from "react-icons/tb";
+
 import {
   CampaignItemListType,
   CampaignListType,
 } from "@/components/utils/types";
 import { showCampaignStore } from "@/store/store";
-interface CampaignProps {
-  campaignName: string;
-  senderName: string;
-  senderEmail: string;
-  count: number;
-}
-interface CampaignDetailsInterface {
-  campaignDetails: CampaignProps | null;
-}
-const CampaignItems = ({ campaignDetails }: CampaignDetailsInterface) => {
+
+const CampaignItems = () => {
   const [showTemplateData, setShowTemplateData] = useState<string | null>(null);
   const [itemIdClicked, setItemIdClicked] = useState<number | null>(null);
   const [scale, setScale] = useState(1);
@@ -38,6 +37,7 @@ const CampaignItems = ({ campaignDetails }: CampaignDetailsInterface) => {
   const setCampaignItemList = showCampaignStore(
     (state) => state.setCampaignItemList
   );
+  const campaignDetails = showCampaignStore((state) => state.campaignDetails);
 
   useEffect(() => {
     const userIDString =
@@ -73,7 +73,7 @@ const CampaignItems = ({ campaignDetails }: CampaignDetailsInterface) => {
       {campaignItemList?.campaigns !== null && (
         <>
           <div className="flex items-center justify-between gap-4 text-dark-black dark:text-slate-300 dark:border-slate-300 border-violet-50 ">
-            <div className="flex items-center gap-4 w-1/2">
+            <div className="flex items-center gap-4 lg:w-1/2 w-1/3">
               <button
                 onClick={() => {
                   setClickedCampaignId(null);
@@ -82,43 +82,41 @@ const CampaignItems = ({ campaignDetails }: CampaignDetailsInterface) => {
               >
                 &lt;
               </button>
-              <h1 className="w-full text-dark-black dark:text-slate-300">
-                Campaign name: {campaignDetails?.campaignName}
+              <h1 className="text-dark-black dark:text-slate-300 lg:text-sm text-xs">
+                Campaign name: <span className="text-green-500 font-semibold">{campaignDetails?.campaignName}</span>
               </h1>
             </div>
-            <div className="w-1/4 flex flex-col p-2 border rounded-md">
+            <h1 className="lg:text-sm text-xs m-0 px-2">
+              Sender Name: <span className="text-green-500 font-semibold">{campaignDetails?.senderName}</span>
+            </h1>
+            <h1 className="lg:text-sm text-xs m-0 px-2">
+              Sender Email: <span className="text-green-500 font-semibold">{campaignDetails?.senderEmail}</span>
+            </h1>
+            <div className="w-1/8 h-full flex flex-col justify-center p-2 border rounded-md">
               <h1 className="lg:text-sm text-xs">
-                Sender Name: {campaignDetails?.senderName}
-              </h1>
-              <h1 className="lg:text-sm text-xs">
-                Sender Email: {campaignDetails?.senderEmail}
-              </h1>
-              <h1 className="lg:text-sm text-xs">
-                Sender Name: {campaignDetails?.count}
+                Total Recipients:  <span className="text-green-500 font-semibold">{campaignDetails?.count}</span>
               </h1>
             </div>
           </div>
-          <div className="flex gap-4">
-            <div className="flex flex-col items-center gap-4 w-1/2">
+          <div className="flex gap-4 h-full">
+            <div className="flex flex-col items-center gap-4 w-1/2 h-5/6">
               <ListGroup className="relative rounded-none flex flex-col gap-0 w-full bg-transparent overflow-auto border-none">
-                <ListGroup.Item className="sticky top-0 bg-dark-black w-full flex items-center justify-between p-0 m-0">
-                  <p className="w-1/4 m-0 p-0 text-xs lg:text-sm text-slate-300">
+                <div className="sticky top-0 bg-dark-black w-full flex items-center justify-center py-2 m-0">
+                  <p className="w-full m-0 p-0 text-sm text-center text-slate-300">
                     Recipient Table
                   </p>
-                </ListGroup.Item>
+                </div>
                 <ListGroup.Item className="sticky top-0 bg-dark-black w-full flex items-center justify-between p-0 m-0">
-                  <p className="w-1/4 m-0 p-0 text-xs lg:text-sm border-r text-slate-300">
+                  <p className="w-1/4 m-0 p-0 text-xs border-r text-slate-300">
                     Name
                   </p>
-                  <p className="w-1/4 m-0 p-0 text-xs lg:text-sm border-r text-slate-300">
+                  <p className="w-1/4 m-0 p-0 text-xs border-r text-slate-300">
                     Email
                   </p>
-                  <p className="w-1/4 m-0 p-0 text-xs lg:text-sm border-r text-slate-300">
+                  <p className="w-1/4 m-0 p-0 text-xs border-r text-slate-300">
                     Group
                   </p>
-                  <p className="w-1/4 m-0 p-0 text-xs lg:text-sm text-slate-300">
-                    Status
-                  </p>
+                  <p className="w-1/4 m-0 p-0 text-xs text-slate-300">Status</p>
                 </ListGroup.Item>
                 {campaignItemList?.campaigns.map(
                   (item: CampaignItemListType, index: number) => {
@@ -132,7 +130,7 @@ const CampaignItems = ({ campaignDetails }: CampaignDetailsInterface) => {
                           }}
                           active={itemIdClicked === index}
                         >
-                          <div className="w-1/4 m-0 p-0 text-xs lg:text-sm truncate flex items-center justify-center">
+                          <div className="w-1/4 m-0 p-0 text-xs truncate flex items-center justify-center">
                             <Tooltip
                               content={item.recipientName}
                               className="bg-brand-color flex items-center"
@@ -141,7 +139,7 @@ const CampaignItems = ({ campaignDetails }: CampaignDetailsInterface) => {
                               {item.recipientName}
                             </Tooltip>
                           </div>
-                          <div className="w-1/4 m-0 p-0 text-xs lg:text-sm truncate flex items-center justify-center">
+                          <div className="w-1/4 m-0 p-0 text-xs truncate flex items-center justify-center">
                             <Tooltip
                               content={item.recipientEmail}
                               className="bg-brand-color"
@@ -150,7 +148,7 @@ const CampaignItems = ({ campaignDetails }: CampaignDetailsInterface) => {
                               {item.recipientEmail}
                             </Tooltip>
                           </div>
-                          <div className="w-1/4 m-0 p-0 text-xs lg:text-sm truncate flex items-center justify-center">
+                          <div className="w-1/4 m-0 p-0 text-xs truncate flex items-center justify-center">
                             <Tooltip
                               content={item.group}
                               className="bg-brand-color"
@@ -159,20 +157,56 @@ const CampaignItems = ({ campaignDetails }: CampaignDetailsInterface) => {
                               {item.group}
                             </Tooltip>
                           </div>
-                          <div className="w-1/4 m-0 p-0 text-xs lg:text-sm truncate flex items-center justify-center">
+                          <div className="w-1/4 m-0 p-0 truncate text-xl flex items-center justify-center">
                             <Tooltip
-                              content={"status"}
-                              className="bg-brand-color"
+                              content={
+                                <div className="flex flex-col items-start justify-start gap-1">
+                                  <div className="flex gap-1 items-center justify-start">
+                                    <p className="text-blue-500">
+                                      <TbChecks />
+                                    </p>
+
+                                    <p className="text-xs">: Seen</p>
+                                  </div>
+                                  <div className="flex gap-1 items-center justify-start">
+                                    <p className="text-green-500">
+                                      <TbProgressCheck />
+                                    </p>
+                                    <p className="text-xs">: Delivered</p>
+                                  </div>
+                                  <div className="flex gap-1 items-center justify-start">
+                                    <p className="text-red-500">
+                                      <TbProgressX />
+                                    </p>
+                                    <p className="text-xs">: Bounced/Failed</p>
+                                  </div>
+                                  <div className="flex gap-1 items-center justify-start">
+                                    <p className="text-orange-300">
+                                      <TbProgress />
+                                    </p>
+                                    <p className="text-xs">: In Progress</p>
+                                  </div>
+                                </div>
+                              }
+                              className="bg-dark-black"
                               placement="bottom"
                             >
                               {item.open !== 0 ? (
-                                <p>Seen</p>
+                                <p className="text-blue-500">
+                                  <TbChecks />
+                                </p>
                               ) : item.deliver !== 2 && item.deliver !== 0 ? (
-                                <p>Sent</p>
+                                <p className="text-green-500">
+                                  <TbProgressCheck />
+                                </p>
                               ) : item.deliver === 2 ? (
-                                <p>Failed/Bounced</p>
+                                <p className="text-red-500">
+                                  <TbProgressX />
+                                </p>
                               ) : (
-                                <p>Sending</p>
+                                <p className="text-orange-300">
+                                  <TbProgress />
+                                </p>
                               )}
                             </Tooltip>
                           </div>
@@ -193,15 +227,15 @@ const CampaignItems = ({ campaignDetails }: CampaignDetailsInterface) => {
                 />
               </div>
             </div>
-            <div className="w-1/2">
-              <div className="h-full dark:bg-dark-glass bg-violet-50 shadow-md rounded-md p-2 overflow-auto">
+            <div className="w-1/2 h-full overflow-auto">
+              <div className="flex items-center justify-center dark:bg-dark-glass bg-violet-50 shadow-md rounded-md p-2 overflow-auto">
                 {showTemplateData === null ? (
-                  <p className="flex items-center justify-center h-full dark:text-slate-300 text-dark-black">
+                  <p className="flex items-center justify-center w-full h-full dark:text-slate-300 text-dark-black">
                     Select Recipients to Load Email
                   </p>
                 ) : (
                   <div
-                    className=" scale-based-on-the-width bg-[#F7F8F9] w-full h-full rounded-md"
+                    className="bg-[#F7F8F9] "
                     style={{
                       transform: `scale(${scale})`,
                       transition: "transform 0.2s",
