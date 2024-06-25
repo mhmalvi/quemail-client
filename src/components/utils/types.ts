@@ -112,6 +112,8 @@ export type CampaignStoreState = {
   viewRecipients: boolean;
   viewSchedule: boolean;
   clickedGroup: number[] | null;
+  multipartPage: number;
+  setMultipartPage: (state: number) => void;
   setNewCampaign: (
     data:
       | NewCampaignType
@@ -198,6 +200,5 @@ export interface ShowCampaignStore {
   setCampaignList: (state: CampaignListResponse) => void;
   setCampaignItemList: (state: CampaignItemListResponse) => void;
   setClickedCampaignId: (state: number | null) => void;
-
   setCampaignDetails: (state: CampaignDetails | null) => void;
 }
