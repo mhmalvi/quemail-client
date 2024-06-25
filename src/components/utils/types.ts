@@ -147,6 +147,7 @@ export interface CampaignListType {
   campaignName: string;
   count: number;
   fromMail: string;
+  fromName: string;
   id: number;
 }
 interface CampaignListResponse {
@@ -189,5 +190,5 @@ export interface ShowCampaignStore {
   clickedCampaignId: number | null;
   setCampaignList: (state: CampaignListResponse) => void;
   setCampaignItemList: (state: CampaignItemListResponse) => void;
-  setClickedCampaignId: (state: number) => void;
+  setClickedCampaignId: (state: number | null) => void;
 }
