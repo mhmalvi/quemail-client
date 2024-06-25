@@ -28,7 +28,7 @@ const MainEditor = () => {
   const [data, setData] = useState({
     template: "",
     name: selectedTemplate?.name || null,
-    user_id: userID,
+    userID: userID,
   });
   const optionsDark = {
     appearance: {

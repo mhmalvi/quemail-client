@@ -19,9 +19,9 @@ const AllCampaigns = () => {
     <div className={CONTAINER_STYLES}>
       <div className="relative w-full h-full rounded-md flex flex-col gap-4 overflow-hidden">
         {clickedCampaignId !== null ? (
-          <CampaignItems campaignDetails={campaignDetails} />
+          <CampaignItems/>
         ) : (
-          <CampaignList setCampaignDetails={setCampaignDetails} />
+          <CampaignList/>
         )}
       </div>
     </div>

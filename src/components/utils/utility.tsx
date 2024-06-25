@@ -18,12 +18,12 @@ export const customTheme: CustomFlowbiteTheme = {
     content: {
       base: "relative h-full w-full p-4 md:h-auto rounded-md",
       inner:
-        "relative flex h-full w-full flex-col rounded-md bg-violet-50 shadow ",
+        "relative flex h-full w-full flex-col rounded-md bg-violet-50 dark:bg-dark-black shadow-md",
     },
 
     header: {
-      base: "flex items-center justify-between rounded-t xl:py-2 py-1 px-4 bg-gradient-to-b from-violet-200 to-violet-200 dark:bg-gradient-to-b dark:from-light-black dark:to-light-black",
-      title: "xl:text-base text-sm font-medium text-gray-900 dark:text-white",
+      base: "flex items-center justify-between rounded-t xl:py-2 py-1 px-4 bg-dark-black",
+      title: "xl:text-base text-sm font-medium text-slate-300",
     },
   },
   table: {
@@ -195,7 +195,7 @@ export const customTheme: CustomFlowbiteTheme = {
       link: {
         base: "flex w-full items-center border-b border-slate-300 px-2 py-2 dark:border-brand-color",
         active: {
-          off: "hover:bg-gray-100 hover:text-brand-color focus:text-brand-color focus:outline-none focus:ring-1 focus:ring-brand-color dark:border-brand-color dark:hover:bg-dark-glass dark:hover:text-white dark:focus:text-white dark:focus:ring-brand-color",
+          off: "focus:text-brand-color focus:outline-none focus:ring-1 focus:ring-brand-color dark:border-brand-color dark:focus:text-white dark:focus:ring-brand-color",
           on: "bg-violet-100 text-dark-black dark:text-slate-300 dark:bg-light-black",
         },
       },

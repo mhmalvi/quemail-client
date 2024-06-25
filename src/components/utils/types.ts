@@ -19,7 +19,7 @@ export type OpenEditContactModal = {
 
 export type EditContactData = {
   id: number | null;
-  user_id: string | false | null;
+  userID: string | false | null;
   json: {
     name: string | null;
     email: string | null;
@@ -49,7 +49,7 @@ export interface themeAction {
 }
 export type TemplateType = {
   name: string | null;
-  client_id: number | null;
+  userID: number | null;
   id: number | null;
   template: {
     html: string | null;
@@ -158,6 +158,12 @@ interface CampaignListResponse {
   totalPages: number | null;
   message: string | null;
 }
+interface CampaignDetails {
+  campaignName: string;
+  senderName: string;
+  senderEmail: string;
+  count: number;
+}
 export interface CampaignItemListType {
   id: number;
   subject: string | null;
@@ -188,7 +194,10 @@ export interface ShowCampaignStore {
   campaignList: CampaignListResponse | null;
   campaignItemList: CampaignItemListResponse | null;
   clickedCampaignId: number | null;
+  campaignDetails: CampaignDetails | null;
   setCampaignList: (state: CampaignListResponse) => void;
   setCampaignItemList: (state: CampaignItemListResponse) => void;
   setClickedCampaignId: (state: number | null) => void;
+
+  setCampaignDetails: (state: CampaignDetails | null) => void;
 }

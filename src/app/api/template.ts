@@ -1,4 +1,6 @@
 export const saveTemplate = async (data: Object) => {
+  const token = typeof window !== "undefined" && localStorage.getItem("token");
+  const parsedToken = token && JSON.parse(token);
   try {
     const result = await fetch(
       `https://backend.quemailer.com/api/template-save`,
@@ -6,6 +8,7 @@ export const saveTemplate = async (data: Object) => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Authorization: parsedToken,
         },
         body: JSON.stringify(data),
       }
@@ -35,7 +38,7 @@ export const fetchTemplate = async () => {
           Authorization: parsedToken,
         },
         body: JSON.stringify({
-          client_id: userID,
+          userID: userID,
         }),
       }
     );
@@ -65,7 +68,7 @@ export const destroyTemplate = async (data: number | null) => {
         },
         body: JSON.stringify({
           id: data,
-          client_id: userID,
+          userID: userID,
         }),
       }
     );
