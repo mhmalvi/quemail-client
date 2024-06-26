@@ -83,18 +83,30 @@ const CampaignItems = () => {
                 &lt;
               </button>
               <h1 className="text-dark-black dark:text-slate-300 lg:text-sm text-xs">
-                Campaign name: <span className="text-green-500 font-semibold">{campaignDetails?.campaignName}</span>
+                Campaign name:{" "}
+                <span className="text-green-500 font-semibold">
+                  {campaignDetails?.campaignName}
+                </span>
               </h1>
             </div>
             <h1 className="lg:text-sm text-xs m-0 px-2">
-              Sender Name: <span className="text-green-500 font-semibold">{campaignDetails?.senderName}</span>
+              Sender Name:{" "}
+              <span className="text-green-500 font-semibold">
+                {campaignDetails?.senderName}
+              </span>
             </h1>
             <h1 className="lg:text-sm text-xs m-0 px-2">
-              Sender Email: <span className="text-green-500 font-semibold">{campaignDetails?.senderEmail}</span>
+              Sender Email:{" "}
+              <span className="text-green-500 font-semibold">
+                {campaignDetails?.senderEmail}
+              </span>
             </h1>
             <div className="w-1/8 h-full flex flex-col justify-center p-2 border rounded-md">
               <h1 className="lg:text-sm text-xs">
-                Total Recipients:  <span className="text-green-500 font-semibold">{campaignDetails?.count}</span>
+                Total Recipients:{" "}
+                <span className="text-green-500 font-semibold">
+                  {campaignDetails?.count}
+                </span>
               </h1>
             </div>
           </div>
@@ -116,7 +128,45 @@ const CampaignItems = () => {
                   <p className="w-1/4 m-0 p-0 text-xs border-r text-slate-300">
                     Group
                   </p>
-                  <p className="w-1/4 m-0 p-0 text-xs text-slate-300">Status</p>
+                  <div className="w-1/4 flex items-center justify-center">
+                    <Tooltip
+                      content={
+                        <div className="flex flex-col items-start justify-start gap-1">
+                          <div className="flex gap-1 items-center justify-start">
+                            <p className="text-blue-500">
+                              <TbChecks />
+                            </p>
+
+                            <p className="text-xs">: Seen</p>
+                          </div>
+                          <div className="flex gap-1 items-center justify-start">
+                            <p className="text-green-500">
+                              <TbProgressCheck />
+                            </p>
+                            <p className="text-xs">: Delivered</p>
+                          </div>
+                          <div className="flex gap-1 items-center justify-start">
+                            <p className="text-red-500">
+                              <TbProgressX />
+                            </p>
+                            <p className="text-xs">: Bounced/Failed</p>
+                          </div>
+                          <div className="flex gap-1 items-center justify-start">
+                            <p className="text-orange-300">
+                              <TbProgress />
+                            </p>
+                            <p className="text-xs">: In Progress</p>
+                          </div>
+                        </div>
+                      }
+                      className="bg-dark-black"
+                      placement="bottom"
+                    >
+                      <p className="w-full m-0 p-0 text-xs text-slate-300">
+                        Status
+                      </p>
+                    </Tooltip>
+                  </div>
                 </ListGroup.Item>
                 {campaignItemList?.campaigns.map(
                   (item: CampaignItemListType, index: number) => {
@@ -161,31 +211,39 @@ const CampaignItems = () => {
                             <Tooltip
                               content={
                                 <div className="flex flex-col items-start justify-start gap-1">
-                                  <div className="flex gap-1 items-center justify-start">
-                                    <p className="text-blue-500">
-                                      <TbChecks />
-                                    </p>
+                                  {item.open !== 0 ? (
+                                    <div className="flex gap-1 items-center justify-start">
+                                      <p className="text-blue-500">
+                                        <TbChecks />
+                                      </p>
 
-                                    <p className="text-xs">: Seen</p>
-                                  </div>
-                                  <div className="flex gap-1 items-center justify-start">
-                                    <p className="text-green-500">
-                                      <TbProgressCheck />
-                                    </p>
-                                    <p className="text-xs">: Delivered</p>
-                                  </div>
-                                  <div className="flex gap-1 items-center justify-start">
-                                    <p className="text-red-500">
-                                      <TbProgressX />
-                                    </p>
-                                    <p className="text-xs">: Bounced/Failed</p>
-                                  </div>
-                                  <div className="flex gap-1 items-center justify-start">
-                                    <p className="text-orange-300">
-                                      <TbProgress />
-                                    </p>
-                                    <p className="text-xs">: In Progress</p>
-                                  </div>
+                                      <p className="text-xs">: Seen</p>
+                                    </div>
+                                  ) : item.deliver !== 2 &&
+                                    item.deliver !== 0 ? (
+                                    <div className="flex gap-1 items-center justify-start">
+                                      <p className="text-green-500">
+                                        <TbProgressCheck />
+                                      </p>
+                                      <p className="text-xs">: Delivered</p>
+                                    </div>
+                                  ) : item.deliver === 2 ? (
+                                    <div className="flex gap-1 items-center justify-start">
+                                      <p className="text-red-500">
+                                        <TbProgressX />
+                                      </p>
+                                      <p className="text-xs">
+                                        : Bounced/Failed
+                                      </p>
+                                    </div>
+                                  ) : (
+                                    <div className="flex gap-1 items-center justify-start">
+                                      <p className="text-orange-300">
+                                        <TbProgress />
+                                      </p>
+                                      <p className="text-xs">: In Progress</p>
+                                    </div>
+                                  )}
                                 </div>
                               }
                               className="bg-dark-black"
