@@ -75,7 +75,7 @@ export const campaignStore = create<CampaignStoreState>((set) => ({
   selectedTemplate: null,
   templateData: null,
   clickedGroup: null,
-  multipartPage: 1,
+  
   setNewCampaign: (data) =>
     set((state) => ({
       newCampaign:
@@ -94,9 +94,7 @@ export const campaignStore = create<CampaignStoreState>((set) => ({
       clickedGroup:
         typeof state === "function" ? state(prevState.clickedGroup) : state,
     })),
-    setMultipartPage(state) {
-      set(() => ({ multipartPage: state }));
-    },
+  
 }));
 
 export const showCampaignStore = create<ShowCampaignStore>((set) => ({

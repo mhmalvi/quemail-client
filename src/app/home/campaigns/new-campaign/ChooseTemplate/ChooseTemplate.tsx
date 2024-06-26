@@ -6,7 +6,7 @@ import CreateTemplateModal from "./CreateTemplateModal";
 import { campaignStore } from "@/store/store";
 import { BIG_BUTTON_STYLES } from "@/components/styles/button";
 
-const ChooseTemplate = () => {
+const ChooseTemplate = ({ tabsRef, setActiveTab }: any) => {
   const [chooseTemplate, setChooseTemplate] = useState<string>("");
   const newCampaign = campaignStore((state) => state.newCampaign);
   const setNewCampaign = campaignStore((state) => state.setNewCampaign);
