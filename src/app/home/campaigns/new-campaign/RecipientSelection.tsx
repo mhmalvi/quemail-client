@@ -99,22 +99,22 @@ const RecipientSelection = ({ tabsRef }: any) => {
         <h1 className="m-0 p-0 xl:text-xl text-sm">Recipient Selection</h1>
         {newCampaign?.recipient && (
           <button
-            className="font-normal xl:text-sm text-xs dark:text-slate-300 text-dark-black border border-slate-300 px-2 py-1 rounded-md"
-            onClick={() => setOpenGroupModal(true)}
+            className="font-normal xl:text-sm text-xs bg-red-500 text-white px-2 py-1 rounded-md"
+            onClick={handleClearRecipients}
           >
-            Add More
+            Clear
           </button>
         )}
       </div>
       <div className="w-1/2 flex flex-col gap-4 overflow-auto">
         {newCampaign?.recipient ? (
           <div className="flex items-center gap-4">
-            <div className="w-full flex items-center justify-between border border-slate-300 xl:p-2 p-1 rounded-md">
+            <div className="w-full flex items-center justify-between border border-light-black dark:border-light-glass xl:p-2 p-1 rounded-md">
               <h1 className="m-0 px-2 py-0 dark:text-slate-300 text-dark-black xl:text-base text-xs">
                 {newCampaign.recipient.length} contact/s selected
               </h1>
               <h1
-                className="xl:px-4 xl:py-2 px-2 py-1 bg-brand-color text-slate-300 rounded-md cursor-pointer xl:text-base text-xs"
+                className="px-4 xl:py-2 py-1 bg-brand-color text-slate-300 rounded-md cursor-pointer xl:text-base text-xs"
                 onClick={() => setViewRecipients(true)}
               >
                 View
@@ -122,10 +122,10 @@ const RecipientSelection = ({ tabsRef }: any) => {
             </div>
 
             <button
-              className="w-1/5 xl:p-4 px-2 py-1 border border-red-500 bg-red-500 rounded-md text-white flex items-center justify-center xl:text-base text-xs"
-              onClick={handleClearRecipients}
+              className="w-1/5 xl:p-4 p-2 border text-dark-black dark:text-slate-300 border-light-black dark:border-light-glass px-2 py-1 rounded-md"
+              onClick={() => setOpenGroupModal(true)}
             >
-              Clear
+              Add More
             </button>
           </div>
         ) : (

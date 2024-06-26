@@ -6,11 +6,11 @@ import { NewCampaignType } from "@/components/utils/types";
 import { sendMail } from "@/app/api/campaign";
 import { successNotification } from "@/components/utils/utility";
 import { BORDERED_BUTTON_STYLES } from "@/components/styles/button";
+import Link from "next/link";
 
-const Scheduler = () => {
+const Scheduler = ({ tabsRef }: any) => {
   const [time, setTime] = useState("00:00");
   const [date, setDate] = useState("");
-  const [showSchedule, setShowSchedule] = useState(false);
   const viewSchedule = campaignStore((state) => state.viewSchedule);
   const newCampaign = campaignStore((state) => state.newCampaign);
   const setNewCampaign = campaignStore((state) => state.setNewCampaign);
@@ -36,7 +36,11 @@ const Scheduler = () => {
         successNotification(
           <div className="flex flex-col gap-4">
             <h1>Campaign has started</h1>
-            <button className={BORDERED_BUTTON_STYLES}>View</button>
+            <Link href="/home/campaigns/all-campaigns">
+              <button className="m-0 px-4 py-1 bg-brand-color text-slate-300 rounded-md">
+                View
+              </button>
+            </Link>
           </div>
         );
         setNewCampaign({
@@ -79,8 +83,10 @@ const Scheduler = () => {
     setTime(utcTime);
   };
   const handleSetSchedule = () => {
-    setShowSchedule(true);
     startCampaign();
+    setTimeout(() => {
+      tabsRef.current.setActiveTab(0);
+    }, 1000);
   };
 
   return (
@@ -114,13 +120,23 @@ const Scheduler = () => {
         <form className="flex flex-col gap-4 w-full">
           <div className="flex gap-2 items-center">
             <p className="text-sm text-dark-black dark:text-slate-300">
-              Select time (in UTC)
+              Select time
             </p>
             <Tooltip
-              content="Copy from available shortcodes into template"
-              className="bg-light-black"
+              content={
+                <div className="flex flex-col items-center justify-center gap-1 text-center">
+                  <span>All emails will be sent in UTC Time. </span>
+                  <span>
+                    When you select your local time, the scheduler automatically
+                    converts it to UTC.
+                  </span>
+                </div>
+              }
+              className="bg-light-black "
             >
-              <p className="px-2 bg-brand-color m-0 rounded-full">?</p>
+              <p className="px-2 bg-brand-color m-0 rounded-full cursor-help">
+                ?
+              </p>
             </Tooltip>
           </div>
           <input
@@ -134,39 +150,14 @@ const Scheduler = () => {
           />
         </form>
       </div>
-      {showSchedule ? (
-        <div className="flex flex-col gap-2 xl:p-4 xl:border xl:border-brand-color rounded-md">
-          <h1 className="m-0 p-0 dark:text-slate-300 text-dark-black flex items-center justify-between xl:text-sm text-xs">
-            Scheduled Date: <span>{date}</span>
-          </h1>
-          <h1 className="m-0 p-0 dark:text-slate-300 text-dark-black flex items-center justify-between xl:text-sm text-xs">
-            Scheduled Time: <span>{time}</span>
-          </h1>
-          <button
-            className="w-full xl:px-4 xl:py-2 bg-red-500 rounded-md disabled:cursor-not-allowed disabled:opacity-25"
-            disabled={date === ""}
-            onClick={() => {
-              setTime("00:00");
-              setDate("");
-              setShowSchedule(false);
-              setNewCampaign((prev: any) => ({
-                ...prev,
-                schedule: null,
-              }));
-            }}
-          >
-            Clear
-          </button>
-        </div>
-      ) : (
-        <button
-          className="w-full px-2 py-1 xl:text-sm text-xs border border-brand-color text-dark-black dark:text-slate-300 rounded-md disabled:cursor-not-allowed disabled:opacity-25"
-          disabled={date === ""}
-          onClick={handleSetSchedule}
-        >
-          Add Schedule
-        </button>
-      )}
+
+      <button
+        className="w-full px-2 py-1 xl:text-sm text-xs border border-brand-color text-dark-black dark:text-slate-300 rounded-md disabled:cursor-not-allowed disabled:opacity-25"
+        disabled={date === ""}
+        onClick={handleSetSchedule}
+      >
+        Schedule Now
+      </button>
     </div>
   );
 };

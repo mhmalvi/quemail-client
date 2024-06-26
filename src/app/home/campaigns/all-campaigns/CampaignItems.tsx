@@ -175,6 +175,7 @@ const CampaignItems = () => {
                         <ListGroup.Item
                           className="text-base flex items-center justify-center w-full gap-4"
                           onClick={() => {
+                            setShowTemplateData(null)
                             setShowTemplateData(item.templateData);
                             setItemIdClicked(item.id);
                           }}
