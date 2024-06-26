@@ -17,7 +17,7 @@ interface MailAdded {
     id: number;
   };
 }
-const CampaignInfo = ({ tabsRef, setActiveTab }: any) => {
+const CampaignInfo = ({ tabsRef }: any) => {
   const [mailAdded, setMailAdded] = useState<MailAdded | null>(null);
 
   const newCampaign = campaignStore((state) => state.newCampaign);
@@ -58,7 +58,6 @@ const CampaignInfo = ({ tabsRef, setActiveTab }: any) => {
 
   const handleCampaignName = (e: React.ChangeEvent<HTMLInputElement>) => {
     let campaignUniqueName = e.target.value;
-    // setCampaignName(campaignUniqueName);
     setNewCampaign((prev: any | null) => ({
       ...prev,
       campaignInfo: {
@@ -82,177 +81,176 @@ const CampaignInfo = ({ tabsRef, setActiveTab }: any) => {
       }
     })();
   }, []);
-
   console.log(newCampaign);
-
   return (
     <div className="relative w-full flex flex-col items-center justify-center xl:py-16 py-4 px-4 gap-4 h-full">
-      <div className="flex flex-col w-1/2">
-        <label className="dark:text-slate-300 text-dark-black">
-          Campaign Name
-        </label>
-        <input
-          placeholder="Add a name of the campaign"
-          className=" w-full px-4 xl:py-2 py-1 bg-transparent rounded-md border dark:border-dark-glass shadow-md dark:text-slate-300 text-dark-black focus:ring-0 focus:outline-none"
-          value={
-            newCampaign?.campaignInfo !== null &&
-            newCampaign?.campaignInfo?.campaignName
-              ? newCampaign?.campaignInfo.campaignName
-              : ""
-          }
-          onChange={handleCampaignName}
-        />
-      </div>
-      <div className="flex flex-col w-1/2 gap-4">
-        <div className="flex w-full items-center justify-between">
-          <label className="dark:text-slate-300 text-dark-black">
-            Subject Line
+      <div className="w-1/2 flex flex-col gap-4 bg-white shadow-md dark:bg-dark-glass rounded-md xl:p-16 p-8">
+        <div className="flex flex-col w-full">
+          <label className="dark:text-slate-300 text-dark-black text-sm xl:text-base">
+            Campaign Name
           </label>
-          <div className="flex items-center justify-between">
-            <Tooltip
-              content="Copy from available shortcodes into subject"
-              className="bg-light-black xl:text-sm text-xs w-1/2"
-            >
+          <input
+            placeholder="Add a name of the campaign"
+            className="text-sm xl:text-base w-full px-4 xl:py-2 py-1 bg-light-glass rounded-md border dark:border-dark-glass shadow-md dark:text-slate-300 text-dark-black focus:ring-0 focus:outline-none"
+            value={
+              newCampaign?.campaignInfo !== null &&
+              newCampaign?.campaignInfo?.campaignName
+                ? newCampaign?.campaignInfo.campaignName
+                : ""
+            }
+            onChange={handleCampaignName}
+          />
+        </div>
+        <div className="flex flex-col w-full gap-4">
+          <div className="flex w-full items-center justify-between">
+            <label className="dark:text-slate-300 text-dark-black text-sm xl:text-base">
+              Subject Line
+            </label>
+            <div className="flex items-center justify-between">
+              <Tooltip
+                content="Copy from available shortcodes into subject"
+                className="bg-brand-color xl:text-sm text-xs"
+              >
+                <Dropdown
+                  label="Actions"
+                  placement="bottom-start"
+                  renderTrigger={() => (
+                    <div className="cursor-pointer flex items-center gap-2 bg-dark-black border border-brand-color px-2 py-1 rounded-md">
+                      <h1 className="m-0 p-0 xl:text-sm text-xs">
+                        Select dynamic headers
+                      </h1>
+                      <Image
+                        src={Images.Copy}
+                        alt="copy"
+                        className="2xl:w-6 w-0 rounded-md dark:fill-text-slate-300 fill-dark-black"
+                      />
+                    </div>
+                  )}
+                >
+                  {fields.map((items: any, index: number) => {
+                    return (
+                      <div key={index}>
+                        <Dropdown.Item
+                          className="dark:text-slate-300 text-light-black hover:text-gray-800 xl:text-sm text-xs "
+                          onClick={() => {
+                            navigator.clipboard.writeText(`{${items.label}}`);
+                            successNotification(
+                              `${items.label} copied to clipboard as {${items.label}}`
+                            );
+                          }}
+                        >
+                          {items?.label}
+                        </Dropdown.Item>
+                      </div>
+                    );
+                  })}
+                </Dropdown>
+              </Tooltip>
+            </div>
+          </div>
+          <textarea
+            placeholder="What is the subject?"
+            className="text-sm xl:text-base xl:max-h-28 lg:max-h-20 min-h-8 aria-expanded w-full px-4 xl:py-2 py-1 bg-light-glass rounded-md border dark:border-dark-glass shadow-md dark:text-slate-300 text-dark-black focus:ring-0 focus:outline-none outline-brand-color"
+            value={
+              newCampaign?.campaignInfo !== null &&
+              newCampaign?.campaignInfo?.subject
+                ? newCampaign?.campaignInfo.subject
+                : ""
+            }
+            onChange={handleSubjectChange}
+            rows={4}
+          />
+        </div>
+        <div className="flex flex-col w-full gap-4 ">
+          <div className="flex flex-col">
+            <label className="dark:text-slate-300 text-dark-black text-sm xl:text-base">
+              Sender Name
+            </label>
+            <input
+              placeholder="Who is sending?"
+              className="text-sm xl:text-base w-full px-4 xl:py-2 py-1 bg-light-glass rounded-md border dark:border-dark-glass shadow-md dark:text-slate-300 text-dark-black focus:ring-0 focus:outline-none"
+              value={
+                newCampaign?.campaignInfo !== null &&
+                newCampaign?.campaignInfo?.fromName
+                  ? newCampaign?.campaignInfo.fromName
+                  : ""
+              }
+              onChange={handleNameChange}
+            />
+          </div>
+          <div className="flex flex-col">
+            <label className="dark:text-slate-300 text-dark-black text-sm xl:text-base">
+              From Mail
+            </label>
+            {mailAdded?.google ? (
               <Dropdown
                 label="Actions"
                 placement="bottom-start"
                 renderTrigger={() => (
-                  <div className="cursor-pointer flex items-center gap-2 bg-brand-color px-2 py-1 rounded-md">
-                    <h1 className="m-0 p-0 xl:text-sm text-xs">
-                      Select dynamic headers
-                    </h1>
-                    <Image
-                      src={Images.Copy}
-                      alt="copy"
-                      className="2xl:w-6 w-0 rounded-md dark:fill-text-slate-300 fill-dark-black"
-                    />
+                  <div className="disabled:opacity-50 cursor-pointer flex items-center justify-between text-sm w-full px-4 xl:py-2 py-1 bg-light-glass duration-200 ease-in-out rounded-md border dark:border-dark-glass shadow-md dark:text-slate-300 text-dark-black">
+                    {newCampaign?.campaignInfo?.fromMail !== null &&
+                    newCampaign?.campaignInfo?.fromMail ? (
+                      <div className="flex items-center justify-between w-full">
+                        <span className="dark:text-slate-300 text-dark-black text-sm xl:text-base">
+                          {newCampaign?.campaignInfo?.fromMail !== null &&
+                            newCampaign?.campaignInfo?.fromMail}
+                        </span>
+                        <span>-</span>
+                      </div>
+                    ) : (
+                      <h1 className="dark:text-slate-300/75 text-dark-black/75 flex justify-between w-full text-sm xl:text-base">
+                        Select from Mail
+                        <span>▼</span>
+                      </h1>
+                    )}
                   </div>
                 )}
               >
-                {fields.map((items: any, index: number) => {
-                  return (
-                    <div key={index}>
-                      <Dropdown.Item
-                        className="dark:text-slate-300 text-light-black hover:text-gray-800 xl:text-sm text-xs "
-                        onClick={() => {
-                          navigator.clipboard.writeText(`{${items.label}}`);
-                          successNotification(
-                            `${items.label} copied to clipboard as {${items.label}}`
-                          );
-                        }}
-                      >
-                        {items?.label}
-                      </Dropdown.Item>
-                    </div>
-                  );
-                })}
-              </Dropdown>
-            </Tooltip>
-          </div>
-        </div>
-        <textarea
-          placeholder="What is the subject?"
-          className="xl:max-h-28 lg:max-h-20 min-h-8 aria-expanded w-full px-4 xl:py-2 py-1 bg-transparent rounded-md border dark:border-dark-glass shadow-md dark:text-slate-300 text-dark-black focus:ring-0 focus:outline-none outline-brand-color"
-          value={
-            newCampaign?.campaignInfo !== null &&
-            newCampaign?.campaignInfo?.subject
-              ? newCampaign?.campaignInfo.subject
-              : ""
-          }
-          onChange={handleSubjectChange}
-          rows={4}
-        />
-      </div>
-      <hr />
-      <div className="flex flex-col w-1/2 gap-4 ">
-        <div className="flex flex-col">
-          <label className="dark:text-slate-300 text-dark-black">
-            Sender Name
-          </label>
-          <input
-            placeholder="Who is sending?"
-            className="w-full px-4 xl:py-2 py-1 bg-transparent rounded-md border dark:border-dark-glass shadow-md dark:text-slate-300 text-dark-black focus:ring-0 focus:outline-none"
-            value={
-              newCampaign?.campaignInfo !== null &&
-              newCampaign?.campaignInfo?.fromName
-                ? newCampaign?.campaignInfo.fromName
-                : ""
-            }
-            onChange={handleNameChange}
-          />
-        </div>
-        <div className="flex flex-col">
-          <label className="dark:text-slate-300 text-dark-black">
-            From Mail
-          </label>
-          {mailAdded?.google ? (
-            <Dropdown
-              label="Actions"
-              placement="bottom-start"
-              renderTrigger={() => (
-                <div className="disabled:opacity-50 cursor-pointer flex items-center justify-between text-sm w-full px-4 xl:py-2 py-1 bg-transparent duration-200 ease-in-out rounded-md border dark:border-dark-glass shadow-md dark:text-slate-300 text-dark-black">
-                  {newCampaign?.campaignInfo?.fromMail !== null &&
-                  newCampaign?.campaignInfo?.fromMail ? (
-                    <div className="flex items-center justify-between w-full">
-                      <span className="dark:text-slate-300 text-dark-black">
-                        {newCampaign?.campaignInfo?.fromMail !== null &&
-                          newCampaign?.campaignInfo?.fromMail}
-                      </span>
-                      <span>-</span>
-                    </div>
-                  ) : (
-                    <h1 className="dark:text-slate-300/75 text-dark-black/75 flex justify-between w-full">
-                      Select from Mail
-                      <span>▼</span>
-                    </h1>
-                  )}
-                </div>
-              )}
-            >
-              {mailAdded && mailAdded.google !== null && (
+                {mailAdded && mailAdded.google !== null && (
+                  <Dropdown.Item
+                    className="dark:text-slate-300 text-light-black hover:text-gray-800 text-sm xl:text-base"
+                    onClickCapture={(e: any) => {
+                      handleFromMailChange(e.target.textContent);
+                    }}
+                  >
+                    {mailAdded.google?.email}
+                  </Dropdown.Item>
+                )}
                 <Dropdown.Item
-                  className="dark:text-slate-300 text-light-black hover:text-gray-800"
-                  onClickCapture={(e: any) => {
-                    handleFromMailChange(e.target.textContent);
+                  className="dark:text-slate-300 text-light-black hover:text-gray-80 text-sm xl:text-base"
+                  onClick={() => {
+                    handleFromMailChange(null);
                   }}
                 >
-                  {mailAdded.google?.email}
+                  Clear
                 </Dropdown.Item>
-              )}
-              <Dropdown.Item
-                className="dark:text-slate-300 text-light-black hover:text-gray-800"
-                onClick={() => {
-                  handleFromMailChange(null);
-                }}
-              >
-                Clear
-              </Dropdown.Item>
-            </Dropdown>
-          ) : (
-            <h1 className="text-sm dark:text-slate-300 text-dark-black">
-              No from email Added
-            </h1>
-          )}
+              </Dropdown>
+            ) : (
+              <h1 className="text-sm dark:text-slate-300 text-dark-black">
+                No from email Added
+              </h1>
+            )}
+          </div>
         </div>
-      </div>
-      <div className="flex items-center justify-end w-1/2 gap-4 ">
-        <button
-          className="border border-brand-color px-8 py-2 rounded-md disabled:opacity-20"
-          disabled={
-            newCampaign?.campaignInfo?.subject === null ||
-            newCampaign?.campaignInfo?.subject === "" ||
-            newCampaign?.campaignInfo?.fromMail === null ||
-            newCampaign?.campaignInfo?.fromMail === "" ||
-            newCampaign?.campaignInfo?.fromName === null ||
-            newCampaign?.campaignInfo?.fromName === "" ||
-            newCampaign?.campaignInfo?.campaignName === null ||
-            newCampaign?.campaignInfo?.campaignName === "" ||
-            newCampaign?.campaignInfo === null
-          }
-          onClick={() => tabsRef.current.setActiveTab(1)}
-        >
-          Next
-        </button>
+        <div className="flex items-center justify-end w-full gap-4 ">
+          <button
+            className="text-sm xl:text-base border border-brand-color text-dark-black dark:text-slate-300 xl:px-8 px-4 xl:py-2 py-1 rounded-md disabled:opacity-20"
+            disabled={
+              newCampaign?.campaignInfo === null ||
+              newCampaign?.campaignInfo.subject === null ||
+              newCampaign?.campaignInfo.subject === "" ||
+              newCampaign?.campaignInfo.fromMail === null ||
+              newCampaign?.campaignInfo.fromMail === "" ||
+              newCampaign?.campaignInfo.fromName === null ||
+              newCampaign?.campaignInfo.fromName === "" ||
+              newCampaign?.campaignInfo.campaignName === null ||
+              newCampaign?.campaignInfo.campaignName === ""
+            }
+            onClick={() => tabsRef.current.setActiveTab(1)}
+          >
+            Next
+          </button>
+        </div>
       </div>
     </div>
   );

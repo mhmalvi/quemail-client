@@ -67,7 +67,12 @@ export const campaignStore = create<CampaignStoreState>((set) => ({
   viewSchedule: false,
   newCampaign: {
     template: null,
-    campaignInfo: null,
+    campaignInfo: {
+      campaignName: null,
+      fromMail: null,
+      fromName: null,
+      subject: null,
+    },
     recipient: null,
     schedule: null,
     userID: null,
@@ -75,7 +80,7 @@ export const campaignStore = create<CampaignStoreState>((set) => ({
   selectedTemplate: null,
   templateData: null,
   clickedGroup: null,
-  
+
   setNewCampaign: (data) =>
     set((state) => ({
       newCampaign:
@@ -94,7 +99,6 @@ export const campaignStore = create<CampaignStoreState>((set) => ({
       clickedGroup:
         typeof state === "function" ? state(prevState.clickedGroup) : state,
     })),
-  
 }));
 
 export const showCampaignStore = create<ShowCampaignStore>((set) => ({
@@ -124,5 +128,4 @@ export const showCampaignStore = create<ShowCampaignStore>((set) => ({
   setCampaignDetails(state) {
     set(() => ({ campaignDetails: state }));
   },
- 
 }));

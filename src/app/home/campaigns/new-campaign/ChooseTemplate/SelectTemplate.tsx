@@ -68,12 +68,16 @@ const SelectTemplate: React.FC<SelectTemplateProps> = ({
       dismissible
       show={chooseTemplate === "select"}
       onClose={() => setChooseTemplate("")}
+      className="border dark:border-light-glass"
     >
-      <Modal.Header className="dark:bg-dark-glass bg-violet-50 text-slate-300">
+      <Modal.Header className="dark:bg-dark-black bg-white">
+        <p className=" dark:text-slate-300 text-dark-black">
+
         Select a template from the list below
+        </ p>
       </Modal.Header>
-      <Modal.Body className="dark:bg-dark-black bg-violet-50 text-slate-300">
-        <Table hoverable striped className="w-full !h-20 overflow-y-scroll">
+      <Modal.Body className="dark:bg-dark-black bg-white text-slate-300">
+        <Table hoverable striped className="w-full !h-20 overflow-auto">
           <Table.Head className="sticky top-0 py-0 !rounded-tl-md w-full">
             <Table.HeadCell className="text-center sticky top-0 py-2">
               Template Name

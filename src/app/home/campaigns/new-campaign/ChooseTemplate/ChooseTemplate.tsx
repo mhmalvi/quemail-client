@@ -6,7 +6,7 @@ import CreateTemplateModal from "./CreateTemplateModal";
 import { campaignStore } from "@/store/store";
 import { BIG_BUTTON_STYLES } from "@/components/styles/button";
 
-const ChooseTemplate = ({ tabsRef, setActiveTab }: any) => {
+const ChooseTemplate = ({ tabsRef }: any) => {
   const [chooseTemplate, setChooseTemplate] = useState<string>("");
   const newCampaign = campaignStore((state) => state.newCampaign);
   const setNewCampaign = campaignStore((state) => state.setNewCampaign);
@@ -16,7 +16,7 @@ const ChooseTemplate = ({ tabsRef, setActiveTab }: any) => {
       newCampaign?.template === null ||
       newCampaign?.template.data === null ||
       newCampaign?.template.name === null ? (
-        <div className="relative h-full w-full flex flex-col py-8 items-center justify-center dark:bg-dark-glass bg-violet-50 rounded-md shadow-md border dark:border-none gap-4 overflow-hidden">
+        <div className="relative w-full flex flex-col items-center justify-center xl:pt-16 py-4 px-4 gap-4 h-full ">
           <h1 className="xl:text-base text-xs dark:text-slate-300 text-dark-black w-1/2 text-center">
             If you&apos;re looking to launch a new campaign, you can easily
             create one. But you need to set up a template first.
@@ -49,21 +49,53 @@ const ChooseTemplate = ({ tabsRef, setActiveTab }: any) => {
           />
         </div>
       ) : (
-        <div className="relative  h-full w-full flex flex-col py-8 items-center justify-center dark:bg-dark-glass bg-violet-50 rounded-md shadow-md border dark:border-none gap-4">
-          <h1 className="m-0 p-0 text-dark-black dark:text-slate-300">Template Selected: {newCampaign.template.name}</h1>
-          <button
-            className="bg-red-500 px-4 py-2 text-slate-50 xl:text-base text-sm"
-            onClick={() => {
-              setNewCampaign((prev: any | null) => ({
-                ...prev,
-                template: null,
-              }));
-            }}
-          >
-            Clear selection
-          </button>
+        <div className="relative w-full flex flex-col items-center justify-center xl:pt-16 py-4 px-4 gap-4 h-full">
+          <div className="flex items-center justify-center gap-4 ">
+            <h1 className="m-0 p-0 text-dark-black dark:text-slate-300 text-xs xl:text-base">
+              Template Selected: {newCampaign.template.name}
+            </h1>
+            <button
+              className="bg-red-500 px-4 py-1 text-slate-50 text-xs xl:text-base rounded-md"
+              onClick={() => {
+                setNewCampaign((prev: any | null) => ({
+                  ...prev,
+                  template: null,
+                }));
+              }}
+            >
+              Clear selection
+            </button>
+          </div>
+          <div className="w-1/2 bg-dark-black h-[calc(60vh-2rem)] overflow-auto rounded-md ">
+            <div
+              dangerouslySetInnerHTML={{
+                __html: `${newCampaign.template.data}`,
+              }}
+              className="p-2 h-full innerHtml"
+            />
+          </div>
         </div>
       )}
+      <div className="flex items-center justify-center w-full gap-4">
+        <div className="flex items-center justify-between w-1/2 gap-4">
+          <button
+            className="text-sm xl:text-base border border-brand-color text-dark-black dark:text-slate-300 xl:px-8 px-4 xl:py-2 py-1 rounded-md disabled:opacity-20"
+            onClick={() => tabsRef.current.setActiveTab(0)}
+          >
+            Previous
+          </button>
+          <button
+            className="text-sm xl:text-base border border-brand-color text-dark-black dark:text-slate-300 xl:px-8 px-4 xl:py-2 py-1 rounded-md disabled:opacity-20" disabled={
+              newCampaign?.template?.data === null ||
+              newCampaign?.template === null ||
+              newCampaign?.template?.data === ""
+            }
+            onClick={() => tabsRef.current.setActiveTab(2)}
+          >
+            Next
+          </button>
+        </div>
+      </div>
     </>
   );
 };

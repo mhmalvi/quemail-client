@@ -17,6 +17,7 @@ import Link from "next/link";
 import { successNotification } from "@/components/utils/utility";
 import { HiAdjustments, HiClipboardList, HiUserCircle } from "react-icons/hi";
 import { MdDashboard } from "react-icons/md";
+import Review from "./Review";
 
 const NewCampaign = () => {
   const newCampaign = campaignStore((state) => state.newCampaign);
@@ -28,7 +29,7 @@ const NewCampaign = () => {
   const viewSchedule = campaignStore((state) => state.viewSchedule);
 
   const tabsRef = useRef<TabsRef>(null);
-  const [activeTab,setActiveTab] = useState(0) 
+  const [activeTab, setActiveTab] = useState(0);
   const startCampaign = async () => {
     const userIDString =
       typeof window !== "undefined" && localStorage.getItem("userID");
@@ -81,9 +82,9 @@ const NewCampaign = () => {
       console.log(error);
     }
   };
-  console.log(newCampaign);
+
   return (
-    <div className={COL_CONTAINER_STYLES}>
+    <div>
       <Tabs
         aria-label="Default tabs"
         ref={tabsRef}
@@ -91,32 +92,99 @@ const NewCampaign = () => {
       >
         <Tabs.Item
           active={activeTab === 1}
-          title="1. Campaign Information"
+          title={
+            newCampaign?.campaignInfo?.subject !== null &&
+            newCampaign?.campaignInfo?.subject !== "" &&
+            newCampaign?.campaignInfo?.fromMail !== null &&
+            newCampaign?.campaignInfo?.fromMail !== "" &&
+            newCampaign?.campaignInfo?.fromName !== null &&
+            newCampaign?.campaignInfo?.fromName !== "" &&
+            newCampaign?.campaignInfo?.campaignName !== null &&
+            newCampaign?.campaignInfo?.campaignName !== "" &&
+            newCampaign?.campaignInfo !== null ? (
+              <p>1. Campaign Information - Tick</p>
+            ) : (
+              <p>1. Campaign Information</p>
+            )
+          }
           icon={HiUserCircle}
         >
-          <CampaignInfo tabsRef={tabsRef} setActiveTab={setActiveTab}/>
+          <CampaignInfo tabsRef={tabsRef} />
         </Tabs.Item>
         <Tabs.Item
           active={activeTab === 2}
-          title="2. Add Template"
+          title={
+            newCampaign?.template?.data !== null &&
+            newCampaign?.template !== null &&
+            newCampaign?.template?.data !== "" ? (
+              <p>2. Add Template - Tick</p>
+            ) : (
+              <p>2. Add Template</p>
+            )
+          }
           icon={MdDashboard}
+          disabled={
+            newCampaign?.campaignInfo?.subject === null ||
+            newCampaign?.campaignInfo?.subject === "" ||
+            newCampaign?.campaignInfo?.fromMail === null ||
+            newCampaign?.campaignInfo?.fromMail === "" ||
+            newCampaign?.campaignInfo?.fromName === null ||
+            newCampaign?.campaignInfo?.fromName === "" ||
+            newCampaign?.campaignInfo?.campaignName === null ||
+            newCampaign?.campaignInfo?.campaignName === "" ||
+            newCampaign?.campaignInfo === null
+          }
         >
-          <ChooseTemplate tabsRef={tabsRef} setActiveTab={setActiveTab}/>
+          <ChooseTemplate tabsRef={tabsRef} />
         </Tabs.Item>
-        <Tabs.Item title="3. Add Contacts" icon={HiAdjustments}>
-          <RecipientSelection />
+        <Tabs.Item
+          active={activeTab === 3}
+          title={
+            newCampaign?.recipient !== null ? (
+              <p>3. Add Contacts - Tick</p>
+            ) : (
+              <p>3. Add Contacts</p>
+            )
+          }
+          icon={HiAdjustments}
+          disabled={
+            newCampaign?.template?.data === null ||
+            newCampaign?.template === null ||
+            newCampaign?.template?.data === "" ||
+            newCampaign?.campaignInfo?.subject === null ||
+            newCampaign?.campaignInfo?.subject === "" ||
+            newCampaign?.campaignInfo?.fromMail === null ||
+            newCampaign?.campaignInfo?.fromMail === "" ||
+            newCampaign?.campaignInfo?.fromName === null ||
+            newCampaign?.campaignInfo?.fromName === "" ||
+            newCampaign?.campaignInfo?.campaignName === null ||
+            newCampaign?.campaignInfo?.campaignName === "" ||
+            newCampaign?.campaignInfo === null
+          }
+        >
+          <RecipientSelection tabsRef={tabsRef} />
         </Tabs.Item>
-        <Tabs.Item title="4. Review" icon={HiClipboardList}>
-          This is{" "}
-          <span className="font-medium text-gray-800 dark:text-white">
-            Contacts tabs associated content
-          </span>
-          . Clicking another tab will toggle the visibility of this one for the
-          next. The tab JavaScript swaps classes to control the content
-          visibility and styling.
-        </Tabs.Item>
-        <Tabs.Item disabled title="Disabled">
-          Disabled content
+        <Tabs.Item
+          title="4. Review"
+          icon={HiClipboardList}
+          disabled={
+            newCampaign?.recipient === null ||
+            newCampaign?.template?.data === null ||
+            newCampaign?.template === null ||
+            newCampaign?.template?.data === "" ||
+            newCampaign?.campaignInfo?.subject === null ||
+            newCampaign?.campaignInfo?.subject === "" ||
+            newCampaign?.campaignInfo?.fromMail === null ||
+            newCampaign?.campaignInfo?.fromMail === "" ||
+            newCampaign?.campaignInfo?.fromName === null ||
+            newCampaign?.campaignInfo?.fromName === "" ||
+            newCampaign?.campaignInfo?.campaignName === null ||
+            newCampaign?.campaignInfo?.campaignName === "" ||
+            newCampaign?.campaignInfo === null
+          }
+          
+        >
+            <Review tabsRef={tabsRef} />
         </Tabs.Item>
       </Tabs>
       {/* <div className="w-full flex items-center justify-between">
