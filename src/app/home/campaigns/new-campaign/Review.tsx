@@ -43,8 +43,12 @@ const Review = ({ tabsRef }: any) => {
                 <div key={index}>
                   <p className="w-full flex items-center justify-between m-0 p-0 xl:text-base text-xs text-dark-black dark:text-slate-300">
                     <span className="w-1/4 text-center">{items.json.name}</span>
-                    <span className="w-1/2 text-center">{items.json.email}</span>
-                    <span className="w-1/4 text-center">{items.json.group}</span>
+                    <span className="w-1/2 text-center">
+                      {items.json.email}
+                    </span>
+                    <span className="w-1/4 text-center">
+                      {items.json.group}
+                    </span>
                   </p>
                 </div>
               );
@@ -72,21 +76,21 @@ const Review = ({ tabsRef }: any) => {
         </div>
         <div className="h-1/6 flex items-center justify-between w-full gap-4">
           <button
-            className="border border-brand-color px-8 py-2 rounded-md disabled:opacity-20 disabled:cursor-not-allowed text-dark-black dark:text-slate-300"
+            className="text-sm xl:text-base border border-brand-color text-dark-black dark:text-slate-300 xl:px-8 px-4 xl:py-2 py-1 rounded-md disabled:opacity-20"
             onClick={() => tabsRef.current.setActiveTab(2)}
           >
             Previous
           </button>
           <button
-            className="border border-brand-color px-8 py-2 rounded-md disabled:opacity-20 disabled:cursor-not-allowed text-dark-black dark:text-slate-300"
+            className="text-sm xl:text-base border border-brand-color text-dark-black dark:text-slate-300 xl:px-8 px-4 xl:py-2 py-1 rounded-md disabled:opacity-20"
             disabled={
               newCampaign?.template?.data === null ||
               newCampaign?.template === null ||
               newCampaign?.template?.data === ""
             }
-            onClick={() => console.log("submitted")}
+            onClick={() => tabsRef.current.setActiveTab(4)}
           >
-            Run
+            Next
           </button>
         </div>
       </div>

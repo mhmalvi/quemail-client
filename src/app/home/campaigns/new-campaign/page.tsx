@@ -3,85 +3,23 @@ import React, { useRef, useState } from "react";
 import CampaignInfo from "./CampaignInfo";
 import { NewCampaignType } from "@/components/utils/types";
 import RecipientSelection from "./RecipientSelection";
-import Scheduler from "./Scheduler";
 import ChooseTemplate from "./ChooseTemplate/ChooseTemplate";
 import { campaignStore } from "@/store/store";
-import { Dropdown, Modal, Table, Tabs, TabsRef } from "flowbite-react";
+import { Tabs, TabsRef } from "flowbite-react";
 import { sendMail } from "@/app/api/campaign";
-import { COL_CONTAINER_STYLES } from "@/components/styles/flex_col_container";
-import {
-  BIG_BUTTON_STYLES,
-  BORDERED_BUTTON_STYLES,
-} from "@/components/styles/button";
 import Link from "next/link";
 import { successNotification } from "@/components/utils/utility";
 import { HiAdjustments, HiClipboardList, HiUserCircle } from "react-icons/hi";
 import { MdDashboard } from "react-icons/md";
 import Review from "./Review";
+import { TbCheck } from "react-icons/tb";
+import StartCampaign from "./StartCampaign/StartCampaign";
 
 const NewCampaign = () => {
   const newCampaign = campaignStore((state) => state.newCampaign);
-  const setNewCampaign = campaignStore((state) => state.setNewCampaign);
-  const viewRecipients = campaignStore((state) => state.viewRecipients);
-  const setViewRecipients = campaignStore((state) => state.setViewRecipients);
-  const setViewSchedule = campaignStore((state) => state.setViewSchedule);
-  const setClickedGroup = campaignStore((state) => state.setClickedGroup);
-  const viewSchedule = campaignStore((state) => state.viewSchedule);
 
   const tabsRef = useRef<TabsRef>(null);
   const [activeTab, setActiveTab] = useState(0);
-  const startCampaign = async () => {
-    const userIDString =
-      typeof window !== "undefined" && localStorage.getItem("userID");
-    const userID = userIDString ? parseInt(userIDString, 10) : null;
-    const date = new Date().toISOString();
-    const [fullDate, fullTime] = date.split("T");
-    const time = fullTime.split(".")[0];
-    const formattedDate = `${fullDate} ${time}`;
-    const updatedCampaign: NewCampaignType = {
-      ...newCampaign,
-      userID: userID ?? null,
-      template: newCampaign?.template ?? { name: null, data: null },
-      campaignInfo: newCampaign?.campaignInfo ?? null,
-      recipient: newCampaign?.recipient ?? null,
-      schedule: formattedDate ?? null,
-    };
-    setNewCampaign(updatedCampaign);
-
-    try {
-      const res = await sendMail(updatedCampaign);
-      if (res.status === 200) {
-        successNotification(
-          <div className="flex flex-col gap-1">
-            <h1>Campaign has started</h1>
-            <Link href="/home/campaigns/all-campaigns">
-              <button className="m-0 px-4 py-1 bg-brand-color text-slate-300 rounded-md">
-                View
-              </button>
-            </Link>
-          </div>
-        );
-        setNewCampaign({
-          userID: null,
-          template: {
-            name: null,
-            data: null,
-          },
-          campaignInfo: {
-            campaignName: null,
-            subject: null,
-            fromMail: null,
-            fromName: null,
-          },
-          recipient: null,
-          schedule: null,
-        });
-        setClickedGroup(null);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
 
   return (
     <div>
@@ -102,7 +40,12 @@ const NewCampaign = () => {
             newCampaign?.campaignInfo?.campaignName !== null &&
             newCampaign?.campaignInfo?.campaignName !== "" &&
             newCampaign?.campaignInfo !== null ? (
-              <p>1. Campaign Information - Tick</p>
+              <p className="flex items-center gap-2">
+                1. Campaign Information
+                <span className="text-green-500">
+                  <TbCheck />
+                </span>
+              </p>
             ) : (
               <p>1. Campaign Information</p>
             )
@@ -117,7 +60,12 @@ const NewCampaign = () => {
             newCampaign?.template?.data !== null &&
             newCampaign?.template !== null &&
             newCampaign?.template?.data !== "" ? (
-              <p>2. Add Template - Tick</p>
+              <p className="flex items-center gap-2">
+                2. Add Template
+                <span className="text-green-500">
+                  <TbCheck />
+                </span>
+              </p>
             ) : (
               <p>2. Add Template</p>
             )
@@ -141,7 +89,12 @@ const NewCampaign = () => {
           active={activeTab === 3}
           title={
             newCampaign?.recipient !== null ? (
-              <p>3. Add Contacts - Tick</p>
+              <p className="flex items-center gap-2 ">
+                3. Add Contacts
+                <span className="text-green-500">
+                  <TbCheck />
+                </span>
+              </p>
             ) : (
               <p>3. Add Contacts</p>
             )
@@ -165,7 +118,18 @@ const NewCampaign = () => {
           <RecipientSelection tabsRef={tabsRef} />
         </Tabs.Item>
         <Tabs.Item
-          title="4. Review"
+          title={
+            activeTab >= 4 ? (
+              <p className="flex items-center gap-2">
+                4. Review
+                <span className="text-green-500">
+                  <TbCheck />
+                </span>
+              </p>
+            ) : (
+              <p>4. Review</p>
+            )
+          }
           icon={HiClipboardList}
           disabled={
             newCampaign?.recipient === null ||
@@ -182,9 +146,29 @@ const NewCampaign = () => {
             newCampaign?.campaignInfo?.campaignName === "" ||
             newCampaign?.campaignInfo === null
           }
-          
         >
-            <Review tabsRef={tabsRef} />
+          <Review tabsRef={tabsRef} />
+        </Tabs.Item>
+        <Tabs.Item
+          title={<p className="flex items-center gap-2">5. Schedule and Run</p>}
+          icon={HiClipboardList}
+          disabled={
+            newCampaign?.recipient === null ||
+            newCampaign?.template?.data === null ||
+            newCampaign?.template === null ||
+            newCampaign?.template?.data === "" ||
+            newCampaign?.campaignInfo?.subject === null ||
+            newCampaign?.campaignInfo?.subject === "" ||
+            newCampaign?.campaignInfo?.fromMail === null ||
+            newCampaign?.campaignInfo?.fromMail === "" ||
+            newCampaign?.campaignInfo?.fromName === null ||
+            newCampaign?.campaignInfo?.fromName === "" ||
+            newCampaign?.campaignInfo?.campaignName === null ||
+            newCampaign?.campaignInfo?.campaignName === "" ||
+            newCampaign?.campaignInfo === null
+          }
+        >
+          <StartCampaign tabsRef={tabsRef}/>
         </Tabs.Item>
       </Tabs>
       {/* <div className="w-full flex items-center justify-between">
