@@ -10,6 +10,7 @@ import Link from "next/link";
 
 const Scheduler = ({ tabsRef }: any) => {
   const [time, setTime] = useState("00:00");
+  const [showUserTime, setShowUserTime] = useState("00:00");
   const [date, setDate] = useState("");
   const viewSchedule = campaignStore((state) => state.viewSchedule);
   const newCampaign = campaignStore((state) => state.newCampaign);
@@ -65,11 +66,10 @@ const Scheduler = ({ tabsRef }: any) => {
       console.log(error);
     }
   };
-
   const handleTimeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const localTime = event.target.value;
     const [hours, minutes] = localTime.split(":").map(Number);
-
+    setShowUserTime(localTime)
     const localDate = new Date();
     localDate.setHours(hours, minutes, 0, 0);
 
@@ -145,7 +145,7 @@ const Scheduler = ({ tabsRef }: any) => {
             className=" rounded-md bg-white border-none text-dark-black leading-none focus:ring-0 focus:border-none block flex-1 w-full xl:text-sm text-xs xl:p-2.5 px-4 py-1 dark:bg-dark-glass dark:placeholder-gray-400 dark:text-slate-300 dark:focus:ring-0 dark:focus:border-none fill-white"
             min="00:00"
             max="24:00"
-            value={time}
+            value={showUserTime}
             onChange={handleTimeChange}
           />
         </form>
