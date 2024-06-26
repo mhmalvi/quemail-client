@@ -116,7 +116,7 @@ const CampaignInfo = ({ tabsRef }: any) => {
                   placement="bottom-start"
                   renderTrigger={() => (
                     <div className="cursor-pointer flex items-center gap-2 bg-dark-black border border-brand-color px-2 py-1 rounded-md">
-                      <h1 className="m-0 p-0 xl:text-sm text-xs">
+                      <h1 className="m-0 p-0 xl:text-sm text-xs text-slate-300">
                         Select dynamic headers
                       </h1>
                       <Image

@@ -11,12 +11,12 @@ const ChooseTemplate = ({ tabsRef }: any) => {
   const newCampaign = campaignStore((state) => state.newCampaign);
   const setNewCampaign = campaignStore((state) => state.setNewCampaign);
   return (
-    <>
+    <div className="flex flex-col ">
       {newCampaign?.template === undefined ||
       newCampaign?.template === null ||
       newCampaign?.template.data === null ||
       newCampaign?.template.name === null ? (
-        <div className="relative w-full flex flex-col items-center justify-center xl:pt-16 py-4 px-4 gap-4 h-full ">
+        <div className="relative w-full flex flex-col items-center justify-center pt-36 px-4 gap-4 h-full ">
           <h1 className="xl:text-base text-xs dark:text-slate-300 text-dark-black w-1/2 text-center">
             If you&apos;re looking to launch a new campaign, you can easily
             create one. But you need to set up a template first.
@@ -96,7 +96,7 @@ const ChooseTemplate = ({ tabsRef }: any) => {
           </button>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 export default ChooseTemplate;
