@@ -122,7 +122,7 @@ const RecipientSelection = ({ tabsRef }: any) => {
             </div>
 
             <button
-              className="w-1/5 xl:p-4 px-2 py-1 border border-red-500 bg-red-500 rounded-md  text-slate-50 flex items-center justify-center xl:text-base text-xs"
+              className="w-1/5 xl:p-4 px-2 py-1 border border-red-500 bg-red-500 rounded-md text-white flex items-center justify-center xl:text-base text-xs"
               onClick={handleClearRecipients}
             >
               Clear
