@@ -202,12 +202,22 @@ export const customTheme: CustomFlowbiteTheme = {
     },
   },
   tabs: {
+    base: "flex flex-col gap-2 ",
     tablist: {
-      base: "flex text-center gap-0",
+      base: "flex text-center gap-0 sticky top-0  rounded-t-md",
 
       tabitem: {
-        base: "flex items-center justify-center rounded-t-md px-4 py-2 text-sm font-medium first:ml-0 focus:outline-none focus:ring-0 focus:ring-cyan-300 disabled:cursor-not-allowed disabled:text-gray-400 disabled:dark:text-gray-500",
+        base: "flex items-center justify-center rounded-t-md px-4 py-2 text-sm font-medium first:ml-0 focus:outline-none focus:ring-0 disabled:cursor-not-allowed disabled:text-gray-400 disabled:dark:text-gray-500",
         icon: "mr-2 h-5 w-5",
+        styles: {
+          default: {
+            base: "rounded-t-lg",
+            active: {
+              on: "bg-brand-color text-white dark:bg-brand-color dark:text-slate-300",
+              off: "text-light-black hover:bg-violet-50 hover:text-dark-black dark:text-slate-300 dark:hover:bg-light-glass dark:hover:text-slate-300",
+            },
+          },
+        },
       },
     },
     tabitemcontainer: {
