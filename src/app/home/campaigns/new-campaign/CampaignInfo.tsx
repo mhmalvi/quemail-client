@@ -133,9 +133,9 @@ const CampaignInfo = ({ tabsRef }: any) => {
                         <Dropdown.Item
                           className="dark:text-slate-300 text-light-black hover:text-gray-800 xl:text-sm text-xs "
                           onClick={() => {
-                            navigator.clipboard.writeText(`{${items.label}}`);
+                            navigator.clipboard.writeText(`{${items.label.toLowerCase()}}`);
                             successNotification(
-                              `${items.label} copied to clipboard as {${items.label}}`
+                              `${items.label} copied to clipboard as {${items.label.toLowerCase()}}`
                             );
                           }}
                         >
