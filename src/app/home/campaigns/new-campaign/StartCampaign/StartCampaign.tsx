@@ -47,6 +47,9 @@ const StartCampaign = ({ tabsRef }: any) => {
             </Link>
           </div>
         );
+        setTimeout(() => {
+          tabsRef.current.setActiveTab(0);
+        }, 1000);
         setNewCampaign({
           userID: null,
           template: {
@@ -80,7 +83,7 @@ const StartCampaign = ({ tabsRef }: any) => {
           >
             Back
           </button>
-          <Scheduler tabsRef={tabsRef}/>
+          <Scheduler tabsRef={tabsRef} />
         </div>
       ) : (
         <>
