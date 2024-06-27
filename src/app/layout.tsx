@@ -49,7 +49,7 @@ export default async function RootLayout({
         {children}
         <ToastContainer
           position="bottom-left"
-          autoClose={2000}
+          autoClose={5000}
           hideProgressBar={false}
           newestOnTop={false}
           closeOnClick
