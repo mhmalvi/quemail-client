@@ -2,7 +2,7 @@
 import { campaignStore, themeStore } from "@/store/store";
 import React, { useRef, useEffect, useState } from "react";
 import EmailEditor, { EditorRef, EmailEditorProps } from "react-email-editor";
-import { saveTemplate } from "@/app/api/template";
+import { saveTemplate, updateTemplate } from "@/app/api/template";
 import {
   successNotification,
   warningNotification,
@@ -20,15 +20,19 @@ const MainEditor = () => {
     typeof window !== "undefined" && localStorage.getItem("userID");
 
   const [saveClicked, setSaveClicked] = useState<boolean>(false);
+  const [disableButton, setDisableButton] = useState<boolean>(true);
+  const [updateClicked, setUpdateClicked] = useState<boolean>(false);
   const themes = themeStore((state: any) => state.theme);
   const templateData = campaignStore((state) => state.templateData);
   const selectedTemplate = campaignStore((state) => state.selectedTemplate);
   const emailEditorRef = useRef<EditorRef>(null);
 
+  console.log(selectedTemplate);
   const [data, setData] = useState({
     template: "",
     name: selectedTemplate?.name || null,
     userID: userID,
+    id: selectedTemplate?.id,
   });
   const optionsDark = {
     appearance: {
@@ -55,13 +59,16 @@ const MainEditor = () => {
         var type = data.type; // body, row, content
         var item = data.item;
         var changes = data.changes;
-        console.log("design:updated", type, item, changes);
+        console.log("design:updated", changes, item, type);
+        if( item !== undefined || changes !== undefined || type !== undefined ){
+          setDisableButton(false)
+        }
       });
     }
   };
 
   useEffect(() => {
-    if (saveClicked) {
+    if (saveClicked || updateClicked) {
       const unlayer = emailEditorRef.current?.editor;
       if (unlayer) {
         unlayer.exportHtml((data: any) => {
@@ -73,14 +80,32 @@ const MainEditor = () => {
         });
       }
     }
-  }, [saveClicked]);
+  }, [saveClicked, updateClicked]);
 
   useEffect(() => {
-    saveClicked &&
-      data.template &&
-      (async () => {
-        if (data.template) {
-          const res = await saveTemplate(data);
+    saveClicked && data.template
+      ? (async () => {
+          if (data.template) {
+            const res = await saveTemplate(data);
+            if (res.status === 201) {
+              successNotification(res.message);
+              window.location.reload();
+            } else if (res.status === 409) {
+              warningNotification(res.message);
+            } else if (res.status === 422) {
+              warningNotification(res.message);
+            } else {
+              warningNotification(res.message);
+            }
+            setSaveClicked(false);
+          }
+        })()
+      : updateClicked &&
+        data.template &&
+        (async () => {
+          console.log("Inside: ", data);
+
+          const res = await updateTemplate(data);
           if (res.status === 201) {
             successNotification(res.message);
             window.location.reload();
@@ -92,9 +117,8 @@ const MainEditor = () => {
             warningNotification(res.message);
           }
           setSaveClicked(false);
-        }
-      })();
-  }, [data, data.template, router, saveClicked]);
+        })();
+  }, [data, data.template, router, saveClicked, updateClicked]);
 
   return (
     <div className="h-full w-full flex flex-col gap-4 overflow-hidden rounded-md ">
@@ -155,15 +179,15 @@ const MainEditor = () => {
           <button
             className={BIG_BUTTON_STYLES}
             onClick={() => {
-              setSaveClicked(true);
+              selectedTemplate !== null
+                ? setUpdateClicked(true)
+                : setSaveClicked(true);
             }}
-            disabled={data.name === ""}
+            disabled={data.name === "" || disableButton}
           >
-            Save Template
+            {selectedTemplate !== null ? "Update Template" : "Save Template"}
           </button>
-          <button className={BIG_BUTTON_STYLES}>
-            Export HTML
-          </button>
+          <button className={BIG_BUTTON_STYLES}>Export HTML</button>
         </div>
       </div>
       <div className="xl:h-[78dvh] h-[70dvh] flex items-center justify-center">
