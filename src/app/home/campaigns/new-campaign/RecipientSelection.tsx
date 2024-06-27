@@ -42,32 +42,34 @@ const RecipientSelection = ({ tabsRef }: any) => {
         const res = await fetchGroupItems(groupName, 1);
         if (res.status === 200) {
           setTotalItems(res?.total);
-          const groupRes = await recipientsByGroup(groupName, 1, totalItems);
-          try {
-            if (groupRes.status === 200) {
-              const updateRecipients = groupRes.contacts.map(
-                (recipient: ContactType) => ({
-                  id: recipient.id,
-                  json: {
-                    name: recipient.json.name,
-                    email: recipient.json.email,
-                    group: recipient.json.group,
-                  },
-                })
-              );
-              setNewCampaign((prev: any | null) => ({
-                ...prev,
-                recipient: prev?.recipient
-                  ? [...prev.recipient, ...updateRecipients]
-                  : [...updateRecipients],
-              }));
-              setOpenGroupModal(false);
-            } else {
-              warningNotification(res.message);
+          setTimeout(async ()=>{
+            const groupRes = await recipientsByGroup(groupName, 1, totalItems);
+            try {
+              if (groupRes.status === 200) {
+                const updateRecipients = groupRes.contacts.map(
+                  (recipient: ContactType) => ({
+                    id: recipient.id,
+                    json: {
+                      name: recipient.json.name,
+                      email: recipient.json.email,
+                      group: recipient.json.group,
+                    },
+                  })
+                );
+                setNewCampaign((prev: any | null) => ({
+                  ...prev,
+                  recipient: prev?.recipient
+                    ? [...prev.recipient, ...updateRecipients]
+                    : [...updateRecipients],
+                }));
+                setOpenGroupModal(false);
+              } else {
+                warningNotification(res.message);
+              }
+            } catch (error) {
+              warningNotification("Failed to add recipients.");
             }
-          } catch (error) {
-            warningNotification("Failed to add recipients.");
-          }
+          },1000)
         } else {
           warningNotification(res.message);
         }
