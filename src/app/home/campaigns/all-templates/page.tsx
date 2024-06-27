@@ -73,11 +73,11 @@ const AllTemplates = () => {
           </div>
           <Table hoverable striped className="w-full rounded-md overflow-hidden">
             <Table.Head>
-              <Table.HeadCell >
+              <Table.HeadCell className="text-center w-1/3">
                 Template Name
               </Table.HeadCell>
-              <Table.HeadCell>Id</Table.HeadCell>
-              <Table.HeadCell className="text-center">
+              <Table.HeadCell className="w-1/3"></Table.HeadCell>
+              <Table.HeadCell className="text-center w-1/3">
                 Actions
               </Table.HeadCell>
             </Table.Head>
@@ -88,18 +88,18 @@ const AllTemplates = () => {
                     key={index}
                     className="dark:border-gray-700 dark:bg-gray-800 overflow-hidden"
                   >
-                    <Table.Cell >
-                      <h1 className="m-0 p-0 dark:text-slate-300 text-dark-black my-auto">
+                    <Table.Cell className="w-1/3">
+                      <h1 className="m-0 p-0 text-center dark:text-slate-300 text-dark-black my-auto">
                         {item.name}
                       </h1>
                     </Table.Cell>
-                    <Table.Cell >
-                      <h1 className="dark:text-slate-300 text-dark-black my-auto">
+                    <Table.Cell className="w-1/3">
+                      {/* <h1 className="dark:text-slate-300 text-dark-black my-auto">
                         {item.id}
-                      </h1>
+                      </h1> */}
                     </Table.Cell>
                     <Table.Cell
-                      className={`w-full text-center flex items-center justify-center gap-4 `}
+                      className={`w-1/3 text-center flex items-center justify-center gap-4 `}
                     >
                       <Image
                         src={Images.Eye}
