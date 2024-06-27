@@ -7,6 +7,7 @@ import { Modal, Table } from "flowbite-react";
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Images from "@/components/utils/images";
+import { recipientsByGroup } from "@/app/api/campaign";
 
 const RecipientSelection = ({ tabsRef }: any) => {
   const groupData = contactStore((state) => state.groupData);
@@ -18,6 +19,7 @@ const RecipientSelection = ({ tabsRef }: any) => {
   const clickedGroup = campaignStore((state) => state.clickedGroup);
   const setClickedGroup = campaignStore((state) => state.setClickedGroup);
   const [openGroupModal, setOpenGroupModal] = useState<boolean>(false);
+  const [totalItems, setTotalItems] = useState<number>(1);
 
   useEffect(() => {
     if (groupData === null) {
@@ -39,23 +41,33 @@ const RecipientSelection = ({ tabsRef }: any) => {
       try {
         const res = await fetchGroupItems(groupName, 1);
         if (res.status === 200) {
-          const updateRecipients = res.contacts.map(
-            (recipient: ContactType) => ({
-              id: recipient.id,
-              json: {
-                name: recipient.json.name,
-                email: recipient.json.email,
-                group: recipient.json.group,
-              },
-            })
-          );
-          setNewCampaign((prev: any | null) => ({
-            ...prev,
-            recipient: prev?.recipient
-              ? [...prev.recipient, ...updateRecipients]
-              : [...updateRecipients],
-          }));
-          setOpenGroupModal(false);
+          setTotalItems(res?.total);
+          const groupRes = await recipientsByGroup(groupName, 1, totalItems);
+          try {
+            if (groupRes.status === 200) {
+              const updateRecipients = groupRes.contacts.map(
+                (recipient: ContactType) => ({
+                  id: recipient.id,
+                  json: {
+                    name: recipient.json.name,
+                    email: recipient.json.email,
+                    group: recipient.json.group,
+                  },
+                })
+              );
+              setNewCampaign((prev: any | null) => ({
+                ...prev,
+                recipient: prev?.recipient
+                  ? [...prev.recipient, ...updateRecipients]
+                  : [...updateRecipients],
+              }));
+              setOpenGroupModal(false);
+            } else {
+              warningNotification(res.message);
+            }
+          } catch (error) {
+            warningNotification("Failed to add recipients.");
+          }
         } else {
           warningNotification(res.message);
         }
@@ -195,48 +207,61 @@ const RecipientSelection = ({ tabsRef }: any) => {
         dismissible
         show={viewRecipients}
         onClose={() => setViewRecipients(false)}
+        className="flex items-center justify-center w-full"
       >
-        <Modal.Header className="dark:bg-dark-glass bg-violet-50">
-          Selected Recipients
-        </Modal.Header>
-        <Modal.Body className="dark:bg-dark-black bg-violet-50 text-slate-300">
-          <Table className="w-full !h-20 overflow-y-scroll">
-            <Table.Head className="sticky top-0 py-0 !rounded-tl-md w-full">
-              <Table.HeadCell className="sticky top-0 py-2">
-                Name
-              </Table.HeadCell>
-              <Table.HeadCell className="sticky top-0 py-2">
-                Email
-              </Table.HeadCell>
-              <Table.HeadCell className="sticky top-0 py-2">
-                Group
-              </Table.HeadCell>
-            </Table.Head>
-            <Table.Body className="divide-y overflow-auto">
-              {newCampaign?.recipient !== null &&
-                newCampaign?.recipient.map((item: any, index: number) => (
-                  <Table.Row
-                    key={index}
-                    className="dark:border-gray-700 dark:bg-gray-800 w-full"
-                  >
-                    <Table.Cell className="w-1/3">{item.json.name}</Table.Cell>
-                    <Table.Cell className="w-1/3">{item.json.email}</Table.Cell>
-                    <Table.Cell className="w-1/3">{item.json.group}</Table.Cell>
-                  </Table.Row>
-                ))}
-            </Table.Body>
-          </Table>
-        </Modal.Body>
+        <div className="h-[80vh] overflow-hidden relative">
+          <Modal.Header className="dark:bg-dark-glass bg-violet-50 ">
+          <p className=" dark:text-slate-300 text-dark-black">
+            Selected Recipients
+            </p>
+          </Modal.Header>
+          <Modal.Body className="h-[80vh] dark:bg-dark-glass bg-violet-50 text-slate-300 relative p-0">
+            <Table className="w-full ">
+              <Table.Head className="sticky top-0 py-0 !rounded-tl-md w-full">
+                <Table.HeadCell className="sticky text-center top-0 py-2">
+                  Name
+                </Table.HeadCell>
+                <Table.HeadCell className="sticky text-center top-0 py-2">
+                  Email
+                </Table.HeadCell>
+                <Table.HeadCell className="sticky text-center top-0 py-2">
+                  Group
+                </Table.HeadCell>
+              </Table.Head>
+              <Table.Body className="divide-y">
+                {newCampaign?.recipient !== null &&
+                  newCampaign?.recipient.map((item: any, index: number) => (
+                    <Table.Row
+                      key={index}
+                      className="dark:border-gray-700 dark:bg-transparent w-full"
+                    >
+                      <Table.Cell className="w-1/3 text-center dark:text-slate-300 text-dark-black">
+                        {item.json.name}
+                      </Table.Cell>
+                      <Table.Cell className="w-1/3 text-center dark:text-slate-300 text-dark-black">
+                        {item.json.email}
+                      </Table.Cell>
+                      <Table.Cell className="w-1/3 text-center dark:text-slate-300 text-dark-black">
+                        {item.json.group}
+                      </Table.Cell>
+                    </Table.Row>
+                  ))}
+              </Table.Body>
+            </Table>
+          </Modal.Body>
+        </div>
       </Modal>
       <div className="flex items-center justify-center w-full gap-4">
         <div className="flex items-center justify-between w-1/2 gap-4">
           <button
-            className="text-sm xl:text-base border border-brand-color text-dark-black dark:text-slate-300 xl:px-8 px-4 xl:py-2 py-1 rounded-md disabled:opacity-20" onClick={() => tabsRef.current.setActiveTab(1)}
+            className="text-sm xl:text-base border border-brand-color text-dark-black dark:text-slate-300 xl:px-8 px-4 xl:py-2 py-1 rounded-md disabled:opacity-20"
+            onClick={() => tabsRef.current.setActiveTab(1)}
           >
             Previous
           </button>
           <button
-            className="text-sm xl:text-base border border-brand-color text-dark-black dark:text-slate-300 xl:px-8 px-4 xl:py-2 py-1 rounded-md disabled:opacity-20" disabled={newCampaign?.recipient === null}
+            className="text-sm xl:text-base border border-brand-color text-dark-black dark:text-slate-300 xl:px-8 px-4 xl:py-2 py-1 rounded-md disabled:opacity-20"
+            disabled={newCampaign?.recipient === null}
             onClick={() => tabsRef.current.setActiveTab(3)}
           >
             Next
