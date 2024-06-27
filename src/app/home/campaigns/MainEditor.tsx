@@ -60,8 +60,8 @@ const MainEditor = () => {
         var item = data.item;
         var changes = data.changes;
         console.log("design:updated", changes, item, type);
-        if( item !== undefined || changes !== undefined || type !== undefined ){
-          setDisableButton(false)
+        if (item !== undefined || changes !== undefined || type !== undefined) {
+          setDisableButton(false);
         }
       });
     }
@@ -89,7 +89,9 @@ const MainEditor = () => {
             const res = await saveTemplate(data);
             if (res.status === 201) {
               successNotification(res.message);
-              window.location.reload();
+              setTimeout(() => {
+                window.location.reload();
+              }, 1500);
             } else if (res.status === 409) {
               warningNotification(res.message);
             } else if (res.status === 422) {
@@ -108,7 +110,9 @@ const MainEditor = () => {
           const res = await updateTemplate(data);
           if (res.status === 201) {
             successNotification(res.message);
-            window.location.reload();
+            setTimeout(() => {
+              window.location.reload();
+            }, 1500);
           } else if (res.status === 409) {
             warningNotification(res.message);
           } else if (res.status === 422) {
@@ -161,9 +165,13 @@ const MainEditor = () => {
                     <Dropdown.Item
                       className="dark:text-slate-300 text-light-black hover:text-gray-800 xl:text-base text-sm"
                       onClick={() => {
-                        navigator.clipboard.writeText(`{${items.label}}`);
+                        navigator.clipboard
+                          .writeText(`{${items.label.toLowerCase()}}`)
+                          .toString();
                         successNotification(
-                          `${items.label} copied to clipboard as {${items.label}}`
+                          `${
+                            items.label
+                          } copied to clipboard as {${items.label.toLowerCase()}}`
                         );
                       }}
                     >
