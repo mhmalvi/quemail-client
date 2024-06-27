@@ -3,7 +3,7 @@ import { fetchGroupItems, fetchGroupList } from "@/app/api/contact";
 import { ContactType } from "@/components/utils/types";
 import { warningNotification } from "@/components/utils/utility";
 import { contactStore, campaignStore } from "@/store/store";
-import { Modal } from "flowbite-react";
+import { Modal, Table } from "flowbite-react";
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Images from "@/components/utils/images";
@@ -13,6 +13,7 @@ const RecipientSelection = ({ tabsRef }: any) => {
   const setGroupData = contactStore((state) => state.setGroupData);
   const newCampaign = campaignStore((state) => state.newCampaign);
   const setNewCampaign = campaignStore((state) => state.setNewCampaign);
+  const viewRecipients = campaignStore((state) => state.viewRecipients);
   const setViewRecipients = campaignStore((state) => state.setViewRecipients);
   const clickedGroup = campaignStore((state) => state.clickedGroup);
   const setClickedGroup = campaignStore((state) => state.setClickedGroup);
@@ -188,6 +189,43 @@ const RecipientSelection = ({ tabsRef }: any) => {
               </div>
             ))}
           </div>
+        </Modal.Body>
+      </Modal>
+      <Modal
+        dismissible
+        show={viewRecipients}
+        onClose={() => setViewRecipients(false)}
+      >
+        <Modal.Header className="dark:bg-dark-glass bg-violet-50">
+          Selected Recipients
+        </Modal.Header>
+        <Modal.Body className="dark:bg-dark-black bg-violet-50 text-slate-300">
+          <Table className="w-full !h-20 overflow-y-scroll">
+            <Table.Head className="sticky top-0 py-0 !rounded-tl-md w-full">
+              <Table.HeadCell className="sticky top-0 py-2">
+                Name
+              </Table.HeadCell>
+              <Table.HeadCell className="sticky top-0 py-2">
+                Email
+              </Table.HeadCell>
+              <Table.HeadCell className="sticky top-0 py-2">
+                Group
+              </Table.HeadCell>
+            </Table.Head>
+            <Table.Body className="divide-y overflow-auto">
+              {newCampaign?.recipient !== null &&
+                newCampaign?.recipient.map((item: any, index: number) => (
+                  <Table.Row
+                    key={index}
+                    className="dark:border-gray-700 dark:bg-gray-800 w-full"
+                  >
+                    <Table.Cell className="w-1/3">{item.json.name}</Table.Cell>
+                    <Table.Cell className="w-1/3">{item.json.email}</Table.Cell>
+                    <Table.Cell className="w-1/3">{item.json.group}</Table.Cell>
+                  </Table.Row>
+                ))}
+            </Table.Body>
+          </Table>
         </Modal.Body>
       </Modal>
       <div className="flex items-center justify-center w-full gap-4">
