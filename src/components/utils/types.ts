@@ -9,12 +9,7 @@ export interface DashboardLayoutProps {
 // }
 export type OpenEditContactModal = {
   show: boolean;
-  data: {
-    json: {
-      name: string;
-      email: string;
-    };
-  } | null;
+  data: EditContactData | null;
 };
 
 export type EditContactData = {
@@ -65,6 +60,7 @@ export type ContactType = {
     email: string | null;
     group: string | null;
   };
+  userID: number
 };
 
 export type ContactStoreState = {
@@ -149,6 +145,7 @@ export interface CampaignListType {
   fromMail: string;
   fromName: string;
   id: number;
+  updatedAt: string;
 }
 interface CampaignListResponse {
   status: number | null;

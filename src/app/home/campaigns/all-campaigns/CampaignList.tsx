@@ -19,7 +19,6 @@ const CampaignList = () => {
   const setCampaignDetails = showCampaignStore(
     (state) => state.setCampaignDetails
   );
-  
 
   useEffect(() => {
     const calculateCampaignsPerPage = () => {
@@ -60,17 +59,20 @@ const CampaignList = () => {
       </div>
       <ListGroup className="relative flex flex-col w-full bg-dark-glass overflow-auto">
         <ListGroup.Item className="sticky top-0 bg-dark-black w-full flex items-center justify-between gap-2 p-0 m-0">
-          <p className="w-1/4 m-0 p-0 text-xs lg:text-sm border-r text-slate-300">
+          <p className="w-1/5 m-0 p-0 text-xs lg:text-sm border-r text-slate-300">
             Campaign Name
           </p>
-          <p className="w-1/4 m-0 p-0 text-xs lg:text-sm border-r text-slate-300">
+          <p className="w-1/5 m-0 p-0 text-xs lg:text-sm border-r text-slate-300">
             Sender Name
           </p>
-          <p className="w-1/4 m-0 p-0 text-xs lg:text-sm border-r text-slate-300">
+          <p className="w-1/5 m-0 p-0 text-xs lg:text-sm border-r text-slate-300">
             Sender Email
           </p>
-          <p className="w-1/4 m-0 p-0 text-xs lg:text-sm text-slate-300">
+          <p className="w-1/5 m-0 p-0 text-xs lg:text-sm text-slate-300">
             No. of recipients
+          </p>
+          <p className="w-1/5 m-0 p-0 text-xs lg:text-sm text-slate-300">
+            Scheduled Date
           </p>
         </ListGroup.Item>
         {campaignList?.campaigns !== null &&
@@ -92,7 +94,7 @@ const CampaignList = () => {
                     }}
                     className="text-base flex items-center justify-center w-full gap-2"
                   >
-                    <div className="w-1/4 m-0 p-0 text-xs lg:text-sm truncate flex items-center justify-center">
+                    <div className="w-1/5 m-0 p-0 text-xs lg:text-sm truncate flex items-center justify-center">
                       <Tooltip
                         content={item.campaignName}
                         className="bg-brand-color"
@@ -101,7 +103,7 @@ const CampaignList = () => {
                         {item.campaignName}
                       </Tooltip>
                     </div>
-                    <div className="w-1/4 m-0 p-0 text-xs lg:text-sm truncate flex items-center justify-center">
+                    <div className="w-1/5 m-0 p-0 text-xs lg:text-sm truncate flex items-center justify-center">
                       <Tooltip
                         content={item.fromMail}
                         className="bg-brand-color"
@@ -110,7 +112,7 @@ const CampaignList = () => {
                         {item.fromName}
                       </Tooltip>
                     </div>
-                    <div className="w-1/4 m-0 p-0 text-xs lg:text-sm truncate flex items-center justify-center">
+                    <div className="w-1/5 m-0 p-0 text-xs lg:text-sm truncate flex items-center justify-center">
                       <Tooltip
                         content={item.fromMail}
                         className="bg-brand-color"
@@ -119,8 +121,11 @@ const CampaignList = () => {
                         {item.fromMail}
                       </Tooltip>
                     </div>
-                    <p className="w-1/4 m-0 p-0 text-xs lg:text-sm">
+                    <p className="w-1/5 m-0 p-0 text-xs lg:text-sm">
                       {item.count}
+                    </p>
+                    <p className="w-1/5 m-0 p-0 text-xs lg:text-sm">
+                      {item.updatedAt.split("T")[0]}
                     </p>
                   </ListGroup.Item>
                 </div>

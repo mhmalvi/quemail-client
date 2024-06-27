@@ -71,7 +71,11 @@ const AllTemplates = () => {
               Create a New Template
             </button>
           </div>
-          <Table hoverable striped className="w-full rounded-md overflow-hidden">
+          <Table
+            hoverable
+            striped
+            className="w-full rounded-md overflow-hidden"
+          >
             <Table.Head>
               <Table.HeadCell className="text-center w-1/3">
                 Template Name
@@ -86,76 +90,78 @@ const AllTemplates = () => {
                 templateData.map((item: TemplateType, index: number) => (
                   <Table.Row
                     key={index}
-                    className="dark:border-gray-700 dark:bg-gray-800 overflow-hidden"
+                    className="w-full dark:border-gray-700 overflow-hidden"
                   >
                     <Table.Cell className="w-1/3">
                       <h1 className="m-0 p-0 text-center dark:text-slate-300 text-dark-black my-auto">
                         {item.name}
                       </h1>
                     </Table.Cell>
-                    <Table.Cell className="w-1/3">
+                    <Table.Cell className="w-1/3 ">
                       {/* <h1 className="dark:text-slate-300 text-dark-black my-auto">
                         {item.id}
                       </h1> */}
                     </Table.Cell>
-                    <Table.Cell
-                      className={`w-1/3 text-center flex items-center justify-center gap-4 `}
-                    >
-                      <Image
-                        src={Images.Eye}
-                        alt="eye"
-                        className="cursor-pointer w-1/8 opacity-50 fill-transparent"
-                        onClick={() => {
-                          setOpenTemplateModal(true);
-                          setSelectedTemplate(item);
-                        }}
-                      />
-                      <div className="px-4 py-1 m-0 border border-brand-color rounded-md xl:text-base text-sm">Use</div>
-                      <Popover
-                        aria-labelledby="default-popover"
-                        open={openDeletePopover === item.id}
-                        onOpenChange={() => {
-                          setOpenDeletePopover(
-                            openDeletePopover === item.id ? null : item.id
-                          );
-                        }}
-                        content={
-                          <div className="w-64 text-sm text-gray-500 dark:text-gray-400">
-                            <div className="border-b border-gray-200 bg-gray-100 px-3 py-2 dark:border-gray-600 dark:bg-gray-700">
-                              <h3
-                                id="default-popover"
-                                className="font-semibold text-gray-900 dark:text-white"
-                              >
-                                Are you sure you want to delete?
-                              </h3>
-                            </div>
-                            <div className="px-4 py-2 flex items-center justify-between">
-                              <button
-                                onClick={() => {
-                                  onDelete(item.id);
-                                }}
-                                className="px-4 py-2 bg-red-500 rounded-md text-white"
-                              >
-                                Delete
-                              </button>
-                              <button
-                                onClick={() => {
-                                  setOpenDeletePopover(null);
-                                }}
-                                className="px-4 py-2 border border-brand-color rounded-md dark:text-slate-300 text-dark-black"
-                              >
-                                Cancel
-                              </button>
-                            </div>
-                          </div>
-                        }
-                      >
+                    <Table.Cell className="w-1/3">
+                      <div className="text-center flex items-center justify-center gap-4 ">
                         <Image
-                          src={Images.Delete}
-                          alt="deleteContact"
-                          className="cursor-pointer"
+                          src={Images.Eye}
+                          alt="eye"
+                          className="cursor-pointer w-1/8 opacity-50 fill-transparent"
+                          onClick={() => {
+                            setOpenTemplateModal(true);
+                            setSelectedTemplate(item);
+                          }}
                         />
-                      </Popover>
+                        <div className="px-4 py-1 m-0 border border-brand-color rounded-md xl:text-base text-sm">
+                          Use
+                        </div>
+                        <Popover
+                          aria-labelledby="default-popover"
+                          open={openDeletePopover === item.id}
+                          onOpenChange={() => {
+                            setOpenDeletePopover(
+                              openDeletePopover === item.id ? null : item.id
+                            );
+                          }}
+                          content={
+                            <div className="w-64 text-sm text-gray-500 dark:text-gray-400">
+                              <div className="border-b border-gray-200 bg-gray-100 px-3 py-2 dark:border-gray-600 dark:bg-gray-700">
+                                <h3
+                                  id="default-popover"
+                                  className="font-semibold text-gray-900 dark:text-white"
+                                >
+                                  Are you sure you want to delete?
+                                </h3>
+                              </div>
+                              <div className="px-4 py-2 flex items-center justify-between">
+                                <button
+                                  onClick={() => {
+                                    onDelete(item.id);
+                                  }}
+                                  className="px-4 py-2 bg-red-500 rounded-md text-white"
+                                >
+                                  Delete
+                                </button>
+                                <button
+                                  onClick={() => {
+                                    setOpenDeletePopover(null);
+                                  }}
+                                  className="px-4 py-2 border border-brand-color rounded-md dark:text-slate-300 text-dark-black"
+                                >
+                                  Cancel
+                                </button>
+                              </div>
+                            </div>
+                          }
+                        >
+                          <Image
+                            src={Images.Delete}
+                            alt="deleteContact"
+                            className="cursor-pointer"
+                          />
+                        </Popover>
+                      </div>
                     </Table.Cell>
                   </Table.Row>
                 ))}
@@ -177,25 +183,24 @@ const AllTemplates = () => {
           </div>
         </div>
       )}
-      {
-        <Modal
-          show={openTemplateModal}
-          dismissible
-          onClose={() => {
-            setOpenTemplateModal(false);
-            setSelectedTemplate(null);
-          }}
-          size={"9xl"}
-          className="h-screen"
-        >
-          <Modal.Header className="dark:bg-dark-glass bg-violet-50 text-slate-300 ">
-            Edit {templateData ? templateData[0]?.name : ""}
-          </Modal.Header>
-          <Modal.Body className="dark:bg-dark-black bg-violet-50 text-slate-300 h-[calc(100vh-100px)] overflow-y-auto">
-            <Editor />
-          </Modal.Body>
-        </Modal>
-      }
+
+      <Modal
+        show={openTemplateModal}
+        dismissible
+        onClose={() => {
+          setOpenTemplateModal(false);
+          setSelectedTemplate(null);
+        }}
+        size={"9xl"}
+        className="h-screen"
+      >
+        <Modal.Header className="dark:bg-dark-glass bg-violet-50 text-slate-300 ">
+          Edit {templateData ? templateData[0]?.name : ""}
+        </Modal.Header>
+        <Modal.Body className="dark:bg-dark-black bg-violet-50 text-slate-300 h-[calc(100vh-100px)] overflow-y-auto">
+          <Editor />
+        </Modal.Body>
+      </Modal>
     </div>
   );
 };

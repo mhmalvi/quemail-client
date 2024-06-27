@@ -32,12 +32,12 @@ const ContactTable = () => {
   );
   const currentPage = contactStore((state) => state.currentPage);
   const currentGroupPage = contactStore((state) => state.currentGroupPage);
+  const onGroupPageChange = (page: number) => setCurrentGroupPage(page);
   const totalPages = contactStore((state) => state.totalPages);
   const groupTotalPages = contactStore((state) => state.groupTotalPages);
   const userID =
     typeof window !== "undefined" && localStorage.getItem("userID");
   const onPageChange = (page: number) => setCurrentPage(page);
-  const onGroupPageChange = (page: number) => setCurrentGroupPage(page);
   const [selectAllChecked, setSelectAllChecked] = useState(false);
   const [updateLoading, setUpdateLoading] = useState(false);
   const [editContactData, setEditContactData] = useState<EditContactData>({
@@ -69,7 +69,7 @@ const ContactTable = () => {
   const [openDeletePopover, setOpenDeletePopover] = useState<null | number>(
     null
   );
-  const handleEditContact = (contact: any) => {
+  const handleEditContact = (contact: EditContactData) => {
     setEditContactData(contact);
     setInitialEditContactData(contact);
     setOpenEditContactModal({
@@ -87,6 +87,7 @@ const ContactTable = () => {
     }));
   };
 
+  console.log(editContactData);
   const onUpdate = async () => {
     const res = await updateContact(editContactData);
     if (res.status === 201) {
@@ -119,6 +120,7 @@ const ContactTable = () => {
       warningNotification("Something went wrong. Please try again.");
     }
   };
+
   return (
     <>
       <div className="flex flex-col gap-4 h-5/6 overflow-auto">
@@ -130,13 +132,17 @@ const ContactTable = () => {
                 onChange={(e) => setSelectAllChecked(e.target.checked)}
               />
             </Table.HeadCell>
-            <Table.HeadCell className="sticky top-0 py-2">Name</Table.HeadCell>
-            <Table.HeadCell className="sticky top-0 py-2">Email</Table.HeadCell>
-            <Table.HeadCell className="sticky top-0 py-2">
-              Added by
+            <Table.HeadCell className="sticky top-0 py-2 text-center ">
+              Name
             </Table.HeadCell>
-            <Table.HeadCell className="sticky top-0 py-2">Group</Table.HeadCell>
-            <Table.HeadCell className="sticky top-0 py-2">
+            <Table.HeadCell className="sticky top-0 py-2 text-center ">
+              Email
+            </Table.HeadCell>
+
+            <Table.HeadCell className="sticky top-0 py-2 text-center ">
+              Group
+            </Table.HeadCell>
+            <Table.HeadCell className="sticky top-0 py-2 text-center ">
               Date Added
             </Table.HeadCell>
             <Table.HeadCell className="sticky top-0 py-2 text-center w-full">
@@ -145,21 +151,25 @@ const ContactTable = () => {
           </Table.Head>
           <Table.Body className="divide-y">
             {groupContacts !== null
-              ? groupContacts.map((items, index) => (
+              ? groupContacts.map((items: any, index) => (
                   <Table.Row
                     key={index}
-                    className="dark:border-gray-700 dark:bg-gray-800"
+                    className="dark:border-gray-700 dark:bg-transparent"
                   >
-                    <Table.Cell>
+                    <Table.Cell className="text-center">
                       <Checkbox />
                     </Table.Cell>
-                    <Table.Cell className="font-medium text-gray-900 dark:text-white">
+                    <Table.Cell className="font-medium text-gray-900 dark:text-white text-center">
                       {items.json.name}
                     </Table.Cell>
-                    <Table.Cell>{items.json.email}</Table.Cell>
-                    <Table.Cell>-</Table.Cell>
-                    <Table.Cell>{items.json.group}</Table.Cell>
-                    <Table.Cell>-</Table.Cell>
+                    <Table.Cell className="text-center">
+                      {items.json.email}
+                    </Table.Cell>
+
+                    <Table.Cell className="text-center">
+                      {items.json.group}
+                    </Table.Cell>
+                    <Table.Cell className="text-center">-</Table.Cell>
                     <Table.Cell className="w-full flex items-center justify-center gap-8">
                       <Image
                         className="cursor-pointer"
@@ -223,16 +233,22 @@ const ContactTable = () => {
                     key={index}
                     className="dark:border-gray-700 dark:bg-gray-800"
                   >
-                    <Table.Cell>
+                    <Table.Cell className="text-center">
                       <Checkbox />
                     </Table.Cell>
-                    <Table.Cell className="font-medium text-gray-900 dark:text-white">
+                    <Table.Cell className="font-medium text-center text-gray-900 dark:text-white">
                       {contact.json.name}
                     </Table.Cell>
-                    <Table.Cell>{contact.json.email}</Table.Cell>
-                    <Table.Cell>-</Table.Cell>
-                    <Table.Cell>{contact.json.group}</Table.Cell>
-                    <Table.Cell>-</Table.Cell>
+                    <Table.Cell className="text-center">
+                      {contact.json.email}
+                    </Table.Cell>
+
+                    <Table.Cell className="text-center">
+                      {contact.json.group}
+                    </Table.Cell>
+                    <Table.Cell className="text-center">
+                      {contact.updatedAt.split("T")[0]}
+                    </Table.Cell>
                     <Table.Cell className="w-full flex items-center justify-center gap-8">
                       <Image
                         className="cursor-pointer"
@@ -340,6 +356,7 @@ const ContactTable = () => {
               onChange={(event) =>
                 handleEditContactDataChange("name", event.target.value)
               }
+              className="bg-tranparent"
               required
             />
           </div>
@@ -352,6 +369,7 @@ const ContactTable = () => {
               onChange={(event) =>
                 handleEditContactDataChange("email", event.target.value)
               }
+              className="bg-tranparent"
               required
             />
           </div>
@@ -364,6 +382,7 @@ const ContactTable = () => {
               onChange={(event) =>
                 handleEditContactDataChange("group", event.target.value)
               }
+              className="bg-tranparent"
               required
             />
           </div>
