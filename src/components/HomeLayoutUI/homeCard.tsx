@@ -81,21 +81,6 @@ const HomeCard = () => {
   };
   const [mailAdded, setMailAdded] = useState<MailAdded | null>(null);
 
-  useEffect(() => {
-    (async () => {
-      const res = await fetchAddedMail();
-      if (res?.status === 200) {
-        setMailAdded(res.emails);
-      } else if (res?.status === 422) {
-        warningNotification(res.message);
-      } else if (res?.status === 404) {
-        warningNotification(res.message);
-      } else {
-        warningNotification("Something went wrong");
-      }
-    })();
-  }, []);
-
   const onRemove = async () => {
     try {
       const res = await destroyMail(emailInfo.id);
@@ -110,7 +95,30 @@ const HomeCard = () => {
       console.log(error);
     }
   };
-
+  const handleGoogleClick = async () => {
+    setEmailInfo((prev: any) => ({
+      ...prev,
+      provider: "Google",
+      email: mailAdded?.google?.email || null,
+      appPassword: mailAdded?.google?.app_password || null,
+      id: mailAdded?.google?.id || null,
+    }));
+    try {
+      const res = await fetchAddedMail();
+      if (res?.status === 200) {
+        setMailAdded(res.emails);
+      } else if (res?.status === 422) {
+        warningNotification(res.message);
+      } else if (res?.status === 404) {
+        warningNotification(res.message);
+      } else {
+        warningNotification("Something went wrong");
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  console.log(mailAdded);
   const [openDeletePopover, setOpenDeletePopover] = useState(false);
   return (
     <div className="h-full relative dark:bg-dark-glass shadow-md bg-[#ffffffbf] backdrop-blur-2xl rounded-md p-4 flex flex-col gap-4 overflow-hidden">
@@ -123,18 +131,10 @@ const HomeCard = () => {
       <div className="bg-[url('/SVG/Home/homeCardBg.svg')] dark:bg-transparent bg-violet-50 w-full h-1/2 border dark:border-dark-black/30 shadow-xl shadow-inner rounded-md flex items-center justify-center gap-16">
         <div
           className="relative bg-white xl:h-20 h-16 xl:p-4 p-2 border dark:border-dark-black/60 hover:dark:border-brand-color hover:border-brand-color xl:w-20 w-16 rounded-md shadow-md cursor-pointer hover:scale-95 duration-100 ease-in-out"
-          onClick={() => {
-            setEmailInfo((prev: any) => ({
-              ...prev,
-              provider: "Google",
-              email: mailAdded?.google?.email || null,
-              appPassword: mailAdded?.google?.app_password || null,
-              id: mailAdded?.google?.id || null,
-            }));
-          }}
+          onClick={handleGoogleClick}
         >
           <Image src={Images.Google} alt="Google" className="h-full" />
-          {mailAdded?.google === null ? (
+          {mailAdded?.google === null || mailAdded === null ? (
             ""
           ) : (
             <div className=" absolute -bottom-2 -right-2 bg-green-500 w-6 h-6 flex items-center justify-center m-0 rounded-full">
