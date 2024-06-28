@@ -33,12 +33,12 @@ const ContactTable = () => {
   const currentPage = contactStore((state) => state.currentPage);
   const currentGroupPage = contactStore((state) => state.currentGroupPage);
   const onGroupPageChange = (page: number) => setCurrentGroupPage(page);
+  
   const totalPages = contactStore((state) => state.totalPages);
   const groupTotalPages = contactStore((state) => state.groupTotalPages);
   const userID =
     typeof window !== "undefined" && localStorage.getItem("userID");
   const onPageChange = (page: number) => setCurrentPage(page);
-  const [selectAllChecked, setSelectAllChecked] = useState(false);
   const [updateLoading, setUpdateLoading] = useState(false);
   const [editContactData, setEditContactData] = useState<EditContactData>({
     id: null,
@@ -87,7 +87,6 @@ const ContactTable = () => {
     }));
   };
 
-  console.log(editContactData);
   const onUpdate = async () => {
     const res = await updateContact(editContactData);
     if (res.status === 201) {
@@ -120,32 +119,26 @@ const ContactTable = () => {
       warningNotification("Something went wrong. Please try again.");
     }
   };
-
+  
   return (
     <>
       <div className="flex flex-col gap-4 h-5/6 overflow-auto">
         <Table hoverable striped>
-          <Table.Head className="sticky top-0 py-0 !rounded-tl-md">
-            <Table.HeadCell className="sticky top-0 py-2">
-              <Checkbox
-                checked={selectAllChecked}
-                onChange={(e) => setSelectAllChecked(e.target.checked)}
-              />
-            </Table.HeadCell>
-            <Table.HeadCell className="sticky top-0 py-2 text-center ">
+          <Table.Head className="w-full sticky top-0 py-0 !rounded-tl-md">
+            <Table.HeadCell className="w-1/5 sticky top-0 py-2 text-center ">
               Name
             </Table.HeadCell>
-            <Table.HeadCell className="sticky top-0 py-2 text-center ">
+            <Table.HeadCell className="w-1/5 sticky top-0 py-2 text-center ">
               Email
             </Table.HeadCell>
 
-            <Table.HeadCell className="sticky top-0 py-2 text-center ">
+            <Table.HeadCell className="w-1/5 sticky top-0 py-2 text-center ">
               Group
             </Table.HeadCell>
-            <Table.HeadCell className="sticky top-0 py-2 text-center ">
+            <Table.HeadCell className="w-1/5 sticky top-0 py-2 text-center ">
               Date Added
             </Table.HeadCell>
-            <Table.HeadCell className="sticky top-0 py-2 text-center w-full">
+            <Table.HeadCell className="w-1/5 sticky top-0 py-2 text-center w-full">
               Action
             </Table.HeadCell>
           </Table.Head>
@@ -154,23 +147,23 @@ const ContactTable = () => {
               ? groupContacts.map((items: any, index) => (
                   <Table.Row
                     key={index}
-                    className="dark:border-gray-700 dark:bg-transparent"
+                    className="w-full dark:border-gray-700 dark:bg-transparent"
                   >
-                    <Table.Cell className="text-center">
-                      <Checkbox />
-                    </Table.Cell>
-                    <Table.Cell className="font-medium text-gray-900 dark:text-white text-center">
+                    <Table.Cell className="w-1/5 font-medium text-gray-900 dark:text-white text-center">
                       {items.json.name}
                     </Table.Cell>
-                    <Table.Cell className="text-center">
+                    <Table.Cell className="w-1/5 text-center">
                       {items.json.email}
                     </Table.Cell>
 
-                    <Table.Cell className="text-center">
+                    <Table.Cell className="w-1/5 text-center">
                       {items.json.group}
                     </Table.Cell>
-                    <Table.Cell className="text-center">-</Table.Cell>
-                    <Table.Cell className="w-full flex items-center justify-center gap-8">
+                    <Table.Cell className="w-1/5 text-center">
+                      {" "}
+                      {items.updatedAt.split("T")[0]}
+                    </Table.Cell>
+                    <Table.Cell className="w-1/5 flex items-center justify-center gap-8">
                       <Image
                         className="cursor-pointer"
                         src={Images.Edit}
@@ -230,23 +223,21 @@ const ContactTable = () => {
               : allContactList !== null &&
                 allContactList.map((contact: any, index: any) => (
                   <Table.Row
+                    
                     key={index}
                     className="dark:border-gray-700 dark:bg-gray-800"
                   >
-                    <Table.Cell className="text-center">
-                      <Checkbox />
-                    </Table.Cell>
-                    <Table.Cell className="font-medium text-center text-gray-900 dark:text-white">
+                    <Table.Cell className="w-1/5 font-medium text-center text-gray-900 dark:text-white">
                       {contact.json.name}
                     </Table.Cell>
-                    <Table.Cell className="text-center">
+                    <Table.Cell className="w-1/5 text-center">
                       {contact.json.email}
                     </Table.Cell>
 
-                    <Table.Cell className="text-center">
+                    <Table.Cell className="w-1/5 text-center">
                       {contact.json.group}
                     </Table.Cell>
-                    <Table.Cell className="text-center">
+                    <Table.Cell className="w-1/5 text-center">
                       {contact.updatedAt.split("T")[0]}
                     </Table.Cell>
                     <Table.Cell className="w-full flex items-center justify-center gap-8">
