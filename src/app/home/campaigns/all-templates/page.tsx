@@ -1,11 +1,12 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { Modal, Popover, Table } from "flowbite-react";
+import { Modal, Popover, Table, Tooltip } from "flowbite-react";
 import { fetchTemplate, destroyTemplate } from "@/app/api/template";
 import { campaignStore } from "@/store/store";
 import { TemplateType } from "@/components/utils/types";
 import Image from "next/image";
 import Images from "@/components/utils/images";
+import { TbRocket, TbEye, TbTrash } from "react-icons/tb";
 import {
   successNotification,
   warningNotification,
@@ -14,13 +15,16 @@ import dynamic from "next/dynamic";
 import NoContacts from "@/components/HomeLayoutUI/NoContacts";
 import { CONTAINER_STYLES } from "@/components/styles/flex_container";
 import { BIG_BUTTON_STYLES } from "@/components/styles/button";
+import { useRouter } from "next/navigation";
 
 const AllTemplates = () => {
   const Editor = dynamic(() => import("../MainEditor"), {
     ssr: false,
   });
+  const router = useRouter();
   const templateData = campaignStore((state) => state.templateData);
   const setTemplateData = campaignStore((state) => state.setTemplateData);
+  const setNewCampaign = campaignStore((state) => state.setNewCampaign);
   const setSelectedTemplate = campaignStore(
     (state) => state.setSelectedTemplate
   );
@@ -57,6 +61,22 @@ const AllTemplates = () => {
       window.location.reload();
     } else {
       warningNotification("Something went wrong. Please try again.");
+    }
+  };
+  const handleTemplateSelection = (
+    templateName: string | null,
+    templateHtml: string | null
+  ) => {
+    if (templateName && templateHtml) {
+      setNewCampaign((prev: any | null) => ({
+        ...prev,
+        template: {
+          name: templateName,
+          data: templateHtml,
+        },
+      }));
+
+      router.push("/home/campaigns/new-campaign");
     }
   };
   return (
@@ -104,18 +124,20 @@ const AllTemplates = () => {
                     </Table.Cell>
                     <Table.Cell className="w-1/3">
                       <div className="text-center flex items-center justify-center gap-4 ">
-                        <Image
-                          src={Images.Eye}
-                          alt="eye"
-                          className="cursor-pointer w-1/8 opacity-50 fill-transparent"
-                          onClick={() => {
-                            setOpenTemplateModal(true);
-                            setSelectedTemplate(item);
-                          }}
-                        />
-                        <div className="px-4 py-1 m-0 border border-brand-color rounded-md xl:text-base text-sm">
-                          Use
-                        </div>
+                        <Tooltip
+                          content="Preview Template"
+                          className="bg-brand-color"
+                        >
+                          <TbEye
+                            size={25}
+                            onClick={() => {
+                              setOpenTemplateModal(true);
+                              setSelectedTemplate(item);
+                            }}
+                            className="cursor-pointer hover:text-brand-color"
+                          />
+                        </Tooltip>
+
                         <Popover
                           aria-labelledby="default-popover"
                           open={openDeletePopover === item.id}
@@ -155,12 +177,32 @@ const AllTemplates = () => {
                             </div>
                           }
                         >
-                          <Image
-                            src={Images.Delete}
-                            alt="deleteContact"
-                            className="cursor-pointer"
-                          />
+                          <Tooltip
+                            content="Remove Template"
+                            className="bg-red-500"
+                          >
+                            <TbTrash
+                              size={25}
+                              className="hover:text-red-500 cursor-pointer"
+                            />
+                          </Tooltip>
                         </Popover>
+                        <Tooltip
+                          content={`Use template ${item.name} in Campaign`}
+                          className="bg-brand-color text-white"
+                        >
+                          <div
+                            className="px-4 py-1 rounded-md border border-brand-color hover:bg-brand-color hover:text-yellow-200 cursor-pointer"
+                            onClick={() =>
+                              handleTemplateSelection(
+                                item.name,
+                                item.template.html
+                              )
+                            }
+                          >
+                            <TbRocket size={25} />
+                          </div>
+                        </Tooltip>
                       </div>
                     </Table.Cell>
                   </Table.Row>

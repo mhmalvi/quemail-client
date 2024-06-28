@@ -6,7 +6,7 @@ import {
   TbProgress,
   TbProgressX,
   TbProgressCheck,
-  TbChecks,
+  TbChecks
 } from "react-icons/tb";
 
 import {
@@ -175,7 +175,7 @@ const CampaignItems = () => {
                         <ListGroup.Item
                           className="text-base flex items-center justify-center w-full gap-4"
                           onClick={() => {
-                            setShowTemplateData(null)
+                            setShowTemplateData(null);
                             setShowTemplateData(item.templateData);
                             setItemIdClicked(item.id);
                           }}

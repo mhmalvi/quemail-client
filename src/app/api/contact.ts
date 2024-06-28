@@ -25,6 +25,37 @@ export const importContact = async (data: {}) => {
   }
 };
 
+export const importContactManually = async (data: {
+  userID: string | false | null;
+  name: string | null;
+  email: string | null;
+  group: string | null;
+}) => {
+  const token = typeof window !== "undefined" && localStorage.getItem("token");
+  const parsedToken = token && JSON.parse(token);
+  try {
+    const result = await fetch(
+      `https://backend.quemailer.com/api/contact-save-manually`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: parsedToken,
+        },
+        body: JSON.stringify(data),
+      }
+    );
+    if (result) {
+      const responseData = await result.json();
+      return responseData;
+    } else {
+      return null;
+    }
+  } catch (error: any) {
+    return error.response;
+  }
+};
+
 export const fetchContact = async (page: number, per_page: number | null) => {
   const userID =
     typeof window !== "undefined" && localStorage.getItem("userID");
