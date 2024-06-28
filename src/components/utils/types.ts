@@ -60,7 +60,7 @@ export type ContactType = {
     email: string | null;
     group: string | null;
   };
-  userID: number
+  userID: number;
 };
 
 export type ContactStoreState = {
@@ -73,6 +73,8 @@ export type ContactStoreState = {
   groupTotalPages: number;
   currentPage: number;
   currentGroupPage: number;
+  allContactPerPage: number;
+  setAllContactPerPage: (state: number) => void;
   setAllContactList: (contactData: [ContactType] | null) => void;
   setCsvData: (csvData: any[]) => void;
   setHasData: (state: boolean) => void;

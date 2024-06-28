@@ -9,13 +9,20 @@ import Images from "@/components/utils/images";
 import Groups from "./Groups";
 import ContactTable from "./ContactTable";
 import { COL_CONTAINER_STYLES } from "@/components/styles/flex_col_container";
-import { BIG_BUTTON_STYLES, BORDERED_BUTTON_STYLES } from "@/components/styles/button";
+import {
+  BIG_BUTTON_STYLES,
+  BORDERED_BUTTON_STYLES,
+} from "@/components/styles/button";
 
 const AllContacts = () => {
   const groupContacts = contactStore((state) => state.groupContacts);
   const allContactList = contactStore((state) => state.allContactList);
   const setAllContactList = contactStore((state) => state.setAllContactList);
   const setTotalPages = contactStore((state) => state.setTotalPages);
+  const setAllContactPerPage = contactStore(
+    (state) => state.setAllContactPerPage
+  );
+  const allContactPerPage = contactStore((state) => state.allContactPerPage);
   const currentPage = contactStore((state) => state.currentPage);
   const [openModal, setOpenModal] = useState({
     show: "",
@@ -25,8 +32,12 @@ const AllContacts = () => {
 
   useEffect(() => {
     (async () => {
+      const height = document.getElementById("tableHeight")?.clientHeight;
+      
+      height !== undefined && setAllContactPerPage(height/80);
+      const revisedHeight = Math.floor(allContactPerPage);
       try {
-        const res = await fetchContact(currentPage);
+        const res = await fetchContact(currentPage, revisedHeight);
         if (res.status === 200) {
           setAllContactList(res?.contact);
           setTotalPages(res?.totalPages);
@@ -35,12 +46,18 @@ const AllContacts = () => {
         console.log(error);
       }
     })();
-  }, [currentPage, setAllContactList, setTotalPages]);
+  }, [
+    allContactPerPage,
+    currentPage,
+    setAllContactList,
+    setAllContactPerPage,
+    setTotalPages,
+  ]);
 
   return (
     <>
       {Images.Edit && allContactList !== null && allContactList.length > 0 ? (
-        <div className={COL_CONTAINER_STYLES}>
+        <div id="tableHeight" className={COL_CONTAINER_STYLES}>
           <div className="w-full flex items-center justify-between">
             <div className="flex items-center justify-center gap-4">
               <Groups />
@@ -56,19 +73,14 @@ const AllContacts = () => {
               </h1>
             </div>
             <div className="flex items-center gap-4">
-              <button
-                className={BIG_BUTTON_STYLES}
-                disabled
-              >
+              {/* <button className={BIG_BUTTON_STYLES} disabled>
                 Add to Campaign
-              </button>
+              </button> */}
               <Dropdown
                 label=""
                 placement="bottom"
                 renderTrigger={() => (
-                  <h1 className={BIG_BUTTON_STYLES}>
-                    Add Contacts +
-                  </h1>
+                  <h1 className={BIG_BUTTON_STYLES}>Add Contacts +</h1>
                 )}
               >
                 <Dropdown.Item

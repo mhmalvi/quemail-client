@@ -25,13 +25,13 @@ export const importContact = async (data: {}) => {
   }
 };
 
-export const fetchContact = async (page: number) => {
+export const fetchContact = async (page: number, per_page: number | null) => {
   const userID =
     typeof window !== "undefined" && localStorage.getItem("userID");
   const data = {
     userID: userID,
     page: page,
-    per_page: 8,
+    per_page: per_page,
   };
   try {
     const result = await fetch(
@@ -136,10 +136,7 @@ export const fetchGroupList = async () => {
   }
 };
 
-export const fetchGroupItems = async (
-  data: string | null,
-  page: number
-) => {
+export const fetchGroupItems = async (data: string | null, page: number) => {
   const token = typeof window !== "undefined" && localStorage.getItem("token");
   const parsedToken = token && JSON.parse(token);
   const userID =

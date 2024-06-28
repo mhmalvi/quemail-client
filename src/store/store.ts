@@ -46,10 +46,12 @@ export const contactStore = create<ContactStoreState>((set) => ({
   allContactList: null,
   groupData: null,
   groupContacts: null,
+  allContactPerPage: 8,
   totalPages: 1,
   groupTotalPages: 1,
   currentPage: 1,
   currentGroupPage: 1,
+  setAllContactPerPage: (state) => set(() => ({ allContactPerPage: state })),
   setAllContactList: (contactData) =>
     set(() => ({ allContactList: contactData })),
   setCsvData: (csvData: any[]) => set(() => ({ csvData: csvData })),
