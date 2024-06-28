@@ -105,9 +105,7 @@ const HomeCard = () => {
           warningNotification(res.message);
         } else if (res?.status === 404) {
           warningNotification(res.message);
-        } else {
-          warningNotification("Add your email first");
-        }
+        } 
       } catch (err) {
         console.log(err);
       }
