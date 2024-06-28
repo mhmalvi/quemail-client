@@ -1,17 +1,25 @@
 import { EditContactData } from "@/components/utils/types";
 
 export const importContact = async (data: {}) => {
+  const token = typeof window !== "undefined" && localStorage.getItem("token");
+  const parsedToken = token && JSON.parse(token);
   const userID =
     typeof window !== "undefined" && localStorage.getItem("userID");
+
+  var fullData = {
+    data,
+    userID: userID,
+  };
   try {
     const result = await fetch(
-      `https://backend.quemailer.com/api/contact-save/${userID}`,
+      `https://backend.quemailer.com/api/contact-save`,
       {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Authorization: parsedToken,
         },
-        body: JSON.stringify(data),
+        body: JSON.stringify(fullData),
       }
     );
     if (result) {
@@ -57,6 +65,8 @@ export const importContactManually = async (data: {
 };
 
 export const fetchContact = async (page: number, per_page: number | null) => {
+  const token = typeof window !== "undefined" && localStorage.getItem("token");
+  const parsedToken = token && JSON.parse(token);
   const userID =
     typeof window !== "undefined" && localStorage.getItem("userID");
   const data = {
@@ -71,6 +81,7 @@ export const fetchContact = async (page: number, per_page: number | null) => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Authorization: parsedToken,
         },
         body: JSON.stringify(data),
       }
@@ -87,6 +98,8 @@ export const fetchContact = async (page: number, per_page: number | null) => {
 };
 
 export const updateContact = async (data: EditContactData) => {
+  const token = typeof window !== "undefined" && localStorage.getItem("token");
+  const parsedToken = token && JSON.parse(token);
   try {
     const result = await fetch(
       `https://backend.quemailer.com/api/contact-update`,
@@ -94,6 +107,7 @@ export const updateContact = async (data: EditContactData) => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Authorization: parsedToken,
         },
         body: JSON.stringify(data),
       }
@@ -110,6 +124,8 @@ export const updateContact = async (data: EditContactData) => {
 };
 
 export const destroyContact = async (data: number) => {
+  const token = typeof window !== "undefined" && localStorage.getItem("token");
+  const parsedToken = token && JSON.parse(token);
   const userID =
     typeof window !== "undefined" && localStorage.getItem("userID");
   try {
@@ -119,6 +135,7 @@ export const destroyContact = async (data: number) => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Authorization: parsedToken,
         },
         body: JSON.stringify({
           id: data,
