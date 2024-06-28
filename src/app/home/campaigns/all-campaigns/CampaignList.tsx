@@ -58,20 +58,20 @@ const CampaignList = () => {
         </h1>
       </div>
       <ListGroup className="relative flex flex-col w-full bg-dark-glass overflow-auto">
-        <ListGroup.Item className="sticky top-0 bg-dark-black w-full flex items-center justify-between gap-2 p-0 m-0">
-          <p className="w-1/5 m-0 p-0 text-xs lg:text-sm border-r text-slate-300">
+        <ListGroup.Item className="sticky top-0 dark:bg-dark-black bg-violet-50 w-full flex items-center justify-between gap-2 p-0 m-0">
+          <p className="w-1/5 m-0 p-0 text-xs lg:text-sm border-r text-dark-black dark:text-slate-300">
             Campaign Name
           </p>
-          <p className="w-1/5 m-0 p-0 text-xs lg:text-sm border-r text-slate-300">
+          <p className="w-1/5 m-0 p-0 text-xs lg:text-sm border-r text-dark-black dark:text-slate-300">
             Sender Name
           </p>
-          <p className="w-1/5 m-0 p-0 text-xs lg:text-sm border-r text-slate-300">
+          <p className="w-1/5 m-0 p-0 text-xs lg:text-sm border-r text-dark-black dark:text-slate-300">
             Sender Email
           </p>
-          <p className="w-1/5 m-0 p-0 text-xs lg:text-sm text-slate-300">
+          <p className="w-1/5 m-0 p-0 text-xs lg:text-sm text-dark-black dark:text-slate-300">
             No. of recipients
           </p>
-          <p className="w-1/5 m-0 p-0 text-xs lg:text-sm text-slate-300">
+          <p className="w-1/5 m-0 p-0 text-xs lg:text-sm text-dark-black dark:text-slate-300">
             Scheduled Date
           </p>
         </ListGroup.Item>
@@ -104,13 +104,7 @@ const CampaignList = () => {
                       </Tooltip>
                     </div>
                     <div className="w-1/5 m-0 p-0 text-xs lg:text-sm truncate flex items-center justify-center">
-                      <Tooltip
-                        content={item.fromMail}
-                        className="bg-brand-color"
-                        placement="bottom"
-                      >
-                        {item.fromName}
-                      </Tooltip>
+                      {item.fromName}
                     </div>
                     <div className="w-1/5 m-0 p-0 text-xs lg:text-sm truncate flex items-center justify-center">
                       <Tooltip
