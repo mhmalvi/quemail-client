@@ -96,20 +96,22 @@ const HomeCard = () => {
     }
   };
   useEffect(() => {
-    (async () => {
-      try {
-        const res = await fetchAddedMail();
-        if (res?.status === 200) {
-          setMailAdded(res.emails);
-        } else if (res?.status === 422) {
-          warningNotification(res.message);
-        } else if (res?.status === 404) {
-          warningNotification(res.message);
+    setTimeout(() => {
+      (async () => {
+        try {
+          const res = await fetchAddedMail();
+          if (res?.status === 200) {
+            setMailAdded(res.emails);
+          } else if (res?.status === 422) {
+            warningNotification(res.message);
+          } else if (res?.status === 404) {
+            warningNotification(res.message);
+          }
+        } catch (err) {
+          console.log(err);
         }
-      } catch (err) {
-        console.log(err);
-      }
-    })();
+      })();
+    }, 1500);
   }, []);
   const handleGoogleClick = async () => {
     setEmailInfo((prev: any) => ({
