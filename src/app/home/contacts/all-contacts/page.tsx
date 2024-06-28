@@ -80,7 +80,7 @@ const AllContacts = () => {
                 label=""
                 placement="bottom"
                 renderTrigger={() => (
-                  <h1 className={BIG_BUTTON_STYLES}>Add Contacts +</h1>
+                  <h1 className={`${BIG_BUTTON_STYLES} cursor-pointer`}>Add Contacts +</h1>
                 )}
               >
                 <Dropdown.Item
