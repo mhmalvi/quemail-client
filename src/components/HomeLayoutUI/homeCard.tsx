@@ -95,6 +95,24 @@ const HomeCard = () => {
       console.log(error);
     }
   };
+  useEffect(() => {
+    (async () => {
+      try {
+        const res = await fetchAddedMail();
+        if (res?.status === 200) {
+          setMailAdded(res.emails);
+        } else if (res?.status === 422) {
+          warningNotification(res.message);
+        } else if (res?.status === 404) {
+          warningNotification(res.message);
+        } else {
+          warningNotification("Add your email first");
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    })();
+  }, []);
   const handleGoogleClick = async () => {
     setEmailInfo((prev: any) => ({
       ...prev,
@@ -103,22 +121,7 @@ const HomeCard = () => {
       appPassword: mailAdded?.google?.app_password || null,
       id: mailAdded?.google?.id || null,
     }));
-    try {
-      const res = await fetchAddedMail();
-      if (res?.status === 200) {
-        setMailAdded(res.emails);
-      } else if (res?.status === 422) {
-        warningNotification(res.message);
-      } else if (res?.status === 404) {
-        warningNotification(res.message);
-      } else {
-        warningNotification("Something went wrong");
-      }
-    } catch (err) {
-      console.log(err);
-    }
   };
-  console.log(mailAdded);
   const [openDeletePopover, setOpenDeletePopover] = useState(false);
   return (
     <div className="h-full relative dark:bg-dark-glass shadow-md bg-[#ffffffbf] backdrop-blur-2xl rounded-md p-4 flex flex-col gap-4 overflow-hidden">
