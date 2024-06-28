@@ -61,7 +61,6 @@ const SelectTemplate: React.FC<SelectTemplateProps> = ({
       setChooseTemplate("");
     }
   };
-  
 
   return (
     <Modal
@@ -72,9 +71,8 @@ const SelectTemplate: React.FC<SelectTemplateProps> = ({
     >
       <Modal.Header className="dark:bg-dark-black bg-white">
         <p className=" dark:text-slate-300 text-dark-black">
-
-        Select a template from the list below
-        </ p>
+          Select a template from the list below
+        </p>
       </Modal.Header>
       <Modal.Body className="dark:bg-dark-black bg-white text-slate-300">
         <Table hoverable striped className="w-full !h-20 overflow-auto">
@@ -82,7 +80,9 @@ const SelectTemplate: React.FC<SelectTemplateProps> = ({
             <Table.HeadCell className="text-center sticky top-0 py-2">
               Template Name
             </Table.HeadCell>
-            <Table.HeadCell className="text-center sticky top-0 py-2">Id</Table.HeadCell>
+            <Table.HeadCell className="text-center sticky top-0 py-2">
+              Id
+            </Table.HeadCell>
             <Table.HeadCell className="text-center sticky top-0 py-2">
               Actions
             </Table.HeadCell>
@@ -107,7 +107,9 @@ const SelectTemplate: React.FC<SelectTemplateProps> = ({
                   <Table.Cell className="w-full text-center flex items-center justify-center gap-4">
                     <button
                       className="px-4 py-2 bg-brand-color rounded-md text-slate-300"
-                      onClick={() => handleTemplateSelection(item.name, item.template.html)}
+                      onClick={() =>
+                        handleTemplateSelection(item.name, item.template.html)
+                      }
                     >
                       Use
                     </button>

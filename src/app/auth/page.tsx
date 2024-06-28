@@ -1,10 +1,12 @@
 "use client";
 import React, { Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
+
 import { Storage } from "@/store/store";
 
 const Authenticate = () => {
   const router = useRouter();
+  
   const searchParams = useSearchParams();
   const userName = searchParams.get("userName");
   const email = searchParams.get("email");

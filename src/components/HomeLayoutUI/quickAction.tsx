@@ -6,6 +6,7 @@ import ImportCSV from "@/app/home/contacts/all-contacts/ImportCSV";
 import Link from "next/link";
 import dynamic from "next/dynamic";
 import { Modal } from "flowbite-react";
+import ManualContact from "@/app/home/contacts/all-contacts/ManualContact";
 
 const QuickActions = () => {
   const [actionClick, setActionClick] = useState({
@@ -14,6 +15,7 @@ const QuickActions = () => {
   const Editor = dynamic(() => import("../../app/home/campaigns/MainEditor"), {
     ssr: false,
   });
+  const [openAddContactModal, setOpenAddContactModal] = useState(false);
   return (
     <div className=" xl:w-1/4 w-1/3 dark:bg-dark-glass bg-[#ffffffbf] shadow-md backdrop-blur-xl rounded-md p-4 flex flex-col gap-4 overflow-hidden">
       <h1 className="xl:text-xl text-base m-0 p-0 dark:text-white text-dark-black">
@@ -37,7 +39,12 @@ const QuickActions = () => {
           Create Campaigns
         </h1>
       </Link>
-      <button className="rounded-md h-full flex gap-4 items-center xl:p-4 p-2 dark:bg-dark-glass bg-light-glass dark:border-light-black border dark:border-slate-500 dark:hover:border-brand-color hover:border-brand-color duration-100 ease-in">
+      <button
+        onClick={() => {
+          setOpenAddContactModal(true);
+        }}
+        className="rounded-md h-full flex gap-4 items-center xl:p-4 p-2 dark:bg-dark-glass bg-light-glass dark:border-light-black border dark:border-slate-500 dark:hover:border-brand-color hover:border-brand-color duration-100 ease-in"
+      >
         {Images.Add_Contact && (
           <Image
             src={Images.Add_Contact}
@@ -107,6 +114,18 @@ const QuickActions = () => {
         </Modal.Header>
         <Modal.Body className="dark:bg-dark-black bg-violet-50 text-slate-300 h-[calc(100vh-100px)] overflow-y-auto">
           <Editor />
+        </Modal.Body>
+      </Modal>
+      <Modal
+        dismissible
+        show={openAddContactModal}
+        onClose={() => setOpenAddContactModal(false)}
+      >
+        <Modal.Header className="dark:bg-dark-glass bg-violet-50 dark:text-slate-300 text-dark-black">
+          Add a Contact
+        </Modal.Header>
+        <Modal.Body className="dark:bg-dark-black bg-violet-50 rounded-md">
+          <ManualContact setOpenAddContactModal={setOpenAddContactModal} />
         </Modal.Body>
       </Modal>
     </div>

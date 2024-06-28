@@ -42,7 +42,7 @@ const Login = () => {
     const response = await emailCheck(credentialsData.email);
 
     if (response.status === 404) {
-      warningNotification(response.statusText);
+      warningNotification("Email not registered.");
       setStepTwo((prevData) => ({
         ...prevData,
         loading: false,

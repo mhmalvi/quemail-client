@@ -13,6 +13,7 @@ import {
   BIG_BUTTON_STYLES,
   BORDERED_BUTTON_STYLES,
 } from "@/components/styles/button";
+import ManualContact from "./ManualContact";
 
 const AllContacts = () => {
   const groupContacts = contactStore((state) => state.groupContacts);
@@ -31,11 +32,12 @@ const AllContacts = () => {
     useState<boolean>(false);
 
   useEffect(() => {
+    const height = document.getElementById("tableHeight")?.clientHeight;
+
+    height !== undefined && setAllContactPerPage(height / 80);
+    const revisedHeight = Math.floor(allContactPerPage);
+
     (async () => {
-      const height = document.getElementById("tableHeight")?.clientHeight;
-      
-      height !== undefined && setAllContactPerPage(height/80);
-      const revisedHeight = Math.floor(allContactPerPage);
       try {
         const res = await fetchContact(currentPage, revisedHeight);
         if (res.status === 200) {
@@ -80,7 +82,9 @@ const AllContacts = () => {
                 label=""
                 placement="bottom"
                 renderTrigger={() => (
-                  <h1 className={`${BIG_BUTTON_STYLES} cursor-pointer`}>Add Contacts +</h1>
+                  <h1 className={`${BIG_BUTTON_STYLES} cursor-pointer`}>
+                    Add Contacts +
+                  </h1>
                 )}
               >
                 <Dropdown.Item
@@ -116,9 +120,7 @@ const AllContacts = () => {
               Add a Contact
             </Modal.Header>
             <Modal.Body className="dark:bg-dark-black bg-violet-50 rounded-md">
-              <h1 className="text-brand-color bg-slate-300 px-4 py-2 rounded-md">
-                This feature is under development
-              </h1>
+              <ManualContact setOpenAddContactModal={setOpenAddContactModal}/>
             </Modal.Body>
           </Modal>
         </div>
