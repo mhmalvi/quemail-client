@@ -146,7 +146,7 @@ export const destroyMail = async (id: number | null) => {
 export const recipientsByGroup = async (
   data: string | null,
   page: number,
-  per_page:number
+  per_page:number | null
 ) => {
   const token = typeof window !== "undefined" && localStorage.getItem("token");
   const parsedToken = token && JSON.parse(token);

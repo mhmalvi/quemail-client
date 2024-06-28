@@ -19,7 +19,7 @@ const RecipientSelection = ({ tabsRef }: any) => {
   const clickedGroup = campaignStore((state) => state.clickedGroup);
   const setClickedGroup = campaignStore((state) => state.setClickedGroup);
   const [openGroupModal, setOpenGroupModal] = useState<boolean>(false);
-  const [totalItems, setTotalItems] = useState<number>(1);
+  const [totalItems, setTotalItems] = useState<number | null>(null);
 
   useEffect(() => {
     if (groupData === null) {
@@ -39,37 +39,37 @@ const RecipientSelection = ({ tabsRef }: any) => {
   const handleAddRecipients = async (groupName: string | null) => {
     if (groupName) {
       try {
-        const res = await fetchGroupItems(groupName, 1);
+        const res = await recipientsByGroup(groupName, 1, 1);
         if (res.status === 200) {
-          setTotalItems(res?.total);
-          setTimeout(async ()=>{
-            const groupRes = await recipientsByGroup(groupName, 1, totalItems);
-            try {
-              if (groupRes.status === 200) {
-                const updateRecipients = groupRes.contacts.map(
-                  (recipient: ContactType) => ({
-                    id: recipient.id,
-                    json: {
-                      name: recipient.json.name,
-                      email: recipient.json.email,
-                      group: recipient.json.group,
-                    },
-                  })
-                );
-                setNewCampaign((prev: any | null) => ({
-                  ...prev,
-                  recipient: prev?.recipient
-                    ? [...prev.recipient, ...updateRecipients]
-                    : [...updateRecipients],
-                }));
-                setOpenGroupModal(false);
-              } else {
-                warningNotification(res.message);
-              }
-            } catch (error) {
-              warningNotification("Failed to add recipients.");
+      
+
+          const groupRes = await recipientsByGroup(groupName, 1, res.total);
+          try {
+            if (groupRes.status === 200) {
+              const updateRecipients = groupRes.contacts.map(
+                (recipient: ContactType) => ({
+                  id: recipient.id,
+                  json: {
+                    name: recipient.json.name,
+                    email: recipient.json.email,
+                    group: recipient.json.group,
+                  },
+                })
+              );
+              setNewCampaign((prev: any | null) => ({
+                ...prev,
+                recipient: prev?.recipient
+                  ? [...prev.recipient, ...updateRecipients]
+                  : [...updateRecipients],
+              }));
+              setOpenGroupModal(false);
+            } else {
+              warningNotification(res.message);
             }
-          },1000)
+          } catch (error) {
+            warningNotification("Failed to add recipients.");
+          }
+          // },1500)
         } else {
           warningNotification(res.message);
         }
@@ -213,8 +213,8 @@ const RecipientSelection = ({ tabsRef }: any) => {
       >
         <div className="h-[80vh] overflow-hidden relative">
           <Modal.Header className="dark:bg-dark-glass bg-violet-50 ">
-          <p className=" dark:text-slate-300 text-dark-black">
-            Selected Recipients
+            <p className=" dark:text-slate-300 text-dark-black">
+              Selected Recipients
             </p>
           </Modal.Header>
           <Modal.Body className="h-[80vh] dark:bg-dark-glass bg-violet-50 text-slate-300 relative p-0">

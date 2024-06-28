@@ -17,6 +17,7 @@ const Groups = () => {
   const currentPage = contactStore((state) => state.currentPage);
   const setGroupTotalPages = contactStore((state) => state.setGroupTotalPages);
 
+  console.log(groupContacts)
   useEffect(() => {
     (async () => {
       const res = await fetchGroupList();
