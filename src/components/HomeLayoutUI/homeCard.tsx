@@ -105,7 +105,7 @@ const HomeCard = () => {
           warningNotification(res.message);
         } else if (res?.status === 404) {
           warningNotification(res.message);
-        } 
+        }
       } catch (err) {
         console.log(err);
       }
@@ -249,16 +249,16 @@ const HomeCard = () => {
             <button
               className="xl:px-4 px-2 xl:py-2 py-1 bg-brand-color text-slate-50 rounded-md disabled:opacity-20"
               onClick={() => {
-                mailAdded?.google !== null
-                  ? handleUpdateMail(
-                      emailInfo.email,
-                      emailInfo.appPassword,
-                      emailInfo?.id
-                    )
-                  : handleAddMail(
+                mailAdded?.google === null || mailAdded === null
+                  ? handleAddMail(
                       emailInfo.email,
                       emailInfo.appPassword,
                       emailInfo.provider
+                    )
+                  : handleUpdateMail(
+                      emailInfo.email,
+                      emailInfo.appPassword,
+                      emailInfo?.id
                     );
                 setEmailInfo((prev) => ({
                   ...prev,
@@ -275,10 +275,10 @@ const HomeCard = () => {
                   aria-label="Purple spinner example"
                   size="xl"
                 />
-              ) : mailAdded?.google !== null ? (
-                "Update"
-              ) : (
+              ) : mailAdded?.google === null || mailAdded === null ? (
                 "Save"
+              ) : (
+                "Update"
               )}
             </button>
 
