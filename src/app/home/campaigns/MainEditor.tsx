@@ -13,7 +13,6 @@ import Image from "next/image";
 import Images from "@/components/utils/images";
 import { fields } from "@/components/utils/staticData";
 import { BIG_BUTTON_STYLES } from "@/components/styles/button";
-import { register } from "module";
 
 const MainEditor = () => {
   const router = useRouter();
@@ -33,17 +32,6 @@ const MainEditor = () => {
     userID: userID,
     id: selectedTemplate?.id,
   });
-  const optionsDark = {
-    appearance: {
-      theme: "dark",
-    },
-  };
-
-  const optionsLight = {
-    appearance: {
-      theme: "light",
-    },
-  };
 
   const onReady: EmailEditorProps["onReady"] = (unlayer) => {
     const templateDesign = templateData && templateData[0]?.template?.design;
@@ -51,6 +39,7 @@ const MainEditor = () => {
       unlayer.loadDesign(selectedTemplate?.template.design as any);
     }
   };
+
   const onLoad: EmailEditorProps["onLoad"] = () => {
     const unlayer = emailEditorRef.current?.editor;
     if (unlayer) {
@@ -59,35 +48,11 @@ const MainEditor = () => {
         var type = data.type; // body, row, content
         var item = data.item;
         var changes = data.changes;
-        console.log("design:updated", changes, item, type);
         if (item !== undefined || changes !== undefined || type !== undefined) {
           setDisableButton(false);
         }
       });
     }
-    if (emailEditorRef.current) {
-      emailEditorRef?.current?.editor?.registerProvider('custom_provider', CustomProviderCallback);
-    }
-  };
-  const toolsConfig = {
-    toolbars: {
-      left: ['custom_tool'],
-      right: ['custom_tool'],
-    },
-    tools: {
-      custom_tool: {
-        position: 'left',
-        id: 'custom_tool',
-        icon: '<svg></svg>', // You can put an SVG icon here
-        title: 'Custom Tool',
-        options: {
-          color: {
-            label: 'Color',
-            options: ['#ff0000', '#00ff00', '#0000ff']
-          }
-        }
-      }
-    },
   };
 
   useEffect(() => {
@@ -237,38 +202,11 @@ const MainEditor = () => {
                   tabs: {},
                 },
               },
-              
             },
-          
+            projectId: 239892,
           }}
         />
       </div>
-    </div>
-  );
-};
-const CustomProviderCallback = (editor: any, options: any) => {
-  editor.registerTool({
-    name: 'custom_provider',
-    displayName: 'Custom Provider',
-    icon: '<svg></svg>', // Add SVG icon for the provider
-    create: CustomProviderComponent,
-  });
-};
-
-const CustomProviderComponent: React.FC<{ options: any; save: any }> = ({ options, save }) => {
-  const handleAddContent = () => {
-    save({
-      type: 'custom',
-      content: '<div style="color: #ff0000;">Custom Provider Content</div>',
-      properties: {
-        color: '#ff0000',
-      },
-    });
-  };
-
-  return (
-    <div>
-      <button onClick={handleAddContent}>Add Custom Content</button>
     </div>
   );
 };
