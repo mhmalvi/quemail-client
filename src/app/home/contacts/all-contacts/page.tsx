@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { Modal, Dropdown } from "flowbite-react";
-import NoContacts from "../../../../components/HomeLayoutUI/NoContacts";
+import NoContacts from "../../HomeLayoutUI/NoContacts";
 import ImportCSV from "./ImportCSV";
 import { contactStore } from "@/store/store";
 import { fetchContact } from "@/app/api/contact";
@@ -120,7 +120,7 @@ const AllContacts = () => {
               Add a Contact
             </Modal.Header>
             <Modal.Body className="dark:bg-dark-black bg-violet-50 rounded-md">
-              <ManualContact setOpenAddContactModal={setOpenAddContactModal}/>
+              <ManualContact setOpenAddContactModal={setOpenAddContactModal} />
             </Modal.Body>
           </Modal>
         </div>

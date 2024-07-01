@@ -11,7 +11,7 @@ import { Storage } from "@/store/store";
 import Image from "next/image";
 import { signOut } from "@/app/api/auth";
 import { useRouter } from "next/navigation";
-import Images from "../utils/images";
+import Images from "../../../components/utils/images";
 
 const Topnav = () => {
   const closeSidebar = sideBarStore((state: any) => state.setCloseSidebar);

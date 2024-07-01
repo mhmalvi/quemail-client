@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
-import Images from "../utils/images";
+import Images from "../../../components/utils/images";
 import { Modal, Popover, Spinner } from "flowbite-react";
 import {
   addMailInfo,
@@ -9,7 +9,10 @@ import {
   fetchAddedMail,
   updateMailInfo,
 } from "@/app/api/campaign";
-import { successNotification, warningNotification } from "../utils/utility";
+import {
+  successNotification,
+  warningNotification,
+} from "../../../components/utils/utility";
 
 // Define the type for mailAdded
 interface MailAdded {

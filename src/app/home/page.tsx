@@ -1,8 +1,8 @@
 "use client";
 
 import React from "react";
-import HomeCard from "@/components/HomeLayoutUI/homeCard";
-import QuickActions from "@/components/HomeLayoutUI/quickAction";
+import HomeCard from "@/app/home/HomeLayoutUI/homeCard";
+import QuickActions from "@/app/home/HomeLayoutUI/quickAction";
 const Home = () => {
   return (
     <div className="relative w-full h-full dark:bg-dark-glass dark:border-none border bg-[#ffffff40] backdrop-blur-2xl rounded-md p-4 flex flex-col gap-4 overflow-hidden">

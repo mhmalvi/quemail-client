@@ -12,7 +12,7 @@ import {
   warningNotification,
 } from "@/components/utils/utility";
 import dynamic from "next/dynamic";
-import NoContacts from "@/components/HomeLayoutUI/NoContacts";
+import NoContacts from "@/app/home/HomeLayoutUI/NoContacts";
 import { CONTAINER_STYLES } from "@/components/styles/flex_container";
 import { BIG_BUTTON_STYLES } from "@/components/styles/button";
 import { useRouter } from "next/navigation";

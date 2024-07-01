@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import Sidebar from "@/components/HomeLayoutUI/sidebar";
-import Topnav from "@/components/HomeLayoutUI/topnav";
+import Sidebar from "@/app/home/HomeLayoutUI/sidebar";
+import Topnav from "@/app/home/HomeLayoutUI/topnav";
 import { Flowbite, Spinner } from "flowbite-react";
 import { useRouter } from "next/navigation";
 import { customTheme } from "@/components/utils/utility";
