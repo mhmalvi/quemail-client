@@ -75,9 +75,7 @@ const AllContacts = () => {
               </h1>
             </div>
             <div className="flex items-center gap-4">
-              {/* <button className={BIG_BUTTON_STYLES} disabled>
-                Add to Campaign
-              </button> */}
+             
               <Dropdown
                 label=""
                 placement="bottom"
@@ -111,18 +109,7 @@ const AllContacts = () => {
 
           <ContactTable />
 
-          <Modal
-            dismissible
-            show={openAddContactModal}
-            onClose={() => setOpenAddContactModal(false)}
-          >
-            <Modal.Header className="dark:bg-dark-glass bg-violet-50 dark:text-slate-300 text-dark-black">
-              Add a Contact
-            </Modal.Header>
-            <Modal.Body className="dark:bg-dark-black bg-violet-50 rounded-md">
-              <ManualContact setOpenAddContactModal={setOpenAddContactModal} />
-            </Modal.Body>
-          </Modal>
+          
         </div>
       ) : (
         <div className="relative w-full h-full rounded-md p-4 flex flex-col items-center justify-center gap-8 overflow-hidden">
@@ -152,6 +139,18 @@ const AllContacts = () => {
       {openModal.show === "importContacts" && (
         <ImportCSV openModal={openModal} setOpenModal={setOpenModal} />
       )}
+      <Modal
+            dismissible
+            show={openAddContactModal}
+            onClose={() => setOpenAddContactModal(false)}
+          >
+            <Modal.Header className="dark:bg-dark-glass bg-violet-50 dark:text-slate-300 text-dark-black">
+              Add a Contact
+            </Modal.Header>
+            <Modal.Body className="dark:bg-dark-black bg-violet-50 rounded-md">
+              <ManualContact setOpenAddContactModal={setOpenAddContactModal} />
+            </Modal.Body>
+          </Modal>
     </>
   );
 };
