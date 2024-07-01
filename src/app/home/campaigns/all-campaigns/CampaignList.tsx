@@ -12,6 +12,10 @@ const CampaignList = () => {
   const [idClicked, setIdClicked] = useState<number>();
 
   const campaignList = showCampaignStore((state) => state.campaignList);
+  const allCampaignItemsPerPage = showCampaignStore((state) => state.allCampaignItemsPerPage);
+  const setAllCampaignItemsPerPage = showCampaignStore(
+    (state) => state.setAllCampaignItemsPerPage
+  );
   const setCampaignList = showCampaignStore((state) => state.setCampaignList);
   const setClickedCampaignId = showCampaignStore(
     (state) => state.setClickedCampaignId
@@ -21,21 +25,19 @@ const CampaignList = () => {
   );
 
   useEffect(() => {
-    const calculateCampaignsPerPage = () => {
-      const viewportHeight = window.innerHeight;
-      const campaignHeight = 62;
-      const campaignsCount = Math.ceil(viewportHeight / campaignHeight);
-      return campaignsCount;
-    };
+    const height = document.getElementById("tableHeight")?.clientHeight;
+
+    height !== undefined && setAllCampaignItemsPerPage(height / 80);
+    const revisedHeight = Math.floor(allCampaignItemsPerPage);
+
     const userIDString =
       typeof window !== "undefined" && localStorage.getItem("userID");
     const userID = userIDString ? parseInt(userIDString, 10) : null;
-    const campaignsPerPage = calculateCampaignsPerPage();
-    setCampaignsPerPage(campaignsPerPage);
+   
     const data = {
       userID: userID,
       page: currentPage,
-      per_page: campaignsPerPage,
+      per_page: revisedHeight,
     };
     (async () => {
       try {
@@ -48,7 +50,7 @@ const CampaignList = () => {
         console.log(err);
       }
     })();
-  }, [campaignsPerPage, currentPage, setCampaignList]);
+  }, [allCampaignItemsPerPage, campaignsPerPage, currentPage, setAllCampaignItemsPerPage, setCampaignList]);
 
   return (
     <>

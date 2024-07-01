@@ -194,6 +194,8 @@ export interface ShowCampaignStore {
   campaignItemList: CampaignItemListResponse | null;
   clickedCampaignId: number | null;
   campaignDetails: CampaignDetails | null;
+  allCampaignItemsPerPage: number;
+  setAllCampaignItemsPerPage: (state: number) => void;
   setCampaignList: (state: CampaignListResponse) => void;
   setCampaignItemList: (state: CampaignItemListResponse) => void;
   setClickedCampaignId: (state: number | null) => void;

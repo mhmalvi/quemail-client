@@ -6,7 +6,7 @@ import {
   TbProgress,
   TbProgressX,
   TbProgressCheck,
-  TbChecks
+  TbChecks,
 } from "react-icons/tb";
 
 import {
@@ -21,10 +21,16 @@ const CampaignItems = () => {
   const [scale, setScale] = useState(1);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPage, setTotalPage] = useState<number>(1);
+  const setAllCampaignItemsPerPage = showCampaignStore(
+    (state) => state.setAllCampaignItemsPerPage
+  );
+  const allCampaignItemsPerPage = showCampaignStore(
+    (state) => state.allCampaignItemsPerPage
+  );
 
   const adjustScale = () => {
     const screenWidth = window.innerWidth;
-    const newScale = screenWidth / 1200; // Example scaling factor
+    const newScale = screenWidth / 1200;
     setScale(newScale < 1 ? newScale : 1);
   };
   const clickedCampaignId = showCampaignStore(
@@ -40,6 +46,11 @@ const CampaignItems = () => {
   const campaignDetails = showCampaignStore((state) => state.campaignDetails);
 
   useEffect(() => {
+    const height = document.getElementById("tableHeight")?.clientHeight;
+
+    height !== undefined && setAllCampaignItemsPerPage(height / 80);
+    const revisedHeight = Math.floor(allCampaignItemsPerPage);
+
     const userIDString =
       typeof window !== "undefined" && localStorage.getItem("userID");
     const userID = userIDString ? parseInt(userIDString, 10) : null;
@@ -47,7 +58,7 @@ const CampaignItems = () => {
       userID: userID,
       campaignID: clickedCampaignId,
       page: currentPage,
-      per_page: 8,
+      per_page: revisedHeight,
     };
     (async () => {
       try {
@@ -60,7 +71,7 @@ const CampaignItems = () => {
         console.log(err);
       }
     })();
-  }, [clickedCampaignId, currentPage, setCampaignItemList]);
+  }, [allCampaignItemsPerPage, clickedCampaignId, currentPage, setAllCampaignItemsPerPage, setCampaignItemList]);
 
   useEffect(() => {
     window.addEventListener("resize", adjustScale);

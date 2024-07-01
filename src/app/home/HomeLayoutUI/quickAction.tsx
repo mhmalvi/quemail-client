@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import React, { useState } from "react";
-import Images from "../utils/images";
+import Images from "../../../components/utils/images";
 import ImportCSV from "@/app/home/contacts/all-contacts/ImportCSV";
 import Link from "next/link";
 import dynamic from "next/dynamic";
@@ -12,7 +12,7 @@ const QuickActions = () => {
   const [actionClick, setActionClick] = useState({
     show: "",
   });
-  const Editor = dynamic(() => import("../../app/home/campaigns/MainEditor"), {
+  const Editor = dynamic(() => import("../campaigns/MainEditor"), {
     ssr: false,
   });
   const [openAddContactModal, setOpenAddContactModal] = useState(false);
