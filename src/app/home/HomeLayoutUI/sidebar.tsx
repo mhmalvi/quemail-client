@@ -148,50 +148,7 @@ const Sidebar = () => {
           </Dropdown.Item>
         </Link>
       </Dropdown>
-      <Dropdown
-        label="Dropdown button"
-        placement="right-start"
-        renderTrigger={() => (
-          <div className="relative w-full flex items-center gap-8 m-0 p-0 overflow-hidden cursor-pointer text-black dark:text-slate-300 hover:text-brand-color dark:hover:text-brand-color ease-in duration-100">
-            <div
-              className={`bg-dark-black xl:p-3 px-3 py-2 rounded-md overflow-hidden z-20`}
-            >
-              <Image
-                src={Images.SettingSidebar}
-                alt="Contact_Tab"
-                className="w-full"
-              />
-            </div>
-            <div
-              className={`absolute flex items-center w-2/3 justify-between gap-8 ${
-                sidebarToggle ? "right-0" : "hidden"
-              }`}
-            >
-              <h1 className={`m-0 p-0 z-10 overflow-hidden `}>Settings</h1>
-              <IoIosArrowForward />
-            </div>
-          </div>
-        )}
-        className="dark:bg-dark-black dark:border-none border bg-violet-50"
-      >
-        <Dropdown.Item className="dark:text-slate-300 text-light-black hover:text-gray-800">
-          Account
-        </Dropdown.Item>
-        <Dropdown.Item className="dark:text-slate-300 text-light-black hover:text-gray-800">
-          Advanced
-        </Dropdown.Item>
-        <Dropdown.Item className="dark:text-slate-300 text-light-black hover:text-gray-800">
-          Security
-        </Dropdown.Item>
-        <Link
-          href="/home/privacy-policy"
-          className="focus:outline-none focus:ring-0 active:outline-none active:ring-0"
-        >
-          <Dropdown.Item className="dark:text-slate-300 text-light-black hover:text-gray-800">
-            Privacy Policy
-          </Dropdown.Item>
-        </Link>
-      </Dropdown>
+      
     </div>
   );
 };
