@@ -32,16 +32,16 @@ const MyProfile = () => {
             <p className="m-0 p-0 text-xs dark:text-slate-300 text-dark-black">
               Photo should be at least 300px by 300px
             </p>
-            <button className="xl:px-4 xl:py-2 px-2 py-1 xl:text-base text-sm border border-brand-color text-brand-color font-semibold rounded-md">
+            {/* <button className="xl:px-4 xl:py-2 px-2 py-1 xl:text-base text-sm border border-brand-color text-brand-color font-semibold rounded-md">
               Upload
-            </button>
+            </button> */}
           </div>
         </div>
       </div>
       <div className="h-full w-full flex gap-4">
         <AccountDetails />
-        <ChangePassword />
-        <AccountDetails />
+        {/* <ChangePassword />
+        <AccountDetails /> */}
       </div>
     </div>
   );
