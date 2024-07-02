@@ -1,6 +1,9 @@
 "use client";
 import { useEffect, useState } from "react";
-import dynamic from "next/dynamic";
+import SummaryRate from "./SummaryRate";
+import { Dropdown } from "flowbite-react";
+import { TbFilter } from "react-icons/tb";
+import Filter from "./Filter";
 
 const CampaignPerformance = () => {
   const [Chart, setChart] = useState<any>();
@@ -28,7 +31,15 @@ const CampaignPerformance = () => {
   }, []);
 
   return (
-    <div className="w-full h-full flex items-center justify-center gap-4 dark:bg-dark-glass shadow-md backdrop-blur-2xl bg-white rounded-md p-4 overflow-hidden">
+    <div className="w-full h-full flex flex-col gap-4 dark:bg-dark-glass shadow-md backdrop-blur-2xl bg-white rounded-md p-4 overflow-hidden">
+      <div className="w-1/5 ">
+        <Filter />
+      </div>
+      <div className="h-1/4">
+        <SummaryRate />
+      </div>
+      {/* <div className="h-1/3">
+
       {Chart && (
         <div className="row">
           <Chart
@@ -39,6 +50,7 @@ const CampaignPerformance = () => {
           />
         </div>
       )}
+      </div> */}
     </div>
   );
 };
