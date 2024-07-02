@@ -24,8 +24,6 @@ import Privacy2 from "/public/SVG/PrivacyPolicy/PrivacyTwo.svg";
 import Contact from "/public/SVG/Contact/Contact.svg";
 
 // Sidebar
-import ContactSidebar from "/public/SVG/Sidebar/Contacts.svg";
-import CampaignSidebar from "/public/SVG/Sidebar/Campaigns.svg";
 import SettingSidebar from "/public/SVG/Sidebar/Settings.svg";
 
 // Icons
@@ -57,7 +55,11 @@ import AllCampaigns from "/public/SVG/Home/AllCampaigns.svg";
 import Groups from "/public/SVG/Home/Groups.svg"
 import Notebook from "/public/SVG/Home/Notebook.svg"
 
+// Performance
+import ChartSVG from "/public/SVG/Performance/chartSVG.svg"
+
 const Images = {
+  ChartSVG,
   Copy,
   Eye,
   Delete,
@@ -74,8 +76,6 @@ const Images = {
   SectionTwo,
   SectionFour,
   SectionFive,
-  ContactSidebar,
-  CampaignSidebar,
   SettingSidebar,
   IoIosArrowForward,
   Privacy1,
