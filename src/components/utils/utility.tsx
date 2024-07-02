@@ -79,10 +79,11 @@ export const customTheme: CustomFlowbiteTheme = {
     },
   },
   dropdown: {
+    content: "py-0 focus:outline-none",
     floating: {
       item: {
         container: " ",
-        base: " flex w-full cursor-pointer items-center justify-start px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:bg-gray-100 focus:outline-none dark:text-slate-300 dark:hover:bg-brand-color dark:focus:bg-brand-color dark:focus:text-white",
+        base: " flex w-full cursor-pointer items-center justify-start px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:bg-gray-100 focus:outline-none dark:text-slate-300 dark:hover:bg-light-black/50 dark:focus:bg-light-black/50 dark:focus:text-white",
         icon: "mr-2 h-4 w-4",
       },
       style: {
