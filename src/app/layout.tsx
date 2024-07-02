@@ -3,8 +3,6 @@ import { Montserrat } from "next/font/google";
 import "./globals.css";
 import { Slide, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Images from "@/components/utils/images";
-import Head from "next/head";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -16,6 +14,14 @@ const montserrat = Montserrat({
 export const metadata: Metadata = {
   title: "Quemailer",
   description: "One stop email marketing.",
+  icons: {
+    icon: "/favicon.ico",
+    apple: "/favicon/apple-touch-icon.png",
+    other: [
+      { rel: "icon", url: "/favicon/favicon-32x32.png", sizes: "32x32" },
+      { rel: "icon", url: "/favicon/favicon-16x16.png", sizes: "16x16" },
+    ],
+  },
 };
 
 export default async function RootLayout({
@@ -25,26 +31,7 @@ export default async function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <Head>
-        <link rel="shortcut icon" href="/favicon/favicon.ico" />
-        <link
-          rel="apple-touch-icon"
-          sizes="180x180"
-          href="/favicon/apple-touch-icon.png"
-        />
-        <link
-          rel="icon"
-          type="image/png"
-          sizes="32x32"
-          href="/favicon/favicon-32x32.png"
-        />
-        <link
-          rel="icon"
-          type="image/png"
-          sizes="16x16"
-          href="/favicon/favicon-16x16.png"
-        />
-      </Head>
+     
       <body className={`${montserrat.className} bg-dark-black`}>
         {children}
         <ToastContainer

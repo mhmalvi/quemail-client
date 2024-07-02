@@ -5,6 +5,7 @@ import Images from "@/components/utils/images";
 import { sideBarStore } from "@/store/store";
 import { IoIosArrowForward } from "react-icons/io";
 import { Dropdown, DropdownDivider } from "flowbite-react";
+import { TbMail,TbUser  } from "react-icons/tb";
 
 import Link from "next/link";
 
@@ -52,13 +53,10 @@ const Sidebar = () => {
         renderTrigger={() => (
           <div className="relative w-full flex items-center gap-8 m-0 p-0 overflow-hidden cursor-pointer text-black dark:text-slate-300 hover:text-brand-color dark:hover:text-brand-color ease-in duration-100">
             <div
-              className={`bg-dark-black xl:p-3 px-3 py-2 rounded-md overflow-hidden z-20`}
+              className={`duration-100 ease-in hover:text-brand-color text-slate-300 bg-dark-black xl:p-3 px-3 py-2 rounded-md overflow-hidden z-20`}
             >
-              <Image
-                src={Images.CampaignSidebar}
-                alt="Contact_Tab"
-                className="w-full"
-              />
+              <TbMail className=" w-full" size={20}/>
+             
             </div>
             <div
               className={`absolute flex items-center w-2/3 justify-between gap-8 ${
@@ -113,13 +111,11 @@ const Sidebar = () => {
         renderTrigger={() => (
           <div className="relative w-full flex items-center gap-8 m-0 p-0 overflow-hidden cursor-pointer text-black dark:text-slate-300 hover:text-brand-color dark:hover:text-brand-color ease-in duration-100">
             <div
-              className={`bg-dark-black xl:p-3 px-3 py-2 rounded-md overflow-hidden z-20`}
+              className={`duration-100 ease-in hover:text-brand-color text-slate-300 bg-dark-black xl:p-3 px-3 py-2 rounded-md overflow-hidden z-20`}
             >
-              <Image
-                src={Images.ContactSidebar}
-                alt="Contact_Tab"
-                className="w-full"
-              />
+              
+              <TbUser className="w-full" size={20}/>
+             
             </div>
             <div
               className={`absolute flex items-center w-2/3 justify-between gap-8 ${
