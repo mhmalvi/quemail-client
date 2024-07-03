@@ -1,16 +1,11 @@
 "use client";
 import React, { useRef, useState } from "react";
 import CampaignInfo from "./CampaignInfo";
-import { NewCampaignType } from "@/components/utils/types";
 import RecipientSelection from "./RecipientSelection";
 import ChooseTemplate from "./ChooseTemplate/ChooseTemplate";
 import { campaignStore } from "@/store/store";
 import { Tabs, TabsRef } from "flowbite-react";
-import { sendMail } from "@/app/api/campaign";
-import Link from "next/link";
-import { successNotification } from "@/components/utils/utility";
-import { HiAdjustments, HiClipboardList, HiUserCircle } from "react-icons/hi";
-import { MdDashboard } from "react-icons/md";
+import { TbBrandCampaignmonitor, TbTemplate,TbUserCog,TbChartCandle  ,TbCalendarBolt   } from "react-icons/tb";
 import Review from "./Review";
 import { TbCheck } from "react-icons/tb";
 import StartCampaign from "./StartCampaign/StartCampaign";
@@ -50,7 +45,7 @@ const NewCampaign = () => {
               <p>1. Campaign Information</p>
             )
           }
-          icon={HiUserCircle}
+          icon={TbBrandCampaignmonitor}
         >
           <CampaignInfo tabsRef={tabsRef} />
         </Tabs.Item>
@@ -70,7 +65,7 @@ const NewCampaign = () => {
               <p>2. Add Template</p>
             )
           }
-          icon={MdDashboard}
+          icon={TbTemplate}
           disabled={
             newCampaign?.campaignInfo?.subject === null ||
             newCampaign?.campaignInfo?.subject === "" ||
@@ -99,7 +94,7 @@ const NewCampaign = () => {
               <p>3. Add Contacts</p>
             )
           }
-          icon={HiAdjustments}
+          icon={TbUserCog}
           disabled={
             newCampaign?.template?.data === null ||
             newCampaign?.template === null ||
@@ -130,7 +125,7 @@ const NewCampaign = () => {
               <p>4. Review</p>
             )
           }
-          icon={HiClipboardList}
+          icon={TbChartCandle }
           disabled={
             newCampaign?.recipient === null ||
             newCampaign?.template?.data === null ||
@@ -151,7 +146,7 @@ const NewCampaign = () => {
         </Tabs.Item>
         <Tabs.Item
           title={<p className="flex items-center gap-2">5. Schedule and Run</p>}
-          icon={HiClipboardList}
+          icon={TbCalendarBolt }
           disabled={
             newCampaign?.recipient === null ||
             newCampaign?.template?.data === null ||
@@ -170,126 +165,7 @@ const NewCampaign = () => {
         >
           <StartCampaign tabsRef={tabsRef}/>
         </Tabs.Item>
-      </Tabs>
-      {/* <div className="w-full flex items-center justify-between">
-        <div className="flex items-center rounded-md gap-8">
-          <h1
-            className={`${
-              newCampaign?.template !== null &&
-              newCampaign?.template.data !== null &&
-              newCampaign?.template.name !== null
-                ? "text-green-500"
-                : "dark:text-slate-300 text-dark-black opacity-20"
-            } xl:text-base text-xs  `}
-          >
-            Template{" "}
-            {newCampaign?.template !== null &&
-              newCampaign?.template.data !== null &&
-              newCampaign?.template.name !== null && <span>✔</span>}
-          </h1>
-          <h1
-            className={`${
-              newCampaign?.campaignInfo !== null &&
-              newCampaign?.campaignInfo.campaignName !== "" &&
-              newCampaign?.campaignInfo.campaignName !== null &&
-              newCampaign?.campaignInfo.campaignName !== undefined &&
-              newCampaign?.campaignInfo.subject !== "" &&
-              newCampaign?.campaignInfo.subject !== undefined &&
-              newCampaign?.campaignInfo.fromName !== "" &&
-              newCampaign?.campaignInfo.fromName !== undefined &&
-              newCampaign?.campaignInfo.fromMail !== null
-                ? "text-green-500"
-                : "dark:text-slate-300 text-dark-black opacity-20"
-            } xl:text-base text-xs  `}
-          >
-            Campaign Information
-            {newCampaign?.campaignInfo !== null &&
-              newCampaign?.campaignInfo.campaignName !== "" &&
-              newCampaign?.campaignInfo.campaignName !== null &&
-              newCampaign?.campaignInfo.campaignName !== undefined &&
-              newCampaign?.campaignInfo.subject !== "" &&
-              newCampaign?.campaignInfo.subject !== undefined &&
-              newCampaign?.campaignInfo.fromName !== "" &&
-              newCampaign?.campaignInfo.fromName !== undefined &&
-              newCampaign?.campaignInfo.fromMail !== null && <span>✔</span>}
-          </h1>
-          <h1
-            className={`${
-              newCampaign?.recipient !== null
-                ? "text-green-500"
-                : "dark:text-slate-300 text-dark-black opacity-20"
-            } xl:text-base text-xs  `}
-          >
-            Recipients Selection
-            {newCampaign?.recipient !== null && <span>✔</span>}
-          </h1>
-          <h1
-            className={`${
-              newCampaign?.schedule !== null
-                ? "text-green-500"
-                : "dark:text-slate-300 text-dark-black opacity-20"
-            } xl:text-base text-xs  `}
-          >
-            Schedule {newCampaign?.schedule !== null && <span>✔</span>}
-          </h1>
-        </div>
-        <div className="flex gap-4 items-center">
-          <button className={BORDERED_BUTTON_STYLES}>Save & Exit</button>
-
-          {newCampaign?.template !== null &&
-          newCampaign?.template.data !== null &&
-          newCampaign?.template.name !== null &&
-          newCampaign?.campaignInfo !== null &&
-          newCampaign?.recipient !== null &&
-          newCampaign?.campaignInfo.campaignName !== null &&
-          newCampaign?.campaignInfo.fromMail !== null &&
-          newCampaign?.campaignInfo.fromName !== null &&
-          newCampaign?.campaignInfo.subject !== null ? (
-            <Dropdown
-              label="Actions"
-              placement="bottom-start"
-              renderTrigger={() => (
-                <button className={BIG_BUTTON_STYLES}>
-                  <h1 className="m-0 p-0 ">Start Campaign ▼</h1>
-                </button>
-              )}
-            >
-              <Dropdown.Item
-                onClick={startCampaign}
-                className="xl:text-base text-sm"
-              >
-                Run campaign Now
-              </Dropdown.Item>
-              <Dropdown.Item
-                onClick={() => {
-                  setViewSchedule(!viewSchedule);
-                }}
-                className="xl:text-base text-sm"
-              >
-                Schedule Campaign
-              </Dropdown.Item>
-            </Dropdown>
-          ) : (
-            <button
-              className={`opacity-10 cursor-not-allowed ${BIG_BUTTON_STYLES}`}
-            >
-              <h1 className="m-0 p-0 ">Start Campaign ▼</h1>
-            </button>
-          )}
-        </div>
-      </div> */}
-      {/* <div className="flex  justify-between gap-4 h-full">
-        <div className="flex flex-col gap-4 w-full">
-          
-          <div className="flex w-full h-full gap-4">
-            
-            
-          </div>
-        </div>
-        <Scheduler />
-      </div> */}
-
-      
+      </Tabs>      
     </div>
   );
 };
