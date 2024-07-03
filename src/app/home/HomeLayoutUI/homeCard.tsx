@@ -42,7 +42,7 @@ const HomeCard = () => {
       return false;
     }
 
-    if (!appPassword || !validateAppPassword(appPassword) || appPassword.length !== 19) {
+    if (!appPassword || !validateAppPassword(appPassword) || appPassword.length > 19 || appPassword.length < 16) {
       warningNotification("Invalid appPassword. Only letters and spaces are allowed.");
       return false;
     }
