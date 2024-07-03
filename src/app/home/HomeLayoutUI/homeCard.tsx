@@ -99,6 +99,7 @@ const HomeCard = () => {
             ...prev,
             loading: false,
           }));
+          
           successNotification(res.message);
           window.location.reload();
         } else if (res.status === 422) {
