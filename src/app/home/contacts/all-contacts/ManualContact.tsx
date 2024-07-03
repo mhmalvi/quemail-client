@@ -7,44 +7,77 @@ import {
 import { Label, Spinner, TextInput } from "flowbite-react";
 import React, { useState } from "react";
 
-const ManualContact = ({ setOpenAddContactModal }: any) => {
-  const userID =
-    typeof window !== "undefined" && localStorage.getItem("userID");
+interface ManualContactProps {
+  setOpenAddContactModal: (open: boolean) => void;
+}
 
-  const [addContactData, setAddContactData] = useState<{
-    userID: string | false | null;
-    name: string | null;
-    email: string | null;
-    group: string | null;
-  }>({
+interface AddContactData {
+  userID: string | null;
+  name: string | null;
+  email: string | null;
+  group: string | null;
+}
+
+const ManualContact: React.FC<ManualContactProps> = ({ setOpenAddContactModal }) => {
+  const userID =
+    typeof window !== "undefined" ? localStorage.getItem("userID") : null;
+
+  const [addContactData, setAddContactData] = useState<AddContactData>({
     userID: userID,
     name: null,
     email: null,
     group: null,
   });
-  const handleEditContactDataChange = (field: string, value: string) => {
+
+  const [updateLoading, setUpdateLoading] = useState(false);
+
+  const handleEditContactDataChange = (field: keyof AddContactData, value: string) => {
     setAddContactData((prevData) => ({
       ...prevData,
       [field]: value,
     }));
-    console.log(addContactData);
   };
-  const [updateLoading, setUpdateLoading] = useState(false);
+
+  const validateName = (name: string) => /^[a-zA-Z]+(\s?[a-zA-Z]+)*$/.test(name.trim());
+  const validateEmail = (email: string) => /\S+@\S+\.\S+/.test(email);
+  const validateGroup = (group: string) => /^[a-zA-Z0-9]+(\s?[a-zA-Z0-9]+)*$/.test(group.trim());
 
   const addContactsManually = async () => {
-    const res = await importContactManually(addContactData);
+    const { name, email, group } = addContactData;
+
+    if (!name || !validateName(name)) {
+      warningNotification("Invalid name. Only letters and spaces are allowed.");
+      setUpdateLoading(false);
+      return;
+    }
+
+    if (!email || !validateEmail(email)) {
+      warningNotification("Invalid email format.");
+      setUpdateLoading(false);
+      return;
+    }
+
+    if (!group || !validateGroup(group)) {
+      warningNotification("Invalid group name. Only letters, numbers, and spaces are allowed.");
+      setUpdateLoading(false);
+      return;
+    }
+
+    setUpdateLoading(true);
+
     try {
+      const res = await importContactManually(addContactData);
       if (res.status === 201) {
-        setUpdateLoading(false);
         successNotification(res.message);
         setOpenAddContactModal(false);
         window.location.reload();
       } else if (res.status === 422) {
-        setUpdateLoading(false);
         warningNotification(res.message);
       }
     } catch (err) {
       console.log(err);
+    } finally {
+      setUpdateLoading(false);
     }
   };
 
@@ -56,11 +89,8 @@ const ManualContact = ({ setOpenAddContactModal }: any) => {
           id="name"
           placeholder="John Doe"
           value={addContactData.name || ""}
-          onChange={(event) => {
-            handleEditContactDataChange("name", event.target.value);
-            console.log(event);
-          }}
-          className="bg-tranparent"
+          onChange={(event) => handleEditContactDataChange("name", event.target.value)}
+          className="bg-transparent"
           required
         />
       </div>
@@ -70,10 +100,8 @@ const ManualContact = ({ setOpenAddContactModal }: any) => {
           id="email"
           placeholder="name@company.com"
           value={addContactData.email || ""}
-          onChange={(event) =>
-            handleEditContactDataChange("email", event.target.value)
-          }
-          className="bg-tranparent"
+          onChange={(event) => handleEditContactDataChange("email", event.target.value)}
+          className="bg-transparent"
           required
         />
       </div>
@@ -83,10 +111,8 @@ const ManualContact = ({ setOpenAddContactModal }: any) => {
           id="group"
           placeholder="Group Name"
           value={addContactData.group || ""}
-          onChange={(event) =>
-            handleEditContactDataChange("group", event.target.value)
-          }
-          className="bg-tranparent"
+          onChange={(event) => handleEditContactDataChange("group", event.target.value)}
+          className="bg-transparent"
           required
         />
       </div>
@@ -97,6 +123,7 @@ const ManualContact = ({ setOpenAddContactModal }: any) => {
             setUpdateLoading(true);
             addContactsManually();
           }}
+          disabled={updateLoading}
         >
           {updateLoading ? (
             <Spinner
@@ -120,4 +147,5 @@ const ManualContact = ({ setOpenAddContactModal }: any) => {
     </div>
   );
 };
+
 export default ManualContact;
