@@ -201,3 +201,13 @@ export interface ShowCampaignStore {
   setClickedCampaignId: (state: number | null) => void;
   setCampaignDetails: (state: CampaignDetails | null) => void;
 }
+export interface nameFilterState{
+  count: number | null;
+  current_page: number | null;
+  totalPages: number | null;
+  paginatedData: [CampaignListType];
+}
+export interface PerformanceState {
+  nameFilter: nameFilterState | null;
+  setNameFilter: (state: nameFilterState) => void;
+}
