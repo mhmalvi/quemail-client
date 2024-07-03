@@ -38,9 +38,9 @@ const ManualContact: React.FC<ManualContactProps> = ({ setOpenAddContactModal })
     }));
   };
 
-  const validateName = (name: string) => /^[a-zA-Z\s]+$/.test(name);
+  const validateName = (name: string) => /^[a-zA-Z]+(\s?[a-zA-Z]+)*$/.test(name.trim());
   const validateEmail = (email: string) => /\S+@\S+\.\S+/.test(email);
-  const validateGroup = (group: string) => /^[a-zA-Z0-9\s]+$/.test(group);
+  const validateGroup = (group: string) => /^[a-zA-Z0-9]+(\s?[a-zA-Z0-9]+)*$/.test(group.trim());
 
   const addContactsManually = async () => {
     const { name, email, group } = addContactData;
