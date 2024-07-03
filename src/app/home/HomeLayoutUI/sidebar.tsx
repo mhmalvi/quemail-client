@@ -5,7 +5,7 @@ import Images from "@/components/utils/images";
 import { sideBarStore } from "@/store/store";
 import { IoIosArrowForward } from "react-icons/io";
 import { Dropdown, DropdownDivider } from "flowbite-react";
-import { TbMail,TbUser  } from "react-icons/tb";
+import { TbMail, TbUser } from "react-icons/tb";
 
 import Link from "next/link";
 
@@ -40,7 +40,9 @@ const Sidebar = () => {
           className={`overflow-hidden w-full flex justify-center items-center mt-4 rounded-md cursor-pointer duration-100 ease-in`}
           onClick={setOpenSidebar}
         >
-          <div className={`2xl:h-16 h-12 w-8 flex flex-col gap-1.5 items-center justify-center relative rounded-md ease-in duration-100`}>
+          <div
+            className={`2xl:h-16 h-12 w-8 flex flex-col gap-1.5 items-center justify-center relative rounded-md ease-in duration-100`}
+          >
             <div className="h-1.5 w-10 rounded-sm bg-brand-color"></div>
             <div className="h-1.5 w-10 rounded-sm bg-brand-color"></div>
             <div className="h-1.5 w-10 rounded-sm bg-brand-color"></div>
@@ -55,8 +57,7 @@ const Sidebar = () => {
             <div
               className={`duration-100 ease-in hover:text-brand-color text-slate-300 bg-dark-black xl:p-3 px-3 py-2 rounded-md overflow-hidden z-20`}
             >
-              <TbMail className=" w-full" size={20}/>
-             
+              <TbMail className=" w-full" size={20} />
             </div>
             <div
               className={`absolute flex items-center w-2/3 justify-between gap-8 ${
@@ -70,6 +71,7 @@ const Sidebar = () => {
         )}
         className="dark:bg-dark-black dark:border-none border bg-violet-50"
       >
+        <Dropdown.Header title="Email">Email</Dropdown.Header>
         <Link
           href="/home/campaigns/new-campaign"
           className="focus:outline-none focus:ring-0 active:outline-none active:ring-0"
@@ -91,10 +93,9 @@ const Sidebar = () => {
           className="focus:outline-none focus:ring-0 active:outline-none active:ring-0"
         >
           <Dropdown.Item className="dark:text-slate-300 text-light-black hover:text-gray-800">
-            Campaign Performance
+            Email Campaign Performance
           </Dropdown.Item>
         </Link>
-        <DropdownDivider className="bg-light-black" />
 
         <Link
           href="/home/campaigns/all-templates"
@@ -113,9 +114,7 @@ const Sidebar = () => {
             <div
               className={`duration-100 ease-in hover:text-brand-color text-slate-300 bg-dark-black xl:p-3 px-3 py-2 rounded-md overflow-hidden z-20`}
             >
-              
-              <TbUser className="w-full" size={20}/>
-             
+              <TbUser className="w-full" size={20} />
             </div>
             <div
               className={`absolute flex items-center w-2/3 justify-between gap-8 ${
@@ -144,7 +143,6 @@ const Sidebar = () => {
           </Dropdown.Item>
         </Link>
       </Dropdown>
-      
     </div>
   );
 };

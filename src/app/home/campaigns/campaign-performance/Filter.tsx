@@ -1,40 +1,42 @@
 "use client";
 
+import { nameFilterState } from "@/components/utils/types";
+import { performanceStore } from "@/store/store";
 import { Dropdown } from "flowbite-react";
-import React, { ChangeEventHandler, useEffect, useState } from "react";
+import React, { ChangeEventHandler, useEffect, useMemo, useState } from "react";
 import { TbFilter } from "react-icons/tb";
 import { io } from "socket.io-client";
 
 const Filter = () => {
   const [searchValueByName, setSearchValueByName] = useState("");
   const [searchValueById, setSearchValueById] = useState("");
-
-  const socket = io("https://backend.quemailer.com");
+  const nameFilter = performanceStore((state) => state.nameFilter);
+  const setNameFilter = performanceStore((state) => state.setNameFilter);
+  const socket = useMemo(() => io("https://backend.quemailer.com"), []);
   const userID =
     typeof window !== "undefined" && localStorage.getItem("userID");
-
-  socket.connect();
   useEffect(() => {
+    socket.connect();
     socket.emit("campaigns", {
       name: searchValueByName,
-      userID: userID,
+      userID: userID && userID,
       page: 1,
       per_page: 8,
     });
-    const handleMessage = (e: any) => {
-      console.log(e);
-      //   dispatch(setNotifications(e));
-      //   setViewedData((prevData) => ({
-      //     ...prevData,
-      //     id: e.map((item) => item.id),
-      //   }));
+    const handleMessage = (e: nameFilterState) => {
+      setNameFilter({
+        count: e.count,
+        current_page: e.current_page,
+        totalPages: e.totalPages,
+        paginatedData: e.paginatedData,
+      });
     };
     socket.on("campaigns", handleMessage);
     return () => {
       socket.off("campaigns");
       socket.disconnect();
     };
-  }, [searchValueByName, socket, userID]);
+  }, [searchValueByName, setNameFilter, socket, userID]);
 
   return (
     <div>
@@ -83,8 +85,23 @@ const Filter = () => {
             placeholder="search by id"
           />
         </Dropdown.Header>
-        <div className="h-64 w-full flex flex-col overflow-auto bg-violet-100">
-          <Dropdown.Item></Dropdown.Item>
+        <div className="h-64 w-full flex flex-col overflow-auto relative">
+          <div className="w-full flex items-center justify-between px-4 py-2 sticky top-0 bg-white dark:bg-dark-black border-b dark:border-light-glass">
+            <p className="p-0 text-brand-color">Campaign Name</p>
+            <p className="p-0 text-brand-color">Id</p>
+          </div>
+          {nameFilter?.paginatedData.map((items, index) => {
+            return (
+              <div key={index}>
+                <Dropdown.Item className="flex">
+                  <div className="w-full flex items-center justify-between py-2 top-0 border-b dark:border-light-glass">
+                    <p>{items.campaignName}</p>
+                    <p>{items.id}</p>
+                  </div>
+                </Dropdown.Item>
+              </div>
+            );
+          })}
         </div>
       </Dropdown>
     </div>

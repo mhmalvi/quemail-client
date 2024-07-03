@@ -5,6 +5,7 @@ import {
   CampaignStoreState,
   ContactStoreState,
   NewCampaignType,
+  PerformanceState,
   ShowCampaignStore,
   themeAction,
   themeState,
@@ -82,7 +83,6 @@ export const campaignStore = create<CampaignStoreState>((set) => ({
   selectedTemplate: null,
   templateData: null,
   clickedGroup: null,
-  
 
   setNewCampaign: (data) =>
     set((state) => ({
@@ -124,7 +124,8 @@ export const showCampaignStore = create<ShowCampaignStore>((set) => ({
   clickedCampaignId: null,
   campaignDetails: null,
   allCampaignItemsPerPage: 8,
-  setAllCampaignItemsPerPage: (state) => set(() => ({ allCampaignItemsPerPage: state })),
+  setAllCampaignItemsPerPage: (state) =>
+    set(() => ({ allCampaignItemsPerPage: state })),
   setCampaignList: (state) => set(() => ({ campaignList: state })),
   setClickedCampaignId: (state) => set(() => ({ clickedCampaignId: state })),
   setCampaignItemList(state) {
@@ -133,4 +134,12 @@ export const showCampaignStore = create<ShowCampaignStore>((set) => ({
   setCampaignDetails(state) {
     set(() => ({ campaignDetails: state }));
   },
+}));
+
+export const performanceStore = create<PerformanceState>((set) => ({
+  nameFilter: null,
+  setNameFilter: (state) =>
+    set(() => ({
+      nameFilter: state,
+    })),
 }));

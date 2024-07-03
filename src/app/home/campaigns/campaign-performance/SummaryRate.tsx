@@ -32,7 +32,7 @@ const SummaryRate = () => {
           </div>
         </div>
         <div className="relative w-2/3 flex flex-col items-end">
-          <h1 className="xl:text-8xl text-5xl text-dark-black dark:text-slate-300 font-semibold px-4 py-2 z-20">
+          <h1 className="xl:text-7xl text-5xl text-dark-black dark:text-slate-300 font-semibold px-4 py-2 z-20">
             90%
           </h1>
           <div className="absolute bottom-0 px-4 flex items-end xl:gap-4 gap-2 z-10">
@@ -80,7 +80,7 @@ const SummaryRate = () => {
           </div>
         </div>
         <div className="relative w-2/3 flex flex-col items-end">
-          <h1 className="xl:text-8xl text-5xl text-dark-black dark:text-slate-300 font-semibold px-4 py-2 z-20">
+          <h1 className="xl:text-7xl text-5xl text-dark-black dark:text-slate-300 font-semibold px-4 py-2 z-20">
             90%
           </h1>
           <div className="absolute bottom-0 px-4 flex items-end xl:gap-4 gap-2 z-10">
@@ -121,7 +121,7 @@ const SummaryRate = () => {
           </div>
         </div>
         <div className="relative w-2/3 flex flex-col items-end">
-          <h1 className="xl:text-8xl text-5xl text-dark-black dark:text-slate-300 font-semibold px-4 py-2 z-20">
+          <h1 className="xl:text-7xl text-5xl text-dark-black dark:text-slate-300 font-semibold px-4 py-2 z-20">
             10%
           </h1>
           <div className="absolute bottom-0 px-4 flex items-end xl:gap-4 gap-2 z-10">
@@ -177,7 +177,7 @@ const SummaryRate = () => {
           </div>
         </div>
         <div className="relative w-2/3 flex flex-col items-end">
-          <h1 className="xl:text-8xl text-5xl text-dark-black dark:text-slate-300 font-semibold px-4 py-2 z-20">
+          <h1 className="xl:text-7xl text-5xl text-dark-black dark:text-slate-300 font-semibold px-4 py-2 z-20">
             10%
           </h1>
           <div className="absolute bottom-0 px-4 flex items-end xl:gap-4 gap-2 z-10">
@@ -186,13 +186,13 @@ const SummaryRate = () => {
                 <div className="h-full w-full relative">
                   <div
                     className={`absolute ${
-                      hovered === "Opened" ? "left-0 skew-y-6 w-1/2 bg-white" : "bg-dark-black xl:left-5 left-3 w-2"
-                    }   border-2 border-dark-black h-full rounded  duration-200 ease-in-out`}
+                      hovered === "Opened" ? "left-0 skew-y-6 w-1/2 bg-brand-color" : "bg-brand-color xl:left-5 left-3 w-2"
+                    } border h-full rounded  duration-200 ease-in-out`}
                   ></div>
                   <div
                     className={`absolute ${
-                      hovered === "Opened" ? "right-0 -skew-y-6 w-1/2 bg-white" : "bg-dark-black xl:right-5 right-3 w-2"
-                    } border-2 border-dark-black h-full rounded  duration-200 ease-in-out`}
+                      hovered === "Opened" ? "right-0 -skew-y-6 w-1/2 bg-brand-color" : "bg-brand-color xl:right-5 right-3 w-2"
+                    } border h-full rounded  duration-200 ease-in-out`}
                   ></div>
                 </div>
               </div>
