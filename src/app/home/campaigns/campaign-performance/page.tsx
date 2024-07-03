@@ -32,10 +32,10 @@ const CampaignPerformance = () => {
 
   return (
     <div className="w-full h-full flex flex-col gap-4 dark:bg-dark-glass shadow-md backdrop-blur-2xl bg-white rounded-md p-4 overflow-hidden">
-      <div className="w-1/5 ">
+      <div className="w-1/5 z-20">
         <Filter />
       </div>
-      <div className="h-1/4">
+      <div className="h-1/4 z-10">
         <SummaryRate />
       </div>
       {/* <div className="h-1/3">

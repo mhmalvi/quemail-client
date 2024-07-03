@@ -32,10 +32,40 @@ const config: Config = {
         "dark-black": "#0b0b0b",
       },
       keyframes: {
-        fadeIn: {
-          "0%": { transform: "translateX(-50px)" },
-          "100%": { transform: "translateX(0)" },
+        up: {
+          "0%, 100%": { transform: "translateY(30px)" },
+          "50%": { transform: "translateY(0px)" },
         },
+        up1: {
+          "0%, 100%": { transform: "translateY(30px)" },
+          "50%": { transform: "translateY(0px)" },
+        },
+        up2: {
+          "0%, 100%": { transform: "translateY(30px)" },
+          "50%": { transform: "translateY(0px)" },
+        },
+        moveRight: {
+          "0%": {
+            transform: "translateX(-50px) translateZ(50px) translateY(50px)",
+          },
+          "100%": {
+            transform: "translateX(40px) translateZ(50px) translateY(-50px)",
+          },
+        },
+        closeEyes: {
+          "0%": { height: "16px" },
+          "25%": { height: "0px" },
+          "50%": { height: "16px" },
+          "75%": { height: "16px" },
+          "100%": { height: "16px" },
+        },
+      },
+      animation: {
+        up: "up 2s linear infinite",
+        up1: "up1 3s linear infinite",
+        up2: "up2 4s linear infinite",
+        moveRight: "moveRight 2s linear infinite",
+        closeEyes: "closeEyes 2s ease-in-out infinite",
       },
     },
   },

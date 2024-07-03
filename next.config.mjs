@@ -3,16 +3,20 @@ const nextConfig = {
   images: {
     remotePatterns: [
       {
-        protocol:"https",
+        protocol: "https",
         hostname: "cdn.tools.unlayer.com",
       },
       {
-        protocol:"https",
+        protocol: "https",
         hostname: "fonts.gstatic.com",
       },
       {
-        protocol:"https",
+        protocol: "https",
         hostname: "lh3.googleusercontent.com",
+      },
+      {
+        protocol: "https",
+        hostname: "backend.quemailer.com",
       },
     ],
   },
