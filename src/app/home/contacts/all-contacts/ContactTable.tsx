@@ -88,6 +88,28 @@ const ContactTable = () => {
   };
 
   const onUpdate = async () => {
+    const validateName = (name: string) => /^[a-zA-Z]+(\s?[a-zA-Z]+)*$/.test(name.trim());
+    const validateEmail = (email: string) => /\S+@\S+\.\S+/.test(email);
+    const validateGroup = (group: string) => /^[a-zA-Z0-9]+(\s?[a-zA-Z0-9]+)*$/.test(group.trim()); 
+
+    if (editContactData.json.name && !validateName(editContactData.json.name) || editContactData.json.name?.length === 0) {
+      warningNotification("Invalid name. Only letters and spaces are allowed.");
+      setUpdateLoading(false);
+      return;
+    }
+
+    if ( editContactData.json.email && !validateEmail(editContactData.json.email) || editContactData.json.email?.length === 0) {
+      warningNotification("Invalid email format.");
+      setUpdateLoading(false);
+      return;
+    }
+
+    if (editContactData.json.group && !validateGroup(editContactData.json.group) || editContactData.json.group?.length === 0) {
+      warningNotification("Invalid group name. Only letters, numbers, and spaces are allowed.");
+      setUpdateLoading(false);
+      return;
+    }
+
     const res = await updateContact(editContactData);
     if (res.status === 201) {
       successNotification(res?.message);
@@ -342,7 +364,7 @@ const ContactTable = () => {
             <Label htmlFor="name" value="Edit name" />
             <TextInput
               id="name"
-              placeholder="name@company.com"
+              placeholder="John Doe"
               value={editContactData.json.name || ""}
               onChange={(event) =>
                 handleEditContactDataChange("name", event.target.value)

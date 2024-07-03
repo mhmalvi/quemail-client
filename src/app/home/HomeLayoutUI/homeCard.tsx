@@ -32,12 +32,35 @@ const HomeCard = () => {
     loading: false,
   });
 
+  const handleFormMailValidation = (email:string | null, appPassword:string | null) =>{
+
+    const validateEmail = (email: string) => /\S+@\S+\.\S+/.test(email);
+    const validateAppPassword = (appPassword: string) => /^[a-zA-Z]+(\s?[a-zA-Z]+)*$/.test(appPassword.trim());
+
+    if (!email || !validateEmail(email)) {
+      warningNotification("Invalid email. Check your email address.");
+      return false;
+    }
+
+    if (!appPassword || !validateAppPassword(appPassword) || appPassword.length !== 19) {
+      warningNotification("Invalid appPassword. Only letters and spaces are allowed.");
+      return false;
+    }
+
+    setEmailInfo((prev) => ({
+      ...prev,
+      loading: true,
+    }));
+
+    return true;
+  }
+
   const handleAddMail = async (
     email: string | null,
     appPassword: string | null,
     provider: string | null
   ) => {
-    if (emailInfo.provider === "Google") {
+    if (emailInfo.provider === "Google" && handleFormMailValidation(email,appPassword)) {
       try {
         const res = await addMailInfo(email, appPassword, provider);
         if (res.status === 201) {
@@ -56,13 +79,19 @@ const HomeCard = () => {
         console.log(error);
       }
     }
+    else {
+      setEmailInfo((prev) => ({
+        ...prev,
+        loading: false,
+      }));
+    }
   };
   const handleUpdateMail = async (
     email: string | null,
     appPassword: string | null,
     id: number | null
   ) => {
-    if (emailInfo.provider === "Google") {
+    if (emailInfo.provider === "Google" && handleFormMailValidation(email,appPassword)) {
       try {
         const res = await updateMailInfo(email, appPassword, id);
         if (res.status === 201) {
@@ -70,6 +99,7 @@ const HomeCard = () => {
             ...prev,
             loading: false,
           }));
+          
           successNotification(res.message);
           window.location.reload();
         } else if (res.status === 422) {
@@ -80,6 +110,12 @@ const HomeCard = () => {
       } catch (error) {
         console.log(error);
       }
+    }
+    else {
+      setEmailInfo((prev) => ({
+        ...prev,
+        loading: false,
+      }));
     }
   };
   const [mailAdded, setMailAdded] = useState<MailAdded | null>(null);
@@ -265,10 +301,6 @@ const HomeCard = () => {
                       emailInfo.appPassword,
                       emailInfo?.id
                     );
-                setEmailInfo((prev) => ({
-                  ...prev,
-                  loading: true,
-                }));
               }}
               disabled={
                 emailInfo.email === null || emailInfo.appPassword === null

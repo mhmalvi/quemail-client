@@ -23,6 +23,30 @@ const CampaignInfo = ({ tabsRef }: any) => {
   const newCampaign = campaignStore((state) => state.newCampaign);
   const setNewCampaign = campaignStore((state) => state.setNewCampaign);
 
+  const handleFormDataValidation = () => {
+    console.log("inside")
+    const validateCampaignName = (campaignName: string) => /^[a-zA-Z0-9]+(\s?[a-zA-Z0-9]+)*$/.test(campaignName.trim());
+    const validateSubjectLine = (subjectLine: string) => /^[a-zA-Z0-9]+(\s?[a-zA-Z0-9]+)*$/.test(subjectLine.trim());
+    const validateSenderName = (senderName: string) => /^[a-zA-Z]+(\s?[a-zA-Z]+)*$/.test(senderName.trim());
+
+    if (newCampaign?.campaignInfo?.campaignName && !validateCampaignName(newCampaign?.campaignInfo?.campaignName)) {
+      warningNotification("Invalid name. Only letters and spaces are allowed.");
+      return;
+    }
+
+    if (newCampaign?.campaignInfo?.subject && !validateSubjectLine(newCampaign?.campaignInfo?.subject)) {
+      warningNotification("Invalid subject. Only letters,numbers and spaces are allowed.");
+      return;
+    }
+
+    if (newCampaign?.campaignInfo?.fromName && !validateSenderName(newCampaign?.campaignInfo?.fromName)) {
+      warningNotification("Invalid sender name. Only letters and spaces are allowed.");
+      return;
+    }
+
+    tabsRef.current.setActiveTab(1)
+  }
+ 
   const handleSubjectChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const newSubject = e.target.value;
     // setSubject(newSubject);
@@ -246,7 +270,9 @@ const CampaignInfo = ({ tabsRef }: any) => {
               newCampaign?.campaignInfo.campaignName === null ||
               newCampaign?.campaignInfo.campaignName === ""
             }
-            onClick={() => tabsRef.current.setActiveTab(1)}
+            onClick={() =>{
+              handleFormDataValidation()
+            }}
           >
             Next
           </button>
