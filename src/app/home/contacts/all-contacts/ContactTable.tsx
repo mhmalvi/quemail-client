@@ -88,6 +88,28 @@ const ContactTable = () => {
   };
 
   const onUpdate = async () => {
+    const validateName = (name: string) => /^[a-zA-Z\s]+$/.test(name);
+    const validateEmail = (email: string) => /\S+@\S+\.\S+/.test(email);
+    const validateGroup = (group: string) => /^[a-zA-Z0-9\s]+$/.test(group);
+
+    if (editContactData.json.name && !validateName(editContactData.json.name)) {
+      warningNotification("Invalid name. Only letters and spaces are allowed.");
+      setUpdateLoading(false);
+      return;
+    }
+
+    if ( editContactData.json.email && !validateEmail(editContactData.json.email)) {
+      warningNotification("Invalid email format.");
+      setUpdateLoading(false);
+      return;
+    }
+
+    if (editContactData.json.group && !validateGroup(editContactData.json.group)) {
+      warningNotification("Invalid group name. Only letters, numbers, and spaces are allowed.");
+      setUpdateLoading(false);
+      return;
+    }
+    
     const res = await updateContact(editContactData);
     if (res.status === 201) {
       successNotification(res?.message);
