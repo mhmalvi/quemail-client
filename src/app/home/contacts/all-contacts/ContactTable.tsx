@@ -400,7 +400,7 @@ const ContactTable = () => {
               onChange={(event) =>
                 handleEditContactDataChange("email", event.target.value)
               }
-              className="bg-tranparent"
+              className="bg-tranparent "
               required
             />
           </div>
