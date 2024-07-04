@@ -17,33 +17,15 @@ const QuickActions = () => {
   });
   const [openAddContactModal, setOpenAddContactModal] = useState(false);
   return (
-    <div className=" xl:w-1/4 w-1/3 dark:bg-dark-glass bg-[#ffffffbf] shadow-md backdrop-blur-xl rounded-md p-4 flex flex-col gap-4 overflow-hidden">
+    <div className="border dark:border-none border-violet-200 xl:w-1/4 w-1/3 dark:bg-light-glass bg-white shadow-md backdrop-blur-xl rounded-md p-4 flex flex-col gap-4 overflow-hidden">
       <h1 className="xl:text-xl text-base m-0 p-0 dark:text-white text-dark-black">
         Quick actions
       </h1>
-      <p className="text-xs m-0 p-0 dark:text-slate-300 text-dark-black">
-        Use these features to excel your work flow
-      </p>
-      <Link
-        href="/home/campaigns/new-campaign"
-        className="rounded-md h-full flex gap-4 items-center xl:p-4 p-2 dark:bg-dark-glass bg-light-glass dark:border-light-black border dark:border-slate-500 dark:hover:border-brand-color hover:border-brand-color duration-100 ease-in"
-      >
-        {Images.Create_Campaigns && (
-          <Image
-            src={Images.Create_Campaigns}
-            alt="add_Contact"
-            className="xl:w-1/4 w-1/6"
-          />
-        )}
-        <h1 className="dark:text-slate-300 text-dark-black text-base m-0 p-0 text-start">
-          Create Campaigns
-        </h1>
-      </Link>
       <button
         onClick={() => {
           setOpenAddContactModal(true);
         }}
-        className="rounded-md h-full flex gap-4 items-center xl:p-4 p-2 dark:bg-dark-glass bg-light-glass dark:border-light-black border dark:border-slate-500 dark:hover:border-brand-color hover:border-brand-color duration-100 ease-in"
+        className="rounded-md h-full flex gap-4 items-center xl:p-4 p-2 dark:bg-dark-glass bg-light-glass dark:border-light-glass border border-violet-200 dark:hover:border-brand-color hover:border-brand-color duration-100 ease-in"
       >
         {Images.Add_Contact && (
           <Image
@@ -62,7 +44,7 @@ const QuickActions = () => {
             show: "importContacts",
           });
         }}
-        className="  rounded-md h-full flex gap-4 items-center xl:p-4 p-2 dark:bg-dark-glass bg-light-glass dark:border-light-black border  dark:border-slate-500 dark:hover:border-brand-color hover:border-brand-color duration-100 ease-in"
+        className="rounded-md h-full flex gap-4 items-center xl:p-4 p-2 dark:bg-dark-glass bg-light-glass dark:border-light-glass border border-violet-200 dark:hover:border-brand-color hover:border-brand-color duration-100 ease-in"
       >
         {Images.Import_Contact && (
           <Image
@@ -75,13 +57,14 @@ const QuickActions = () => {
           Import Contacts
         </h1>
       </button>
+
       <button
         onClick={() => {
           setActionClick({
             show: "generateTemplate",
           });
         }}
-        className="rounded-md h-full flex gap-4 items-center xl:p-4 p-2 dark:bg-dark-glass bg-light-glass dark:border-light-black border  dark:border-slate-500 dark:hover:border-brand-color hover:border-brand-color duration-100 ease-in"
+        className="rounded-md h-full flex gap-4 items-center xl:p-4 p-2 dark:bg-dark-glass bg-light-glass dark:border-light-glass border border-violet-200 dark:hover:border-brand-color hover:border-brand-color duration-100 ease-in"
       >
         {Images.Generate_Templates && (
           <Image
@@ -94,7 +77,21 @@ const QuickActions = () => {
           Create a template
         </h1>
       </button>
-
+      <Link
+        href="/home/campaigns/new-campaign"
+        className="rounded-md h-full flex gap-4 items-center xl:p-4 p-2 dark:bg-dark-glass bg-light-glass dark:border-light-glass border border-violet-200 dark:hover:border-brand-color hover:border-brand-color duration-100 ease-in"
+      >
+        {Images.Create_Campaigns && (
+          <Image
+            src={Images.Create_Campaigns}
+            alt="add_Contact"
+            className="xl:w-1/4 w-1/6"
+          />
+        )}
+        <h1 className="dark:text-slate-300 text-dark-black text-base m-0 p-0 text-start">
+          Create Campaigns
+        </h1>
+      </Link>
       {actionClick.show === "importContacts" && (
         <ImportCSV openModal={actionClick} setOpenModal={setActionClick} />
       )}

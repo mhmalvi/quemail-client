@@ -87,10 +87,11 @@ export const customTheme: CustomFlowbiteTheme = {
         icon: "mr-2 h-4 w-4",
       },
       style: {
-        dark: "bg-violet-50 text-white dark:bg-dark-black",
-        light: "border border-gray-200 bg-violet-50 text-gray-900",
+        dark: "border border-light-glass text-slate-300 bg-dark-black",
+        light: "border border-violet-200 bg-violet-50 text-gray-900",
         auto: "bg-white text-gray-900 dark:border-none dark:bg-dark-black dark:text-slate-300 backdrop-blur-2xl",
       },
+      divider: "my-1 h-px bg-violet-200 dark:bg-dark-glass",
     },
   },
   datepicker: {
