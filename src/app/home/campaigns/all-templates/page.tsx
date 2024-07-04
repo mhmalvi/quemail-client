@@ -232,7 +232,7 @@ const AllTemplates = () => {
         size={"9xl"}
         className="h-screen"
       >
-        <Modal.Header className="dark:bg-dark-glass bg-violet-50 text-slate-300 ">
+        <Modal.Header>
           Edit {templateData ? templateData[0]?.name : ""}
         </Modal.Header>
         <Modal.Body className="dark:bg-dark-black bg-violet-50 text-slate-300 h-[calc(100vh-100px)] overflow-y-auto">

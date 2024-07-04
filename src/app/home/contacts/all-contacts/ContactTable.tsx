@@ -374,7 +374,7 @@ const ContactTable = () => {
           }));
         }}
       >
-        <Modal.Header className="dark:bg-dark-glass bg-violet-50 dark:text-slate-300 text-dark-black">
+        <Modal.Header>
           Edit Contact
         </Modal.Header>
         <Modal.Body className="dark:bg-dark-black bg-violet-50">
