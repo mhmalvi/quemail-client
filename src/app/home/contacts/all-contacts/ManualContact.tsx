@@ -18,7 +18,9 @@ interface AddContactData {
   group: string | null;
 }
 
-const ManualContact: React.FC<ManualContactProps> = ({ setOpenAddContactModal }) => {
+const ManualContact: React.FC<ManualContactProps> = ({
+  setOpenAddContactModal,
+}) => {
   const userID =
     typeof window !== "undefined" ? localStorage.getItem("userID") : null;
 
@@ -31,16 +33,21 @@ const ManualContact: React.FC<ManualContactProps> = ({ setOpenAddContactModal })
 
   const [updateLoading, setUpdateLoading] = useState(false);
 
-  const handleEditContactDataChange = (field: keyof AddContactData, value: string) => {
+  const handleEditContactDataChange = (
+    field: keyof AddContactData,
+    value: string
+  ) => {
     setAddContactData((prevData) => ({
       ...prevData,
       [field]: value,
     }));
   };
 
-  const validateName = (name: string) => /^[a-zA-Z]+(\s?[a-zA-Z]+)*$/.test(name.trim());
+  const validateName = (name: string) =>
+    /^[a-zA-Z]+(\s?[a-zA-Z]+)*$/.test(name.trim());
   const validateEmail = (email: string) => /\S+@\S+\.\S+/.test(email);
-  const validateGroup = (group: string) => /^[a-zA-Z0-9]+(\s?[a-zA-Z0-9]+)*$/.test(group.trim());
+  const validateGroup = (group: string) =>
+    /^[a-zA-Z0-9]+(\s?[a-zA-Z0-9]+)*$/.test(group.trim());
 
   const addContactsManually = async () => {
     const { name, email, group } = addContactData;
@@ -58,7 +65,9 @@ const ManualContact: React.FC<ManualContactProps> = ({ setOpenAddContactModal })
     }
 
     if (!group || !validateGroup(group)) {
-      warningNotification("Invalid group name. Only letters, numbers, and spaces are allowed.");
+      warningNotification(
+        "Invalid group name. Only letters, numbers, and spaces are allowed."
+      );
       setUpdateLoading(false);
       return;
     }
@@ -70,7 +79,9 @@ const ManualContact: React.FC<ManualContactProps> = ({ setOpenAddContactModal })
       if (res.status === 201) {
         successNotification(res.message);
         setOpenAddContactModal(false);
-        window.location.reload();
+
+        window.location.href =
+          window.location.pathname + "?reload=" + new Date().getTime();
       } else if (res.status === 422) {
         warningNotification(res.message);
       }
@@ -89,7 +100,9 @@ const ManualContact: React.FC<ManualContactProps> = ({ setOpenAddContactModal })
           id="name"
           placeholder="John Doe"
           value={addContactData.name || ""}
-          onChange={(event) => handleEditContactDataChange("name", event.target.value)}
+          onChange={(event) =>
+            handleEditContactDataChange("name", event.target.value)
+          }
           className="bg-transparent"
           required
         />
@@ -100,7 +113,9 @@ const ManualContact: React.FC<ManualContactProps> = ({ setOpenAddContactModal })
           id="email"
           placeholder="name@company.com"
           value={addContactData.email || ""}
-          onChange={(event) => handleEditContactDataChange("email", event.target.value)}
+          onChange={(event) =>
+            handleEditContactDataChange("email", event.target.value)
+          }
           className="bg-transparent"
           required
         />
@@ -111,7 +126,9 @@ const ManualContact: React.FC<ManualContactProps> = ({ setOpenAddContactModal })
           id="group"
           placeholder="Group Name"
           value={addContactData.group || ""}
-          onChange={(event) => handleEditContactDataChange("group", event.target.value)}
+          onChange={(event) =>
+            handleEditContactDataChange("group", event.target.value)
+          }
           className="bg-transparent"
           required
         />

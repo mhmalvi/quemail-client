@@ -38,7 +38,8 @@ const CredentialsLogin = ({
       router.push("/home");
     } else if (response?.status === 404) {
       warningNotification(response.message);
-      window.location.reload();
+      window.location.href =
+        window.location.pathname + "?reload=" + new Date().getTime();
     }
   };
   return (

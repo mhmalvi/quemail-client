@@ -31,19 +31,35 @@ const HomeCard = () => {
     id: null,
     loading: false,
   });
+  const [loading, setLoading] = useState<boolean>(true);
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false);
+    }, 2000);
+  }, []);
 
-  const handleFormMailValidation = (email:string | null, appPassword:string | null) =>{
-
+  const handleFormMailValidation = (
+    email: string | null,
+    appPassword: string | null
+  ) => {
     const validateEmail = (email: string) => /\S+@\S+\.\S+/.test(email);
-    const validateAppPassword = (appPassword: string) => /^[a-zA-Z]+(\s?[a-zA-Z]+)*$/.test(appPassword.trim());
+    const validateAppPassword = (appPassword: string) =>
+      /^[a-zA-Z]+(\s?[a-zA-Z]+)*$/.test(appPassword.trim());
 
     if (!email || !validateEmail(email)) {
       warningNotification("Invalid email. Check your email address.");
       return false;
     }
 
-    if (!appPassword || !validateAppPassword(appPassword) || appPassword.length > 19 || appPassword.length < 16) {
-      warningNotification("Invalid appPassword. Only letters and spaces are allowed.");
+    if (
+      !appPassword ||
+      !validateAppPassword(appPassword) ||
+      appPassword.length > 19 ||
+      appPassword.length < 16
+    ) {
+      warningNotification(
+        "Invalid appPassword. Only letters and spaces are allowed."
+      );
       return false;
     }
 
@@ -53,14 +69,17 @@ const HomeCard = () => {
     }));
 
     return true;
-  }
+  };
 
   const handleAddMail = async (
     email: string | null,
     appPassword: string | null,
     provider: string | null
   ) => {
-    if (emailInfo.provider === "Google" && handleFormMailValidation(email,appPassword)) {
+    if (
+      emailInfo.provider === "Google" &&
+      handleFormMailValidation(email, appPassword)
+    ) {
       try {
         const res = await addMailInfo(email, appPassword, provider);
         if (res.status === 201) {
@@ -69,7 +88,8 @@ const HomeCard = () => {
             loading: false,
           }));
           successNotification(res.message);
-          window.location.reload();
+          window.location.href =
+            window.location.pathname + "?reload=" + new Date().getTime();
         } else if (res.status === 422) {
           warningNotification(res.message);
         } else if (res.status === 500) {
@@ -78,8 +98,7 @@ const HomeCard = () => {
       } catch (error) {
         console.log(error);
       }
-    }
-    else {
+    } else {
       setEmailInfo((prev) => ({
         ...prev,
         loading: false,
@@ -91,7 +110,10 @@ const HomeCard = () => {
     appPassword: string | null,
     id: number | null
   ) => {
-    if (emailInfo.provider === "Google" && handleFormMailValidation(email,appPassword)) {
+    if (
+      emailInfo.provider === "Google" &&
+      handleFormMailValidation(email, appPassword)
+    ) {
       try {
         const res = await updateMailInfo(email, appPassword, id);
         if (res.status === 201) {
@@ -99,9 +121,10 @@ const HomeCard = () => {
             ...prev,
             loading: false,
           }));
-          
+
           successNotification(res.message);
-          window.location.reload();
+          window.location.href =
+            window.location.pathname + "?reload=" + new Date().getTime();
         } else if (res.status === 422) {
           warningNotification(res.message);
         } else if (res.status === 500) {
@@ -110,8 +133,7 @@ const HomeCard = () => {
       } catch (error) {
         console.log(error);
       }
-    }
-    else {
+    } else {
       setEmailInfo((prev) => ({
         ...prev,
         loading: false,
@@ -126,7 +148,8 @@ const HomeCard = () => {
 
       if (res.status === 201) {
         successNotification(res.message);
-        window.location.reload();
+        window.location.href =
+          window.location.pathname + "?reload=" + new Date().getTime();
       } else {
         warningNotification("Something went wrong. Please try again.");
       }
@@ -163,33 +186,42 @@ const HomeCard = () => {
   };
   const [openDeletePopover, setOpenDeletePopover] = useState(false);
   return (
-    <div className="h-full relative dark:bg-dark-glass shadow-md bg-[#ffffffbf] backdrop-blur-2xl rounded-md p-4 flex flex-col gap-4 overflow-hidden">
+    <div className="border dark:border-none border-violet-200 h-full relative dark:bg-light-glass shadow-md bg-[#ffffffbf] backdrop-blur-2xl rounded-md p-4 flex flex-col justify-between gap-4 overflow-hidden">
       <h1 className="xl:text-xl text-base m-0 p-0 dark:text-white text-dark-black">
         Connect your email address
       </h1>
-      <p className="xl:text-base text-xs m-0 p-0 dark:text-slate-300 text-light-black">
-        Use your email to send more targeted emails
-      </p>
-      <div className="bg-[url('/SVG/Home/homeCardBg.svg')] dark:bg-transparent bg-violet-50 w-full h-1/2 border dark:border-dark-black/30 shadow-xl shadow-inner rounded-md flex items-center justify-center gap-16">
-        <div
-          className="relative bg-white xl:h-20 h-16 xl:p-4 p-2 border dark:border-dark-black/60 hover:dark:border-brand-color hover:border-brand-color xl:w-20 w-16 rounded-md shadow-md cursor-pointer hover:scale-95 duration-100 ease-in-out"
-          onClick={handleGoogleClick}
-        >
-          <Image src={Images.Google} alt="Google" className="h-full" />
-          {mailAdded?.google === null || mailAdded === null ? (
-            ""
-          ) : (
-            <div className=" absolute -bottom-2 -right-2 bg-green-500 w-6 h-6 flex items-center justify-center m-0 rounded-full">
-              ✔
+      <div className="bg-[url('/SVG/Home/homeCardBg.svg')] dark:bg-transparent bg-violet-50 w-full h-1/2 border border-violet-200 dark:border-dark-black/30 rounded-md flex items-center justify-center gap-16">
+        {loading ? (
+          <div className=" flex flex-col items-center justify-center">
+            <Spinner
+              color="purple"
+              aria-label="Purple spinner example"
+              size="xl"
+            />
+          </div>
+        ) : (
+          <>
+            <div
+              className="relative bg-white xl:h-20 h-16 xl:p-4 p-2 border dark:border-dark-black/60 hover:dark:border-brand-color hover:border-brand-color xl:w-20 w-16 rounded-md shadow-md cursor-pointer hover:scale-95 duration-100 ease-in-out"
+              onClick={handleGoogleClick}
+            >
+              <Image src={Images.Google} alt="Google" className="h-full" />
+              {mailAdded?.google === null || mailAdded === null ? (
+                ""
+              ) : (
+                <div className=" absolute -bottom-2 -right-2 bg-green-500 w-6 h-6 flex items-center justify-center m-0 rounded-full">
+                  ✔
+                </div>
+              )}
             </div>
-          )}
-        </div>
-        <div className=" bg-white xl:h-20 h-16 xl:p-4 p-2 border dark:border-dark-black/60 hover:dark:border-brand-color hover:border-brand-color xl:w-20 w-16 rounded-md shadow-md cursor-pointer hover:scale-95 duration-100 ease-in-out">
-          <Image src={Images.Yahoo} alt="Yahoo" className="h-full" />
-        </div>
-        <div className=" bg-white xl:h-20 h-16 xl:p-4 p-2 border dark:border-dark-black/60 hover:dark:border-brand-color hover:border-brand-color xl:w-20 w-16 rounded-md shadow-md cursor-pointer hover:scale-95 duration-100 ease-in-out">
-          <Image src={Images.Outlook} alt="Outlook" className="h-full" />
-        </div>
+            <div className=" bg-white xl:h-20 h-16 xl:p-4 p-2 border dark:border-dark-black/60 hover:dark:border-brand-color hover:border-brand-color xl:w-20 w-16 rounded-md shadow-md cursor-pointer hover:scale-95 duration-100 ease-in-out">
+              <Image src={Images.Yahoo} alt="Yahoo" className="h-full" />
+            </div>
+            <div className=" bg-white xl:h-20 h-16 xl:p-4 p-2 border dark:border-dark-black/60 hover:dark:border-brand-color hover:border-brand-color xl:w-20 w-16 rounded-md shadow-md cursor-pointer hover:scale-95 duration-100 ease-in-out">
+              <Image src={Images.Outlook} alt="Outlook" className="h-full" />
+            </div>{" "}
+          </>
+        )}
       </div>
       <p className="xl:text-sm text-xs m-0 p-0 dark:text-slate-300 text-light-black ">
         Please connect your email account to enable the sending of emails
