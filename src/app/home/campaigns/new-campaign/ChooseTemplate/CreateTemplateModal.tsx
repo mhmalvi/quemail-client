@@ -20,7 +20,7 @@ const CreateTemplateModal: React.FC<SelectTemplateProps> = ({
       size={"9xl"}
       className="h-screen"
     >
-      <Modal.Header className="dark:bg-dark-glass bg-violet-50 text-slate-300 ">
+      <Modal.Header>
         Create a template
       </Modal.Header>
       <Modal.Body className="dark:bg-dark-black bg-violet-50 text-slate-300 h-[calc(100vh-100px)] w-full left-0 overflow-y-auto">
