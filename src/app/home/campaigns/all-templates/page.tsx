@@ -80,49 +80,41 @@ const AllTemplates = () => {
     }
   };
   return (
-    <div className={CONTAINER_STYLES}>
+    <div className="relative w-full h-full dark:bg-dark-glass shadow-md backdrop-blur-2xl bg-white rounded-md flex gap-4 overflow-auto scroll-smooth">
       {templateData && templateData.length > 0 ? (
         <div className="w-full flex flex-col gap-4 border-brand-color">
-          <div className="flex items-center justify-end">
-            <button
-              className={BIG_BUTTON_STYLES}
-              onClick={() => setOpenTemplateModal(true)}
-            >
-              Create a New Template
-            </button>
-          </div>
-          <Table
-            hoverable
-            striped
-            className="w-full rounded-md overflow-hidden"
-          >
-            <Table.Head>
-              <Table.HeadCell className="text-center w-1/3">
-                Template Name
-              </Table.HeadCell>
-              <Table.HeadCell className="w-1/3"></Table.HeadCell>
-              <Table.HeadCell className="text-center w-1/3">
-                Actions
-              </Table.HeadCell>
-            </Table.Head>
-            <Table.Body className="divide-y w-full left-0 overflow-auto dark:shadow-brand-color">
-              {templateData !== null &&
-                templateData.map((item: TemplateType, index: number) => (
-                  <Table.Row
+          <div className="flex flex-wrap items-center justify-between gap-4 p-4">
+            <div className="border border-violet-200 dark:border-light-glass 2xl:w-64 2xl:h-80 w-48 h-60 rounded-md flex flex-col items-center">
+              <div
+                onClick={() => setOpenTemplateModal(true)}
+                className="hover:scale-95 duration-100 ease-in-out cursor-pointer w-full h-full bg-violet-50 dark:bg-dark-black overflow-hidden flex items-center justify-center rounded-md text-dark-black dark:text-slate-300"
+              >
+                <p className="p-0 m-0 text-xs 2xl:text-base  ">
+                  Create a new template
+                </p>
+              </div>
+            </div>
+            {templateData !== null &&
+              templateData.map((item: TemplateType, index: number) => {
+                console.log(item);
+                return (
+                  <div
                     key={index}
-                    className="w-full dark:border-gray-700 overflow-hidden"
+                    className="border border-violet-200 dark:border-light-glass 2xl:w-64 2xl:h-80 w-48 h-60 rounded-md flex flex-col items-center rounded-md overflow-hidden"
                   >
-                    <Table.Cell className="w-1/3">
-                      <h1 className="m-0 p-0 text-center dark:text-slate-300 text-dark-black my-auto">
-                        {item.name}
-                      </h1>
-                    </Table.Cell>
-                    <Table.Cell className="w-1/3 ">
-                      {/* <h1 className="dark:text-slate-300 text-dark-black my-auto">
-                        {item.id}
-                      </h1> */}
-                    </Table.Cell>
-                    <Table.Cell className="w-1/3">
+                    <div className="relative w-full h-1/2 bg-[#F7F8F9] overflow-hidden flex flex-start border-b border-violet-200 dark:border-light-glass">
+                      <div
+                        className="2xl:scale-50 scale-[0.38] origin-top-left"
+                        dangerouslySetInnerHTML={{
+                          __html: `${item.template.html}`,
+                        }}
+                      ></div>
+                    </div>
+                    <div className="flex items-center justify-between w-full h-1/4 bg-violet-50 dark:bg-dark-black overflow-hidden p-4 border-b border-violet-200 dark:border-light-glass">
+                      <p className="text-xs 2xl:text-base text-dark-black dark:text-slate-300 ">{item.name}</p>
+                      <p className="text-xs 2xl:text-base text-dark-black dark:text-slate-300 ">{item.id}</p>
+                    </div>
+                    <div className="flex items-center justify-center w-full h-1/4 bg-violet-50 dark:bg-dark-black overflow-hidden">
                       <div className="text-center flex items-center justify-center gap-4 ">
                         <Tooltip
                           content="Preview Template"
@@ -134,10 +126,9 @@ const AllTemplates = () => {
                               setOpenTemplateModal(true);
                               setSelectedTemplate(item);
                             }}
-                            className="cursor-pointer hover:text-brand-color"
+                            className="cursor-pointer text-dark-black dark:text-slate-300 hover:text-brand-color"
                           />
                         </Tooltip>
-
                         <Popover
                           aria-labelledby="default-popover"
                           open={openDeletePopover === item.id}
@@ -183,32 +174,31 @@ const AllTemplates = () => {
                           >
                             <TbTrash
                               size={25}
-                              className="hover:text-red-500 cursor-pointer"
+                              className="hover:text-red-500 text-dark-black dark:text-slate-300 cursor-pointer"
                             />
                           </Tooltip>
                         </Popover>
                         <Tooltip
-                          content={`Use template ${item.name} in Campaign`}
+                          content={`Use this template now`}
                           className="bg-brand-color text-white"
                         >
-                          <div
-                            className="px-4 py-1 rounded-md border border-brand-color hover:bg-brand-color hover:text-yellow-200 cursor-pointer"
+                          <TbRocket
+                            size={25}
                             onClick={() =>
                               handleTemplateSelection(
                                 item.name,
                                 item.template.html
                               )
                             }
-                          >
-                            <TbRocket size={25} />
-                          </div>
+                            className="hover:text-brand-color cursor-pointer text-dark-black dark:text-slate-300 "
+                          />
                         </Tooltip>
                       </div>
-                    </Table.Cell>
-                  </Table.Row>
-                ))}
-            </Table.Body>
-          </Table>
+                    </div>
+                  </div>
+                );
+              })}
+          </div>
         </div>
       ) : (
         <div className="relative w-full h-full rounded-md p-4 flex flex-col items-center justify-center gap-8 overflow-hidden">
