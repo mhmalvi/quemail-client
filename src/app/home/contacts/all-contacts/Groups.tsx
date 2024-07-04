@@ -91,7 +91,8 @@ const Groups = () => {
           ))}
         <Dropdown.Item
           className="dark:text-slate-300 text-light-black hover:text-slate-700"
-          onClick={() => window.location.reload()}
+          onClick={() => 
+            window.location.href = window.location.href}
         >
           Clear
         </Dropdown.Item>
