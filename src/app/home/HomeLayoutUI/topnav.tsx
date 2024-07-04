@@ -182,7 +182,9 @@ const Topnav = () => {
           console.log(isModalOpen);
         }}
       >
-        <Modal.Header>Account Details</Modal.Header>
+        <Modal.Header>
+          Account Details
+        </Modal.Header>
         <Modal.Body>
           <MyProfile />
         </Modal.Body>
