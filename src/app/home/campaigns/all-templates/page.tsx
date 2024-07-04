@@ -58,7 +58,9 @@ const AllTemplates = () => {
     const res = await destroyTemplate(data);
     if (res.status === 201) {
       successNotification(res.message);
-      window.location.reload();
+
+      window.location.href =
+        window.location.pathname + "?reload=" + new Date().getTime();
     } else {
       warningNotification("Something went wrong. Please try again.");
     }
@@ -84,10 +86,10 @@ const AllTemplates = () => {
       {templateData && templateData.length > 0 ? (
         <div className="w-full flex flex-col gap-4 border-brand-color">
           <div className="flex flex-wrap items-center justify-between gap-4 p-4">
-            <div className="border border-violet-200 dark:border-light-glass 2xl:w-64 2xl:h-80 w-48 h-60 rounded-md flex flex-col items-center">
+            <div className="hover:translate-y-2 duration-100 ease-in-out border border-violet-200 dark:border-light-glass 2xl:w-64 2xl:h-80 w-48 h-60 rounded-md flex flex-col items-center">
               <div
                 onClick={() => setOpenTemplateModal(true)}
-                className="hover:scale-95 duration-100 ease-in-out cursor-pointer w-full h-full bg-violet-50 dark:bg-dark-black overflow-hidden flex items-center justify-center rounded-md text-dark-black dark:text-slate-300"
+                className=" cursor-pointer w-full h-full bg-violet-50 dark:bg-dark-black overflow-hidden flex items-center justify-center rounded-md text-dark-black dark:text-slate-300"
               >
                 <p className="p-0 m-0 text-xs 2xl:text-base  ">
                   Create a new template
@@ -100,7 +102,7 @@ const AllTemplates = () => {
                 return (
                   <div
                     key={index}
-                    className="border border-violet-200 dark:border-light-glass 2xl:w-64 2xl:h-80 w-48 h-60 rounded-md flex flex-col items-center rounded-md overflow-hidden"
+                    className="border border-violet-200 dark:border-light-glass 2xl:w-64 2xl:h-96 w-48 h-60 rounded-md flex flex-col items-center rounded-md overflow-hidden hover:translate-y-2 duration-100"
                   >
                     <div className="relative w-full h-1/2 bg-[#F7F8F9] overflow-hidden flex flex-start border-b border-violet-200 dark:border-light-glass">
                       <div
@@ -110,9 +112,13 @@ const AllTemplates = () => {
                         }}
                       ></div>
                     </div>
-                    <div className="flex items-center justify-between w-full h-1/4 bg-violet-50 dark:bg-dark-black overflow-hidden p-4 border-b border-violet-200 dark:border-light-glass">
-                      <p className="text-xs 2xl:text-base text-dark-black dark:text-slate-300 ">{item.name}</p>
-                      <p className="text-xs 2xl:text-base text-dark-black dark:text-slate-300 ">{item.id}</p>
+                    <div className="flex items-center justify-between w-full h-1/4 bg-violet-50 dark:bg-dark-black overflow-hidden p-4 border-b border-violet-200 dark:border-light-glass ">
+                      <p className="text-xs 2xl:text-base text-dark-black dark:text-slate-300 ">
+                        {item.name}
+                      </p>
+                      <p className="text-xs 2xl:text-base text-dark-black dark:text-slate-300 ">
+                        {item.id}
+                      </p>
                     </div>
                     <div className="flex items-center justify-center w-full h-1/4 bg-violet-50 dark:bg-dark-black overflow-hidden">
                       <div className="text-center flex items-center justify-center gap-4 ">
@@ -126,7 +132,7 @@ const AllTemplates = () => {
                               setOpenTemplateModal(true);
                               setSelectedTemplate(item);
                             }}
-                            className="cursor-pointer text-dark-black dark:text-slate-300 hover:text-brand-color"
+                            className="hover:text-brand-color dark:hover:text-brand-color cursor-pointer text-dark-black dark:text-slate-300 "
                           />
                         </Tooltip>
                         <Popover
@@ -174,7 +180,7 @@ const AllTemplates = () => {
                           >
                             <TbTrash
                               size={25}
-                              className="hover:text-red-500 text-dark-black dark:text-slate-300 cursor-pointer"
+                              className="hover:text-red-500 dark:hover:text-red-500 text-dark-black dark:text-slate-300 cursor-pointer"
                             />
                           </Tooltip>
                         </Popover>
@@ -190,7 +196,7 @@ const AllTemplates = () => {
                                 item.template.html
                               )
                             }
-                            className="hover:text-brand-color cursor-pointer text-dark-black dark:text-slate-300 "
+                            className="hover:text-brand-color dark:hover:text-brand-color cursor-pointer text-dark-black dark:text-slate-300 "
                           />
                         </Tooltip>
                       </div>

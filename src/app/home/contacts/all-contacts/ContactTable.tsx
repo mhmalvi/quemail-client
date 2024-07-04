@@ -133,7 +133,9 @@ const ContactTable = () => {
         show: false,
         data: null,
       });
-      window.location.reload();
+
+      window.location.href =
+        window.location.pathname + "?reload=" + new Date().getTime();
     } else {
       warningNotification("Something went wrong. Please try again.");
     }
@@ -151,7 +153,9 @@ const ContactTable = () => {
     const res = await destroyContact(data);
     if (res.status === 201) {
       successNotification(res.message);
-      window.location.reload();
+
+      window.location.href =
+        window.location.pathname + "?reload=" + new Date().getTime();
     } else {
       warningNotification("Something went wrong. Please try again.");
     }
