@@ -79,8 +79,24 @@ const ImportCSV: React.FC<ImportCSVProps> = ({ openModal, setOpenModal }) => {
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                right: 10,
-                width: "5%",
+               
+                borderRadius:"0 24px 0 0",
+                
+                "@media (max-width: 1366px)": {
+                  right: "14%",
+                  top:"8.2%",
+                  width: "1%",
+                },
+                "@media (max-width: 1600px)": {
+                  right: "13.8%",
+                  top:"6.9%",
+                  width: "1%",
+                },
+                "@media (max-width: 1920px)": {
+                  right: "13.5%",
+                  top:"5.5%",
+                  width: "1%",
+                },
               },
             },
             variants: {
