@@ -31,6 +31,12 @@ const HomeCard = () => {
     id: null,
     loading: false,
   });
+  const [loading, setLoading] = useState<boolean>(true);
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false);
+    }, 2000);
+  }, []);
 
   const handleFormMailValidation = (
     email: string | null,
@@ -181,27 +187,38 @@ const HomeCard = () => {
       <h1 className="xl:text-xl text-base m-0 p-0 dark:text-white text-dark-black">
         Connect your email address
       </h1>
-
       <div className="bg-[url('/SVG/Home/homeCardBg.svg')] dark:bg-transparent bg-violet-50 w-full h-1/2 border dark:border-dark-black/30 shadow-xl shadow-inner rounded-md flex items-center justify-center gap-16">
-        <div
-          className="relative bg-white xl:h-20 h-16 xl:p-4 p-2 border dark:border-dark-black/60 hover:dark:border-brand-color hover:border-brand-color xl:w-20 w-16 rounded-md shadow-md cursor-pointer hover:scale-95 duration-100 ease-in-out"
-          onClick={handleGoogleClick}
-        >
-          <Image src={Images.Google} alt="Google" className="h-full" />
-          {mailAdded?.google === null || mailAdded === null ? (
-            ""
-          ) : (
-            <div className=" absolute -bottom-2 -right-2 bg-green-500 w-6 h-6 flex items-center justify-center m-0 rounded-full">
-              ✔
+        {loading ? (
+          <div className=" flex flex-col items-center justify-center">
+            <Spinner
+              color="purple"
+              aria-label="Purple spinner example"
+              size="xl"
+            />
+          </div>
+        ) : (
+          <>
+            <div
+              className="relative bg-white xl:h-20 h-16 xl:p-4 p-2 border dark:border-dark-black/60 hover:dark:border-brand-color hover:border-brand-color xl:w-20 w-16 rounded-md shadow-md cursor-pointer hover:scale-95 duration-100 ease-in-out"
+              onClick={handleGoogleClick}
+            >
+              <Image src={Images.Google} alt="Google" className="h-full" />
+              {mailAdded?.google === null || mailAdded === null ? (
+                ""
+              ) : (
+                <div className=" absolute -bottom-2 -right-2 bg-green-500 w-6 h-6 flex items-center justify-center m-0 rounded-full">
+                  ✔
+                </div>
+              )}
             </div>
-          )}
-        </div>
-        <div className=" bg-white xl:h-20 h-16 xl:p-4 p-2 border dark:border-dark-black/60 hover:dark:border-brand-color hover:border-brand-color xl:w-20 w-16 rounded-md shadow-md cursor-pointer hover:scale-95 duration-100 ease-in-out">
-          <Image src={Images.Yahoo} alt="Yahoo" className="h-full" />
-        </div>
-        <div className=" bg-white xl:h-20 h-16 xl:p-4 p-2 border dark:border-dark-black/60 hover:dark:border-brand-color hover:border-brand-color xl:w-20 w-16 rounded-md shadow-md cursor-pointer hover:scale-95 duration-100 ease-in-out">
-          <Image src={Images.Outlook} alt="Outlook" className="h-full" />
-        </div>
+            <div className=" bg-white xl:h-20 h-16 xl:p-4 p-2 border dark:border-dark-black/60 hover:dark:border-brand-color hover:border-brand-color xl:w-20 w-16 rounded-md shadow-md cursor-pointer hover:scale-95 duration-100 ease-in-out">
+              <Image src={Images.Yahoo} alt="Yahoo" className="h-full" />
+            </div>
+            <div className=" bg-white xl:h-20 h-16 xl:p-4 p-2 border dark:border-dark-black/60 hover:dark:border-brand-color hover:border-brand-color xl:w-20 w-16 rounded-md shadow-md cursor-pointer hover:scale-95 duration-100 ease-in-out">
+              <Image src={Images.Outlook} alt="Outlook" className="h-full" />
+            </div>{" "}
+          </>
+        )}
       </div>
       <p className="xl:text-sm text-xs m-0 p-0 dark:text-slate-300 text-light-black ">
         Please connect your email account to enable the sending of emails
