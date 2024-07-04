@@ -70,7 +70,8 @@ const ManualContact: React.FC<ManualContactProps> = ({ setOpenAddContactModal })
       if (res.status === 201) {
         successNotification(res.message);
         setOpenAddContactModal(false);
-        window.location.reload();
+        
+        window.location.href = window.location.href;
       } else if (res.status === 422) {
         warningNotification(res.message);
       }

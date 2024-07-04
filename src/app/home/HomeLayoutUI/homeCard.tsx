@@ -88,7 +88,7 @@ const HomeCard = () => {
             loading: false,
           }));
           successNotification(res.message);
-          window.location.reload();
+          window.location.href = window.location.href;
         } else if (res.status === 422) {
           warningNotification(res.message);
         } else if (res.status === 500) {
@@ -122,7 +122,7 @@ const HomeCard = () => {
           }));
 
           successNotification(res.message);
-          window.location.reload();
+          window.location.href = window.location.href;
         } else if (res.status === 422) {
           warningNotification(res.message);
         } else if (res.status === 500) {
@@ -146,7 +146,7 @@ const HomeCard = () => {
 
       if (res.status === 201) {
         successNotification(res.message);
-        window.location.reload();
+        window.location.href = window.location.href;
       } else {
         warningNotification("Something went wrong. Please try again.");
       }
@@ -183,11 +183,11 @@ const HomeCard = () => {
   };
   const [openDeletePopover, setOpenDeletePopover] = useState(false);
   return (
-    <div className="h-full relative dark:bg-dark-glass shadow-md bg-[#ffffffbf] backdrop-blur-2xl rounded-md p-4 flex flex-col justify-between gap-4 overflow-hidden">
+    <div className="border dark:border-none border-violet-200 h-full relative dark:bg-light-glass shadow-md bg-[#ffffffbf] backdrop-blur-2xl rounded-md p-4 flex flex-col justify-between gap-4 overflow-hidden">
       <h1 className="xl:text-xl text-base m-0 p-0 dark:text-white text-dark-black">
         Connect your email address
       </h1>
-      <div className="bg-[url('/SVG/Home/homeCardBg.svg')] dark:bg-transparent bg-violet-50 w-full h-1/2 border dark:border-dark-black/30 shadow-xl shadow-inner rounded-md flex items-center justify-center gap-16">
+      <div className="bg-[url('/SVG/Home/homeCardBg.svg')] dark:bg-transparent bg-violet-50 w-full h-1/2 border border-violet-200 dark:border-dark-black/30 rounded-md flex items-center justify-center gap-16">
         {loading ? (
           <div className=" flex flex-col items-center justify-center">
             <Spinner

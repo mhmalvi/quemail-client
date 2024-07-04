@@ -18,7 +18,8 @@ const ImportCSV: React.FC<ImportCSVProps> = ({ openModal, setOpenModal }) => {
     const res = await importContact(e);
     if (res?.status === 201) {
       successNotification(res?.message);
-      window.location.reload();
+      
+      window.location.href = window.location.href;
     } else {
       warningNotification("Something went wrong. Try again.");
     }

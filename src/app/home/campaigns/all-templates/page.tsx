@@ -58,7 +58,8 @@ const AllTemplates = () => {
     const res = await destroyTemplate(data);
     if (res.status === 201) {
       successNotification(res.message);
-      window.location.reload();
+      
+      window.location.href = window.location.href;
     } else {
       warningNotification("Something went wrong. Please try again.");
     }

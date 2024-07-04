@@ -78,7 +78,7 @@ const MainEditor = () => {
             if (res.status === 201) {
               successNotification(res.message);
               setTimeout(() => {
-                window.location.reload();
+                window.location.href = window.location.href;
               }, 1500);
             } else if (res.status === 409) {
               warningNotification(res.message);
@@ -99,7 +99,8 @@ const MainEditor = () => {
           if (res.status === 201) {
             successNotification(res.message);
             setTimeout(() => {
-              window.location.reload();
+              
+        window.location.href = window.location.href;
             }, 1500);
           } else if (res.status === 409) {
             warningNotification(res.message);
