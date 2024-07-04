@@ -177,7 +177,7 @@ const RecipientSelection = ({ tabsRef }: any) => {
         show={openGroupModal}
         onClose={() => setOpenGroupModal(false)}
       >
-        <Modal.Header className="dark:bg-dark-black bg-white">
+        <Modal.Header>
           <p className=" dark:text-slate-300 text-dark-black">
             Add recipients from group
           </p>
@@ -212,7 +212,7 @@ const RecipientSelection = ({ tabsRef }: any) => {
         className="flex items-center justify-center w-full"
       >
         <div className="h-[80vh] overflow-hidden relative">
-          <Modal.Header className="dark:bg-dark-glass bg-violet-50 ">
+          <Modal.Header>
             <p className=" dark:text-slate-300 text-dark-black">
               Selected Recipients
             </p>

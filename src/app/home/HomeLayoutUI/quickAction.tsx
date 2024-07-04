@@ -106,7 +106,7 @@ const QuickActions = () => {
         size={"7xl"}
         className="h-screen"
       >
-        <Modal.Header className="dark:bg-dark-glass bg-violet-50 text-slate-300 ">
+        <Modal.Header >
           Create a template
         </Modal.Header>
         <Modal.Body className="dark:bg-dark-black bg-violet-50 text-slate-300 h-[calc(100vh-100px)] overflow-y-auto">
@@ -118,7 +118,7 @@ const QuickActions = () => {
         show={openAddContactModal}
         onClose={() => setOpenAddContactModal(false)}
       >
-        <Modal.Header className="dark:bg-dark-glass bg-violet-50 dark:text-slate-300 text-dark-black">
+        <Modal.Header>
           Add a Contact
         </Modal.Header>
         <Modal.Body className="dark:bg-dark-black bg-violet-50 rounded-md">
