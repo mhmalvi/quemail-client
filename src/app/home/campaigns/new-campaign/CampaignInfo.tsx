@@ -24,29 +24,45 @@ const CampaignInfo = ({ tabsRef }: any) => {
   const setNewCampaign = campaignStore((state) => state.setNewCampaign);
 
   const handleFormDataValidation = () => {
-    console.log("inside")
-    const validateCampaignName = (campaignName: string) => /^[a-zA-Z0-9]+(\s?[a-zA-Z0-9]+)*$/.test(campaignName.trim());
-    const validateSubjectLine = (subjectLine: string) => /^[a-zA-Z0-9]+(\s?[a-zA-Z0-9]+)*$/.test(subjectLine.trim());
-    const validateSenderName = (senderName: string) => /^[a-zA-Z]+(\s?[a-zA-Z]+)*$/.test(senderName.trim());
+    console.log("inside");
+    const validateCampaignName = (campaignName: string) =>
+      /^[a-zA-Z0-9]+(\s?[a-zA-Z0-9]+)*$/.test(campaignName.trim());
+    const validateSubjectLine = (subjectLine: string) =>
+      /^[a-zA-Z0-9]+(\s?[a-zA-Z0-9]+)*$/.test(subjectLine.trim());
+    const validateSenderName = (senderName: string) =>
+      /^[a-zA-Z]+(\s?[a-zA-Z]+)*$/.test(senderName.trim());
 
-    if (newCampaign?.campaignInfo?.campaignName && !validateCampaignName(newCampaign?.campaignInfo?.campaignName)) {
+    if (
+      newCampaign?.campaignInfo?.campaignName &&
+      !validateCampaignName(newCampaign?.campaignInfo?.campaignName)
+    ) {
       warningNotification("Invalid name. Only letters and spaces are allowed.");
       return;
     }
 
-    if (newCampaign?.campaignInfo?.subject && !validateSubjectLine(newCampaign?.campaignInfo?.subject)) {
-      warningNotification("Invalid subject. Only letters,numbers and spaces are allowed.");
+    if (
+      newCampaign?.campaignInfo?.subject &&
+      !validateSubjectLine(newCampaign?.campaignInfo?.subject)
+    ) {
+      warningNotification(
+        "Invalid subject. Only letters,numbers and spaces are allowed."
+      );
       return;
     }
 
-    if (newCampaign?.campaignInfo?.fromName && !validateSenderName(newCampaign?.campaignInfo?.fromName)) {
-      warningNotification("Invalid sender name. Only letters and spaces are allowed.");
+    if (
+      newCampaign?.campaignInfo?.fromName &&
+      !validateSenderName(newCampaign?.campaignInfo?.fromName)
+    ) {
+      warningNotification(
+        "Invalid sender name. Only letters and spaces are allowed."
+      );
       return;
     }
 
-    tabsRef.current.setActiveTab(1)
-  }
- 
+    tabsRef.current.setActiveTab(1);
+  };
+
   const handleSubjectChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const newSubject = e.target.value;
     // setSubject(newSubject);
@@ -106,7 +122,7 @@ const CampaignInfo = ({ tabsRef }: any) => {
     })();
   }, []);
   return (
-    <div className="relative w-full flex flex-col items-center justify-center xl:py-16 py-4 px-4 gap-4 h-full ">
+    <div className="relative w-full flex flex-col items-center justify-center 2xl:py-16 py-4 px-4 gap-4 h-full ">
       <div className="w-1/2 flex flex-col gap-4 bg-white shadow-md dark:bg-dark-glass rounded-md xl:p-16 p-8">
         <div className="flex flex-col w-full">
           <label className="dark:text-slate-300 text-dark-black text-sm xl:text-base">
@@ -156,9 +172,13 @@ const CampaignInfo = ({ tabsRef }: any) => {
                         <Dropdown.Item
                           className="dark:text-slate-300 text-light-black hover:text-gray-800 xl:text-sm text-xs "
                           onClick={() => {
-                            navigator.clipboard.writeText(`{${items.label.toLowerCase()}}`);
+                            navigator.clipboard.writeText(
+                              `{${items.label.toLowerCase()}}`
+                            );
                             successNotification(
-                              `${items.label} copied to clipboard as {${items.label.toLowerCase()}}`
+                              `${
+                                items.label
+                              } copied to clipboard as {${items.label.toLowerCase()}}`
                             );
                           }}
                         >
@@ -269,8 +289,8 @@ const CampaignInfo = ({ tabsRef }: any) => {
               newCampaign?.campaignInfo.campaignName === null ||
               newCampaign?.campaignInfo.campaignName === ""
             }
-            onClick={() =>{
-              handleFormDataValidation()
+            onClick={() => {
+              handleFormDataValidation();
             }}
           >
             Next
