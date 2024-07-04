@@ -144,7 +144,7 @@ const AllContacts = () => {
             show={openAddContactModal}
             onClose={() => setOpenAddContactModal(false)}
           >
-            <Modal.Header className="dark:bg-dark-glass bg-violet-50 dark:text-slate-300 text-dark-black">
+            <Modal.Header>
               Add a Contact
             </Modal.Header>
             <Modal.Body className="dark:bg-dark-black bg-violet-50 rounded-md">

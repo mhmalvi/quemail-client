@@ -69,7 +69,7 @@ const SelectTemplate: React.FC<SelectTemplateProps> = ({
       onClose={() => setChooseTemplate("")}
       className="border dark:border-light-glass"
     >
-      <Modal.Header className="dark:bg-dark-black bg-white">
+      <Modal.Header>
         <p className=" dark:text-slate-300 text-dark-black">
           Select a template from the list below
         </p>

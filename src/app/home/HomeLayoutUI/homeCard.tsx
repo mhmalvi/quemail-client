@@ -240,7 +240,7 @@ const HomeCard = () => {
           }));
         }}
       >
-        <Modal.Header className=" dark:text-slate-300 text-dark-black">
+        <Modal.Header>
           <div className="flex items-center gap-4">
             <h1>Connect store</h1>
             <Popover
