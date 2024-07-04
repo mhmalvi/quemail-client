@@ -11,8 +11,6 @@ const StartCampaign = ({ tabsRef }: any) => {
   const newCampaign = campaignStore((state) => state.newCampaign);
   const setNewCampaign = campaignStore((state) => state.setNewCampaign);
   const setClickedGroup = campaignStore((state) => state.setClickedGroup);
-  const viewRecipients = campaignStore((state) => state.viewRecipients);
-  const setViewRecipients = campaignStore((state) => state.setViewRecipients);
   const setViewSchedule = campaignStore((state) => state.setViewSchedule);
   const viewSchedule = campaignStore((state) => state.viewSchedule);
 
