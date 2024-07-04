@@ -93,7 +93,7 @@ const Sidebar = () => {
           className="focus:outline-none focus:ring-0 active:outline-none active:ring-0"
         >
           <Dropdown.Item className="dark:text-slate-300 text-light-black hover:text-gray-800">
-            Email Campaign Performance
+            Campaign Performance
           </Dropdown.Item>
         </Link>
 
