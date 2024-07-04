@@ -147,14 +147,14 @@ const CampaignInfo = ({ tabsRef }: any) => {
                   label="Actions"
                   placement="bottom-start"
                   renderTrigger={() => (
-                    <div className="cursor-pointer flex items-center gap-2 bg-dark-black border border-brand-color px-2 py-1 rounded-md">
-                      <h1 className="m-0 p-0 xl:text-sm text-xs text-slate-300">
+                    <div className="cursor-pointer flex items-center gap-2 bg-violet-200 dark:bg-dark-black border border-brand-color px-2 py-1 rounded-md">
+                      <h1 className="m-0 p-0 xl:text-sm text-xs dark:text-slate-300 text-dark-black">
                         Select dynamic headers
                       </h1>
                       <Image
                         src={Images.Copy}
                         alt="copy"
-                        className="2xl:w-6 w-0 rounded-md dark:fill-text-slate-300 fill-dark-black"
+                        className="2xl:w-6 w-0 rounded-md dark:text-slate-300 text-dark-black"
                       />
                     </div>
                   )}
