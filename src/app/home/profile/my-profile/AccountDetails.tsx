@@ -4,7 +4,6 @@ import { Storage } from "@/store/store";
 
 const AccountDetails = () => {
   //const [editClicked, setEditClicked] = useState(false);
-  ///// ffrfrd
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');

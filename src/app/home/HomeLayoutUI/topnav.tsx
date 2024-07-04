@@ -12,11 +12,13 @@ import Image from "next/image";
 import { signOut } from "@/app/api/auth";
 import { useRouter } from "next/navigation";
 import Images from "../../../components/utils/images";
+import MyProfile from "../profile/my-profile/page";
 
 const Topnav = () => {
   const closeSidebar = sideBarStore((state: any) => state.setCloseSidebar);
   const setTheme = themeStore((state: any) => state.setTheme);
   const [openThemeModal, setOpenThemeModal] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const pathname = usePathname();
   const path: string = pathname;
@@ -118,11 +120,15 @@ const Topnav = () => {
                 {Storage.getItem("email")}
               </span>
             </Dropdown.Header>
-            <Link href="/home/profile/my-profile">
-              <Dropdown.Item className="dark:text-slate-300 text-light-black hover:text-slate-700">
-                My Profile
-              </Dropdown.Item>
-            </Link>
+            <Dropdown.Item
+              onClick={() => {
+                setIsModalOpen(true);
+                console.log(isModalOpen);
+              }}
+              className="dark:text-slate-300 text-light-black hover:text-slate-700"
+            >
+              My Profile
+            </Dropdown.Item>
             <Link href="/home/profile/users">
               <Dropdown.Item className="dark:text-slate-300 text-light-black hover:text-slate-700">
                 Users
@@ -168,6 +174,29 @@ const Topnav = () => {
             ></div>
           </div>
         </Modal.Body>
+      </Modal>
+      <Modal
+        show={isModalOpen}
+        onClose={() => {
+          setIsModalOpen(false);
+          console.log(isModalOpen);
+        }}
+      >
+        <Modal.Header>Account Details</Modal.Header>
+        <Modal.Body>
+          <MyProfile />
+        </Modal.Body>
+        <Modal.Footer>
+          <button
+            className="bg-blue-500 text-white px-4 py-2 rounded"
+            onClick={() => {
+              setIsModalOpen(false);
+              console.log(isModalOpen);
+            }}
+          >
+            Close
+          </button>
+        </Modal.Footer>
       </Modal>
     </>
   );

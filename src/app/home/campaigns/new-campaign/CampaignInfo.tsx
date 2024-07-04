@@ -25,24 +25,21 @@ const CampaignInfo = ({ tabsRef }: any) => {
 
   const handleFormDataValidation = () => {
     console.log("inside");
-    const validateCampaignName = (campaignName: string) =>
-      /^[a-zA-Z0-9]+(\s?[a-zA-Z0-9]+)*$/.test(campaignName.trim());
-    const validateSubjectLine = (subjectLine: string) =>
-      /^[a-zA-Z0-9]+(\s?[a-zA-Z0-9]+)*$/.test(subjectLine.trim());
+
     const validateSenderName = (senderName: string) =>
       /^[a-zA-Z]+(\s?[a-zA-Z]+)*$/.test(senderName.trim());
 
     if (
       newCampaign?.campaignInfo?.campaignName &&
-      !validateCampaignName(newCampaign?.campaignInfo?.campaignName)
-    ) {
+      newCampaign?.campaignInfo?.campaignName.length === 0)
+     {
       warningNotification("Invalid name. Only letters and spaces are allowed.");
       return;
     }
 
     if (
       newCampaign?.campaignInfo?.subject &&
-      !validateSubjectLine(newCampaign?.campaignInfo?.subject)
+      newCampaign?.campaignInfo?.subject.length === 0
     ) {
       warningNotification(
         "Invalid subject. Only letters,numbers and spaces are allowed."
