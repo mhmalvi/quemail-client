@@ -13,11 +13,11 @@ const Groups = () => {
   const setGroupData = contactStore((state) => state.setGroupData);
   const groupContacts = contactStore((state) => state.groupContacts);
   const setGroupContacts = contactStore((state) => state.setGroupContacts);
-  const [clickedGroupName,setClickedGroupName] = useState<any>(null)
+  const [clickedGroupName, setClickedGroupName] = useState<any>(null);
   const currentPage = contactStore((state) => state.currentPage);
   const setGroupTotalPages = contactStore((state) => state.setGroupTotalPages);
 
-  console.log(groupContacts)
+  console.log(groupContacts);
   useEffect(() => {
     (async () => {
       const res = await fetchGroupList();
@@ -91,8 +91,10 @@ const Groups = () => {
           ))}
         <Dropdown.Item
           className="dark:text-slate-300 text-light-black hover:text-slate-700"
-          onClick={() => 
-            window.location.href = window.location.href}
+          onClick={() =>
+            (window.location.href =
+              window.location.pathname + "?reload=" + new Date().getTime())
+          }
         >
           Clear
         </Dropdown.Item>

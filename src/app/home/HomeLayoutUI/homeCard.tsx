@@ -88,7 +88,8 @@ const HomeCard = () => {
             loading: false,
           }));
           successNotification(res.message);
-          window.location.href = window.location.href;
+          window.location.href =
+            window.location.pathname + "?reload=" + new Date().getTime();
         } else if (res.status === 422) {
           warningNotification(res.message);
         } else if (res.status === 500) {
@@ -122,7 +123,8 @@ const HomeCard = () => {
           }));
 
           successNotification(res.message);
-          window.location.href = window.location.href;
+          window.location.href =
+            window.location.pathname + "?reload=" + new Date().getTime();
         } else if (res.status === 422) {
           warningNotification(res.message);
         } else if (res.status === 500) {
@@ -146,7 +148,8 @@ const HomeCard = () => {
 
       if (res.status === 201) {
         successNotification(res.message);
-        window.location.href = window.location.href;
+        window.location.href =
+          window.location.pathname + "?reload=" + new Date().getTime();
       } else {
         warningNotification("Something went wrong. Please try again.");
       }

@@ -18,8 +18,9 @@ const ImportCSV: React.FC<ImportCSVProps> = ({ openModal, setOpenModal }) => {
     const res = await importContact(e);
     if (res?.status === 201) {
       successNotification(res?.message);
-      
-      window.location.href = window.location.href;
+
+      window.location.href =
+        window.location.pathname + "?reload=" + new Date().getTime();
     } else {
       warningNotification("Something went wrong. Try again.");
     }
@@ -80,22 +81,22 @@ const ImportCSV: React.FC<ImportCSVProps> = ({ openModal, setOpenModal }) => {
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-               
-                borderRadius:"0 24px 0 0",
-                
+
+                borderRadius: "0 24px 0 0",
+
                 "@media (max-width: 1366px)": {
                   right: "14%",
-                  top:"8.2%",
+                  top: "8.2%",
                   width: "1%",
                 },
                 "@media (max-width: 1600px)": {
                   right: "13.8%",
-                  top:"6.9%",
+                  top: "6.9%",
                   width: "1%",
                 },
                 "@media (max-width: 1920px)": {
                   right: "13.5%",
-                  top:"5.5%",
+                  top: "5.5%",
                   width: "1%",
                 },
               },
