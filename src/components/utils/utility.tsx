@@ -22,8 +22,9 @@ export const customTheme: CustomFlowbiteTheme = {
     },
 
     header: {
-      base: "flex items-center justify-between rounded-t xl:py-2 py-1 px-4 bg-dark-black",
-      title: "xl:text-base text-sm font-medium text-slate-300",
+      base: "flex items-center justify-between rounded-t xl:py-2 py-1 px-4 dark:bg-dark-black bg-violet-200",
+      title:
+        "xl:text-base text-sm font-medium dark:text-slate-300 text-dark-black",
     },
   },
   table: {
@@ -243,7 +244,7 @@ export const customTheme: CustomFlowbiteTheme = {
         svg: "h-5 w-5 text-gray-500 dark:text-gray-400",
       },
       input: {
-        base: "block w-full border disabled:cursor-not-allowed disabled:opacity-50",
+        base: "block w-full border border-violet-200 dark:border-light-glass disabled:cursor-not-allowed disabled:opacity-50",
         sizes: {
           sm: "p-2 sm:text-xs",
           md: "p-2.5 text-sm",

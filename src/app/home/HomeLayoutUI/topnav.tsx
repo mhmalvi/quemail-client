@@ -182,11 +182,13 @@ const Topnav = () => {
           console.log(isModalOpen);
         }}
       >
-        <Modal.Header>Account Details</Modal.Header>
+        <Modal.Header>
+          Account Details
+        </Modal.Header>
         <Modal.Body>
           <MyProfile />
         </Modal.Body>
-        <Modal.Footer>
+        <Modal.Footer className="flex justify-end">
           <button
             className="bg-blue-500 text-white px-4 py-2 rounded"
             onClick={() => {
