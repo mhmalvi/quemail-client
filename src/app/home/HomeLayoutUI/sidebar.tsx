@@ -14,7 +14,7 @@ const Sidebar = () => {
   const setOpenSidebar = sideBarStore((state: any) => state.setOpenSidebar);
   return (
     <div
-      className={`h-full xl:px-4 px-2 flex flex-col xl:gap-8 gap-4 dark:border-none border-r dark:bg-dark-glass bg-light-glass ease-in duration-100 ${
+      className={`h-full xl:px-4 px-2 flex flex-col xl:gap-8 gap-4 dark:border-none border-r border-violet-200 dark:bg-light-glass bg-light-glass ease-in duration-100 ${
         sidebarToggle ? "xl:w-1/6 w-1/5 " : "xl:w-20 w-16"
       } `}
     >
@@ -71,7 +71,9 @@ const Sidebar = () => {
         )}
         className="dark:bg-dark-black dark:border-light-glass border bg-violet-50"
       >
-        <Dropdown.Header title="Email">Email</Dropdown.Header>
+        <Dropdown.Header title="Email">
+          Email
+        </Dropdown.Header>
         <Link
           href="/home/campaigns/new-campaign"
           className="focus:outline-none focus:ring-0 active:outline-none active:ring-0"
