@@ -105,9 +105,8 @@ const CampaignInfo = ({ tabsRef }: any) => {
       }
     })();
   }, []);
-  console.log(newCampaign);
   return (
-    <div className="relative w-full flex flex-col items-center justify-center xl:py-16 py-4 px-4 gap-4 h-full">
+    <div className="relative w-full flex flex-col items-center justify-center xl:py-16 py-4 px-4 gap-4 h-full ">
       <div className="w-1/2 flex flex-col gap-4 bg-white shadow-md dark:bg-dark-glass rounded-md xl:p-16 p-8">
         <div className="flex flex-col w-full">
           <label className="dark:text-slate-300 text-dark-black text-sm xl:text-base">

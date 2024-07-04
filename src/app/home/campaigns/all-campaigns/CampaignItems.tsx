@@ -71,7 +71,13 @@ const CampaignItems = () => {
         console.log(err);
       }
     })();
-  }, [allCampaignItemsPerPage, clickedCampaignId, currentPage, setAllCampaignItemsPerPage, setCampaignItemList]);
+  }, [
+    allCampaignItemsPerPage,
+    clickedCampaignId,
+    currentPage,
+    setAllCampaignItemsPerPage,
+    setCampaignItemList,
+  ]);
 
   useEffect(() => {
     window.addEventListener("resize", adjustScale);
@@ -84,7 +90,7 @@ const CampaignItems = () => {
       {campaignItemList?.campaigns !== null && (
         <>
           <div className="flex items-center justify-between gap-4 text-dark-black dark:text-slate-300 dark:border-slate-300 border-violet-50 ">
-            <div className="flex items-center gap-4 lg:w-1/2 w-1/3">
+            <div className="flex items-center gap-4 xl:w-1/2 w-1/3">
               <button
                 onClick={() => {
                   setClickedCampaignId(null);
@@ -93,27 +99,30 @@ const CampaignItems = () => {
               >
                 &lt;
               </button>
-              <h1 className="text-dark-black dark:text-slate-300 lg:text-sm text-xs">
+              <h1 className="text-dark-black dark:text-slate-300 xl:text-sm text-xs">
                 Campaign name:{" "}
                 <span className="text-green-500 font-semibold">
                   {campaignDetails?.campaignName}
                 </span>
               </h1>
+              <button className="w-1/8 h-full flex flex-col justify-center p-2 rounded-md xl:text-sm text-xs text-slate-300 border border-light-glass hover:bg-brand-color bg-dark-black duration-100 ease-in-out">
+                View Performance
+              </button>
             </div>
-            <h1 className="lg:text-sm text-xs m-0 px-2">
+            <h1 className="xl:text-sm text-xs m-0 px-2">
               Sender Name:{" "}
               <span className="text-green-500 font-semibold">
                 {campaignDetails?.senderName}
               </span>
             </h1>
-            <h1 className="lg:text-sm text-xs m-0 px-2">
+            <h1 className="xl:text-sm text-xs m-0 px-2">
               Sender Email:{" "}
               <span className="text-green-500 font-semibold">
                 {campaignDetails?.senderEmail}
               </span>
             </h1>
-            <div className="w-1/8 h-full flex flex-col justify-center p-2 border rounded-md">
-              <h1 className="lg:text-sm text-xs">
+            <div className="w-1/8 h-full flex flex-col justify-center p-2 rounded-md">
+              <h1 className="xl:text-sm text-xs">
                 Total Recipients:{" "}
                 <span className="text-green-500 font-semibold">
                   {campaignDetails?.count}
@@ -298,7 +307,7 @@ const CampaignItems = () => {
               </div>
             </div>
             <div className="w-1/2 h-full overflow-auto">
-              <div className="flex items-center justify-center dark:bg-dark-glass bg-violet-50 shadow-md rounded-md p-2 overflow-auto">
+              <div className=" h-full flex items-center justify-center dark:bg-dark-glass bg-violet-50 shadow-md rounded-md p-2 overflow-auto">
                 {showTemplateData === null ? (
                   <p className="flex items-center justify-center w-full h-full dark:text-slate-300 text-dark-black">
                     Select Recipients to Load Email
