@@ -24,26 +24,22 @@ const CampaignInfo = ({ tabsRef }: any) => {
   const setNewCampaign = campaignStore((state) => state.setNewCampaign);
 
   const handleFormDataValidation = () => {
-    console.log("inside");
-
     const validateSenderName = (senderName: string) =>
       /^[a-zA-Z]+(\s?[a-zA-Z]+)*$/.test(senderName.trim());
 
     if (
       newCampaign?.campaignInfo?.campaignName &&
-      newCampaign?.campaignInfo?.campaignName.length === 0)
-     {
-      warningNotification("Invalid name. Only letters and spaces are allowed.");
+      newCampaign?.campaignInfo?.campaignName.trim().length === 0
+    ) {
+      warningNotification("Invalid Campaign name. Name can not be empty");
       return;
     }
 
     if (
       newCampaign?.campaignInfo?.subject &&
-      newCampaign?.campaignInfo?.subject.length === 0
+      newCampaign?.campaignInfo?.subject.trim().length === 0
     ) {
-      warningNotification(
-        "Invalid subject. Only letters,numbers and spaces are allowed."
-      );
+      warningNotification("Invalid subject. Subject line can not be empty");
       return;
     }
 
@@ -52,7 +48,7 @@ const CampaignInfo = ({ tabsRef }: any) => {
       !validateSenderName(newCampaign?.campaignInfo?.fromName)
     ) {
       warningNotification(
-        "Invalid sender name. Only letters and spaces are allowed."
+        "Invalid sender name. Subject Line can not be empty , only letters are allowed"
       );
       return;
     }
@@ -127,7 +123,7 @@ const CampaignInfo = ({ tabsRef }: any) => {
           </label>
           <input
             placeholder="Add a name of the campaign"
-            className="text-sm xl:text-base w-full px-4 xl:py-2 py-1 bg-light-glass rounded-md border dark:border-dark-glass shadow-md dark:text-slate-300 text-dark-black focus:ring-0 focus:outline-none"
+            className="text-sm xl:text-base w-full px-4 xl:py-2 py-1 bg-light-glass rounded-md border border-violet-200 dark:border-dark-glass shadow-md dark:text-slate-300 text-dark-black focus:ring-0 focus:outline-none"
             value={
               newCampaign?.campaignInfo !== null &&
               newCampaign?.campaignInfo?.campaignName
@@ -190,7 +186,8 @@ const CampaignInfo = ({ tabsRef }: any) => {
           </div>
           <textarea
             placeholder="What is the subject?"
-            className="text-sm xl:text-base xl:max-h-28 lg:max-h-20 min-h-8 aria-expanded w-full px-4 xl:py-2 py-1 bg-light-glass rounded-md border dark:border-dark-glass shadow-md dark:text-slate-300 text-dark-black focus:ring-0 focus:outline-none outline-brand-color"
+            className="text-sm xl:text-base xl:max-h-28 lg:max-h-20 min-h-8 aria-expanded w-full px-4 xl:py-2 py-1 bg-light-glass rounded-md border
+            border-violet-200 dark:border-dark-glass shadow-md dark:text-slate-300 text-dark-black focus:ring-0 focus:outline-none outline-brand-color"
             value={
               newCampaign?.campaignInfo !== null &&
               newCampaign?.campaignInfo?.subject
@@ -208,7 +205,7 @@ const CampaignInfo = ({ tabsRef }: any) => {
             </label>
             <input
               placeholder="Who is sending?"
-              className="text-sm xl:text-base w-full px-4 xl:py-2 py-1 bg-light-glass rounded-md border dark:border-dark-glass shadow-md dark:text-slate-300 text-dark-black focus:ring-0 focus:outline-none"
+              className="text-sm xl:text-base w-full px-4 xl:py-2 py-1 bg-light-glass rounded-md border border-violet-200 dark:border-dark-glass shadow-md dark:text-slate-300 text-dark-black focus:ring-0 focus:outline-none"
               value={
                 newCampaign?.campaignInfo !== null &&
                 newCampaign?.campaignInfo?.fromName
@@ -227,7 +224,7 @@ const CampaignInfo = ({ tabsRef }: any) => {
                 label="Actions"
                 placement="bottom-start"
                 renderTrigger={() => (
-                  <div className="disabled:opacity-50 cursor-pointer flex items-center justify-between text-sm w-full px-4 xl:py-2 py-1 bg-light-glass duration-200 ease-in-out rounded-md border dark:border-dark-glass shadow-md dark:text-slate-300 text-dark-black">
+                  <div className="disabled:opacity-50 cursor-pointer flex items-center justify-between text-sm w-full px-4 xl:py-2 py-1 bg-light-glass duration-200 ease-in-out rounded-md border border-violet-200 dark:border-dark-glass shadow-md dark:text-slate-300 text-dark-black">
                     {newCampaign?.campaignInfo?.fromMail !== null &&
                     newCampaign?.campaignInfo?.fromMail ? (
                       <div className="flex items-center justify-between w-full">

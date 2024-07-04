@@ -33,7 +33,7 @@ const ContactTable = () => {
   const currentPage = contactStore((state) => state.currentPage);
   const currentGroupPage = contactStore((state) => state.currentGroupPage);
   const onGroupPageChange = (page: number) => setCurrentGroupPage(page);
-  
+
   const totalPages = contactStore((state) => state.totalPages);
   const groupTotalPages = contactStore((state) => state.groupTotalPages);
   const userID =
@@ -88,24 +88,39 @@ const ContactTable = () => {
   };
 
   const onUpdate = async () => {
-    const validateName = (name: string) => /^[a-zA-Z]+(\s?[a-zA-Z]+)*$/.test(name.trim());
+    const validateName = (name: string) =>
+      /^[a-zA-Z]+(\s?[a-zA-Z]+)*$/.test(name.trim());
     const validateEmail = (email: string) => /\S+@\S+\.\S+/.test(email);
-    const validateGroup = (group: string) => /^[a-zA-Z0-9]+(\s?[a-zA-Z0-9]+)*$/.test(group.trim()); 
+    const validateGroup = (group: string) =>
+      /^[a-zA-Z0-9]+(\s?[a-zA-Z0-9]+)*$/.test(group.trim());
 
-    if (editContactData.json.name && !validateName(editContactData.json.name) || editContactData.json.name?.length === 0) {
+    if (
+      (editContactData.json.name && !validateName(editContactData.json.name)) ||
+      editContactData.json.name?.length === 0
+    ) {
       warningNotification("Invalid name. Only letters and spaces are allowed.");
       setUpdateLoading(false);
       return;
     }
 
-    if ( editContactData.json.email && !validateEmail(editContactData.json.email) || editContactData.json.email?.length === 0) {
+    if (
+      (editContactData.json.email &&
+        !validateEmail(editContactData.json.email)) ||
+      editContactData.json.email?.length === 0
+    ) {
       warningNotification("Invalid email format.");
       setUpdateLoading(false);
       return;
     }
 
-    if (editContactData.json.group && !validateGroup(editContactData.json.group) || editContactData.json.group?.length === 0) {
-      warningNotification("Invalid group name. Only letters, numbers, and spaces are allowed.");
+    if (
+      (editContactData.json.group &&
+        !validateGroup(editContactData.json.group)) ||
+      editContactData.json.group?.length === 0
+    ) {
+      warningNotification(
+        "Invalid group name. Only letters, numbers, and spaces are allowed."
+      );
       setUpdateLoading(false);
       return;
     }
@@ -141,7 +156,7 @@ const ContactTable = () => {
       warningNotification("Something went wrong. Please try again.");
     }
   };
-  
+
   return (
     <>
       <div className="flex flex-col gap-4 h-5/6 overflow-auto">
@@ -245,7 +260,6 @@ const ContactTable = () => {
               : allContactList !== null &&
                 allContactList.map((contact: any, index: any) => (
                   <Table.Row
-                    
                     key={index}
                     className="dark:border-gray-700 dark:bg-gray-800"
                   >
@@ -382,7 +396,7 @@ const ContactTable = () => {
               onChange={(event) =>
                 handleEditContactDataChange("email", event.target.value)
               }
-              className="bg-tranparent"
+              className="bg-tranparent "
               required
             />
           </div>
