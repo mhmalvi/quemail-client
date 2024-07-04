@@ -7,15 +7,13 @@ import {
   warningNotification,
 } from "@/components/utils/utility";
 import { contactStore } from "@/store/store";
-import React, { useState } from "react";
+import React from "react";
 import { ReactSpreadsheetImport } from "react-spreadsheet-import";
 import "@/app/globals.css";
 
 const ImportCSV: React.FC<ImportCSVProps> = ({ openModal, setOpenModal }) => {
   const setCsvData = contactStore((state) => state.setCsvData);
-  // const csvData = contactStore((state: any) => state.csvData);
   const setHasData = contactStore((state) => state.setHasData);
-  // const hasData = contactStore((state: any) => state.hasData);
   const handleSave = async (e: {}) => {
     const res = await importContact(e);
     if (res?.status === 201) {
