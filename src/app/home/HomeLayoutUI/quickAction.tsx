@@ -21,9 +21,7 @@ const QuickActions = () => {
       <h1 className="xl:text-xl text-base m-0 p-0 dark:text-white text-dark-black">
         Quick actions
       </h1>
-      <p className="text-xs m-0 p-0 dark:text-slate-300 text-dark-black">
-        Use these features to excel your work flow
-      </p>
+      
       <Link
         href="/home/campaigns/new-campaign"
         className="rounded-md h-full flex gap-4 items-center xl:p-4 p-2 dark:bg-dark-glass bg-light-glass dark:border-light-black border dark:border-slate-500 dark:hover:border-brand-color hover:border-brand-color duration-100 ease-in"
