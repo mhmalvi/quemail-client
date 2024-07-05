@@ -10,8 +10,15 @@ import {
   themeAction,
   themeState,
   utilState,
+  TourState,
 } from "@/components/utils/types";
 import { create } from "zustand";
+
+export const useTourStore = create<TourState>((set) => ({
+  isTourGoing: false,
+  setIsTourGoing: (isTourGoing) => set({ isTourGoing }),
+}));
+
 export const Storage = {
   getItem: (key: any) => {
     if (typeof window !== "undefined" && localStorage.getItem(key)) {
