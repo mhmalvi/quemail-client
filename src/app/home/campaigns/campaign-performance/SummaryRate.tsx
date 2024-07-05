@@ -13,13 +13,11 @@ const SummaryRate = () => {
         onMouseOut={() => {
           setHovered("");
         }}
-        className="flex bg-violet-100 dark:bg-dark-black shadow-md rounded-2xl w-1/3 h-full overflow-hidden"
+        className="flex bg-violet-100 dark:bg-dark-black border border-violet-200 dark:border-light-glass  rounded-2xl w-1/3 h-full overflow-hidden"
       >
         <div className="w-2/3 h-full flex flex-col items-start justify-between xl:gap-4 gap-2 p-4">
           <div className="h-full w-full">
-            <h1 className="text-xl text-brand-color font-semibold">
-              Clicks
-            </h1>
+            <h1 className="text-xl text-brand-color font-semibold">Clicks</h1>
             <p className="xl:text-base text-sm text-dark-black dark:text-slate-300">
               40 Clicked
             </p>
@@ -61,7 +59,7 @@ const SummaryRate = () => {
         onMouseOut={() => {
           setHovered("");
         }}
-        className="flex bg-violet-100 dark:bg-dark-black shadow-md rounded-2xl w-1/3 h-full overflow-hidden"
+        className="flex bg-violet-100 dark:bg-dark-black border border-violet-200 dark:border-light-glass  rounded-2xl w-1/3 h-full overflow-hidden"
       >
         <div className="w-2/3 h-full flex flex-col items-start justify-between xl:gap-4 gap-2 p-4">
           <div className="h-full w-full">
@@ -104,7 +102,7 @@ const SummaryRate = () => {
         onMouseOut={() => {
           setHovered("");
         }}
-        className="flex bg-violet-100 dark:bg-dark-black shadow-md rounded-2xl w-1/3 h-full overflow-hidden"
+        className="flex bg-violet-100 dark:bg-dark-black border border-violet-200 dark:border-light-glass  rounded-2xl w-1/3 h-full overflow-hidden"
       >
         <div className="w-2/3 h-full flex flex-col items-start justify-between xl:gap-4 gap-2 p-4">
           <div className="h-full w-full">
@@ -128,22 +126,30 @@ const SummaryRate = () => {
             <div className="p-2">
               <div className="xl:w-20 xl:h-20 w-16 h-16 xl:text-5xl text-2xl bg-gradient-to-r from-brand-color to-brand-color-2 p-4 rounded-full overflow-hidden flex flex-col items-center justify-center gap-4">
                 <div className="flex w-full  xl:gap-4 relative">
-                  <div className="h-4 w-1/2  relative left-0 bottom-0">
+                  <div className="h-4 w-1/2 relative left-0 bottom-0">
                     <div
-                      className={`absolute  bottom-0 w-4 h-4 rounded-full bg-white flex items-end justify-center overflow-hidden ${
-                        hovered === "Unsubscribed" && "animate-closeEyes"
-                      } `}
+                      className={`relative bottom-0 w-4 h-4 rounded-full border bg-gradient-to-r from-brand-color to-brand-color-2 flex items-end justify-center overflow-hidden `}
                     >
-                      <div className="w-2 h-2 rounded-full bg-dark-black "></div>
+                      <div
+                        className={`absolute  bottom-0 w-4 h-4 rounded-full bg-white flex items-end justify-center overflow-hidden ${
+                          hovered === "Unsubscribed" && "animate-closeEyes"
+                        } `}
+                      >
+                        <div className="w-2 h-2 rounded-full bg-dark-black "></div>
+                      </div>
                     </div>
                   </div>
                   <div className="h-4 w-1/2 relative right-0 bottom-0">
                     <div
-                      className={`absolute  bottom-0  w-4 h-4 rounded-full bg-white flex items-end justify-center overflow-hidden ${
-                        hovered === "Unsubscribed" && "animate-closeEyes"
-                      } `}
+                      className={`relative bottom-0 w-4 h-4 rounded-full border bg-gradient-to-r from-brand-color to-brand-color-2 flex items-end justify-center overflow-hidden `}
                     >
-                      <div className="w-2 h-2 rounded-full bg-dark-black "></div>
+                      <div
+                        className={`absolute  bottom-0 w-4 h-4 rounded-full bg-white flex items-end justify-center overflow-hidden ${
+                          hovered === "Unsubscribed" && "animate-closeEyes"
+                        } `}
+                      >
+                        <div className="w-2 h-2 rounded-full bg-dark-black "></div>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -160,13 +166,11 @@ const SummaryRate = () => {
         onMouseOut={() => {
           setHovered("");
         }}
-        className="flex bg-violet-100 dark:bg-dark-black shadow-md rounded-2xl w-1/3 h-full overflow-hidden"
+        className="flex bg-violet-100 dark:bg-dark-black border border-violet-200 dark:border-light-glass  rounded-2xl w-1/3 h-full overflow-hidden"
       >
         <div className="w-2/3 h-full flex flex-col items-start justify-between xl:gap-4 gap-2 p-4">
           <div className="h-full w-full">
-            <h1 className="text-xl text-brand-color font-semibold">
-              Opened
-            </h1>
+            <h1 className="text-xl text-brand-color font-semibold">Opened</h1>
             <p className="xl:text-base text-sm text-dark-black dark:text-slate-300">
               40 Clicked
             </p>
@@ -186,12 +190,16 @@ const SummaryRate = () => {
                 <div className="h-full w-full relative">
                   <div
                     className={`absolute ${
-                      hovered === "Opened" ? "left-0 skew-y-6 w-1/2 bg-brand-color" : "bg-brand-color xl:left-5 left-3 w-2"
+                      hovered === "Opened"
+                        ? "left-0 skew-y-6 w-1/2 bg-brand-color"
+                        : "bg-brand-color xl:left-5 left-3 w-2"
                     } border h-full rounded  duration-200 ease-in-out`}
                   ></div>
                   <div
                     className={`absolute ${
-                      hovered === "Opened" ? "right-0 -skew-y-6 w-1/2 bg-brand-color" : "bg-brand-color xl:right-5 right-3 w-2"
+                      hovered === "Opened"
+                        ? "right-0 -skew-y-6 w-1/2 bg-brand-color"
+                        : "bg-brand-color xl:right-5 right-3 w-2"
                     } border h-full rounded  duration-200 ease-in-out`}
                   ></div>
                 </div>
