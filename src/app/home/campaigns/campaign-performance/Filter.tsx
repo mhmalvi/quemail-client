@@ -116,13 +116,15 @@ const Filter = () => {
         placement="bottom-start"
         dismissOnClick={false}
         renderTrigger={() => (
-          <div className="cursor-pointer flex items-center justify-between gap-4 bg-dark-black border border-light-glass px-4 py-2 rounded-md z-30">
-            <h1 className="m-0 p-0 xl:text-base text-xs ">Filter Campaigns</h1>
-            <TbFilter />
+          <div className="cursor-pointer flex items-center justify-between gap-4 bg-violet-50 dark:bg-dark-black border border-violet-200 dark:border-light-glass px-4 py-2 rounded-md z-30">
+            <h1 className="m-0 p-0 xl:text-base text-xs dark:text-slate-300 text-dark-black">
+              Filter Campaigns
+            </h1>
+            <TbFilter className="text-dark-black dark:text-slate-300" />
           </div>
         )}
       >
-        <Dropdown.Header className="border border-b-none dark:border-none p-2 relative flex gap-2 rounded-t-md">
+        <Dropdown.Header className="border border-violet-200 dark:border-light-glass p-2 relative flex gap-2 rounded-t-md">
           <input
             value={searchValueByName}
             onKeyDown={(e) => e.stopPropagation()}
@@ -134,7 +136,7 @@ const Filter = () => {
                 : searchValueById.length > 0
                 ? "hidden"
                 : ""
-            } rounded-md bg-dark-black dark:bg-light-black left-0 p-2 focus:outline-none focus:border-none border-none outline-none placeholder:text-sm placeholder:text-slate-300/60 text-slate-300`}
+            } rounded-md bg-violet-200 dark:bg-light-black left-0 p-2 focus:outline-none focus:border-none border-none outline-none placeholder:text-sm placeholder:text-dark-black/40 dark:placeholder:text-slate-300/60 text-dark-black dark:text-slate-300`}
           />
 
           <input
@@ -147,41 +149,43 @@ const Filter = () => {
                 : searchValueByName.length > 0
                 ? "hidden"
                 : ""
-            } rounded-md bg-dark-black dark:bg-light-black left-0 p-2 focus:outline-none focus:border-none border-none outline-none placeholder:text-sm placeholder:text-slate-300/60 text-slate-300`}
+            } rounded-md bg-violet-200 dark:bg-light-black left-0 p-2 focus:outline-none focus:border-none border-none outline-none placeholder:text-sm placeholder:text-dark-black/40 dark:placeholder:text-slate-300/60 text-dark-black dark:text-slate-300`}
             placeholder="search by id"
           />
         </Dropdown.Header>
-        <div
-          className="h-64 w-full flex flex-col overflow-auto relative"
-          onScrollCapture={handleUIEvent}
-          ref={scrollContainerRef}
-        >
-          <div className="w-full flex items-center justify-between px-4 py-2 sticky top-0 bg-white dark:bg-dark-black border-b dark:border-light-glass">
-            <p className="p-0 text-brand-color">Campaign Name</p>
-            <p className="p-0 text-brand-color">Id</p>
-          </div>
-          {dataArray &&
-            dataArray.map((items, index) => {
-              return (
-                <div key={index}>
-                  <Dropdown.Item className="flex">
-                    <div className="w-full flex items-center justify-between py-2 top-0 border-b dark:border-light-glass">
-                      <p>{items.campaignName}</p>
-                      <p>{items.id}</p>
-                    </div>
-                  </Dropdown.Item>
-                </div>
-              );
-            })}
-          {loading && (
-            <div className="w-full flex items-center justify-center p-4">
-              <Spinner
-                color="purple"
-                aria-label="Purple spinner example"
-                size="xl"
-              />
+        <div className="h-64 w-full overflow-hidden rounded-b-md ">
+          <div
+            className="h-64 w-full flex flex-col overflow-auto relative"
+            onScrollCapture={handleUIEvent}
+            ref={scrollContainerRef}
+          >
+            <div className="w-full flex items-center justify-between px-4 py-2 sticky top-0 bg-white dark:bg-dark-black border-b border-violet-200 dark:border-light-glass">
+              <p className="p-0 text-brand-color">Campaign Name</p>
+              <p className="p-0 text-brand-color">Id</p>
             </div>
-          )}
+            {dataArray &&
+              dataArray.map((items, index) => {
+                return (
+                  <div key={index}>
+                    <Dropdown.Item className="flex">
+                      <div className="w-full flex items-center justify-between py-2 top-0 border-b border-violet-50 dark:border-light-glass">
+                        <p>{items.campaignName}</p>
+                        <p>{items.id}</p>
+                      </div>
+                    </Dropdown.Item>
+                  </div>
+                );
+              })}
+            {loading && (
+              <div className="w-full flex items-center justify-center p-4">
+                <Spinner
+                  color="purple"
+                  aria-label="Purple spinner example"
+                  size="xl"
+                />
+              </div>
+            )}
+          </div>
         </div>
       </Dropdown>
     </div>
