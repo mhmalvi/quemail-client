@@ -4,7 +4,7 @@ import { usePathname } from "next/navigation";
 import { DarkThemeToggle, Dropdown, Modal, Tooltip } from "flowbite-react";
 import { MdArrowRight } from "react-icons/md";
 import Link from "next/link";
-import { sideBarStore, themeStore } from "@/store/store";
+import { sideBarStore, themeStore, useTourStore } from "@/store/store";
 import { BsQuestionDiamondFill } from "react-icons/bs";
 import { MdNotifications } from "react-icons/md";
 import { Storage } from "@/store/store";
@@ -19,7 +19,8 @@ const Topnav = () => {
   const setTheme = themeStore((state: any) => state.setTheme);
   const [openThemeModal, setOpenThemeModal] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isTourGoing, setIsTourGoing] = useState(false);
+  const isTourGoing = useTourStore((state) => state.isTourGoing);
+  const setIsTourGoing = useTourStore((state) => state.setIsTourGoing);
 
   const pathname = usePathname();
   const path: string = pathname;
@@ -91,7 +92,7 @@ const Topnav = () => {
             <div className="p-2">
               <BsQuestionDiamondFill
                 size={20}
-                className="dark:text-slate-300 text-dark-black transition-transform duration-200 ease-in-out hover:-translate-y-1 cursor-pointer"
+                className="step-10 dark:text-slate-300 text-dark-black transition-transform duration-200 ease-in-out hover:-translate-y-1 cursor-pointer"
                 onClick={() => {
                   setIsTourGoing(!isTourGoing);
                 }}
@@ -108,7 +109,7 @@ const Topnav = () => {
             label="Dropdown button"
             placement="bottom-start"
             renderTrigger={() => (
-              <div className="h-10 w-10 rounded-full bg-brand-color cursor-pointer overflow-hidden">
+              <div className="step-9 h-10 w-10 rounded-full bg-brand-color cursor-pointer overflow-hidden">
                 <Image
                   src={
                     photo !== "" && photo !== null ? photo : Images.User_Icon
@@ -132,7 +133,6 @@ const Topnav = () => {
             <Dropdown.Item
               onClick={() => {
                 setIsModalOpen(true);
-                console.log(isModalOpen);
               }}
               className="dark:text-slate-300 text-light-black hover:text-slate-700"
             >
@@ -188,7 +188,6 @@ const Topnav = () => {
         show={isModalOpen}
         onClose={() => {
           setIsModalOpen(false);
-          console.log(isModalOpen);
         }}
       >
         <Modal.Header>Account Details</Modal.Header>
@@ -200,7 +199,6 @@ const Topnav = () => {
             className="bg-blue-500 text-white px-4 py-2 rounded"
             onClick={() => {
               setIsModalOpen(false);
-              console.log(isModalOpen);
             }}
           >
             Close

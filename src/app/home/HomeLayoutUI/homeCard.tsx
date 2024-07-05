@@ -190,7 +190,7 @@ const HomeCard = () => {
       <h1 className="xl:text-xl text-base m-0 p-0 dark:text-white text-dark-black">
         Connect your email address
       </h1>
-      <div className="bg-[url('/SVG/Home/homeCardBg.svg')] dark:bg-transparent bg-violet-50 w-full h-1/2 border border-violet-200 dark:border-dark-black/30 rounded-md flex items-center justify-center gap-16">
+      <div className="step-2 bg-[url('/SVG/Home/homeCardBg.svg')] dark:bg-transparent bg-violet-50 w-full h-1/2 border border-violet-200 dark:border-dark-black/30 rounded-md flex items-center justify-center gap-16">
         {loading ? (
           <div className=" flex flex-col items-center justify-center">
             <Spinner

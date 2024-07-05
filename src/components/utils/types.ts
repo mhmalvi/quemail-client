@@ -211,3 +211,8 @@ export interface PerformanceState {
   nameFilter: nameFilterState | null;
   setNameFilter: (state: nameFilterState) => void;
 }
+
+export interface TourState {
+  isTourGoing: boolean;
+  setIsTourGoing: (isTourGoing: boolean) => void;
+}
