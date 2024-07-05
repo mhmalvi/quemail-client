@@ -89,9 +89,9 @@ export const customTheme: CustomFlowbiteTheme = {
         icon: "mr-2 h-4 w-4",
       },
       style: {
-        dark: "border border-light-glass text-slate-300 bg-dark-black",
+        dark: "border dark:border-light-glass text-slate-300 bg-dark-black",
         light: "border border-violet-200 bg-violet-50 text-gray-900",
-        auto: "bg-white text-gray-900 dark:border-none dark:bg-dark-black dark:text-slate-300 backdrop-blur-2xl",
+        auto: "bg-white text-gray-900 dark:border-light-glass dark:bg-dark-black dark:text-slate-300 backdrop-blur-2xl",
       },
       divider: "my-0 h-px bg-violet-200 dark:bg-dark-glass",
     },
