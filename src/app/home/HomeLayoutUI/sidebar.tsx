@@ -5,7 +5,7 @@ import Images from "@/components/utils/images";
 import { sideBarStore } from "@/store/store";
 import { IoIosArrowForward } from "react-icons/io";
 import { Dropdown, DropdownDivider } from "flowbite-react";
-import { TbMail, TbUser } from "react-icons/tb";
+import { TbMail, TbUser, TbSettingsDollar } from "react-icons/tb";
 
 import Link from "next/link";
 
@@ -71,9 +71,7 @@ const Sidebar = () => {
         )}
         className="dark:bg-dark-black dark:border-light-glass border bg-violet-50"
       >
-        <Dropdown.Header title="Email">
-          Email
-        </Dropdown.Header>
+        <Dropdown.Header title="Email">Email</Dropdown.Header>
         <Link
           href="/home/campaigns/new-campaign"
           className="focus:outline-none focus:ring-0 active:outline-none active:ring-0"
@@ -128,7 +126,7 @@ const Sidebar = () => {
             </div>
           </div>
         )}
-        className="dark:bg-dark-black dark:border-none border bg-violet-50"
+        className="dark:bg-dark-black border border-violet-200 dark:border-light-glass bg-violet-50"
       >
         <Link
           href="/home/contacts/all-contacts"
@@ -142,6 +140,43 @@ const Sidebar = () => {
         <Link href="/home/contacts/email-subscriptions">
           <Dropdown.Item className="dark:text-slate-300 text-light-black hover:text-gray-800">
             Email Subscriptions
+          </Dropdown.Item>
+        </Link>
+      </Dropdown>
+      <Dropdown
+        label="Dropdown button"
+        placement="right-start"
+        renderTrigger={() => (
+          <div className="relative w-full flex items-center gap-8 m-0 p-0 overflow-hidden cursor-pointer text-black dark:text-slate-300 hover:text-brand-color dark:hover:text-brand-color ease-in duration-100">
+            <div
+              className={`duration-100 ease-in hover:text-brand-color text-slate-300 bg-dark-black xl:p-3 px-3 py-2 rounded-md overflow-hidden z-20`}
+            >
+              <TbSettingsDollar className="w-full" size={20} />
+            </div>
+            <div
+              className={`absolute flex items-center w-2/3 justify-between gap-8 ${
+                sidebarToggle ? "right-0" : "hidden"
+              }`}
+            >
+              <h1 className={`m-0 p-0 z-10 overflow-hidden `}>Billing</h1>
+              <IoIosArrowForward />
+            </div>
+          </div>
+        )}
+        className="dark:bg-dark-black border border-violet-200 dark:border-light-glass bg-violet-50"
+      >
+        <Link
+          href="#"
+          className="focus:outline-none focus:ring-0 active:outline-none active:ring-0"
+        >
+          <Dropdown.Item className="dark:text-slate-300 text-light-black hover:text-gray-800">
+            Billing Dashboard
+          </Dropdown.Item>
+        </Link>
+
+        <Link href="/home/billing/pricing-plan">
+          <Dropdown.Item className="dark:text-slate-300 text-light-black hover:text-gray-800">
+            Pricing Plans
           </Dropdown.Item>
         </Link>
       </Dropdown>
