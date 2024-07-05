@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
-import { DarkThemeToggle, Dropdown, Modal } from "flowbite-react";
+import { DarkThemeToggle, Dropdown, Modal, Tooltip } from "flowbite-react";
 import { MdArrowRight } from "react-icons/md";
 import Link from "next/link";
 import { sideBarStore, themeStore } from "@/store/store";
@@ -19,6 +19,7 @@ const Topnav = () => {
   const setTheme = themeStore((state: any) => state.setTheme);
   const [openThemeModal, setOpenThemeModal] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isTourGoing, setIsTourGoing] = useState(false);
 
   const pathname = usePathname();
   const path: string = pathname;
@@ -83,12 +84,20 @@ const Topnav = () => {
           <div>
             <DarkThemeToggle className="focus:ring-0 focus:outline-none active:outline-none active:ring-0 ease-in duration-100 text-brand-color hover:bg-transparent dark:hover:bg-transparent dark:text-yellow-500" />
           </div>
-          <div className="p-2">
-            <BsQuestionDiamondFill
-              size={20}
-              className="dark:text-slate-300 text-dark-black"
-            />
-          </div>
+          <Tooltip
+            content="Start quemailer tour!"
+            className="bg-brand-color xl:text-sm text-xs"
+          >
+            <div className="p-2">
+              <BsQuestionDiamondFill
+                size={20}
+                className="dark:text-slate-300 text-dark-black transition-transform duration-200 ease-in-out hover:-translate-y-1 cursor-pointer"
+                onClick={() => {
+                  setIsTourGoing(!isTourGoing);
+                }}
+              />
+            </div>
+          </Tooltip>
           <div className="p-2">
             <MdNotifications
               size={20}
