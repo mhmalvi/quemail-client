@@ -3,14 +3,14 @@ export const tourSteps = [
   {
     selector: ".step-1",
     content: (
-      <div>
-        <h1>Welcome to QueMailer Tutorial</h1>
-        <p>This is the first step of the tour!</p>
+      <div className="bg-violet-50 dark:bg-dark-black p-8 rounded-t-md">
+        <h1 className="p-0 m-0 text-dark-black dark:text-slate-300">Welcome to QueMailer Tutorial</h1>
+        <p className="p-0 m-0 text-dark-black dark:text-slate-300">This is the first step of the tour!</p>
       </div>
     ),
     style: {
-      backgroundColor: "#BEB6FD",
-      color: "#020507",
+      backgroundColor: "transparent",
+      padding:0,
     },
   },
   {
