@@ -1,10 +1,13 @@
-import { CSSProperties } from "react";
-
-const tourSteps = [
+export const tourSteps = [
   //step-1 does not exist, to show welcome in center
   {
     selector: ".step-1",
-    content: "Welcome to QueMailer Tutorial Guide",
+    content: (
+      <div>
+        <h1>Welcome to QueMailer Tutorial</h1>
+        <p>This is the first step of the tour!</p>
+      </div>
+    ),
     style: {
       backgroundColor: "#BEB6FD",
       color: "#020507",
@@ -85,5 +88,3 @@ const tourSteps = [
     },
   },
 ];
-
-export default tourSteps;
