@@ -6,7 +6,7 @@ import QuickActions from "@/app/home/HomeLayoutUI/quickAction";
 import Summary from "./HomeLayoutUI/Summary";
 import Tour from "reactour";
 import { useTourStore } from "@/store/store";
-import tourSteps from "@/components/utils/tourSteps";
+import { tourSteps } from "@/components/utils/tourSteps";
 
 const Home = () => {
   const isTourGoing = useTourStore((state) => state.isTourGoing);
