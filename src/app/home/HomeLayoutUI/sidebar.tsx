@@ -174,7 +174,7 @@ const Sidebar = () => {
           </Dropdown.Item>
         </Link>
 
-        <Link href="/home/billing/pricing-plan">
+        <Link href="/home/billing/pricing-plans">
           <Dropdown.Item className="dark:text-slate-300 text-light-black hover:text-gray-800">
             Pricing Plans
           </Dropdown.Item>
