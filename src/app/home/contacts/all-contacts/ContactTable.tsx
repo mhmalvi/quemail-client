@@ -164,22 +164,21 @@ const ContactTable = () => {
   return (
     <>
       <div className="flex flex-col gap-4 h-5/6 overflow-auto">
-        <Table hoverable striped>
-          <Table.Head className="w-full sticky top-0 py-0 !rounded-tl-md">
-            <Table.HeadCell className="w-1/5 sticky top-0 py-2 text-center ">
+        <Table hoverable striped id="tableHeight">
+          <Table.Head className="w-full ">
+            <Table.HeadCell className="w-1/5 sticky text-center ">
               Name
             </Table.HeadCell>
-            <Table.HeadCell className="w-1/5 sticky top-0 py-2 text-center ">
+            <Table.HeadCell className="w-1/5 sticky text-center ">
               Email
             </Table.HeadCell>
-
-            <Table.HeadCell className="w-1/5 sticky top-0 py-2 text-center ">
+            <Table.HeadCell className="w-1/5 sticky text-center ">
               Group
             </Table.HeadCell>
-            <Table.HeadCell className="w-1/5 sticky top-0 py-2 text-center ">
+            <Table.HeadCell className="w-1/5 sticky text-center ">
               Date Added
             </Table.HeadCell>
-            <Table.HeadCell className="w-1/5 sticky top-0 py-2 text-center w-full">
+            <Table.HeadCell className="w-1/5 sticky text-center">
               Action
             </Table.HeadCell>
           </Table.Head>

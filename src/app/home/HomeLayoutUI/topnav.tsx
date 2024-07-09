@@ -92,7 +92,7 @@ const Topnav = () => {
             <div className="p-2">
               <BsQuestionDiamondFill
                 size={20}
-                className="step-10 dark:text-slate-300 text-dark-black transition-transform duration-200 ease-in-out hover:-translate-y-1 cursor-pointer"
+                className="step-10 dark:text-slate-300 text-dark-black transition-fill duration-200 ease-in-out hover:fill-brand-color cursor-pointer"
                 onClick={() => {
                   setIsTourGoing(!isTourGoing);
                 }}
