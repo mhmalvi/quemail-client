@@ -1,7 +1,13 @@
 "use client";
 import { useState, useEffect, SetStateAction, Dispatch } from "react";
 import { fetchCampaign } from "@/app/api/campaign";
-import { ListGroup, Pagination, Dropdown, Tooltip } from "flowbite-react";
+import {
+  ListGroup,
+  Pagination,
+  Dropdown,
+  Tooltip,
+  Table,
+} from "flowbite-react";
 import { CampaignListType } from "@/components/utils/types";
 import { showCampaignStore } from "@/store/store";
 
@@ -12,7 +18,9 @@ const CampaignList = () => {
   const [idClicked, setIdClicked] = useState<number>();
 
   const campaignList = showCampaignStore((state) => state.campaignList);
-  const allCampaignItemsPerPage = showCampaignStore((state) => state.allCampaignItemsPerPage);
+  const allCampaignItemsPerPage = showCampaignStore(
+    (state) => state.allCampaignItemsPerPage
+  );
   const setAllCampaignItemsPerPage = showCampaignStore(
     (state) => state.setAllCampaignItemsPerPage
   );
@@ -27,109 +35,106 @@ const CampaignList = () => {
   useEffect(() => {
     const height = document.getElementById("tableHeight")?.clientHeight;
 
-    height !== undefined && setAllCampaignItemsPerPage(height / 80);
-    const revisedHeight = Math.floor(allCampaignItemsPerPage);
+    if (height !== undefined) {
+      const itemsPerPage = Math.floor(height / 80);
+      setAllCampaignItemsPerPage(itemsPerPage);
 
-    const userIDString =
-      typeof window !== "undefined" && localStorage.getItem("userID");
-    const userID = userIDString ? parseInt(userIDString, 10) : null;
-   
-    const data = {
-      userID: userID,
-      page: currentPage,
-      per_page: revisedHeight,
-    };
-    (async () => {
-      try {
-        const res = await fetchCampaign(data);
-        if (res.status === 200) {
-          setCampaignList(res);
-          setTotalPage(res.totalPages);
+      const userIDString =
+        typeof window !== "undefined" && localStorage.getItem("userID");
+      const userID = userIDString ? parseInt(userIDString, 10) : null;
+
+      const data = {
+        userID: userID,
+        page: currentPage,
+        per_page: itemsPerPage,
+      };
+
+      (async () => {
+        try {
+          const res = await fetchCampaign(data);
+          if (res.status === 200) {
+            setCampaignList(res);
+            setTotalPage(res.totalPages);
+          }
+        } catch (err) {
+          console.log(err);
         }
-      } catch (err) {
-        console.log(err);
-      }
-    })();
-  }, [allCampaignItemsPerPage, campaignsPerPage, currentPage, setAllCampaignItemsPerPage, setCampaignList]);
+      })();
+    }
+  }, [currentPage, setAllCampaignItemsPerPage, setCampaignList]);
 
   return (
     <>
-      <div className="flex items-center justify-between text-dark-black dark:text-slate-300 dark:border-slate-300 border-violet-50 ">
-        <h1 className="w-full text-dark-black dark:text-slate-300">
-          Campaign List
-        </h1>
+      <div className="flex flex-col gap-4 h-5/6 overflow-auto" id="tableHeight">
+        <Table hoverable striped>
+          <Table.Head className="w-full ">
+            <Table.HeadCell className="w-1/5 sticky text-center ">
+              Campaign Name
+            </Table.HeadCell>
+            <Table.HeadCell className="w-1/5 sticky text-center ">
+              Sender Name
+            </Table.HeadCell>
+            <Table.HeadCell className="w-1/5 sticky text-center ">
+              Sender Email
+            </Table.HeadCell>
+            <Table.HeadCell className="w-1/5 sticky text-center ">
+              No. of recipients
+            </Table.HeadCell>
+            <Table.HeadCell className="w-1/5 sticky text-center">
+              Scheduled Date
+            </Table.HeadCell>
+          </Table.Head>
+          <Table.Body className="divide-y">
+            {campaignList?.campaigns !== null &&
+              campaignList?.campaigns.map((items: any, index) => (
+                <Table.Row
+                  key={index}
+                  className="w-full dark:border-gray-700 dark:bg-transparent"
+                  onClick={() => {
+                    setIdClicked(index);
+                    setClickedCampaignId(items.id);
+                    setCampaignDetails({
+                      campaignName: items.campaignName,
+                      senderName: items.fromName,
+                      senderEmail: items.fromMail,
+                      count: items.count,
+                    });
+                  }}
+                >
+                  <Table.Cell className="w-full flex items-center justify-center text-gray-900 dark:text-white">
+                    <Tooltip
+                      content={items.campaignName}
+                      className="bg-brand-color text-center"
+                      placement="bottom"
+                    >
+                      {items.campaignName}
+                    </Tooltip>
+                  </Table.Cell>
+                  <Table.Cell className="w-1/5 text-center">
+                    {items.fromName}
+                  </Table.Cell>
+
+                  <Table.Cell className="w-full flex items-center justify-center text-center">
+                    <Tooltip
+                      content={items.fromMail}
+                      className="bg-brand-color"
+                      placement="bottom"
+                    >
+                      {items.fromMail}
+                    </Tooltip>
+                  </Table.Cell>
+                  <Table.Cell className="w-1/5 text-center">
+                    {items.count}
+                  </Table.Cell>
+                  <Table.Cell className="w-1/5 text-center gap-4">
+                    {items.updatedAt.split("T")[0]}
+                  </Table.Cell>
+                </Table.Row>
+              ))}
+          </Table.Body>
+        </Table>
       </div>
-      <ListGroup className="relative flex flex-col w-full bg-dark-glass overflow-auto">
-        <ListGroup.Item className="sticky top-0 dark:bg-dark-black bg-violet-50 w-full flex items-center justify-between gap-2 p-0 m-0">
-          <p className="w-1/5 m-0 p-0 text-xs lg:text-sm border-r text-dark-black dark:text-slate-300">
-            Campaign Name
-          </p>
-          <p className="w-1/5 m-0 p-0 text-xs lg:text-sm border-r text-dark-black dark:text-slate-300">
-            Sender Name
-          </p>
-          <p className="w-1/5 m-0 p-0 text-xs lg:text-sm border-r text-dark-black dark:text-slate-300">
-            Sender Email
-          </p>
-          <p className="w-1/5 m-0 p-0 text-xs lg:text-sm text-dark-black dark:text-slate-300">
-            No. of recipients
-          </p>
-          <p className="w-1/5 m-0 p-0 text-xs lg:text-sm text-dark-black dark:text-slate-300">
-            Scheduled Date
-          </p>
-        </ListGroup.Item>
-        {campaignList?.campaigns !== null &&
-          campaignList?.campaigns.map(
-            (item: CampaignListType, index: number) => {
-              return (
-                <div key={index}>
-                  <ListGroup.Item
-                    active={idClicked === index}
-                    onClick={() => {
-                      setIdClicked(index);
-                      setClickedCampaignId(item.id);
-                      setCampaignDetails({
-                        campaignName: item.campaignName,
-                        senderName: item.fromName,
-                        senderEmail: item.fromMail,
-                        count: item.count,
-                      });
-                    }}
-                    className="text-base flex items-center justify-center w-full gap-2"
-                  >
-                    <div className="w-1/5 m-0 p-0 text-xs lg:text-sm truncate flex items-center justify-center">
-                      <Tooltip
-                        content={item.campaignName}
-                        className="bg-brand-color"
-                        placement="bottom"
-                      >
-                        {item.campaignName}
-                      </Tooltip>
-                    </div>
-                    <div className="w-1/5 m-0 p-0 text-xs lg:text-sm truncate flex items-center justify-center">
-                      {item.fromName}
-                    </div>
-                    <div className="w-1/5 m-0 p-0 text-xs lg:text-sm truncate flex items-center justify-center">
-                      <Tooltip
-                        content={item.fromMail}
-                        className="bg-brand-color"
-                        placement="bottom"
-                      >
-                        {item.fromMail}
-                      </Tooltip>
-                    </div>
-                    <p className="w-1/5 m-0 p-0 text-xs lg:text-sm">
-                      {item.count}
-                    </p>
-                    <p className="w-1/5 m-0 p-0 text-xs lg:text-sm">
-                      {item.updatedAt.split("T")[0]}
-                    </p>
-                  </ListGroup.Item>
-                </div>
-              );
-            }
-          )}
-      </ListGroup>
-      <div className="w-full flex items-center justify-center">
+      <div className="w-full flex items-center justify-center rounded-md">
         <Pagination
           layout="pagination"
           currentPage={currentPage}
@@ -142,4 +147,5 @@ const CampaignList = () => {
     </>
   );
 };
+
 export default CampaignList;

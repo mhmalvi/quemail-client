@@ -61,7 +61,7 @@ const PricingPlans = () => {
               from
             </p>
             <h1 className="text-dark-black dark:text-slate-300 text-4xl font-semibold">
-              $0
+              $300
             </h1>
             <p className="text-dark-black dark:text-slate-300 xl:text-xl text-sm">
               per month, paid yearly
@@ -103,7 +103,7 @@ const PricingPlans = () => {
               from
             </p>
             <h1 className="text-dark-black dark:text-slate-300 text-4xl font-semibold">
-              $0
+              $700
             </h1>
             <p className="text-dark-black dark:text-slate-300 xl:text-xl text-sm">
               per month, paid yearly
@@ -145,7 +145,7 @@ const PricingPlans = () => {
               from
             </p>
             <h1 className="text-dark-black dark:text-slate-300 text-4xl font-semibold">
-              $0
+              $1500
             </h1>
             <p className="text-dark-black dark:text-slate-300 xl:text-xl text-sm">
               per month, paid yearly
