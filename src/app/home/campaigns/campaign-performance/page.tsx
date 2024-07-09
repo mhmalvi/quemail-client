@@ -4,7 +4,7 @@ import SummaryRate from "./SummaryRate";
 import { Dropdown } from "flowbite-react";
 import { TbFilter } from "react-icons/tb";
 import Filter from "./Filter";
-import { CampaignPerformanceList } from "../all-campaigns/CampaignPerformanceList";
+import { CampaignPerformanceList } from "./CampaignPerformanceList";
 
 const CampaignPerformance = () => {
   const [Chart, setChart] = useState<any>();
@@ -24,7 +24,6 @@ const CampaignPerformance = () => {
       },
     ],
   });
-  
 
   useEffect(() => {
     import("react-apexcharts").then((mod) => {
@@ -40,12 +39,12 @@ const CampaignPerformance = () => {
       <div className="h-1/4 z-10">
         <SummaryRate />
       </div>
-      <div className="h-1/4 z-10">
-        <CampaignPerformanceList/>
+      <hr className="border-0.5 border-brand-color" />
+      <div className="h-3/4 z-10">
+        <CampaignPerformanceList />
       </div>
-      {/* <div className="h-1/3">
-
-      {Chart && (
+      {/* <div className="h-3/4">
+        {Chart && (
         <div className="row">
           <Chart
             options={state.options}

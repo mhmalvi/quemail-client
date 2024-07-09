@@ -145,6 +145,31 @@ export const showCampaignStore = create<ShowCampaignStore>((set) => ({
 
 export const performanceStore = create<PerformanceState>((set) => ({
   nameFilter: null,
+  leads: {
+    count: null,
+    item: [],
+  },
+
+  setLeads: (index, item) =>
+    set((state) => {
+      const existingIndex = state.leads.item?.findIndex(
+        (i) => i.index === index
+      );
+      let updatedItems;
+      if (existingIndex !== -1 && existingIndex !== undefined) {
+        // Item exists, remove it
+        updatedItems = state.leads.item?.filter((i) => i.index !== index) || [];
+      } else {
+        // Item does not exist, add it
+        updatedItems = [...(state.leads.item || []), { ...item, index }];
+      }
+      return {
+        leads: {
+          ...state.leads,
+          item: updatedItems,
+        },
+      };
+    }),
   setNameFilter: (state) =>
     set(() => ({
       nameFilter: state,
