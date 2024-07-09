@@ -138,7 +138,6 @@ const Filter = () => {
                 : ""
             } rounded-md bg-violet-200 dark:bg-light-black left-0 p-2 focus:outline-none focus:border-none border-none outline-none placeholder:text-sm placeholder:text-dark-black/40 dark:placeholder:text-slate-300/60 text-dark-black dark:text-slate-300`}
           />
-
           <input
             value={searchValueById}
             onKeyDown={(e) => e.stopPropagation()}
