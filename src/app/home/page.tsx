@@ -4,11 +4,14 @@ import React, { useState } from "react";
 import HomeCard from "@/app/home/HomeLayoutUI/homeCard";
 import QuickActions from "@/app/home/HomeLayoutUI/quickAction";
 import Summary from "./HomeLayoutUI/Summary";
-import Tour from "reactour";
 import { useTourStore } from "@/store/store";
 import { tourSteps } from "@/components/utils/tourSteps";
+import dynamic from "next/dynamic";
 
 const Home = () => {
+  const Tour = dynamic(() => import('reactour'), {
+    ssr: false,
+  })
   const isTourGoing = useTourStore((state) => state.isTourGoing);
   const setIsTourGoing = useTourStore((state) => state.setIsTourGoing);
 
@@ -25,13 +28,16 @@ const Home = () => {
         </div>
         <QuickActions />
       </div>
-      <Tour
-        steps={tourSteps}
-        isOpen={isTourGoing}
-        rounded={5}
-        accentColor="#5F01D1"
-        onRequestClose={() => setIsTourGoing(false)}
-      />
+      {typeof window !== undefined && (
+        <Tour
+          steps={tourSteps}
+          isOpen={isTourGoing}
+          rounded={5}
+          accentColor="#6D53FF"
+          onRequestClose={() => setIsTourGoing(false)}
+          className="bg-orange-300"
+        />
+      )}
     </div>
   );
 };

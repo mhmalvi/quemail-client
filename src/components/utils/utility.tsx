@@ -29,20 +29,21 @@ export const customTheme: CustomFlowbiteTheme = {
   },
   table: {
     root: {
-      base: "w-full text-left text-sm text-gray-500 dark:text-gray-400 dark:bg-transparent shadow-sm shadow-brand-color/50",
+      base: "w-full text-left text-sm text-gray-500 dark:text-gray-400 dark:bg-transparent shadow-sm shadow-brand-color/50 ",
       shadow:
         "absolute left-0 top-0 -z-10 h-full w-full rounded-lg bg-white dark:bg-transparent",
     },
     body: {
-      base: "group/body",
+      base: "group/body w-full",
       cell: {
         base: "px-6 py-4 group-first/body:group-first/row:first:rounded-tl-lg group-first/body:group-first/row:last:rounded-tr-lg group-last/body:group-last/row:first:rounded-bl-lg group-last/body:group-last/row:last:rounded-br-lg",
+        
       },
     },
     head: {
-      base: "group/head text-xs uppercase bg-transparent text-brand-color ",
+      base: "group/head text-xs uppercase dark:bg-dark-black bg-violet-50 text-brand-color rounded-tl-md sticky top-0 ",
       cell: {
-        base: "px-6 py-3 dark:bg-[#171717] bg-white border-b dark:border-light-black group-first/head:first:rounded-tl-md group-first/head:first:w-8 group-first/head:last:rounded-tr-md w-1/6",
+        base: "px-6 py-4 dark:bg-dark-black bg-violet-50 border-b dark:border-light-black group-first/head:first:rounded-tl-md group-first/head:first:w-8 group-first/head:last:rounded-tr-md ",
       },
     },
     row: {
