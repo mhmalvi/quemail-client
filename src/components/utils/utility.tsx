@@ -41,16 +41,16 @@ export const customTheme: CustomFlowbiteTheme = {
       },
     },
     head: {
-      base: "group/head text-xs uppercase dark:bg-dark-black bg-violet-50 text-brand-color rounded-tl-md sticky top-0 ",
+      base: "group/head text-xs uppercase dark:bg-dark-black bg-violet-50 text-brand-color dark:text-slate-300 rounded-tl-md sticky top-0 ",
       cell: {
-        base: "px-6 py-4 dark:bg-dark-black bg-violet-50 border-b dark:border-light-black group-first/head:first:rounded-tl-md group-first/head:first:w-8 group-first/head:last:rounded-tr-md ",
+        base: "px-6 py-4 dark:bg-dark-black bg-violet-200 border-b dark:border-light-black group-first/head:first:rounded-tl-md group-first/head:first:w-8 group-first/head:last:rounded-tr-md ",
       },
     },
     row: {
       base: "group/row ",
-      hovered: "hover:bg-gray-50 dark:hover:bg-dark-black",
+      hovered: "hover:bg-gray-200 dark:hover:bg-dark-black",
       striped:
-        "odd:bg-white even:bg-gray-50 odd:dark:bg-transparent even:dark:bg-transparent ",
+        "odd:bg-white even:bg-violet-50 odd:dark:bg-transparent even:dark:bg-dark-black/30 ",
     },
   },
   pagination: {

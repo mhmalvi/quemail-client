@@ -64,7 +64,7 @@ const MainEditor = () => {
             ...prev,
             template: data,
           }));
-          console.log("Exported", data);
+          
         });
       }
     }

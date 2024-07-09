@@ -4,8 +4,8 @@ import { fetchCampaignItems } from "@/app/api/campaign";
 import { ListGroup, Pagination, Tooltip } from "flowbite-react";
 import {
   TbProgress,
-  TbProgressX,
-  TbProgressCheck,
+  TbX ,
+  TbCheck,
   TbChecks,
 } from "react-icons/tb";
 
@@ -162,13 +162,13 @@ const CampaignItems = () => {
                             </div>
                             <div className="flex gap-1 items-center justify-start">
                               <p className="text-green-500">
-                                <TbProgressCheck />
+                                <TbCheck />
                               </p>
                               <p className="text-xs">: Delivered</p>
                             </div>
                             <div className="flex gap-1 items-center justify-start">
                               <p className="text-red-500">
-                                <TbProgressX />
+                                <TbX  />
                               </p>
                               <p className="text-xs">: Bounced/Failed</p>
                             </div>
@@ -245,14 +245,14 @@ const CampaignItems = () => {
                                       item.deliver !== 0 ? (
                                       <div className="flex gap-1 items-center justify-start">
                                         <p className="text-green-500">
-                                          <TbProgressCheck />
+                                          <TbCheck />
                                         </p>
                                         <p className="text-xs">: Delivered</p>
                                       </div>
                                     ) : item.deliver === 2 ? (
                                       <div className="flex gap-1 items-center justify-start">
                                         <p className="text-red-500">
-                                          <TbProgressX />
+                                          <TbX  />
                                         </p>
                                         <p className="text-xs">
                                           : Bounced/Failed
@@ -277,11 +277,11 @@ const CampaignItems = () => {
                                   </p>
                                 ) : item.deliver !== 2 && item.deliver !== 0 ? (
                                   <p className="text-green-500">
-                                    <TbProgressCheck />
+                                    <TbCheck />
                                   </p>
                                 ) : item.deliver === 2 ? (
                                   <p className="text-red-500">
-                                    <TbProgressX />
+                                    <TbX  />
                                   </p>
                                 ) : (
                                   <p className="text-orange-300">
