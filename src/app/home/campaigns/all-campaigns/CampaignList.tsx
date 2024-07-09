@@ -35,33 +35,36 @@ const CampaignList = () => {
   useEffect(() => {
     const height = document.getElementById("tableHeight")?.clientHeight;
 
-    if (height !== undefined) {
-      const itemsPerPage = Math.floor(height / 80);
-      setAllCampaignItemsPerPage(itemsPerPage);
+    height !== undefined && setAllCampaignItemsPerPage(height / 80);
+    const revisedHeight = Math.floor(allCampaignItemsPerPage);
 
-      const userIDString =
-        typeof window !== "undefined" && localStorage.getItem("userID");
-      const userID = userIDString ? parseInt(userIDString, 10) : null;
+    const userIDString =
+      typeof window !== "undefined" && localStorage.getItem("userID");
+    const userID = userIDString ? parseInt(userIDString, 10) : null;
 
-      const data = {
-        userID: userID,
-        page: currentPage,
-        per_page: itemsPerPage,
-      };
-
-      (async () => {
-        try {
-          const res = await fetchCampaign(data);
-          if (res.status === 200) {
-            setCampaignList(res);
-            setTotalPage(res.totalPages);
-          }
-        } catch (err) {
-          console.log(err);
+    const data = {
+      userID: userID,
+      page: currentPage,
+      per_page: revisedHeight,
+    };
+    (async () => {
+      try {
+        const res = await fetchCampaign(data);
+        if (res.status === 200) {
+          setCampaignList(res);
+          setTotalPage(res.totalPages);
         }
-      })();
-    }
-  }, [currentPage, setAllCampaignItemsPerPage, setCampaignList]);
+      } catch (err) {
+        console.log(err);
+      }
+    })();
+  }, [
+    allCampaignItemsPerPage,
+    campaignsPerPage,
+    currentPage,
+    setAllCampaignItemsPerPage,
+    setCampaignList,
+  ]);
 
   return (
     <>
@@ -147,5 +150,4 @@ const CampaignList = () => {
     </>
   );
 };
-
 export default CampaignList;

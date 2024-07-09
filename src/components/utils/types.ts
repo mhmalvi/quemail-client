@@ -201,15 +201,29 @@ export interface ShowCampaignStore {
   setClickedCampaignId: (state: number | null) => void;
   setCampaignDetails: (state: CampaignDetails | null) => void;
 }
-export interface nameFilterState{
+export interface nameFilterState {
   count: number | null;
   current_page: number | null;
   totalPages: number | null;
   paginatedData: [CampaignListType];
 }
+
+export interface performanceTable {
+  campaignName: string | null;
+  phone: string | null;
+  opened: string | null;
+  clicked: string | null;
+  subscribed: string | null;
+  index: number | null;
+}
 export interface PerformanceState {
   nameFilter: nameFilterState | null;
   setNameFilter: (state: nameFilterState) => void;
+  leads: {
+    count: number | null;
+    item: performanceTable[]|null;
+  };
+  setLeads: (index: number, item: performanceTable) => void;
 }
 
 export interface TourState {
