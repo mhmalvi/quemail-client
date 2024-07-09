@@ -4,87 +4,149 @@ export const tourSteps = [
     selector: ".step-1",
     content: (
       <div className="bg-violet-50 dark:bg-dark-black p-8 rounded-t-md">
-        <h1 className="p-0 m-0 text-dark-black dark:text-slate-300">Welcome to QueMailer Tutorial</h1>
-        <p className="p-0 m-0 text-dark-black dark:text-slate-300">This is the first step of the tour!</p>
+        <h1 className="p-0 m-0 text-dark-black dark:text-slate-300">
+          Welcome to QueMailer Tutorial
+        </h1>
+        <p className="p-0 m-0 text-dark-black dark:text-slate-300">
+          This is the first step of the tour!
+        </p>
       </div>
     ),
     style: {
       backgroundColor: "transparent",
-      padding:0,
+      padding: 0,
     },
   },
   {
     selector: ".step-2",
-    content:
-      "From here you can set your email. Currently google, yahoo and outlook is supported",
+    content: (
+      <div className="bg-violet-50 dark:bg-dark-black p-8 rounded-t-md">
+        <h1 className="p-0 m-0 text-dark-black dark:text-slate-300">
+          From here you can set your email.
+        </h1>
+        <p className="p-0 m-0 text-dark-black dark:text-slate-300">
+          Currently google, yahoo and outlook is supported
+        </p>
+      </div>
+    ),
     style: {
-      backgroundColor: "#BEB6FD",
-      color: "#020507",
+      backgroundColor: "transparent",
+      padding: 0,
     },
   },
   {
     selector: ".step-3",
-    content: "This is an overall performance report",
+    content: (
+      <div className="bg-violet-50 dark:bg-dark-black p-8 rounded-t-md">
+        <h1 className="p-0 m-0 text-dark-black dark:text-slate-300">
+          This is the overall performance report
+        </h1>
+      </div>
+    ),
     style: {
-      backgroundColor: "#BEB6FD",
-      color: "#020507",
+      backgroundColor: "transparent",
+      padding: 0,
     },
   },
   {
     selector: ".step-4",
-    content: "This is the quick actions section",
+    content: (
+      <div className="bg-violet-50 dark:bg-dark-black p-8 rounded-t-md">
+        <h1 className="p-0 m-0 text-dark-black dark:text-slate-300">
+          This is the quick actions sections.
+        </h1>
+      </div>
+    ),
     style: {
-      backgroundColor: "#BEB6FD",
-      color: "#020507",
+      backgroundColor: "transparent",
+      padding: 0,
     },
   },
   {
     selector: ".step-5",
-    content:
-      "This is Contact Section. You can either manually add contact here.",
+    content: (
+      <div className="bg-violet-50 dark:bg-dark-black p-8 rounded-t-md">
+        <h1 className="p-0 m-0 text-dark-black dark:text-slate-300">
+          This is Contact Section.
+        </h1>
+        <p className="p-0 m-0 text-dark-black dark:text-slate-300">
+          You can either manually add contact here.
+        </p>
+      </div>
+    ),
     style: {
-      backgroundColor: "#BEB6FD",
-      color: "#020507",
+      backgroundColor: "transparent",
+      padding: 0,
     },
   },
   {
     selector: ".step-6",
-    content: "or Upload .xlsx, .xls or .csv file",
+    content: (
+      <div className="bg-violet-50 dark:bg-dark-black p-8 rounded-t-md">
+        <h1 className="p-0 m-0 text-dark-black dark:text-slate-300">
+          or Upload .xlsx, .xls or .csv file
+        </h1>
+      </div>
+    ),
     style: {
-      backgroundColor: "#BEB6FD",
-      color: "#020507",
+      backgroundColor: "transparent",
+      padding: 0,
     },
   },
   {
     selector: ".step-7",
-    content: "This is create template shortcut",
+    content: (
+      <div className="bg-violet-50 dark:bg-dark-black p-8 rounded-t-md">
+        <h1 className="p-0 m-0 text-dark-black dark:text-slate-300">
+          This is create template shortcut
+        </h1>
+      </div>
+    ),
     style: {
-      backgroundColor: "#BEB6FD",
-      color: "#020507",
+      backgroundColor: "transparent",
+      padding: 0,
     },
   },
   {
     selector: ".step-8",
-    content: "This is create campaigns shortcut",
+    content: (
+      <div className="bg-violet-50 dark:bg-dark-black p-8 rounded-t-md">
+        <h1 className="p-0 m-0 text-dark-black dark:text-slate-300">
+          This is create campaigns shortcut
+        </h1>
+      </div>
+    ),
     style: {
-      backgroundColor: "#BEB6FD",
-      color: "#020507",
+      backgroundColor: "transparent",
+      padding: 0,
     },
   },
   {
     selector: ".step-9",
-    content: "Here you can see your account related informations",
+    content: (
+      <div className="bg-violet-50 dark:bg-dark-black p-8 rounded-t-md">
+        <h1 className="p-0 m-0 text-dark-black dark:text-slate-300">
+          Here you can see your account related informations
+        </h1>
+      </div>
+    ),
     style: {
-      backgroundColor: "#BEB6FD",
-      color: "#020507",
+      backgroundColor: "transparent",
+      padding: 0,
     },
   },
   {
     selector: ".step-10",
-    content: "And lastly, I am always here if you need me!",
+    content: (
+      <div className="bg-violet-50 dark:bg-dark-black p-8 rounded-t-md">
+        <h1 className="p-0 m-0 text-dark-black dark:text-slate-300">
+          And lastly, I am always here if you need me!
+        </h1>
+      </div>
+    ),
     style: {
-      backgroundColor: "#BEB6FD",
-      color: "#020507",
+      backgroundColor: "transparent",
+      padding: 0,
     },
   },
 ];
