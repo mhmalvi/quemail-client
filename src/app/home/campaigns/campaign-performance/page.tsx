@@ -4,6 +4,7 @@ import SummaryRate from "./SummaryRate";
 import { Dropdown } from "flowbite-react";
 import { TbFilter } from "react-icons/tb";
 import Filter from "./Filter";
+import { CampaignPerformanceList } from "../all-campaigns/CampaignPerformanceList";
 
 const CampaignPerformance = () => {
   const [Chart, setChart] = useState<any>();
@@ -38,6 +39,9 @@ const CampaignPerformance = () => {
       </div>
       <div className="h-1/4 z-10">
         <SummaryRate />
+      </div>
+      <div className="h-1/4 z-10">
+        <CampaignPerformanceList/>
       </div>
       {/* <div className="h-1/3">
 
