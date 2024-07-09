@@ -63,6 +63,41 @@ export const sectionFiveData = [
   "Transactional emails",
 ];
 
+export const campaignData = [
+  {
+    "name": "John Doe",
+    "phone_number": "123-456-7890",
+    "opened": true,
+    "clicked": false,
+    "subscribed": true,
+    "date_added": "2023-07-01"
+  },
+  {
+    "name": "Jane Smith",
+    "phone_number": "987-654-3210",
+    "opened": false,
+    "clicked": true,
+    "subscribed": false,
+    "date_added": "2023-06-15"
+  },
+  {
+    "name": "Alice Johnson",
+    "phone_number": "555-123-4567",
+    "opened": true,
+    "clicked": true,
+    "subscribed": true,
+    "date_added": "2023-06-20"
+  },
+  {
+    "name": "Bob Brown",
+    "phone_number": "555-987-6543",
+    "opened": false,
+    "clicked": false,
+    "subscribed": false,
+    "date_added": "2023-07-02"
+  }
+]
+
 export const fields = [
   {
     label: "Name",

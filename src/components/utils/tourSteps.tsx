@@ -1,7 +1,6 @@
 export const tourSteps = [
   //step-1 does not exist, to show welcome in center
   {
-    selector: ".step-1",
     content: (
       <div>
         <h1>Welcome to QueMailer Tutorial</h1>
