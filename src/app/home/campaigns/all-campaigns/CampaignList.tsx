@@ -1,29 +1,23 @@
 "use client";
-import { useState, useEffect, SetStateAction, Dispatch } from "react";
+import { useState, useEffect } from "react";
 import { fetchCampaign } from "@/app/api/campaign";
 import {
-  ListGroup,
   Pagination,
-  Dropdown,
   Tooltip,
   Table,
 } from "flowbite-react";
-import { CampaignListType } from "@/components/utils/types";
 import { showCampaignStore } from "@/store/store";
 
 const CampaignList = () => {
+  
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPage, setTotalPage] = useState<number>(1);
   const [campaignsPerPage, setCampaignsPerPage] = useState<number | null>(8);
   const [idClicked, setIdClicked] = useState<number>();
 
   const campaignList = showCampaignStore((state) => state.campaignList);
-  const allCampaignItemsPerPage = showCampaignStore(
-    (state) => state.allCampaignItemsPerPage
-  );
-  const setAllCampaignItemsPerPage = showCampaignStore(
-    (state) => state.setAllCampaignItemsPerPage
-  );
+ 
+
   const setCampaignList = showCampaignStore((state) => state.setCampaignList);
   const setClickedCampaignId = showCampaignStore(
     (state) => state.setClickedCampaignId
@@ -31,12 +25,16 @@ const CampaignList = () => {
   const setCampaignDetails = showCampaignStore(
     (state) => state.setCampaignDetails
   );
-
   useEffect(() => {
     const height = document.getElementById("tableHeight")?.clientHeight;
 
-    height !== undefined && setAllCampaignItemsPerPage(height / 80);
-    const revisedHeight = Math.floor(allCampaignItemsPerPage);
+    if (window.innerWidth < 1650) {
+      height !== undefined && setCampaignsPerPage(height / 42);
+    } else {
+      height !== undefined && setCampaignsPerPage(height/60);
+    }
+
+    const revisedHeight = campaignsPerPage !== null && Math.floor(campaignsPerPage);
 
     const userIDString =
       typeof window !== "undefined" && localStorage.getItem("userID");
@@ -59,10 +57,8 @@ const CampaignList = () => {
       }
     })();
   }, [
-    allCampaignItemsPerPage,
     campaignsPerPage,
     currentPage,
-    setAllCampaignItemsPerPage,
     setCampaignList,
   ]);
 

@@ -4,7 +4,6 @@ import { CampaignListType, nameFilterState } from "@/components/utils/types";
 import { performanceStore } from "@/store/store";
 import { Dropdown, Spinner } from "flowbite-react";
 import React, {
-  ChangeEventHandler,
   useEffect,
   useMemo,
   useRef,
