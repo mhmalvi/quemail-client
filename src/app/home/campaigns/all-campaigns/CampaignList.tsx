@@ -64,7 +64,7 @@ const CampaignList = () => {
 
   return (
     <>
-      <div className="flex flex-col gap-4 h-5/6 overflow-auto" id="tableHeight">
+      <div className="flex flex-col gap-4 h-5/6 overflow-auto duration-200 ease-in-out" id="tableHeight">
         <Table hoverable striped>
           <Table.Head className="w-full ">
             <Table.HeadCell className="w-1/5 sticky text-center ">
@@ -88,7 +88,7 @@ const CampaignList = () => {
               campaignList?.campaigns.map((items: any, index) => (
                 <Table.Row
                   key={index}
-                  className="w-full dark:border-gray-700 dark:bg-transparent"
+                  className="w-full dark:border-gray-700 dark:bg-transparent cursor-pointer"
                   onClick={() => {
                     setIdClicked(index);
                     setClickedCampaignId(items.id);
