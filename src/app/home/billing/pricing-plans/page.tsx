@@ -2,6 +2,7 @@
 
 import { CONTAINER_STYLES } from "@/components/styles/flex_container";
 import React from "react";
+import { TbX } from "react-icons/tb";
 
 const PricingPlans = () => {
   return (
@@ -34,18 +35,41 @@ const PricingPlans = () => {
             </button>
           </div>
           <div className="h-3/6 w-full overflow-y-auto">
-            <div className="flex flex-col gap-4">
-              <h1 className="flex gap-2 xl:text-base text-sm text-dark-black dark:text-slate-300">
-                <span className="text-brand-color">✔</span>Email Marketing &
-                Automation
+            <div className="flex flex-col gap-2">
+              <h1 className="flex gap-2 text-sm text-dark-black dark:text-slate-300">
+                <span className="text-brand-color">✔</span>2 campaigns / month
               </h1>
-              <h1 className="flex gap-2 xl:text-base text-sm text-dark-black dark:text-slate-300">
-                <span className="text-brand-color">✔</span>Email Marketing &
-                Automation
+              <h1 className="flex gap-2 text-sm text-dark-black dark:text-slate-300">
+                <span className="text-brand-color">✔</span>Custom Email Template
               </h1>
-              <h1 className="flex gap-2 xl:text-base text-sm text-dark-black dark:text-slate-300">
-                <span className="text-brand-color">✔</span>Email Marketing &
-                Automation
+              <h1 className="flex gap-2 text-sm text-dark-black dark:text-slate-300">
+                <span className="text-brand-color">✔</span>100 emails / campaign
+              </h1>
+              <h1 className="flex gap-2 text-sm text-dark-black dark:text-slate-300">
+                <span className="text-brand-color">✔</span>Add up to 2000
+                contacts
+              </h1>
+              <h1 className="flex gap-2 text-sm text-dark-black dark:text-slate-300">
+                <span className="text-brand-color">✔</span> Analytics and
+                Reporting
+              </h1>
+              <h1 className="flex items-center gap-2 text-sm text-dark-black dark:text-slate-300">
+                <span className="text-red-500">
+                  <TbX />
+                </span>
+                Audience Segmentation
+              </h1>
+              <h1 className="flex items-center gap-2 text-sm text-dark-black dark:text-slate-300">
+                <span className="text-red-500">
+                  <TbX />
+                </span>
+                Social media integration for cross-channel marketing
+              </h1>
+              <h1 className="flex items-center gap-2 text-sm text-dark-black dark:text-slate-300">
+                <span className="text-red-500">
+                  <TbX />
+                </span>
+                Customer Journey Mapping, Retargeting Campaigns
               </h1>
             </div>
           </div>
@@ -76,18 +100,41 @@ const PricingPlans = () => {
             </button>
           </div>
           <div className="h-3/6 w-full overflow-y-auto">
-            <div className="flex flex-col gap-4">
-              <h1 className="flex gap-2 xl:text-base text-sm text-dark-black dark:text-slate-300">
-                <span className="text-brand-color">✔</span>Email Marketing &
-                Automation
+            <div className="flex flex-col gap-2">
+              <h1 className="flex gap-2 text-sm text-dark-black dark:text-slate-300">
+                <span className="text-brand-color">✔</span>4 campaigns / month
               </h1>
-              <h1 className="flex gap-2 xl:text-base text-sm text-dark-black dark:text-slate-300">
-                <span className="text-brand-color">✔</span>Email Marketing &
-                Automation
+              <h1 className="flex gap-2 text-sm text-dark-black dark:text-slate-300">
+                <span className="text-brand-color">✔</span>Custom Email
+                Templates
               </h1>
-              <h1 className="flex gap-2 xl:text-base text-sm text-dark-black dark:text-slate-300">
-                <span className="text-brand-color">✔</span>Email Marketing &
-                Automation
+              <h1 className="flex gap-2 text-sm text-dark-black dark:text-slate-300">
+                <span className="text-brand-color">✔</span>300 emails / campaign
+              </h1>
+              <h1 className="flex gap-2 text-sm text-dark-black dark:text-slate-300">
+                <span className="text-brand-color">✔</span>Add up to 10,000
+                contacts
+              </h1>
+              <h1 className="flex gap-2 text-sm text-dark-black dark:text-slate-300">
+                <span className="text-brand-color">✔</span> Analytics and
+                Reporting
+              </h1>
+              <h1 className="flex gap-2 text-sm text-dark-black dark:text-slate-300">
+                <span className="text-brand-color">✔</span>
+                Audience Segmentation
+              </h1>
+
+              <h1 className="flex items-center gap-2 text-sm text-dark-black dark:text-slate-300">
+                <span className="text-red-500">
+                  <TbX />
+                </span>
+                Social media integration for cross-channel marketing
+              </h1>
+              <h1 className="flex items-center gap-2 text-sm text-dark-black dark:text-slate-300">
+                <span className="text-red-500">
+                  <TbX />
+                </span>
+                Customer Journey Mapping, Retargeting Campaigns
               </h1>
             </div>
           </div>
@@ -118,18 +165,36 @@ const PricingPlans = () => {
             </button>
           </div>
           <div className="h-3/6 w-full overflow-y-auto">
-            <div className="flex flex-col gap-4">
-              <h1 className="flex gap-2 xl:text-base text-sm text-dark-black dark:text-slate-300">
-                <span className="text-brand-color">✔</span>Email Marketing &
-                Automation
+            <div className="flex flex-col gap-2">
+              <h1 className="flex gap-2 text-sm text-dark-black dark:text-slate-300">
+                <span className="text-brand-color">✔</span>4 campaigns / month
               </h1>
-              <h1 className="flex gap-2 xl:text-base text-sm text-dark-black dark:text-slate-300">
-                <span className="text-brand-color">✔</span>Email Marketing &
-                Automation
+              <h1 className="flex gap-2 text-sm text-dark-black dark:text-slate-300">
+                <span className="text-brand-color">✔</span>Custom Email
+                Templates
               </h1>
-              <h1 className="flex gap-2 xl:text-base text-sm text-dark-black dark:text-slate-300">
-                <span className="text-brand-color">✔</span>Email Marketing &
-                Automation
+              <h1 className="flex gap-2 text-sm text-dark-black dark:text-slate-300">
+                <span className="text-brand-color">✔</span>750 emails / campaign
+              </h1>
+              <h1 className="flex gap-2 text-sm text-dark-black dark:text-slate-300">
+                <span className="text-brand-color">✔</span>Add up to 20,000
+                contacts
+              </h1>
+              <h1 className="flex gap-2 text-sm text-dark-black dark:text-slate-300">
+                <span className="text-brand-color">✔</span> Analytics and
+                Reporting
+              </h1>
+              <h1 className="flex gap-2 text-sm text-dark-black dark:text-slate-300">
+                <span className="text-brand-color">✔</span>
+                Audience Segmentation
+              </h1>
+              <h1 className="flex gap-2 text-sm text-dark-black dark:text-slate-300">
+                <span className="text-brand-color">✔</span>
+                Social media integration for cross-channel marketing
+              </h1>
+              <h1 className="flex gap-2 text-sm text-dark-black dark:text-slate-300">
+                <span className="text-brand-color">✔</span>
+                Customer Journey Mapping, Retargeting Campaigns
               </h1>
             </div>
           </div>
@@ -160,18 +225,36 @@ const PricingPlans = () => {
             </button>
           </div>
           <div className="h-3/6 w-full overflow-y-auto">
-            <div className="flex flex-col gap-4">
-              <h1 className="flex gap-2 xl:text-base text-sm text-dark-black dark:text-slate-300">
-                <span className="text-brand-color">✔</span>Email Marketing &
-                Automation
+          <div className="flex flex-col gap-2">
+              <h1 className="flex gap-2 text-sm text-dark-black dark:text-slate-300">
+                <span className="text-brand-color">✔</span>10 campaigns / month
               </h1>
-              <h1 className="flex gap-2 xl:text-base text-sm text-dark-black dark:text-slate-300">
-                <span className="text-brand-color">✔</span>Email Marketing &
-                Automation
+              <h1 className="flex gap-2 text-sm text-dark-black dark:text-slate-300">
+                <span className="text-brand-color">✔</span>Custom Email
+                Templates
               </h1>
-              <h1 className="flex gap-2 xl:text-base text-sm text-dark-black dark:text-slate-300">
-                <span className="text-brand-color">✔</span>Email Marketing &
-                Automation
+              <h1 className="flex gap-2 text-sm text-dark-black dark:text-slate-300">
+                <span className="text-brand-color">✔</span>Unlimited emails / campaign
+              </h1>
+              <h1 className="flex gap-2 text-sm text-dark-black dark:text-slate-300">
+                <span className="text-brand-color">✔</span>Add up to 50,000
+                contacts
+              </h1>
+              <h1 className="flex gap-2 text-sm text-dark-black dark:text-slate-300">
+                <span className="text-brand-color">✔</span> Analytics and
+                Reporting
+              </h1>
+              <h1 className="flex gap-2 text-sm text-dark-black dark:text-slate-300">
+                <span className="text-brand-color">✔</span>
+                Audience Segmentation
+              </h1>
+              <h1 className="flex gap-2 text-sm text-dark-black dark:text-slate-300">
+                <span className="text-brand-color">✔</span>
+                Social media integration for cross-channel marketing
+              </h1>
+              <h1 className="flex gap-2 text-sm text-dark-black dark:text-slate-300">
+                <span className="text-brand-color">✔</span>
+                Customer Journey Mapping, Retargeting Campaigns
               </h1>
             </div>
           </div>
