@@ -209,6 +209,18 @@ export interface ShowCampaignStore {
   setClickedCampaignId: (state: number | null) => void;
   setCampaignDetails: (state: CampaignDetails | null) => void;
 }
+
+export interface compareCampaignState {
+  clickedCampaignId1: number | null;
+  clickedCampaignId2: number | null;
+  campaignDetails1: CampaignDetails | null;
+  campaignDetails2: CampaignDetails | null;
+  setClickedCampaignId1: (state: number | null) => void;
+  setClickedCampaignId2: (state: number | null) => void;
+  setCampaignDetails1: (state: CampaignDetails | null) => void;
+  setCampaignDetails2: (state: CampaignDetails | null) => void;
+}
+
 export interface nameFilterState {
   count: number | null;
   current_page: number | null;
@@ -229,4 +241,8 @@ export interface PerformanceState {
 export interface TourState {
   isTourGoing: boolean;
   setIsTourGoing: (isTourGoing: boolean) => void;
+}
+
+export interface FilterProps {
+  position: string;
 }
