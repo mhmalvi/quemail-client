@@ -260,3 +260,30 @@ export const fetchCampaignItems = async (data: {}) => {
     return error.response;
   }
 };
+export const fetchAllItems = async (data: {}) => {
+  const token = typeof window !== "undefined" && localStorage.getItem("token");
+  const parsedToken = token && JSON.parse(token);
+
+  try {
+    const result = await fetch(
+      `https://backend.quemailer.com/api/get-all-recipients-campaignwise`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: parsedToken,
+        },
+        body: JSON.stringify(data),
+      }
+    );
+    if (result) {
+      const responseData = await result.json();
+      return responseData;
+    } else {
+      return null;
+    }
+  } catch (error: any) {
+    return error.response;
+  }
+};
+
