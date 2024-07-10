@@ -11,20 +11,28 @@ export const customTheme: CustomFlowbiteTheme = {
     root: {
       base: "fixed inset-x-0 top-0 z-50 h-screen w-screen overflow-y-auto overflow-x-hidden md:inset-0 md:h-full ",
       show: {
-        on: "flex bg-dark-glass bg-opacity-50 dark:bg-opacity-80 backdrop-blur-md",
+        on: "flex bg-dark-glass bg-opacity-50 dark:bg-opacity-80 backdrop-blur-md rounded-md",
         off: "hidden",
       },
     },
     content: {
       base: "relative h-full w-full p-4 md:h-auto rounded-md",
       inner:
-        "relative flex h-full w-full flex-col rounded-md bg-violet-50 dark:bg-dark-black shadow-md",
+        "relative flex rounded-md h-full w-full flex-col rounded-md bg-violet-50 dark:bg-dark-black shadow-md",
     },
 
     header: {
-      base: "flex items-center justify-between rounded-t xl:py-2 py-1 px-4 dark:bg-dark-black bg-violet-200",
+      base: "flex items-center justify-between rounded-t-md xl:py-2 py-1 px-4 dark:bg-dark-black bg-violet-200",
       title:
         "xl:text-base text-sm font-medium dark:text-slate-300 text-dark-black",
+    },
+    body: {
+      base: "flex-1 overflow-auto p-6 rounded-md",
+      popup: "pt-0",
+    },
+    footer: {
+      base: "flex items-center space-x-2 rounded-md border-gray-200 p-6 dark:border-gray-600",
+      popup: "border-t rounded-md",
     },
   },
   table: {
@@ -37,7 +45,6 @@ export const customTheme: CustomFlowbiteTheme = {
       base: "group/body w-full",
       cell: {
         base: "xl:px-6 2xl:py-4 px-4 py-2 group-first/body:group-first/row:first:rounded-tl-lg group-first/body:group-first/row:last:rounded-tr-lg group-last/body:group-last/row:first:rounded-bl-lg group-last/body:group-last/row:last:rounded-br-lg",
-        
       },
     },
     head: {

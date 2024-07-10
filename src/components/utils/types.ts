@@ -186,10 +186,16 @@ export interface CampaignItemListType {
 interface CampaignItemListResponse {
   message: string | null;
   status: number | null;
-  campaigns: CampaignItemListType[] | null;
+  recipients: CampaignItemListType[] | null;
   total: number | null;
   totalPages: number | null;
   current_page: number | null;
+  open:number | null,
+  not_opened:number | null,
+  subscribed:number | null,
+  unSubscribed:number | null,
+  bounce:number | null,
+  delivered:number | null,
 }
 export interface ShowCampaignStore {
   campaignList: CampaignListResponse | null;
