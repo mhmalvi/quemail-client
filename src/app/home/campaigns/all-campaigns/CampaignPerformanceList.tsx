@@ -5,7 +5,8 @@ import { TbX, TbCheck, TbDownload } from "react-icons/tb";
 import { performanceStore, showCampaignStore } from "@/store/store";
 import { fetchCampaignItems } from "@/app/api/campaign";
 import { CampaignItemListType } from "@/components/utils/types";
-import { DownloadAllItems } from "./DownloadAllItems";
+import DownloadCSV from "./DownloadCSV";
+
 
 const CampaignPerformanceList = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -68,12 +69,7 @@ const CampaignPerformanceList = () => {
                 placeholder="Search users"
               />
             </div>
-            <div onClick={DownloadAllItems} className="flex items-center justify-center gap-2 border rounded-md xl:px-4 xl:py-2 px-2 py-1 border-violet-200 dark:border-light-black">
-              <TbDownload className="text-brand-color" />
-              <p className="text-dark-black dark:text-slate-300 text-xs xl:text-base xl:p-0 p-1">
-                CSV
-              </p>
-            </div>
+            <DownloadCSV/>
           </div>
           <div className="flex w-full relative gap-4">
             <div
