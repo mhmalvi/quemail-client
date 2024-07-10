@@ -18,10 +18,8 @@ const Filter: React.FC<FilterProps> = ({ position }) => {
   const [searchValueById, setSearchValueById] = useState("");
   const nameFilter = performanceStore((state) => state.nameFilter);
   const setNameFilter = performanceStore((state) => state.setNameFilter);
-  const clickedId1 = compareCampaignStore((state)=> state.clickedCampaignId1);
-  const clickedId2 = compareCampaignStore((state)=> state.clickedCampaignId2); 
-  const setClickedCampaignId1 = compareCampaignStore((state)=> state.setClickedCampaignId1);
-  const setClickedCampaignId2 = compareCampaignStore((state)=> state.setClickedCampaignId2);
+  const setCompareCampaignId1 = compareCampaignStore((state)=> state.setClickedCampaignId1);
+  const setCompareCampaignId2 = compareCampaignStore((state)=> state.setClickedCampaignId2);
 
   const [dataArray, setDataArray] = useState<CampaignListType[] | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
@@ -107,12 +105,10 @@ const Filter: React.FC<FilterProps> = ({ position }) => {
 
   const handleFilterSelect = (id: number) => {
     if(position === "left"){
-      setClickedCampaignId1(id)
-      console.log("left side clicked and id: "+clickedId1)
+      setCompareCampaignId1(id)
     }
     if (position === "right"){
-      setClickedCampaignId2(id)
-      console.log("right side clicked and id: "+clickedId2)
+      setCompareCampaignId2(id)
     }
   }
 
