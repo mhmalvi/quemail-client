@@ -47,7 +47,7 @@ const CampaignPerformanceList = () => {
 
   return (
     <>
-      {campaignItemList?.campaigns !== null && (
+      {campaignItemList?.recipients !== null && (
         <div className="flex flex-col gap-4 h-full">
           <div className="h-1/6 w-full flex items-center justify-end gap-4">
             <div className="w-1/6 flex justify-center items-center border border-violet-200 dark:border-light-black rounded-md">
@@ -98,7 +98,7 @@ const CampaignPerformanceList = () => {
                     </Table.HeadCell>
                   </Table.Head>
                   <Table.Body className="divide-y">
-                    {campaignItemList?.campaigns.map(
+                    {campaignItemList?.recipients.map(
                       (items: CampaignItemListType, index) => (
                         <Table.Row
                           key={index}

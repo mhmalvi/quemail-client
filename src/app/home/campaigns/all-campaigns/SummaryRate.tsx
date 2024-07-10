@@ -1,9 +1,48 @@
 "use client";
-import React, { useState } from "react";
+import { showCampaignStore } from "@/store/store";
+import React, { useMemo, useState } from "react";
 import { FaPaperPlane } from "react-icons/fa";
 
 const SummaryRate = () => {
   const [hovered, setHovered] = useState("");
+  const campaignItemList = showCampaignStore((state) => state.campaignItemList);
+  const deliveryPercentage = useMemo(() => {
+    if (
+      campaignItemList !== null &&
+      campaignItemList.delivered !== null &&
+      campaignItemList.total !== null &&
+      campaignItemList.total !== 0
+    ) {
+      return Math.ceil(
+        (campaignItemList.delivered / campaignItemList.total) * 100
+      );
+    }
+    return 0;
+  }, [campaignItemList]);
+  const openPercentage = useMemo(() => {
+    if (
+      campaignItemList !== null &&
+      campaignItemList.open !== null &&
+      campaignItemList.total !== null &&
+      campaignItemList.total !== 0
+    ) {
+      return Math.ceil((campaignItemList.open / campaignItemList.total) * 100);
+    }
+    return 0;
+  }, [campaignItemList]);
+  const subscribedPercentage = useMemo(() => {
+    if (
+      campaignItemList !== null &&
+      campaignItemList.subscribed !== null &&
+      campaignItemList.total !== null &&
+      campaignItemList.total !== 0
+    ) {
+      return Math.ceil(
+        (campaignItemList.subscribed / campaignItemList.total) * 100
+      );
+    }
+    return 0;
+  }, [campaignItemList]);
   return (
     <div className="relative w-full h-full flex gap-8 overflow-hidden">
       <div
@@ -30,7 +69,7 @@ const SummaryRate = () => {
           </div>
         </div>
         <div className="relative w-2/3 flex flex-col items-end">
-          <h1 className="2xl:text-7xl xl:text-5xl text-4xl text-dark-black dark:text-slate-300 font-semibold px-4 py-2 z-20">
+          <h1 className="2xl:text-7xl xl:text-4xl text-4xl text-dark-black dark:text-slate-300 font-semibold px-4 py-2 z-20">
             90%
           </h1>
           <div className="absolute bottom-0 px-4 flex items-end xl:gap-4 gap-2 z-10">
@@ -66,20 +105,22 @@ const SummaryRate = () => {
             <h1 className="text-xl text-brand-color font-semibold">
               Delivered
             </h1>
-            <p className="xl:text-base text-sm text-dark-black dark:text-slate-300">
-              40 Clicked
-            </p>
+            
           </div>
-          <div className="flex items-center justify-center bg-brand-color/20 border-2 border-brand-color h-1/2 rounded-md p-2">
-            <p className="2xl:text-2xl text-base -rotate-45 text-brand-color">
-              →
+          <div className="flex items-center justify-center dark:bg-brand-color/20 border-2 border-brand-color h-1/2 rounded-md p-2">
+          <p className="2xl:text-xl xl:text-base text-sm text-green-500">
+              {campaignItemList?.delivered}
+              <span className="text-dark-black dark:text-slate-300">
+                {" "}
+                out of
+              </span>{" "}
+              {campaignItemList?.total}
             </p>
-            <p className="2xl:text-2xl text-base text-brand-color">0.3%</p>
           </div>
         </div>
         <div className="relative w-2/3 flex flex-col items-end">
-          <h1 className="2xl:text-7xl xl:text-5xl text-4xl text-dark-black dark:text-slate-300 font-semibold px-4 py-2 z-20">
-            90%
+          <h1 className="2xl:text-7xl xl:text-4xl text-4xl text-dark-black dark:text-slate-300 font-semibold px-4 py-2 z-20">
+            {deliveryPercentage} %
           </h1>
           <div className="absolute bottom-0 px-4 flex items-end xl:gap-4 gap-2 z-10">
             <div className="p-2">
@@ -107,20 +148,23 @@ const SummaryRate = () => {
         <div className="w-2/3 h-full flex flex-col items-start justify-between xl:gap-4 gap-2 p-4">
           <div className="h-full w-full">
             <h1 className="text-xl text-brand-color font-semibold">
-              Unsubscribed
+              Subscribed
             </h1>
-            <p className="xl:text-base text-sm text-dark-black dark:text-slate-300">
-              40 Clicked
-            </p>
           </div>
-          <div className="flex items-center justify-center bg-red-500/20 border-2 border-red-500 h-1/2 rounded-md p-2">
-            <p className="2xl:text-2xl text-base rotate-45 text-red-500">→</p>
-            <p className="2xl:text-2xl text-base text-red-500">0.3%</p>
+          <div className="flex items-center justify-center dark:bg-brand-color/20 border-2 border-brand-color h-1/2 rounded-md p-2">
+            <p className="2xl:text-xl xl:text-base text-sm text-green-500">
+              {campaignItemList?.subscribed}
+              <span className="text-dark-black dark:text-slate-300">
+                {" "}
+                out of
+              </span>{" "}
+              {campaignItemList?.total}
+            </p>
           </div>
         </div>
         <div className="relative w-2/3 flex flex-col items-end">
-          <h1 className="2xl:text-7xl xl:text-5xl text-4xl text-dark-black dark:text-slate-300 font-semibold px-4 py-2 z-20">
-            10%
+          <h1 className="2xl:text-7xl xl:text-4xl text-4xl text-dark-black dark:text-slate-300 font-semibold px-4 py-2 z-20">
+            {subscribedPercentage} %
           </h1>
           <div className="absolute bottom-0 px-4 flex items-end xl:gap-4 gap-2 z-10">
             <div className="p-2">
@@ -153,7 +197,13 @@ const SummaryRate = () => {
                     </div>
                   </div>
                 </div>
-                <div className="origin-center w-1/2 h-8 rounded-full xl:border-t-4 border-t-2"></div>
+                <div
+                  className={`origin-center w-1/2 h-8 rounded-full ${
+                    subscribedPercentage > 50
+                      ? "xl:border-b-4 border-b-2"
+                      : "xl:border-t-4 border-t-2"
+                  } `}
+                ></div>
               </div>
             </div>
           </div>
@@ -171,18 +221,21 @@ const SummaryRate = () => {
         <div className="w-2/3 h-full flex flex-col items-start justify-between xl:gap-4 gap-2 p-4">
           <div className="h-full w-full">
             <h1 className="text-xl text-brand-color font-semibold">Opened</h1>
-            <p className="xl:text-base text-sm text-dark-black dark:text-slate-300">
-              40 Clicked
-            </p>
           </div>
-          <div className="flex items-center justify-center bg-red-500/20 border-2 border-red-500 h-1/2 rounded-md p-2">
-            <p className="2xl:text-2xl text-base rotate-45 text-red-500">→</p>
-            <p className="2xl:text-2xl text-base text-red-500">0.3%</p>
+          <div className="flex items-center justify-center dark:bg-brand-color/20 border-2 border-brand-color h-1/2 rounded-md p-2">
+            <p className="2xl:text-xl xl:text-base text-sm text-green-500">
+              {campaignItemList?.open}
+              <span className="text-dark-black dark:text-slate-300">
+                {" "}
+                out of
+              </span>{" "}
+              {campaignItemList?.total}
+            </p>
           </div>
         </div>
         <div className="relative w-2/3 flex flex-col items-end">
-          <h1 className="2xl:text-7xl xl:text-5xl text-4xl text-dark-black dark:text-slate-300 font-semibold px-4 py-2 z-20">
-            10%
+          <h1 className="2xl:text-7xl xl:text-4xl text-4xl text-dark-black dark:text-slate-300 font-semibold px-4 py-2 z-20">
+            {openPercentage} %
           </h1>
           <div className="absolute bottom-0 px-4 flex items-end xl:gap-4 gap-2 z-10">
             <div className="p-2">
