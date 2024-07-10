@@ -23,10 +23,10 @@ const SummaryRate = () => {
             </p>
           </div>
           <div className="flex items-center justify-center bg-brand-color/20 border-2 border-brand-color h-1/2 rounded-md p-2">
-            <p className="xl:text-2xl text-base -rotate-45 text-brand-color">
+            <p className="2xl:text-2xl text-base -rotate-45 text-brand-color">
               →
             </p>
-            <p className="xl:text-2xl text-base text-brand-color">0.3%</p>
+            <p className="2xl:text-2xl text-base text-brand-color">0.3%</p>
           </div>
         </div>
         <div className="relative w-2/3 flex flex-col items-end">
@@ -71,10 +71,10 @@ const SummaryRate = () => {
             </p>
           </div>
           <div className="flex items-center justify-center bg-brand-color/20 border-2 border-brand-color h-1/2 rounded-md p-2">
-            <p className="xl:text-2xl text-base -rotate-45 text-brand-color">
+            <p className="2xl:text-2xl text-base -rotate-45 text-brand-color">
               →
             </p>
-            <p className="xl:text-2xl text-base text-brand-color">0.3%</p>
+            <p className="2xl:text-2xl text-base text-brand-color">0.3%</p>
           </div>
         </div>
         <div className="relative w-2/3 flex flex-col items-end">
@@ -114,8 +114,8 @@ const SummaryRate = () => {
             </p>
           </div>
           <div className="flex items-center justify-center bg-red-500/20 border-2 border-red-500 h-1/2 rounded-md p-2">
-            <p className="xl:text-2xl text-base rotate-45 text-red-500">→</p>
-            <p className="xl:text-2xl text-base text-red-500">0.3%</p>
+            <p className="2xl:text-2xl text-base rotate-45 text-red-500">→</p>
+            <p className="2xl:text-2xl text-base text-red-500">0.3%</p>
           </div>
         </div>
         <div className="relative w-2/3 flex flex-col items-end">
@@ -176,8 +176,8 @@ const SummaryRate = () => {
             </p>
           </div>
           <div className="flex items-center justify-center bg-red-500/20 border-2 border-red-500 h-1/2 rounded-md p-2">
-            <p className="xl:text-2xl text-base rotate-45 text-red-500">→</p>
-            <p className="xl:text-2xl text-base text-red-500">0.3%</p>
+            <p className="2xl:text-2xl text-base rotate-45 text-red-500">→</p>
+            <p className="2xl:text-2xl text-base text-red-500">0.3%</p>
           </div>
         </div>
         <div className="relative w-2/3 flex flex-col items-end">
