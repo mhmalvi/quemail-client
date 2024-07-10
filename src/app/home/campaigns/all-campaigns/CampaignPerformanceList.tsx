@@ -7,7 +7,6 @@ import { fetchCampaignItems } from "@/app/api/campaign";
 import { CampaignItemListType } from "@/components/utils/types";
 
 const CampaignPerformanceList = () => {
-
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPage, setTotalPage] = useState<number>(1);
   const clickedCampaignId = showCampaignStore(
@@ -41,11 +40,7 @@ const CampaignPerformanceList = () => {
         console.log(err);
       }
     })();
-  }, [
-    clickedCampaignId,
-    currentPage,
-    setCampaignItemList,
-  ]);
+  }, [clickedCampaignId, currentPage, setCampaignItemList]);
 
   const leads = performanceStore((state) => state.leads);
   const setLeads = performanceStore((state) => state.setLeads);
@@ -192,7 +187,17 @@ const CampaignPerformanceList = () => {
                   : "w-1/6 h-full contents relative dark:bg-dark-black"
               }
             >
-              <div className="sticky top-0">ok</div>
+              <div className="sticky top-0 h-full w-1/6 flex flex-col items-center justify-center gap-4 rounded-md">
+                <button className="border border-violet-200 dark:border-light-glass px-4 py-2 rounded-md w-2/3">
+                  Add to group
+                </button>
+                <button className="border border-violet-200 dark:border-light-glass px-4 py-2 rounded-md w-2/3">
+                  Reply
+                </button>
+                <button className="border border-violet-200 dark:border-light-glass px-4 py-2 rounded-md w-2/3">
+                  Action 3
+                </button>
+              </div>
             </div>
           </div>
         </div>

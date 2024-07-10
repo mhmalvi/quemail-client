@@ -58,7 +58,7 @@ const CredentialsLogin = ({
                 otp: e.target.value,
               }));
             }}
-            className="bg-transparent rounded-md focus:outline-none focus:ring-0 focus:border-brand-color outline-none border border-slate-400 px-5 py-2"
+            className="bg-transparent text-slate-300 rounded-md focus:outline-none focus:ring-0 focus:border-brand-color outline-none border border-slate-400 px-5 py-2"
           />
         </div>
         {buttonClick ? (

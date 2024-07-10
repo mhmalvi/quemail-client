@@ -109,7 +109,7 @@ const Login = () => {
                       email: e.target.value,
                     }));
                   }}
-                  className="bg-transparent rounded-md focus:outline-none focus:ring-0 focus:border-brand-color outline-none border border-slate-400 px-5 py-2"
+                  className="bg-transparent text-slate-300 rounded-md focus:outline-none focus:ring-0 focus:border-brand-color outline-none border border-slate-400 px-5 py-2"
                 />
               </div>
               {stepTwo.loading ? (
@@ -168,7 +168,7 @@ const Login = () => {
             </div>
             <input
               type="email"
-              className="bg-transparent rounded-md focus:ring-none outline-none border border-slate-400 px-4 py-2"
+              className="bg-transparent rounded-md focus:ring-none outline-none border border-slate-400 px-4 py-2 text-slate-300"
             />
             <button className="bg-gradient-to-r from-brand-color to-button-color-2 px-4 py-2 rounded-md">
               Reset Password
