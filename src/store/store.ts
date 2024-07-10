@@ -11,6 +11,7 @@ import {
   themeState,
   utilState,
   TourState,
+  compareCampaignState
 } from "@/components/utils/types";
 import { create } from "zustand";
 
@@ -140,6 +141,21 @@ export const showCampaignStore = create<ShowCampaignStore>((set) => ({
   },
   setCampaignDetails(state) {
     set(() => ({ campaignDetails: state }));
+  },
+}));
+
+export const compareCampaignStore = create<compareCampaignState>((set) => ({
+  clickedCampaignId1: null,
+  clickedCampaignId2: null,
+  campaignDetails1: null,
+  campaignDetails2: null,
+  setClickedCampaignId1: (state) => set(() => ({ clickedCampaignId1: state })),
+  setClickedCampaignId2: (state) => set(() => ({ clickedCampaignId2: state })),
+  setCampaignDetails1(state) {
+    set(() => ({ campaignDetails1: state }));
+  },
+  setCampaignDetails2(state) {
+    set(() => ({ campaignDetails2: state }));
   },
 }));
 
