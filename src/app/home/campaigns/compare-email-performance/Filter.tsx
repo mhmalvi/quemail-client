@@ -1,7 +1,7 @@
 "use client";
 
-import { CampaignListType, nameFilterState } from "@/components/utils/types";
-import { performanceStore } from "@/store/store";
+import { CampaignListType, FilterProps, nameFilterState } from "@/components/utils/types";
+import { performanceStore, compareCampaignStore } from "@/store/store";
 import { Dropdown, Spinner } from "flowbite-react";
 import React, {
   useEffect,
@@ -13,11 +13,15 @@ import React, {
 import { TbFilter } from "react-icons/tb";
 import { io } from "socket.io-client";
 
-const Filter = () => {
+const Filter: React.FC<FilterProps> = ({ position }) => {
   const [searchValueByName, setSearchValueByName] = useState("");
   const [searchValueById, setSearchValueById] = useState("");
   const nameFilter = performanceStore((state) => state.nameFilter);
   const setNameFilter = performanceStore((state) => state.setNameFilter);
+  const clickedId1 = compareCampaignStore((state)=> state.clickedCampaignId1);
+  const clickedId2 = compareCampaignStore((state)=> state.clickedCampaignId2); 
+  const setClickedCampaignId1 = compareCampaignStore((state)=> state.setClickedCampaignId1);
+  const setClickedCampaignId2 = compareCampaignStore((state)=> state.setClickedCampaignId2);
 
   const [dataArray, setDataArray] = useState<CampaignListType[] | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
@@ -101,6 +105,17 @@ const Filter = () => {
     }
   };
 
+  const handleFilterSelect = (id: number) => {
+    if(position === "left"){
+      setClickedCampaignId1(id)
+      console.log("left side clicked and id: "+clickedId1)
+    }
+    if (position === "right"){
+      setClickedCampaignId2(id)
+      console.log("right side clicked and id: "+clickedId2)
+    }
+  }
+
   const handleSearchByIdChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchValueById(e.target.value);
     if (scrollContainerRef.current) {
@@ -166,11 +181,15 @@ const Filter = () => {
                 return (
                   <div key={index}>
                     <Dropdown.Item className="flex">
-                      <div className="w-full flex items-center justify-between py-2 top-0 border-b border-violet-50 dark:border-light-glass">
+                      <div onClick={()=>{
+                        handleFilterSelect(items.id)
+                      }} 
+                      className="w-full flex items-center justify-between py-2 top-0 border-b border-violet-50 dark:border-light-glass">
                         <p>{items.campaignName}</p>
                         <p>{items.id}</p>
                       </div>
                     </Dropdown.Item>
+
                   </div>
                 );
               })}

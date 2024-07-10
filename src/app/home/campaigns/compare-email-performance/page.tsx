@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import Filter from "./Filter";
+import CompareBox from "./CompareBox";
 
 const CompareEmailCampaign = () => {
   const [data1, setData1] = useState(null);
@@ -18,16 +19,29 @@ const CompareEmailCampaign = () => {
 
   return (
     <div className="w-full h-full flex justify-center gap-4 dark:bg-dark-glass shadow-md backdrop-blur-2xl bg-white rounded-md p-4 overflow-hidden">
-      <div className="w-1/3">
-        <Filter />
+      <div className = "flex flex-col w-1/4">
+          <Filter position={"left"} />
+          <CompareBox />
       </div>
-      <div className="w-1/3">
-        
-      </div>
-      <div className="w-1/3">
-        <Filter />
+      <div className="w-1/4 flex flex-col justify-center items-center pt-16">
+        <h1 className="h-1/6 p-0 m-0 text-xl font-semibold text-dark-black dark:text-slate-300 flex">
+          Clicked
+        </h1>
+        <h1 className="h-1/6 p-0 m-0 text-xl font-semibold text-dark-black dark:text-slate-300 flex">
+          Opened
+        </h1>
+        <h1 className="h-1/6 p-0 m-0 text-xl font-semibold text-dark-black dark:text-slate-300 flex">
+          Subscribed
+        </h1>
+        <h1 className="h-1/6 p-0 m-0 text-xl font-semibold text-dark-black dark:text-slate-300 flex">
+          Bounced
+        </h1>
       </div>
 
+      <div className = "flex flex-col w-1/4">
+          <Filter position={"right"} />
+          <CompareBox />
+      </div>
     </div>
   );
 };
