@@ -89,11 +89,11 @@ const Sidebar = () => {
           </Dropdown.Item>
         </Link>
         <Link
-          href="/home/campaigns/campaign-performance"
+          href="/home/campaigns/compare-email-performance"
           className="focus:outline-none focus:ring-0 active:outline-none active:ring-0"
         >
           <Dropdown.Item className="dark:text-slate-300 text-light-black hover:text-gray-800">
-            Campaign Performance
+            Compare Performance
           </Dropdown.Item>
         </Link>
 
