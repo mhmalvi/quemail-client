@@ -6,7 +6,6 @@ import CampaignPerformanceList from "./CampaignPerformanceList";
 import { showCampaignStore } from "@/store/store";
 
 const CampaignItems = () => {
-  const [scale, setScale] = useState(1);
   const setCampaignItemList = showCampaignStore(
     (state) => state.setCampaignItemList
   );
