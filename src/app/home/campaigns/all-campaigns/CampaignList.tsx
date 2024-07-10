@@ -20,7 +20,6 @@ const CampaignList = () => {
 
   const setCampaignList = showCampaignStore((state) => state.setCampaignList);
   const setClickedCampaignId = showCampaignStore(
-    
     (state) => state.setClickedCampaignId
   );
   const setCampaignDetails = showCampaignStore(
