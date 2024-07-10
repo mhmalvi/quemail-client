@@ -180,6 +180,8 @@ export interface CampaignItemListType {
   click: number | null;
   bounce: number | null;
   deliver: number | null;
+  index: number | null;
+  subscription_status: number | null;
 }
 interface CampaignItemListResponse {
   message: string | null;
@@ -197,7 +199,7 @@ export interface ShowCampaignStore {
   allCampaignItemsPerPage: number;
   setAllCampaignItemsPerPage: (state: number) => void;
   setCampaignList: (state: CampaignListResponse) => void;
-  setCampaignItemList: (state: CampaignItemListResponse) => void;
+  setCampaignItemList: (state: CampaignItemListResponse | null) => void;
   setClickedCampaignId: (state: number | null) => void;
   setCampaignDetails: (state: CampaignDetails | null) => void;
 }
@@ -208,22 +210,14 @@ export interface nameFilterState {
   paginatedData: [CampaignListType];
 }
 
-export interface performanceTable {
-  campaignName: string | null;
-  phone: string | null;
-  opened: string | null;
-  clicked: string | null;
-  subscribed: string | null;
-  index: number | null;
-}
 export interface PerformanceState {
   nameFilter: nameFilterState | null;
   setNameFilter: (state: nameFilterState) => void;
   leads: {
     count: number | null;
-    item: performanceTable[]|null;
+    item: CampaignItemListType[] | null;
   };
-  setLeads: (index: number, item: performanceTable) => void;
+  setLeads: (index: number, item: CampaignItemListType) => void;
 }
 
 export interface TourState {
