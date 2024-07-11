@@ -2,7 +2,6 @@
 
 import { CONTAINER_STYLES } from "@/components/styles/flex_container";
 import React, { useEffect } from "react";
-import { TbX } from "react-icons/tb";
 import PlanComponent from "./PlanComponent";
 import {
   pricingplan1,
