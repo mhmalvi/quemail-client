@@ -11,7 +11,8 @@ import {
   themeState,
   utilState,
   TourState,
-  compareCampaignState
+  compareCampaignState,
+  BillingState
 } from "@/components/utils/types";
 import { create } from "zustand";
 
@@ -197,3 +198,17 @@ export const performanceStore = create<PerformanceState>((set) => ({
       nameFilter: state,
     })),
 }));
+export const billingStore = create<BillingState>((set)=>({
+  products:[],
+  priceId: null,
+  checkoutModal:false,
+  setProducts(state) {
+    set(() => ({ products: state }));
+  },
+  setCheckoutModal(state) {
+    set(() => ({ checkoutModal: state }));
+  },
+  setPriceId(state) {
+    set(() => ({ priceId: state }));
+  },
+}))

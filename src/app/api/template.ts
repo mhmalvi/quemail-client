@@ -3,7 +3,7 @@ export const saveTemplate = async (data: Object) => {
   const parsedToken = token && JSON.parse(token);
   try {
     const result = await fetch(
-      `https://backend.quemailer.com/api/template-save`,
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/template-save`,
       {
         method: "POST",
         headers: {
@@ -30,7 +30,7 @@ export const fetchTemplate = async () => {
   const parsedToken = token && JSON.parse(token);
   try {
     const result = await fetch(
-      `https://backend.quemailer.com/api/template-fetch`,
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/template-fetch`,
       {
         method: "POST",
         headers: {
@@ -59,7 +59,7 @@ export const destroyTemplate = async (data: number | null) => {
     typeof window !== "undefined" && localStorage.getItem("userID");
   try {
     const result = await fetch(
-      `https://backend.quemailer.com/api/template-destroy`,
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/template-destroy`,
       {
         method: "POST",
         headers: {
@@ -87,7 +87,7 @@ export const updateTemplate = async (data: any) => {
   const parsedToken = token && JSON.parse(token);
   try {
     const result = await fetch(
-      `https://backend.quemailer.com/api/template-update`,
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/template-update`,
       {
         method: "POST",
         headers: {

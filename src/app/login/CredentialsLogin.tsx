@@ -30,6 +30,7 @@ const CredentialsLogin = ({
       Storage.setItem("photo", response.user.photo);
       Storage.setItem("token", response.user.token);
       Storage.setItem("userID", response.user.userID);
+      Storage.setItem("customerID", response.user.customerID);
       setButtonClick(false);
       setStepTwo({
         item: false,
