@@ -33,6 +33,36 @@ const DownloadCSV: React.FC = () => {
   );
 
   useEffect(() => {
+    const downloadCSV = (data: Recipient[]) => {
+      const fields = [
+        "bounce",
+        "campaignID",
+        "click",
+        "createdAt",
+        "deliver",
+        "fromEmail",
+        "fromName",
+        "group",
+        "id",
+        "open",
+        "recipientEmail",
+        "recipientName",
+        "schedule",
+        "subject",
+        "subscription_status",
+      ];
+
+      const csv = convertToCSV(data, fields);
+      const blob = new Blob([csv], { type: "text/csv" });
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.setAttribute("hidden", "");
+      a.setAttribute("href", url);
+      a.setAttribute("download", "recipients.csv");
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    };
     if (toDownload && toDownload.recipients) {
       downloadCSV(toDownload.recipients);
     }
@@ -77,37 +107,6 @@ const DownloadCSV: React.FC = () => {
     });
 
     return str;
-  };
-
-  const downloadCSV = (data: Recipient[]) => {
-    const fields = [
-      "bounce",
-      "campaignID",
-      "click",
-      "createdAt",
-      "deliver",
-      "fromEmail",
-      "fromName",
-      "group",
-      "id",
-      "open",
-      "recipientEmail",
-      "recipientName",
-      "schedule",
-      "subject",
-      "subscription_status",
-    ];
-
-    const csv = convertToCSV(data, fields);
-    const blob = new Blob([csv], { type: "text/csv" });
-    const url = window.URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.setAttribute("hidden", "");
-    a.setAttribute("href", url);
-    a.setAttribute("download", "recipients.csv");
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
   };
 
   return (
