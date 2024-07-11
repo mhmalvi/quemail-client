@@ -190,12 +190,12 @@ interface CampaignItemListResponse {
   total: number | null;
   totalPages: number | null;
   current_page: number | null;
-  open:number | null,
-  not_opened:number | null,
-  subscribed:number | null,
-  unSubscribed:number | null,
-  bounce:number | null,
-  delivered:number | null,
+  open: number | null;
+  not_opened: number | null;
+  subscribed: number | null;
+  unSubscribed: number | null;
+  bounce: number | null;
+  delivered: number | null;
 }
 export interface ShowCampaignStore {
   campaignList: CampaignListResponse | null;
@@ -245,4 +245,13 @@ export interface TourState {
 
 export interface FilterProps {
   position: string;
+}
+
+export interface BillingState {
+  products: [] | null;
+  priceId: number | null;
+  checkoutModal: boolean;
+  setProducts: (state: [] | null) => void;
+  setPriceId: (state: number | null) => void;
+  setCheckoutModal: (state: boolean) => void;
 }

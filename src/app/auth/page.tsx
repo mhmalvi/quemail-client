@@ -13,8 +13,9 @@ const Authenticate = () => {
   const photo = searchParams.get("photo");
   const token = searchParams.get("token");
   const userID = searchParams.get("userID");
+  const customerID = searchParams.get("customerID");
 
-  if (token && userName && email && photo && userID) {
+  if (token && userName && email && photo && userID && customerID) {
     Storage.setItem("userName", userName);
     Storage.setItem("email", email);
     Storage.setItem("photo", photo);

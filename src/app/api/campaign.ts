@@ -18,7 +18,7 @@ export const addMailInfo = async (
   };
   try {
     const result = await fetch(
-      `https://backend.quemailer.com/api/app-password-save`,
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/app-password-save`,
       {
         method: "POST",
         headers: {
@@ -48,7 +48,7 @@ export const fetchAddedMail = async () => {
   console.log("userID: ", userID);
   try {
     const result = await fetch(
-      `https://backend.quemailer.com/api/app-password-fetch`,
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/app-password-fetch`,
       {
         method: "POST",
         headers: {
@@ -89,7 +89,7 @@ export const updateMailInfo = async (
   };
   try {
     const result = await fetch(
-      `https://backend.quemailer.com/api/app-password-update`,
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/app-password-update`,
       {
         method: "POST",
         headers: {
@@ -122,7 +122,7 @@ export const destroyMail = async (id: number | null) => {
   };
   try {
     const result = await fetch(
-      `https://backend.quemailer.com/api/app-password-destroy`,
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/app-password-destroy`,
       {
         method: "POST",
         headers: {
@@ -154,7 +154,7 @@ export const recipientsByGroup = async (
     typeof window !== "undefined" && localStorage.getItem("userID");
   try {
     const result = await fetch(
-      `https://backend.quemailer.com/api/contact-fetch-by-group`,
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/contact-fetch-by-group`,
       {
         method: "POST",
         headers: {
@@ -188,7 +188,7 @@ export const sendMail = async (data: NewCampaignType) => {
 
   try {
     const result = await fetch(
-      `https://backend.quemailer.com/api/campaign-create`,
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/campaign-create`,
       {
         method: "POST",
         headers: {
@@ -214,7 +214,7 @@ export const fetchCampaign = async (data: {}) => {
 
   try {
     const result = await fetch(
-      `https://backend.quemailer.com/api/campaign-fetch`,
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/campaign-fetch`,
       {
         method: "POST",
         headers: {
@@ -240,7 +240,7 @@ export const fetchCampaignItems = async (data: {}) => {
 
   try {
     const result = await fetch(
-      `https://backend.quemailer.com/api/campaignwise-mail-fetch`,
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/campaignwise-mail-fetch`,
       {
         method: "POST",
         headers: {
@@ -266,7 +266,7 @@ export const fetchAllItems = async (data: {}) => {
 
   try {
     const result = await fetch(
-      `https://backend.quemailer.com/api/get-all-recipients-campaignwise`,
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/get-all-recipients-campaignwise`,
       {
         method: "POST",
         headers: {
