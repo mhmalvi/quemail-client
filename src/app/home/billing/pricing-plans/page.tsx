@@ -41,9 +41,6 @@ const PricingPlans = () => {
       }
     })();
   }, [setProducts]);
-  console.log(products);
-  console.log("price: ",priceId);
-  
   return (
     <div className={CONTAINER_STYLES}>
       {products

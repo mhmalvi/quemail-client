@@ -21,7 +21,7 @@ const CampaignItems = () => {
   return (
     <div className="h-full flex flex-col gap-2">
       <div className=" flex items-center justify-between gap-4 text-dark-black dark:text-slate-300 dark:border-slate-300 border-violet-50 ">
-        <div className="flex items-center gap-4 2xl:w-1/2 w-1/3">
+        <div className="flex items-center gap-4 2xl:w-1/3 w-1/3">
           <button
             onClick={() => {
               setClickedCampaignId(null);
@@ -31,39 +31,39 @@ const CampaignItems = () => {
           >
             &lt;
           </button>
-          <h1 className="text-dark-black dark:text-slate-300 xl:text-sm text-xs">
+          <h1 className="text-dark-black dark:text-slate-300 2xl:text-sm text-xs">
             Campaign name:{" "}
             <span className="text-green-500 font-semibold">
               {campaignDetails?.campaignName}
             </span>
           </h1>
-          <button className="w-1/8 h-full flex flex-col justify-center 2xl:p-2 py-1 px-2 rounded-md xl:text-sm text-xs text-dark-black dark:text-slate-300 hover:text-slate-300 border border-slate-300 hover:bg-dark-black bg-transparent duration-100 ease-in-out">
+          <button className="w-1/8 h-full flex flex-col justify-center 2xl:p-2 py-1 px-2 rounded-md 2xl:text-sm text-xs text-dark-black dark:text-slate-300 hover:text-slate-300 border border-slate-300 hover:bg-dark-black bg-transparent duration-100 ease-in-out">
             Compare Performance
           </button>
         </div>
-        <div className="flex items-center justify-end gap-4 2xl:w-1/2 w-2/3">
+        <div className="flex items-center justify-end gap-4 2xl:w-2/3 w-2/3">
           <button
             onClick={() => {
               setOpenTemplateModal(true);
             }}
-            className="w-1/8 h-full flex flex-col justify-center 2xl:p-2 py-1 px-2 rounded-md xl:text-sm text-xs text-dark-black dark:text-slate-300 hover:text-slate-300 border border-slate-300 hover:bg-dark-black bg-transparent duration-100 ease-in-out"
+            className="w-1/8 h-full flex flex-col justify-center 2xl:p-2 py-1 px-2 rounded-md 2xl:text-sm text-xs text-dark-black dark:text-slate-300 hover:text-slate-300 border border-slate-300 hover:bg-dark-black bg-transparent duration-100 ease-in-out"
           >
             View Sent Template
           </button>
-          <h1 className="xl:text-sm text-xs m-0 px-2">
+          <h1 className="2xl:text-sm text-xs m-0 px-2">
             Sender Name:{" "}
             <span className="text-green-500 font-semibold">
               {campaignDetails?.senderName}
             </span>
           </h1>
-          <h1 className="xl:text-sm text-xs m-0 px-2">
+          <h1 className="2xl:text-sm text-xs m-0 px-2">
             Sender Email:{" "}
             <span className="text-green-500 font-semibold">
               {campaignDetails?.senderEmail}
             </span>
           </h1>
           <div className="w-1/8 h-full flex flex-col justify-center p-2 rounded-md">
-            <h1 className="xl:text-sm text-xs">
+            <h1 className="2xl:text-sm text-xs">
               Total Recipients:{" "}
               <span className="text-green-500 font-semibold">
                 {campaignDetails?.count}

@@ -119,57 +119,57 @@ const Filter: React.FC<FilterProps> = ({ position }) => {
   };
 
   const [state, setState] = useState<number | null>(null);
-  const handleFilter1 = async () => {
-    console.log("inside filter 1");
-    const userIDString =
-      typeof window !== "undefined" && localStorage.getItem("userID");
-    const userID = userIDString ? parseInt(userIDString, 10) : null;
-
-    const data1 = {
-      userID: userID,
-      campaignID: leftID,
-      page: 1,
-      per_page: 1,
-    };
-    try {
-      const res = await fetchCampaignItems(data1);
-      setCampaignDetails1(res);
-      console.log(res);
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
-  const handleFilter2 = async () => {
-    console.log("inside filter 2");
-    const userIDString =
-      typeof window !== "undefined" && localStorage.getItem("userID");
-    const userID = userIDString ? parseInt(userIDString, 10) : null;
-
-    const data2 = {
-      userID: userID,
-      campaignID: rightID,
-      page: 1,
-      per_page: 1,
-    };
-
-    try {
-      const res = await fetchCampaignItems(data2);
-      setCampaignDetails2(res);
-      console.log(res);
-    } catch (err) {
-      console.log(err);
-    }
-  };
 
   useEffect(() => {
+    const handleFilter1 = async () => {
+      console.log("inside filter 1");
+      const userIDString =
+        typeof window !== "undefined" && localStorage.getItem("userID");
+      const userID = userIDString ? parseInt(userIDString, 10) : null;
+
+      const data1 = {
+        userID: userID,
+        campaignID: leftID,
+        page: 1,
+        per_page: 1,
+      };
+      try {
+        const res = await fetchCampaignItems(data1);
+        setCampaignDetails1(res);
+        console.log(res);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+    const handleFilter2 = async () => {
+      console.log("inside filter 2");
+      const userIDString =
+        typeof window !== "undefined" && localStorage.getItem("userID");
+      const userID = userIDString ? parseInt(userIDString, 10) : null;
+
+      const data2 = {
+        userID: userID,
+        campaignID: rightID,
+        page: 1,
+        per_page: 1,
+      };
+
+      try {
+        const res = await fetchCampaignItems(data2);
+        setCampaignDetails2(res);
+        console.log(res);
+      } catch (err) {
+        console.log(err);
+      }
+    };
     if (state === 1) {
       handleFilter1();
     } else if (state === 2) {
       handleFilter2();
     }
     return setState(null);
-  }, [state]);
+  }, [leftID, rightID, setCampaignDetails1, setCampaignDetails2, state]);
 
   const handleSearchByNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setDataArray(null);
@@ -322,8 +322,8 @@ const Filter: React.FC<FilterProps> = ({ position }) => {
             {dataArray &&
               dataArray.map((items, index) => {
                 return (
-                  <div key={index}>
-                    <Dropdown.Item className="flex">
+                  <div key={index} className="m-0 p-0">
+                    <Dropdown.Item className="flex py-0">
                       <div
                         onClick={() => {
                           handleFilterSelect(items.id, items.campaignName);
