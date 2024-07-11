@@ -58,7 +58,7 @@ const ImportCSV: React.FC<ImportCSVProps> = ({ openModal, setOpenModal }) => {
               },
               tableWrapper: {
                 border: "0px solid #00000000",
-                bg: "#00000000",
+                bg: "#000000",
                 "& > :first-of-type": {
                   border: "1px solid #374151",
                 },
