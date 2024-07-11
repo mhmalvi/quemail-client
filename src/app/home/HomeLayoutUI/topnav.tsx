@@ -120,7 +120,7 @@ const Topnav = () => {
                 />
               </div>
             )}
-            className="dark:bg-dark-black bg-violet-50 dark:border-none border z-40"
+            className="dark:bg-dark-black border border-violet-200 dark:border-light-glass bg-violet-50"
           >
             <Dropdown.Header>
               <span className="block text-sm dark:text-slate-300 text-light-black">
