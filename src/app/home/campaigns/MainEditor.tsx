@@ -203,8 +203,13 @@ const MainEditor = () => {
                   dock: "left",
                   tabs: {},
                 },
+               
               },
+              
+              
+              
             },
+            
             projectId: 239892,
           }}
         />

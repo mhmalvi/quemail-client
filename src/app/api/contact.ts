@@ -12,7 +12,7 @@ export const importContact = async (data: {}) => {
   };
   try {
     const result = await fetch(
-      `https://backend.quemailer.com/api/contact-save`,
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/contact-save`,
       {
         method: "POST",
         headers: {
@@ -43,7 +43,7 @@ export const importContactManually = async (data: {
   const parsedToken = token && JSON.parse(token);
   try {
     const result = await fetch(
-      `https://backend.quemailer.com/api/contact-save-manually`,
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/contact-save-manually`,
       {
         method: "POST",
         headers: {
@@ -76,7 +76,7 @@ export const fetchContact = async (page: number, per_page: number | null) => {
   };
   try {
     const result = await fetch(
-      `https://backend.quemailer.com/api/contact-fetch`,
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/contact-fetch`,
       {
         method: "POST",
         headers: {
@@ -102,7 +102,7 @@ export const updateContact = async (data: EditContactData) => {
   const parsedToken = token && JSON.parse(token);
   try {
     const result = await fetch(
-      `https://backend.quemailer.com/api/contact-update`,
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/contact-update`,
       {
         method: "POST",
         headers: {
@@ -130,7 +130,7 @@ export const destroyContact = async (data: number) => {
     typeof window !== "undefined" && localStorage.getItem("userID");
   try {
     const result = await fetch(
-      `https://backend.quemailer.com/api/contact-destroy`,
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/contact-destroy`,
       {
         method: "POST",
         headers: {
@@ -161,7 +161,7 @@ export const fetchGroupList = async () => {
     typeof window !== "undefined" && localStorage.getItem("userID");
   try {
     const result = await fetch(
-      `https://backend.quemailer.com/api/group-fetch`,
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/group-fetch`,
       {
         method: "POST",
         headers: {
@@ -191,7 +191,7 @@ export const fetchGroupItems = async (data: string | null, page: number) => {
     typeof window !== "undefined" && localStorage.getItem("userID");
   try {
     const result = await fetch(
-      `https://backend.quemailer.com/api/contact-fetch-by-group`,
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/contact-fetch-by-group`,
       {
         method: "POST",
         headers: {

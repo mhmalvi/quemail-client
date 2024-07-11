@@ -22,7 +22,7 @@ export const customTheme: CustomFlowbiteTheme = {
     },
 
     header: {
-      base: "flex items-center justify-between rounded-t-md xl:py-2 py-1 px-4 dark:bg-dark-black bg-violet-200",
+      base: "flex items-center justify-between rounded-t-md xl:py-2 py-1 px-4 dark:bg-dark-glass bg-violet-200",
       title:
         "xl:text-base text-sm font-medium dark:text-slate-300 text-dark-black",
     },
