@@ -64,7 +64,6 @@ const MainEditor = () => {
             ...prev,
             template: data,
           }));
-          
         });
       }
     }
@@ -203,14 +202,9 @@ const MainEditor = () => {
                   dock: "left",
                   tabs: {},
                 },
-               
               },
-              
-              
-              
             },
-            
-            projectId: 239892,
+            projectId: 241316,
           }}
         />
       </div>

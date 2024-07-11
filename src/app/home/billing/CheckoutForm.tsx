@@ -36,6 +36,7 @@ const CheckoutForm = (props: CheckoutFormProps): JSX.Element => {
     if (!stripe || !elements) {
       return;
     }
+    // update api information here
     const subscriptionResponse = await fetch("/api/create-subscription", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
