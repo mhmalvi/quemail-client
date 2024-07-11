@@ -13,6 +13,7 @@ import { billingStore } from "@/store/store";
 import { Modal } from "flowbite-react";
 import CheckoutFormWrapper from "../CheckoutForm";
 import { fetchPriceId, fetchProducts } from "@/app/api/billing";
+import { Storage } from "@/store/store";
 
 const PricingPlans = () => {
   const checkoutModal = billingStore((state: any) => state.checkoutModal);
@@ -20,6 +21,7 @@ const PricingPlans = () => {
   const setProducts = billingStore((state: any) => state.setProducts);
   const products = billingStore((state: any) => state.products);
   const priceId = billingStore((state: any) => state.priceId);
+  const customerId = Storage.getItem("stripeCustomerID");
 
   useEffect(() => {
     (async () => {
@@ -92,7 +94,7 @@ const PricingPlans = () => {
           </h1>
         </Modal.Header>
         <Modal.Body className="dark:bg-dark-black bg-violet-50 text-slate-300 overflow-y-auto h-full">
-          <CheckoutFormWrapper customerId="" priceId={priceId} />
+          <CheckoutFormWrapper customerId={customerId} priceId={priceId} />
         </Modal.Body>
       </Modal>
     </div>

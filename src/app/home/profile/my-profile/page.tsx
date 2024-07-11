@@ -11,11 +11,6 @@ const MyProfile = () => {
   return (
     <div className="relative w-full h-full rounded-md flex flex-row gap-4 overflow-hidden">
       <div className="h-1/4 w-full rounded-md flex items-center justify-between gap-4 p-8">
-        {/* <div className="flex flex-col gap-4">
-          <h1 className="m-0 p-0 xl:text-4xl text-2xl dark:text-slate-300 text-dark-black">
-            {Storage.getItem("userName")}
-          </h1>
-        </div> */}
         <div className="h-full flex flex-col items-center justify-center xl:gap-8 gap-4 ml-14 mt-6">
           <div className="rounded-full xl:h-32 h-20 xl:w-32 w-20 overflow-hidden">
             <Image
@@ -32,8 +27,6 @@ const MyProfile = () => {
       </div>
       <div className="h-full w-full flex gap-4 drop-shadow m-6">
         <AccountDetails />
-        {/* <ChangePassword />
-        <AccountDetails /> */}
       </div>
     </div>
   );
