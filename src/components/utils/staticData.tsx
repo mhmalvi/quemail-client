@@ -65,38 +65,38 @@ export const sectionFiveData = [
 
 export const campaignData = [
   {
-    "name": "John Doe",
-    "phone_number": "123-456-7890",
-    "opened": true,
-    "clicked": false,
-    "subscribed": true,
-    "date_added": "2023-07-01"
+    name: "John Doe",
+    phone_number: "123-456-7890",
+    opened: true,
+    clicked: false,
+    subscribed: true,
+    date_added: "2023-07-01",
   },
   {
-    "name": "Jane Smith",
-    "phone_number": "987-654-3210",
-    "opened": false,
-    "clicked": true,
-    "subscribed": false,
-    "date_added": "2023-06-15"
+    name: "Jane Smith",
+    phone_number: "987-654-3210",
+    opened: false,
+    clicked: true,
+    subscribed: false,
+    date_added: "2023-06-15",
   },
   {
-    "name": "Alice Johnson",
-    "phone_number": "555-123-4567",
-    "opened": true,
-    "clicked": true,
-    "subscribed": true,
-    "date_added": "2023-06-20"
+    name: "Alice Johnson",
+    phone_number: "555-123-4567",
+    opened: true,
+    clicked: true,
+    subscribed: true,
+    date_added: "2023-06-20",
   },
   {
-    "name": "Bob Brown",
-    "phone_number": "555-987-6543",
-    "opened": false,
-    "clicked": false,
-    "subscribed": false,
-    "date_added": "2023-07-02"
-  }
-]
+    name: "Bob Brown",
+    phone_number: "555-987-6543",
+    opened: false,
+    clicked: false,
+    subscribed: false,
+    date_added: "2023-07-02",
+  },
+];
 
 export const fields = [
   {
@@ -149,3 +149,140 @@ export const fields = [
     validations: [],
   },
 ] as const;
+
+export const pricingplan1 = [
+  {
+    ticked: true,
+    content: "1 campaigns / month",
+  },
+  {
+    ticked: true,
+    content: "Custom Email Template",
+  },
+  {
+    ticked: true,
+    content: "100 emails / campaign",
+  },
+  {
+    ticked: true,
+    content: "Add up to 2000 contacts",
+  },
+  {
+    ticked: true,
+    content: "Analytics and Reporting",
+  },
+  {
+    ticked: false,
+    content: "Audience Segmentation",
+  },
+  {
+    ticked: false,
+    content: "Social media integration for cross-channel marketing",
+  },
+  {
+    ticked: false,
+    content: "Customer Journey Mapping, Retargeting Campaigns",
+  },
+];
+export const pricingplan2 = [
+  {
+    ticked: true,
+    content: "2 campaigns / month",
+  },
+  {
+    ticked: true,
+    content: "Custom Email Template",
+  },
+  {
+    ticked: true,
+    content: "300 emails / campaign",
+  },
+  {
+    ticked: true,
+    content: "Add up to 10,000 contacts",
+  },
+  {
+    ticked: true,
+    content: "Analytics and Reporting",
+  },
+  {
+    ticked: true,
+    content: "Audience Segmentation",
+  },
+  {
+    ticked: false,
+    content: "Social media integration for cross-channel marketing",
+  },
+  {
+    ticked: false,
+    content: "Customer Journey Mapping, Retargeting Campaigns",
+  },
+];
+export const pricingplan3 = [
+  {
+    ticked: true,
+    content: "4 campaigns / month",
+  },
+  {
+    ticked: true,
+    content: "Custom Email Template",
+  },
+  {
+    ticked: true,
+    content: "750 emails / campaign",
+  },
+  {
+    ticked: true,
+    content: "Add up to 20,000 contacts",
+  },
+  {
+    ticked: true,
+    content: "Analytics and Reporting",
+  },
+  {
+    ticked: true,
+    content: "Audience Segmentation",
+  },
+  {
+    ticked: true,
+    content: "Social media integration for cross-channel marketing",
+  },
+  {
+    ticked: true,
+    content: "Customer Journey Mapping, Retargeting Campaigns",
+  },
+];
+export const pricingplan4 = [
+  {
+    ticked: true,
+    content: "10 campaigns / month",
+  },
+  {
+    ticked: true,
+    content: "Custom Email Template",
+  },
+  {
+    ticked: true,
+    content: "Unlimited emails / campaign",
+  },
+  {
+    ticked: true,
+    content: "Add up to 50,000 contacts",
+  },
+  {
+    ticked: true,
+    content: "Analytics and Reporting",
+  },
+  {
+    ticked: true,
+    content: "Audience Segmentation",
+  },
+  {
+    ticked: true,
+    content: "Social media integration for cross-channel marketing",
+  },
+  {
+    ticked: true,
+    content: "Customer Journey Mapping, Retargeting Campaigns",
+  },
+];

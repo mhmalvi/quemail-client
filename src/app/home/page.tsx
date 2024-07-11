@@ -7,37 +7,38 @@ import Summary from "./HomeLayoutUI/Summary";
 import { useTourStore } from "@/store/store";
 import { tourSteps } from "@/components/utils/tourSteps";
 import dynamic from "next/dynamic";
-
 const Home = () => {
-  const Tour = dynamic(() => import('reactour'), {
+
+  const Tour = dynamic(() => import("reactour"), {
     ssr: false,
-  })
+  });
   const isTourGoing = useTourStore((state) => state.isTourGoing);
   const setIsTourGoing = useTourStore((state) => state.setIsTourGoing);
 
   return (
     <div className="relative w-full h-full rounded-md flex flex-col gap-4 overflow-hidden">
-      <div className="flex gap-4 h-full ">
-        <div className="h-full w-full flex flex-col flex-grow justify-around gap-4">
-          <div className="home-card-element flex h-1/2 gap-4">
-            <HomeCard />
+    
+        <div className="flex gap-4 h-full ">
+          <div className="h-full w-full flex flex-col flex-grow justify-around gap-4">
+            <div className="home-card-element flex h-1/2 gap-4">
+              <HomeCard />
+            </div>
+            <div className="flex h-1/2 gap-4">
+              <Summary />
+            </div>
           </div>
-          <div className="flex h-1/2 gap-4">
-            <Summary />
-          </div>
+          <QuickActions />
         </div>
-        <QuickActions />
-      </div>
-      {typeof window !== undefined && (
-        <Tour
-          steps={tourSteps}
-          isOpen={isTourGoing}
-          rounded={5}
-          accentColor="#6D53FF"
-          onRequestClose={() => setIsTourGoing(false)}
-          className="bg-orange-300"
-        />
-      )}
+        {typeof window !== undefined && (
+          <Tour
+            steps={tourSteps}
+            isOpen={isTourGoing}
+            rounded={5}
+            accentColor="#6D53FF"
+            onRequestClose={() => setIsTourGoing(false)}
+            className="bg-orange-300"
+          />
+        )}
     </div>
   );
 };

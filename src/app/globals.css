@@ -15,7 +15,6 @@
     --background-end-rgb: 0, 0, 0;
   }
 }
-
 body {
   color: rgb(var(--foreground-rgb));
   background: linear-gradient(
@@ -53,7 +52,7 @@ body {
 
 /* Tour CSS */
 /* Footer */
-.sc-dcJsrY .ghknmB{
+.sc-dcJsrY .ghknmB {
   background-color: #0b0b0b;
   margin-top: 0;
   padding: 24px 0 24px 0;

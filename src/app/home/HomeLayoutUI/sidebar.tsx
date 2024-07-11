@@ -166,7 +166,7 @@ const Sidebar = () => {
         className="dark:bg-dark-black border border-violet-200 dark:border-light-glass bg-violet-50"
       >
         <Link
-          href="#"
+          href="/home/billing"
           className="focus:outline-none focus:ring-0 active:outline-none active:ring-0"
         >
           <Dropdown.Item className="dark:text-slate-300 text-light-black hover:text-gray-800">

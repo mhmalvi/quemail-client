@@ -8,35 +8,6 @@ const CompareBox: React.FC<FilterProps> = ({ position }) => {
     const leftID = compareCampaignStore((state) => state.clickedCampaignId1);
     const rightID = compareCampaignStore((state) => state.clickedCampaignId2);
 
-    useEffect(() => {
-        const userIDString =
-          typeof window !== "undefined" && localStorage.getItem("userID");
-        const userID = userIDString ? parseInt(userIDString, 10) : null;
-    
-        const data1 = {
-          userID: userID,
-          campaignID: clickedCampaignId,
-          page: currentPage,
-          per_page: 6,
-        };
-    
-        (async () => {
-          try {
-            const res = await fetchCampaignItems(data);
-            if (res.status === 200) {
-              setCampaignItemList(res);
-              setTotalPage(res.totalPages);
-            }
-          } catch (err) {
-            console.log(err);
-          }
-        })();
-      }, [clickedCampaignId, currentPage, setCampaignItemList]);
-
-    const handleClick=()=>{
-        
-    }
-
     return (
         <div className="bg-violet-50 duration-100 ease-in-out border border-violet-200 dark:border-light-glass dark:bg-dark-black h-full rounded-md flex flex-col items-center justify-center p-4">
             <div className="h-full m-5 w-full bg-white dark:bg-light-glass p-4 rounded-md flex flex-col items-center gap-4">

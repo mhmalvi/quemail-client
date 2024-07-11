@@ -2,7 +2,7 @@ import { OTPData } from "@/components/utils/types";
 
 export const googleLogin = async () => {
   try {
-    const result = await fetch(`https://backend.quemailer.com/api/auth/user`, {
+    const result = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/auth/user`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -16,7 +16,7 @@ export const googleLogin = async () => {
 export const emailCheck = async (email: string) => {
   try {
     const result = await fetch(
-      `https://backend.quemailer.com/api/check-if-user-email-exists`,
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/check-if-user-email-exists`,
       {
         method: "POST",
         headers: {
@@ -35,7 +35,7 @@ export const emailCheck = async (email: string) => {
 
 export const verifyOTP = async (data: OTPData) => {
   try {
-    const result = await fetch(`https://backend.quemailer.com/api/verify-otp`, {
+    const result = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/verify-otp`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -60,7 +60,7 @@ export const signOut = async () => {
   const token = typeof window !== "undefined" && localStorage.getItem("token");
   const parsedToken = token && JSON.parse(token);
   try {
-    const result = await fetch(`https://backend.quemailer.com/api/logout`, {
+    const result = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/logout`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
