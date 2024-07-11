@@ -19,11 +19,11 @@ const CompareEmailCampaign = () => {
 
   return (
     <div className="w-full h-full flex justify-center gap-4 dark:bg-dark-glass shadow-md backdrop-blur-2xl bg-white rounded-md p-4 overflow-hidden">
-      <div className = "flex flex-col w-1/4">
+      <div className = "flex flex-col w-1/4 gap-4">
           <Filter position="left" />
           <CompareBox position="left" />
       </div>
-      <div className="w-1/4 flex flex-col justify-between justify-center items-center pt-28 pb-20">
+      <div className="w-1/4 flex flex-col justify-between justify-center items-center pt-32 pb-20">
       <div className="flex flex-row items-center w-full">
         <hr className="flex-grow border-violet-300 border-t-2" />
         <h1 className="px-4 text-xl font-semibold text-dark-black dark:text-slate-300">
@@ -55,7 +55,7 @@ const CompareEmailCampaign = () => {
       </div>
       </div>
 
-      <div className = "flex flex-col w-1/4">
+      <div className = "flex flex-col w-1/4 gap-4">
           <Filter position={"right"} />
           <CompareBox position="right"/>
       </div>
