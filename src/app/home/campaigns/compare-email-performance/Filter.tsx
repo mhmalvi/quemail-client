@@ -19,10 +19,16 @@ const Filter: React.FC<FilterProps> = ({ position }) => {
   const setNameFilter = performanceStore((state) => state.setNameFilter);
   const leftID = compareCampaignStore((state) => state.clickedCampaignId1);
   const rightID = compareCampaignStore((state) => state.clickedCampaignId2);
-  const campaignDetails1 = compareCampaignStore((state) => state.campaignDetails1);
-  const campaignDetails2 = compareCampaignStore((state) => state.campaignDetails2);
-  const [leftFilterNameSelected, setLeftFilterNameSelected] = useState<String>("");
-  const [rightFilterNameSelected, setRightFilterNameSelected] = useState<String>("");
+  const campaignDetails1 = compareCampaignStore(
+    (state) => state.campaignDetails1
+  );
+  const campaignDetails2 = compareCampaignStore(
+    (state) => state.campaignDetails2
+  );
+  const [leftFilterNameSelected, setLeftFilterNameSelected] =
+    useState<String>("");
+  const [rightFilterNameSelected, setRightFilterNameSelected] =
+    useState<String>("");
   const setCampaignDetails1 = compareCampaignStore(
     (state) => state.setCampaignDetails1
   );
@@ -176,55 +182,76 @@ const Filter: React.FC<FilterProps> = ({ position }) => {
 
   const handleFilterSelect = (id: number, name: String) => {
     if (position === "left") {
-      setLeftFilterNameSelected(name)
+      setLeftFilterNameSelected(name);
       setCompareCampaignId1(id);
       setState(1);
     }
     if (position === "right") {
-      setRightFilterNameSelected(name)
+      setRightFilterNameSelected(name);
       setCompareCampaignId2(id);
       setState(2);
     }
   };
 
-  const compareCampaign = () => {
-    var leftPoint = 0;
-    var rightPoint = 0;
-    if (campaignDetails1 == null || campaignDetails2 == null){
-      return null
-    }
-    if (campaignDetails1?.open != null && campaignDetails2?.open!= null && campaignDetails1.open > campaignDetails2.open){
-      leftPoint += 1
-    }
-    if (campaignDetails1?.open != null && campaignDetails2?.open!= null && campaignDetails1.open < campaignDetails2.open){
-      rightPoint += 1
-    }
-    if (campaignDetails1?.subscribed != null && campaignDetails2?.subscribed!= null && campaignDetails1.subscribed > campaignDetails2.subscribed){
-      leftPoint += 1
-    }
-    if (campaignDetails1?.subscribed != null && campaignDetails2?.subscribed!= null && campaignDetails1.subscribed < campaignDetails2.subscribed){
-      rightPoint += 1
-    }
-    if (campaignDetails1?.bounce != null && campaignDetails2?.bounce!= null && campaignDetails1.bounce < campaignDetails2.bounce){
-      leftPoint += 1
-    }
-    if (campaignDetails1?.bounce != null && campaignDetails2?.bounce!= null && campaignDetails1.bounce > campaignDetails2.bounce){
-      rightPoint += 1
-    }
-    if (leftPoint > rightPoint){
-      return "left"
-    }
-    else if (leftPoint < rightPoint){
-      return "right"
-    }
-    else {
-      return "draw"
-    }
-  }
-
   useEffect(() => {
-    setWinnerCampaign(compareCampaign())
-  }, [setWinnerCampaign,compareCampaign]);
+    const compareCampaign = () => {
+      var leftPoint = 0;
+      var rightPoint = 0;
+      if (campaignDetails1 == null || campaignDetails2 == null) {
+        return null;
+      }
+      if (
+        campaignDetails1?.open != null &&
+        campaignDetails2?.open != null &&
+        campaignDetails1.open > campaignDetails2.open
+      ) {
+        leftPoint += 1;
+      }
+      if (
+        campaignDetails1?.open != null &&
+        campaignDetails2?.open != null &&
+        campaignDetails1.open < campaignDetails2.open
+      ) {
+        rightPoint += 1;
+      }
+      if (
+        campaignDetails1?.subscribed != null &&
+        campaignDetails2?.subscribed != null &&
+        campaignDetails1.subscribed > campaignDetails2.subscribed
+      ) {
+        leftPoint += 1;
+      }
+      if (
+        campaignDetails1?.subscribed != null &&
+        campaignDetails2?.subscribed != null &&
+        campaignDetails1.subscribed < campaignDetails2.subscribed
+      ) {
+        rightPoint += 1;
+      }
+      if (
+        campaignDetails1?.bounce != null &&
+        campaignDetails2?.bounce != null &&
+        campaignDetails1.bounce < campaignDetails2.bounce
+      ) {
+        leftPoint += 1;
+      }
+      if (
+        campaignDetails1?.bounce != null &&
+        campaignDetails2?.bounce != null &&
+        campaignDetails1.bounce > campaignDetails2.bounce
+      ) {
+        rightPoint += 1;
+      }
+      if (leftPoint > rightPoint) {
+        return "left";
+      } else if (leftPoint < rightPoint) {
+        return "right";
+      } else {
+        return "draw";
+      }
+    };
+    setWinnerCampaign(compareCampaign());
+  }, [campaignDetails1, campaignDetails2, setWinnerCampaign]);
 
   const handleSearchByIdChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchValueById(e.target.value);
