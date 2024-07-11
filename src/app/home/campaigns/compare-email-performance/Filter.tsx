@@ -1,15 +1,14 @@
 "use client";
 
-import { CampaignListType, FilterProps, nameFilterState } from "@/components/utils/types";
+import { fetchCampaignItems } from "@/app/api/campaign";
+import {
+  CampaignListType,
+  FilterProps,
+  nameFilterState,
+} from "@/components/utils/types";
 import { performanceStore, compareCampaignStore } from "@/store/store";
 import { Dropdown, Spinner } from "flowbite-react";
-import React, {
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-  UIEvent,
-} from "react";
+import React, { useEffect, useMemo, useRef, useState, UIEvent } from "react";
 import { TbFilter } from "react-icons/tb";
 import { io } from "socket.io-client";
 
@@ -18,8 +17,27 @@ const Filter: React.FC<FilterProps> = ({ position }) => {
   const [searchValueById, setSearchValueById] = useState("");
   const nameFilter = performanceStore((state) => state.nameFilter);
   const setNameFilter = performanceStore((state) => state.setNameFilter);
-  const setCompareCampaignId1 = compareCampaignStore((state)=> state.setClickedCampaignId1);
-  const setCompareCampaignId2 = compareCampaignStore((state)=> state.setClickedCampaignId2);
+  const leftID = compareCampaignStore((state) => state.clickedCampaignId1);
+  const rightID = compareCampaignStore((state) => state.clickedCampaignId2);
+  const campaignDetails1 = compareCampaignStore((state) => state.campaignDetails1);
+  const campaignDetails2 = compareCampaignStore((state) => state.campaignDetails2);
+  const [leftFilterNameSelected, setLeftFilterNameSelected] = useState<String>("");
+  const [rightFilterNameSelected, setRightFilterNameSelected] = useState<String>("");
+  const setCampaignDetails1 = compareCampaignStore(
+    (state) => state.setCampaignDetails1
+  );
+  const setCampaignDetails2 = compareCampaignStore(
+    (state) => state.setCampaignDetails2
+  );
+  const setCompareCampaignId1 = compareCampaignStore(
+    (state) => state.setClickedCampaignId1
+  );
+  const setCompareCampaignId2 = compareCampaignStore(
+    (state) => state.setClickedCampaignId2
+  );
+  const setWinnerCampaign = compareCampaignStore(
+    (state) => state.setWinnerCampaign
+  );
 
   const [dataArray, setDataArray] = useState<CampaignListType[] | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
@@ -94,6 +112,59 @@ const Filter: React.FC<FilterProps> = ({ position }) => {
     }
   };
 
+  const [state, setState] = useState<number | null>(null);
+  const handleFilter1 = async () => {
+    console.log("inside filter 1");
+    const userIDString =
+      typeof window !== "undefined" && localStorage.getItem("userID");
+    const userID = userIDString ? parseInt(userIDString, 10) : null;
+
+    const data1 = {
+      userID: userID,
+      campaignID: leftID,
+      page: 1,
+      per_page: 1,
+    };
+    try {
+      const res = await fetchCampaignItems(data1);
+      setCampaignDetails1(res);
+      console.log(res);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const handleFilter2 = async () => {
+    console.log("inside filter 2");
+    const userIDString =
+      typeof window !== "undefined" && localStorage.getItem("userID");
+    const userID = userIDString ? parseInt(userIDString, 10) : null;
+
+    const data2 = {
+      userID: userID,
+      campaignID: rightID,
+      page: 1,
+      per_page: 1,
+    };
+
+    try {
+      const res = await fetchCampaignItems(data2);
+      setCampaignDetails2(res);
+      console.log(res);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useEffect(() => {
+    if (state === 1) {
+      handleFilter1();
+    } else if (state === 2) {
+      handleFilter2();
+    }
+    return setState(null);
+  }, [state]);
+
   const handleSearchByNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setDataArray(null);
     setSearchValueByName(e.target.value);
@@ -103,14 +174,57 @@ const Filter: React.FC<FilterProps> = ({ position }) => {
     }
   };
 
-  const handleFilterSelect = (id: number) => {
-    if(position === "left"){
-      setCompareCampaignId1(id)
+  const handleFilterSelect = (id: number, name: String) => {
+    if (position === "left") {
+      setLeftFilterNameSelected(name)
+      setCompareCampaignId1(id);
+      setState(1);
     }
-    if (position === "right"){
-      setCompareCampaignId2(id)
+    if (position === "right") {
+      setRightFilterNameSelected(name)
+      setCompareCampaignId2(id);
+      setState(2);
+    }
+  };
+
+  const compareCampaign = () => {
+    var leftPoint = 0;
+    var rightPoint = 0;
+    if (campaignDetails1 == null || campaignDetails2 == null){
+      return null
+    }
+    if (campaignDetails1?.open != null && campaignDetails2?.open!= null && campaignDetails1.open > campaignDetails2.open){
+      leftPoint += 1
+    }
+    if (campaignDetails1?.open != null && campaignDetails2?.open!= null && campaignDetails1.open < campaignDetails2.open){
+      rightPoint += 1
+    }
+    if (campaignDetails1?.subscribed != null && campaignDetails2?.subscribed!= null && campaignDetails1.subscribed > campaignDetails2.subscribed){
+      leftPoint += 1
+    }
+    if (campaignDetails1?.subscribed != null && campaignDetails2?.subscribed!= null && campaignDetails1.subscribed < campaignDetails2.subscribed){
+      rightPoint += 1
+    }
+    if (campaignDetails1?.bounce != null && campaignDetails2?.bounce!= null && campaignDetails1.bounce < campaignDetails2.bounce){
+      leftPoint += 1
+    }
+    if (campaignDetails1?.bounce != null && campaignDetails2?.bounce!= null && campaignDetails1.bounce > campaignDetails2.bounce){
+      rightPoint += 1
+    }
+    if (leftPoint > rightPoint){
+      return "left"
+    }
+    else if (leftPoint < rightPoint){
+      return "right"
+    }
+    else {
+      return "draw"
     }
   }
+
+  useEffect(() => {
+    setWinnerCampaign(compareCampaign())
+  }, [setWinnerCampaign,compareCampaign]);
 
   const handleSearchByIdChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchValueById(e.target.value);
@@ -128,7 +242,13 @@ const Filter: React.FC<FilterProps> = ({ position }) => {
         renderTrigger={() => (
           <div className="cursor-pointer flex items-center justify-between gap-4 bg-violet-50 dark:bg-dark-black border border-violet-200 dark:border-light-glass px-4 py-2 rounded-md z-30">
             <h1 className="m-0 p-0 xl:text-base text-xs dark:text-slate-300 text-dark-black">
-              Filter Campaigns
+              <h1 className="m-0 p-0 xl:text-base text-xs dark:text-slate-300 text-dark-black">
+                {position === "left" && leftID
+                  ? leftFilterNameSelected
+                  : position === "right" && rightID
+                  ? rightFilterNameSelected
+                  : "Filter Campaigns"}
+              </h1>
             </h1>
             <TbFilter className="text-dark-black dark:text-slate-300" />
           </div>
@@ -177,15 +297,16 @@ const Filter: React.FC<FilterProps> = ({ position }) => {
                 return (
                   <div key={index}>
                     <Dropdown.Item className="flex">
-                      <div onClick={()=>{
-                        handleFilterSelect(items.id)
-                      }} 
-                      className="w-full flex items-center justify-between py-2 top-0 border-b border-violet-50 dark:border-light-glass">
+                      <div
+                        onClick={() => {
+                          handleFilterSelect(items.id, items.campaignName);
+                        }}
+                        className="w-full flex items-center justify-between py-2 top-0 border-b border-violet-50 dark:border-light-glass"
+                      >
                         <p>{items.campaignName}</p>
                         <p>{items.id}</p>
                       </div>
                     </Dropdown.Item>
-
                   </div>
                 );
               })}
