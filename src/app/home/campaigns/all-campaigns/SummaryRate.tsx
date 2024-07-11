@@ -44,7 +44,7 @@ const SummaryRate = () => {
     return 0;
   }, [campaignItemList]);
   return (
-    <div className="relative w-full h-full flex gap-8 overflow-hidden">
+    <div className="relative w-full h-full flex gap-4 overflow-hidden">
       <div
         onMouseOver={() => {
           setHovered("Clicked");
