@@ -12,7 +12,7 @@ import {
   utilState,
   TourState,
   compareCampaignState,
-  BillingState
+  BillingState,
 } from "@/components/utils/types";
 import { create } from "zustand";
 
@@ -23,11 +23,18 @@ export const useTourStore = create<TourState>((set) => ({
 
 export const Storage = {
   getItem: (key: any) => {
-    if (typeof window !== "undefined" && localStorage.getItem(key)) {
-      return JSON.parse(localStorage.getItem(key) || "");
-    } else {
-      return null;
+    if (typeof window !== "undefined") {
+      const item = localStorage.getItem(key);
+      if (item) {
+        try {
+          return JSON.parse(item);
+        } catch (error) {
+          console.error("Failed to parse JSON from localStorage", error);
+          return null;
+        }
+      }
     }
+    return null;
   },
   setItem: (key: any, value: any) => {
     if (typeof window !== "undefined")
@@ -202,10 +209,10 @@ export const performanceStore = create<PerformanceState>((set) => ({
       nameFilter: state,
     })),
 }));
-export const billingStore = create<BillingState>((set)=>({
-  products:[],
+export const billingStore = create<BillingState>((set) => ({
+  products: [],
   priceId: null,
-  checkoutModal:false,
+  checkoutModal: false,
   setProducts(state) {
     set(() => ({ products: state }));
   },
@@ -215,4 +222,4 @@ export const billingStore = create<BillingState>((set)=>({
   setPriceId(state) {
     set(() => ({ priceId: state }));
   },
-}))
+}));
