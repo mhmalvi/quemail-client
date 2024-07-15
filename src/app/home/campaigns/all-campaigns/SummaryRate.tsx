@@ -69,7 +69,7 @@ const SummaryRate = () => {
           </div>
         </div>
         <div className="relative w-2/3 flex flex-col items-end">
-          <h1 className="2xl:text-7xl xl:text-4xl text-4xl text-dark-black dark:text-slate-300 font-semibold px-4 py-2 z-20">
+          <h1 className="2xl:text-6xl xl:text-4xl text-4xl text-dark-black dark:text-slate-300 font-semibold px-4 py-2 z-20">
             90%
           </h1>
           <div className="absolute bottom-0 px-4 flex items-end xl:gap-4 gap-2 z-10">
@@ -105,10 +105,9 @@ const SummaryRate = () => {
             <h1 className="text-xl text-brand-color font-semibold">
               Delivered
             </h1>
-            
           </div>
           <div className="flex items-center justify-center dark:bg-brand-color/20 border-2 border-brand-color h-1/2 rounded-md p-2">
-          <p className="2xl:text-xl xl:text-base text-sm text-green-500">
+            <p className="2xl:text-xl xl:text-base text-sm text-green-500">
               {campaignItemList?.delivered}
               <span className="text-dark-black dark:text-slate-300">
                 {" "}
@@ -119,7 +118,7 @@ const SummaryRate = () => {
           </div>
         </div>
         <div className="relative w-2/3 flex flex-col items-end">
-          <h1 className="2xl:text-7xl xl:text-4xl text-4xl text-dark-black dark:text-slate-300 font-semibold px-4 py-2 z-20">
+          <h1 className="2xl:text-6xl xl:text-4xl text-4xl text-dark-black dark:text-slate-300 font-semibold px-4 py-2 z-20">
             {deliveryPercentage} %
           </h1>
           <div className="absolute bottom-0 px-4 flex items-end xl:gap-4 gap-2 z-10">
@@ -163,7 +162,7 @@ const SummaryRate = () => {
           </div>
         </div>
         <div className="relative w-2/3 flex flex-col items-end">
-          <h1 className="2xl:text-7xl xl:text-4xl text-4xl text-dark-black dark:text-slate-300 font-semibold px-4 py-2 z-20">
+          <h1 className="2xl:text-6xl xl:text-4xl text-4xl text-dark-black dark:text-slate-300 font-semibold px-4 py-2 z-20">
             {subscribedPercentage} %
           </h1>
           <div className="absolute bottom-0 px-4 flex items-end xl:gap-4 gap-2 z-10">
@@ -234,7 +233,7 @@ const SummaryRate = () => {
           </div>
         </div>
         <div className="relative w-2/3 flex flex-col items-end">
-          <h1 className="2xl:text-7xl xl:text-4xl text-4xl text-dark-black dark:text-slate-300 font-semibold px-4 py-2 z-20">
+          <h1 className="2xl:text-6xl xl:text-4xl text-4xl text-dark-black dark:text-slate-300 font-semibold px-4 py-2 z-20">
             {openPercentage} %
           </h1>
           <div className="absolute bottom-0 px-4 flex items-end xl:gap-4 gap-2 z-10">

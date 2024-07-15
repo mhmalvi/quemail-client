@@ -178,12 +178,14 @@ export const compareCampaignStore = create<compareCampaignState>((set) => ({
 }));
 
 export const performanceStore = create<PerformanceState>((set) => ({
+  campaignName: undefined,
   nameFilter: null,
   leads: {
     count: null,
     item: [],
   },
 
+  setCampaignName: (state) => set(() => ({ campaignName: state })),
   setLeads: (index, item) =>
     set((state) => {
       const existingIndex = state.leads.item?.findIndex(
