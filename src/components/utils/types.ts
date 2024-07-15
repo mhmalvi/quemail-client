@@ -231,7 +231,10 @@ export interface nameFilterState {
 }
 
 export interface PerformanceState {
+  campaignName: string | undefined;
   nameFilter: nameFilterState | null;
+
+  setCampaignName: (state: string | undefined) => void;
   setNameFilter: (state: nameFilterState) => void;
   leads: {
     count: number | null;
@@ -256,4 +259,13 @@ export interface BillingState {
   setProducts: (state: [] | null) => void;
   setPriceId: (state: number | null) => void;
   setCheckoutModal: (state: boolean) => void;
+}
+
+// Define the type for mailAdded
+export interface MailAdded {
+  google?: {
+    email: string;
+    app_password: string;
+    id: number;
+  };
 }

@@ -7,7 +7,6 @@ import { fetchCampaignItems } from "@/app/api/campaign";
 import { CampaignItemListType } from "@/components/utils/types";
 import DownloadCSV from "./DownloadCSV";
 
-
 const CampaignPerformanceList = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPage, setTotalPage] = useState<number>(1);
@@ -19,6 +18,19 @@ const CampaignPerformanceList = () => {
     (state) => state.setCampaignItemList
   );
   const campaignItemList = showCampaignStore((state) => state.campaignItemList);
+
+  //currently selected campaign
+  const currentCampaign = showCampaignStore(
+    (state) => state.campaignDetails?.campaignName
+  );
+
+  const leads = performanceStore((state) => state.leads);
+  const setLeads = performanceStore((state) => state.setLeads);
+  const checkCampaign = performanceStore((state) => state.campaignName);
+  const setCurrentCampaignName = performanceStore(
+    (state) => state.setCampaignName
+  );
+
   useEffect(() => {
     const handleResize = () => {
       setPerPage(window.outerWidth < 1366 ? 6 : 4);
@@ -54,9 +66,11 @@ const CampaignPerformanceList = () => {
       }
     })();
   }, [clickedCampaignId, currentPage, perPage, setCampaignItemList]);
-
-  const leads = performanceStore((state) => state.leads);
-  const setLeads = performanceStore((state) => state.setLeads);
+  useEffect(() => {
+    if (currentCampaign === checkCampaign){
+      
+    }
+  }, [campaignItemList?.recipients, checkCampaign, currentCampaign, setLeads]);
 
   return (
     <>
@@ -69,7 +83,7 @@ const CampaignPerformanceList = () => {
                 placeholder="Search users"
               />
             </div>
-            <DownloadCSV/>
+            <DownloadCSV />
           </div>
           <div className="flex w-full relative gap-4">
             <div
@@ -111,7 +125,10 @@ const CampaignPerformanceList = () => {
                         <Table.Row
                           key={index}
                           className="w-full dark:border-gray-700 dark:bg-transparent"
-                          onClick={() => setLeads(index, items)}
+                          onClick={() => {
+                            setLeads(index, items);
+                            setCurrentCampaignName(currentCampaign);
+                          }}
                         >
                           <Table.Cell className="w-8 text-center">
                             <input
@@ -119,7 +136,9 @@ const CampaignPerformanceList = () => {
                               readOnly
                               className="rounded-md bg-transparent checked:bg-brand-color dark:checked:bg-brand-color outline-none focus:ring-0"
                               checked={leads?.item?.some(
-                                (lead) => lead.index === index
+                                (lead) =>
+                                  lead.index === index &&
+                                  currentCampaign === checkCampaign
                               )}
                             />
                           </Table.Cell>
@@ -190,7 +209,9 @@ const CampaignPerformanceList = () => {
 
             <div
               className={
-                leads.item && leads?.item?.length < 1
+                leads.item &&
+                leads?.item?.length < 1 &&
+                currentCampaign === checkCampaign
                   ? "w-0 h-0 hidden"
                   : "w-1/6 h-full contents relative dark:bg-dark-black"
               }
