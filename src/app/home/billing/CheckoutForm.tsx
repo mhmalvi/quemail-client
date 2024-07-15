@@ -23,6 +23,7 @@ const CheckoutForm = (props: CheckoutFormProps): JSX.Element => {
   const stripe = useStripe();
   const elements = useElements();
 
+  
   const handleCardInputChange = (event: StripeCardElementChangeEvent) => {
     setDisabled(event.empty);
     setError(event.error?.message ?? "");
@@ -67,7 +68,7 @@ const CheckoutForm = (props: CheckoutFormProps): JSX.Element => {
     >
       <CardElement
         onChange={handleCardInputChange}
-        className="p-4 bg-violet-200 rounded-md w-full"
+        className="p-4 bg-white rounded-md w-full"
       />
       <button
         disabled={!stripe || disabled}
