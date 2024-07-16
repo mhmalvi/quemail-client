@@ -2,9 +2,6 @@
 import Navbar from "@/components/Landing/Navbar";
 import Landing from "./Landing/Landing";
 import Footer from "@/components/Landing/Footer";
-import { loadStripe } from "@stripe/stripe-js";
-import { useEffect } from "react";
-import { Elements } from "@stripe/react-stripe-js";
 
 export default function Home() {
 
@@ -15,6 +12,7 @@ export default function Home() {
         </div>
         <Landing />
         <Footer />
+        
     </main>
   );
 }
