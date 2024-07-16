@@ -188,6 +188,18 @@ export const performanceStore = create<PerformanceState>((set) => ({
   setCampaignName: (state) => set(() => ({ campaignName: state })),
   setLeads: (index, item) =>
     set((state) => {
+      if (
+        performanceStore.getState().campaignName !=
+        showCampaignStore.getState().campaignDetails?.campaignName
+      ) {
+        // Reset leads
+        return {
+          leads: {
+            ...state.leads,
+            item: [],
+          },
+        };
+      }
       const existingIndex = state.leads.item?.findIndex(
         (i) => i.index === index
       );
