@@ -66,11 +66,6 @@ const CampaignPerformanceList = () => {
       }
     })();
   }, [clickedCampaignId, currentPage, perPage, setCampaignItemList]);
-  useEffect(() => {
-    if (currentCampaign === checkCampaign){
-      
-    }
-  }, [campaignItemList?.recipients, checkCampaign, currentCampaign, setLeads]);
 
   return (
     <>
@@ -88,9 +83,11 @@ const CampaignPerformanceList = () => {
           <div className="flex w-full relative gap-4">
             <div
               className={`${
-                leads.item && leads?.item?.length < 1
-                  ? "w-full duration-100 ease-in-out flex flex-col gap-4"
-                  : "w-5/6 duration-100 ease-in-out flex flex-col gap-4"
+                leads.item &&
+                leads?.item?.length > 0 &&
+                currentCampaign === checkCampaign
+                  ? "w-5/6 duration-100 ease-in-out flex flex-col gap-4"
+                  : "w-full duration-100 ease-in-out flex flex-col gap-4"
               }`}
             >
               <div>
@@ -210,10 +207,10 @@ const CampaignPerformanceList = () => {
             <div
               className={
                 leads.item &&
-                leads?.item?.length < 1 &&
+                leads?.item?.length > 0 &&
                 currentCampaign === checkCampaign
-                  ? "w-0 h-0 hidden"
-                  : "w-1/6 h-full contents relative dark:bg-dark-black"
+                  ? "w-1/6 h-full contents relative dark:bg-dark-black"
+                  : "w-0 h-0 hidden"
               }
             >
               <div className="sticky top-0 h-full w-1/6 flex flex-col items-center justify-center gap-4 rounded-md">
