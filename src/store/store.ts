@@ -161,11 +161,19 @@ export const showCampaignStore = create<ShowCampaignStore>((set) => ({
 export const compareCampaignStore = create<compareCampaignState>((set) => ({
   clickedCampaignId1: null,
   clickedCampaignId2: null,
+  campaign1Name: undefined,
+  campaign2Name: undefined,
   campaignDetails1: null,
   campaignDetails2: null,
   winnerCampaign: null,
   setClickedCampaignId1: (state) => set(() => ({ clickedCampaignId1: state })),
   setClickedCampaignId2: (state) => set(() => ({ clickedCampaignId2: state })),
+  setCampaign1Name(state) {
+    set(() => ({ campaign1Name: state }));
+  },
+  setCampaign2Name(state) {
+    set(() => ({ campaign2Name: state }));
+  },
   setCampaignDetails1(state) {
     set(() => ({ campaignDetails1: state }));
   },

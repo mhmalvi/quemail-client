@@ -211,11 +211,15 @@ export interface ShowCampaignStore {
 }
 
 export interface compareCampaignState {
+  campaign1Name: string | undefined;
+  campaign2Name: string | undefined;
   clickedCampaignId1: number | null;
   clickedCampaignId2: number | null;
   campaignDetails1: CampaignItemListResponse | null;
   campaignDetails2: CampaignItemListResponse | null;
   winnerCampaign: string | null;
+  setCampaign1Name: (state: string | undefined) => void;
+  setCampaign2Name: (state: string | undefined) => void;
   setClickedCampaignId1: (state: number | null) => void;
   setClickedCampaignId2: (state: number | null) => void;
   setCampaignDetails1: (state: CampaignItemListResponse | null) => void;

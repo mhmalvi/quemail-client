@@ -3,21 +3,40 @@ import { useState } from "react";
 import SummaryRate from "./SummaryRate";
 import CampaignPerformanceList from "./CampaignPerformanceList";
 
-import { showCampaignStore } from "@/store/store";
+import { compareCampaignStore, showCampaignStore } from "@/store/store";
 import { Modal } from "flowbite-react";
+import { useRouter } from "next/navigation";
 
 const CampaignItems = () => {
   const [openTemplateModal, setOpenTemplateModal] = useState<boolean>(false);
   const setCampaignItemList = showCampaignStore(
     (state) => state.setCampaignItemList
   );
+  const setCompareID1 = compareCampaignStore(
+    (state) => state.setClickedCampaignId1
+  );
+  const setLeftFilterName = compareCampaignStore(
+    (state) => state.setCampaign1Name
+  );
+  const compareID1details = compareCampaignStore(
+    (state) => state.setCampaignDetails1
+  );
   const campaignItemList = showCampaignStore((state) => state.campaignItemList);
+  const currentCampaign = showCampaignStore((state) => state.clickedCampaignId);
   const setClickedCampaignId = showCampaignStore(
     (state) => state.setClickedCampaignId
   );
 
   const campaignDetails = showCampaignStore((state) => state.campaignDetails);
-  
+  const router = useRouter();
+
+  const handleClick = () => {
+    setCompareID1(currentCampaign);
+    compareID1details(campaignItemList);
+    setLeftFilterName(campaignDetails?.campaignName);
+    router.push("/home/campaigns/compare-email-performance");
+  };
+
   return (
     <div className="h-full flex flex-col gap-2">
       <div className=" flex items-center justify-between gap-4 text-dark-black dark:text-slate-300 dark:border-slate-300 border-violet-50 ">
@@ -37,7 +56,10 @@ const CampaignItems = () => {
               {campaignDetails?.campaignName}
             </span>
           </h1>
-          <button className="w-1/8 h-full flex flex-col justify-center 2xl:p-2 py-1 px-2 rounded-md 2xl:text-sm text-xs text-dark-black dark:text-slate-300 hover:text-slate-300 border border-slate-300 hover:bg-dark-black bg-transparent duration-100 ease-in-out">
+          <button
+            className="w-1/8 h-full flex flex-col justify-center 2xl:p-2 py-1 px-2 rounded-md 2xl:text-sm text-xs text-dark-black dark:text-slate-300 hover:text-slate-300 border border-slate-300 hover:bg-dark-black bg-transparent duration-100 ease-in-out"
+            onClick={handleClick}
+          >
             Compare Performance
           </button>
         </div>
