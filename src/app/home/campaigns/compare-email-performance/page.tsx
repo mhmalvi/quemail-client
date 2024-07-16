@@ -1,10 +1,8 @@
 "use client";
-import { useState } from "react";
 import Filter from "./Filter";
 import CompareBox from "./CompareBox";
 
 const CompareEmailCampaign = () => {
-
   return (
     <div className="w-full h-full flex justify-center gap-4 dark:bg-dark-glass shadow-md backdrop-blur-2xl bg-white rounded-md p-4 overflow-hidden">
       <div className="flex flex-col w-1/4 gap-4">

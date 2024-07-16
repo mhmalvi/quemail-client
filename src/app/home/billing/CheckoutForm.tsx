@@ -81,6 +81,7 @@ const CheckoutForm = (props: CheckoutFormProps): JSX.Element => {
     </form>
   );
 };
+
 const CheckoutFormWrapper = (props: CheckoutFormProps) => {
   return (
     <Elements stripe={stripePromise}>
@@ -88,4 +89,5 @@ const CheckoutFormWrapper = (props: CheckoutFormProps) => {
     </Elements>
   );
 };
+
 export default CheckoutFormWrapper;
