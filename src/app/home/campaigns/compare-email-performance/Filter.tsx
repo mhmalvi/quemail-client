@@ -6,7 +6,11 @@ import {
   FilterProps,
   nameFilterState,
 } from "@/components/utils/types";
-import { performanceStore, compareCampaignStore } from "@/store/store";
+import {
+  performanceStore,
+  compareCampaignStore,
+  showCampaignStore,
+} from "@/store/store";
 import { Dropdown, Spinner } from "flowbite-react";
 import React, { useEffect, useMemo, useRef, useState, UIEvent } from "react";
 import { TbFilter } from "react-icons/tb";
@@ -19,16 +23,25 @@ const Filter: React.FC<FilterProps> = ({ position }) => {
   const setNameFilter = performanceStore((state) => state.setNameFilter);
   const leftID = compareCampaignStore((state) => state.clickedCampaignId1);
   const rightID = compareCampaignStore((state) => state.clickedCampaignId2);
+  const leftFilterName = compareCampaignStore((state) => state.campaign1Name);
+  const rightFilterName = compareCampaignStore((state) => state.campaign2Name);
+  const setLeftFilterName = compareCampaignStore(
+    (state) => state.setCampaign1Name
+  );
+  const setRightFilterName = compareCampaignStore(
+    (state) => state.setCampaign2Name
+  );
   const campaignDetails1 = compareCampaignStore(
     (state) => state.campaignDetails1
   );
   const campaignDetails2 = compareCampaignStore(
     (state) => state.campaignDetails2
   );
-  const [leftFilterNameSelected, setLeftFilterNameSelected] =
-    useState<String>("");
+  const [leftFilterNameSelected, setLeftFilterNameSelected] = useState<String>(
+    leftFilterName ? leftFilterName : ""
+  );
   const [rightFilterNameSelected, setRightFilterNameSelected] =
-    useState<String>("");
+    useState<String>(rightFilterName ? rightFilterName : "");
   const setCampaignDetails1 = compareCampaignStore(
     (state) => state.setCampaignDetails1
   );
@@ -55,6 +68,14 @@ const Filter: React.FC<FilterProps> = ({ position }) => {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    console.log(
+      "leftID and leftFilterName: " +
+        leftID +
+        "  " +
+        leftFilterNameSelected +
+        " " +
+        performanceStore.getState().campaignName
+    );
     const handleMessage = (e: nameFilterState) => {
       if (searchValueByName.length < 1) {
         setCurrentPage(1);
@@ -92,7 +113,13 @@ const Filter: React.FC<FilterProps> = ({ position }) => {
       socket.off("campaigns", handleMessage);
       socket.disconnect();
     };
-  }, [searchValueByName, setNameFilter, socket]);
+  }, [
+    leftFilterNameSelected,
+    leftID,
+    searchValueByName,
+    setNameFilter,
+    socket,
+  ]);
 
   useEffect(() => {
     socket.connect();
@@ -180,14 +207,16 @@ const Filter: React.FC<FilterProps> = ({ position }) => {
     }
   };
 
-  const handleFilterSelect = (id: number, name: String) => {
+  const handleFilterSelect = (id: number, name: string) => {
     if (position === "left") {
       setLeftFilterNameSelected(name);
+      setLeftFilterName(name);
       setCompareCampaignId1(id);
       setState(1);
     }
     if (position === "right") {
       setRightFilterNameSelected(name);
+      setRightFilterName(name);
       setCompareCampaignId2(id);
       setState(2);
     }

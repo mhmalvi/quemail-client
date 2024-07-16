@@ -211,11 +211,15 @@ export interface ShowCampaignStore {
 }
 
 export interface compareCampaignState {
+  campaign1Name: string | undefined;
+  campaign2Name: string | undefined;
   clickedCampaignId1: number | null;
   clickedCampaignId2: number | null;
   campaignDetails1: CampaignItemListResponse | null;
   campaignDetails2: CampaignItemListResponse | null;
   winnerCampaign: string | null;
+  setCampaign1Name: (state: string | undefined) => void;
+  setCampaign2Name: (state: string | undefined) => void;
   setClickedCampaignId1: (state: number | null) => void;
   setClickedCampaignId2: (state: number | null) => void;
   setCampaignDetails1: (state: CampaignItemListResponse | null) => void;
@@ -231,7 +235,10 @@ export interface nameFilterState {
 }
 
 export interface PerformanceState {
+  campaignName: string | undefined;
   nameFilter: nameFilterState | null;
+
+  setCampaignName: (state: string | undefined) => void;
   setNameFilter: (state: nameFilterState) => void;
   leads: {
     count: number | null;
@@ -256,4 +263,13 @@ export interface BillingState {
   setProducts: (state: [] | null) => void;
   setPriceId: (state: number | null) => void;
   setCheckoutModal: (state: boolean) => void;
+}
+
+// Define the type for mailAdded
+export interface MailAdded {
+  google?: {
+    email: string;
+    app_password: string;
+    id: number;
+  };
 }

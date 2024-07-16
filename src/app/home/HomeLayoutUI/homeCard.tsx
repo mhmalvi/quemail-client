@@ -13,15 +13,8 @@ import {
   successNotification,
   warningNotification,
 } from "../../../components/utils/utility";
+import { MailAdded } from "@/components/utils/types";
 
-// Define the type for mailAdded
-interface MailAdded {
-  google?: {
-    email: string;
-    app_password: string;
-    id: number;
-  };
-}
 
 const HomeCard = () => {
   const [emailInfo, setEmailInfo] = useState({

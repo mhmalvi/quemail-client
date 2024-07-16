@@ -12,7 +12,7 @@ import {
   utilState,
   TourState,
   compareCampaignState,
-  BillingState
+  BillingState,
 } from "@/components/utils/types";
 import { create } from "zustand";
 
@@ -23,11 +23,18 @@ export const useTourStore = create<TourState>((set) => ({
 
 export const Storage = {
   getItem: (key: any) => {
-    if (typeof window !== "undefined" && localStorage.getItem(key)) {
-      return JSON.parse(localStorage.getItem(key) || "");
-    } else {
-      return null;
+    if (typeof window !== "undefined") {
+      const item = localStorage.getItem(key);
+      if (item) {
+        try {
+          return JSON.parse(item);
+        } catch (error) {
+          console.error("Failed to parse JSON from localStorage", error);
+          return null;
+        }
+      }
     }
+    return null;
   },
   setItem: (key: any, value: any) => {
     if (typeof window !== "undefined")
@@ -154,11 +161,19 @@ export const showCampaignStore = create<ShowCampaignStore>((set) => ({
 export const compareCampaignStore = create<compareCampaignState>((set) => ({
   clickedCampaignId1: null,
   clickedCampaignId2: null,
+  campaign1Name: undefined,
+  campaign2Name: undefined,
   campaignDetails1: null,
   campaignDetails2: null,
   winnerCampaign: null,
   setClickedCampaignId1: (state) => set(() => ({ clickedCampaignId1: state })),
   setClickedCampaignId2: (state) => set(() => ({ clickedCampaignId2: state })),
+  setCampaign1Name(state) {
+    set(() => ({ campaign1Name: state }));
+  },
+  setCampaign2Name(state) {
+    set(() => ({ campaign2Name: state }));
+  },
   setCampaignDetails1(state) {
     set(() => ({ campaignDetails1: state }));
   },
@@ -171,14 +186,28 @@ export const compareCampaignStore = create<compareCampaignState>((set) => ({
 }));
 
 export const performanceStore = create<PerformanceState>((set) => ({
+  campaignName: undefined,
   nameFilter: null,
   leads: {
     count: null,
     item: [],
   },
 
+  setCampaignName: (state) => set(() => ({ campaignName: state })),
   setLeads: (index, item) =>
     set((state) => {
+      if (
+        performanceStore.getState().campaignName !=
+        showCampaignStore.getState().campaignDetails?.campaignName
+      ) {
+        // Reset leads
+        return {
+          leads: {
+            ...state.leads,
+            item: [],
+          },
+        };
+      }
       const existingIndex = state.leads.item?.findIndex(
         (i) => i.index === index
       );
@@ -202,10 +231,10 @@ export const performanceStore = create<PerformanceState>((set) => ({
       nameFilter: state,
     })),
 }));
-export const billingStore = create<BillingState>((set)=>({
-  products:[],
+export const billingStore = create<BillingState>((set) => ({
+  products: [],
   priceId: null,
-  checkoutModal:false,
+  checkoutModal: false,
   setProducts(state) {
     set(() => ({ products: state }));
   },
@@ -215,4 +244,4 @@ export const billingStore = create<BillingState>((set)=>({
   setPriceId(state) {
     set(() => ({ priceId: state }));
   },
-}))
+}));
