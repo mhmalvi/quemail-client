@@ -4,8 +4,8 @@ import { Key, useEffect, useState } from "react";
 import { loadStripe } from "@stripe/stripe-js";
 import AddCardFormWrapper from "../AddCardForm";
 import { Storage } from "@/store/store";
-import { getAllCardList, deleteCard } from "@/app/api/billing";
-import { TbEdit, TbTrash, TbCreditCard, TbCirclePlus } from "react-icons/tb";
+import { getAllCardList, deleteCard, updateDefaultCard } from "@/app/api/billing";
+import { TbEdit, TbTrash, TbCreditCard, TbCirclePlus, TbCircleCheck } from "react-icons/tb";
 import { Card, DeleteCardModalProps } from "@/components/utils/types";
 
 const stripePublicKey = process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY;
@@ -66,6 +66,7 @@ const CardDetails = () => {
     const res = await getAllCardList();
     if (res) {
       setAllCards(res.data);
+      console.log(res)
     }
   };
 
@@ -75,6 +76,13 @@ const CardDetails = () => {
 
   const handleDeleteSuccess = () => {
     setAllCards((prevCards) => prevCards.filter((card) => card.id !== selectedCard?.id));
+  };
+
+  const handleUpdateDefaultCard = async (id: string) => {
+    await updateDefaultCard(id);
+    setTimeout(() => {
+      window.location.reload();
+    }, 5000); // Reload the page after 5000 milliseconds (5 seconds)
   };
 
   return (
@@ -109,24 +117,26 @@ const CardDetails = () => {
                 className="w-full dark:border-gray-700 dark:bg-transparent cursor-pointer"
               >
                 <Table.Cell className="w-full flex items-center justify-center text-gray-900 dark:text-white">
-                  <Tooltip content={items.name} className="bg-brand-color text-center" placement="bottom">
-                    {items.name && items.name.length > 5 ? `${items.name.slice(0, 5)}...` : items.name}
+                  <Tooltip content={index === 0 ? items.name + ": Default" : items.name} className="bg-brand-color text-center" placement="bottom">
+                    <div className="flex flex-row items-center gap-2">
+                      {items.name && items.name.length > 5 ? `${items.name.slice(0, 4)}...` : items.name}
+                      {index === 0 ? <TbCircleCheck className="text-green-500"></TbCircleCheck> : ""}
+                    </div>
                   </Tooltip>
                 </Table.Cell>
                 <Table.Cell className="w-1/5 text-center">{items.brand}</Table.Cell>
                 <Table.Cell className="w-1/5 text-center">{items.last4}</Table.Cell>
                 <Table.Cell className="w-1/5 text-center">
                   <div className="flex justify-center gap-2">
-                    <Tooltip content="update card" className="bg-brand-color text-center" placement="bottom">
-                      <button className="border rounded-full border-violet-500 hover:text-violet-500">
-                        <TbEdit className="m-1" />
-                      </button>
-                    </Tooltip>
-                    <Tooltip content="make default" className="bg-brand-color text-center" placement="bottom">
-                      <button className="border rounded-full border-green-500 hover:text-green-500">
-                        <TbCreditCard className="m-1 transition-fill duration-200 ease-in-out" />
-                      </button>
-                    </Tooltip>
+                    {index === 0 ? "" :
+                      <Tooltip content="make default" className="bg-brand-color text-center" placement="bottom">
+                        <button className="border rounded-full border-green-500 hover:text-green-500"
+                          onClick={() => {
+                            handleUpdateDefaultCard(items.id)
+                          }}>
+                          <TbCreditCard className="m-1 transition-fill duration-200 ease-in-out" />
+                        </button>
+                      </Tooltip>}
                     <Tooltip content="delete card" className="bg-brand-color text-center" placement="bottom">
                       <button
                         className="border rounded-full border-red-500 hover:text-red-500"

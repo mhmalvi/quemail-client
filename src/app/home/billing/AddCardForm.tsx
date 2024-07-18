@@ -9,6 +9,8 @@ import {
 } from "@stripe/react-stripe-js";
 import { loadStripe, StripeCardElementChangeEvent } from "@stripe/stripe-js";
 import { createCard, getAllCardList } from "@/app/api/billing";
+import { Spinner } from "flowbite-react";
+
 
 const stripePublicKey = process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY;
 const stripePromise = stripePublicKey ? loadStripe(stripePublicKey) : null;
@@ -74,7 +76,9 @@ const CheckoutForm = (props: AddCardFormProps): JSX.Element => {
         setError(result.error.message);
       } else {
         console.log("Card added successfully:", result);
-        // Redirect to a success page or show a success message
+        setTimeout(() => {
+          window.location.reload();
+        }, 5000);
       }
     } catch (error) {
       console.log(error);
@@ -98,13 +102,21 @@ const CheckoutForm = (props: AddCardFormProps): JSX.Element => {
         placeholder="Enter Card Holder Name"
         className="p-4 bg-white rounded-md w-full text-dark-black"
       />
-      <button
-        disabled={!stripe || disabled}
-        type="submit"
-        className="w-1/4 bg-brand-color p-2 rounded-md disabled:cursor-not-allowed disabled:bg-brand-color/20"
-      >
-        ADD CARD
-      </button>
+      {loading ? (
+        <Spinner
+          color="purple"
+          aria-label="Purple spinner example"
+          size="xl"
+        />
+      ) : (
+        <button
+          disabled={!stripe || disabled}
+          type="submit"
+          className="w-1/4 bg-brand-color p-2 rounded-md disabled:cursor-not-allowed disabled:bg-brand-color/20"
+        >
+          ADD CARD
+        </button>
+      )}
       {error && <div className="text-red-500 font-semibold ">{error}</div>}
     </form>
   );
