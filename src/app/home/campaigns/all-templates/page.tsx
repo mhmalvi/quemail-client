@@ -89,7 +89,7 @@ const AllTemplates = () => {
             <div className=" hover:translate-y-2 duration-100 ease-in-out border border-violet-200 dark:border-light-glass 2xl:w-64 2xl:h-96 w-48 h-60 rounded-md flex flex-col items-center">
               <div
                 onClick={() => setOpenTemplateModal(true)}
-                className=" cursor-pointer w-full h-full bg-violet-50 dark:bg-dark-black overflow-hidden h-full flex items-center justify-center rounded-md text-dark-black dark:text-slate-300"
+                className=" cursor-pointer w-full bg-violet-50 dark:bg-dark-black overflow-hidden h-full flex items-center justify-center rounded-md text-dark-black dark:text-slate-300"
               >
                 <p className="p-0 m-0 text-xs 2xl:text-base font-semibold ">
                   Create a new template
@@ -102,7 +102,7 @@ const AllTemplates = () => {
                 return (
                   <div
                     key={index}
-                    className=" border border-violet-200 dark:border-light-glass 2xl:w-64 2xl:h-96 w-48 h-60 rounded-md flex flex-col items-center rounded-md overflow-hidden hover:translate-y-2 duration-100"
+                    className=" border border-violet-200 dark:border-light-glass 2xl:w-64 2xl:h-96 w-48 h-60 flex flex-col items-center rounded-md overflow-hidden hover:translate-y-2 duration-100"
                   >
                     <div className="relative w-full h-1/2 bg-[#F7F8F9] overflow-hidden flex flex-start border-b border-violet-200 dark:border-light-glass">
                       <div

@@ -273,3 +273,19 @@ export interface MailAdded {
     id: number;
   };
 }
+
+export interface Card {
+  name: string;
+  brand: string;
+  last4: number;
+  id: string;
+}
+
+export interface DeleteCardModalProps {
+  show: boolean;
+  onClose: () => void;
+  name: string;
+  brand: string;
+  digit: number;
+  id: string;
+}
