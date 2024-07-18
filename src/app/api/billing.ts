@@ -1,4 +1,3 @@
-
 import { Storage } from "@/store/store";
 export const fetchProducts = async () => {
   try {
@@ -46,7 +45,7 @@ export const fetchPriceId = async (priceId: number) => {
   }
 };
 export const getCardDetails = async () => {
-  const secretKey = process.env.NEXT_PUBLIC_STRIPE_SECRET_KEY
+  const secretKey = process.env.NEXT_PUBLIC_STRIPE_SECRET_KEY;
   const customerId = Storage.getItem("stripeCustomerID");
   try {
     const result = await fetch(
@@ -69,13 +68,54 @@ export const getCardDetails = async () => {
     return error.response;
   }
 };
-export const createCard = async (stripeToken:string) => {
-  const secretKey = process.env.NEXT_PUBLIC_STRIPE_SECRET_KEY
+
+export const getAllCardList = async () => {
+  const secretKey = process.env.NEXT_PUBLIC_STRIPE_SECRET_KEY;
+  const customerId = Storage.getItem("stripeCustomerID");
+  try {
+    const result = await fetch(
+      `https://api.stripe.com/v1/customers/${customerId}/cards`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+          Authorization: "Bearer " + secretKey,
+        },
+      }
+    );
+    if (result) {
+      const responseData = await result.json();
+      return responseData;
+    } else {
+      return null;
+    }
+  } catch (error: any) {
+    return error.response;
+  }
+};
+
+export const createCard = async (stripeToken: string, name: string) => {
+  const secretKey = process.env.NEXT_PUBLIC_STRIPE_SECRET_KEY;
   const customerId = Storage.getItem("stripeCustomerID");
 
   const data = new URLSearchParams({ source: stripeToken });
 
   try {
+    const response2 = await fetch(
+      `https://api.stripe.com/v1/customers/${customerId}/cards`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+          Authorization: `Bearer ${secretKey}`,
+        },
+      }
+    );
+
+    const result2 = await response2.json();
+
+    console.log(result2.data);
+
     const response = await fetch(
       `https://api.stripe.com/v1/customers/${customerId}/sources`,
       {
@@ -89,17 +129,49 @@ export const createCard = async (stripeToken:string) => {
     );
 
     if (!response.ok) {
-      throw new Error('Network response was not ok');
+      throw new Error("Network response was not ok");
+    }
+    const result = await response.json();
+
+    const cardId = result.id;
+
+    const data1 = new URLSearchParams({ name: name });
+
+    const response1 = await fetch(
+      `https://api.stripe.com/v1/customers/${customerId}/sources/${cardId}`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+          Authorization: `Bearer ${secretKey}`,
+        },
+        body: data1.toString(),
+      }
+    );
+
+    const result1 = await response1.json();
+
+    if (Array.isArray(result2.data)) {
+      result2.data.some((card: any) => {
+        if (result1.fingerprint === card.fingerprint) {
+          deleteCard(result1.id);
+          console.log("duplicate card detected");
+          return true; // Breaks the loop
+        }
+        return false;
+      });
+    } else {
+      console.log("result2.data is not an array");
     }
 
-    const result = await response.json();
-    return result;
+    return result1;
   } catch (error) {
     return error;
   }
 };
-export const deleteCard = async (cardId:any) => {
-  const secretKey = process.env.NEXT_PUBLIC_STRIPE_SECRET_KEY
+
+export const deleteCard = async (cardId: any) => {
+  const secretKey = process.env.NEXT_PUBLIC_STRIPE_SECRET_KEY;
   const customerId = Storage.getItem("stripeCustomerID");
 
   try {
@@ -115,7 +187,7 @@ export const deleteCard = async (cardId:any) => {
     );
 
     if (!response.ok) {
-      throw new Error('Network response was not ok');
+      throw new Error("Network response was not ok");
     }
 
     const result = await response.json();
@@ -124,8 +196,8 @@ export const deleteCard = async (cardId:any) => {
     return error;
   }
 };
-export const updateDefaultCard = async (defaultCard:any) => {
-  const secretKey = process.env.NEXT_PUBLIC_STRIPE_SECRET_KEY
+export const updateDefaultCard = async (defaultCard: any) => {
+  const secretKey = process.env.NEXT_PUBLIC_STRIPE_SECRET_KEY;
   const customerId = Storage.getItem("stripeCustomerID");
 
   const data = new URLSearchParams({ default_source: defaultCard });
@@ -144,7 +216,7 @@ export const updateDefaultCard = async (defaultCard:any) => {
     );
 
     if (!response.ok) {
-      throw new Error('Network response was not ok');
+      throw new Error("Network response was not ok");
     }
 
     const result = await response.json();
