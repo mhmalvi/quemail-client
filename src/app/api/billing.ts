@@ -1,4 +1,9 @@
 import { Storage } from "@/store/store";
+import {
+  successNotification,
+  warningNotification,
+} from "@/components/utils/utility";
+
 export const fetchProducts = async () => {
   try {
     const result = await fetch(
@@ -44,30 +49,30 @@ export const fetchPriceId = async (priceId: number) => {
     return error.response;
   }
 };
-export const getCardDetails = async () => {
-  const secretKey = process.env.NEXT_PUBLIC_STRIPE_SECRET_KEY;
-  const customerId = Storage.getItem("stripeCustomerID");
-  try {
-    const result = await fetch(
-      `https://api.stripe.com/v1/customers/${customerId}/cards`,
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
-          Authorization: "Bearer " + secretKey,
-        },
-      }
-    );
-    if (result) {
-      const responseData = await result.json();
-      return responseData;
-    } else {
-      return null;
-    }
-  } catch (error: any) {
-    return error.response;
-  }
-};
+// export const getCardDetails = async () => {
+//   const secretKey = process.env.NEXT_PUBLIC_STRIPE_SECRET_KEY;
+//   const customerId = Storage.getItem("stripeCustomerID");
+//   try {
+//     const result = await fetch(
+//       `https://api.stripe.com/v1/customers/${customerId}/cards`,
+//       {
+//         method: "GET",
+//         headers: {
+//           "Content-Type": "application/x-www-form-urlencoded",
+//           Authorization: "Bearer " + secretKey,
+//         },
+//       }
+//     );
+//     if (result) {
+//       const responseData = await result.json();
+//       return responseData;
+//     } else {
+//       return null;
+//     }
+//   } catch (error: any) {
+//     return error.response;
+//   }
+// };
 
 export const getAllCardList = async () => {
   const secretKey = process.env.NEXT_PUBLIC_STRIPE_SECRET_KEY;
@@ -94,6 +99,8 @@ export const getAllCardList = async () => {
   }
 };
 
+
+//need to update createCard function
 export const createCard = async (stripeToken: string, name: string) => {
   const secretKey = process.env.NEXT_PUBLIC_STRIPE_SECRET_KEY;
   const customerId = Storage.getItem("stripeCustomerID");
@@ -156,7 +163,7 @@ export const createCard = async (stripeToken: string, name: string) => {
         if (result1.fingerprint === card.fingerprint) {
           deleteCard(result1.id);
           console.log("duplicate card detected");
-          return true; // Breaks the loop
+          return true;
         }
         return false;
       });
@@ -187,15 +194,19 @@ export const deleteCard = async (cardId: any) => {
     );
 
     if (!response.ok) {
+      warningNotification("Network response was not ok!")
       throw new Error("Network response was not ok");
     }
 
     const result = await response.json();
+    successNotification("Deleted Card successfully!")
     return result;
   } catch (error) {
+    warningNotification("Something went wrong!")
     return error;
   }
 };
+
 export const updateDefaultCard = async (defaultCard: any) => {
   const secretKey = process.env.NEXT_PUBLIC_STRIPE_SECRET_KEY;
   const customerId = Storage.getItem("stripeCustomerID");
