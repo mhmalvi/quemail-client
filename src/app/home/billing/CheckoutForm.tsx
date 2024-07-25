@@ -8,6 +8,7 @@ import {
   Elements,
 } from "@stripe/react-stripe-js";
 import { loadStripe, StripeCardElementChangeEvent } from "@stripe/stripe-js";
+import { Storage, billingStore } from "@/store/store";
 
 const stripePublicKey = process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY;
 const stripePromise = stripePublicKey ? loadStripe(stripePublicKey) : null;
@@ -23,7 +24,6 @@ const CheckoutForm = (props: CheckoutFormProps): JSX.Element => {
   const stripe = useStripe();
   const elements = useElements();
 
-  
   const handleCardInputChange = (event: StripeCardElementChangeEvent) => {
     setDisabled(event.empty);
     setError(event.error?.message ?? "");
@@ -38,14 +38,23 @@ const CheckoutForm = (props: CheckoutFormProps): JSX.Element => {
       return;
     }
     // update api information here
-    const subscriptionResponse = await fetch("/api/create-subscription", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        customerId: props.customerId,
-        priceId: props.priceId,
-      }),
-    });
+    const subscriptionResponse = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/create-subscription`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: Storage.getItem("token"),
+        },
+        body: JSON.stringify({
+          stripeCustomerID: props.customerId,
+          priceID: props.priceId,
+          userID: Storage.getItem("userID"),
+          amount: billingStore.getState().amount,
+        }),
+      }
+    );
+
     const subscription = await subscriptionResponse.json();
     const stripePayload = await stripe.confirmCardPayment(
       subscription.clientSecret,

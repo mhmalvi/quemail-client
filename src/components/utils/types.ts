@@ -257,12 +257,14 @@ export interface FilterProps {
 }
 
 export interface BillingState {
+  amount: string | null;
   products: [] | null;
   priceId: number | null;
   checkoutModal: boolean;
   setProducts: (state: [] | null) => void;
   setPriceId: (state: number | null) => void;
   setCheckoutModal: (state: boolean) => void;
+  setAmount: (state: string | null) => void;
 }
 
 // Define the type for mailAdded
