@@ -1,11 +1,21 @@
 import { Elements } from "@stripe/react-stripe-js";
-import { Modal, Table, Tooltip } from "flowbite-react";
+import { Modal, Spinner, Table, Tooltip } from "flowbite-react";
 import { Key, useEffect, useState } from "react";
 import { loadStripe } from "@stripe/stripe-js";
 import AddCardFormWrapper from "../AddCardForm";
 import { Storage } from "@/store/store";
-import { getAllCardList, deleteCard, updateDefaultCard } from "@/app/api/billing";
-import { TbEdit, TbTrash, TbCreditCard, TbCirclePlus, TbCircleCheck } from "react-icons/tb";
+import {
+  getAllCardList,
+  deleteCard,
+  updateDefaultCard,
+} from "@/app/api/billing";
+import {
+  TbEdit,
+  TbTrash,
+  TbCreditCard,
+  TbCirclePlus,
+  TbCircleCheck,
+} from "react-icons/tb";
 import { Card, DeleteCardModalProps } from "@/components/utils/types";
 
 const stripePublicKey = process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY;
@@ -18,7 +28,7 @@ const renderDeleteCardModal = ({
   brand,
   digit,
   id,
-  onDeleteSuccess
+  onDeleteSuccess,
 }: DeleteCardModalProps & { onDeleteSuccess: () => void }) => (
   <Modal show={show} onClose={onClose} size={"3xl"}>
     <Modal.Header>
@@ -61,28 +71,33 @@ const CardDetails = () => {
   const [selectedCard, setSelectedCard] = useState<Card | null>(null);
   const customerId = Storage.getItem("stripeCustomerID");
   const [allCards, setAllCards] = useState<Card[]>([]);
+  const [tableLoading, setTableLoading] = useState<boolean>(false);
 
   const fetchAllCards = async () => {
     const res = await getAllCardList();
     if (res) {
       setAllCards(res.data);
-      console.log(res)
+      setTableLoading(false);
+      console.log(res);
     }
   };
 
   useEffect(() => {
+    setTableLoading(true);
     fetchAllCards();
   }, []);
 
   const handleDeleteSuccess = () => {
-    setAllCards((prevCards) => prevCards.filter((card) => card.id !== selectedCard?.id));
+    setAllCards((prevCards) =>
+      prevCards.filter((card) => card.id !== selectedCard?.id)
+    );
   };
 
   const handleUpdateDefaultCard = async (id: string) => {
     await updateDefaultCard(id);
     setTimeout(() => {
       window.location.reload();
-    }, 5000); // Reload the page after 5000 milliseconds (5 seconds)
+    }, 5000);
   };
 
   return (
@@ -102,59 +117,113 @@ const CardDetails = () => {
           </span>
         </button>
       </h1>
-      <div className="w-full h-full overflow-auto border rounded border-violet-200">
-        <Table hoverable striped>
-          <Table.Head className="w-full">
-            <Table.HeadCell className="w-1/3 sticky text-center">Holder Name</Table.HeadCell>
-            <Table.HeadCell className="w-1/3 sticky text-center">Brand</Table.HeadCell>
-            <Table.HeadCell className="w-1/3 sticky text-center">Last 4 Digit</Table.HeadCell>
-            <Table.HeadCell className="w-1/3 sticky text-center">Actions</Table.HeadCell>
-          </Table.Head>
-          <Table.Body className="divide-y">
-            {allCards.map((items: Card, index: Key) => (
-              <Table.Row
-                key={index}
-                className="w-full dark:border-gray-700 dark:bg-transparent cursor-pointer"
-              >
-                <Table.Cell className="w-full flex items-center justify-center text-gray-900 dark:text-white">
-                  <Tooltip content={index === 0 ? items.name + ": Default" : items.name} className="bg-brand-color text-center" placement="bottom">
-                    <div className="flex flex-row items-center gap-2">
-                      {items.name && items.name.length > 5 ? `${items.name.slice(0, 4)}...` : items.name}
-                      {index === 0 ? <TbCircleCheck className="text-green-500"></TbCircleCheck> : ""}
-                    </div>
-                  </Tooltip>
-                </Table.Cell>
-                <Table.Cell className="w-1/5 text-center">{items.brand}</Table.Cell>
-                <Table.Cell className="w-1/5 text-center">{items.last4}</Table.Cell>
-                <Table.Cell className="w-1/5 text-center">
-                  <div className="flex justify-center gap-2">
-                    {index === 0 ? "" :
-                      <Tooltip content="make default" className="bg-brand-color text-center" placement="bottom">
-                        <button className="border rounded-full border-green-500 hover:text-green-500"
-                          onClick={() => {
-                            handleUpdateDefaultCard(items.id)
-                          }}>
-                          <TbCreditCard className="m-1 transition-fill duration-200 ease-in-out" />
-                        </button>
-                      </Tooltip>}
-                    <Tooltip content="delete card" className="bg-brand-color text-center" placement="bottom">
-                      <button
-                        className="border rounded-full border-red-500 hover:text-red-500"
-                        onClick={() => {
-                          setSelectedCard(items);
-                          setDeleteCardModal(true);
-                        }}
-                      >
-                        <TbTrash className="m-1 transition-fill duration-200 ease-in-out" />
-                      </button>
+
+      {tableLoading ? (
+        <div className="flex w-full h-80 justify-center items-center">
+          <Spinner
+            color="purple"
+            aria-label="Purple spinner example"
+            size="xl"
+          />
+        </div>
+      ) : allCards.length === 0 ? (
+        <div className="flex w-full h-full border rounded border-violet-200 justify-center items-center">
+          <h1 className="xl:text-xl text-base m-0 p-0 dark:text-white text-dark-black">
+            No Card Added
+          </h1>
+        </div>
+      ) : (
+        <div className="w-full min-h-fit border rounded border-violet-200 overflow-auto">
+          <Table hoverable striped>
+            <Table.Head className="w-full">
+              <Table.HeadCell className="w-1/3 sticky text-center">
+                Name
+              </Table.HeadCell>
+              <Table.HeadCell className="w-1/3 sticky text-center">
+                Brand
+              </Table.HeadCell>
+              <Table.HeadCell className="w-1/3 sticky text-center">
+                Digit
+              </Table.HeadCell>
+              <Table.HeadCell className="w-1/3 sticky text-center">
+                Actions
+              </Table.HeadCell>
+            </Table.Head>
+            <Table.Body className="divide-y">
+              {allCards.map((items: Card, index: Key) => (
+                <Table.Row
+                  key={index}
+                  className="w-full dark:border-gray-700 dark:bg-transparent cursor-pointer"
+                >
+                  <Table.Cell className="w-full flex items-center justify-center text-gray-900 dark:text-white">
+                    <Tooltip
+                      content={
+                        index === 0 ? items.name + ": Default" : items.name
+                      }
+                      className="bg-brand-color text-center"
+                      placement="bottom"
+                    >
+                      <div className="flex flex-row items-center gap-2">
+                        {items.name && items.name.length > 5
+                          ? `${items.name.slice(0, 4)}...`
+                          : items.name}
+                        {index === 0 ? (
+                          <TbCircleCheck className="text-green-500"></TbCircleCheck>
+                        ) : (
+                          ""
+                        )}
+                      </div>
                     </Tooltip>
-                  </div>
-                </Table.Cell>
-              </Table.Row>
-            ))}
-          </Table.Body>
-        </Table>
-      </div>
+                  </Table.Cell>
+                  <Table.Cell className="w-1/5 text-center">
+                    {items.brand}
+                  </Table.Cell>
+                  <Table.Cell className="w-1/5 text-center">
+                    {items.last4}
+                  </Table.Cell>
+                  <Table.Cell className="w-1/5 text-center">
+                    <div className="flex justify-center gap-2">
+                      {index === 0 ? (
+                        ""
+                      ) : (
+                        <Tooltip
+                          content="make default"
+                          className="bg-brand-color text-center"
+                          placement="bottom"
+                        >
+                          <button
+                            className="border rounded-full border-green-500 hover:text-green-500"
+                            onClick={() => {
+                              handleUpdateDefaultCard(items.id);
+                            }}
+                          >
+                            <TbCreditCard className="m-1 transition-fill duration-200 ease-in-out" />
+                          </button>
+                        </Tooltip>
+                      )}
+                      <Tooltip
+                        content="delete card"
+                        className="bg-brand-color text-center"
+                        placement="bottom"
+                      >
+                        <button
+                          className="border rounded-full border-red-500 hover:text-red-500"
+                          onClick={() => {
+                            setSelectedCard(items);
+                            setDeleteCardModal(true);
+                          }}
+                        >
+                          <TbTrash className="m-1 transition-fill duration-200 ease-in-out" />
+                        </button>
+                      </Tooltip>
+                    </div>
+                  </Table.Cell>
+                </Table.Row>
+              ))}
+            </Table.Body>
+          </Table>
+        </div>
+      )}
 
       <Modal
         show={addCardModal}
@@ -165,7 +234,9 @@ const CardDetails = () => {
         size={"3xl"}
       >
         <Modal.Header>
-          <h1 className="text-dark-black dark:text-slate-300">Enter your card details</h1>
+          <h1 className="text-dark-black dark:text-slate-300">
+            Enter your card details
+          </h1>
         </Modal.Header>
         <Modal.Body className="dark:bg-dark-black bg-violet-50 text-slate-300 overflow-y-auto h-full">
           <Elements stripe={stripePromise}>
@@ -181,7 +252,7 @@ const CardDetails = () => {
           brand: selectedCard.brand,
           digit: selectedCard.last4,
           id: selectedCard.id,
-          onDeleteSuccess: handleDeleteSuccess
+          onDeleteSuccess: handleDeleteSuccess,
         })}
     </div>
   );
