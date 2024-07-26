@@ -1,8 +1,45 @@
-import { Storage } from "@/store/store";
+import { billingStore, Storage } from "@/store/store";
 import {
   successNotification,
   warningNotification,
 } from "@/components/utils/utility";
+import { subscriptionProps } from "@/components/utils/types";
+
+export const subscription = async (
+  stripeCustomerID: string,
+  priceID: string,
+  paymentSourceID: string
+) => {
+  try {
+    const result = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/create-subscription`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: Storage.getItem("token"),
+        },
+        body: JSON.stringify({
+          stripeCustomerID: stripeCustomerID,
+          priceID: priceID,
+          userID: Storage.getItem("userID"),
+          amount: billingStore.getState().amount,
+          paymentSourceID: paymentSourceID,
+        }),
+      }
+    );
+    if (result) {
+      const response = await result.json();
+      successNotification("Subscription Started!");
+      return response.id;
+    } else {
+      return null;
+    }
+  } catch (error: any) {
+    warningNotification("Something went wrong. Please try again!");
+    return error.response;
+  }
+};
 
 export const fetchProducts = async () => {
   try {
@@ -98,7 +135,6 @@ export const getAllCardList = async () => {
   }
 };
 
-
 //need to update createCard function
 export const createCard = async (stripeToken: string, name: string) => {
   const secretKey = process.env.NEXT_PUBLIC_STRIPE_SECRET_KEY;
@@ -109,7 +145,7 @@ export const createCard = async (stripeToken: string, name: string) => {
   try {
     //get all card information
     const response2 = await getAllCardList();
-    console.log(response2)
+    console.log(response2);
 
     const result2 = response2;
 
@@ -127,6 +163,13 @@ export const createCard = async (stripeToken: string, name: string) => {
     );
 
     if (!response.ok) {
+      const result = await response.json();
+      console.log(result.error.decline_code);
+      if (result.error.decline_code === "insufficient_funds") {
+        warningNotification("Insufficient balance in card!");
+      } else {
+        warningNotification("There was a problem. Please try again!");
+      }
       throw new Error("Network response was not ok");
     }
     const result = await response.json();
@@ -154,7 +197,7 @@ export const createCard = async (stripeToken: string, name: string) => {
       result2.data.some((card: any) => {
         if (result1.fingerprint === card.fingerprint) {
           deleteCard(result1.id);
-          warningNotification("This Card already exists!")
+          warningNotification("This Card already exists!");
           console.log("duplicate card detected");
           throw new Error("Network response was not ok");
         }
@@ -163,7 +206,7 @@ export const createCard = async (stripeToken: string, name: string) => {
     } else {
       console.log("result2.data is not an array");
     }
-    successNotification("Card added successfully!")
+    successNotification("Card added successfully!");
     return result1;
   } catch (error) {
     return error;
@@ -185,17 +228,14 @@ export const deleteCard = async (cardId: any) => {
         },
       }
     );
-
     if (!response.ok) {
-      warningNotification("Network response was not ok!")
+      warningNotification("Network response was not ok!");
       throw new Error("Network response was not ok");
     }
-
     const result = await response.json();
-    successNotification("Deleted Card successfully!")
     return result;
   } catch (error) {
-    warningNotification("Something went wrong!")
+    warningNotification("Something went wrong!");
     return error;
   }
 };

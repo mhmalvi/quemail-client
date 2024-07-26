@@ -8,11 +8,16 @@ import {
   Elements,
 } from "@stripe/react-stripe-js";
 import { loadStripe, StripeCardElementChangeEvent } from "@stripe/stripe-js";
+import { Storage, billingStore, checkout } from "@/store/store";
+import CardDetailsCheckout from "./billing-components/CardDetailsCheckout";
+import { subscription } from "@/app/api/billing";
+import { Spinner } from "flowbite-react";
 
 const stripePublicKey = process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY;
 const stripePromise = stripePublicKey ? loadStripe(stripePublicKey) : null;
 
 interface CheckoutFormProps {
+  //funny moments
   customerId: string;
   priceId: string;
 }
@@ -20,44 +25,29 @@ interface CheckoutFormProps {
 const CheckoutForm = (props: CheckoutFormProps): JSX.Element => {
   const [error, setError] = useState<string | undefined>(undefined);
   const [disabled, setDisabled] = useState(false);
+  const [loading, setLoading] = useState(false);
   const stripe = useStripe();
   const elements = useElements();
-
-  
-  const handleCardInputChange = (event: StripeCardElementChangeEvent) => {
-    setDisabled(event.empty);
-    setError(event.error?.message ?? "");
-  };
+  const cardID = checkout((state: any) => state.cardID);
 
   const handleCheckoutFormSubmit = async (
     event: ChangeEvent<HTMLFormElement>
   ) => {
     event.preventDefault();
-
+    setLoading(true);
     if (!stripe || !elements) {
       return;
     }
-    // update api information here
-    const subscriptionResponse = await fetch("/api/create-subscription", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        customerId: props.customerId,
-        priceId: props.priceId,
-      }),
-    });
-    const subscription = await subscriptionResponse.json();
-    const stripePayload = await stripe.confirmCardPayment(
-      subscription.clientSecret,
-      {
-        payment_method: {
-          card: elements.getElement(CardElement)!,
-        },
-      }
+    const subscriptionResponse = await subscription(
+      props.customerId,
+      props.priceId,
+      cardID
     );
-
-    if (stripePayload.error) {
-      setError(stripePayload.error.message);
+    if (subscriptionResponse) {
+      setLoading(false);
+      setTimeout(() => {
+        window.location.reload();
+      }, 3000);
     }
   };
 
@@ -66,17 +56,18 @@ const CheckoutForm = (props: CheckoutFormProps): JSX.Element => {
       onSubmit={handleCheckoutFormSubmit}
       className="w-full flex flex-col gap-4 items-center"
     >
-      <CardElement
-        onChange={handleCardInputChange}
-        className="p-4 bg-white rounded-md w-full"
-      />
-      <button
-        disabled={!stripe || disabled}
-        type="submit"
-        className="w-1/4 bg-brand-color p-2 rounded-md disabled:cursor-not-allowed disabled:bg-brand-color/20"
-      >
-        Pay Now
-      </button>
+      <CardDetailsCheckout />
+      {loading ? (
+        <Spinner color="purple" aria-label="Purple spinner example" size="xl" />
+      ) : (
+        <button
+          disabled={!stripe || disabled}
+          type="submit"
+          className="w-1/4 bg-brand-color p-2 rounded-md disabled:cursor-not-allowed disabled:bg-brand-color/20"
+        >
+          Pay Now
+        </button>
+      )}
       {error && <div className="text-red-500 font-semibold ">{error}</div>}
     </form>
   );
