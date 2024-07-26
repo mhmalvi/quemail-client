@@ -1,3 +1,5 @@
+import { Key } from "react";
+
 export interface DashboardLayoutProps {
   children: React.ReactNode;
   backgroundImage: string;
@@ -276,11 +278,25 @@ export interface MailAdded {
   };
 }
 
+export interface checkoutProps {
+  cardID: string | null;
+  index: Key | null;
+  setCardID: (state: string | null) => void;
+  setIndex: (state: Key | null) => void;
+}
+
 export interface Card {
   name: string;
   brand: string;
   last4: number;
   id: string;
+}
+
+export interface subscriptionProps {
+  stripeCustomerID: string;
+  priceID: string;
+  amount: number;
+  paymentSourceID: string;
 }
 
 export interface DeleteCardModalProps {
