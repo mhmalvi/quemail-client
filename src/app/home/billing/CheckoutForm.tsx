@@ -17,6 +17,7 @@ const stripePublicKey = process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY;
 const stripePromise = stripePublicKey ? loadStripe(stripePublicKey) : null;
 
 interface CheckoutFormProps {
+  //funny moments
   customerId: string;
   priceId: string;
 }
