@@ -11,7 +11,6 @@ import { loadStripe, StripeCardElementChangeEvent } from "@stripe/stripe-js";
 import { createCard, getAllCardList } from "@/app/api/billing";
 import { Spinner } from "flowbite-react";
 
-
 const stripePublicKey = process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY;
 const stripePromise = stripePublicKey ? loadStripe(stripePublicKey) : null;
 
@@ -78,7 +77,7 @@ const CheckoutForm = (props: AddCardFormProps): JSX.Element => {
         console.log("Card added successfully:", result);
         setTimeout(() => {
           window.location.reload();
-        }, 5000);
+        }, 3000);
       }
     } catch (error) {
       console.log(error);
@@ -103,11 +102,7 @@ const CheckoutForm = (props: AddCardFormProps): JSX.Element => {
         className="p-4 bg-white rounded-md w-full text-dark-black"
       />
       {loading ? (
-        <Spinner
-          color="purple"
-          aria-label="Purple spinner example"
-          size="xl"
-        />
+        <Spinner color="purple" aria-label="Purple spinner example" size="xl" />
       ) : (
         <button
           disabled={!stripe || disabled}

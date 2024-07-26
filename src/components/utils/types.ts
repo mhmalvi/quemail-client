@@ -1,3 +1,5 @@
+import { Key } from "react";
+
 export interface DashboardLayoutProps {
   children: React.ReactNode;
   backgroundImage: string;
@@ -257,12 +259,14 @@ export interface FilterProps {
 }
 
 export interface BillingState {
+  amount: string | null;
   products: [] | null;
   priceId: number | null;
   checkoutModal: boolean;
   setProducts: (state: [] | null) => void;
   setPriceId: (state: number | null) => void;
   setCheckoutModal: (state: boolean) => void;
+  setAmount: (state: string | null) => void;
 }
 
 // Define the type for mailAdded
@@ -274,11 +278,25 @@ export interface MailAdded {
   };
 }
 
+export interface checkoutProps {
+  cardID: string | null;
+  index: Key | null;
+  setCardID: (state: string | null) => void;
+  setIndex: (state: Key | null) => void;
+}
+
 export interface Card {
   name: string;
   brand: string;
   last4: number;
   id: string;
+}
+
+export interface subscriptionProps {
+  stripeCustomerID: string;
+  priceID: string;
+  amount: number;
+  paymentSourceID: string;
 }
 
 export interface DeleteCardModalProps {

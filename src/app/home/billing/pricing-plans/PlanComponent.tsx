@@ -13,13 +13,14 @@ interface planProps {
     ticked: boolean;
     content: string;
   }[];
-  priceId:number 
+  priceId: number;
 }
 const PlanComponent = (props: planProps) => {
-  const { heading, price, planType, item,priceId } = props;
+  const { heading, price, planType, item, priceId } = props;
 
   const setCheckoutModal = billingStore((state) => state.setCheckoutModal);
   const setPriceId = billingStore((state) => state.setPriceId);
+  const setAmount = billingStore((state) => state.setAmount);
   return (
     <div className="bg-violet-50 hover:bg-violet-200 dark:hover:bg-light-glass duration-100 ease-in-out border border-violet-200 dark:border-light-glass dark:bg-dark-black h-full w-full rounded-md flex flex-col items-center p-4">
       <h1 className="h-1/6 p-0 m-0 text-4xl font-semibold text-dark-black dark:text-slate-300 flex items-center">
@@ -43,9 +44,10 @@ const PlanComponent = (props: planProps) => {
         <div className="h-1/6 w-full py-4">
           <button
             disabled={planType === "Current Plan"}
-            onClick={()=>{
-                setCheckoutModal(true)
-                setPriceId(priceId)
+            onClick={() => {
+              setCheckoutModal(true);
+              setPriceId(priceId);
+              setAmount(price);
             }}
             className="w-full h-full border disabled:border-voilet-200 disabled:dark:border-light-glass dark:border-light-glass disabled:hover:bg-violet-200 disabled:bg-violet-200 disabled:dark:bg-dark-black/50 hover:bg-dark-black duration-100 ease-in-out bg-brand-color rounded-md disabled:text-dark-black/60  disabled:dark:text-slate-300/60 disabled:cursor-not-allowed cursor-pointer text-slate-300"
           >
