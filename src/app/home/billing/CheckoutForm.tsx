@@ -29,6 +29,7 @@ const CheckoutForm = (props: CheckoutFormProps): JSX.Element => {
   const stripe = useStripe();
   const elements = useElements();
   const cardID = checkout((state: any) => state.cardID);
+  const index = checkout((state: any) => state.index);
 
   const handleCheckoutFormSubmit = async (
     event: ChangeEvent<HTMLFormElement>
@@ -43,6 +44,7 @@ const CheckoutForm = (props: CheckoutFormProps): JSX.Element => {
       props.priceId,
       cardID
     );
+    console.log(subscriptionResponse);
     if (subscriptionResponse) {
       setLoading(false);
       setTimeout(() => {
