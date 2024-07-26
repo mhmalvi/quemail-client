@@ -13,6 +13,7 @@ import {
   TourState,
   compareCampaignState,
   BillingState,
+  checkoutProps
 } from "@/components/utils/types";
 import { create } from "zustand";
 
@@ -247,5 +248,16 @@ export const billingStore = create<BillingState>((set) => ({
   },
   setAmount(state) {
     set(() => ({ amount: state }));
+  },
+}));
+
+export const checkout = create<checkoutProps>((set) => ({
+  cardID: null,
+  index: null,
+  setCardID(state) {
+    set(() => ({ cardID: state }));
+  },
+  setIndex(state) {
+    set(() => ({ index: state }));
   },
 }));

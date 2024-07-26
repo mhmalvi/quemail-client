@@ -17,6 +17,7 @@ import {
   TbCircleCheck,
 } from "react-icons/tb";
 import { Card, DeleteCardModalProps } from "@/components/utils/types";
+import { successNotification } from "@/components/utils/utility";
 
 const stripePublicKey = process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY;
 const stripePromise = stripePublicKey ? loadStripe(stripePublicKey) : null;
@@ -54,6 +55,7 @@ const renderDeleteCardModal = ({
           onClick={() => {
             deleteCard(id).then(() => {
               onDeleteSuccess();
+              successNotification("Card deleted!");
               onClose();
             });
           }}
