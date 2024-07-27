@@ -145,10 +145,7 @@ export const createCard = async (stripeToken: string, name: string) => {
   try {
     //get all card information
     const response2 = await getAllCardList();
-    console.log(response2);
-
     const result2 = response2;
-
     //create the card
     const response = await fetch(
       `https://api.stripe.com/v1/customers/${customerId}/sources`,
@@ -161,18 +158,11 @@ export const createCard = async (stripeToken: string, name: string) => {
         body: data.toString(),
       }
     );
+    const result = await response.json();
 
     if (!response.ok) {
-      const result = await response.json();
-      console.log(result.error.decline_code);
-      if (result.error.decline_code === "insufficient_funds") {
-        warningNotification("Insufficient balance in card!");
-      } else {
-        warningNotification("There was a problem. Please try again!");
-      }
-      throw new Error("Network response was not ok");
+      return result;
     }
-    const result = await response.json();
 
     const cardId = result.id;
 
@@ -193,20 +183,21 @@ export const createCard = async (stripeToken: string, name: string) => {
 
     const result1 = await response1.json();
 
+    if (!response1.ok) {
+      return result1;
+    }
+
     if (Array.isArray(result2.data)) {
       result2.data.some((card: any) => {
         if (result1.fingerprint === card.fingerprint) {
           deleteCard(result1.id);
-          warningNotification("This Card already exists!");
-          console.log("duplicate card detected");
-          throw new Error("Network response was not ok");
+          throw new Error("duplicate");
         }
         return false;
       });
     } else {
       console.log("result2.data is not an array");
     }
-    successNotification("Card added successfully!");
     return result1;
   } catch (error) {
     return error;
