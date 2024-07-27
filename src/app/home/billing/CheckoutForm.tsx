@@ -63,7 +63,7 @@ const CheckoutForm = (props: CheckoutFormProps): JSX.Element => {
         <Spinner color="purple" aria-label="Purple spinner example" size="xl" />
       ) : (
         <button
-          disabled={!stripe || disabled}
+          disabled={!stripe || disabled || index == null}
           type="submit"
           className="w-1/4 bg-brand-color p-2 rounded-md disabled:cursor-not-allowed disabled:bg-brand-color/20"
         >
