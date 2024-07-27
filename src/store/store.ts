@@ -13,7 +13,8 @@ import {
   TourState,
   compareCampaignState,
   BillingState,
-  checkoutProps
+  checkoutProps,
+  subscriptionDetailsProps,
 } from "@/components/utils/types";
 import { create } from "zustand";
 
@@ -259,5 +260,16 @@ export const checkout = create<checkoutProps>((set) => ({
   },
   setIndex(state) {
     set(() => ({ index: state }));
+  },
+}));
+
+export const subsciption = create<subscriptionDetailsProps>((set) => ({
+  subscriptonID: null,
+  plan: null,
+  setSubscriptonID(state) {
+    set(() => ({ subscriptonID: state }));
+  },
+  setPlan(state) {
+    set(() => ({ plan: state }));
   },
 }));

@@ -41,6 +41,32 @@ export const subscription = async (
   }
 };
 
+export const subscriptionDetails = async () => {
+  const secretKey = process.env.NEXT_PUBLIC_STRIPE_SECRET_KEY;
+  const subscriptionId = Storage.getItem("subscription");
+  try {
+    const result = await fetch(
+      `https://api.stripe.com/v1/subscriptions/${subscriptionId}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+          Authorization: "Bearer " + secretKey,
+        },
+      }
+    );
+    if (result) {
+      const responseData = await result.json();
+      console.log(responseData);
+      return responseData;
+    } else {
+      return null;
+    }
+  } catch (error: any) {
+    return error.response;
+  }
+};
+
 export const fetchProducts = async () => {
   try {
     const result = await fetch(
