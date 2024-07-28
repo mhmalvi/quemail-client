@@ -8,6 +8,7 @@ import {
   getAllCardList,
   deleteCard,
   updateDefaultCard,
+  stripeINFO,
 } from "@/app/api/billing";
 import {
   TbEdit,
@@ -75,15 +76,17 @@ const CardDetails = () => {
   const [addCardModal, setAddCardModal] = useState<boolean>(false);
   const [deleteCardModal, setDeleteCardModal] = useState<boolean>(false);
   const [selectedCard, setSelectedCard] = useState<Card | null>(null);
-  const customerId = Storage.getItem("stripeCustomerID");
   const [allCards, setAllCards] = useState<Card[]>([]);
   const [tableLoading, setTableLoading] = useState<boolean>(false);
+  const [customerId, setCustomerID] = useState<any>(null);
 
   const fetchAllCards = async () => {
     const res = await getAllCardList();
-    if (res) {
+    const res1 = await stripeINFO();
+    if (res && res1) {
       setAllCards(res.data);
       setTableLoading(false);
+      setCustomerID(res1.stripeCustomerID);
       console.log(res);
     }
   };

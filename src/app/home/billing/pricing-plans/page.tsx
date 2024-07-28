@@ -1,7 +1,7 @@
 "use client";
 
 import { CONTAINER_STYLES } from "@/components/styles/flex_container";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import PlanComponent from "./PlanComponent";
 import {
   pricingplan1,
@@ -12,7 +12,7 @@ import {
 import { billingStore } from "@/store/store";
 import { Modal } from "flowbite-react";
 import CheckoutFormWrapper from "../CheckoutForm";
-import { fetchPriceId, fetchProducts } from "@/app/api/billing";
+import { fetchPriceId, fetchProducts, stripeINFO } from "@/app/api/billing";
 import { Storage } from "@/store/store";
 
 const PricingPlans = () => {
@@ -21,12 +21,13 @@ const PricingPlans = () => {
   const setProducts = billingStore((state: any) => state.setProducts);
   const products = billingStore((state: any) => state.products);
   const priceId = billingStore((state: any) => state.priceId);
-  const customerId = Storage.getItem("stripeCustomerID");
+  const [customerId, setCustomerID] = useState<string>("");
 
   useEffect(() => {
     (async () => {
       const res = await fetchProducts();
-      if (res) {
+      const res1 = await stripeINFO();
+      if (res && res1) {
         const pricePromises = res.map((product: { default_price: number }) =>
           fetchPriceId(product.default_price)
         );
@@ -39,6 +40,7 @@ const PricingPlans = () => {
           })
         );
         setProducts(productsWithPrices);
+        setCustomerID(res1.stripeCustomerID);
       }
     })();
   }, [setProducts]);

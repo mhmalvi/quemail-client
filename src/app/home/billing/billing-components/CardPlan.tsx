@@ -1,7 +1,7 @@
 import { Storage } from "@/store/store";
 import { subscriptionDetails } from "@/app/api/billing";
 
-const CardPlan = async () => {
+const CardPlan = () => {
   const priceID = Storage.getItem("priceID");
 
   return (
