@@ -45,14 +45,14 @@ const Campaigns = () => {
         </Link>
       </button>
       <button className="w-1/3 flex flex-col items-center justify-center dark:text-slate-300 text-dark-black p-2 border border-violet-200 dark:border-light-glass rounded-md dark:hover:bg-dark-black hover:bg-violet-50 duration-100 ease-in">
-        <Link href="/home/campaigns/campaign-performance">
+        <Link href="/home/campaigns/compare-email-performance">
           <Image
             alt="allTemplates"
             src={Images.AllCampaigns}
             className="w-full"
           />
           <h1 className="m-0 p-0 dark:text-slate-300 text-dark-black xl:text-2xl text-xl">
-            Campaign Performance
+            Compare Performance
           </h1>
         </Link>
       </button>

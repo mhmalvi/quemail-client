@@ -10,6 +10,10 @@ import {
 import { loadStripe, StripeCardElementChangeEvent } from "@stripe/stripe-js";
 import { createCard, getAllCardList } from "@/app/api/billing";
 import { Spinner } from "flowbite-react";
+import {
+  successNotification,
+  warningNotification,
+} from "@/components/utils/utility";
 
 const stripePublicKey = process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY;
 const stripePromise = stripePublicKey ? loadStripe(stripePublicKey) : null;
@@ -53,6 +57,7 @@ const CheckoutForm = (props: AddCardFormProps): JSX.Element => {
 
     setLoading(true);
     setError(undefined);
+    setDisabled(true);
 
     const { token, error: stripeError } = await stripe.createToken(cardElement);
 
@@ -70,14 +75,17 @@ const CheckoutForm = (props: AddCardFormProps): JSX.Element => {
 
     try {
       const result = await createCard(token.id, cardHolderName);
-
       if (result.error) {
         setError(result.error.message);
+        setDisabled(false);
+      } else if (result.message === "duplicate") {
+        setError("This card already exist!");
+        setDisabled(false);
       } else {
-        console.log("Card added successfully:", result);
         setTimeout(() => {
           window.location.reload();
         }, 3000);
+        successNotification("Card added successfully!");
       }
     } catch (error) {
       console.log(error);

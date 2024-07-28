@@ -36,6 +36,7 @@ const CheckoutForm = (props: CheckoutFormProps): JSX.Element => {
   ) => {
     event.preventDefault();
     setLoading(true);
+    setDisabled(true);
     if (!stripe || !elements) {
       return;
     }

@@ -16,6 +16,7 @@ const Authenticate = () => {
   const subscription = searchParams.get("subscription");
   const stripeCustomerID = searchParams.get("stripeCustomerID");
   const first_user = searchParams.get("first_user");
+  const priceID = searchParams.get("priceID");
 
   if (
     token &&
@@ -25,7 +26,8 @@ const Authenticate = () => {
     userID &&
     first_user &&
     stripeCustomerID &&
-    subscription
+    subscription &&
+    priceID
   ) {
     Storage.setItem("userName", userName);
     Storage.setItem("email", email);
@@ -35,6 +37,7 @@ const Authenticate = () => {
     Storage.setItem("subscription", subscription);
     Storage.setItem("stripeCustomerID", stripeCustomerID);
     Storage.setItem("first_user", Number(first_user));
+    Storage.setItem("priceID", priceID);
     router.push("/home");
   }
 
