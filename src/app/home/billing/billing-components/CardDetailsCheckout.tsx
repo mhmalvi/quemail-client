@@ -35,7 +35,7 @@ const CardDetailsCheckout = () => {
   };
 
   return (
-    <div className="bg-white step-3 summary-element w-full dark:bg-light-glass backdrop-blur-xl dark:border-none border border-violet-200 rounded-md overflow-hidden p-4 flex flex-col gap-2">
+    <div className="bg-white step-3 summary-element w-full dark:bg-light-glass backdrop-blur-xl dark:border-none overflow-hidden flex flex-col">
       {tableLoading ? (
         <div className="flex w-full h-80 justify-center items-center">
           <Spinner
@@ -51,7 +51,7 @@ const CardDetailsCheckout = () => {
           </h1>
         </div>
       ) : (
-        <div className="w-full min-h-fit border rounded border-violet-200 overflow-auto">
+        <div className="w-full h-full overflow-auto">
           <Table hoverable striped>
             <Table.Head className="w-full">
               <Table.HeadCell className="w-1/3 sticky text-center">

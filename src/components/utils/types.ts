@@ -285,6 +285,13 @@ export interface checkoutProps {
   setIndex: (state: Key | null) => void;
 }
 
+export interface subscriptionDetailsProps {
+  subscriptonID: string | null;
+  plan: string | null;
+  setSubscriptonID: (state: string | null) => void;
+  setPlan: (state: string | null) => void;
+}
+
 export interface Card {
   name: string;
   brand: string;

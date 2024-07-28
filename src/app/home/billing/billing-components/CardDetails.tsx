@@ -18,6 +18,10 @@ import {
 } from "react-icons/tb";
 import { Card, DeleteCardModalProps } from "@/components/utils/types";
 import { successNotification } from "@/components/utils/utility";
+import {
+  BIG_BUTTON_STYLES,
+  BORDERED_BUTTON_STYLES,
+} from "@/components/styles/button";
 
 const stripePublicKey = process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY;
 const stripePromise = stripePublicKey ? loadStripe(stripePublicKey) : null;
@@ -109,7 +113,7 @@ const CardDetails = () => {
       </h1>
       <h1 className="text-base m-0 p-0 dark:text-white text-dark-black flex justify-end gap-4">
         <button
-          className="w-1/8 h-full flex flex-col justify-center 2xl:p-2 py-1 px-2 rounded-md 2xl:text-sm text-xs text-dark-black dark:text-white hover:text-white border border-slate-300 hover:bg-violet-500 bg-transparent duration-100 ease-in-out"
+          className={`${BORDERED_BUTTON_STYLES} hover:bg-brand-color hover:text-white cursor-pointer`}
           onClick={() => {
             setAddCardModal(true);
           }}
@@ -135,7 +139,7 @@ const CardDetails = () => {
           </h1>
         </div>
       ) : (
-        <div className="w-full min-h-fit border rounded border-violet-200 overflow-auto">
+        <div className="w-full h-full overflow-auto">
           <Table hoverable striped>
             <Table.Head className="w-full">
               <Table.HeadCell className="w-1/3 sticky text-center">
