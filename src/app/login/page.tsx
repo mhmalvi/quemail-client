@@ -87,12 +87,14 @@ const Login = () => {
               onClick={() => handleGoogleClick()}
             >
               <Image src={Images.Google} alt="GoogleLogo" className="w-1/12" />
-              <h1 className="m-0 p-0 text-slate-300">Login with Google</h1>
+              <h1 className="m-0 p-0 text-slate-300">Continue with Google</h1>
             </button>
 
             <div className="flex w-full items-center justify-center gap-4">
               <div className="w-full h-0.5 bg-slate-400"></div>
-              <h1 className="m-0 p-0 text-slate-400">or</h1>
+              <h1 className="w-full m-0 p-0 text-slate-400 text-center">
+                Or login with
+              </h1>
               <div className="w-full h-0.5 bg-slate-400"></div>
             </div>
             <form
