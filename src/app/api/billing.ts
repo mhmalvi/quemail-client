@@ -41,8 +41,35 @@ export const subscription = async (
   }
 };
 
+export const stripeSubscriptionInfo = async () => {
+  const secretKey = process.env.NEXT_PUBLIC_STRIPE_SECRET_KEY;
+  const res = await stripeINFO();
+  if (res.message !== "success") {
+    throw new Error(res.message);
+  }
+  try {
+    const result = await fetch(
+      `https://api.stripe.com/v1/products/${res.productID}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+          Authorization: "Bearer " + secretKey,
+        },
+      }
+    );
+    if (result) {
+      const responseData = await result.json();
+      return responseData;
+    } else {
+      return null;
+    }
+  } catch (error: any) {
+    return error.response;
+  }
+};
+
 export const stripeINFO = async () => {
-  console.log("insdie stripeINFO");
   const userID = Storage.getItem("userID");
   try {
     const result = await fetch(`https://backend.quemailer.com/api/getID`, {
@@ -57,7 +84,6 @@ export const stripeINFO = async () => {
     });
     if (result) {
       const responseData = await result.json();
-      console.log(responseData);
       return responseData;
     } else {
       return null;
@@ -73,8 +99,7 @@ export const subscriptionDetails = async () => {
   if (res.message !== "success") {
     throw new Error(res.message);
   }
-  console.log(res);
-  const subscriptionId = res.subscription;
+  const subscriptionId = res.subscriptionID;
   try {
     const result = await fetch(
       `https://api.stripe.com/v1/subscriptions/${subscriptionId}`,
@@ -88,7 +113,6 @@ export const subscriptionDetails = async () => {
     );
     if (result) {
       const responseData = await result.json();
-      console.log(responseData);
       return responseData;
     } else {
       return null;
@@ -147,7 +171,6 @@ export const fetchPriceId = async (priceId: number) => {
 export const getAllCardList = async () => {
   const secretKey = process.env.NEXT_PUBLIC_STRIPE_SECRET_KEY;
   const res = await stripeINFO();
-  console.log(res);
   if (res) {
     try {
       const result = await fetch(
