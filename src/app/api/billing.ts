@@ -41,9 +41,40 @@ export const subscription = async (
   }
 };
 
+export const stripeINFO = async () => {
+  console.log("insdie stripeINFO");
+  const userID = Storage.getItem("userID");
+  try {
+    const result = await fetch(`https://backend.quemailer.com/api/getID`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: Storage.getItem("token"),
+      },
+      body: JSON.stringify({
+        userID: userID,
+      }),
+    });
+    if (result) {
+      const responseData = await result.json();
+      console.log(responseData);
+      return responseData;
+    } else {
+      return null;
+    }
+  } catch (error: any) {
+    return error.response;
+  }
+};
+
 export const subscriptionDetails = async () => {
   const secretKey = process.env.NEXT_PUBLIC_STRIPE_SECRET_KEY;
-  const subscriptionId = Storage.getItem("subscription");
+  const res = await stripeINFO();
+  if (res.message !== "success") {
+    throw new Error(res.message);
+  }
+  console.log(res);
+  const subscriptionId = res.subscription;
   try {
     const result = await fetch(
       `https://api.stripe.com/v1/subscriptions/${subscriptionId}`,
@@ -112,69 +143,52 @@ export const fetchPriceId = async (priceId: number) => {
     return error.response;
   }
 };
-//   const secretKey = process.env.NEXT_PUBLIC_STRIPE_SECRET_KEY;
-//   const customerId = Storage.getItem("stripeCustomerID");
-//   try {
-//     const result = await fetch(
-//       `https://api.stripe.com/v1/customers/${customerId}/cards`,
-//       {
-//         method: "GET",
-//         headers: {
-//           "Content-Type": "application/x-www-form-urlencoded",
-//           Authorization: "Bearer " + secretKey,
-//         },
-//       }
-//     );
-//     if (result) {
-//       const responseData = await result.json();
-//       return responseData;
-//     } else {
-//       return null;
-//     }
-//   } catch (error: any) {
-//     return error.response;
-//   }
-// };
 
 export const getAllCardList = async () => {
   const secretKey = process.env.NEXT_PUBLIC_STRIPE_SECRET_KEY;
-  const customerId = Storage.getItem("stripeCustomerID");
-  try {
-    const result = await fetch(
-      `https://api.stripe.com/v1/customers/${customerId}/cards`,
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
-          Authorization: "Bearer " + secretKey,
-        },
+  const res = await stripeINFO();
+  console.log(res);
+  if (res) {
+    try {
+      const result = await fetch(
+        `https://api.stripe.com/v1/customers/${res.stripeCustomerID}/cards`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+            Authorization: "Bearer " + secretKey,
+          },
+        }
+      );
+      if (result) {
+        const responseData = await result.json();
+        return responseData;
+      } else {
+        return null;
       }
-    );
-    if (result) {
-      const responseData = await result.json();
-      return responseData;
-    } else {
-      return null;
+    } catch (error: any) {
+      return error.response;
     }
-  } catch (error: any) {
-    return error.response;
   }
 };
 
 //need to update createCard function
 export const createCard = async (stripeToken: string, name: string) => {
   const secretKey = process.env.NEXT_PUBLIC_STRIPE_SECRET_KEY;
-  const customerId = Storage.getItem("stripeCustomerID");
+  const res = await stripeINFO();
 
   const data = new URLSearchParams({ source: stripeToken });
 
+  if (res.message !== "success") {
+    throw new Error(res.message);
+  }
   try {
     //get all card information
     const response2 = await getAllCardList();
     const result2 = response2;
     //create the card
     const response = await fetch(
-      `https://api.stripe.com/v1/customers/${customerId}/sources`,
+      `https://api.stripe.com/v1/customers/${res.stripeCustomerID}/sources`,
       {
         method: "POST",
         headers: {
@@ -196,7 +210,7 @@ export const createCard = async (stripeToken: string, name: string) => {
 
     //update the card with name
     const response1 = await fetch(
-      `https://api.stripe.com/v1/customers/${customerId}/sources/${cardId}`,
+      `https://api.stripe.com/v1/customers/${res.stripeCustomerID}/sources/${cardId}`,
       {
         method: "POST",
         headers: {
@@ -232,11 +246,15 @@ export const createCard = async (stripeToken: string, name: string) => {
 
 export const deleteCard = async (cardId: any) => {
   const secretKey = process.env.NEXT_PUBLIC_STRIPE_SECRET_KEY;
-  const customerId = Storage.getItem("stripeCustomerID");
+  const res = await stripeINFO();
+
+  if (res.message !== "success") {
+    throw new Error(res.message);
+  }
 
   try {
     const response = await fetch(
-      `https://api.stripe.com/v1/customers/${customerId}/sources/${cardId}`,
+      `https://api.stripe.com/v1/customers/${res.stripeCustomerID}/sources/${cardId}`,
       {
         method: "DELETE",
         headers: {
@@ -259,13 +277,17 @@ export const deleteCard = async (cardId: any) => {
 
 export const updateDefaultCard = async (defaultCard: any) => {
   const secretKey = process.env.NEXT_PUBLIC_STRIPE_SECRET_KEY;
-  const customerId = Storage.getItem("stripeCustomerID");
+  const res = await stripeINFO();
+
+  // if (res.message !== "success") {
+  //   throw new Error(res.message);
+  // }
 
   const data = new URLSearchParams({ default_source: defaultCard });
 
   try {
     const response = await fetch(
-      `https://api.stripe.com/v1/customers/${customerId}`,
+      `https://api.stripe.com/v1/customers/${res.stripeCustomerID}`,
       {
         method: "POST",
         headers: {
