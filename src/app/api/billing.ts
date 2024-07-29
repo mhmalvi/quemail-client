@@ -69,7 +69,12 @@ export const stripeINFO = async () => {
 
 export const subscriptionDetails = async () => {
   const secretKey = process.env.NEXT_PUBLIC_STRIPE_SECRET_KEY;
-  const subscriptionId = Storage.getItem("subscription");
+  const res = await stripeINFO();
+  if (res.message !== "success") {
+    throw new Error(res.message);
+  }
+  console.log(res);
+  const subscriptionId = res.subscription;
   try {
     const result = await fetch(
       `https://api.stripe.com/v1/subscriptions/${subscriptionId}`,
