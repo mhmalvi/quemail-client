@@ -93,6 +93,42 @@ export const stripeINFO = async () => {
   }
 };
 
+export const stripeInvoiceHistory = async (status: string, limit: string) => {
+  const userID = Storage.getItem("userID");
+  const res = await stripeINFO();
+  console.log(res);
+  if (res.message !== "success") {
+    throw new Error(res.message);
+  }
+  const customerID = res.stripeCustomerID;
+  try {
+    const result = await fetch(
+      `https://backend.quemailer.com/api/customer-invoices`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: Storage.getItem("token"),
+        },
+        body: JSON.stringify({
+          userID: userID,
+          stripeCustomerID: customerID,
+          status: status,
+          limit: limit,
+        }),
+      }
+    );
+    if (result) {
+      const responseData = await result.json();
+      return responseData;
+    } else {
+      return null;
+    }
+  } catch (error: any) {
+    return error.response;
+  }
+};
+
 export const subscriptionDetails = async () => {
   const secretKey = process.env.NEXT_PUBLIC_STRIPE_SECRET_KEY;
   const res = await stripeINFO();
