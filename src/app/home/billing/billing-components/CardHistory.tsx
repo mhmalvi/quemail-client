@@ -1,5 +1,5 @@
 import { stripeInvoiceHistory } from "@/app/api/billing";
-import { Table } from "flowbite-react";
+import { Table, Tooltip } from "flowbite-react";
 import { Key, useEffect, useState } from "react";
 import { TbCaretLeftRight, TbDownload } from "react-icons/tb";
 import { Dropdown } from "flowbite-react";
@@ -164,8 +164,6 @@ const CardHistory = () => {
                   {expanded ? (
                     <>
                       <Table.Cell className="w-1/4 text-center">
-                        {/* const startDate: Date = new Date(res1.current_period_start * 1000);
-                  setCreatedTime(startDate); */}
                         {new Date(items.created * 1000).toLocaleString()}
                       </Table.Cell>
                       <Table.Cell className="w-1/4 text-center">
@@ -177,9 +175,17 @@ const CardHistory = () => {
                       <Table.Cell className="w-1/4 text-center">
                         <button
                           className="border rounded-full border-green-500 hover:text-green-500"
-                          onClick={() => {}}
+                          onClick={() => {
+                            window.open(items.hosted_invoice_url);
+                          }}
                         >
-                          <TbDownload className="m-1 transition-fill duration-200 ease-in-out" />
+                          <Tooltip
+                            content={"Download"}
+                            className="bg-brand-color text-center"
+                            placement="bottom"
+                          >
+                            <TbDownload className="m-1 transition-fill duration-200 ease-in-out" />
+                          </Tooltip>
                         </button>
                       </Table.Cell>
                     </>

@@ -11,7 +11,7 @@ import CardResources from "./billing-components/CardResources";
 const Billing = () => {
   return (
     <div className="relative w-full h-full rounded-md flex flex-col gap-4">
-      <div className="h-full w-full flex flex-row gap-4 overflow-auto">
+      <div className="h-full w-full flex flex-row gap-4">
         <div className="h-full w-full flex flex-col gap-4">
           <div className="h-full w-full flex flex-row gap-4 overflow-auto">
             <div className=" w-full flex">
