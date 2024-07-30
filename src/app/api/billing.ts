@@ -44,7 +44,7 @@ export const subscription = async (
 export const stripeSubscriptionInfo = async () => {
   const secretKey = process.env.NEXT_PUBLIC_STRIPE_SECRET_KEY;
   const res = await stripeINFO();
-  if (res.message !== "success") {
+  if (res && res.message !== "success") {
     throw new Error(res.message);
   }
   try {

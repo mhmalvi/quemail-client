@@ -35,7 +35,7 @@ const CardHistory = () => {
 
   return (
     <div
-      className={`step-4 border dark:border-none border-violet-200 h-full ${
+      className={`step-4 border dark:border-none border-violet-200 ${
         expanded ? "xl:w-full w-full" : "xl:w-1/4 w-1/3"
       } dark:bg-light-glass bg-white shadow-md backdrop-blur-xl rounded-md p-4 flex flex-col gap-4`}
     >
@@ -64,7 +64,7 @@ const CardHistory = () => {
           renderTrigger={() => (
             <div className="px-4 py-1 rounded-md border border-brand-color cursor-pointer overflow-hidden">
               <h1 className="flex items-center justify-center gap-4 duration-100 ease-in text-dark-black dark:text-slate-300 xl:text-base text-sm ">
-                Status <span className="text-xs">▼</span>
+                {status} <span className="text-xs">▼</span>
               </h1>
             </div>
           )}
@@ -93,7 +93,7 @@ const CardHistory = () => {
           renderTrigger={() => (
             <div className="px-4 py-1 rounded-md border border-brand-color cursor-pointer overflow-hidden">
               <h1 className="flex items-center justify-center gap-4 duration-100 ease-in text-dark-black dark:text-slate-300 xl:text-base text-sm ">
-                Limit <span className="text-xs">▼</span>
+                {limit} <span className="text-xs">▼</span>
               </h1>
             </div>
           )}
@@ -125,7 +125,7 @@ const CardHistory = () => {
           </Dropdown.Item>
         </Dropdown>
       </div>
-      <div className="w-full h-96 overflow-auto">
+      <div className="w-full h-full overflow-auto">
         <Table hoverable striped>
           <Table.Head className="w-full">
             {expanded ? (

@@ -42,17 +42,23 @@ const PlanComponent = (props: planProps) => {
           </p>
         </div>
         <div className="h-1/6 w-full py-4">
-          <button
-            disabled={planType === "Current Plan"}
-            onClick={() => {
-              setCheckoutModal(true);
-              setPriceId(priceId);
-              setAmount(price);
-            }}
-            className="w-full h-full border disabled:border-voilet-200 disabled:dark:border-light-glass dark:border-light-glass disabled:hover:bg-violet-200 disabled:bg-violet-200 disabled:dark:bg-dark-black/50 hover:bg-dark-black duration-100 ease-in-out bg-brand-color rounded-md disabled:text-dark-black/60  disabled:dark:text-slate-300/60 disabled:cursor-not-allowed cursor-pointer text-slate-300"
-          >
-            {planType}
-          </button>
+          {planType === "Current Plan" ? (
+            <div className="w-full h-full border border-green-800 bg-green-500 rounded-md text-slate-300 flex justify-center items-center">
+              <span>Current Plan</span>
+            </div>
+          ) : (
+            <button
+              disabled={planType === "Current Plan"}
+              onClick={() => {
+                setCheckoutModal(true);
+                setPriceId(priceId);
+                setAmount(price);
+              }}
+              className="w-full h-full border disabled:border-voilet-200 disabled:dark:border-light-glass dark:border-light-glass disabled:hover:bg-violet-200 disabled:bg-violet-200 disabled:dark:bg-dark-black/50 hover:bg-dark-black duration-100 ease-in-out bg-brand-color rounded-md disabled:text-dark-black/60  disabled:dark:text-slate-300/60 disabled:cursor-not-allowed cursor-pointer text-slate-300"
+            >
+              {planType}
+            </button>
+          )}
         </div>
         <div className="h-3/6 w-full overflow-y-auto">
           <div className="flex flex-col gap-2">
