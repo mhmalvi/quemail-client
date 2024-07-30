@@ -93,7 +93,7 @@ export const stripeINFO = async () => {
   }
 };
 
-export const stripeInvoiceHistory = async (status: string, limit: string) => {
+export const stripeInvoiceHistory = async (status: string, limit: number) => {
   const userID = Storage.getItem("userID");
   const res = await stripeINFO();
   console.log(res);
