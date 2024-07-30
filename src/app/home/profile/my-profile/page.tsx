@@ -20,9 +20,6 @@ const MyProfile = () => {
               height={300}
             />
           </div>
-          <button className="xl:px-4 xl:py-2 px-2 py-1 xl:text-base text-sm border border-brand-color text-brand-color font-semibold rounded-md">
-            Upload
-          </button>
         </div>
       </div>
       <div className="h-full w-full flex gap-4 drop-shadow m-6">

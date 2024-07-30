@@ -30,6 +30,26 @@ const config: Config = {
         "light-glass": "#ffffff1A",
         "light-black": "#4d4d4d",
         "dark-black": "#0b0b0b",
+        bronze: {
+          light: "#cd7f32",
+          dark: "#8c5b23",
+        },
+        silver: {
+          light: "#c0c0c0",
+          dark: "#808080",
+        },
+        gold: {
+          light: "#ffd700",
+          dark: "#b89400",
+        },
+        platinum: {
+          light: "#e5e4e2",
+          dark: "#b4b2b0",
+        },
+        diamond: {
+          light: "#b9f2ff",
+          dark: "#7ec3d8",
+        },
       },
       keyframes: {
         up: {
