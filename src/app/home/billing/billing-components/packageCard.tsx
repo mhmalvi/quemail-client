@@ -28,7 +28,7 @@ const PackageCard: React.FC<PackageCardProps> = ({ packageName }) => {
         packageName
       )}`}
     >
-      <h1 className="flex text-base m-0 p-0 font-medium text-violet-500">
+      <h1 className="flex text-base m-0 p-0 font-medium text-slate-600">
         {packageName}
       </h1>
     </div>
