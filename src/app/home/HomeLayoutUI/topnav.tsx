@@ -73,10 +73,7 @@ const Topnav = () => {
       Storage.removeItem("photo");
       Storage.removeItem("email");
       Storage.removeItem("userID");
-      Storage.removeItem("cust_id");
-      Storage.removeItem("subscription");
       Storage.removeItem("first_user");
-      Storage.removeItem("stripeCustomerID");
       router.push("/");
     }
   }, [logoutConfirm, router]);

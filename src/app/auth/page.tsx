@@ -34,10 +34,7 @@ const Authenticate = () => {
     Storage.setItem("photo", photo);
     Storage.setItem("token", token);
     Storage.setItem("userID", Number(userID));
-    Storage.setItem("subscription", subscription);
-    Storage.setItem("stripeCustomerID", stripeCustomerID);
     Storage.setItem("first_user", Number(first_user));
-    Storage.setItem("priceID", priceID);
     router.push("/home");
   }
 
