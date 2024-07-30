@@ -12,7 +12,12 @@ import {
 import { billingStore } from "@/store/store";
 import { Modal } from "flowbite-react";
 import CheckoutFormWrapper from "../CheckoutForm";
-import { fetchPriceId, fetchProducts, stripeINFO } from "@/app/api/billing";
+import {
+  fetchPriceId,
+  fetchProducts,
+  stripeINFO,
+  stripeSubscriptionInfo,
+} from "@/app/api/billing";
 import { Storage } from "@/store/store";
 
 const PricingPlans = () => {
@@ -22,12 +27,14 @@ const PricingPlans = () => {
   const products = billingStore((state: any) => state.products);
   const priceId = billingStore((state: any) => state.priceId);
   const [customerId, setCustomerID] = useState<string>("");
+  const [currentPackage, setCurrentPackage] = useState<string>("");
 
   useEffect(() => {
     (async () => {
       const res = await fetchProducts();
       const res1 = await stripeINFO();
-      if (res && res1) {
+      const res2 = await stripeSubscriptionInfo();
+      if (res && res1 && res2) {
         const pricePromises = res.map((product: { default_price: number }) =>
           fetchPriceId(product.default_price)
         );
@@ -41,6 +48,7 @@ const PricingPlans = () => {
         );
         setProducts(productsWithPrices);
         setCustomerID(res1.stripeCustomerID);
+        setCurrentPackage(res2.name);
       }
     })();
   }, [setProducts]);
@@ -67,7 +75,12 @@ const PricingPlans = () => {
                   heading={items.name}
                   price={calculatedPrice.toString()}
                   priceId={items.default_price}
-                  planType={`Choose ${items.name}`}
+                  //planType={`Choose ${items.name}`}
+                  planType={
+                    items.name === currentPackage
+                      ? "Current Plan"
+                      : `Choose ${items.name}`
+                  }
                   item={
                     items.name === "Starter"
                       ? pricingplan1
