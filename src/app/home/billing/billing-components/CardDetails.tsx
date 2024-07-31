@@ -145,16 +145,16 @@ const CardDetails = () => {
         <div className="w-full h-full overflow-auto">
           <Table hoverable striped>
             <Table.Head className="w-full">
-              <Table.HeadCell className="w-1/3 sticky text-center">
+              <Table.HeadCell className="w-1/4 sticky text-center">
                 Name
               </Table.HeadCell>
-              <Table.HeadCell className="w-1/3 sticky text-center">
+              <Table.HeadCell className="w-1/4 sticky text-center">
                 Brand
               </Table.HeadCell>
-              <Table.HeadCell className="w-1/3 sticky text-center">
+              <Table.HeadCell className="w-1/4 sticky text-center">
                 Digit
               </Table.HeadCell>
-              <Table.HeadCell className="w-1/3 sticky text-center">
+              <Table.HeadCell className="w-1/4 sticky text-center">
                 Actions
               </Table.HeadCell>
             </Table.Head>
@@ -184,13 +184,13 @@ const CardDetails = () => {
                       </div>
                     </Tooltip>
                   </Table.Cell>
-                  <Table.Cell className="w-1/5 text-center">
+                  <Table.Cell className="w-1/4 text-center">
                     {items.brand}
                   </Table.Cell>
-                  <Table.Cell className="w-1/5 text-center">
+                  <Table.Cell className="w-1/4 text-center">
                     {items.last4}
                   </Table.Cell>
-                  <Table.Cell className="w-1/5 text-center">
+                  <Table.Cell className="w-1/4 text-center">
                     <div className="flex justify-center gap-2">
                       {index === 0 ? (
                         ""
