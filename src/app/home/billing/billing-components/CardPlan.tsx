@@ -16,7 +16,7 @@ const CardPlan = () => {
     const res1 = await subscriptionDetails();
     if (res && res1) {
       console.log(res1);
-      setPackageName(res.name);
+      setPackageName(res.lookup_key);
       const startDate: Date = new Date(res1.current_period_start * 1000);
       setCreatedTime(startDate);
       const endDate: Date = new Date(res1.current_period_end * 1000);
@@ -56,7 +56,7 @@ const CardPlan = () => {
   }, [staticEndTime]);
 
   return (
-    <div className="step-3 summary-element w-full bg-white dark:bg-light-glass backdrop-blur-xl dark:border-none border border-violet-500 rounded-md overflow-hidden p-4">
+    <div className="step-3 summary-element w-full bg-white dark:bg-light-glass backdrop-blur-xl dark:border-none border border-violet-200 rounded-md overflow-hidden p-4">
       <h1 className="xl:text-xl text-base m-0 p-0 dark:text-white text-dark-black text-center">
         Card Plan
       </h1>
