@@ -30,14 +30,24 @@ export const subscription = async (
     );
     if (result) {
       const response = await result.json();
-      successNotification("Subscription Started!");
+      console.log(response.data.id);
+      if (response.data.id) {
+        successNotification("Subscription Started!");
+        return "success";
+      } else if (
+        response.data.raw.message.includes(
+          "can't be added to this Subscription because an existing Subscription Item"
+        )
+      ) {
+        return "inUse";
+      }
       return response.id;
     } else {
       return null;
     }
   } catch (error: any) {
-    warningNotification("Something went wrong. Please try again!");
-    return error.response;
+    warningNotification("Network Error, Please try again later");
+    return error;
   }
 };
 
@@ -49,7 +59,7 @@ export const stripeSubscriptionInfo = async () => {
   }
   try {
     const result = await fetch(
-      `https://api.stripe.com/v1/products/${res.productID}`,
+      `https://api.stripe.com/v1/prices/${res.priceID}`,
       {
         method: "GET",
         headers: {
@@ -72,16 +82,19 @@ export const stripeSubscriptionInfo = async () => {
 export const stripeINFO = async () => {
   const userID = Storage.getItem("userID");
   try {
-    const result = await fetch(`https://backend.quemailer.com/api/getID`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: Storage.getItem("token"),
-      },
-      body: JSON.stringify({
-        userID: userID,
-      }),
-    });
+    const result = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/getID`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: Storage.getItem("token"),
+        },
+        body: JSON.stringify({
+          userID: userID,
+        }),
+      }
+    );
     if (result) {
       const responseData = await result.json();
       return responseData;
@@ -103,7 +116,7 @@ export const stripeInvoiceHistory = async (status: string, limit: number) => {
   const customerID = res.stripeCustomerID;
   try {
     const result = await fetch(
-      `https://backend.quemailer.com/api/customer-invoices`,
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/customer-invoices`,
       {
         method: "POST",
         headers: {
@@ -136,6 +149,8 @@ export const subscriptionDetails = async () => {
     throw new Error(res.message);
   }
   const subscriptionId = res.subscriptionID;
+  console.log("subscription ID: ", subscriptionId);
+
   try {
     const result = await fetch(
       `https://api.stripe.com/v1/subscriptions/${subscriptionId}`,
@@ -161,7 +176,7 @@ export const subscriptionDetails = async () => {
 export const fetchProducts = async () => {
   try {
     const result = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/api/stripe-products`,
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/stripe-prices`,
       {
         method: "GET",
         headers: {
@@ -171,31 +186,8 @@ export const fetchProducts = async () => {
     );
     if (result) {
       const response = await result.json();
+      console.log(response);
       return response.data;
-    } else {
-      return null;
-    }
-  } catch (error: any) {
-    return error.response;
-  }
-};
-export const fetchPriceId = async (priceId: number) => {
-  try {
-    const result = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/api/stripe-price-by-product-id`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          priceID: priceId,
-        }),
-      }
-    );
-    if (result) {
-      const responseData = await result.json();
-      return responseData;
     } else {
       return null;
     }
@@ -231,7 +223,6 @@ export const getAllCardList = async () => {
   }
 };
 
-//need to update createCard function
 export const createCard = async (stripeToken: string, name: string) => {
   const secretKey = process.env.NEXT_PUBLIC_STRIPE_SECRET_KEY;
   const res = await stripeINFO();

@@ -16,7 +16,7 @@ const CardPlan = () => {
     const res1 = await subscriptionDetails();
     if (res && res1) {
       console.log(res1);
-      setPackageName(res.name);
+      setPackageName(res.lookup_key);
       const startDate: Date = new Date(res1.current_period_start * 1000);
       setCreatedTime(startDate);
       const endDate: Date = new Date(res1.current_period_end * 1000);

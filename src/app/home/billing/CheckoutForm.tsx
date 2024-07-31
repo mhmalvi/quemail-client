@@ -45,13 +45,15 @@ const CheckoutForm = (props: CheckoutFormProps): JSX.Element => {
       props.priceId,
       cardID
     );
-    console.log(subscriptionResponse);
-    if (subscriptionResponse) {
-      setLoading(false);
-      setTimeout(() => {
-        window.location.reload();
-      }, 3000);
+    if (subscriptionResponse === "inUse") {
+      setError("This package is already active");
+    } else if (subscriptionResponse) {
+      console.log(subscriptionResponse);
+      // setTimeout(() => {
+      //   window.location.reload();
+      // }, 3000);
     }
+    setLoading(false);
   };
 
   return (

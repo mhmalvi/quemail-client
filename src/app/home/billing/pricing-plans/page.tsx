@@ -13,7 +13,6 @@ import { billingStore } from "@/store/store";
 import { Modal } from "flowbite-react";
 import CheckoutFormWrapper from "../CheckoutForm";
 import {
-  fetchPriceId,
   fetchProducts,
   stripeINFO,
   stripeSubscriptionInfo,
@@ -35,18 +34,7 @@ const PricingPlans = () => {
       const res1 = await stripeINFO();
       const res2 = await stripeSubscriptionInfo();
       if (res && res1 && res2) {
-        const pricePromises = res.map((product: { default_price: number }) =>
-          fetchPriceId(product.default_price)
-        );
-        const prices = await Promise.all(pricePromises);
-
-        const productsWithPrices = res.map(
-          (product: { default_price: number }, index: number) => ({
-            ...product,
-            price: prices[index],
-          })
-        );
-        setProducts(productsWithPrices);
+        setProducts(res);
         setCustomerID(res1.stripeCustomerID);
         setCurrentPackage(res2.name);
       }
@@ -57,44 +45,33 @@ const PricingPlans = () => {
       {products
         .slice()
         .reverse()
-        .map(
-          (
-            items: {
-              name: string;
-              price: {
-                unit_amount: number;
-              };
-              default_price: number;
-            },
-            index: number
-          ) => {
-            const calculatedPrice = items.price.unit_amount / 100;
-            return (
-              <div key={index} className="p-0 m-0 relative flex w-full gap-4">
-                <PlanComponent
-                  heading={items.name}
-                  price={calculatedPrice.toString()}
-                  priceId={items.default_price}
-                  //planType={`Choose ${items.name}`}
-                  planType={
-                    items.name === currentPackage
-                      ? "Current Plan"
-                      : `Choose ${items.name}`
-                  }
-                  item={
-                    items.name === "Starter"
-                      ? pricingplan1
-                      : items.name === "Growth"
-                      ? pricingplan2
-                      : items.name === "Professional"
-                      ? pricingplan3
-                      : pricingplan4
-                  }
-                />
-              </div>
-            );
-          }
-        )}
+        .map((items: any, index: number) => {
+          const calculatedPrice = items.unit_amount / 100;
+          return (
+            <div key={index} className="p-0 m-0 relative flex w-full gap-4">
+              <PlanComponent
+                heading={items.lookup_key}
+                price={calculatedPrice.toString()}
+                priceId={items.id}
+                //planType={`Choose ${items.name}`}
+                planType={
+                  items.lookup_key === currentPackage
+                    ? "Current Plan"
+                    : `Choose ${items.lookup_key}`
+                }
+                item={
+                  items.lookup_key === "Starter"
+                    ? pricingplan1
+                    : items.lookup_key === "Growth"
+                    ? pricingplan2
+                    : items.lookup_key === "Professional"
+                    ? pricingplan3
+                    : pricingplan4
+                }
+              />
+            </div>
+          );
+        })}
       <Modal
         show={checkoutModal}
         dismissible

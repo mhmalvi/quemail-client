@@ -40,12 +40,7 @@ const CardHistory = () => {
       } dark:bg-light-glass bg-white shadow-md backdrop-blur-xl rounded-md p-4 flex flex-col gap-4`}
     >
       <div className="flex flex-row justify-between items-center">
-        <h1
-          className="xl:text-xl text-base m-0 p-0 dark:text-white text-dark-black text-center flex-grow"
-          onClick={() => {
-            // handleButtonClick();
-          }}
-        >
+        <h1 className="xl:text-xl text-base m-0 p-0 dark:text-white text-dark-black text-center flex-grow">
           History
         </h1>
         <button
@@ -62,7 +57,7 @@ const CardHistory = () => {
           label="Groups ▼"
           placement="bottom-start"
           renderTrigger={() => (
-            <div className="px-4 py-1 rounded-md border border-brand-color cursor-pointer overflow-hidden">
+            <div className="px-2 py-1 rounded-md border border-brand-color cursor-pointer overflow-hidden">
               <h1 className="flex items-center justify-center gap-4 duration-100 ease-in text-dark-black dark:text-slate-300 xl:text-base text-sm ">
                 {status} <span className="text-xs">▼</span>
               </h1>
@@ -91,7 +86,7 @@ const CardHistory = () => {
           label="Groups ▼"
           placement="bottom-start"
           renderTrigger={() => (
-            <div className="px-4 py-1 rounded-md border border-brand-color cursor-pointer overflow-hidden">
+            <div className="px-2 py-1 rounded-md border border-brand-color cursor-pointer overflow-hidden">
               <h1 className="flex items-center justify-center gap-4 duration-100 ease-in text-dark-black dark:text-slate-300 xl:text-base text-sm ">
                 {limit} <span className="text-xs">▼</span>
               </h1>
