@@ -13,22 +13,9 @@ const Authenticate = () => {
   const photo = searchParams.get("photo");
   const token = searchParams.get("token");
   const userID = searchParams.get("userID");
-  const subscription = searchParams.get("subscription");
-  const stripeCustomerID = searchParams.get("stripeCustomerID");
   const first_user = searchParams.get("first_user");
-  const priceID = searchParams.get("priceID");
 
-  if (
-    token &&
-    userName &&
-    email &&
-    photo &&
-    userID &&
-    first_user &&
-    stripeCustomerID &&
-    subscription &&
-    priceID
-  ) {
+  if (token && userName && email && photo && userID && first_user) {
     Storage.setItem("userName", userName);
     Storage.setItem("email", email);
     Storage.setItem("photo", photo);
