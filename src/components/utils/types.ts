@@ -263,9 +263,11 @@ export interface BillingState {
   products: [] | null;
   priceId: number | null;
   checkoutModal: boolean;
+  cancelModal: boolean;
   setProducts: (state: [] | null) => void;
   setPriceId: (state: number | null) => void;
   setCheckoutModal: (state: boolean) => void;
+  setCancelModal: (state: boolean) => void;
   setAmount: (state: string | null) => void;
 }
 
