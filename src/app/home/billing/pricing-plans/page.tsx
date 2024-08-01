@@ -49,6 +49,9 @@ const PricingPlans = () => {
           const calculatedPrice = items.unit_amount / 100;
           return (
             <div key={index} className="p-0 m-0 relative flex w-full gap-4">
+              {
+                
+              }
               <PlanComponent
                 heading={items.lookup_key}
                 price={calculatedPrice.toString()}
