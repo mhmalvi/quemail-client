@@ -43,13 +43,20 @@ const CardHistory = () => {
         <h1 className="xl:text-xl text-base m-0 p-0 dark:text-white text-dark-black text-center flex-grow">
           History
         </h1>
+
         <button
           className=" border rounded-full border-brand-color dark:border-white"
           onClick={() => {
             handleExpanded();
           }}
         >
-          <TbCaretLeftRight className="text-brand-color dark:text-white" />
+          <Tooltip
+            content={expanded ? "Collapse" : "Expand"}
+            className="bg-brand-color text-center"
+            placement="left"
+          >
+            <TbCaretLeftRight className="text-brand-color dark:text-white" />
+          </Tooltip>
         </button>
       </div>
       {invoices && invoices.length !== 0 ? (
