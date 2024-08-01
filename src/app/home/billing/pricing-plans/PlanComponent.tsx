@@ -49,7 +49,7 @@ const PlanComponent = (props: planProps) => {
           </p>
         </div>
         <div className="h-1/6 w-full py-4">
-          {planType === "Current Plan" ? (
+          {planType.length > 0 && planType === "Current Plan" ? (
             <button
               onClick={() => {
                 handleCancelSubscription();
