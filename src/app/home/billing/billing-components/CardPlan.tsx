@@ -15,7 +15,7 @@ const CardPlan = () => {
     const res = await stripeSubscriptionInfo();
     const res1 = await subscriptionDetails();
     if (res && res1) {
-      console.log(res1);
+      console.log("price:", res);
       setPackageName(res.lookup_key);
       const startDate: Date = new Date(res1.current_period_start * 1000);
       setCreatedTime(startDate);
