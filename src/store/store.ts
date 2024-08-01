@@ -237,12 +237,16 @@ export const billingStore = create<BillingState>((set) => ({
   products: [],
   priceId: null,
   checkoutModal: false,
+  cancelModal: false,
   amount: null,
   setProducts(state) {
     set(() => ({ products: state }));
   },
   setCheckoutModal(state) {
     set(() => ({ checkoutModal: state }));
+  },
+  setCancelModal(state) {
+    set(() => ({ cancelModal: state }));
   },
   setPriceId(state) {
     set(() => ({ priceId: state }));

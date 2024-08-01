@@ -18,15 +18,10 @@ interface planProps {
 }
 const PlanComponent = (props: planProps) => {
   const { heading, price, planType, item, priceId } = props;
-
+  const setCancelModal = billingStore((state) => state.setCancelModal);
   const setCheckoutModal = billingStore((state) => state.setCheckoutModal);
   const setPriceId = billingStore((state) => state.setPriceId);
   const setAmount = billingStore((state) => state.setAmount);
-
-  const handleCancelSubscription = async () => {
-    const res = await cancelSubscription();
-    console.log("cancel subscription : ", res);
-  };
 
   return (
     <div className="bg-violet-50 hover:bg-violet-200 dark:hover:bg-light-glass duration-100 ease-in-out border border-violet-200 dark:border-light-glass dark:bg-dark-black h-full w-full rounded-md flex flex-col items-center p-4">
@@ -52,7 +47,7 @@ const PlanComponent = (props: planProps) => {
           {planType.length > 0 && planType === "Current Plan" ? (
             <button
               onClick={() => {
-                handleCancelSubscription();
+                setCancelModal(true);
               }}
               className="w-full h-full border disabled:border-voilet-200 disabled:dark:border-light-glass dark:border-light-glass disabled:hover:bg-violet-200 disabled:bg-violet-200 disabled:dark:bg-dark-black/50 hover:bg-dark-black duration-100 ease-in-out bg-yellow-300 rounded-md disabled:text-dark-black/60  disabled:dark:text-slate-300/60 disabled:cursor-not-allowed cursor-pointer text-black font-semibold hover:text-slate-300"
             >
