@@ -49,9 +49,9 @@ const CheckoutForm = (props: CheckoutFormProps): JSX.Element => {
       setError("This package is already active");
     } else if (subscriptionResponse) {
       console.log(subscriptionResponse);
-      // setTimeout(() => {
-      //   window.location.reload();
-      // }, 3000);
+      setTimeout(() => {
+        window.location.reload();
+      }, 2000);
     }
     setLoading(false);
   };

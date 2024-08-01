@@ -81,36 +81,30 @@ export const getSubscriptionDetails = async () => {
 };
 
 export const cancelSubscription = async () => {
-  const secretKey = process.env.NEXT_PUBLIC_STRIPE_SECRET_KEY;
-  const res = await stripeINFO();
-  const res1 = await getSubscriptionDetails();
-  if (res && res.message !== "success") {
-    throw new Error(res.message);
+  try {
+    const result = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/cancel-subscription`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: Storage.getItem("token"),
+        },
+        body: JSON.stringify({
+          userID: Storage.getItem("userID"),
+        }),
+      }
+    );
+    if (result) {
+      const responseData = await result.json();
+      console.log(responseData);
+      return responseData;
+    } else {
+      return null;
+    }
+  } catch (error: any) {
+    return error.response;
   }
-  if (!res1) {
-    throw new Error(res1.message);
-  }
-  console.log("cancel subs: ", res1);
-  // try {
-  //   const result = await fetch(
-  //     `https://api.stripe.com/v1/subscriptions/${res.subscriptionID}`,
-  //     {
-  //       method: "GET",
-  //       headers: {
-  //         "Content-Type": "application/x-www-form-urlencoded",
-  //         Authorization: "Bearer " + secretKey,
-  //       },
-  //     }
-  //   );
-  //   if (result) {
-  //     const responseData = await result.json();
-  //     return responseData;
-  //   } else {
-  //     return null;
-  //   }
-  // } catch (error: any) {
-  //   return error.response;
-  // }
 };
 
 export const stripeSubscriptionInfo = async () => {
