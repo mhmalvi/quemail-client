@@ -51,6 +51,68 @@ export const subscription = async (
   }
 };
 
+//This is for fetching a single subscription details
+export const getSubscriptionDetails = async () => {
+  const secretKey = process.env.NEXT_PUBLIC_STRIPE_SECRET_KEY;
+  const res = await stripeINFO();
+  if (res && res.message !== "success") {
+    throw new Error(res.message);
+  }
+  try {
+    const result = await fetch(
+      `https://api.stripe.com/v1/subscriptions/${res.subscriptionID}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+          Authorization: "Bearer " + secretKey,
+        },
+      }
+    );
+    if (result) {
+      const responseData = await result.json();
+      return responseData;
+    } else {
+      return null;
+    }
+  } catch (error: any) {
+    return error.response;
+  }
+};
+
+export const cancelSubscription = async () => {
+  const secretKey = process.env.NEXT_PUBLIC_STRIPE_SECRET_KEY;
+  const res = await stripeINFO();
+  const res1 = await getSubscriptionDetails();
+  if (res && res.message !== "success") {
+    throw new Error(res.message);
+  }
+  if (!res1) {
+    throw new Error(res1.message);
+  }
+  console.log("cancel subs: ", res1);
+  // try {
+  //   const result = await fetch(
+  //     `https://api.stripe.com/v1/subscriptions/${res.subscriptionID}`,
+  //     {
+  //       method: "GET",
+  //       headers: {
+  //         "Content-Type": "application/x-www-form-urlencoded",
+  //         Authorization: "Bearer " + secretKey,
+  //       },
+  //     }
+  //   );
+  //   if (result) {
+  //     const responseData = await result.json();
+  //     return responseData;
+  //   } else {
+  //     return null;
+  //   }
+  // } catch (error: any) {
+  //   return error.response;
+  // }
+};
+
 export const stripeSubscriptionInfo = async () => {
   const secretKey = process.env.NEXT_PUBLIC_STRIPE_SECRET_KEY;
   const res = await stripeINFO();
@@ -164,6 +226,7 @@ export const subscriptionDetails = async () => {
     );
     if (result) {
       const responseData = await result.json();
+      console.log("subscripton details: ", responseData);
       return responseData;
     } else {
       return null;

@@ -36,7 +36,7 @@ const PricingPlans = () => {
       if (res && res1 && res2) {
         setProducts(res);
         setCustomerID(res1.stripeCustomerID);
-        setCurrentPackage(res2.name);
+        setCurrentPackage(res2.lookup_key);
       }
     })();
   }, [setProducts]);
