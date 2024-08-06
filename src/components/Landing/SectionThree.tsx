@@ -20,7 +20,7 @@ const SectionTwo = () => {
           return (
             <div
               key={index}
-              className="flex flex-col xl:gap-2 items-center xl:w-1/2 lg:w-1/5 w-1/2 p-2 border-l-4 border-r-4"
+              className="flex flex-col xl:gap-2 items-center xl:w-1/2 lg:w-1/2 w-1/2 p-2 border-l-4 border-r-4"
             >
               <h1 className="m-0 p-0 text-3xl font-semibold text-slate-300 text-center">
                 {items.title}
