@@ -1,12 +1,22 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Images from "../utils/images";
 import Image from "next/image";
 import Link from "next/link";
 
 const Navbar = () => {
   const [openNavDrawer, setOpenNavDrawer] = useState(false);
-  const token = typeof window !== "undefined" && localStorage.getItem("token");
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  if (!isMounted) {
+    return null; // Or you can return a loading indicator
+  }
+
+  const token = localStorage.getItem("token");
 
   return (
     <>
@@ -84,19 +94,16 @@ const Navbar = () => {
             className={`relative flex flex-col items-center justify-center gap-2 z-30`}
           >
             <div
-              className={`h-1.5 w-10 ease-in duration-200 ${
-                openNavDrawer ? "right-0 absolute rotate-45" : "rotate-0"
-              } bg-slate-300 z-30`}
+              className={`h-1.5 w-10 ease-in duration-200 ${openNavDrawer ? "right-0 absolute rotate-45" : "rotate-0"
+                } bg-slate-300 z-30`}
             ></div>
             <div
-              className={`h-1.5 w-10 ease-in duration-200 ${
-                openNavDrawer ? "hidden" : "flex"
-              } bg-slate-300`}
+              className={`h-1.5 w-10 ease-in duration-200 ${openNavDrawer ? "hidden" : "flex"
+                } bg-slate-300`}
             ></div>
             <div
-              className={`h-1.5 w-10 ease-in duration-200 ${
-                openNavDrawer ? "right-0 absolute -rotate-45" : "rotate-0"
-              } bg-slate-300`}
+              className={`h-1.5 w-10 ease-in duration-200 ${openNavDrawer ? "right-0 absolute -rotate-45" : "rotate-0"
+                } bg-slate-300`}
             ></div>
           </div>
         </div>
