@@ -1,23 +1,23 @@
 export const sectionTwoData = [
   {
-    title: "Create community with newsletters",
+    title: "Automated Campaigns",
     description:
-      "Connect with subscribers and share your knowledge with timely email broadcasts.",
+      "Simplify your marketing efforts with Quemailer’s intuitive automation tools. Effortlessly create, schedule, and manage your email campaigns, allowing you to focus on what truly matters—engaging your audience.With automation, you can send personalized emails based on user behavior, ensuring timely and relevant communication.",
   },
   {
-    title: "Win more sales with abandoned cart emails",
+    title: "High Deliverability",
     description:
-      "Recover sales with abandoned cart emails to remind customers about unfinished purchases.",
+      "Simplify your marketing efforts with Quemailer’s intuitive automation tools. Effortlessly create, schedule, and manage your email campaigns, allowing you to focus on what truly matters—engaging your audience. With automation, you can send personalized emails based on user behavior, ensuring timely and relevant communication.",
   },
   {
-    title: "Engage your audience with autoresponders",
+    title: "Seamless Integrations",
     description:
-      "Increase engagement with autoresponder emails triggered at a particular time.",
+      "Simplify your marketing efforts with Quemailer’s intuitive automation tools. Effortlessly create, schedule, and manage your email campaigns, allowing you to focus on what truly matters—engaging your audience.With automation, you can send personalized emails based on user behavior, ensuring timely and relevant communication.",
   },
   {
-    title: "Foster trust with transactional emails",
+    title: "24/7 Support",
     description:
-      "Keep your customers informed with prompt emails confirming each step of their purchase.",
+      "Receive unparalleled assistance from Quemailer’s dedicated support team, available 24/7.Whether you need help setting up a campaign, troubleshooting an issue, or optimizing yourstrategy, our experts are always ready to provide the support you need. Access comprehensive resources, including guides, tutorials, and personalized assistance to ensure your success.",
   },
 ];
 
@@ -37,30 +37,23 @@ export const sectionThreePackage = [
 ];
 export const sectionThreeData = [
   {
-    title: "100%",
-    description: "average list growth for all paid plans in the first 30 days",
+    title: "Tailored Solutions:",
+    description: "Customize your email marketing strategy with solutions that fit your specific needs. Whether you're looking to increase engagement, drive sales, or nurture leads, Quemailer provides the tools and flexibility to achieve your goals."
   },
   {
-    title: "99%",
-    description: "deliverability rate for 10+ countries",
+    title: "AI-Powered Recommendations:",
+    description: "Leverage artificial intelligence to optimize your campaigns and improve engagement. Our AI-driven insights help you understand your audience better, craft compelling messages, and maximize your marketing ROI.",
   },
   {
-    title: "50+",
-    description: "customers worldwide trust us with their email marketing",
-  },
-  {
-    title: "24/7",
-    description: "support from a 5-star rated Customer Success",
+    title: "Dedicated IP Addresses:",
+    description: "Enhance your email deliverability and reputation with dedicated IP addresses.By using a dedicated IP, you can ensure consistentdeliverability and build a strong sender reputation, crucial for large - scale email campaigns.",
   },
 ];
 
 export const sectionFiveData = [
-  "Dedicated IP Address",
-  "SMS marketing automation",
-  "Dedicated 24/7 support",
-  "Single sign-on (SSO)",
-  "AI recommendations",
-  "Transactional emails",
+  "Blog and Articles: Stay updated with the latest trends, tips, and best practices in email marketing.",
+  "Case Studies: Learn from the success stories of businesses that have leveraged Quemailer to achieve their marketing goals.",
+  "Case Studies: Learn from the success stories of businesses that have leveraged Quemailer to achieve their marketing goals.",
 ];
 
 export const campaignData = [
