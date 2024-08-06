@@ -4,6 +4,8 @@ import Images from "../utils/images";
 import Image from "next/image";
 import Link from "next/link";
 
+//check
+
 const Navbar = () => {
   const [openNavDrawer, setOpenNavDrawer] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
