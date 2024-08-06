@@ -42,7 +42,7 @@ const Footer = () => {
               </p>
             </div>
           </div>
-          <hr className="lg:hidden"/>
+          <hr className="lg:hidden" />
           <div className="sm:w-1/3 lg:my-0 my-8 flex flex-col justify-between items-center sm:gap-0 gap-4 ">
             <h1 className=" sm:text-start sm:text-base text-2xl text-center text-slate-300 cursor-pointer h-8 flex justify-center items-center">
               Terms & Conditions
@@ -61,7 +61,7 @@ const Footer = () => {
             </h1>
           </div>
           <div className="sm:w-1/3 flex flex-col justify-between overflow-hidden">
-            <h1 className="text-xl text-brand-color mb-2 text-slate-300">Newsletter</h1>
+            <h1 className="text-xl text-brand-color mb-2 ">Newsletter</h1>
             <form className="flex justify-between items-center bg-[transparent] p-1 border-[1px] rounded-md sm:mb-0 mb-8 ">
               <input
                 type="email"
