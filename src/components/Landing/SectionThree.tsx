@@ -22,8 +22,10 @@ const SectionTwo = () => {
               key={index}
               className="flex flex-col xl:gap-2 items-center xl:w-1/2 lg:w-1/2 w-1/2 p-2 border-l-4 border-r-4"
             >
-              <h1 className="m-0 p-0 text-3xl font-semibold text-slate-300 text-center">
-                {items.title}
+              <h1 className="m-0 p-0 text-3xl font-semibold text-center">
+                <span className="bg-clip-text text-transparent bg-gradient-to-r from-brand-color to-brand-color-2 m-0 font-semibold xl:text-3xl text-2xl">
+                  {items.title}
+                </span>
               </h1>
               <p className="m-0 p-0 xl:text-base text-xs text-center text-slate-300">
                 {items.description}

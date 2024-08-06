@@ -25,71 +25,45 @@ const CardPlan = () => {
     }
   };
 
-  const calculateRemainingTime = (endTime: number) => {
-    const currentTime = Math.floor(Date.now() / 1000);
-    const remainingSeconds = endTime - currentTime;
+  // const calculateRemainingTime = (endTime: number) => {
+  //   const currentTime = Math.floor(Date.now() / 1000);
+  //   const remainingSeconds = endTime - currentTime;
 
-    if (remainingSeconds <= 0) {
-      return "Time is up!";
-    }
+  //   if (remainingSeconds <= 0) {
+  //     return "Time is up!";
+  //   }
 
-    const days = Math.floor(remainingSeconds / (3600 * 24));
-    const hours = Math.floor((remainingSeconds % (3600 * 24)) / 3600);
-    const minutes = Math.floor((remainingSeconds % 3600) / 60);
-    const seconds = remainingSeconds % 60;
+  //   const days = Math.floor(remainingSeconds / (3600 * 24));
+  //   const hours = Math.floor((remainingSeconds % (3600 * 24)) / 3600);
+  //   const minutes = Math.floor((remainingSeconds % 3600) / 60);
+  //   const seconds = remainingSeconds % 60;
 
-    return `${days}d ${hours}h ${minutes}m ${seconds}s`;
-  };
+  //   return `${days}d ${hours}h ${minutes}m ${seconds}s`;
+  // };
 
   useEffect(() => {
     fetchSubscriptionInfo();
   }, []);
 
-  useEffect(() => {
-    if (staticEndTime) {
-      const interval = setInterval(() => {
-        setRemainingTime(calculateRemainingTime(staticEndTime));
-      }, 1000);
+  // useEffect(() => {
+  //   if (staticEndTime) {
+  //     const interval = setInterval(() => {
+  //       setRemainingTime(calculateRemainingTime(staticEndTime));
+  //     }, 1000);
 
-      return () => clearInterval(interval);
-    }
-  }, [staticEndTime]);
+  //     return () => clearInterval(interval);
+  //   }
+  // }, [staticEndTime]);
 
   return (
     <div className="step-3 summary-element w-full bg-white dark:bg-light-glass backdrop-blur-xl dark:border-none border border-violet-200 rounded-md overflow-hidden p-4">
       <h1 className="xl:text-xl text-base m-0 p-0 dark:text-white text-dark-black text-center">
         Card Plan
       </h1>
-      {packageName && remainingTime && createdTime && endTime ? (
+      {packageName && createdTime && endTime ? (
         <div className="flex flex-row w-full h-full gap-4 justify-center items-center">
-          <div className="flex w-full h-2/3 rounded justify-center items-center">
-            <PackageCard packageName={packageName}></PackageCard>
-          </div>
-          <div className="flex flex-col w-full h-2/3 justify-between ">
-            <div>
-              <h1 className="text-base m-0 p-0 text-brand-color font-medium">
-                Remaining time:
-              </h1>
-              <h1 className="text-base m-0 p-0 dark:text-white text-dark-black">
-                {remainingTime}
-              </h1>
-            </div>
-            <div>
-              <h1 className="text-base m-0 p-0 text-brand-color font-medium">
-                Subscription Started:
-              </h1>
-              <h1 className="text-base m-0 p-0 dark:text-white text-dark-black">
-                {createdTime?.toLocaleString()}
-              </h1>
-            </div>
-            <div>
-              <h1 className="text-base m-0 p-0 text-brand-color font-medium">
-                Subscription End:
-              </h1>
-              <h1 className="text-base m-0 p-0 dark:text-white text-dark-black">
-                {endTime?.toLocaleString()}
-              </h1>
-            </div>
+          <div className="flex w-full h-5/6 rounded justify-center items-center">
+            <PackageCard packageName={packageName} createdTime={createdTime} endTime={endTime}></PackageCard>
           </div>
         </div>
       ) : (
