@@ -6,10 +6,10 @@ import Images from "../utils/images";
 const SectionOne = () => {
   return (
     <div className="w-full flex flex-col gap-4 items-center justify-center h-screen">
-      <h1 className="m-0 px-0 xl:text-4xl text-2xl text-center flex flex-col gap-2 text-slate-300 xl:mt-8 mt-16">
-        Welcome to Quemailer
+      <h1 className="m-0 px-0 xl:text-4xl text-3xl text-center flex gap-2 text-slate-300 xl:mt-8 mt-16">
+        Welcome to,
         <span className="bg-clip-text text-transparent bg-gradient-to-r from-brand-color to-brand-color-2 m-0 font-semibold xl:text-5xl text-4xl">
-          Transform Your Email Marketing Strategy
+          Quemailer
         </span>
       </h1>
       <p className="p-0 m-0 xl:w-2/3 w-8/12 xl:text-base text-sm text-center text-slate-300">

@@ -2,40 +2,45 @@ import React from "react";
 
 type PackageCardProps = {
   packageName: string | null;
+  createdTime: Date | null;
+  endTime: Date | null;
 };
 
-const PackageCard: React.FC<PackageCardProps> = ({ packageName }) => {
+const PackageCard: React.FC<PackageCardProps> = ({ packageName, createdTime, endTime }) => {
   const getBackgroundColor = (packageName: string | null): string => {
     switch (packageName) {
       case "Free":
         return "bg-gradient-to-r from-bronze-light to-bronze-dark";
-      case "Starter":
+      case "Starters":
         return "bg-gradient-to-r from-silver-light to-silver-dark";
-      case "Growth":
-        return "bg-gradient-to-r from-gold-light to-gold-dark";
-      case "Professional":
-        return "bg-gradient-to-r from-platinum-light to-platinum-dark";
-      case "Enterprise":
-        return "bg-gradient-to-r from-diamond-light to-diamond-dark";
+      case "Growths":
+        return "bg-gradient-to-r from-pink-500 from-10% via-red-500 via-30% to-yellow-500 to-90%";
+      case "Professionals":
+        return "bg-gradient-to-r from-indigo-500 from-20% via-sky-500 via-40% to-emerald-500 to-90%";
+      case "Enterprises":
+        return "bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500";
       default:
-        return "bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 transition-all duration-500";
+        return "bg-gradient-to-r from-gray-300 from-10% via-gray-400 via-30% to-gray-600 to-90% ";
     }
   };
 
-  //bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 - enterprise
-  //bg-gradient-to-r from-indigo-500 from-20% via-sky-500 via-40% to-emerald-500 to-90% - professional
-  //bg-gradient-to-r from-pink-500 from-10% via-red-500 via-30% to-yellow-500 to-90% - growth
   //bg-gradient-to-r from-red-400 from-10% via-pink-500 via-30% to-purple-600 to-90% -
   //bg-gradient-to-r from-gray-300 from-10% via-gray-400 via-30% to-gray-600 to-90% - free
 
   return (
     <div
-      className={`w-2/3 h-2/3 flex rounded justify-center items-center ${getBackgroundColor(
+      className={`w-full h-full flex flex-col rounded justify-center gap-4 pl-4 ${getBackgroundColor(
         packageName
       )}`}
     >
-      <h1 className="flex text-base m-0 p-0 font-medium text-slate-200">
+      <h1 className="flex xl:text-4xl text-xl m-0 p-0  text-slate-300">
         {packageName}
+      </h1>
+      <h1 className="flex xl:text-2xl text-xl m-0 p-0  text-slate-300">
+        Start Time: {createdTime?.toLocaleString()}
+      </h1>
+      <h1 className="flex xl:text-2xl text-xl m-0 p-0  text-slate-300">
+        End Time: {endTime?.toLocaleString()}
       </h1>
     </div>
   );
