@@ -8,20 +8,22 @@ const CardPlan = () => {
   const [packageName, setPackageName] = useState<string | null>(null);
   const [createdTime, setCreatedTime] = useState<Date | null>(null);
   const [endTime, setEndTime] = useState<Date | null>(null);
-  const [staticEndTime, setStaticEndTime] = useState<number | null>(null);
-  const [remainingTime, setRemainingTime] = useState<string>("");
+  const [packagePrice, setPackagePrice] = useState<number>(0);
+  // const [staticEndTime, setStaticEndTime] = useState<number | null>(null);
+  // const [remainingTime, setRemainingTime] = useState<string>("");
 
   const fetchSubscriptionInfo = async () => {
     const res = await stripeSubscriptionInfo();
     const res1 = await subscriptionDetails();
     if (res && res1) {
-      console.log("price:", res);
+      console.log(res1.plan.amount);
+      setPackagePrice((res1.plan.amount / 100))
       setPackageName(res.lookup_key);
       const startDate: Date = new Date(res1.current_period_start * 1000);
       setCreatedTime(startDate);
       const endDate: Date = new Date(res1.current_period_end * 1000);
       setEndTime(endDate);
-      setStaticEndTime(res1.current_period_end);
+      // setStaticEndTime(res1.current_period_end);
     }
   };
 
@@ -63,7 +65,7 @@ const CardPlan = () => {
       {packageName && createdTime && endTime ? (
         <div className="flex flex-row w-full h-full gap-4 justify-center items-center">
           <div className="flex w-full h-5/6 rounded justify-center items-center">
-            <PackageCard packageName={packageName} createdTime={createdTime} endTime={endTime}></PackageCard>
+            <PackageCard packagePrice={packagePrice} packageName={packageName} createdTime={createdTime} endTime={endTime}></PackageCard>
           </div>
         </div>
       ) : (

@@ -33,6 +33,7 @@ const PricingPlans = () => {
   const priceId = billingStore((state: any) => state.priceId);
   const [customerId, setCustomerID] = useState<string>("");
   const [currentPackage, setCurrentPackage] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     (async () => {
@@ -43,6 +44,7 @@ const PricingPlans = () => {
         setProducts(res);
         setCustomerID(res1.stripeCustomerID);
         setCurrentPackage(res2.lookup_key);
+        setLoading(false);
       }
     })();
   }, [setProducts]);
@@ -68,7 +70,7 @@ const PricingPlans = () => {
           const calculatedPrice = items.unit_amount / 100;
           return (
             <div key={index} className="p-0 m-0 relative flex w-full gap-4">
-              {products ? (
+              {!loading ? (
                 <PlanComponent
                   heading={items.lookup_key}
                   price={calculatedPrice.toString()}
@@ -83,10 +85,10 @@ const PricingPlans = () => {
                     items.lookup_key === "Starter"
                       ? pricingplan1
                       : items.lookup_key === "Growth"
-                      ? pricingplan2
-                      : items.lookup_key === "Professional"
-                      ? pricingplan3
-                      : pricingplan4
+                        ? pricingplan2
+                        : items.lookup_key === "Professional"
+                          ? pricingplan3
+                          : pricingplan4
                   }
                 />
               ) : (

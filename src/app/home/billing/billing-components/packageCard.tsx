@@ -4,9 +4,10 @@ type PackageCardProps = {
   packageName: string | null;
   createdTime: Date | null;
   endTime: Date | null;
+  packagePrice: number | null;
 };
 
-const PackageCard: React.FC<PackageCardProps> = ({ packageName, createdTime, endTime }) => {
+const PackageCard: React.FC<PackageCardProps> = ({ packageName, createdTime, endTime, packagePrice }) => {
   const getBackgroundColor = (packageName: string | null): string => {
     switch (packageName) {
       case "Free":
@@ -35,6 +36,9 @@ const PackageCard: React.FC<PackageCardProps> = ({ packageName, createdTime, end
     >
       <h1 className="flex xl:text-4xl text-xl m-0 p-0  text-slate-300">
         {packageName}
+      </h1>
+      <h1 className="flex xl:text-4xl text-xl m-0 p-0  text-slate-300">
+        {packagePrice}
       </h1>
       <h1 className="flex xl:text-2xl text-xl m-0 p-0  text-slate-300">
         Start Time: {createdTime?.toLocaleString()}

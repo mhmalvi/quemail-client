@@ -14,9 +14,8 @@ const Sidebar = () => {
   const setOpenSidebar = sideBarStore((state: any) => state.setOpenSidebar);
   return (
     <div
-      className={`h-full xl:px-4 px-2 flex flex-col xl:gap-8 gap-4 dark:border-none border-r border-violet-200 dark:bg-light-glass bg-light-glass ease-in duration-100 ${
-        sidebarToggle ? "xl:w-1/6 w-1/5 " : "xl:w-20 w-16"
-      } `}
+      className={`h-full xl:px-4 px-2 flex flex-col xl:gap-8 gap-4 dark:border-none border-r border-violet-200 dark:bg-light-glass bg-light-glass ease-in duration-100 ${sidebarToggle ? "xl:w-1/6 w-1/5 " : "xl:w-20 w-16"
+        } `}
     >
       {sidebarToggle ? (
         <div
@@ -60,9 +59,8 @@ const Sidebar = () => {
               <TbMail className=" w-full" size={20} />
             </div>
             <div
-              className={`absolute flex items-center w-2/3 justify-between gap-8 ${
-                sidebarToggle ? "right-0" : "hidden"
-              }`}
+              className={`absolute flex items-center w-2/3 justify-between gap-8 ${sidebarToggle ? "right-0" : "hidden"
+                }`}
             >
               <h1 className={`m-0 p-0 z-10 overflow-hidden `}>Campaigns</h1>
               <IoIosArrowForward />
@@ -117,9 +115,8 @@ const Sidebar = () => {
               <TbUser className="w-full" size={20} />
             </div>
             <div
-              className={`absolute flex items-center w-2/3 justify-between gap-8 ${
-                sidebarToggle ? "right-0" : "hidden"
-              }`}
+              className={`absolute flex items-center w-2/3 justify-between gap-8 ${sidebarToggle ? "right-0" : "hidden"
+                }`}
             >
               <h1 className={`m-0 p-0 z-10 overflow-hidden `}>Contacts</h1>
               <IoIosArrowForward />
@@ -137,11 +134,11 @@ const Sidebar = () => {
           </Dropdown.Item>
         </Link>
 
-        <Link href="/home/contacts/email-subscriptions">
+        {/* <Link href="/home/contacts/email-subscriptions">
           <Dropdown.Item className="dark:text-slate-300 text-light-black hover:text-gray-800">
             Email Subscriptions
           </Dropdown.Item>
-        </Link>
+        </Link> */}
       </Dropdown>
       <Dropdown
         label="Dropdown button"
@@ -154,9 +151,8 @@ const Sidebar = () => {
               <TbSettingsDollar className="w-full" size={20} />
             </div>
             <div
-              className={`absolute flex items-center w-2/3 justify-between gap-8 ${
-                sidebarToggle ? "right-0" : "hidden"
-              }`}
+              className={`absolute flex items-center w-2/3 justify-between gap-8 ${sidebarToggle ? "right-0" : "hidden"
+                }`}
             >
               <h1 className={`m-0 p-0 z-10 overflow-hidden `}>Billing</h1>
               <IoIosArrowForward />

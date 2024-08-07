@@ -143,7 +143,7 @@ const CardDetails = () => {
               </span>
             </button>
           </h1>
-          <div className="w-full h-full overflow-auto">
+          <div className="w-full h-full overflow-y-auto overflow-x-hidden">
             <Table hoverable striped>
               <Table.Head className="w-full">
                 <Table.HeadCell className="w-1/4 sticky text-center">
