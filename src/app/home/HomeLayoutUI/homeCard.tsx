@@ -207,12 +207,12 @@ const HomeCard = () => {
                 </div>
               )}
             </div>
-            <div className=" bg-white xl:h-20 h-16 xl:p-4 p-2 border dark:border-dark-black/60 hover:dark:border-brand-color hover:border-brand-color xl:w-20 w-16 rounded-md shadow-md cursor-pointer hover:scale-95 duration-100 ease-in-out">
+            {/* <div className=" bg-white xl:h-20 h-16 xl:p-4 p-2 border dark:border-dark-black/60 hover:dark:border-brand-color hover:border-brand-color xl:w-20 w-16 rounded-md shadow-md cursor-pointer hover:scale-95 duration-100 ease-in-out">
               <Image src={Images.Yahoo} alt="Yahoo" className="h-full" />
             </div>
             <div className=" bg-white xl:h-20 h-16 xl:p-4 p-2 border dark:border-dark-black/60 hover:dark:border-brand-color hover:border-brand-color xl:w-20 w-16 rounded-md shadow-md cursor-pointer hover:scale-95 duration-100 ease-in-out">
               <Image src={Images.Outlook} alt="Outlook" className="h-full" />
-            </div>{" "}
+            </div>{" "} */}
           </>
         )}
       </div>
@@ -317,15 +317,15 @@ const HomeCard = () => {
               onClick={() => {
                 mailAdded?.google === null || mailAdded === null
                   ? handleAddMail(
-                      emailInfo.email,
-                      emailInfo.appPassword,
-                      emailInfo.provider
-                    )
+                    emailInfo.email,
+                    emailInfo.appPassword,
+                    emailInfo.provider
+                  )
                   : handleUpdateMail(
-                      emailInfo.email,
-                      emailInfo.appPassword,
-                      emailInfo?.id
-                    );
+                    emailInfo.email,
+                    emailInfo.appPassword,
+                    emailInfo?.id
+                  );
               }}
               disabled={
                 emailInfo.email === null || emailInfo.appPassword === null

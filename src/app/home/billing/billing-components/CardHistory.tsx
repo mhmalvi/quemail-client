@@ -1,11 +1,11 @@
 import { stripeInvoiceHistory } from "@/app/api/billing";
-import { Spinner, Table, Tooltip } from "flowbite-react";
+import { Spinner, Table, Tooltip, Dropdown } from "flowbite-react";
 import { Key, useEffect, useState } from "react";
 import { TbCaretLeftRight, TbDownload } from "react-icons/tb";
-import { Dropdown } from "flowbite-react";
 
 const CardHistory = () => {
   const [status, setStatus] = useState<string>("paid");
+  const [invoicesLoading, setInvoicesLoading] = useState<boolean>(true);
   const [limit, setLimit] = useState<number>(5);
   const [expanded, setExpanded] = useState<boolean>(false);
   const [invoices, setInvoices] = useState<any>(null);
@@ -16,6 +16,7 @@ const CardHistory = () => {
       if (res && res.message === "success") {
         console.log(res);
         setInvoices(res.invoice.data);
+        setInvoicesLoading(false);
       }
     };
     fetchInvoices();
@@ -35,9 +36,8 @@ const CardHistory = () => {
 
   return (
     <div
-      className={`step-4 border dark:border-none border-violet-200 ${
-        expanded ? "xl:w-full w-full" : "xl:w-1/4 w-1/3"
-      } dark:bg-light-glass bg-white shadow-md backdrop-blur-xl rounded-md p-4 flex flex-col gap-4`}
+      className={`step-4 border dark:border-none border-violet-200 ${expanded ? "xl:w-full w-full" : "xl:w-1/4 w-1/3"
+        } dark:bg-light-glass bg-white shadow-md backdrop-blur-xl rounded-md p-4 flex flex-col gap-4`}
     >
       <div className="flex flex-row justify-between items-center">
         <h1 className="xl:text-xl text-base m-0 p-0 dark:text-white text-dark-black text-center flex-grow">
@@ -45,7 +45,7 @@ const CardHistory = () => {
         </h1>
 
         <button
-          className=" border rounded-full border-brand-color dark:border-white"
+          className="border rounded-full border-brand-color dark:border-white"
           onClick={() => {
             handleExpanded();
           }}
@@ -59,7 +59,7 @@ const CardHistory = () => {
           </Tooltip>
         </button>
       </div>
-      {invoices && invoices.length !== 0 ? (
+      {!invoicesLoading ? (
         <>
           <div className="w-full flex flex-row justify-center items-center gap-4">
             <Dropdown
@@ -78,6 +78,7 @@ const CardHistory = () => {
                 className="dark:text-slate-300 text-light-black hover:text-slate-700"
                 onClick={() => {
                   handleStatus("paid");
+                  setInvoicesLoading(true);
                 }}
               >
                 Paid
@@ -86,9 +87,37 @@ const CardHistory = () => {
                 className="dark:text-slate-300 text-light-black hover:text-slate-700"
                 onClick={() => {
                   handleStatus("open");
+                  setInvoicesLoading(true);
                 }}
               >
-                Open
+                Pending
+              </Dropdown.Item>
+              <Dropdown.Item
+                className="dark:text-slate-300 text-light-black hover:text-slate-700"
+                onClick={() => {
+                  handleStatus("uncollectible");
+                  setInvoicesLoading(true);
+                }}
+              >
+                Uncollectible
+              </Dropdown.Item>
+              <Dropdown.Item
+                className="dark:text-slate-300 text-light-black hover:text-slate-700"
+                onClick={() => {
+                  handleStatus("draft");
+                  setInvoicesLoading(true);
+                }}
+              >
+                Draft
+              </Dropdown.Item>
+              <Dropdown.Item
+                className="dark:text-slate-300 text-light-black hover:text-slate-700"
+                onClick={() => {
+                  handleStatus("void");
+                  setInvoicesLoading(true);
+                }}
+              >
+                Canceled
               </Dropdown.Item>
             </Dropdown>
             <Dropdown
@@ -129,7 +158,7 @@ const CardHistory = () => {
               </Dropdown.Item>
             </Dropdown>
           </div>
-          <div className="w-full h-full overflow-auto">
+          <div className="w-full h-full overflow-y-auto overflow-x-hidden">
             <Table hoverable striped>
               <Table.Head className="w-full">
                 {expanded ? (
@@ -210,7 +239,7 @@ const CardHistory = () => {
           </div>
         </>
       ) : (
-        <div className=" w-full h-screen flex flex-col items-center justify-center">
+        <div className="w-full h-screen flex flex-col items-center justify-center">
           <Spinner
             color="purple"
             aria-label="Purple spinner example"

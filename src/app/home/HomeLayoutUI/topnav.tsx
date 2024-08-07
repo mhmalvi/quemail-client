@@ -41,8 +41,8 @@ const Topnav = () => {
           capitalizedParts.length - 1 === index
             ? ""
             : capitalizedParts.length - 2 === index
-            ? "./"
-            : "../"
+              ? "./"
+              : "../"
         }
       >
         <h1
@@ -100,12 +100,12 @@ const Topnav = () => {
               />
             </div>
           </Tooltip>
-          <div className="p-2">
+          {/* <div className="p-2">
             <MdNotifications
               size={20}
               className="dark:text-slate-300 text-dark-black"
             />
-          </div>
+          </div> */}
           <Dropdown
             label="Dropdown button"
             placement="bottom-start"
@@ -139,20 +139,20 @@ const Topnav = () => {
             >
               My Profile
             </Dropdown.Item>
-            <Link href="/home/profile/users">
+            {/* <Link href="/home/profile/users">
               <Dropdown.Item className="dark:text-slate-300 text-light-black hover:text-slate-700">
                 Users
               </Dropdown.Item>
-            </Link>
-            <Dropdown.Item className="dark:text-slate-300 text-light-black hover:text-slate-700">
+            </Link> */}
+            {/* <Dropdown.Item className="dark:text-slate-300 text-light-black hover:text-slate-700">
               Account & Billing
-            </Dropdown.Item>
+            </Dropdown.Item> */}
             <Dropdown.Item className="dark:text-slate-300 text-light-black hover:text-slate-700">
               Pricing Plans
             </Dropdown.Item>
-            <Dropdown.Item className="dark:text-slate-300 text-light-black hover:text-slate-700">
+            {/* <Dropdown.Item className="dark:text-slate-300 text-light-black hover:text-slate-700">
               Support
-            </Dropdown.Item>
+            </Dropdown.Item> */}
 
             <Dropdown.Divider className="bg-light-black" />
             <Dropdown.Item
