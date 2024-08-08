@@ -316,3 +316,9 @@ export interface DeleteCardModalProps {
   digit: number;
   id: string;
 }
+
+export interface currentResources {
+  currentCampaigns: number | null;
+  currentContacts: number | null;
+  currentEmails: number | null;
+}
