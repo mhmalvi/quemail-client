@@ -2,12 +2,17 @@ import React from "react";
 
 type PackageCardProps = {
   packageName: string | null;
-  createdTime: Date | null;
-  endTime: Date | null;
-  packagePrice: number | null;
+  createdTime: Date | string | null;
+  endTime: Date | string | null;
+  packagePrice: number | string | null;
 };
 
-const PackageCard: React.FC<PackageCardProps> = ({ packageName, createdTime, endTime, packagePrice }) => {
+const PackageCard: React.FC<PackageCardProps> = ({
+  packageName,
+  createdTime,
+  endTime,
+  packagePrice,
+}) => {
   const getBackgroundColor = (packageName: string | null): string => {
     switch (packageName) {
       case "Free":
@@ -30,21 +35,10 @@ const PackageCard: React.FC<PackageCardProps> = ({ packageName, createdTime, end
 
   return (
     <div
-      className={`w-full h-full flex flex-col rounded justify-center gap-4 pl-4 ${getBackgroundColor(
-        packageName
-      )}`}
+      className={`w-2/3 h-1/3 flex rounded-full border-4 justify-center items-center animate-glow`}
     >
-      <h1 className="flex xl:text-4xl text-xl m-0 p-0  text-slate-300">
+      <h1 className="xl:text-xl text-base m-0 p-0 dark:text-white text-dark-black text-center overflow-hidden">
         {packageName}
-      </h1>
-      <h1 className="flex xl:text-4xl text-xl m-0 p-0  text-slate-300">
-        {packagePrice}
-      </h1>
-      <h1 className="flex xl:text-2xl text-xl m-0 p-0  text-slate-300">
-        Start Time: {createdTime?.toLocaleString()}
-      </h1>
-      <h1 className="flex xl:text-2xl text-xl m-0 p-0  text-slate-300">
-        End Time: {endTime?.toLocaleString()}
       </h1>
     </div>
   );

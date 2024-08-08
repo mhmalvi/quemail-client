@@ -11,7 +11,6 @@ import { warningNotification } from "@/components/utils/utility";
 const CardResources = () => {
   const [currentResources, setCurrentResources] = useState<currentResources>();
   const [totalResources, setTotalResources] = useState<currentResources>();
-  const [progress, setProgress] = useState<number>(50);
   const [currentPackage, setCurrentPackage] = useState<string | null>(null);
 
   useEffect(() => {
@@ -20,7 +19,7 @@ const CardResources = () => {
       const res1 = await totalResourcesStatus();
       const res2 = await stripeSubscriptionInfo();
 
-      console.log("here", res);
+      console.log("here", res1);
 
       if (
         res &&
@@ -38,8 +37,9 @@ const CardResources = () => {
         const product = res1.products.find(
           (product: any) => product.productName === currentPackage
         );
+        console.log("here1", product);
         if (product) {
-          console.log("here1", currentResources?.currentEmails);
+          console.log("here1", product);
           setTotalResources({
             currentCampaigns: 0,
             currentContacts: product.contactLimit,

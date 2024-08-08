@@ -264,11 +264,13 @@ export interface BillingState {
   priceId: number | null;
   checkoutModal: boolean;
   cancelModal: boolean;
+  quantity: number | null;
   setProducts: (state: [] | null) => void;
   setPriceId: (state: number | null) => void;
   setCheckoutModal: (state: boolean) => void;
   setCancelModal: (state: boolean) => void;
   setAmount: (state: string | null) => void;
+  setQuantity: (state: number | null) => void;
 }
 
 // Define the type for mailAdded

@@ -30,6 +30,7 @@ const CheckoutForm = (props: CheckoutFormProps): JSX.Element => {
   const elements = useElements();
   const cardID = checkout((state: any) => state.cardID);
   const index = checkout((state: any) => state.index);
+  const quantity = billingStore((state: any) => state.quantity);
 
   const handleCheckoutFormSubmit = async (
     event: ChangeEvent<HTMLFormElement>
@@ -43,15 +44,16 @@ const CheckoutForm = (props: CheckoutFormProps): JSX.Element => {
     const subscriptionResponse = await subscription(
       props.customerId,
       props.priceId,
-      cardID
+      cardID,
+      quantity
     );
     if (subscriptionResponse === "inUse") {
       setError("This package is already active");
     } else if (subscriptionResponse) {
       console.log(subscriptionResponse);
-      setTimeout(() => {
-        window.location.reload();
-      }, 2000);
+      // setTimeout(() => {
+      //   window.location.reload();
+      // }, 2000);
     }
     setLoading(false);
   };

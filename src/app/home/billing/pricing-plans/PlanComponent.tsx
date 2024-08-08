@@ -22,6 +22,23 @@ const PlanComponent = (props: planProps) => {
   const setCheckoutModal = billingStore((state) => state.setCheckoutModal);
   const setPriceId = billingStore((state) => state.setPriceId);
   const setAmount = billingStore((state) => state.setAmount);
+  const setQuantity = billingStore((state) => state.setQuantity);
+
+  const handleClick = () => {
+    console.log("planType:", planType);
+    if (planType === "Choose Start") {
+      setQuantity(10);
+    } else if (planType === "Choose Grow") {
+      setQuantity(20);
+    } else if (planType === "Choose Profession") {
+      setQuantity(30);
+    } else if (planType === "Choose Enterprize") {
+      setQuantity(40);
+    }
+    setCheckoutModal(true);
+    setPriceId(priceId);
+    setAmount(price);
+  };
 
   return (
     <div className="bg-violet-50 hover:bg-violet-200 dark:hover:bg-light-glass duration-100 ease-in-out border border-violet-200 dark:border-light-glass dark:bg-dark-black h-full w-full rounded-md flex flex-col items-center p-4">
@@ -57,9 +74,7 @@ const PlanComponent = (props: planProps) => {
             <button
               disabled={planType === "Current Plan"}
               onClick={() => {
-                setCheckoutModal(true);
-                setPriceId(priceId);
-                setAmount(price);
+                handleClick();
               }}
               className="w-full h-full border disabled:border-voilet-200 disabled:dark:border-light-glass dark:border-light-glass disabled:hover:bg-violet-200 disabled:bg-violet-200 disabled:dark:bg-dark-black/50 hover:bg-dark-black duration-100 ease-in-out bg-brand-color rounded-md disabled:text-dark-black/60  disabled:dark:text-slate-300/60 disabled:cursor-not-allowed cursor-pointer text-slate-300"
             >

@@ -8,7 +8,8 @@ import { subscriptionProps } from "@/components/utils/types";
 export const subscription = async (
   stripeCustomerID: string,
   priceID: string,
-  paymentSourceID: string
+  paymentSourceID: string,
+  quantity: number,
 ) => {
   try {
     const result = await fetch(
@@ -25,6 +26,7 @@ export const subscription = async (
           userID: Storage.getItem("userID"),
           amount: billingStore.getState().amount,
           paymentSourceID: paymentSourceID,
+          quantity: quantity
         }),
       }
     );
