@@ -52,6 +52,16 @@ const config: Config = {
         },
       },
       keyframes: {
+        glow: {
+          "0%, 100%": {
+            borderColor: "hsl(200, 100%, 50%)",
+            boxShadow: "0 0 5px hsl(200, 100%, 50%)",
+          },
+          "50%": {
+            borderColor: "hsl(300, 100%, 50%)",
+            boxShadow: "0 0 20px hsl(300, 100%, 50%)",
+          },
+        },
         up: {
           "0%, 100%": { transform: "translateY(30px)" },
           "50%": { transform: "translateY(0px)" },
@@ -81,6 +91,7 @@ const config: Config = {
         },
       },
       animation: {
+        glow: "glow 3s infinite alternate",
         up: "up 2s linear infinite",
         up1: "up1 3s linear infinite",
         up2: "up2 4s linear infinite",

@@ -239,6 +239,7 @@ export const billingStore = create<BillingState>((set) => ({
   checkoutModal: false,
   cancelModal: false,
   amount: null,
+  quantity: null,
   setProducts(state) {
     set(() => ({ products: state }));
   },
@@ -253,6 +254,9 @@ export const billingStore = create<BillingState>((set) => ({
   },
   setAmount(state) {
     set(() => ({ amount: state }));
+  },
+  setQuantity(state) {
+    set(() => ({ quantity: state }));
   },
 }));
 
