@@ -125,8 +125,17 @@ const CardDetails = () => {
         </div>
       ) : allCards && allCards.length === 0 ? (
         <div className="flex w-full h-full border rounded border-violet-200 justify-center items-center">
-          <h1 className="xl:text-xl text-base m-0 p-0 dark:text-white text-dark-black">
-            No Card Added
+          <h1 className="text-base m-0 p-0 dark:text-white text-dark-black flex justify-end gap-4">
+            <button
+              className={`${BORDERED_BUTTON_STYLES} hover:bg-brand-color hover:text-white cursor-pointer`}
+              onClick={() => {
+                setAddCardModal(true);
+              }}
+            >
+              <span className="flex flex-row justify-center items-center gap-2 font-medium text-black-200">
+                add card <TbCirclePlus />
+              </span>
+            </button>
           </h1>
         </div>
       ) : (
