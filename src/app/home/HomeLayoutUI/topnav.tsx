@@ -41,8 +41,8 @@ const Topnav = () => {
           capitalizedParts.length - 1 === index
             ? ""
             : capitalizedParts.length - 2 === index
-              ? "./"
-              : "../"
+            ? "./"
+            : "../"
         }
       >
         <h1
@@ -139,11 +139,11 @@ const Topnav = () => {
             >
               My Profile
             </Dropdown.Item>
-            {/* <Link href="/home/profile/users">
+            <Link href="/home/profile/users">
               <Dropdown.Item className="dark:text-slate-300 text-light-black hover:text-slate-700">
                 Users
               </Dropdown.Item>
-            </Link> */}
+            </Link>
             {/* <Dropdown.Item className="dark:text-slate-300 text-light-black hover:text-slate-700">
               Account & Billing
             </Dropdown.Item> */}
