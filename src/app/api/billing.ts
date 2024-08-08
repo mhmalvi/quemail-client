@@ -417,3 +417,51 @@ export const updateDefaultCard = async (defaultCard: any) => {
     return error;
   }
 };
+
+export const currentResourcesStatus = async () => {
+  const userID = Storage.getItem("userID");
+  try {
+    const result = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/counts`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          userID: userID,
+        }),
+      }
+    );
+    if (result) {
+      const responseData = await result.json();
+      return responseData;
+    } else {
+      return null;
+    }
+  } catch (error: any) {
+    return error.response;
+  }
+};
+
+export const totalResourcesStatus = async () => {
+  try {
+    const result = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/products`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    if (result) {
+      const responseData = await result.json();
+      return responseData;
+    } else {
+      return null;
+    }
+  } catch (error: any) {
+    return error.response;
+  }
+};

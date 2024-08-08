@@ -25,6 +25,7 @@ const CardPlan = () => {
       setEndTime(endDate);
       // setStaticEndTime(res1.current_period_end);
     }
+    
   };
 
   // const calculateRemainingTime = (endTime: number) => {
