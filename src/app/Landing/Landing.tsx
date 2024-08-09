@@ -1,7 +1,7 @@
 "use client";
 import React, { useRef } from "react";
 import { motion } from "framer-motion";
-import { useInView } from "framer-motion"
+import { useInView } from "framer-motion";
 import SectionOne from "@/components/Landing/SectionOne";
 import SectionTwo from "@/components/Landing/SectionTwo";
 import SectionThree from "@/components/Landing/SectionThree";
@@ -18,8 +18,8 @@ const sectionVariants = {
 };
 
 const AnimatedSection = ({ children }: { children: React.ReactNode }) => {
-  const ref = useRef(null)
-  const isInView = useInView(ref)
+  const ref = useRef(null);
+  const isInView = useInView(ref);
 
   return (
     <motion.div
