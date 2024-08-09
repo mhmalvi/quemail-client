@@ -1,6 +1,6 @@
 "use client";
-import React, { useRef } from "react";
-import { motion } from "framer-motion";
+import React, { useEffect, useRef } from "react";
+import { motion, useScroll } from "framer-motion";
 import { useInView } from "framer-motion";
 import SectionOne from "@/components/Landing/SectionOne";
 import SectionTwo from "@/components/Landing/SectionTwo";
@@ -11,23 +11,24 @@ import SectionSix from "@/components/Landing/SectionSix";
 import "../globals.css";
 import Images from "@/components/utils/images";
 import Image from "next/image";
-
-const sectionVariants = {
-  hidden: { opacity: 0, y: 20, scale: 0.8 },
-  visible: { opacity: 1, y: 0, scale: 1 },
-};
+import { landingStore } from "@/store/store";
 
 const AnimatedSection = ({ children }: { children: React.ReactNode }) => {
-  const ref = useRef(null);
+  const welcomeVisible = landingStore((state) => state.welcomeVisible);
+  const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["0.1 1", "0.7 1"],
+    
+  });
 
   return (
     <motion.div
       ref={ref}
-      initial={"hiddens"}
-      animate={isInView ? "visible" : "hidden"}
-      variants={sectionVariants}
-      transition={{ duration: 1 }}
+      style={{
+        scale: scrollYProgress,
+      }}
     >
       {children}
     </motion.div>

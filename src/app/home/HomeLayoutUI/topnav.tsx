@@ -1,7 +1,13 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
-import { DarkThemeToggle, Dropdown, Modal, Tooltip } from "flowbite-react";
+import {
+  DarkThemeToggle,
+  Dropdown,
+  Modal,
+  Spinner,
+  Tooltip,
+} from "flowbite-react";
 import { MdArrowRight } from "react-icons/md";
 import Link from "next/link";
 import { sideBarStore, themeStore, useTourStore } from "@/store/store";
@@ -90,14 +96,18 @@ const Topnav = () => {
             content="Start quemailer tour!"
             className="bg-brand-color xl:text-sm text-xs"
           >
-            <div className="p-2">
-              <BsQuestionDiamondFill
-                size={20}
-                className="step-10 dark:text-slate-300 text-dark-black transition-fill duration-200 ease-in-out hover:fill-brand-color cursor-pointer"
-                onClick={() => {
-                  setIsTourGoing(!isTourGoing);
-                }}
-              />
+            <div className="p-2 step-10 ">
+              {isTourGoing ? (
+                <Spinner color="purple" aria-label="Purple spinner example" />
+              ) : (
+                <BsQuestionDiamondFill
+                  size={20}
+                  className="dark:text-slate-300 text-dark-black transition-fill duration-200 ease-in-out hover:fill-brand-color cursor-pointer"
+                  onClick={() => {
+                    setIsTourGoing(!isTourGoing);
+                  }}
+                />
+              )}
             </div>
           </Tooltip>
           {/* <div className="p-2">
