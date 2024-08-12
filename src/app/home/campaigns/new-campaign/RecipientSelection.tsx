@@ -8,6 +8,7 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Images from "@/components/utils/images";
 import { recipientsByGroup } from "@/app/api/campaign";
+import { currentResourcesStatus } from "@/app/api/billing";
 
 const RecipientSelection = ({ tabsRef }: any) => {
   const groupData = contactStore((state) => state.groupData);
@@ -20,6 +21,8 @@ const RecipientSelection = ({ tabsRef }: any) => {
   const setClickedGroup = campaignStore((state) => state.setClickedGroup);
   const [openGroupModal, setOpenGroupModal] = useState<boolean>(false);
   const [totalItems, setTotalItems] = useState<number | null>(null);
+  const [error, setError] = useState<boolean>(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   useEffect(() => {
     if (groupData === null) {
@@ -36,13 +39,27 @@ const RecipientSelection = ({ tabsRef }: any) => {
     }
   }, [groupData, setGroupData]);
 
+  const checkEmailStatus = async (emailNumber: number) => {
+    console.log("check email number: ", emailNumber);
+    const res = await currentResourcesStatus();
+    if (
+      res &&
+      res.message === "success" &&
+      res.remainingLimit.remainingMail < emailNumber
+    ) {
+      setError(true);
+      setErrorMessage("Exceeds email limit!");
+    } else {
+      setError(false);
+      setErrorMessage(null);
+    }
+  };
+
   const handleAddRecipients = async (groupName: string | null) => {
     if (groupName) {
       try {
         const res = await recipientsByGroup(groupName, 1, 1);
         if (res.status === 200) {
-      
-
           const groupRes = await recipientsByGroup(groupName, 1, res.total);
           try {
             if (groupRes.status === 200) {
@@ -56,6 +73,23 @@ const RecipientSelection = ({ tabsRef }: any) => {
                   },
                 })
               );
+              console.log(
+                "check newCampaign recipient : ",
+                newCampaign?.recipient?.length
+              );
+              console.log(
+                "check updateRecipients length : ",
+                updateRecipients.length
+              );
+
+              if (newCampaign?.recipient?.length && updateRecipients.length) {
+                const updatedRecipients =
+                  newCampaign?.recipient?.length + updateRecipients.length;
+                await checkEmailStatus(updatedRecipients);
+              } else {
+                await checkEmailStatus(updateRecipients.length);
+              }
+
               setNewCampaign((prev: any | null) => ({
                 ...prev,
                 recipient: prev?.recipient
@@ -85,6 +119,7 @@ const RecipientSelection = ({ tabsRef }: any) => {
       recipient: null,
     }));
     setClickedGroup([]);
+    setErrorMessage(null);
   };
 
   const handleRemoveRecipient = (recipientId: number) => {
@@ -261,9 +296,12 @@ const RecipientSelection = ({ tabsRef }: any) => {
           >
             Previous
           </button>
+          {error && errorMessage && (
+            <p className="text-red-500 font-medium text-sm">{errorMessage}</p>
+          )}
           <button
             className="text-sm xl:text-base border border-brand-color text-dark-black dark:text-slate-300 xl:px-8 px-4 xl:py-2 py-1 rounded-md disabled:opacity-20"
-            disabled={newCampaign?.recipient === null}
+            disabled={newCampaign?.recipient === null || error}
             onClick={() => tabsRef.current.setActiveTab(3)}
           >
             Next
