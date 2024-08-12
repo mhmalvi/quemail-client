@@ -9,7 +9,7 @@ export const subscription = async (
   stripeCustomerID: string,
   priceID: string,
   paymentSourceID: string,
-  quantity: number,
+  quantity: number
 ) => {
   try {
     const result = await fetch(
@@ -26,7 +26,7 @@ export const subscription = async (
           userID: Storage.getItem("userID"),
           amount: billingStore.getState().amount,
           paymentSourceID: paymentSourceID,
-          quantity: quantity
+          quantity: quantity,
         }),
       }
     );
@@ -429,6 +429,7 @@ export const currentResourcesStatus = async () => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Authorization: Storage.getItem("token"),
         },
         body: JSON.stringify({
           userID: userID,
@@ -446,24 +447,25 @@ export const currentResourcesStatus = async () => {
   }
 };
 
-export const totalResourcesStatus = async () => {
-  try {
-    const result = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/api/products`,
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
-    if (result) {
-      const responseData = await result.json();
-      return responseData;
-    } else {
-      return null;
-    }
-  } catch (error: any) {
-    return error.response;
-  }
-};
+// export const totalResourcesStatus = async () => {
+//   try {
+//     const result = await fetch(
+//       `${process.env.NEXT_PUBLIC_BASE_URL}/api/products`,
+//       {
+//         method: "GET",
+//         headers: {
+//           "Content-Type": "application/json",
+//           Authorization: Storage.getItem("token"),
+//         },
+//       }
+//     );
+//     if (result) {
+//       const responseData = await result.json();
+//       return responseData;
+//     } else {
+//       return null;
+//     }
+//   } catch (error: any) {
+//     return error.response;
+//   }
+// };
