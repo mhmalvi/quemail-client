@@ -15,7 +15,6 @@ import {
 } from "../../../components/utils/utility";
 import { MailAdded } from "@/components/utils/types";
 
-
 const HomeCard = () => {
   const [emailInfo, setEmailInfo] = useState({
     email: null,
@@ -25,6 +24,7 @@ const HomeCard = () => {
     loading: false,
   });
   const [loading, setLoading] = useState<boolean>(true);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
   useEffect(() => {
     setTimeout(() => {
       setLoading(false);
@@ -40,7 +40,7 @@ const HomeCard = () => {
       /^[a-zA-Z]+(\s?[a-zA-Z]+)*$/.test(appPassword.trim());
 
     if (!email || !validateEmail(email)) {
-      warningNotification("Invalid email. Check your email address.");
+      setErrorMessage("Invalid email. Check your email address.");
       return false;
     }
 
@@ -50,7 +50,7 @@ const HomeCard = () => {
       appPassword.length > 19 ||
       appPassword.length < 16
     ) {
-      warningNotification(
+      setErrorMessage(
         "Invalid appPassword. Only letters and spaces are allowed."
       );
       return false;
@@ -84,9 +84,9 @@ const HomeCard = () => {
           window.location.href =
             window.location.pathname + "?reload=" + new Date().getTime();
         } else if (res.status === 422) {
-          warningNotification(res.message);
+          setErrorMessage(res.message);
         } else if (res.status === 500) {
-          warningNotification(res.message);
+          setErrorMessage(res.message);
         }
       } catch (error) {
         console.log(error);
@@ -97,6 +97,7 @@ const HomeCard = () => {
         loading: false,
       }));
     }
+    setLoading(false);
   };
   const handleUpdateMail = async (
     email: string | null,
@@ -119,9 +120,9 @@ const HomeCard = () => {
           window.location.href =
             window.location.pathname + "?reload=" + new Date().getTime();
         } else if (res.status === 422) {
-          warningNotification(res.message);
+          setErrorMessage(res.message);
         } else if (res.status === 500) {
-          warningNotification(res.message);
+          setErrorMessage(res.message);
         }
       } catch (error) {
         console.log(error);
@@ -144,7 +145,7 @@ const HomeCard = () => {
         window.location.href =
           window.location.pathname + "?reload=" + new Date().getTime();
       } else {
-        warningNotification("Something went wrong. Please try again.");
+        setErrorMessage("Something went wrong. Please try again.");
       }
     } catch (error) {
       console.log(error);
@@ -158,9 +159,9 @@ const HomeCard = () => {
           if (res?.status === 200) {
             setMailAdded(res.emails);
           } else if (res?.status === 422) {
-            warningNotification(res.message);
+            setErrorMessage(res.message);
           } else if (res?.status === 404) {
-            warningNotification(res.message);
+            setErrorMessage(res.message);
           }
         } catch (err) {
           console.log(err);
@@ -224,6 +225,7 @@ const HomeCard = () => {
         show={emailInfo.provider === "Google"}
         dismissible
         onClose={() => {
+          setErrorMessage(null);
           setEmailInfo(() => ({
             email: null,
             appPassword: null,
@@ -311,21 +313,22 @@ const HomeCard = () => {
               className="xl:px-4 px-2 xl:py-2 py-1 bg-transparent dark:text-slate-300 text-dark-black rounded-md border dark:border-light-black focus:ring-0 focus:outline-none active:outline-none active:ring-0"
             />
           </div>
+          <div className="text-red-500">{errorMessage}</div>
           <div className="flex items-center gap-4 justify-end">
             <button
               className="xl:px-4 px-2 xl:py-2 py-1 bg-brand-color text-slate-50 rounded-md disabled:opacity-20"
               onClick={() => {
                 mailAdded?.google === null || mailAdded === null
                   ? handleAddMail(
-                    emailInfo.email,
-                    emailInfo.appPassword,
-                    emailInfo.provider
-                  )
+                      emailInfo.email,
+                      emailInfo.appPassword,
+                      emailInfo.provider
+                    )
                   : handleUpdateMail(
-                    emailInfo.email,
-                    emailInfo.appPassword,
-                    emailInfo?.id
-                  );
+                      emailInfo.email,
+                      emailInfo.appPassword,
+                      emailInfo?.id
+                    );
               }}
               disabled={
                 emailInfo.email === null || emailInfo.appPassword === null
@@ -342,21 +345,6 @@ const HomeCard = () => {
               ) : (
                 "Update"
               )}
-            </button>
-
-            <button
-              className="xl:px-4 px-2 xl:py-2 py-1 bg-red-500 text-slate-50 rounded-md"
-              onClick={() => {
-                setEmailInfo(() => ({
-                  email: null,
-                  appPassword: null,
-                  provider: null,
-                  id: null,
-                  loading: false,
-                }));
-              }}
-            >
-              Cancel
             </button>
           </div>
         </Modal.Body>
