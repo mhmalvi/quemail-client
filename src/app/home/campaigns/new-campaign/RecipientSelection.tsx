@@ -39,21 +39,22 @@ const RecipientSelection = ({ tabsRef }: any) => {
     }
   }, [groupData, setGroupData]);
 
-  const checkEmailStatus = async (emailNumber: number) => {
-    console.log("check email number: ", emailNumber);
-    const res = await currentResourcesStatus();
-    if (
-      res &&
-      res.message === "success" &&
-      res.remainingLimit.remainingMail < emailNumber
-    ) {
-      setError(true);
-      setErrorMessage("Exceeds email limit!");
-    } else {
-      setError(false);
-      setErrorMessage(null);
-    }
-  };
+  useEffect(() => {
+    const update = async () => {
+      const res = await currentResourcesStatus();
+      if (
+        newCampaign?.recipient?.length &&
+        newCampaign?.recipient?.length > res.remainingLimit.remainingMail
+      ) {
+        setError(true);
+        setErrorMessage("Exceeds email limit!");
+      } else {
+        setError(false);
+        setErrorMessage(null);
+      }
+    };
+    update();
+  });
 
   const handleAddRecipients = async (groupName: string | null) => {
     if (groupName) {
@@ -73,23 +74,6 @@ const RecipientSelection = ({ tabsRef }: any) => {
                   },
                 })
               );
-              console.log(
-                "check newCampaign recipient : ",
-                newCampaign?.recipient?.length
-              );
-              console.log(
-                "check updateRecipients length : ",
-                updateRecipients.length
-              );
-
-              if (newCampaign?.recipient?.length && updateRecipients.length) {
-                const updatedRecipients =
-                  newCampaign?.recipient?.length + updateRecipients.length;
-                await checkEmailStatus(updatedRecipients);
-              } else {
-                await checkEmailStatus(updateRecipients.length);
-              }
-
               setNewCampaign((prev: any | null) => ({
                 ...prev,
                 recipient: prev?.recipient
