@@ -3,7 +3,7 @@ import { fetchGroupItems, fetchGroupList } from "@/app/api/contact";
 import { ContactType } from "@/components/utils/types";
 import { warningNotification } from "@/components/utils/utility";
 import { contactStore, campaignStore } from "@/store/store";
-import { Modal, Table } from "flowbite-react";
+import { Modal, Spinner, Table } from "flowbite-react";
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Images from "@/components/utils/images";
@@ -20,7 +20,7 @@ const RecipientSelection = ({ tabsRef }: any) => {
   const clickedGroup = campaignStore((state) => state.clickedGroup);
   const setClickedGroup = campaignStore((state) => state.setClickedGroup);
   const [openGroupModal, setOpenGroupModal] = useState<boolean>(false);
-  const [totalItems, setTotalItems] = useState<number | null>(null);
+  const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
@@ -39,22 +39,19 @@ const RecipientSelection = ({ tabsRef }: any) => {
     }
   }, [groupData, setGroupData]);
 
-  useEffect(() => {
-    const update = async () => {
-      const res = await currentResourcesStatus();
-      if (
-        newCampaign?.recipient?.length &&
-        newCampaign?.recipient?.length > res.remainingLimit.remainingMail
-      ) {
-        setError(true);
-        setErrorMessage("Exceeds email limit!");
-      } else {
-        setError(false);
-        setErrorMessage(null);
-      }
-    };
-    update();
-  });
+  const shouldGoNext = async () => {
+    const res = await currentResourcesStatus();
+    if (
+      newCampaign?.recipient?.length &&
+      newCampaign?.recipient?.length > res.remainingLimit.remainingMail
+    ) {
+      setErrorMessage("Exceeds email limit!");
+    } else {
+      setErrorMessage(null);
+      tabsRef.current.setActiveTab(3);
+    }
+    setLoading(false);
+  };
 
   const handleAddRecipients = async (groupName: string | null) => {
     if (groupName) {
@@ -273,23 +270,38 @@ const RecipientSelection = ({ tabsRef }: any) => {
         </div>
       </Modal>
       <div className="flex items-center justify-center w-full gap-4">
-        <div className="flex items-center justify-between w-1/2 gap-4">
+        <div className="flex justify-between w-1/2 gap-4">
           <button
             className="text-sm xl:text-base border border-brand-color text-dark-black dark:text-slate-300 xl:px-8 px-4 xl:py-2 py-1 rounded-md disabled:opacity-20"
             onClick={() => tabsRef.current.setActiveTab(1)}
           >
             Previous
           </button>
-          {error && errorMessage && (
-            <p className="text-red-500 font-medium text-sm">{errorMessage}</p>
+          {errorMessage && (
+            <p className="sticky text-red-500 font-medium text-sm">
+              {errorMessage}
+            </p>
           )}
-          <button
-            className="text-sm xl:text-base border border-brand-color text-dark-black dark:text-slate-300 xl:px-8 px-4 xl:py-2 py-1 rounded-md disabled:opacity-20"
-            disabled={newCampaign?.recipient === null || error}
-            onClick={() => tabsRef.current.setActiveTab(3)}
-          >
-            Next
-          </button>
+          {loading ? (
+            <div className="flex w-28 justify-center items-center">
+              <Spinner
+                color="purple"
+                aria-label="Purple spinner example"
+                size={"xl"}
+              />
+            </div>
+          ) : (
+            <button
+              className="text-sm xl:text-base border border-brand-color text-dark-black dark:text-slate-300 xl:px-8 px-4 xl:py-2 py-1 rounded-md disabled:opacity-20"
+              disabled={newCampaign?.recipient === null}
+              onClick={() => {
+                setLoading(true);
+                shouldGoNext();
+              }}
+            >
+              Next
+            </button>
+          )}
         </div>
       </div>
     </div>
