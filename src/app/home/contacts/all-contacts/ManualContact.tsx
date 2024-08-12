@@ -1,4 +1,5 @@
 "use client";
+import { currentResourcesStatus } from "@/app/api/billing";
 import { importContactManually } from "@/app/api/contact";
 import {
   successNotification,
@@ -32,6 +33,8 @@ const ManualContact: React.FC<ManualContactProps> = ({
   });
 
   const [updateLoading, setUpdateLoading] = useState(false);
+  const [error, setError] = useState<boolean>(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const handleEditContactDataChange = (
     field: keyof AddContactData,
@@ -50,6 +53,14 @@ const ManualContact: React.FC<ManualContactProps> = ({
     /^[a-zA-Z0-9]+(\s?[a-zA-Z0-9]+)*$/.test(group.trim());
 
   const addContactsManually = async () => {
+    const res = await currentResourcesStatus();
+    if (res && res.message === "success") {
+      if (res.remainingLimit.remainingContact === 0) {
+        setErrorMessage("Contact limit exceeds!");
+        setUpdateLoading(false);
+        return;
+      }
+    }
     const { name, email, group } = addContactData;
 
     if (!name || !validateName(name)) {
@@ -133,6 +144,9 @@ const ManualContact: React.FC<ManualContactProps> = ({
           required
         />
       </div>
+      {errorMessage && (
+        <p className="text-red-500 font-medium text-sm">{errorMessage}</p>
+      )}
       <div className="flex items-center justify-end gap-4">
         <button
           className="px-2 py-1 bg-brand-color rounded-md disabled:opacity-20"
