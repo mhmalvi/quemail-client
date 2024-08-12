@@ -19,6 +19,7 @@ import { signOut } from "@/app/api/auth";
 import { useRouter } from "next/navigation";
 import Images from "../../../components/utils/images";
 import MyProfile from "../profile/my-profile/page";
+import { stripeINFO } from "@/app/api/billing";
 
 const Topnav = () => {
   const closeSidebar = sideBarStore((state: any) => state.setCloseSidebar);
@@ -27,6 +28,7 @@ const Topnav = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const isTourGoing = useTourStore((state) => state.isTourGoing);
   const setIsTourGoing = useTourStore((state) => state.setIsTourGoing);
+  const [isFreeVersion, setIsFreeVersion] = useState<boolean>(false);
 
   const pathname = usePathname();
   const path: string = pathname;
@@ -71,6 +73,18 @@ const Topnav = () => {
     }
   };
   const photo = Storage.getItem("photo");
+
+  useEffect(() => {
+    const retrieveSubs = async () => {
+      const res = await stripeINFO();
+      if (res && res.message === "success") {
+        if (res.priceID === "free") {
+          setIsFreeVersion(true);
+        }
+      }
+    };
+    retrieveSubs();
+  }, []);
 
   useEffect(() => {
     if (logoutConfirm) {
@@ -120,15 +134,21 @@ const Topnav = () => {
             label="Dropdown button"
             placement="bottom-start"
             renderTrigger={() => (
-              <div className="step-9 h-10 w-10 rounded-full bg-brand-color cursor-pointer overflow-hidden">
+              <div className="relative">
                 <Image
                   src={
                     photo !== "" && photo !== null ? photo : Images.User_Icon
                   }
                   alt="user"
-                  width={100}
-                  height={100}
+                  width={50}
+                  height={50}
+                  className="rounded-full"
                 />
+                {isFreeVersion && (
+                  <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center rounded-full">
+                    <span className="text-white text-sm font-bold">Free</span>
+                  </div>
+                )}
               </div>
             )}
             className="dark:bg-dark-black border border-violet-200 dark:border-light-glass bg-violet-50"

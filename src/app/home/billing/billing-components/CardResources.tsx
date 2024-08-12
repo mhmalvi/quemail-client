@@ -2,8 +2,8 @@ import { Progress } from "flowbite-react";
 import { useEffect, useState } from "react";
 import {
   currentResourcesStatus,
+  stripeINFO,
   stripeSubscriptionInfo,
-  totalResourcesStatus,
 } from "@/app/api/billing";
 import { currentResources } from "@/components/utils/types";
 import { warningNotification } from "@/components/utils/utility";
@@ -16,36 +16,31 @@ const CardResources = () => {
   useEffect(() => {
     const currentResourcesState = async () => {
       const res = await currentResourcesStatus();
-      const res1 = await totalResourcesStatus();
-      const res2 = await stripeSubscriptionInfo();
+      const res3 = await stripeINFO();
 
-      console.log("here", res1);
+      console.log("here", res);
+      // console.log("here", res1);
+      // console.log("here", res3);
 
       if (
         res &&
         res.message === "success" &&
-        res1 &&
-        res1.message === "success" &&
-        res2
+        res3 &&
+        res3.message === "success"
       ) {
         setCurrentResources({
-          currentCampaigns: res.campaignCount,
-          currentContacts: res.contactsCount,
-          currentEmails: res.mailCount ? res.mailCount : 0,
+          currentCampaigns: res.countPerPackage.campaignCount,
+          currentContacts: res.countPerPackage.contactsCount,
+          currentEmails: res.countPerPackage.mailCount
+            ? res.countPerPackage.mailCount
+            : 0,
         });
-        setCurrentPackage(res2.lookup_key);
-        const product = res1.products.find(
-          (product: any) => product.productName === currentPackage
-        );
-        console.log("here1", product);
-        if (product) {
-          console.log("here1", product);
-          setTotalResources({
-            currentCampaigns: 0,
-            currentContacts: product.contactLimit,
-            currentEmails: product.emailLimit,
-          });
-        }
+        setCurrentPackage(res.productDB.productName);
+        setTotalResources({
+          currentCampaigns: 0,
+          currentContacts: res.productDB.contactLimit,
+          currentEmails: res.productDB.emailLimit,
+        });
       }
     };
     currentResourcesState();
