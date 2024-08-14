@@ -45,20 +45,20 @@ const CardHistory = () => {
           History
         </h1>
 
-        <button
-          className="border rounded-full border-brand-color dark:border-white"
-          onClick={() => {
-            handleExpanded();
-          }}
+        <Tooltip
+          content={expanded ? "Collapse" : "Expand"}
+          className="bg-brand-color text-center"
+          placement="bottom"
         >
-          <Tooltip
-            content={expanded ? "Collapse" : "Expand"}
-            className="bg-brand-color text-center"
-            placement="left"
+          <button
+            className="border rounded-full border-brand-color dark:border-white"
+            onClick={() => {
+              handleExpanded();
+            }}
           >
             <TbCaretLeftRight className="text-brand-color dark:text-white" />
-          </Tooltip>
-        </button>
+          </button>
+        </Tooltip>
       </div>
       {!invoicesLoading ? (
         <>

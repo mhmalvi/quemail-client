@@ -12,6 +12,7 @@ import {
 } from "@/components/utils/utility";
 import CredentialsLogin from "./CredentialsLogin";
 import { OTPData } from "@/components/utils/types";
+import { passwordLoginStore } from "@/store/store";
 
 const Login = () => {
   const token = typeof window !== "undefined" && localStorage.getItem("token");
@@ -25,8 +26,13 @@ const Login = () => {
   const [credentialsData, setCredentialsData] = useState<OTPData>({
     email: "",
     otp: "",
+    password: "",
   });
   const [openModal, setOpenModal] = useState(false);
+  const passwordExist = passwordLoginStore((state) => state.passwordExist);
+  const setPasswordExist = passwordLoginStore(
+    (state) => state.setPasswordExist
+  );
   const [stepTwo, setStepTwo] = useState({
     item: false,
     loading: false,
@@ -40,6 +46,7 @@ const Login = () => {
     }));
 
     const response = await emailCheck(credentialsData.email);
+    console.log(response);
 
     if (response.status === 404) {
       warningNotification("Email not registered.");
@@ -47,12 +54,16 @@ const Login = () => {
         ...prevData,
         loading: false,
       }));
+    } else if (response.status === 1) {
+      setPasswordExist(true);
     } else {
       setStepTwo({
         item: true,
         loading: false,
       });
-      successNotification("An otp has been sent to this mail.");
+      passwordExist
+        ? ""
+        : successNotification("An otp has been sent to this mail.");
     }
   };
 

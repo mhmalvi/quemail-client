@@ -36,6 +36,27 @@ export const emailCheck = async (email: string) => {
   }
 };
 
+export const verifyPassword = async (email: string, password: string) => {
+  try {
+    const result = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/pass-login`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: email,
+          password: password,
+        }),
+      }
+    );
+    return result;
+  } catch (error: any) {
+    return error.response;
+  }
+};
+
 export const verifyOTP = async (data: OTPData) => {
   try {
     const result = await fetch(

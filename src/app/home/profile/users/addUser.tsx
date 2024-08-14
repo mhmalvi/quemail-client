@@ -28,6 +28,7 @@ const AddUser: React.FC<AddUserProps> = ({ setOpenAddUserModal }) => {
   });
 
   const [updateLoading, setUpdateLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const handleEditUserDataChange = (
     field: keyof AddUserData,
@@ -47,13 +48,13 @@ const AddUser: React.FC<AddUserProps> = ({ setOpenAddUserModal }) => {
     const { name, email } = addUserData;
 
     if (!name || !validateName(name)) {
-      warningNotification("Invalid name. Only letters and spaces are allowed.");
+      setError("Invalid name. Only letters and spaces are allowed.");
       setUpdateLoading(false);
       return;
     }
 
     if (!email || !validateEmail(email)) {
-      warningNotification("Invalid email format.");
+      setError("Invalid email format.");
       setUpdateLoading(false);
       return;
     }
@@ -61,15 +62,15 @@ const AddUser: React.FC<AddUserProps> = ({ setOpenAddUserModal }) => {
     setUpdateLoading(true);
 
     try {
-      const res = await addUser(addUserData.name,addUserData.email);
-      if (res.status === 201) {
+      const res = await addUser(addUserData.name, addUserData.email);
+      if (res.message === "success") {
         successNotification(res.message);
         setOpenAddUserModal(false);
 
         window.location.href =
           window.location.pathname + "?reload=" + new Date().getTime();
-      } else if (res.status === 422) {
-        warningNotification(res.message);
+      } else {
+        setError(res.message);
       }
     } catch (err) {
       console.log(err);
@@ -105,6 +106,9 @@ const AddUser: React.FC<AddUserProps> = ({ setOpenAddUserModal }) => {
           className="bg-transparent"
           required
         />
+      </div>
+      <div className="flex items-center justify-center gap-4 text-red-500">
+        {error}
       </div>
       <div className="flex items-center justify-end gap-4">
         <button
