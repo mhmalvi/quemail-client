@@ -4,8 +4,9 @@ import { verifyOTP, verifyPassword } from "../api/auth";
 import { OTPData, credentialLoginStep } from "@/components/utils/types";
 import { passwordLoginStore, Storage } from "@/store/store";
 import { useRouter } from "next/navigation";
-import { Spinner } from "flowbite-react";
+import { Modal, Spinner } from "flowbite-react";
 import { warningNotification } from "@/components/utils/utility";
+import CompanySelect from "./CompanySelect";
 
 const CredentialsLogin = ({
   setCredentialsData,
@@ -19,14 +20,29 @@ const CredentialsLogin = ({
   const router = useRouter();
   const [buttonClick, setButtonClick] = useState(false);
   const passwordExist = passwordLoginStore((state) => state.passwordExist);
+  const [companyList, setCompanyList] = useState<any>(false);
+  const [showCompanyList, setShowCompanyList] = useState<boolean>(false);
 
-  const handlePasswordLogin = async () => {
+
+  const handlePasswordLogin = async (
+    event: React.FormEvent<HTMLFormElement>
+  ) => {
+    event.preventDefault();
+    setButtonClick(true);
+    console.log("inside handlePasswordlogins")
     const res = await verifyPassword(
       credentialsData.email,
       credentialsData.password
     );
-    if (res.message === "success") {
-      console.log(res);
+    const response = await res.json();
+    if (response.message === "success") {
+      console.log(response);
+      Storage.setItem("satok", response.data.token);
+      Storage.setItem("email", response.data.email);
+      Storage.setItem("userID", response.data.userID);
+      setCompanyList(response.company)
+      setShowCompanyList(true);
+
     }
   };
 
@@ -55,6 +71,8 @@ const CredentialsLogin = ({
         window.location.pathname + "?reload=" + new Date().getTime();
     }
   };
+
+
   return (
     <div className="w-full ">
       {passwordExist ? (
@@ -84,7 +102,7 @@ const CredentialsLogin = ({
               type="submit"
               disabled={
                 credentialsData.email.length === 0 ||
-                credentialsData.otp.length !== 4
+                credentialsData.password.length < 8
               }
               className="disabled:opacity-20 rounded-md w-full px-4 py-2 bg-gradient-to-r from-brand-color to-button-color-2 text-slate-300"
             >
@@ -128,6 +146,17 @@ const CredentialsLogin = ({
           )}
         </form>
       )}
+      <Modal
+        show={showCompanyList}
+        onClose={() => {
+          setShowCompanyList(false);
+        }}
+        size={"3xl"}
+      >
+        <Modal.Body className="dark:bg-dark-black bg-violet-50 text-slate-300 overflow-y-auto h-full m-0 p-0">
+          <CompanySelect companyList={companyList}></CompanySelect>
+        </Modal.Body>
+      </Modal>
     </div>
   );
 };
