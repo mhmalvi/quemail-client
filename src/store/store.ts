@@ -16,6 +16,7 @@ import {
   checkoutProps,
   subscriptionDetailsProps,
   landingState,
+  passwordState,
 } from "@/components/utils/types";
 import { create } from "zustand";
 
@@ -286,4 +287,11 @@ export const subsciption = create<subscriptionDetailsProps>((set) => ({
 export const landingStore = create<landingState>((set) => ({
   welcomeVisible: false,
   setWelcomeVisible: (visible: boolean) => set({ welcomeVisible: visible }),
+}));
+
+export const passwordLoginStore = create<passwordState>((set) => ({
+  passwordExist: false,
+  setPasswordExist(state) {
+    set(() => ({ passwordExist: state }));
+  },
 }));

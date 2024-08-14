@@ -136,6 +136,7 @@ export interface googleLoginData {
 export interface OTPData {
   email: string;
   otp: string;
+  password: string;
 }
 export interface credentialLoginStep {
   item: boolean;
@@ -306,6 +307,11 @@ export interface Card {
 export interface landingState {
   welcomeVisible: boolean;
   setWelcomeVisible: (visible: boolean) => void;
+}
+
+export interface passwordState {
+  passwordExist: boolean;
+  setPasswordExist: (state: boolean) => void;
 }
 
 export interface subscriptionProps {
