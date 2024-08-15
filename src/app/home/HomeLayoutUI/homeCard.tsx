@@ -78,10 +78,12 @@ const HomeCard = () => {
           successNotification(res.message);
           window.location.href =
             window.location.pathname + "?reload=" + new Date().getTime();
-        } else if (res.status === 422) {
+        } else {
           setErrorMessage(res.message);
-        } else if (res.status === 500) {
-          setErrorMessage(res.message);
+          setEmailInfo((prev) => ({
+            ...prev,
+            loading: false,
+          }));
         }
       } catch (error) {
         console.log(error);
@@ -94,6 +96,7 @@ const HomeCard = () => {
     }
     setLoading(false);
   };
+
   const handleUpdateMail = async (
     email: string | null,
     appPassword: string | null,
@@ -114,10 +117,12 @@ const HomeCard = () => {
           successNotification(res.message);
           window.location.href =
             window.location.pathname + "?reload=" + new Date().getTime();
-        } else if (res.status === 422) {
+        } else {
           setErrorMessage(res.message);
-        } else if (res.status === 500) {
-          setErrorMessage(res.message);
+          setEmailInfo((prev) => ({
+            ...prev,
+            loading: false,
+          }));
         }
       } catch (error) {
         console.log(error);
@@ -315,15 +320,15 @@ const HomeCard = () => {
               onClick={() => {
                 mailAdded?.google === null || mailAdded === null
                   ? handleAddMail(
-                      emailInfo.email,
-                      emailInfo.appPassword,
-                      emailInfo.provider
-                    )
+                    emailInfo.email,
+                    emailInfo.appPassword,
+                    emailInfo.provider
+                  )
                   : handleUpdateMail(
-                      emailInfo.email,
-                      emailInfo.appPassword,
-                      emailInfo?.id
-                    );
+                    emailInfo.email,
+                    emailInfo.appPassword,
+                    emailInfo?.id
+                  );
               }}
               disabled={
                 emailInfo.email === null || emailInfo.appPassword === null

@@ -58,15 +58,12 @@ const AddUser: React.FC<AddUserProps> = ({ setOpenAddUserModal }) => {
       setUpdateLoading(false);
       return;
     }
-
     setUpdateLoading(true);
-
     try {
       const res = await addUser(addUserData.name, addUserData.email);
       if (res.message === "success") {
         successNotification(res.message);
         setOpenAddUserModal(false);
-
         window.location.href =
           window.location.pathname + "?reload=" + new Date().getTime();
       } else {
