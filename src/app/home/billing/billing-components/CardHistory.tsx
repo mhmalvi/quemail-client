@@ -28,7 +28,7 @@ const CardHistory = () => {
 
     setTimeout(() => {
       setIsTransitioning(false);
-    }, 300); // Match this duration with the CSS transition time
+    }, 300);
   };
 
   const handleStatus = (status: string) => {
