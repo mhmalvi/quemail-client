@@ -19,7 +19,7 @@ const SectionFive = () => {
         and tools you need to succeed.
       </p>
       <Image src={Images && Images.SectionFive} alt="HeroImage"
-        className="xl:w-1/2 lg:w-1/3 md:w-1/2" />
+        className="xl:w-1/2 lg:w-1/3 md:w-1/2 animate-float" />
       <div className="grid grid-cols-2 items-center text-center justify-center w-full gap-4">
         {sectionFiveData.map((items, index) => {
           return (

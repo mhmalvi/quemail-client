@@ -16,7 +16,7 @@ const SectionTwo = () => {
         revolutionize your marketing efforts.
       </p>
       <Image src={Images && Images.SectionFour} alt="HeroImage"
-        className="xl:w-1/2 lg:w-1/3 md:w-1/2" />
+        className="xl:w-1/2 lg:w-1/3 md:w-1/2 animate-float" />
       <button className="px-4 py-2 bg-yellow-300 text-gray-800 rounded-md font-semibold">
         Create Free account ➟
       </button>
