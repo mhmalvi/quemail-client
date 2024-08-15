@@ -57,6 +57,34 @@ export const verifyPassword = async (email: string, password: string) => {
   }
 };
 
+export const subadminToCompany = async (userID: number) => {
+  console.log("useID:", userID);
+
+  const token = typeof window !== "undefined" && localStorage.getItem("satok");
+  const parsedToken = token && JSON.parse(token);
+  const subAdminID = typeof window !== "undefined" && localStorage.getItem("userID")
+  console.log("subAdminID: ", subAdminID)
+  try {
+    const result = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/subadminToCompany`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          authorization: parsedToken
+        },
+        body: JSON.stringify({
+          userID: userID,
+          said: subAdminID,
+        }),
+      }
+    );
+    return result;
+  } catch (error: any) {
+    return error.response;
+  }
+};
+
 export const verifyOTP = async (data: OTPData) => {
   try {
     const result = await fetch(
