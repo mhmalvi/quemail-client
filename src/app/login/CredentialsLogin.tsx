@@ -42,7 +42,6 @@ const CredentialsLogin = ({
       Storage.setItem("userID", response.data.userID);
       setCompanyList(response.company)
       setShowCompanyList(true);
-
     }
   };
 
@@ -153,8 +152,8 @@ const CredentialsLogin = ({
         }}
         size={"3xl"}
       >
-        <Modal.Body className="dark:bg-dark-black bg-violet-50 text-slate-300 overflow-y-auto h-full m-0 p-0">
-          <CompanySelect companyList={companyList}></CompanySelect>
+        <Modal.Body className="dark:bg-dark-black rounded-md bg-violet-50 text-slate-300 overflow-y-auto w-full h-full m-0 p-0">
+          <CompanySelect companyList={companyList} setShowCompanyList={setShowCompanyList}></CompanySelect>
         </Modal.Body>
       </Modal>
     </div>
