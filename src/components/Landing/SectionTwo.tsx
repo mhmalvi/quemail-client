@@ -16,7 +16,7 @@ const SectionTwo = () => {
       <Image
         src={Images && Images.SectionTwo}
         alt="HeroImage"
-        className="xl:w-1/2 lg:w-1/3 md:w-1/2"
+        className="xl:w-1/2 lg:w-1/3 md:w-1/2 animate-float"
       />
       <div className="lg:w-9/12 w-full flex flex-wrap gap-4 justify-between">
         {sectionTwoData.map((items, index) => {

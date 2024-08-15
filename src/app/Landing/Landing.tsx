@@ -40,12 +40,12 @@ const Landing = () => {
       <Image
         src={Images.Circle}
         alt="background-props"
-        className="fixed -left-40 -top-40 -z-10 opacity-25"
+        className="fixed -left-40 -top-40 -z-10 opacity-25 animate-float"
       />
       <Image
         src={Images.Lines}
         alt="background-props"
-        className="fixed bottom-0 right-0 -z-10 opacity-25"
+        className="fixed bottom-0 right-0 -z-10 opacity-25 animate-float_x"
       />
       <AnimatedSection>
         <SectionOne />

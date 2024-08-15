@@ -9,12 +9,12 @@ const CardHistory = () => {
   const [limit, setLimit] = useState<number>(5);
   const [expanded, setExpanded] = useState<boolean>(false);
   const [invoices, setInvoices] = useState<any>(null);
+  const [isTransitioning, setIsTransitioning] = useState<boolean>(false);
 
   useEffect(() => {
     const fetchInvoices = async () => {
       const res = await stripeInvoiceHistory(status, limit);
       if (res && res.message === "success") {
-        console.log(res);
         setInvoices(res.invoice.data);
         setInvoicesLoading(false);
       }
@@ -23,7 +23,12 @@ const CardHistory = () => {
   }, [limit, status]);
 
   const handleExpanded = () => {
+    setIsTransitioning(true);
     setExpanded(!expanded);
+
+    setTimeout(() => {
+      setIsTransitioning(false);
+    }, 300); // Match this duration with the CSS transition time
   };
 
   const handleStatus = (status: string) => {
@@ -36,31 +41,30 @@ const CardHistory = () => {
 
   return (
     <div
-      className={`step-4 border dark:border-none border-violet-200 ${
-        expanded ? "xl:w-full w-full" : "xl:w-1/4 w-1/3"
-      } dark:bg-light-glass bg-white shadow-md backdrop-blur-xl rounded-md p-4 flex flex-col gap-4 ease-in duration-100 `}
+      className={`step-4 border dark:border-none border-violet-200 ${expanded ? "xl:w-full w-full" : "xl:w-1/4 w-1/3"
+        } dark:bg-light-glass bg-white shadow-md backdrop-blur-xl rounded-md p-4 flex flex-col gap-4 ease-in duration-200`}
     >
       <div className="flex flex-row justify-between items-center">
         <h1 className="xl:text-xl text-base m-0 p-0 dark:text-white text-dark-black text-center flex-grow">
           History
         </h1>
 
-        <Tooltip
-          content={expanded ? "Collapse" : "Expand"}
-          className="bg-brand-color text-center"
-          placement="bottom"
-        >
-          <button
-            className="border rounded-full border-brand-color dark:border-white"
-            onClick={() => {
-              handleExpanded();
-            }}
+        {!isTransitioning && (
+          <Tooltip
+            content={expanded ? "Collapse" : "Expand"}
+            className="bg-brand-color text-center"
+            placement="bottom"
           >
-            <TbCaretLeftRight className="text-brand-color dark:text-white" />
-          </button>
-        </Tooltip>
+            <button
+              className="border rounded-full border-brand-color dark:border-white"
+              onClick={handleExpanded}
+            >
+              <TbCaretLeftRight className="text-brand-color dark:text-white" />
+            </button>
+          </Tooltip>
+        )}
       </div>
-      {!invoicesLoading ? (
+      {!invoicesLoading && !isTransitioning ? (
         <>
           <div className="w-full flex flex-row justify-center items-center gap-4">
             <Dropdown

@@ -52,6 +52,14 @@ const config: Config = {
         },
       },
       keyframes: {
+        float: {
+          '0%, 100%': { transform: 'translateY(0)' },
+          '50%': { transform: 'translateY(-10px)' },
+        },
+        float_x: {
+          '0%, 100%': { transform: 'translateX(0)' },
+          '50%': { transform: 'translateX(10px)' },
+        },
         glow: {
           "0%, 100%": {
             borderColor: "hsl(200, 100%, 50%)",
@@ -91,6 +99,8 @@ const config: Config = {
         },
       },
       animation: {
+        float: 'float 3s ease-in-out infinite',
+        float_x: 'float_x 3s ease-in-out infinite',
         glow: "glow 3s infinite alternate",
         up: "up 2s linear infinite",
         up1: "up1 3s linear infinite",

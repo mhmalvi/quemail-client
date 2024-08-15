@@ -19,11 +19,12 @@ const SectionOne = () => {
         robust features and exceptional support to ensure your campaigns are both effective and
         impactful.
       </p>
-      <Image
+      {/* <Image
         src={Images && Images.HeroImage}
         alt="HeroImage"
-        className="xl:w-1/2 lg:w-1/3 md:w-1/2"
-      />
+        className="xl:w-1/2 lg:w-1/3 md:w-1/2 animate-float"
+      /> */}
+      <iframe className="xl:w-1/2 h-1/2 lg:w-1/3 md:w-1/2" src="https://lottie.host/embed/24e27546-0c73-4ecb-824e-b9323f281f34/SlFkqQweFU.json"></iframe>
       <button className="px-4 py-2 bg-yellow-300 text-gray-800 rounded-md font-semibold">
         Create Free account ➟
       </button>
