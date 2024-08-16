@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Images from "@/components/utils/images";
 import { sideBarStore } from "@/store/store";
@@ -8,14 +8,31 @@ import { Dropdown, DropdownDivider } from "flowbite-react";
 import { TbMail, TbUser, TbSettingsDollar } from "react-icons/tb";
 
 import Link from "next/link";
+import { fetchAccountAcess } from "@/app/api/admin";
 
 const Sidebar = () => {
   const sidebarToggle = sideBarStore((state: any) => state.sidebarToggle);
   const setOpenSidebar = sideBarStore((state: any) => state.setOpenSidebar);
+  const [accountStatus, setAccountStatus] = useState<boolean>(false);
+
+  useEffect(() => {
+    const checkAccountStatus = async () => {
+      const response = await fetchAccountAcess();
+
+      console.log(response);
+
+      if (response.message === "customer") {
+        setAccountStatus(true);
+      }
+    };
+    checkAccountStatus();
+  }, []);
+
   return (
     <div
-      className={`h-full xl:px-4 px-2 flex flex-col xl:gap-8 gap-4 dark:border-none border-r border-violet-200 dark:bg-light-glass bg-light-glass ease-in duration-100 ${sidebarToggle ? "xl:w-1/6 w-1/5 " : "xl:w-20 w-16"
-        } `}
+      className={`h-full xl:px-4 px-2 flex flex-col xl:gap-8 gap-4 dark:border-none border-r border-violet-200 dark:bg-light-glass bg-light-glass ease-in duration-100 ${
+        sidebarToggle ? "xl:w-1/6 w-1/5 " : "xl:w-20 w-16"
+      } `}
     >
       {sidebarToggle ? (
         <div
@@ -59,8 +76,9 @@ const Sidebar = () => {
               <TbMail className=" w-full" size={20} />
             </div>
             <div
-              className={`absolute flex items-center w-2/3 justify-between gap-8 ${sidebarToggle ? "right-0" : "hidden"
-                }`}
+              className={`absolute flex items-center w-2/3 justify-between gap-8 ${
+                sidebarToggle ? "right-0" : "hidden"
+              }`}
             >
               <h1 className={`m-0 p-0 z-10 overflow-hidden `}>Campaigns</h1>
               <IoIosArrowForward />
@@ -115,8 +133,9 @@ const Sidebar = () => {
               <TbUser className="w-full" size={20} />
             </div>
             <div
-              className={`absolute flex items-center w-2/3 justify-between gap-8 ${sidebarToggle ? "right-0" : "hidden"
-                }`}
+              className={`absolute flex items-center w-2/3 justify-between gap-8 ${
+                sidebarToggle ? "right-0" : "hidden"
+              }`}
             >
               <h1 className={`m-0 p-0 z-10 overflow-hidden `}>Contacts</h1>
               <IoIosArrowForward />
@@ -140,42 +159,47 @@ const Sidebar = () => {
           </Dropdown.Item>
         </Link> */}
       </Dropdown>
-      <Dropdown
-        label="Dropdown button"
-        placement="right-start"
-        renderTrigger={() => (
-          <div className="relative w-full flex items-center gap-8 m-0 p-0 overflow-hidden cursor-pointer text-black dark:text-slate-300 hover:text-brand-color dark:hover:text-brand-color ease-in duration-100">
-            <div
-              className={`duration-100 ease-in hover:text-brand-color text-slate-300 bg-dark-black xl:p-3 px-3 py-2 rounded-md overflow-hidden z-20`}
-            >
-              <TbSettingsDollar className="w-full" size={20} />
-            </div>
-            <div
-              className={`absolute flex items-center w-2/3 justify-between gap-8 ${sidebarToggle ? "right-0" : "hidden"
+      {accountStatus ? (
+        <Dropdown
+          label="Dropdown button"
+          placement="right-start"
+          renderTrigger={() => (
+            <div className="relative w-full flex items-center gap-8 m-0 p-0 overflow-hidden cursor-pointer text-black dark:text-slate-300 hover:text-brand-color dark:hover:text-brand-color ease-in duration-100">
+              <div
+                className={`duration-100 ease-in hover:text-brand-color text-slate-300 bg-dark-black xl:p-3 px-3 py-2 rounded-md overflow-hidden z-20`}
+              >
+                <TbSettingsDollar className="w-full" size={20} />
+              </div>
+              <div
+                className={`absolute flex items-center w-2/3 justify-between gap-8 ${
+                  sidebarToggle ? "right-0" : "hidden"
                 }`}
-            >
-              <h1 className={`m-0 p-0 z-10 overflow-hidden `}>Billing</h1>
-              <IoIosArrowForward />
+              >
+                <h1 className={`m-0 p-0 z-10 overflow-hidden `}>Billing</h1>
+                <IoIosArrowForward />
+              </div>
             </div>
-          </div>
-        )}
-        className="dark:bg-dark-black border border-violet-200 dark:border-light-glass bg-violet-50"
-      >
-        <Link
-          href="/home/billing"
-          className="focus:outline-none focus:ring-0 active:outline-none active:ring-0"
+          )}
+          className="dark:bg-dark-black border border-violet-200 dark:border-light-glass bg-violet-50"
         >
-          <Dropdown.Item className="dark:text-slate-300 text-light-black hover:text-gray-800">
-            Billing Dashboard
-          </Dropdown.Item>
-        </Link>
+          <Link
+            href="/home/billing"
+            className="focus:outline-none focus:ring-0 active:outline-none active:ring-0"
+          >
+            <Dropdown.Item className="dark:text-slate-300 text-light-black hover:text-gray-800">
+              Billing Dashboard
+            </Dropdown.Item>
+          </Link>
 
-        <Link href="/home/billing/pricing-plans">
-          <Dropdown.Item className="dark:text-slate-300 text-light-black hover:text-gray-800">
-            Pricing Plans
-          </Dropdown.Item>
-        </Link>
-      </Dropdown>
+          <Link href="/home/billing/pricing-plans">
+            <Dropdown.Item className="dark:text-slate-300 text-light-black hover:text-gray-800">
+              Pricing Plans
+            </Dropdown.Item>
+          </Link>
+        </Dropdown>
+      ) : (
+        ""
+      )}
     </div>
   );
 };

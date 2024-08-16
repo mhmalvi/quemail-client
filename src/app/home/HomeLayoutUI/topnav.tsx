@@ -20,6 +20,7 @@ import { useRouter } from "next/navigation";
 import Images from "../../../components/utils/images";
 import MyProfile from "../profile/my-profile/page";
 import { stripeINFO } from "@/app/api/billing";
+import { fetchAccountAcess } from "@/app/api/admin";
 
 const Topnav = () => {
   const closeSidebar = sideBarStore((state: any) => state.setCloseSidebar);
@@ -29,6 +30,7 @@ const Topnav = () => {
   const isTourGoing = useTourStore((state) => state.isTourGoing);
   const setIsTourGoing = useTourStore((state) => state.setIsTourGoing);
   const [isFreeVersion, setIsFreeVersion] = useState<boolean>(false);
+  const [accountStatus, setAccountStatus] = useState<boolean>(false);
 
   const pathname = usePathname();
   const path: string = pathname;
@@ -84,6 +86,19 @@ const Topnav = () => {
       }
     };
     retrieveSubs();
+  }, []);
+
+  useEffect(() => {
+    const checkAccountStatus = async () => {
+      const response = await fetchAccountAcess();
+
+      console.log(response);
+
+      if (response.message === "customer") {
+        setAccountStatus(true);
+      }
+    };
+    checkAccountStatus();
   }, []);
 
   useEffect(() => {
@@ -169,17 +184,22 @@ const Topnav = () => {
             >
               My Profile
             </Dropdown.Item>
-            <Link href="/home/profile/users">
-              <Dropdown.Item className="dark:text-slate-300 text-light-black hover:text-slate-700">
-                Users
-              </Dropdown.Item>
-            </Link>
+            {accountStatus ? (
+              <Link href="/home/profile/users">
+                <Dropdown.Item className="dark:text-slate-300 text-light-black hover:text-slate-700">
+                  Users
+                </Dropdown.Item>
+              </Link>
+            ) : (
+              ""
+            )}
+
             {/* <Dropdown.Item className="dark:text-slate-300 text-light-black hover:text-slate-700">
               Account & Billing
             </Dropdown.Item> */}
-            <Dropdown.Item className="dark:text-slate-300 text-light-black hover:text-slate-700">
+            {/* <Dropdown.Item className="dark:text-slate-300 text-light-black hover:text-slate-700">
               Pricing Plans
-            </Dropdown.Item>
+            </Dropdown.Item> */}
             {/* <Dropdown.Item className="dark:text-slate-300 text-light-black hover:text-slate-700">
               Support
             </Dropdown.Item> */}
