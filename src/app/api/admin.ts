@@ -34,10 +34,7 @@ export const addUser = async (
   }
 };
 
-export const fetchSubAdminList = async (
-  userName: string | null,
-  email: string | null
-) => {
+export const fetchSubAdminList = async () => {
   const token = typeof window !== "undefined" && localStorage.getItem("token");
   const parsedToken = token && JSON.parse(token);
   const userID =
@@ -46,6 +43,68 @@ export const fetchSubAdminList = async (
   try {
     const result = await fetch(
       `${process.env.NEXT_PUBLIC_BASE_URL}/api/company-subadmins`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: parsedToken,
+        },
+        body: JSON.stringify({
+          userID: userID,
+        }),
+      }
+    );
+    if (result) {
+      const responseData = await result.json();
+      return responseData;
+    } else {
+      return null;
+    }
+  } catch (error: any) {
+    return error.response;
+  }
+};
+
+export const deleteSubAdmin = async (subadminID: number) => {
+  const token = typeof window !== "undefined" && localStorage.getItem("token");
+  const parsedToken = token && JSON.parse(token);
+  const userID =
+    typeof window !== "undefined" && localStorage.getItem("userID");
+
+  try {
+    const result = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/subadmin-remove`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: parsedToken,
+        },
+        body: JSON.stringify({
+          userID: userID,
+          subadminID: subadminID,
+        }),
+      }
+    );
+    if (result) {
+      const responseData = await result.json();
+      return responseData;
+    } else {
+      return null;
+    }
+  } catch (error: any) {
+    return error.response;
+  }
+};
+
+export const fetchAccountAcess = async () => {
+  const token = typeof window !== "undefined" && localStorage.getItem("token");
+  const parsedToken = token && JSON.parse(token);
+  const userID =
+    typeof window !== "undefined" && localStorage.getItem("userID");
+  try {
+    const result = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/getUser`,
       {
         method: "POST",
         headers: {

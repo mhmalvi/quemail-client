@@ -8,7 +8,7 @@ export const importContact = async (data: {}) => {
 
   var fullData = {
     data,
-    userID: userID,
+    user_id: userID,
   };
   try {
     const result = await fetch(
@@ -50,7 +50,12 @@ export const importContactManually = async (data: {
           "Content-Type": "application/json",
           Authorization: parsedToken,
         },
-        body: JSON.stringify(data),
+        body: JSON.stringify({
+          user_id: data.userID,
+          name: data.name,
+          email: data.email,
+          group: data.group,
+        }),
       }
     );
     if (result) {
