@@ -22,7 +22,7 @@ const ImportCSV: React.FC<ImportCSVProps> = ({ openModal, setOpenModal }) => {
       window.location.href =
         window.location.pathname + "?reload=" + new Date().getTime();
     } else {
-      warningNotification("Something went wrong. Try again.");
+      warningNotification(res.message);
     }
   };
   function removeDuplicateEmails(data: any[]) {
