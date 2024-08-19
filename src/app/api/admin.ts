@@ -17,7 +17,7 @@ export const addUser = async (
           Authorization: parsedToken,
         },
         body: JSON.stringify({
-          userID: userID,
+          userID: Number(userID),
           userName: userName,
           email: email,
         }),

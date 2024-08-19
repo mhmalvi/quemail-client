@@ -38,7 +38,7 @@ export const tourSteps = [
     content: (
       <div className="bg-violet-50 dark:bg-dark-black p-8 rounded-t-md">
         <h1 className="p-0 m-0 text-dark-black dark:text-slate-300">
-          This is the overall performance report
+          This is the overview of your current resources status
         </h1>
       </div>
     ),

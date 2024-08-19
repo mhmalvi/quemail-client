@@ -180,7 +180,7 @@ const HomeCard = () => {
   };
   const [openDeletePopover, setOpenDeletePopover] = useState(false);
   return (
-    <div className="border dark:border-none border-violet-200 h-full relative dark:bg-light-glass shadow-md bg-[#ffffffbf] backdrop-blur-2xl rounded-md p-4 flex flex-col justify-between gap-4 overflow-hidden">
+    <div className="border dark:border-none border-violet-200 h-full relative dark:bg-light-glass bg-[#ffffffbf] backdrop-blur-2xl rounded-md p-4 flex flex-col justify-between gap-4 overflow-hidden">
       <h1 className="xl:text-xl text-base m-0 p-0 dark:text-white text-dark-black">
         Connect your email address
       </h1>
@@ -320,15 +320,15 @@ const HomeCard = () => {
               onClick={() => {
                 mailAdded?.google === null || mailAdded === null
                   ? handleAddMail(
-                    emailInfo.email,
-                    emailInfo.appPassword,
-                    emailInfo.provider
-                  )
+                      emailInfo.email,
+                      emailInfo.appPassword,
+                      emailInfo.provider
+                    )
                   : handleUpdateMail(
-                    emailInfo.email,
-                    emailInfo.appPassword,
-                    emailInfo?.id
-                  );
+                      emailInfo.email,
+                      emailInfo.appPassword,
+                      emailInfo?.id
+                    );
               }}
               disabled={
                 emailInfo.email === null || emailInfo.appPassword === null

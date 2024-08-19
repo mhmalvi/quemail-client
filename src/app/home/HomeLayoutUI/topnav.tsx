@@ -149,19 +149,21 @@ const Topnav = () => {
             label="Dropdown button"
             placement="bottom-start"
             renderTrigger={() => (
-              <div className="relative">
+              <div className="step-9 relative">
                 <Image
                   src={
                     photo !== "" && photo !== null ? photo : Images.User_Icon
                   }
                   alt="user"
-                  width={50}
-                  height={50}
-                  className="rounded-full"
+                  width={40}
+                  height={40}
+                  className="rounded-full cursor-pointer"
                 />
                 {isFreeVersion && (
-                  <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center rounded-full">
-                    <span className="text-white text-sm font-bold">Free</span>
+                  <div className="absolute  inset-0 bg-black bg-opacity-50 flex items-center justify-center rounded-full">
+                    <span className="text-white text-sm font-bold cursor-pointer">
+                      Free
+                    </span>
                   </div>
                 )}
               </div>
@@ -247,7 +249,7 @@ const Topnav = () => {
         </Modal.Body>
         <Modal.Footer className="flex justify-end">
           <button
-            className="bg-blue-500 text-white px-4 py-2 rounded"
+            className="bg-brand-color text-white px-4 py-2 rounded"
             onClick={() => {
               setIsModalOpen(false);
             }}
