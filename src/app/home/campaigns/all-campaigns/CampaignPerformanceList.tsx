@@ -161,7 +161,7 @@ const CampaignPerformanceList = () => {
                           <Table.Cell className="w-1/4 text-center">
                             {items.recipientEmail}
                           </Table.Cell>
-                          {/* <Table.Cell className="w-1/4">
+                          <Table.Cell className="w-1/4">
                             <div
                               className={`${
                                 items.open === 0
@@ -171,12 +171,12 @@ const CampaignPerformanceList = () => {
                             >
                               {items.open === 0 ? <TbX /> : <TbCheck />}
                             </div>
-                          </Table.Cell> */}
-                          <Table.Cell className="w-1/5 text-center">
+                          </Table.Cell>
+                          {/* <Table.Cell className="w-1/5 text-center">
                             <div className="text-red-500 w-full text-center flex justify-center">
                               <TbX />
                             </div>
-                          </Table.Cell>
+                          </Table.Cell> */}
                           <Table.Cell className="w-1/5 text-center gap-4">
                             <div
                               className={`${
