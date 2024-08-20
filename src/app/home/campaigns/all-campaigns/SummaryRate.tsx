@@ -44,8 +44,8 @@ const SummaryRate = () => {
     return 0;
   }, [campaignItemList]);
   return (
-    <div className="relative w-full h-full flex gap-4 overflow-hidden">
-      <div
+    <div className="relative w-full h-full flex gap-8 overflow-hidden">
+      {/* <div
         onMouseOver={() => {
           setHovered("Clicked");
         }}
@@ -69,7 +69,7 @@ const SummaryRate = () => {
           </div>
         </div>
         <div className="relative w-2/3 flex flex-col items-end">
-          <h1 className="2xl:text-6xl xl:text-4xl text-4xl text-dark-black dark:text-slate-300 font-semibold px-4 py-2 z-20">
+          <h1 className="2xl:text-7xl xl:text-4xl text-4xl text-dark-black dark:text-slate-300 font-semibold px-4 py-2 z-20">
             90%
           </h1>
           <div className="absolute bottom-0 px-4 flex items-end xl:gap-4 gap-2 z-10">
@@ -90,7 +90,7 @@ const SummaryRate = () => {
             ></div>
           </div>
         </div>
-      </div>
+      </div> */}
       <div
         onMouseOver={() => {
           setHovered("Delivered");
@@ -118,7 +118,7 @@ const SummaryRate = () => {
           </div>
         </div>
         <div className="relative w-2/3 flex flex-col items-end">
-          <h1 className="2xl:text-6xl xl:text-4xl text-4xl text-dark-black dark:text-slate-300 font-semibold px-4 py-2 z-20">
+          <h1 className="2xl:text-7xl xl:text-4xl text-4xl text-dark-black dark:text-slate-300 font-semibold px-4 py-2 z-20">
             {deliveryPercentage} %
           </h1>
           <div className="absolute bottom-0 px-4 flex items-end xl:gap-4 gap-2 z-10">
@@ -162,7 +162,7 @@ const SummaryRate = () => {
           </div>
         </div>
         <div className="relative w-2/3 flex flex-col items-end">
-          <h1 className="2xl:text-6xl xl:text-4xl text-4xl text-dark-black dark:text-slate-300 font-semibold px-4 py-2 z-20">
+          <h1 className="2xl:text-7xl xl:text-4xl text-4xl text-dark-black dark:text-slate-300 font-semibold px-4 py-2 z-20">
             {subscribedPercentage} %
           </h1>
           <div className="absolute bottom-0 px-4 flex items-end xl:gap-4 gap-2 z-10">
@@ -233,7 +233,7 @@ const SummaryRate = () => {
           </div>
         </div>
         <div className="relative w-2/3 flex flex-col items-end">
-          <h1 className="2xl:text-6xl xl:text-4xl text-4xl text-dark-black dark:text-slate-300 font-semibold px-4 py-2 z-20">
+          <h1 className="2xl:text-7xl xl:text-4xl text-4xl text-dark-black dark:text-slate-300 font-semibold px-4 py-2 z-20">
             {openPercentage} %
           </h1>
           <div className="absolute bottom-0 px-4 flex items-end xl:gap-4 gap-2 z-10">
