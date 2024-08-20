@@ -87,7 +87,7 @@ const Sidebar = () => {
         )}
         className="dark:bg-dark-black dark:border-light-glass border bg-violet-50"
       >
-        <Dropdown.Header title="Email">Email</Dropdown.Header>
+        {/* <Dropdown.Header title="Email">Email</Dropdown.Header> */}
         <Link
           href="/home/campaigns/new-campaign"
           className="focus:outline-none focus:ring-0 active:outline-none active:ring-0"

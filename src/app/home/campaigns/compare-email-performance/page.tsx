@@ -13,11 +13,11 @@ const CompareEmailCampaign = () => {
       <div className="w-1/4 h-full flex flex-col justify-end items-center pt-14">
         <div className="w-full h-full flex flex-col justify-center gap-9 items-center border-4 border-transparent">
           <div className="flex flex-row items-center w-full">
-            <hr className="flex-grow border-violet-300 dark:border-light-glass border-t-2" />
+            {/* <hr className="flex-grow border-violet-300 dark:border-light-glass border-t-2" />
             <h1 className="px-4 text-xl font-semibold text-dark-black dark:text-slate-300">
               Clicked
             </h1>
-            <hr className="flex-grow border-violet-300 dark:border-light-glass border-t-2" />
+            <hr className="flex-grow border-violet-300 dark:border-light-glass border-t-2" /> */}
           </div>
           <div className="flex flex-row items-center w-full">
             <hr className="flex-grow border-violet-300 dark:border-light-glass border-t-2" />

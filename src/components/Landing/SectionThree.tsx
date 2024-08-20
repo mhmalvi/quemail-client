@@ -12,8 +12,8 @@ const SectionTwo = () => {
         </span>
       </h1>
       <p className="m-0 p-0 xl:text-base text-center text-slate-300">
-        Quemailer is tailored to meet the needs of businesses of all sizes, from small startups to
-        large enterprises. Our platform offers:
+        Quemailer is tailored to meet the needs of businesses of all sizes, from
+        small startups to large enterprises. Our platform offers:
       </p>
       <div className="xl:w-full xl:p-0 lg:w-full lg:p-0 px-8 flex flex-wrap xl:gap-4 gap-y-4 justify-center">
         {sectionThreeData.map((items, index) => {
@@ -52,9 +52,9 @@ const SectionTwo = () => {
         <h1 className="m-0 p-0 xl:text-base text-sm text-slate-300">
           Get connected with our team to get your custom pricing
         </h1>
-        <button className="px-4 py-2 bg-yellow-300 rounded-md text-gray-800 xl:text-base text-sm font-semibold">
+        {/* <button className="px-4 py-2 bg-yellow-300 rounded-md text-gray-800 xl:text-base text-sm font-semibold">
           Book a demo ➟
-        </button>
+        </button> */}
       </div>
     </div>
   );

@@ -22,6 +22,7 @@ const CampaignList = () => {
   const setCampaignDetails = showCampaignStore(
     (state) => state.setCampaignDetails
   );
+
   useEffect(() => {
     const height = document.getElementById("tableHeight")?.clientHeight;
 
@@ -47,6 +48,7 @@ const CampaignList = () => {
       try {
         const res = await fetchCampaign(data);
         if (res.status === 200) {
+          console.log(res);
           setCampaignList(res);
           setTotalPage(res.totalPages);
         }
@@ -70,25 +72,28 @@ const CampaignList = () => {
           >
             <Table hoverable striped>
               <Table.Head className="w-full ">
-                <Table.HeadCell className="w-1/5 sticky text-center ">
+                <Table.HeadCell className="w-1/6 sticky text-center ">
                   Campaign Name
                 </Table.HeadCell>
-                <Table.HeadCell className="w-1/5 sticky text-center ">
+                <Table.HeadCell className="w-1/6 sticky text-center ">
                   Sender Name
                 </Table.HeadCell>
-                <Table.HeadCell className="w-1/5 sticky text-center ">
+                <Table.HeadCell className="w-1/6 sticky text-center ">
                   Sender Email
                 </Table.HeadCell>
-                <Table.HeadCell className="w-1/5 sticky text-center ">
+                <Table.HeadCell className="w-1/6 sticky text-center ">
                   No. of recipients
                 </Table.HeadCell>
-                <Table.HeadCell className="w-1/5 sticky text-center">
-                  Scheduled Date
+                <Table.HeadCell className="w-1/6 sticky text-center">
+                  Created At
+                </Table.HeadCell>
+                <Table.HeadCell className="w-1/6 sticky text-center">
+                  Scheduled At
                 </Table.HeadCell>
               </Table.Head>
               <Table.Body className="divide-y">
                 {campaignList?.campaigns !== null &&
-                  campaignList?.campaigns.map((items: any, index) => (
+                  campaignList?.campaigns.map((items, index) => (
                     <Table.Row
                       key={index}
                       className="w-full dark:border-gray-700 dark:bg-transparent cursor-pointer"
@@ -128,8 +133,21 @@ const CampaignList = () => {
                       <Table.Cell className="w-1/5 text-center">
                         {items.count}
                       </Table.Cell>
-                      <Table.Cell className="w-1/5 text-center gap-4">
+                      <Table.Cell
+                        onClick={() => {
+                          console.log("schedule time: ", items.updatedAt);
+                        }}
+                        className="w-1/5 text-center gap-4"
+                      >
                         {items.updatedAt.split("T")[0]}
+                      </Table.Cell>
+                      <Table.Cell
+                        onClick={() => {
+                          console.log("items: ", items);
+                        }}
+                        className="w-1/5 text-center"
+                      >
+                        {new Date(items.schedule).toLocaleString()}
                       </Table.Cell>
                     </Table.Row>
                   ))}

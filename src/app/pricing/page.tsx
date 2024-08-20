@@ -4,8 +4,15 @@ import Navbar from "@/components/Landing/Navbar";
 import React from "react";
 import Image from "next/image";
 import Images from "@/components/utils/images";
+import { useRouter, useSearchParams } from "next/navigation";
 
 const Pricing = () => {
+  const router = useRouter();
+
+  const handleCreateAccount = () => {
+    router.push("/login");
+  };
+
   return (
     <main className="flex min-h-screen flex-col items-center bg-background-color ">
       <>
@@ -19,7 +26,10 @@ const Pricing = () => {
                 subscription package.
               </h1>
             </div>
-            <button className="px-4 py-2 bg-gradient-to-r from-brand-color to-brand-color-2 rounded-md">
+            <button
+              onClick={handleCreateAccount}
+              className="px-4 py-2 bg-gradient-to-r from-brand-color to-brand-color-2 rounded-md"
+            >
               Create Account
             </button>
           </div>
@@ -36,7 +46,10 @@ const Pricing = () => {
                     <p className="h-full w-full">per month, paid yearly</p>
                     <p className="h-full w-full">1 Users</p>
                   </div>
-                  <button className="w-full border border-brand-color hover:bg-brand-color ease-in duration-200 rounded-md p-2">
+                  <button
+                    onClick={handleCreateAccount}
+                    className="w-full border border-brand-color hover:bg-brand-color ease-in duration-200 rounded-md p-2"
+                  >
                     Get Started
                   </button>
                   <div className="flex flex-col gap-4">
@@ -58,7 +71,7 @@ const Pricing = () => {
             </div>
             <div className="h-full w-full flex flex-col items-center justify-center bg-light-glass hover:bg-brand-color ease-in duration-200 rounded-md">
               <h1 className="m-0 py-4 text-3xl text-center w-full  h-full">
-                Basic
+                Starter
               </h1>
               <div className="p-1 w-full">
                 <div className="p-4 flex flex-col items-center gap-4 bg-[#282828] rounded-b-md">
@@ -68,7 +81,10 @@ const Pricing = () => {
                     <p className="h-full w-full">per month, paid yearly</p>
                     <p className="h-full w-full">1 Users</p>
                   </div>
-                  <button className="w-full border border-brand-color rounded-md hover:bg-brand-color ease-in duration-200 p-2">
+                  <button
+                    onClick={handleCreateAccount}
+                    className="w-full border border-brand-color rounded-md hover:bg-brand-color ease-in duration-200 p-2"
+                  >
                     Get Started
                   </button>
                 </div>
@@ -76,7 +92,7 @@ const Pricing = () => {
             </div>
             <div className="h-full w-full flex flex-col items-center justify-center bg-light-glass hover:bg-brand-color ease-in duration-200 rounded-md">
               <h1 className="m-0 py-4 text-3xl text-center w-full  h-full">
-                Standard
+                Growth
               </h1>
               <div className="p-1 w-full">
                 <div className="p-4 flex flex-col items-center gap-4 bg-[#282828] rounded-b-md">
@@ -86,7 +102,10 @@ const Pricing = () => {
                     <p className="h-full w-full">per month, paid yearly</p>
                     <p className="h-full w-full">1 Users</p>
                   </div>
-                  <button className="w-full border border-brand-color hover:bg-brand-color ease-in duration-200 rounded-md p-2">
+                  <button
+                    onClick={handleCreateAccount}
+                    className="w-full border border-brand-color hover:bg-brand-color ease-in duration-200 rounded-md p-2"
+                  >
                     Get Started
                   </button>
                 </div>
@@ -94,7 +113,7 @@ const Pricing = () => {
             </div>
             <div className="h-full w-full flex flex-col items-center justify-center bg-light-glass hover:bg-brand-color ease-in duration-200 rounded-md">
               <h1 className="m-0 py-4 text-3xl text-center w-full  h-full">
-                Premium
+                Professional
               </h1>
               <div className="p-1 w-full">
                 <div className="p-4 flex flex-col items-center gap-4 bg-[#282828] rounded-b-md">
@@ -104,7 +123,31 @@ const Pricing = () => {
                     <p className="h-full w-full">per month, paid yearly</p>
                     <p className="h-full w-full">1 Users</p>
                   </div>
-                  <button className="w-full border border-brand-color hover:bg-brand-color ease-in duration-200 rounded-md p-2">
+                  <button
+                    onClick={handleCreateAccount}
+                    className="w-full border border-brand-color hover:bg-brand-color ease-in duration-200 rounded-md p-2"
+                  >
+                    Get Started
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div className="h-full w-full flex flex-col items-center justify-center bg-light-glass hover:bg-brand-color ease-in duration-200 rounded-md">
+              <h1 className="m-0 py-4 text-3xl text-center w-full  h-full">
+                Enterprise
+              </h1>
+              <div className="p-1 w-full">
+                <div className="p-4 flex flex-col items-center gap-4 bg-[#282828] rounded-b-md">
+                  <div className="flex flex-col gap-2 text-center">
+                    <p className="h-full w-full">from</p>
+                    <h1 className="h-full w-full text-6xl">$60</h1>
+                    <p className="h-full w-full">per month, paid yearly</p>
+                    <p className="h-full w-full">1 Users</p>
+                  </div>
+                  <button
+                    onClick={handleCreateAccount}
+                    className="w-full border border-brand-color hover:bg-brand-color ease-in duration-200 rounded-md p-2"
+                  >
                     Get Started
                   </button>
                 </div>
