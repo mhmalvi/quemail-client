@@ -140,7 +140,9 @@ const Users = () => {
         size={"3xl"}
       >
         <Modal.Header>
-          <h1 className="text-dark-black dark:text-slate-300">Select a card</h1>
+          <h1 className="text-dark-black dark:text-slate-300">
+            Enter sub admin user details
+          </h1>
         </Modal.Header>
         <Modal.Body className="dark:bg-dark-black bg-violet-50 text-slate-300 overflow-y-auto h-full">
           <AddUser setOpenAddUserModal={setAddUserModal}></AddUser>
