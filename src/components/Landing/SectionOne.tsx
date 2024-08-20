@@ -12,7 +12,7 @@ const SectionOne = () => {
   };
 
   return (
-    <div className="w-full flex flex-col gap-4 items-center justify-center h-screen">
+    <div className="w-full flex flex-col gap-4 items-center justify-center h-full	">
       <h1 className="m-0 px-0 xl:text-4xl text-3xl text-center flex gap-2 text-slate-300 xl:mt-8 mt-16">
         Welcome to,
         <span className="bg-clip-text text-transparent bg-gradient-to-r from-brand-color to-brand-color-2 m-0 font-semibold xl:text-5xl text-4xl">
