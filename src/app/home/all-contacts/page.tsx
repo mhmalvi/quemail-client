@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { Modal, Dropdown } from "flowbite-react";
-import NoContacts from "../../HomeLayoutUI/NoContacts";
+import NoContacts from "../HomeLayoutUI/NoContacts";
 import ImportCSV from "./ImportCSV";
 import { contactStore } from "@/store/store";
 import { fetchContact } from "@/app/api/contact";
@@ -75,7 +75,6 @@ const AllContacts = () => {
               </h1>
             </div>
             <div className="flex items-center gap-4">
-             
               <Dropdown
                 label=""
                 placement="bottom"
@@ -108,8 +107,6 @@ const AllContacts = () => {
           </div>
 
           <ContactTable />
-
-          
         </div>
       ) : (
         <div className="relative w-full h-full rounded-md p-4 flex flex-col items-center justify-center gap-8 overflow-hidden">
@@ -140,17 +137,15 @@ const AllContacts = () => {
         <ImportCSV openModal={openModal} setOpenModal={setOpenModal} />
       )}
       <Modal
-            dismissible
-            show={openAddContactModal}
-            onClose={() => setOpenAddContactModal(false)}
-          >
-            <Modal.Header>
-              Add a Contact
-            </Modal.Header>
-            <Modal.Body className="dark:bg-dark-black bg-violet-50 rounded-md">
-              <ManualContact setOpenAddContactModal={setOpenAddContactModal} />
-            </Modal.Body>
-          </Modal>
+        dismissible
+        show={openAddContactModal}
+        onClose={() => setOpenAddContactModal(false)}
+      >
+        <Modal.Header>Add a Contact</Modal.Header>
+        <Modal.Body className="dark:bg-dark-black bg-violet-50 rounded-md">
+          <ManualContact setOpenAddContactModal={setOpenAddContactModal} />
+        </Modal.Body>
+      </Modal>
     </>
   );
 };
