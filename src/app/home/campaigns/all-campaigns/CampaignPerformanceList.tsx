@@ -107,22 +107,22 @@ const CampaignPerformanceList = () => {
                   className="w-full relative sticky top-0"
                 >
                   <Table.Head className="w-full">
-                    <Table.HeadCell className="w-8 text-center">
+                    {/* <Table.HeadCell className="w-8 text-center">
                       Selected
-                    </Table.HeadCell>
-                    <Table.HeadCell className="w-1/5 text-center">
+                    </Table.HeadCell> */}
+                    <Table.HeadCell className="w-1/4 text-center">
                       Recipient Name
                     </Table.HeadCell>
-                    <Table.HeadCell className="w-1/5 text-center">
+                    <Table.HeadCell className="w-1/4 text-center">
                       Email
                     </Table.HeadCell>
-                    <Table.HeadCell className="w-1/5 text-center">
+                    <Table.HeadCell className="w-1/4 text-center">
                       Opened
                     </Table.HeadCell>
-                    <Table.HeadCell className="w-1/5 text-center">
+                    {/* <Table.HeadCell className="w-1/4 text-center">
                       Clicked
-                    </Table.HeadCell>
-                    <Table.HeadCell className="w-1/5 text-center">
+                    </Table.HeadCell> */}
+                    <Table.HeadCell className="w-1/4 text-center">
                       Subscribed
                     </Table.HeadCell>
                   </Table.Head>
@@ -132,12 +132,12 @@ const CampaignPerformanceList = () => {
                         <Table.Row
                           key={index}
                           className="w-full dark:border-gray-700 dark:bg-transparent"
-                          onClick={() => {
-                            setLeads(index, items);
-                            setCurrentCampaignName(currentCampaign);
-                          }}
+                          // onClick={() => {
+                          //   setLeads(index, items);
+                          //   setCurrentCampaignName(currentCampaign);
+                          // }}
                         >
-                          <Table.Cell className="w-8 text-center">
+                          {/* <Table.Cell className="w-8 text-center">
                             <input
                               type="checkbox"
                               readOnly
@@ -148,7 +148,7 @@ const CampaignPerformanceList = () => {
                                   currentCampaign === checkCampaign
                               )}
                             />
-                          </Table.Cell>
+                          </Table.Cell> */}
                           <Table.Cell className="w-full flex items-center justify-center text-gray-900 dark:text-white">
                             <Tooltip
                               content={items.recipientName}
@@ -158,20 +158,20 @@ const CampaignPerformanceList = () => {
                               {items.recipientName}
                             </Tooltip>
                           </Table.Cell>
-                          <Table.Cell className="w-1/5 text-center">
+                          <Table.Cell className="w-1/4 text-center">
                             {items.recipientEmail}
                           </Table.Cell>
-                          <Table.Cell className="w-1/5">
+                          {/* <Table.Cell className="w-1/4">
                             <div
                               className={`${
                                 items.open === 0
-                                  ? "text-red-500"
+                                  ? "text-red-400"
                                   : "text-green-500"
                               } w-full text-center flex justify-center`}
                             >
                               {items.open === 0 ? <TbX /> : <TbCheck />}
                             </div>
-                          </Table.Cell>
+                          </Table.Cell> */}
                           <Table.Cell className="w-1/5 text-center">
                             <div className="text-red-500 w-full text-center flex justify-center">
                               <TbX />
