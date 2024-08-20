@@ -145,6 +145,7 @@ export interface credentialLoginStep {
 
 // FETCHING CAMPAIGNS
 export interface CampaignListType {
+  schedule: Date;
   campaignName: string;
   count: number;
   fromMail: string;
@@ -228,6 +229,11 @@ export interface compareCampaignState {
   setCampaignDetails1: (state: CampaignItemListResponse | null) => void;
   setCampaignDetails2: (state: CampaignItemListResponse | null) => void;
   setWinnerCampaign: (state: string | null) => void;
+}
+
+export interface campaignStatus {
+  scheduleTime: Date | null;
+  setScheduleTime: (state: Date | undefined) => void;
 }
 
 export interface nameFilterState {

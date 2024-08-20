@@ -34,9 +34,9 @@ const Users = () => {
 
     if (response.status === 201) {
       successNotification("Subadmin removed!");
-      // setTimeout(() => {
-      //   window.location.reload();
-      // }, 3000);
+      setTimeout(() => {
+        window.location.reload();
+      }, 3000);
     } else {
       warningNotification("Failed to remove subadmin");
     }

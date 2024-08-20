@@ -76,29 +76,41 @@ const CompareBox: React.FC<FilterProps> = ({ position }) => {
     <div
       className={`duration-100 ease-in-out border h-full rounded-md flex flex-col gap-6 items-center justify-center p-4 ${winnerDiv()}`}
     >
-      <Tooltip content="Hovered over" className="bg-brand-color">
+      <div className="flex flex-col gap-6 items-center justify-center pt-4">
+        {/* <Tooltip content="Hovered over" className="bg-brand-color">
         <h1 className="text-dark-black dark:text-slate-300 text-4xl font-semibold p-0 m-0">
           33
         </h1>
-      </Tooltip>
+      </Tooltip> */}
 
-      <Tooltip content="Hovered over" className="bg-brand-color">
-        <h1 className={`text-4xl font-semibold ${getTextColor("open")} p-0 m-0`}>
-          {state?.open}
-        </h1>
-      </Tooltip>
+        <Tooltip content="Hovered over" className="bg-brand-color">
+          <h1
+            className={`text-4xl font-semibold ${getTextColor("open")} p-0 m-0`}
+          >
+            {state?.open}
+          </h1>
+        </Tooltip>
 
-      <Tooltip content="Hovered over" className="bg-brand-color">
-        <h1 className={`text-4xl font-semibold ${getTextColor("subscribed")} p-0 m-0`}>
-          {state?.subscribed}
-        </h1>
-      </Tooltip>
+        <Tooltip content="Hovered over" className="bg-brand-color">
+          <h1
+            className={`text-4xl font-semibold ${getTextColor(
+              "subscribed"
+            )} p-0 m-0`}
+          >
+            {state?.subscribed}
+          </h1>
+        </Tooltip>
 
-      <Tooltip content="Hovered over" className="bg-brand-color">
-        <h1 className={`text-4xl font-semibold ${getTextColor("bounce")} p-0 m-0`}>
-          {state?.bounce}
-        </h1>
-      </Tooltip>
+        <Tooltip content="Hovered over" className="bg-brand-color">
+          <h1
+            className={`text-4xl font-semibold ${getTextColor(
+              "bounce"
+            )} p-0 m-0`}
+          >
+            {state?.bounce}
+          </h1>
+        </Tooltip>
+      </div>
     </div>
   );
 };

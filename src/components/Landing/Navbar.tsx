@@ -4,7 +4,6 @@ import Images from "../utils/images";
 import Image from "next/image";
 import Link from "next/link";
 
-
 const Navbar = () => {
   const [openNavDrawer, setOpenNavDrawer] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
@@ -72,7 +71,7 @@ const Navbar = () => {
             </>
           ) : (
             <>
-              <Link href="/sign-up">
+              <Link href="/login">
                 <button className="rounded-md bg-gradient-to-r from-brand-color to-button-color-2 xl:px-4 xl:py-2 px-4 py-2 xl:text-base text-slate-300 w-full text-sm">
                   Try for free
                 </button>
@@ -95,16 +94,19 @@ const Navbar = () => {
             className={`relative flex flex-col items-center justify-center gap-2 z-30`}
           >
             <div
-              className={`h-1.5 w-10 ease-in duration-200 ${openNavDrawer ? "right-0 absolute rotate-45" : "rotate-0"
-                } bg-slate-300 z-30`}
+              className={`h-1.5 w-10 ease-in duration-200 ${
+                openNavDrawer ? "right-0 absolute rotate-45" : "rotate-0"
+              } bg-slate-300 z-30`}
             ></div>
             <div
-              className={`h-1.5 w-10 ease-in duration-200 ${openNavDrawer ? "hidden" : "flex"
-                } bg-slate-300`}
+              className={`h-1.5 w-10 ease-in duration-200 ${
+                openNavDrawer ? "hidden" : "flex"
+              } bg-slate-300`}
             ></div>
             <div
-              className={`h-1.5 w-10 ease-in duration-200 ${openNavDrawer ? "right-0 absolute -rotate-45" : "rotate-0"
-                } bg-slate-300`}
+              className={`h-1.5 w-10 ease-in duration-200 ${
+                openNavDrawer ? "right-0 absolute -rotate-45" : "rotate-0"
+              } bg-slate-300`}
             ></div>
           </div>
         </div>
@@ -126,7 +128,7 @@ const Navbar = () => {
           </ul>
 
           <div className="flex flex-col items-center justify-center gap-8 w-full">
-            <Link href="/sign-up" className="w-1/2">
+            <Link href="/login" className="w-1/2">
               <button className="rounded-md bg-gradient-to-r from-brand-color to-button-color-2 px-4 py-2 w-full text-2xl">
                 Try for free
               </button>

@@ -3,7 +3,11 @@ import { useState } from "react";
 import SummaryRate from "./SummaryRate";
 import CampaignPerformanceList from "./CampaignPerformanceList";
 
-import { compareCampaignStore, showCampaignStore } from "@/store/store";
+import {
+  CampaignStatus,
+  compareCampaignStore,
+  showCampaignStore,
+} from "@/store/store";
 import { Modal } from "flowbite-react";
 import { useRouter } from "next/navigation";
 
@@ -28,6 +32,7 @@ const CampaignItems = () => {
   );
 
   const campaignDetails = showCampaignStore((state) => state.campaignDetails);
+  const ScheduleTime = CampaignStatus((state) => state.scheduleTime);
   const router = useRouter();
 
   const handleClick = () => {
@@ -89,6 +94,19 @@ const CampaignItems = () => {
               Total Recipients:{" "}
               <span className="text-green-500 font-semibold">
                 {campaignDetails?.count}
+              </span>
+            </h1>
+          </div>
+          <div className="w-1/8 h-full flex flex-col justify-center p-2 rounded-md">
+            <h1
+              onClick={() => {
+                console.log("active status: ", campaignDetails);
+              }}
+              className="2xl:text-sm text-xs"
+            >
+              Schedule Time:{" "}
+              <span className="text-green-500 font-semibold">
+                {ScheduleTime?.toLocaleString()}
               </span>
             </h1>
           </div>

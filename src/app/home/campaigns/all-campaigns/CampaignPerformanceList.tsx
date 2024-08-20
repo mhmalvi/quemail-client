@@ -2,7 +2,11 @@
 import { Pagination, Table, Tooltip } from "flowbite-react";
 import { useEffect, useState } from "react";
 import { TbX, TbCheck, TbDownload } from "react-icons/tb";
-import { performanceStore, showCampaignStore } from "@/store/store";
+import {
+  CampaignStatus,
+  performanceStore,
+  showCampaignStore,
+} from "@/store/store";
 import { fetchCampaignItems } from "@/app/api/campaign";
 import { CampaignItemListType } from "@/components/utils/types";
 import DownloadCSV from "./DownloadCSV";
@@ -31,6 +35,8 @@ const CampaignPerformanceList = () => {
     (state) => state.setCampaignName
   );
 
+  const setScheduleTime = CampaignStatus((state) => state.setScheduleTime);
+
   useEffect(() => {
     const handleResize = () => {
       setPerPage(window.outerWidth < 1366 ? 6 : 4);
@@ -58,7 +64,11 @@ const CampaignPerformanceList = () => {
       try {
         const res = await fetchCampaignItems(data);
         if (res.status === 200) {
+          console.log(res);
           setCampaignItemList(res);
+          const isoString = res.recipients[0].schedule;
+          const date = new Date(isoString);
+          setScheduleTime(date);
           setTotalPage(res.totalPages);
         }
       } catch (err) {

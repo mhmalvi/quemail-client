@@ -22,14 +22,15 @@ const CredentialsLogin = ({
   const passwordExist = passwordLoginStore((state) => state.passwordExist);
   const [companyList, setCompanyList] = useState<any>(false);
   const [showCompanyList, setShowCompanyList] = useState<boolean>(false);
-
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const handlePasswordLogin = async (
     event: React.FormEvent<HTMLFormElement>
   ) => {
     event.preventDefault();
     setButtonClick(true);
-    console.log("inside handlePasswordlogins")
+    setErrorMessage(null);
+    console.log("inside handlePasswordlogins");
     const res = await verifyPassword(
       credentialsData.email,
       credentialsData.password
@@ -40,8 +41,11 @@ const CredentialsLogin = ({
       Storage.setItem("satok", response.data.token);
       Storage.setItem("email", response.data.email);
       Storage.setItem("userID", response.data.userID);
-      setCompanyList(response.company)
+      setCompanyList(response.company);
       setShowCompanyList(true);
+    } else if (response.status === 401) {
+      setErrorMessage(response.message);
+      setButtonClick(false);
     }
   };
 
@@ -71,9 +75,8 @@ const CredentialsLogin = ({
     }
   };
 
-
   return (
-    <div className="w-full ">
+    <div className="w-full">
       {passwordExist ? (
         <form
           className="flex flex-col gap-4 w-full"
@@ -92,6 +95,7 @@ const CredentialsLogin = ({
               className="bg-transparent text-slate-300 rounded-md focus:outline-none focus:ring-0 focus:border-brand-color outline-none border border-slate-400 px-5 py-2"
             />
           </div>
+          <div className="text-red-500">{errorMessage}</div>
           {buttonClick ? (
             <div className="flex items-center justify-center disabled:opacity-20 rounded-md w-full px-4 py-2 bg-gradient-to-r from-brand-color to-button-color-2 text-slate-300">
               <Spinner aria-label="Loading" className="fill-black" />
@@ -152,8 +156,11 @@ const CredentialsLogin = ({
         }}
         size={"3xl"}
       >
-        <Modal.Body className="dark:bg-dark-black rounded-md bg-violet-50 text-slate-300 overflow-y-auto w-full h-full m-0 p-0">
-          <CompanySelect companyList={companyList} setShowCompanyList={setShowCompanyList}></CompanySelect>
+        <Modal.Body className="bg-stone-900 rounded-md overflow-y-auto w-full h-full m-0 p-0">
+          <CompanySelect
+            companyList={companyList}
+            setShowCompanyList={setShowCompanyList}
+          ></CompanySelect>
         </Modal.Body>
       </Modal>
     </div>

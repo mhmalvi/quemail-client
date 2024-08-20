@@ -50,7 +50,7 @@ const Login = () => {
     console.log(response);
     if (response.status === 1) {
       setPasswordExist(true);
-      console.log(passwordExist)
+      console.log(passwordExist);
     }
     if (response.status === 404) {
       warningNotification("Email not registered.");
@@ -141,12 +141,12 @@ const Login = () => {
                 </button>
               )}
             </form>
-            <h1 className="text-slate-300">
+            {/* <h1 className="text-slate-300">
               Don&apos;t have an account?{" "}
               <span className="text-brand-color">
                 <Link href="/sign-up">Sign Up</Link>
               </span>
-            </h1>
+            </h1> */}
           </>
         )}
       </div>

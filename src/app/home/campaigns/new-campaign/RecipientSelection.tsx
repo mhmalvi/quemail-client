@@ -3,7 +3,7 @@ import { fetchGroupItems, fetchGroupList } from "@/app/api/contact";
 import { ContactType } from "@/components/utils/types";
 import { warningNotification } from "@/components/utils/utility";
 import { contactStore, campaignStore } from "@/store/store";
-import { Modal, Spinner, Table } from "flowbite-react";
+import { Modal, Pagination, Spinner, Table } from "flowbite-react";
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Images from "@/components/utils/images";
@@ -23,6 +23,12 @@ const RecipientSelection = ({ tabsRef }: any) => {
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 5; // Set the number of items per page
+
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = groupData?.slice(indexOfFirstItem, indexOfLastItem);
 
   useEffect(() => {
     if (groupData === null) {
@@ -127,7 +133,9 @@ const RecipientSelection = ({ tabsRef }: any) => {
   return (
     <div className="relative w-full flex flex-col items-center justify-center xl:py-16 py-4 px-4 gap-4 h-full">
       <div className="w-1/2 text-brand-color font-semibold flex items-center justify-between">
-        <h1 className="m-0 p-0 xl:text-xl text-sm">Recipient Selection</h1>
+        <h1 className="m-0 p-0 xl:text-xl text-sm text-center w-full">
+          Recipient Selection
+        </h1>
         {newCampaign?.recipient && (
           <button
             className="font-normal xl:text-sm text-xs bg-red-500 text-white px-2 py-1 rounded-md"
@@ -160,20 +168,11 @@ const RecipientSelection = ({ tabsRef }: any) => {
             </button>
           </div>
         ) : (
-          <div className="flex flex-col gap-4">
+          <div className="flex flex-col gap-4 justify-center items-center">
             <p className="m-0 p-0 dark:text-slate-300 text-dark-black xl:text-sm text-xs">
               Who are you sending this campaign to?
             </p>
-            <div className="flex items-center justify-between h-full gap-4">
-              <button className="flex xl:flex-row flex-col items-center h-full gap-4 w-full px-4 py-2 xl:text-base text-xs border border-brand-color rounded-md text-slate-50 hover:dark:bg-dark-black hover:bg-white duration-200 ease-in-out">
-                <h1 className="m-0 p-0 font-semibold dark:text-slate-300 text-dark-black">
-                  Select from all contacts
-                </h1>
-                <Image src={Images.Notebook} alt="notebook" className="w-40 " />
-              </button>
-              <span className="dark:text-slate-300 text-dark-black xl:text-base text-xs">
-                or
-              </span>
+            <div className="flex w-1/2 h-full gap-4 ">
               <button
                 className="flex xl:flex-row flex-col items-center justify-between gap-4 full w-full px-4 py-2 xl:text-base text-xs border border-brand-color rounded-md text-slate-50 disabled:opacity-20 hover:dark:bg-dark-black hover:bg-white duration-200 ease-in-out"
                 onClick={() => setOpenGroupModal(true)}
@@ -194,31 +193,42 @@ const RecipientSelection = ({ tabsRef }: any) => {
         onClose={() => setOpenGroupModal(false)}
       >
         <Modal.Header>
-          <p className=" dark:text-slate-300 text-dark-black">
+          <p className="dark:text-slate-300 text-dark-black">
             Add recipients from group
           </p>
         </Modal.Header>
-        <Modal.Body className="dark:bg-dark-black rounded-b-md bg-white">
-          <div className="flex flex-col gap-4 text-center">
-            {groupData?.map((items: string, index: number) => (
+        <Modal.Body className="dark:bg-dark-black rounded-b-md bg-white ">
+          <div className="flex flex-col gap-4 text-center min-h-80">
+            {currentItems?.map((item: string, index: number) => (
               <div key={index}>
                 <button
                   className="w-full px-4 py-2 rounded-md border border-slate-300 dark:text-slate-300 text-dark-black cursor-pointer disabled:cursor-not-allowed disabled:opacity-20"
-                  disabled={
-                    clickedGroup !== null && clickedGroup.includes(index)
-                  }
+                  disabled={clickedGroup?.includes(indexOfFirstItem + index)}
                   onClick={() => {
-                    handleAddRecipients(items);
+                    handleAddRecipients(item);
                     setClickedGroup((prev) =>
-                      prev ? [...prev, index] : [index]
+                      prev
+                        ? [...prev, indexOfFirstItem + index]
+                        : [indexOfFirstItem + index]
                     );
                   }}
                 >
-                  {items}
+                  {item}
                 </button>
               </div>
             ))}
           </div>
+          {typeof window !== "undefined" && groupData && (
+            <div className="w-full flex justify-center mt-4">
+              <Pagination
+                currentPage={currentPage}
+                totalPages={Math.ceil(groupData?.length / itemsPerPage)}
+                onPageChange={(page) => setCurrentPage(page)}
+                previousLabel="<"
+                nextLabel=">"
+              />
+            </div>
+          )}
         </Modal.Body>
       </Modal>
       <Modal

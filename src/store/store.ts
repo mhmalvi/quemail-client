@@ -17,6 +17,7 @@ import {
   subscriptionDetailsProps,
   landingState,
   passwordState,
+  campaignStatus,
 } from "@/components/utils/types";
 import { create } from "zustand";
 
@@ -132,6 +133,7 @@ export const showCampaignStore = create<ShowCampaignStore>((set) => ({
     total: null,
     totalPages: null,
     message: null,
+    schedule: null,
   },
   campaignItemList: {
     message: null,
@@ -287,6 +289,13 @@ export const subsciption = create<subscriptionDetailsProps>((set) => ({
 export const landingStore = create<landingState>((set) => ({
   welcomeVisible: false,
   setWelcomeVisible: (visible: boolean) => set({ welcomeVisible: visible }),
+}));
+
+export const CampaignStatus = create<campaignStatus>((set) => ({
+  scheduleTime: null,
+  setScheduleTime(state) {
+    set(() => ({ scheduleTime: state }));
+  },
 }));
 
 export const passwordLoginStore = create<passwordState>((set) => ({
