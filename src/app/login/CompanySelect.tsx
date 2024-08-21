@@ -30,8 +30,9 @@ const CompanySelect: React.FC<CompanySelectProps> = ({
     if (response.status === 201) {
       Storage.removeItem("said");
       Storage.removeItem("satok");
-      Storage.removeItem("email");
-      Storage.removeItem("userID");
+      Storage.removeItem("subEmail");
+      Storage.removeItem("subUserID");
+      Storage.removeItem("subUserName");
       router.push("/");
     } else {
       warningNotification("Logout failed. Check internet connection");

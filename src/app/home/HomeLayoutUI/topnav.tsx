@@ -111,6 +111,11 @@ const Topnav = () => {
       Storage.removeItem("email");
       Storage.removeItem("userID");
       Storage.removeItem("first_user");
+      Storage.removeItem("said");
+      Storage.removeItem("satok");
+      Storage.removeItem("subEmail");
+      Storage.removeItem("subUserID");
+      Storage.removeItem("subUserName");
       router.push("/");
     }
   }, [logoutConfirm, router]);
@@ -177,10 +182,14 @@ const Topnav = () => {
           >
             <Dropdown.Header>
               <span className="block text-sm dark:text-slate-300 text-light-black">
-                {Storage.getItem("userName")}
+                {accountStatus
+                  ? Storage.getItem("userName")
+                  : Storage.getItem("subUserName")}
               </span>
               <span className="block truncate text-sm dark:text-slate-300 text-light-black font-medium">
-                {Storage.getItem("email")}
+                {accountStatus
+                  ? Storage.getItem("email")
+                  : Storage.getItem("subEmail")}
               </span>
             </Dropdown.Header>
             <Dropdown.Item
@@ -249,7 +258,7 @@ const Topnav = () => {
         }}
       >
         <Modal.Header>Account Details</Modal.Header>
-        <Modal.Body>
+        <Modal.Body className="w-full h-full">
           <MyProfile />
         </Modal.Body>
         <Modal.Footer className="flex justify-end">

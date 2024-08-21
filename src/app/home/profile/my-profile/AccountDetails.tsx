@@ -1,12 +1,27 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Storage } from "@/store/store";
+import { fetchAccountAcess } from "@/app/api/admin";
 
 const AccountDetails = () => {
   //const [editClicked, setEditClicked] = useState(false);
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
+  const [accountStatus, setAccountStatus] = useState<boolean>(false);
+
+  useEffect(() => {
+    const checkAccountStatus = async () => {
+      const response = await fetchAccountAcess();
+
+      console.log(response);
+
+      if (response.message === "customer") {
+        setAccountStatus(true);
+      }
+    };
+    checkAccountStatus();
+  }, []);
 
   const handleChangeFirst = (e: {
     target: { value: React.SetStateAction<string> };
@@ -69,7 +84,7 @@ const AccountDetails = () => {
       <div className="flex flex-col w-full p-4 xl:gap-4 gap-2">
         <div className="flex flex-col justify-center">
           <label className="xl:text-base text-sm dark:text-slate-300 text-dark-black">
-            First Name
+            User Name
           </label>
           {/* {editClicked ? (
             <input
@@ -79,22 +94,9 @@ const AccountDetails = () => {
           />
           ) : ( */}
           <h1 className="text-brand-color font-semibold xl:px-4 px-2 xl:py-2 py-1 xl:text-base text-sm">
-            {Storage.getItem("userName")}
-          </h1>
-          {/* )} */}
-        </div>
-        <div className="flex flex-col justify-center">
-          <label className="xl:text-base text-sm dark:text-slate-300 text-dark-black">
-            Last Name
-          </label>
-          {/* {editClicked ? (
-            <input className=" dark:text-slate-300 text-dark-black xl:px-4 px-2 xl:py-2 py-1 bg-transparent rounded-md border border-brand-color focus:ring-0 focus:outline-none active:outline-none active:ring-0"
-            value={lastName}
-            onChange={handleChangeLast}
-             />
-          ) : ( */}
-          <h1 className="text-brand-color font-semibold xl:px-4 px-2 xl:py-2 py-1 m-0 xl:text-base text-sm">
-            {Storage.getItem("userName")}
+            {accountStatus
+              ? Storage.getItem("userName")
+              : Storage.getItem("subUserName")}
           </h1>
           {/* )} */}
         </div>
@@ -109,7 +111,9 @@ const AccountDetails = () => {
              />
           ) : ( */}
           <h1 className="text-brand-color font-semibold xl:px-4 px-2 xl:py-2 py-1 m-0 xl:text-base text-sm">
-            {Storage.getItem("email")}
+            {accountStatus
+              ? Storage.getItem("email")
+              : Storage.getItem("subEmail")}
           </h1>
           {/* )} */}
         </div>
