@@ -62,8 +62,9 @@ export const subadminToCompany = async (userID: number) => {
 
   const token = typeof window !== "undefined" && localStorage.getItem("satok");
   const parsedToken = token && JSON.parse(token);
-  const subAdminID = typeof window !== "undefined" && localStorage.getItem("userID")
-  console.log("subAdminID: ", subAdminID)
+  const subAdminID =
+    typeof window !== "undefined" && localStorage.getItem("subUserID");
+  console.log("subAdminID: ", subAdminID);
   try {
     const result = await fetch(
       `${process.env.NEXT_PUBLIC_BASE_URL}/api/subadminToCompany`,
@@ -71,7 +72,7 @@ export const subadminToCompany = async (userID: number) => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          authorization: parsedToken
+          authorization: parsedToken,
         },
         body: JSON.stringify({
           userID: userID,

@@ -131,7 +131,7 @@ export const logoutSubAdmin = async () => {
   const token = typeof window !== "undefined" && localStorage.getItem("satok");
   const parsedToken = token && JSON.parse(token);
   const userID =
-    typeof window !== "undefined" && localStorage.getItem("userID");
+    typeof window !== "undefined" && localStorage.getItem("subUserID");
 
   try {
     const result = await fetch(
@@ -144,6 +144,38 @@ export const logoutSubAdmin = async () => {
         },
         body: JSON.stringify({
           said: Number(userID),
+        }),
+      }
+    );
+    if (result) {
+      const responseData = await result.json();
+      return responseData;
+    } else {
+      return null;
+    }
+  } catch (error: any) {
+    return error.response;
+  }
+};
+
+export const changePassword = async (password: string) => {
+  const token = typeof window !== "undefined" && localStorage.getItem("token");
+  const parsedToken = token && JSON.parse(token);
+  const userID =
+    typeof window !== "undefined" && localStorage.getItem("userID");
+
+  try {
+    const result = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/subadmin-pass-change`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: parsedToken,
+        },
+        body: JSON.stringify({
+          userID: Number(userID),
+          userPassword: password,
         }),
       }
     );

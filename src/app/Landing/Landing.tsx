@@ -35,6 +35,10 @@ const AnimatedSection = ({ children }: { children: React.ReactNode }) => {
 };
 
 const Landing = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <div className="relative flex flex-col items-center justify-between w-full gap-4 h-full 2xl:px-72 xl:px-64 lg:px-36 md:px-8 px-4 z-10">
       <Image

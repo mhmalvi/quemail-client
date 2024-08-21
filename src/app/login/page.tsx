@@ -44,28 +44,32 @@ const Login = () => {
       ...prevData,
       loading: true,
     }));
+    setPasswordExist(false);
 
     var response = await emailCheck(credentialsData.email);
     response = await response.json();
     console.log(response);
+    if (response.status === true) {
+      successNotification("An OTP has been sent to your email");
+      setStepTwo({
+        item: true,
+        loading: false,
+      });
+    }
     if (response.status === 1) {
       setPasswordExist(true);
       console.log(passwordExist);
+      setStepTwo({
+        item: true,
+        loading: false,
+      });
     }
-    if (response.status === 404) {
+    if (response.status === false) {
       warningNotification("Email not registered.");
       setStepTwo((prevData) => ({
         ...prevData,
         loading: false,
       }));
-    } else {
-      setStepTwo({
-        item: true,
-        loading: false,
-      });
-      response.status === 1
-        ? ""
-        : successNotification("An otp has been sent to this mail.");
     }
   };
 

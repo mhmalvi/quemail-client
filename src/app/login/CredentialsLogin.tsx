@@ -38,12 +38,30 @@ const CredentialsLogin = ({
     const response = await res.json();
     if (response.message === "success") {
       console.log(response);
-      Storage.setItem("satok", response.data.token);
-      Storage.setItem("email", response.data.email);
-      Storage.setItem("userID", response.data.userID);
-      setCompanyList(response.company);
-      setShowCompanyList(true);
-    } else if (response.status === 401) {
+      if (response.data) {
+        Storage.setItem("satok", response.data.token);
+        Storage.setItem("subEmail", response.data.email);
+        Storage.setItem("subUserID", response.data.userID);
+        Storage.setItem("subUserName", response.data.userName);
+        setCompanyList(response.company);
+        setShowCompanyList(true);
+      }
+      if (response.user) {
+        Storage.setItem("userName", response.user.userName);
+        Storage.setItem("email", response.user.email);
+        Storage.setItem("photo", response.user.photo);
+        Storage.setItem("token", response.user.token);
+        Storage.setItem("userID", Number(response.user.userID));
+        Storage.setItem("first_user", Number(response.user.first_user));
+        setButtonClick(false);
+        setStepTwo({
+          item: false,
+          loading: false,
+        });
+        router.push("/home");
+      }
+    }
+    if (response.status === 401) {
       setErrorMessage(response.message);
       setButtonClick(false);
     }

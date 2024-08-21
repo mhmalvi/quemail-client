@@ -18,9 +18,8 @@ const CardResources = () => {
       const res = await currentResourcesStatus();
       const res3 = await stripeINFO();
 
-      console.log("here", res);
-      // console.log("here", res1);
-      // console.log("here", res3);
+      console.log("res :", res);
+      console.log("res3 :", res3);
 
       if (
         res &&
@@ -49,8 +48,8 @@ const CardResources = () => {
   return (
     <div className="step-3 summary-element w-full h-full bg-white dark:bg-light-glass backdrop-blur-xl dark:border-none border border-violet-200 rounded-md overflow-hidden p-4">
       {currentResources?.currentCampaigns != null &&
-      totalResources?.currentContacts &&
-      currentResources?.currentContacts ? (
+      currentResources?.currentContacts != null &&
+      currentResources?.currentEmails != null ? (
         <>
           <h1 className="xl:text-xl text-base m-0 p-0 dark:text-white text-dark-black text-center">
             Current / Remaining Resources
@@ -122,6 +121,17 @@ const CardResources = () => {
             color="purple"
             aria-label="Purple spinner example"
             size="xl"
+            onClick={() => {
+              console.log(
+                "current campaign :",
+                currentResources?.currentCampaigns
+              );
+              console.log(
+                "currentContacts :",
+                currentResources?.currentContacts
+              );
+              console.log("currentEmails :", currentResources?.currentEmails);
+            }}
           />
         </div>
       )}
