@@ -43,6 +43,7 @@ const Topnav = () => {
     return capitalizedWords.join(" ");
   });
   const [logoutConfirm, setLogoutConfirm] = useState<boolean>(false);
+  const isHomePage = pathname === "/home";
 
   const displayString: JSX.Element[] = capitalizedParts.map((part, index) => (
     <React.Fragment key={index}>
@@ -67,6 +68,7 @@ const Topnav = () => {
       )}
     </React.Fragment>
   ));
+
   const router = useRouter();
   const handleSignOut = async () => {
     const response = await signOut();
@@ -121,24 +123,27 @@ const Topnav = () => {
           <div>
             <DarkThemeToggle className="focus:ring-0 focus:outline-none active:outline-none active:ring-0 ease-in duration-100 text-brand-color hover:bg-transparent dark:hover:bg-transparent dark:text-yellow-500" />
           </div>
-          <Tooltip
-            content="Start quemailer tour!"
-            className="bg-brand-color xl:text-sm text-xs"
-          >
-            <div className="p-2 step-10 ">
-              {isTourGoing ? (
-                <Spinner color="purple" aria-label="Purple spinner example" />
-              ) : (
-                <BsQuestionDiamondFill
-                  size={20}
-                  className="dark:text-slate-300 text-dark-black transition-fill duration-200 ease-in-out hover:fill-brand-color cursor-pointer"
-                  onClick={() => {
-                    setIsTourGoing(!isTourGoing);
-                  }}
-                />
-              )}
-            </div>
-          </Tooltip>
+          {isHomePage && (
+            <Tooltip
+              content="Start quemailer tour!"
+              className="bg-brand-color xl:text-sm text-xs"
+            >
+              <div className="p-2 step-10">
+                {isTourGoing ? (
+                  <Spinner color="purple" aria-label="Purple spinner example" />
+                ) : (
+                  <BsQuestionDiamondFill
+                    size={20}
+                    className="dark:text-slate-300 text-dark-black transition-fill duration-200 ease-in-out hover:fill-brand-color cursor-pointer"
+                    onClick={() => {
+                      console.log(displayString);
+                      setIsTourGoing(!isTourGoing);
+                    }}
+                  />
+                )}
+              </div>
+            </Tooltip>
+          )}
           {/* <div className="p-2">
             <MdNotifications
               size={20}
