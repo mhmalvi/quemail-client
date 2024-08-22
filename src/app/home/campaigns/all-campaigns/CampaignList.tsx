@@ -108,10 +108,10 @@ const CampaignList = () => {
                         });
                       }}
                     >
-                      <Table.Cell className="w-full flex items-center justify-center text-gray-900 dark:text-white">
+                      <Table.Cell className="w-full flex items-center justify-center text-center">
                         <Tooltip
                           content={items.campaignName}
-                          className="bg-brand-color text-center"
+                          className="bg-brand-color"
                           placement="bottom"
                         >
                           {items.campaignName}

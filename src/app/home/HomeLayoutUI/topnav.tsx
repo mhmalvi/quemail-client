@@ -18,7 +18,7 @@ import Image from "next/image";
 import { signOut } from "@/app/api/auth";
 import { useRouter } from "next/navigation";
 import Images from "../../../components/utils/images";
-import MyProfile from "../profile/my-profile/page";
+import MyProfile from "../my-profile/page";
 import { stripeINFO } from "@/app/api/billing";
 import { fetchAccountAcess } from "@/app/api/admin";
 
@@ -201,7 +201,7 @@ const Topnav = () => {
               My Profile
             </Dropdown.Item>
             {accountStatus ? (
-              <Link href="/home/profile/users">
+              <Link href="/home/users">
                 <Dropdown.Item className="dark:text-slate-300 text-light-black hover:text-slate-700">
                   Users
                 </Dropdown.Item>

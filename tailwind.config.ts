@@ -30,35 +30,15 @@ const config: Config = {
         "light-glass": "#ffffff1A",
         "light-black": "#4d4d4d",
         "dark-black": "#0b0b0b",
-        bronze: {
-          light: "#cd7f32",
-          dark: "#8c5b23",
-        },
-        silver: {
-          light: "#c0c0c0",
-          dark: "#808080",
-        },
-        gold: {
-          light: "#ffd700",
-          dark: "#b89400",
-        },
-        platinum: {
-          light: "#e5e4e2",
-          dark: "#b4b2b0",
-        },
-        diamond: {
-          light: "#b9f2ff",
-          dark: "#7ec3d8",
-        },
       },
       keyframes: {
         float: {
-          '0%, 100%': { transform: 'translateY(0)' },
-          '50%': { transform: 'translateY(-10px)' },
+          "0%, 100%": { transform: "translateY(0)" },
+          "50%": { transform: "translateY(-10px)" },
         },
         float_x: {
-          '0%, 100%': { transform: 'translateX(0)' },
-          '50%': { transform: 'translateX(10px)' },
+          "0%, 100%": { transform: "translateX(0)" },
+          "50%": { transform: "translateX(10px)" },
         },
         glow: {
           "0%, 100%": {
@@ -99,8 +79,8 @@ const config: Config = {
         },
       },
       animation: {
-        float: 'float 3s ease-in-out infinite',
-        float_x: 'float_x 3s ease-in-out infinite',
+        float: "float 3s ease-in-out infinite",
+        float_x: "float_x 3s ease-in-out infinite",
         glow: "glow 3s infinite alternate",
         up: "up 2s linear infinite",
         up1: "up1 3s linear infinite",

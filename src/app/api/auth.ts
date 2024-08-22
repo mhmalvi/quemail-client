@@ -36,6 +36,26 @@ export const emailCheck = async (email: string) => {
   }
 };
 
+export const resetPassowrd = async (email: string) => {
+  try {
+    const result = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/forget-pass`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: email,
+        }),
+      }
+    );
+    return result;
+  } catch (error: any) {
+    return error.response;
+  }
+};
+
 export const verifyPassword = async (email: string, password: string) => {
   try {
     const result = await fetch(

@@ -69,7 +69,7 @@ const Scheduler = ({ tabsRef }: any) => {
   const handleTimeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const localTime = event.target.value;
     const [hours, minutes] = localTime.split(":").map(Number);
-    setShowUserTime(localTime)
+    setShowUserTime(localTime);
     const localDate = new Date();
     localDate.setHours(hours, minutes, 0, 0);
 
