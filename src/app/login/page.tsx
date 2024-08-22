@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Images from "@/components/utils/images";
 import Link from "next/link";
-import { emailCheck } from "../api/auth";
+import { emailCheck, resetPassowrd } from "../api/auth";
 import { Spinner } from "flowbite-react";
 import { useRouter } from "next/navigation";
 import {
@@ -73,10 +73,27 @@ const Login = () => {
     }
   };
 
+  const handleResetPassword = async (
+    event: React.FormEvent<HTMLFormElement>
+  ) => {
+    event.preventDefault();
+
+    var response = await resetPassowrd(credentialsData.email);
+    response = await response.json();
+    console.log(response);
+    if (response.status === 201) {
+      successNotification(response.message);
+    }
+    if (response.status === 535) {
+      warningNotification(response.message);
+    }
+  };
+
   const handleGoogleClick = async () => {
     const googleLoginUrl = "https://backend.quemailer.com/google/login";
     window.open(googleLoginUrl, "_self");
   };
+
   return (
     <div className="relative h-screen bg-dark-black w-full flex items-center justify-center p-8">
       <div className="bg-light-glass xl:w-1/4 md:w-1/3 w-1/2 rounded-md backdrop-blur-2xl p-8 flex flex-col gap-4 items-center justify-center">
@@ -131,6 +148,16 @@ const Login = () => {
                   className="bg-transparent text-slate-300 rounded-md focus:outline-none focus:ring-0 focus:border-brand-color outline-none border border-slate-400 px-5 py-2"
                 />
               </div>
+              <div className="flex justify-end text-sm text-slate-300">
+                <span
+                  onClick={() => {
+                    setOpenModal(true);
+                  }}
+                  className="hover:text-violet-500 cursor-pointer"
+                >
+                  Forgot password?
+                </span>
+              </div>
               {stepTwo.loading ? (
                 <div className="flex items-center justify-center disabled:opacity-20 rounded-md w-full px-4 py-2 bg-gradient-to-r from-brand-color to-button-color-2 text-slate-300">
                   <Spinner aria-label="Loading" className="fill-black" />
@@ -157,37 +184,21 @@ const Login = () => {
       {openModal && (
         <div className="absolute h-full w-full rounded-md flex items-center justify-center">
           <div
-            className="absolute h-full w-full bg-gray-800/50"
+            className="absolute h-full w-full bg-dark-black opacity-70"
             onClick={() => {
               setOpenModal(false);
             }}
           ></div>
-          <form className="absolute lg:h-1/5 lg:w-1/3 w-10/12 bg-gray-800 rounded-md border border-slate-400 p-8 flex flex-col gap-2">
-            <div className="flex items-center justify-between">
+          <form
+            onSubmit={handleResetPassword}
+            className="absolute bg-light-glass xl:w-1/4 md:w-1/3 w-1/2 rounded-md backdrop-blur-2xl p-8 flex flex-col gap-4 items-center justify-center"
+          >
+            <div className="flex w-full h-full items-center justify-center">
               <label>Enter your Email</label>
-              <div
-                onClick={() => {
-                  setOpenModal(false);
-                }}
-                className="cursor-pointer"
-              >
-                <div
-                  className={`relative flex flex-col items-center justify-center gap-2 z-20`}
-                >
-                  <div
-                    className={`h-1 w-4 ease-in duration-200 right-0 absolute rotate-45
-               bg-slate-300 z-30`}
-                  ></div>
-
-                  <div
-                    className={`h-1 w-4 ease-in duration-200 right-0 absolute -rotate-45 bg-slate-300`}
-                  ></div>
-                </div>
-              </div>
             </div>
             <input
               type="email"
-              className="bg-transparent rounded-md focus:ring-none outline-none border border-slate-400 px-4 py-2 text-slate-300"
+              className="bg-transparent w-full text-slate-300 rounded-md focus:outline-none focus:ring-0 focus:border-brand-color outline-none border border-slate-400 px-5 py-2"
             />
             <button className="bg-gradient-to-r from-brand-color to-button-color-2 px-4 py-2 rounded-md">
               Reset Password

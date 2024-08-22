@@ -75,7 +75,13 @@ const CampaignPerformanceList = () => {
         console.log(err);
       }
     })();
-  }, [clickedCampaignId, currentPage, perPage, setCampaignItemList]);
+  }, [
+    clickedCampaignId,
+    currentPage,
+    perPage,
+    setCampaignItemList,
+    setScheduleTime,
+  ]);
 
   return (
     <>

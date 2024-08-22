@@ -59,3 +59,15 @@ body {
   border-bottom-left-radius: 8px;
   border-bottom-right-radius: 8px;
 }
+
+.css-je9nny {
+  overflow: auto;
+}
+
+.css-3sy4zq {
+  border-radius: 12px 12px 12px 12px !important;
+}
+
+.css-3sy4zq:hover {
+  border-radius: 24px 24px 24px 24px !important;
+}

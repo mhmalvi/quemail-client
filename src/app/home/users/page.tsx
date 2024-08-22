@@ -7,7 +7,7 @@ import {
   successNotification,
   warningNotification,
 } from "@/components/utils/utility";
-import NoContacts from "../../HomeLayoutUI/NoContacts";
+import NoContacts from "../HomeLayoutUI/NoContacts";
 import { BIG_BUTTON_STYLES } from "@/components/styles/button";
 import { TbTrash } from "react-icons/tb";
 
