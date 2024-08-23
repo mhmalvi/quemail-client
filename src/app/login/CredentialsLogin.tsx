@@ -101,7 +101,7 @@ const CredentialsLogin = ({
           onSubmit={handlePasswordLogin}
         >
           <div className="flex flex-col gap-2 w-full">
-            <label className="text-slate-300">Add Password</label>
+            <label className="text-slate-300">Password:</label>
             <input
               type="password"
               onChange={(e) => {

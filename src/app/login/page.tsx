@@ -30,6 +30,7 @@ const Login = () => {
   });
   const [openModal, setOpenModal] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null);
   const passwordExist = passwordLoginStore((state) => state.passwordExist);
   const setPasswordExist = passwordLoginStore(
     (state) => state.setPasswordExist
@@ -75,17 +76,21 @@ const Login = () => {
   };
 
   const handleResetPassword = async () => {
+    setError(null);
     var response = await resetPassowrd(credentialsData.email);
     response = await response.json();
     console.log(response);
     if (response.status === 201) {
       successNotification(response.message);
-    }
-    if (response.status === 535) {
-      warningNotification(response.message);
+      setOpenModal(false);
+    } else {
+      setError(response.message);
     }
     setLoading(false);
-    setOpenModal(false);
+    setCredentialsData((prevData) => ({
+      ...prevData,
+      email: "",
+    }));
   };
 
   const handleGoogleClick = async () => {
@@ -203,6 +208,7 @@ const Login = () => {
               }}
               className="bg-transparent w-full text-slate-300 rounded-md focus:outline-none focus:ring-0 focus:border-brand-color outline-none border border-slate-400 px-5 py-2"
             />
+            <div className="text-red-500">{error}</div>
 
             {loading ? (
               <Spinner color="purple" aria-label="Purple spinner example" />

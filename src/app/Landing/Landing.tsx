@@ -14,7 +14,7 @@ import Image from "next/image";
 import { landingStore } from "@/store/store";
 
 const AnimatedSection = ({ children }: { children: React.ReactNode }) => {
-  const welcomeVisible = landingStore((state) => state.welcomeVisible);
+  // const welcomeVisible = landingStore((state) => state.welcomeVisible);
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref);
   const { scrollYProgress } = useScroll({
