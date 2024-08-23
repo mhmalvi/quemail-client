@@ -50,6 +50,11 @@ const config: Config = {
             boxShadow: "0 0 20px hsl(300, 100%, 50%)",
           },
         },
+        gradient: {
+          "0%": { backgroundPosition: "0% 0%" },
+          "50%": { backgroundPosition: "100% 100%" },
+          "100%": { backgroundPosition: "0% 0%" },
+        },
         up: {
           "0%, 100%": { transform: "translateY(30px)" },
           "50%": { transform: "translateY(0px)" },
@@ -79,6 +84,7 @@ const config: Config = {
         },
       },
       animation: {
+        gradient: "gradient 4s ease infinite",
         float: "float 3s ease-in-out infinite",
         float_x: "float_x 3s ease-in-out infinite",
         glow: "glow 3s infinite alternate",

@@ -17,7 +17,7 @@ const SectionOne = () => {
         Welcome to,
         <div className="w-full h-full flex flex-row justify-center items-center gap-4">
           <hr className="border w-full animate-glow"></hr>
-          <span className="bg-clip-text text-transparent bg-gradient-to-r from-brand-color to-brand-color-2 m-0 font-semibold xl:text-5xl text-4xl">
+          <span className="bg-clip-text text-transparent bg-gradient-to-r from-brand-color to-brand-color-2 bg-[length:200%_200%] animate-gradient font-semibold xl:text-5xl text-4xl">
             Quemailer
           </span>
           <hr className="border w-full animate-glow"></hr>
