@@ -28,7 +28,8 @@ const Login = () => {
     otp: "",
     password: "",
   });
-  const [openModal, setOpenModal] = useState(false);
+  const [openModal, setOpenModal] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
   const passwordExist = passwordLoginStore((state) => state.passwordExist);
   const setPasswordExist = passwordLoginStore(
     (state) => state.setPasswordExist
@@ -73,11 +74,7 @@ const Login = () => {
     }
   };
 
-  const handleResetPassword = async (
-    event: React.FormEvent<HTMLFormElement>
-  ) => {
-    event.preventDefault();
-
+  const handleResetPassword = async () => {
     var response = await resetPassowrd(credentialsData.email);
     response = await response.json();
     console.log(response);
@@ -87,6 +84,8 @@ const Login = () => {
     if (response.status === 535) {
       warningNotification(response.message);
     }
+    setLoading(false);
+    setOpenModal(false);
   };
 
   const handleGoogleClick = async () => {
@@ -189,21 +188,36 @@ const Login = () => {
               setOpenModal(false);
             }}
           ></div>
-          <form
-            onSubmit={handleResetPassword}
-            className="absolute bg-light-glass xl:w-1/4 md:w-1/3 w-1/2 rounded-md backdrop-blur-2xl p-8 flex flex-col gap-4 items-center justify-center"
-          >
+
+          <div className="absolute bg-light-glass xl:w-1/4 md:w-1/3 w-1/2 rounded-md backdrop-blur-2xl p-8 flex flex-col gap-4 items-center justify-center">
             <div className="flex w-full h-full items-center justify-center">
               <label>Enter your Email</label>
             </div>
             <input
               type="email"
+              onChange={(e) => {
+                setCredentialsData((prevData) => ({
+                  ...prevData,
+                  email: e.target.value,
+                }));
+              }}
               className="bg-transparent w-full text-slate-300 rounded-md focus:outline-none focus:ring-0 focus:border-brand-color outline-none border border-slate-400 px-5 py-2"
             />
-            <button className="bg-gradient-to-r from-brand-color to-button-color-2 px-4 py-2 rounded-md">
-              Reset Password
-            </button>
-          </form>
+
+            {loading ? (
+              <Spinner color="purple" aria-label="Purple spinner example" />
+            ) : (
+              <button
+                onClick={() => {
+                  setLoading(true);
+                  handleResetPassword();
+                }}
+                className="bg-gradient-to-r from-brand-color to-button-color-2 px-4 py-2 rounded-md"
+              >
+                Reset Password
+              </button>
+            )}
+          </div>
         </div>
       )}
     </div>
