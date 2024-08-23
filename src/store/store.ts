@@ -287,8 +287,10 @@ export const subsciption = create<subscriptionDetailsProps>((set) => ({
 }));
 
 export const landingStore = create<landingState>((set) => ({
-  welcomeVisible: false,
-  setWelcomeVisible: (visible: boolean) => set({ welcomeVisible: visible }),
+  disableScroll: false,
+  setDisableScroll(state) {
+    set(() => ({ disableScroll: state }));
+  },
 }));
 
 export const CampaignStatus = create<campaignStatus>((set) => ({

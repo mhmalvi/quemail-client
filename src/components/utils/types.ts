@@ -311,8 +311,8 @@ export interface Card {
 }
 
 export interface landingState {
-  welcomeVisible: boolean;
-  setWelcomeVisible: (visible: boolean) => void;
+  disableScroll: boolean;
+  setDisableScroll: (disableScroll: boolean) => void;
 }
 
 export interface passwordState {

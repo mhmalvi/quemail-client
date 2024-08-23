@@ -15,25 +15,25 @@ const SectionThree = () => {
         Quemailer is tailored to meet the needs of businesses of all sizes, from
         small startups to large enterprises. Our platform offers:
       </p>
-      <div className="w-full px-4 flex flex-wrap gap-4 justify-center">
-        {sectionThreeData.map((items, index) => {
-          return (
-            <div
-              key={index}
-              className="flex flex-col gap-2 items-center xl:w-1/2 lg:w-1/2 md:w-1/2 w-full p-4 border-l-4 border-r-4"
-            >
-              <h1 className="m-0 p-0 text-center">
-                <span className="bg-clip-text text-transparent bg-gradient-to-r from-brand-color to-brand-color-2 m-0 font-semibold xl:text-3xl lg:text-2xl text-xl">
-                  {items.title}
-                </span>
-              </h1>
-              <p className="m-0 p-0 xl:text-base lg:text-sm text-xs text-center text-slate-300">
-                {items.description}
-              </p>
-            </div>
-          );
-        })}
-      </div>
+
+      {sectionThreeData.map((items, index) => {
+        return (
+          <div
+            key={index}
+            className="flex flex-col gap-2 items-center xl:w-1/2 lg:w-1/2 md:w-1/2 w-full"
+          >
+            <h1 className="m-0 p-0 text-center">
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-brand-color to-brand-color-2 m-0 font-semibold xl:text-3xl lg:text-2xl text-xl">
+                {items.title}
+              </span>
+            </h1>
+            <p className="m-0 p-0 xl:text-base lg:text-sm text-xs text-center text-slate-300">
+              {items.description}
+            </p>
+          </div>
+        );
+      })}
+
       {/* <div className="w-full xl:p-0 px-8 flex flex-wrap gap-4 justify-between">
         {sectionThreePackage.map((items, index) => {
           return (
