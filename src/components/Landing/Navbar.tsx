@@ -33,6 +33,11 @@ const Navbar = () => {
           </h1>
         </Link>
         <ul className="md:flex gap-8 hidden">
+          <Link href="/">
+            <li className="xl:text-base text-sm cursor-pointer hover:text-brand-color text-slate-300 ease-in duration-200">
+              Home
+            </li>
+          </Link>
           <Link href="/about-us">
             <li className="xl:text-base text-sm cursor-pointer hover:text-brand-color text-slate-300 ease-in duration-200">
               About Us
@@ -44,18 +49,13 @@ const Navbar = () => {
             </li>
           </Link>
           {/* <Link href="/support"> */}
-          <li className="xl:text-base text-sm cursor-pointer hover:text-brand-color text-slate-300 ease-in duration-200">
+          {/* <li className="xl:text-base text-sm cursor-pointer hover:text-brand-color text-slate-300 ease-in duration-200">
             Support
-          </li>
+          </li> */}
           {/* </Link> */}
           <Link href="/contact-us">
             <li className="xl:text-base text-sm cursor-pointer hover:text-brand-color text-slate-300 ease-in duration-200">
               Contact Us
-            </li>
-          </Link>
-          <Link href="/privacy-policy">
-            <li className="xl:text-base text-sm cursor-pointer hover:text-brand-color text-slate-300 ease-in duration-200">
-              Privacy Policy
             </li>
           </Link>
         </ul>
@@ -114,17 +114,20 @@ const Navbar = () => {
       {openNavDrawer && (
         <div className="fixed flex flex-col gap-16 items-center justify-center h-full w-full z-10 bg-black">
           <ul className="flex flex-col gap-8">
+            <Link href="/">
+              <li className="text-3xl ease-in duration-200">Home</li>
+            </Link>
             <Link href="/about-us">
               <li className="text-3xl ease-in duration-200">About Us</li>
             </Link>
             <li className="text-3xl ease-in duration-200">Pricing</li>
-            <li className="text-3xl">Support</li>
+            {/* <li className="text-3xl">Support</li> */}
             <Link href="/contact-us">
               <li className="text-3xl">Contact Us</li>
             </Link>
-            <Link href="/privacy-policy">
+            {/* <Link href="/privacy-policy">
               <li className="text-3xl">Privacy Policy</li>
-            </Link>
+            </Link> */}
           </ul>
 
           <div className="flex flex-col items-center justify-center gap-8 w-full">
