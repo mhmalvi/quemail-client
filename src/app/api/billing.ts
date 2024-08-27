@@ -168,7 +168,7 @@ export const stripeInvoiceHistory = async (status: string, limit: number) => {
   const userID = Storage.getItem("userID");
   const res = await stripeINFO();
   console.log(res);
-  if (res.message !== "success") {
+  if (res && res.message !== "success") {
     throw new Error(res.message);
   }
   const customerID = res.stripeCustomerID;
