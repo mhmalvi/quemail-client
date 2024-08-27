@@ -36,6 +36,7 @@ import Import_Contact from "/public/Icons/Import_Contact.svg";
 import User_Icon from "/public/Icons/User_Icon.svg";
 import Edit from "/public/Icons/edit.svg";
 import Delete from "/public/Icons/trash-bin.svg";
+import Support from "/public/Icons/support.png";
 import Eye from "/public/Icons/eye.svg";
 import Copy from "/public/Icons/Copy.svg";
 import Google from "/public/Icons/google.svg";
@@ -52,11 +53,11 @@ import AllTemplates from "/public/SVG/Home/AllTemplates.svg";
 import TemplateGenerator from "/public/SVG/Home/TemplateGenerator.svg";
 import NewCampaign from "/public/SVG/Home/NewCampaign.svg";
 import AllCampaigns from "/public/SVG/Home/AllCampaigns.svg";
-import Groups from "/public/SVG/Home/Groups.svg"
-import Notebook from "/public/SVG/Home/Notebook.svg"
+import Groups from "/public/SVG/Home/Groups.svg";
+import Notebook from "/public/SVG/Home/Notebook.svg";
 
 // Performance
-import ChartSVG from "/public/SVG/Performance/chartSVG.svg"
+import ChartSVG from "/public/SVG/Performance/chartSVG.svg";
 
 const Images = {
   ChartSVG,
@@ -100,6 +101,7 @@ const Images = {
   User_Icon,
   Groups,
   Notebook,
+  Support,
 };
 
 export default Images;

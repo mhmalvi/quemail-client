@@ -13,16 +13,20 @@ import { fetchAccountAcess } from "@/app/api/admin";
 const Sidebar = () => {
   const sidebarToggle = sideBarStore((state: any) => state.sidebarToggle);
   const setOpenSidebar = sideBarStore((state: any) => state.setOpenSidebar);
-  const [accountStatus, setAccountStatus] = useState<boolean>(false);
+  const [accountStatus, setAccountStatus] = useState<string | null>(null);
 
   useEffect(() => {
     const checkAccountStatus = async () => {
       const response = await fetchAccountAcess();
 
-      console.log(response);
+      console.log("account status :", response);
 
-      if (response.message === "customer") {
-        setAccountStatus(true);
+      if (response.message === "superadmin") {
+        setAccountStatus(response.message);
+      } else if (response.message === "customer") {
+        setAccountStatus(response.message);
+      } else if (response.message === "subadmin") {
+        setAccountStatus(response.message);
       }
     };
     checkAccountStatus();
@@ -65,101 +69,142 @@ const Sidebar = () => {
           </div>
         </div>
       )}
-      <Dropdown
-        label="Dropdown button"
-        placement="right-start"
-        renderTrigger={() => (
-          <div className="relative w-full flex items-center gap-8 m-0 p-0 overflow-hidden cursor-pointer text-black dark:text-slate-300 hover:text-brand-color dark:hover:text-brand-color ease-in duration-100">
-            <div
-              className={`duration-100 ease-in hover:text-brand-color text-slate-300 bg-dark-black xl:p-3 px-3 py-2 rounded-md overflow-hidden z-20`}
-            >
-              <TbMail className=" w-full" size={20} />
+      {accountStatus === "superadmin" ? (
+        <Dropdown
+          label="Dropdown button"
+          placement="right-start"
+          renderTrigger={() => (
+            <div className="relative w-full flex items-center gap-8 m-0 p-0 overflow-hidden cursor-pointer text-black dark:text-slate-300 hover:text-brand-color dark:hover:text-brand-color ease-in duration-100">
+              <div
+                className={`duration-100 ease-in hover:text-brand-color text-slate-300 bg-dark-black xl:p-3 px-3 py-2 rounded-md overflow-hidden z-20`}
+              >
+                <TbUser className="w-full" size={20} />
+              </div>
+              <div
+                className={`absolute flex items-center w-2/3 justify-between gap-8 ${
+                  sidebarToggle ? "right-0" : "hidden"
+                }`}
+              >
+                <h1 className={`m-0 p-0 z-10 overflow-hidden `}>Users</h1>
+                <IoIosArrowForward />
+              </div>
             </div>
-            <div
-              className={`absolute flex items-center w-2/3 justify-between gap-8 ${
-                sidebarToggle ? "right-0" : "hidden"
-              }`}
+          )}
+          className="dark:bg-dark-black border border-violet-200 dark:border-light-glass bg-violet-50"
+        >
+          <Link
+            href="/home/billing"
+            className="focus:outline-none focus:ring-0 active:outline-none active:ring-0"
+          >
+            <Dropdown.Item className="dark:text-slate-300 text-light-black hover:text-gray-800">
+              All users
+            </Dropdown.Item>
+          </Link>
+        </Dropdown>
+      ) : (
+        ""
+      )}
+      {accountStatus === "subadmin" || accountStatus === "customer" ? (
+        <>
+          <Dropdown
+            label="Dropdown button"
+            placement="right-start"
+            renderTrigger={() => (
+              <div className="relative w-full flex items-center gap-8 m-0 p-0 overflow-hidden cursor-pointer text-black dark:text-slate-300 hover:text-brand-color dark:hover:text-brand-color ease-in duration-100">
+                <div
+                  className={`duration-100 ease-in hover:text-brand-color text-slate-300 bg-dark-black xl:p-3 px-3 py-2 rounded-md overflow-hidden z-20`}
+                >
+                  <TbMail className=" w-full" size={20} />
+                </div>
+                <div
+                  className={`absolute flex items-center w-2/3 justify-between gap-8 ${
+                    sidebarToggle ? "right-0" : "hidden"
+                  }`}
+                >
+                  <h1 className={`m-0 p-0 z-10 overflow-hidden `}>Campaigns</h1>
+                  <IoIosArrowForward />
+                </div>
+              </div>
+            )}
+            className="dark:bg-dark-black dark:border-light-glass border bg-violet-50"
+          >
+            {/* <Dropdown.Header title="Email">Email</Dropdown.Header> */}
+            <Link
+              href="/home/campaigns/new-campaign"
+              className="focus:outline-none focus:ring-0 active:outline-none active:ring-0"
             >
-              <h1 className={`m-0 p-0 z-10 overflow-hidden `}>Campaigns</h1>
-              <IoIosArrowForward />
-            </div>
-          </div>
-        )}
-        className="dark:bg-dark-black dark:border-light-glass border bg-violet-50"
-      >
-        {/* <Dropdown.Header title="Email">Email</Dropdown.Header> */}
-        <Link
-          href="/home/campaigns/new-campaign"
-          className="focus:outline-none focus:ring-0 active:outline-none active:ring-0"
-        >
-          <Dropdown.Item className="dark:text-slate-300 text-light-black hover:text-gray-800">
-            New Campaign
-          </Dropdown.Item>
-        </Link>
-        <Link
-          href="/home/campaigns/all-campaigns"
-          className="focus:outline-none focus:ring-0 active:outline-none active:ring-0"
-        >
-          <Dropdown.Item className="dark:text-slate-300 text-light-black hover:text-gray-800">
-            All Campaigns
-          </Dropdown.Item>
-        </Link>
-        <Link
-          href="/home/campaigns/compare-email-performance"
-          className="focus:outline-none focus:ring-0 active:outline-none active:ring-0"
-        >
-          <Dropdown.Item className="dark:text-slate-300 text-light-black hover:text-gray-800">
-            Compare Performance
-          </Dropdown.Item>
-        </Link>
+              <Dropdown.Item className="dark:text-slate-300 text-light-black hover:text-gray-800">
+                New Campaign
+              </Dropdown.Item>
+            </Link>
+            <Link
+              href="/home/campaigns/all-campaigns"
+              className="focus:outline-none focus:ring-0 active:outline-none active:ring-0"
+            >
+              <Dropdown.Item className="dark:text-slate-300 text-light-black hover:text-gray-800">
+                All Campaigns
+              </Dropdown.Item>
+            </Link>
+            <Link
+              href="/home/campaigns/compare-email-performance"
+              className="focus:outline-none focus:ring-0 active:outline-none active:ring-0"
+            >
+              <Dropdown.Item className="dark:text-slate-300 text-light-black hover:text-gray-800">
+                Compare Performance
+              </Dropdown.Item>
+            </Link>
 
-        <Link
-          href="/home/campaigns/all-templates"
-          className="focus:outline-none focus:ring-0 active:outline-none active:ring-0"
-        >
-          <Dropdown.Item className="dark:text-slate-300 text-light-black hover:text-gray-800">
-            All Templates
-          </Dropdown.Item>
-        </Link>
-      </Dropdown>
-      <Dropdown
-        label="Dropdown button"
-        placement="right-start"
-        renderTrigger={() => (
-          <div className="relative w-full flex items-center gap-8 m-0 p-0 overflow-hidden cursor-pointer text-black dark:text-slate-300 hover:text-brand-color dark:hover:text-brand-color ease-in duration-100">
-            <div
-              className={`duration-100 ease-in hover:text-brand-color text-slate-300 bg-dark-black xl:p-3 px-3 py-2 rounded-md overflow-hidden z-20`}
+            <Link
+              href="/home/campaigns/all-templates"
+              className="focus:outline-none focus:ring-0 active:outline-none active:ring-0"
             >
-              <TbUser className="w-full" size={20} />
-            </div>
-            <div
-              className={`absolute flex items-center w-2/3 justify-between gap-8 ${
-                sidebarToggle ? "right-0" : "hidden"
-              }`}
+              <Dropdown.Item className="dark:text-slate-300 text-light-black hover:text-gray-800">
+                All Templates
+              </Dropdown.Item>
+            </Link>
+          </Dropdown>
+          <Dropdown
+            label="Dropdown button"
+            placement="right-start"
+            renderTrigger={() => (
+              <div className="relative w-full flex items-center gap-8 m-0 p-0 overflow-hidden cursor-pointer text-black dark:text-slate-300 hover:text-brand-color dark:hover:text-brand-color ease-in duration-100">
+                <div
+                  className={`duration-100 ease-in hover:text-brand-color text-slate-300 bg-dark-black xl:p-3 px-3 py-2 rounded-md overflow-hidden z-20`}
+                >
+                  <TbUser className="w-full" size={20} />
+                </div>
+                <div
+                  className={`absolute flex items-center w-2/3 justify-between gap-8 ${
+                    sidebarToggle ? "right-0" : "hidden"
+                  }`}
+                >
+                  <h1 className={`m-0 p-0 z-10 overflow-hidden `}>Contacts</h1>
+                  <IoIosArrowForward />
+                </div>
+              </div>
+            )}
+            className="dark:bg-dark-black border border-violet-200 dark:border-light-glass bg-violet-50"
+          >
+            <Link
+              href="/home/all-contacts"
+              className="focus:outline-none focus:ring-0 active:outline-none active:ring-0"
             >
-              <h1 className={`m-0 p-0 z-10 overflow-hidden `}>Contacts</h1>
-              <IoIosArrowForward />
-            </div>
-          </div>
-        )}
-        className="dark:bg-dark-black border border-violet-200 dark:border-light-glass bg-violet-50"
-      >
-        <Link
-          href="/home/all-contacts"
-          className="focus:outline-none focus:ring-0 active:outline-none active:ring-0"
-        >
-          <Dropdown.Item className="dark:text-slate-300 text-light-black hover:text-gray-800">
-            All Contacts
-          </Dropdown.Item>
-        </Link>
+              <Dropdown.Item className="dark:text-slate-300 text-light-black hover:text-gray-800">
+                All Contacts
+              </Dropdown.Item>
+            </Link>
 
-        {/* <Link href="/home/contacts/email-subscriptions">
+            {/* <Link href="/home/contacts/email-subscriptions">
           <Dropdown.Item className="dark:text-slate-300 text-light-black hover:text-gray-800">
             Email Subscriptions
           </Dropdown.Item>
         </Link> */}
-      </Dropdown>
-      {accountStatus ? (
+          </Dropdown>
+        </>
+      ) : (
+        ""
+      )}
+      {accountStatus === "customer" ? (
         <Dropdown
           label="Dropdown button"
           placement="right-start"
