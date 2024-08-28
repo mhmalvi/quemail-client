@@ -20,7 +20,7 @@ const Users = () => {
   const [user, setUser] = useState<any>(null);
   const [page, setPage] = useState<number>(1);
   const [totalPages, setTotalPages] = useState<number>(1);
-  const perPage = 10; // Number of items per page
+  const perPage = 10;
 
   const handleDeleteContactMail = async (id: number) => {
     var response = await deleteContactMail(id);

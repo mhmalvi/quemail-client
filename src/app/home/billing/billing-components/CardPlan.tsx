@@ -85,29 +85,29 @@ const CardPlan = () => {
               endTime={endTime}
             ></PackageCard>
           </div>
-          <div className="flex flex-col gap-6 w-1/3 h-5/6 rounded justify-center">
-            <div className="text-base m-0 p-0 text-brand-color">
+          <div className="flex flex-col lg:gap-2 xl:gap-6 w-1/3 h-4/5 justify-center">
+            <div className="xl:text-base m-0 p-0 text-brand-color lg:text-sm">
               Cost:{" "}
-              <div className="text-base m-0 p-0 dark:text-slate-300 text-dark-black">
+              <div className="xl:text-base m-0 p-0 dark:text-slate-300 text-dark-black lg:text-sm">
                 {packagePrice}
               </div>
             </div>
-            <div className="text-base m-0 p-0 text-brand-color">
+            <div className="xl:text-base m-0 p-0 text-brand-color lg:text-sm">
               Started:{" "}
-              <div className="text-base m-0 p-0 dark:text-slate-300 text-dark-black ">
+              <div className="xl:text-base m-0 p-0 dark:text-slate-300 text-dark-black lg:text-sm">
                 {createdTime.toLocaleString()}
               </div>
             </div>
-            <div className="text-base m-0 p-0 text-brand-color">
+            <div className="xl:text-base m-0 p-0 text-brand-color lg:text-sm">
               End:{" "}
-              <div className="text-base m-0 p-0 dark:text-slate-300 text-dark-black ">
+              <div className="xl:text-base m-0 p-0 dark:text-slate-300 text-dark-black lg:text-sm ">
                 {endTime.toLocaleString()}
               </div>
             </div>
           </div>
         </div>
       ) : (
-        <div className="flex w-full h-80 justify-center items-center">
+        <div className="flex w-full h-full justify-center items-center">
           <Spinner
             color="purple"
             aria-label="Purple spinner example"
