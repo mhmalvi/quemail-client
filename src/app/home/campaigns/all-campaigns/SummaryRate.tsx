@@ -165,7 +165,7 @@ const SummaryRate = () => {
           <h1 className="2xl:text-7xl xl:text-4xl text-4xl text-dark-black dark:text-slate-300 font-semibold px-4 py-2 z-20">
             {subscribedPercentage} %
           </h1>
-          <div className="absolute bottom-0 px-4 flex items-end xl:gap-4 gap-2 z-10">
+          <div className="absolute bottom-0 px-4 flex items-end xl:gap-4 gap-2 z-10 ">
             <div className="p-2">
               <div className="xl:w-20 xl:h-20 w-16 h-16 xl:text-5xl text-2xl bg-gradient-to-r from-brand-color to-brand-color-2 p-4 rounded-full overflow-hidden flex flex-col items-center justify-center gap-4">
                 <div className="flex w-full  xl:gap-4 relative">

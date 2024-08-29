@@ -68,14 +68,6 @@ const Filter: React.FC<FilterProps> = ({ position }) => {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    console.log(
-      "leftID and leftFilterName: " +
-        leftID +
-        "  " +
-        leftFilterNameSelected +
-        " " +
-        performanceStore.getState().campaignName
-    );
     const handleMessage = (e: nameFilterState) => {
       if (searchValueByName.length < 1) {
         setCurrentPage(1);

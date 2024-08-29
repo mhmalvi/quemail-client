@@ -133,7 +133,7 @@ const Topnav = () => {
               content="Start quemailer tour!"
               className="bg-brand-color xl:text-sm text-xs"
             >
-              <div className="p-2 step-10">
+              <div className="pr-2 step-10">
                 {isTourGoing ? (
                   <Spinner color="purple" aria-label="Purple spinner example" />
                 ) : (

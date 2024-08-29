@@ -273,7 +273,6 @@ const ContactTable = () => {
                     <Table.Cell className="w-1/5 text-center">
                       {contact.json.email}
                     </Table.Cell>
-
                     <Table.Cell className="w-1/5 text-center">
                       {contact.json.group}
                     </Table.Cell>
