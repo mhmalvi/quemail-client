@@ -112,12 +112,10 @@ const DownloadCSV: React.FC = () => {
   return (
     <div
       onClick={handleDownload}
-      className="flex items-center justify-center gap-2 border rounded-md xl:px-4 xl:py-2 px-2 py-1 border-violet-200 dark:border-light-black cursor-pointer hover:text-slate-300 hover:bg-dark-black duration-300"
+      className="flex items-center justify-center gap-2 border rounded-md xl:px-4 xl:py-2 px-2 py-1 border-violet-500 dark:border-light-black cursor-pointer hover:text-white hover:bg-brand-color text-slate-800 dark:text-slate-100 duration-300"
     >
-      <TbDownload className="text-brand-color" />
-      <p className="text-dark-black dark:text-slate-300 text-xs xl:text-base xl:p-0 p-1">
-        CSV
-      </p>
+      <TbDownload />
+      <p className=" text-xs xl:text-base xl:p-0 p-1">Download CSV</p>
     </div>
   );
 };

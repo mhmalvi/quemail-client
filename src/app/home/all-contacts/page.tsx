@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { Modal, Dropdown } from "flowbite-react";
 import NoContacts from "../HomeLayoutUI/NoContacts";
 import ImportCSV from "./ImportCSV";
@@ -14,23 +14,30 @@ import {
   BORDERED_BUTTON_STYLES,
 } from "@/components/styles/button";
 import ManualContact from "./ManualContact";
+import { io } from "socket.io-client";
 
-const AllContacts = () => {
+const AllContacts: React.FC = () => {
   const groupContacts = contactStore((state) => state.groupContacts);
   const allContactList = contactStore((state) => state.allContactList);
   const setAllContactList = contactStore((state) => state.setAllContactList);
   const setTotalPages = contactStore((state) => state.setTotalPages);
+  const userID =
+    typeof window !== "undefined" && localStorage.getItem("userID");
   const setAllContactPerPage = contactStore(
     (state) => state.setAllContactPerPage
   );
   const allContactPerPage = contactStore((state) => state.allContactPerPage);
   const currentPage = contactStore((state) => state.currentPage);
+  const socket = useMemo(() => io("https://backend.quemailer.com"), []);
+
+  const [searchKeyword, setSearchKeyword] = useState<string>(""); // State to hold search keyword
   const [openModal, setOpenModal] = useState({
     show: "",
   });
   const [openAddContactModal, setOpenAddContactModal] =
     useState<boolean>(false);
 
+  // Fetch contacts initially
   useEffect(() => {
     const height = document.getElementById("tableHeight")?.clientHeight;
 
@@ -56,9 +63,56 @@ const AllContacts = () => {
     setTotalPages,
   ]);
 
+  // Handle search functionality via socket
+  useEffect(() => {
+    socket.connect();
+
+    const handleSearch = () => {
+      socket.emit("contacts", {
+        keyword: searchKeyword, // Sending the search keyword
+        userID: userID && userID,
+        page: currentPage,
+        per_page: 8,
+      });
+    };
+
+    // Trigger search whenever the search keyword changes
+    if (searchKeyword) {
+      handleSearch();
+    } else {
+      // Fetch all contacts when search is cleared
+      socket.emit("contacts", {
+        keyword: "", // Sending the search keyword
+        userID: userID && userID,
+        page: currentPage,
+        per_page: 8,
+      });
+    }
+
+    // Listen for search results from the server
+    socket.on("contacts", (data) => {
+      console.log("emitting :", data);
+      setAllContactList(data.paginatedData);
+      setTotalPages(data.totalPages);
+    });
+
+    // Cleanup on component unmount
+    return () => {
+      socket.disconnect();
+    };
+  }, [
+    currentPage,
+    searchKeyword,
+    socket,
+    userID,
+    setAllContactList,
+    setTotalPages,
+    allContactList,
+  ]);
+
   return (
     <>
-      {Images.Edit && allContactList !== null && allContactList.length > 0 ? (
+      {Images.Edit && allContactList && allContactList !== null ? (
         <div id="tableHeight" className={COL_CONTAINER_STYLES}>
           <div className="w-full flex items-center justify-between">
             <div className="flex items-center justify-center gap-4">
@@ -73,6 +127,14 @@ const AllContacts = () => {
                   <span className="text-brand-color">All Contacts</span>
                 )}
               </h1>
+              <div className="flex justify-center items-center border border-violet-200 dark:border-light-black rounded-md">
+                <input
+                  className="w-full bg-transparent p-2 placeholder:text-xs rounded-md text-xs xl:text-base focus:outline-none focus:border-violet-500 focus:ring-1 focus:ring-brand-color outline-none"
+                  placeholder="Search by Email/Group"
+                  value={searchKeyword}
+                  onChange={(e) => setSearchKeyword(e.target.value)} // Update search keyword
+                />
+              </div>
             </div>
             <div className="flex items-center gap-4">
               <Dropdown

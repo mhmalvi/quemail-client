@@ -88,12 +88,6 @@ const CampaignPerformanceList = () => {
       {campaignItemList?.recipients !== null && (
         <div className="flex flex-col gap-4 h-full">
           <div className="h-1/6 w-full flex items-center justify-end gap-4">
-            <div className="w-1/6 flex justify-center items-center border border-violet-200 dark:border-light-black rounded-md">
-              <input
-                className="w-full bg-transparent p-2 placeholder:text-xs text-xs xl:text-base focus:ring-0 outline-none"
-                placeholder="Search users"
-              />
-            </div>
             <DownloadCSV />
           </div>
           <div className="flex w-full relative gap-4">
