@@ -6,7 +6,7 @@ import { campaignStore } from "@/store/store";
 import { TemplateType } from "@/components/utils/types";
 import Image from "next/image";
 import Images from "@/components/utils/images";
-import { TbRocket, TbEye, TbTrash } from "react-icons/tb";
+import { TbRocket, TbEye, TbTrash, TbCirclePlus } from "react-icons/tb";
 import {
   successNotification,
   warningNotification,
@@ -90,11 +90,12 @@ const AllTemplates = () => {
             <div className=" hover:translate-y-2 duration-100 ease-in-out border border-violet-200 dark:border-light-glass 2xl:w-64 2xl:h-96 w-48 h-60 rounded-md flex flex-col items-center">
               <div
                 onClick={() => setOpenTemplateModal(true)}
-                className=" cursor-pointer w-full bg-violet-50 dark:bg-dark-black overflow-hidden h-full flex items-center justify-center rounded-md text-dark-black dark:text-slate-300"
+                className="gap-2 cursor-pointer w-full bg-violet-50 dark:bg-dark-black overflow-hidden h-full flex items-center justify-center rounded-md text-dark-black dark:text-slate-300"
               >
                 <p className="p-0 m-0 text-xs 2xl:text-base font-semibold ">
                   Create a new template
                 </p>
+                <TbCirclePlus size={30} />
               </div>
             </div>
             {templateData !== null &&
@@ -106,12 +107,14 @@ const AllTemplates = () => {
                     className=" border border-violet-200 dark:border-light-glass 2xl:w-64 2xl:h-96 w-48 h-60 flex flex-col items-center rounded-md overflow-hidden hover:translate-y-2 duration-100"
                   >
                     <div className="relative w-full h-1/2 bg-[#F7F8F9] overflow-hidden flex flex-start border-b border-violet-200 dark:border-light-glass">
-                      <div
-                        className="2xl:scale-50 scale-[0.38] origin-top-left"
-                        dangerouslySetInnerHTML={{
-                          __html: `${item.template.html}`,
-                        }}
-                      ></div>
+                      <div className="cursor-not-allowed">
+                        <div
+                          className="2xl:scale-50 scale-[0.38] origin-top-left 0 cursor-not-allowed"
+                          dangerouslySetInnerHTML={{
+                            __html: `${item.template.html}`,
+                          }}
+                        ></div>
+                      </div>
                     </div>
                     <div className="flex items-center justify-between w-full h-1/4 bg-violet-50 dark:bg-dark-black overflow-hidden px-4 border-b border-violet-200 dark:border-light-glass ">
                       <p className="text-xs 2xl:text-base text-dark-black dark:text-slate-300 ">
