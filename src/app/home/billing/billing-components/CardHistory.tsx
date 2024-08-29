@@ -41,8 +41,9 @@ const CardHistory = () => {
 
   return (
     <div
-      className={`step-4 border dark:border-none border-violet-200 ${expanded ? "xl:w-full w-full" : "xl:w-1/4 w-1/3"
-        } dark:bg-light-glass bg-white shadow-md backdrop-blur-xl rounded-md p-4 flex flex-col gap-4 ease-in duration-200`}
+      className={`step-4 border dark:border-none border-violet-200 ${
+        expanded ? "xl:w-full w-full" : "xl:w-1/4 w-1/3"
+      } dark:bg-light-glass bg-white shadow-md backdrop-blur-xl rounded-md p-4 flex flex-col gap-4 ease-in duration-200`}
     >
       <div className="flex flex-row justify-between items-center">
         <h1 className="xl:text-xl text-base m-0 p-0 dark:text-white text-dark-black text-center flex-grow">
@@ -73,7 +74,12 @@ const CardHistory = () => {
               renderTrigger={() => (
                 <div className="px-2 py-1 rounded-md border border-brand-color cursor-pointer overflow-hidden">
                   <h1 className="flex items-center justify-center gap-4 duration-100 ease-in text-dark-black dark:text-slate-300 xl:text-base text-sm ">
-                    {status} <span className="text-xs">▼</span>
+                    {status === "open"
+                      ? "pending"
+                      : status === "void"
+                      ? "canceled"
+                      : status}
+                    <span className="text-xs">▼</span>
                   </h1>
                 </div>
               )}

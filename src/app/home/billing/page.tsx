@@ -17,7 +17,7 @@ const Billing = () => {
             <div className=" w-full flex">
               <CardPlan />
             </div>
-            <div className="w-full flex">
+            <div className="w-full h-full flex">
               <CardDetails />
             </div>
           </div>
