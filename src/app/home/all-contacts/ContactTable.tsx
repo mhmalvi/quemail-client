@@ -10,6 +10,7 @@ import {
   Spinner,
   Table,
   TextInput,
+  Tooltip,
 } from "flowbite-react";
 import React, { useCallback, useState } from "react";
 import { contactStore } from "@/store/store";
@@ -280,59 +281,73 @@ const ContactTable = () => {
                       {contact.updatedAt.split("T")[0]}
                     </Table.Cell>
                     <Table.Cell className="w-full flex items-center justify-center gap-8">
-                      <Image
-                        className="cursor-pointer"
-                        src={Images.Edit}
-                        alt="editContact"
-                        onClick={() => {
-                          handleEditContact(contact);
-                        }}
-                      />
-                      <Popover
-                        aria-labelledby="default-popover"
-                        open={openDeletePopover === contact.id}
-                        onOpenChange={() => {
-                          setOpenDeletePopover(
-                            openDeletePopover === contact.id ? null : contact.id
-                          );
-                        }}
-                        content={
-                          <div className="w-full text-sm text-gray-500 dark:text-gray-400">
-                            <div className="border-b px-3 py-2">
-                              <h3
-                                id="default-popover"
-                                className="font-semibold text-gray-900 dark:text-slate-300"
-                              >
-                                Are you sure you want to delete?
-                              </h3>
-                            </div>
-                            <div className="px-4 py-2 flex items-center justify-between">
-                              <button
-                                onClick={() => {
-                                  onDelete(contact.id);
-                                }}
-                                className="px-2 py-1 bg-red-500 rounded-md text-white"
-                              >
-                                Delete
-                              </button>
-                              <button
-                                onClick={() => {
-                                  setOpenDeletePopover(null);
-                                }}
-                                className="px-2 py-1 border border-brand-color rounded-md dark:text-slate-300 text-dark-black"
-                              >
-                                Cancel
-                              </button>
-                            </div>
-                          </div>
-                        }
+                      <Tooltip
+                        content={"Edit Contact"}
+                        className="bg-brand-color text-center"
+                        placement="bottom"
                       >
                         <Image
-                          src={Images.Delete}
-                          alt="deleteContact"
                           className="cursor-pointer"
+                          src={Images.Edit}
+                          alt="editContact"
+                          onClick={() => {
+                            handleEditContact(contact);
+                          }}
                         />
-                      </Popover>
+                      </Tooltip>
+                      <Tooltip
+                        content={"Delete Contact"}
+                        className="bg-brand-color text-center"
+                        placement="bottom"
+                      >
+                        <Popover
+                          aria-labelledby="default-popover"
+                          open={openDeletePopover === contact.id}
+                          onOpenChange={() => {
+                            setOpenDeletePopover(
+                              openDeletePopover === contact.id
+                                ? null
+                                : contact.id
+                            );
+                          }}
+                          content={
+                            <div className="w-full text-sm text-gray-500 dark:text-gray-400">
+                              <div className="border-b px-3 py-2">
+                                <h3
+                                  id="default-popover"
+                                  className="font-semibold text-gray-900 dark:text-slate-300"
+                                >
+                                  Are you sure you want to delete?
+                                </h3>
+                              </div>
+                              <div className="px-4 py-2 flex items-center justify-between">
+                                <button
+                                  onClick={() => {
+                                    onDelete(contact.id);
+                                  }}
+                                  className="px-2 py-1 bg-red-500 rounded-md text-white"
+                                >
+                                  Delete
+                                </button>
+                                <button
+                                  onClick={() => {
+                                    setOpenDeletePopover(null);
+                                  }}
+                                  className="px-2 py-1 border border-brand-color rounded-md dark:text-slate-300 text-dark-black"
+                                >
+                                  Cancel
+                                </button>
+                              </div>
+                            </div>
+                          }
+                        >
+                          <Image
+                            src={Images.Delete}
+                            alt="deleteContact"
+                            className="cursor-pointer"
+                          />
+                        </Popover>
+                      </Tooltip>
                     </Table.Cell>
                   </Table.Row>
                 ))}
@@ -373,9 +388,7 @@ const ContactTable = () => {
           }));
         }}
       >
-        <Modal.Header>
-          Edit Contact
-        </Modal.Header>
+        <Modal.Header>Edit Contact</Modal.Header>
         <Modal.Body className="dark:bg-dark-black bg-violet-50">
           <div>
             <Label htmlFor="name" value="Edit name" />

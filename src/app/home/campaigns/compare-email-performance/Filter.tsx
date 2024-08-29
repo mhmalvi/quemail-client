@@ -316,26 +316,7 @@ const Filter: React.FC<FilterProps> = ({ position }) => {
             onKeyDown={(e) => e.stopPropagation()}
             onChange={handleSearchByNameChange}
             placeholder="search by name"
-            className={`${
-              searchValueByName.length > 0
-                ? "w-full flex justify-between gap-1"
-                : searchValueById.length > 0
-                ? "hidden"
-                : ""
-            } rounded-md bg-violet-200 dark:bg-light-black left-0 p-2 focus:outline-none focus:border-none border-none outline-none placeholder:text-sm placeholder:text-dark-black/40 dark:placeholder:text-slate-300/60 text-dark-black dark:text-slate-300`}
-          />
-          <input
-            value={searchValueById}
-            onKeyDown={(e) => e.stopPropagation()}
-            onChange={handleSearchByIdChange}
-            className={`${
-              searchValueById.length > 0
-                ? "w-full flex justify-between gap-1"
-                : searchValueByName.length > 0
-                ? "hidden"
-                : ""
-            } rounded-md bg-violet-200 dark:bg-light-black left-0 p-2 focus:outline-none focus:border-none border-none outline-none placeholder:text-sm placeholder:text-dark-black/40 dark:placeholder:text-slate-300/60 text-dark-black dark:text-slate-300`}
-            placeholder="search by id"
+            className={`w-full rounded-md bg-violet-200 dark:bg-light-black left-0 p-2 focus:outline-none focus:border-none border-none outline-none placeholder:text-sm placeholder:text-dark-black/40 dark:placeholder:text-slate-300/60 text-dark-black dark:text-slate-300`}
           />
         </Dropdown.Header>
         <div className="h-64 w-full overflow-hidden rounded-b-md ">
