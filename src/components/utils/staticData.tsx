@@ -38,15 +38,18 @@ export const sectionThreePackage = [
 export const sectionThreeData = [
   {
     title: "Tailored Solutions:",
-    description: "Customize your email marketing strategy with solutions that fit your specific needs. Whether you're looking to increase engagement, drive sales, or nurture leads, Quemailer provides the tools and flexibility to achieve your goals."
+    description:
+      "Customize your email marketing strategy with solutions that fit your specific needs. Whether you're looking to increase engagement, drive sales, or nurture leads, Quemailer provides the tools and flexibility to achieve your goals.",
   },
   {
     title: "AI-Powered Recommendations:",
-    description: "Leverage artificial intelligence to optimize your campaigns and improve engagement. Our AI-driven insights help you understand your audience better, craft compelling messages, and maximize your marketing ROI.",
+    description:
+      "Leverage artificial intelligence to optimize your campaigns and improve engagement. Our AI-driven insights help you understand your audience better, craft compelling messages, and maximize your marketing ROI.",
   },
   {
     title: "Dedicated IP Addresses:",
-    description: "Enhance your email deliverability and reputation with dedicated IP addresses.By using a dedicated IP, you can ensure consistentdeliverability and build a strong sender reputation, crucial for large - scale email campaigns.",
+    description:
+      "Enhance your email deliverability and reputation with dedicated IP addresses.By using a dedicated IP, you can ensure consistentdeliverability and build a strong sender reputation, crucial for large - scale email campaigns.",
   },
 ];
 
@@ -146,10 +149,6 @@ export const fields = [
 export const pricingplan1 = [
   {
     ticked: true,
-    content: "1 campaigns / month",
-  },
-  {
-    ticked: true,
     content: "Custom Email Template",
   },
   {
@@ -158,41 +157,33 @@ export const pricingplan1 = [
   },
   {
     ticked: true,
-    content: "Add up to 2000 contacts",
+    content: "Add up to 100 contacts",
   },
   {
     ticked: true,
     content: "Analytics and Reporting",
   },
   {
-    ticked: false,
-    content: "Audience Segmentation",
+    ticked: true,
+    content: "Run scheduled campaign",
   },
   {
-    ticked: false,
-    content: "Social media integration for cross-channel marketing",
-  },
-  {
-    ticked: false,
-    content: "Customer Journey Mapping, Retargeting Campaigns",
+    ticked: true,
+    content: "Add multiple subadmin",
   },
 ];
 export const pricingplan2 = [
   {
     ticked: true,
-    content: "2 campaigns / month",
-  },
-  {
-    ticked: true,
     content: "Custom Email Template",
   },
   {
     ticked: true,
-    content: "300 emails / campaign",
+    content: "500 emails / campaign",
   },
   {
     ticked: true,
-    content: "Add up to 10,000 contacts",
+    content: "Add up to 500 contacts",
   },
   {
     ticked: true,
@@ -200,33 +191,25 @@ export const pricingplan2 = [
   },
   {
     ticked: true,
-    content: "Audience Segmentation",
+    content: "Run scheduled campaign",
   },
   {
-    ticked: false,
-    content: "Social media integration for cross-channel marketing",
-  },
-  {
-    ticked: false,
-    content: "Customer Journey Mapping, Retargeting Campaigns",
+    ticked: true,
+    content: "Add multiple subadmin",
   },
 ];
 export const pricingplan3 = [
   {
     ticked: true,
-    content: "4 campaigns / month",
-  },
-  {
-    ticked: true,
     content: "Custom Email Template",
   },
   {
     ticked: true,
-    content: "750 emails / campaign",
+    content: "1000 emails / campaign",
   },
   {
     ticked: true,
-    content: "Add up to 20,000 contacts",
+    content: "Add up to 1000 contacts",
   },
   {
     ticked: true,
@@ -234,33 +217,25 @@ export const pricingplan3 = [
   },
   {
     ticked: true,
-    content: "Audience Segmentation",
+    content: "Run scheduled campaign",
   },
   {
     ticked: true,
-    content: "Social media integration for cross-channel marketing",
-  },
-  {
-    ticked: true,
-    content: "Customer Journey Mapping, Retargeting Campaigns",
+    content: "Add multiple subadmin",
   },
 ];
 export const pricingplan4 = [
   {
     ticked: true,
-    content: "10 campaigns / month",
-  },
-  {
-    ticked: true,
     content: "Custom Email Template",
   },
   {
     ticked: true,
-    content: "Unlimited emails / campaign",
+    content: "1400 emails / campaign",
   },
   {
     ticked: true,
-    content: "Add up to 50,000 contacts",
+    content: "Add up to 1400 contacts",
   },
   {
     ticked: true,
@@ -268,14 +243,10 @@ export const pricingplan4 = [
   },
   {
     ticked: true,
-    content: "Audience Segmentation",
+    content: "Run scheduled campaign",
   },
   {
     ticked: true,
-    content: "Social media integration for cross-channel marketing",
-  },
-  {
-    ticked: true,
-    content: "Customer Journey Mapping, Retargeting Campaigns",
+    content: "Add multiple subadmin",
   },
 ];

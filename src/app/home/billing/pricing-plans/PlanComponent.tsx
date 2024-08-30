@@ -82,8 +82,8 @@ const PlanComponent = (props: planProps) => {
             </button>
           )}
         </div>
-        <div className="h-3/6 w-full overflow-y-auto">
-          <div className="flex flex-col gap-2">
+        <div className="flex h-3/6 w-full overflow-y-auto justify-center items-center">
+          <div className="flex flex-col gap-2 ">
             {item.map((item, index) => {
               return (
                 <div key={index}>
@@ -95,7 +95,7 @@ const PlanComponent = (props: planProps) => {
                     >
                       {item.ticked ? "✔" : <TbX />}
                     </span>
-                    {item.content}
+                    <span className="text-base">{item.content}</span>
                   </h1>
                 </div>
               );
