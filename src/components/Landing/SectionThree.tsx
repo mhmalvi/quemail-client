@@ -7,7 +7,7 @@ const SectionThree = () => {
     <div className="w-full flex flex-col gap-8 items-center justify-center h-full py-8">
       <h1 className="m-0 px-0 xl:text-4xl lg:text-3xl text-2xl text-center flex gap-2 text-slate-300 xl:mt-8 mt-12">
         Why choose
-        <span className="bg-clip-text text-transparent bg-gradient-to-r from-brand-color to-brand-color-2 m-0 font-semibold xl:text-5xl lg:text-4xl text-3xl">
+        <span className="bg-clip-text text-transparent bg-gradient-to-r from-brand-color to-brand-color-2 bg-[length:250%_250%] animate-gradient m-0 font-semibold xl:text-5xl lg:text-4xl text-3xl">
           Quemailer?
         </span>
       </h1>

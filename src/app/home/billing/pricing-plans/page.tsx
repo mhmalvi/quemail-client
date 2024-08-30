@@ -44,7 +44,7 @@ const PricingPlans = () => {
         console.log("pricing plans: ", res);
         setProducts(res);
         setCustomerID(res1.stripeCustomerID);
-        setCurrentPackage(res2.lookup_key);
+        setCurrentPackage(res2.nickname);
         setLoading(false);
       }
     })();
@@ -73,21 +73,21 @@ const PricingPlans = () => {
             <div key={index} className="p-0 m-0 relative flex w-full gap-4">
               {!loading ? (
                 <PlanComponent
-                  heading={items.lookup_key}
+                  heading={items.nickname}
                   price={calculatedPrice.toString()}
                   priceId={items.id}
                   //planType={`Choose ${items.name}`}
                   planType={
-                    items.lookup_key === currentPackage
+                    items.nickname === currentPackage
                       ? "Current Plan"
-                      : `Choose ${items.lookup_key}`
+                      : `Choose ${items.nickname}`
                   }
                   item={
-                    items.lookup_key === "Starter"
+                    items.nickname === "Starter"
                       ? pricingplan1
-                      : items.lookup_key === "Growth"
+                      : items.nickname === "Growth"
                       ? pricingplan2
-                      : items.lookup_key === "Professional"
+                      : items.nickname === "Professional"
                       ? pricingplan3
                       : pricingplan4
                   }

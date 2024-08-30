@@ -15,11 +15,11 @@ const CardPlan = () => {
   const fetchSubscriptionInfo = async () => {
     const res = await stripeSubscriptionInfo();
     const res1 = await subscriptionDetails();
-    console.log("checking: ", res.lookup_key);
+    console.log("checking: ", res.nickname);
     if (res && res1) {
       console.log(res1.plan.amount);
       setPackagePrice(res1.plan.amount / 100);
-      setPackageName(res.lookup_key);
+      setPackageName(res.nickname);
       const startDate: Date = new Date(res1.current_period_start * 1000);
       setCreatedTime(startDate);
       const endDate: Date = new Date(res1.current_period_end * 1000);

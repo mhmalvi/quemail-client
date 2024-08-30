@@ -40,7 +40,7 @@ const Landing = () => {
   }, []);
 
   return (
-    <div className="relative flex flex-col items-center justify-between w-full gap-4 h-full 2xl:px-72 xl:px-64 lg:px-36 md:px-8 px-4 z-10">
+    <div className="relative flex flex-col items-center justify-between w-full gap-4 h-full 2xl:px-72 xl:px-64 lg:px-36 md:px-8 px-4 z-10 bg-gradient-to-r from-[#000000] via-[#1A1A5D] to-[#4B0082] bg-[length:400%_400%] animate-flowingColors">
       <Image
         src={Images.Circle}
         alt="background-props"

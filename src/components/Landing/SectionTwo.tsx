@@ -7,9 +7,11 @@ import { sectionTwoData } from "../utils/staticData";
 const SectionTwo = () => {
   return (
     <div className="w-full flex flex-col gap-4 items-center justify-center h-full	">
-      <h1 className="m-0 px-0 py-2 xl:text-2xl text-base text-center flex flex-col lg:gap-2 text-slate-300">
-        Key Features
-        <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-color to-brand-color-2 xl:text-3xl text-xl">
+      <h1 className="m-0 px-0 py-2  text-center flex flex-col lg:gap-2 ">
+        <span className="bg-clip-text xl:text-3xl text-xl font-semibold text-transparent bg-gradient-to-r from-brand-color to-brand-color-2 bg-[length:250%_250%] animate-gradient">
+          Key features
+        </span>
+        <span className="bg-clip-text text-transparent bg-gradient-to-r from-brand-color to-brand-color-2 bg-[length:250%_250%] animate-gradient xl:text-3xl text-xl">
           that converts contacts into customers
         </span>
       </h1>

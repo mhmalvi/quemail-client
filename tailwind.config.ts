@@ -32,6 +32,11 @@ const config: Config = {
         "dark-black": "#0b0b0b",
       },
       keyframes: {
+        flowingColors: {
+          "0%": { backgroundPosition: "0% 80%" },
+          "50%": { backgroundPosition: "80% 50%" },
+          "100%": { backgroundPosition: "0% 50%" },
+        },
         float: {
           "0%, 100%": { transform: "translateY(0)" },
           "50%": { transform: "translateY(-10px)" },
@@ -84,6 +89,7 @@ const config: Config = {
         },
       },
       animation: {
+        flowingColors: "flowingColors 20s ease infinite",
         gradient: "gradient 4s ease infinite",
         float: "float 3s ease-in-out infinite",
         float_x: "float_x 3s ease-in-out infinite",

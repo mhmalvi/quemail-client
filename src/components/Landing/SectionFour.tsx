@@ -13,7 +13,7 @@ const SectionTwo = () => {
 
   return (
     <div className="w-full flex flex-col gap-4 items-center justify-center lg:h-screen h-full lg:py-0 py-16">
-      <h1 className="m-0 px-0 xl:text-4xl text-3xl text-center flex gap-2 text-slate-300 xl:mt-8 mt-16">
+      <h1 className="bg-clip-text text-transparent bg-gradient-to-r from-brand-color to-brand-color-2 bg-[length:250%_250%] animate-gradient m-0 font-semibold xl:text-5xl lg:text-4xl text-3xl">
         Get Started Today
       </h1>
       <p className="p-0 m-0 lg:w-5/12 w-full text-center text-slate-300">
