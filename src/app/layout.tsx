@@ -1,12 +1,19 @@
 import type { Metadata } from "next";
-import { Montserrat } from "next/font/google";
+import {
+  Montserrat,
+  Roboto,
+  Inter,
+  Open_Sans,
+  Nerko_One,
+  Poppins,
+} from "next/font/google";
 import "./globals.css";
 import { Slide, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const montserrat = Montserrat({
+const poppins = Poppins({
   subsets: ["latin"],
-  style: ["normal", "italic"],
+  style: ["normal"],
   weight: ["300", "400", "500", "700"],
   preload: false,
 });
@@ -31,8 +38,7 @@ export default async function RootLayout({
 }>) {
   return (
     <html lang="en">
-     
-      <body className={`${montserrat.className} bg-dark-black`}>
+      <body className={`${poppins.className} bg-dark-black`}>
         {children}
         <ToastContainer
           position="bottom-left"
