@@ -47,9 +47,15 @@ const CardPlan = () => {
   useEffect(() => {
     const checkIfSubscriptionExist = async () => {
       const res = await stripeINFO();
+      console.log("information: ", res);
       if (res && res.priceID === "free") {
         setPackagePrice("free");
         setPackageName("free");
+        setCreatedTime("N/A");
+        setEndTime("N/A");
+      } else if (res && res.priceID === "Custom") {
+        setPackagePrice("Custom");
+        setPackageName("Custom");
         setCreatedTime("N/A");
         setEndTime("N/A");
       } else {
