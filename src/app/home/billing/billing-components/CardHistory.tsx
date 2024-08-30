@@ -13,8 +13,10 @@ const CardHistory = () => {
 
   useEffect(() => {
     const fetchInvoices = async () => {
+      setInvoicesLoading(true);
       const res = await stripeInvoiceHistory(status, limit);
       if (res && res.message === "success") {
+        console.log("invoices result: ", res);
         setInvoices(res.invoice.data);
         setInvoicesLoading(false);
       }
@@ -89,7 +91,6 @@ const CardHistory = () => {
                 className="dark:text-slate-300 text-light-black hover:text-slate-700"
                 onClick={() => {
                   handleStatus("paid");
-                  setInvoicesLoading(true);
                 }}
               >
                 Paid
@@ -98,7 +99,6 @@ const CardHistory = () => {
                 className="dark:text-slate-300 text-light-black hover:text-slate-700"
                 onClick={() => {
                   handleStatus("open");
-                  setInvoicesLoading(true);
                 }}
               >
                 Pending
@@ -107,7 +107,6 @@ const CardHistory = () => {
                 className="dark:text-slate-300 text-light-black hover:text-slate-700"
                 onClick={() => {
                   handleStatus("uncollectible");
-                  setInvoicesLoading(true);
                 }}
               >
                 Uncollectible
@@ -116,7 +115,6 @@ const CardHistory = () => {
                 className="dark:text-slate-300 text-light-black hover:text-slate-700"
                 onClick={() => {
                   handleStatus("draft");
-                  setInvoicesLoading(true);
                 }}
               >
                 Draft
@@ -125,7 +123,6 @@ const CardHistory = () => {
                 className="dark:text-slate-300 text-light-black hover:text-slate-700"
                 onClick={() => {
                   handleStatus("void");
-                  setInvoicesLoading(true);
                 }}
               >
                 Canceled
@@ -218,13 +215,22 @@ const CardHistory = () => {
                           </Table.Cell>
                           <Table.Cell className="w-1/4 text-center">
                             <button
-                              className="border rounded-full border-green-500 hover:text-green-500"
+                              className={`border rounded-full border-green-500 hover:text-green-500 ${
+                                status === "draft"
+                                  ? "opacity-50 cursor-not-allowed"
+                                  : ""
+                              }`}
                               onClick={() => {
                                 window.open(items.hosted_invoice_url);
                               }}
+                              disabled={status === "draft" ? true : false}
                             >
                               <Tooltip
-                                content={"Download"}
+                                content={
+                                  status === "draft"
+                                    ? "draft does not have invoice"
+                                    : "Download"
+                                }
                                 className="bg-brand-color text-center"
                                 placement="bottom"
                               >

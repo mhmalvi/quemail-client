@@ -41,6 +41,7 @@ const PricingPlans = () => {
       const res1 = await stripeINFO();
       const res2 = await stripeSubscriptionInfo();
       if (res && res1 && res2) {
+        console.log("pricing plans: ", res);
         setProducts(res);
         setCustomerID(res1.stripeCustomerID);
         setCurrentPackage(res2.lookup_key);
@@ -85,10 +86,10 @@ const PricingPlans = () => {
                     items.lookup_key === "Starter"
                       ? pricingplan1
                       : items.lookup_key === "Growth"
-                        ? pricingplan2
-                        : items.lookup_key === "Professional"
-                          ? pricingplan3
-                          : pricingplan4
+                      ? pricingplan2
+                      : items.lookup_key === "Professional"
+                      ? pricingplan3
+                      : pricingplan4
                   }
                 />
               ) : (
