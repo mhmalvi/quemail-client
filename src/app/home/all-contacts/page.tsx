@@ -65,40 +65,35 @@ const AllContacts: React.FC = () => {
 
   // Handle search functionality via socket
   useEffect(() => {
-    socket.connect();
+    // Ensure the socket is connected only once at the start
+    if (!socket.connected) {
+      socket.connect();
+    }
 
     const handleSearch = () => {
       socket.emit("contacts", {
-        keyword: searchKeyword, // Sending the search keyword
-        userID: userID && userID,
+        keyword: searchKeyword || "", // Use an empty string if searchKeyword is undefined
+        userID: userID || "",
         page: currentPage,
         per_page: 8,
       });
     };
 
-    // Trigger search whenever the search keyword changes
-    if (searchKeyword) {
-      handleSearch();
-    } else {
-      // Fetch all contacts when search is cleared
-      socket.emit("contacts", {
-        keyword: "", // Sending the search keyword
-        userID: userID && userID,
-        page: currentPage,
-        per_page: 8,
-      });
-    }
+    // Trigger the search
+    handleSearch();
 
-    // Listen for search results from the server
-    socket.on("contacts", (data) => {
+    // Listen for the server's response
+    const handleContacts = (data: any) => {
       setAllContactList(data.paginatedData);
       setTotalPages(data.totalPages);
-    });
+    };
 
-    // Cleanup on component unmount
+    socket.on("contacts", handleContacts);
+
+    // Cleanup on component unmount or dependencies change
     return () => {
-      socket.off("contacts", handleSearch);
-      socket.disconnect();
+      socket.off("contacts", handleContacts);
+      socket.disconnect(); // Optional, if you want to close the socket on unmount
     };
   }, [
     currentPage,
@@ -107,7 +102,6 @@ const AllContacts: React.FC = () => {
     userID,
     setAllContactList,
     setTotalPages,
-    allContactList,
   ]);
 
   return (
