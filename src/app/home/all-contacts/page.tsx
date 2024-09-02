@@ -130,7 +130,7 @@ const AllContacts: React.FC = () => {
               <div className="flex justify-center items-center border border-violet-200 dark:border-light-black rounded-md">
                 <input
                   className="w-full bg-transparent p-2 placeholder:text-xs rounded-md text-xs xl:text-base focus:outline-none focus:border-violet-500 focus:ring-1 focus:ring-brand-color outline-none"
-                  placeholder="Search by Email/Group"
+                  placeholder="Search by Name/Email/Group"
                   value={searchKeyword}
                   onChange={(e) => setSearchKeyword(e.target.value)} // Update search keyword
                 />
