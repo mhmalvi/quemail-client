@@ -91,13 +91,13 @@ const AllContacts: React.FC = () => {
 
     // Listen for search results from the server
     socket.on("contacts", (data) => {
-      console.log("emitting :", data);
       setAllContactList(data.paginatedData);
       setTotalPages(data.totalPages);
     });
 
     // Cleanup on component unmount
     return () => {
+      socket.off("contacts", handleSearch);
       socket.disconnect();
     };
   }, [
