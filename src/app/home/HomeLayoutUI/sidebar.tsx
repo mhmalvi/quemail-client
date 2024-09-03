@@ -193,6 +193,14 @@ const Sidebar = () => {
                 All Contacts
               </Dropdown.Item>
             </Link>
+            <Link
+              href="/home/all-groups"
+              className="focus:outline-none focus:ring-0 active:outline-none active:ring-0"
+            >
+              <Dropdown.Item className="dark:text-slate-300 text-light-black hover:text-gray-800">
+                All Groups
+              </Dropdown.Item>
+            </Link>
 
             {/* <Link href="/home/contacts/email-subscriptions">
           <Dropdown.Item className="dark:text-slate-300 text-light-black hover:text-gray-800">
