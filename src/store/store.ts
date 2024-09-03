@@ -66,6 +66,7 @@ export const contactStore = create<ContactStoreState>((set) => ({
   hasData: false,
   csvData: null,
   allContactList: null,
+  allGroupList: null,
   groupData: null,
   groupContacts: null,
   allContactPerPage: 8,
@@ -76,6 +77,7 @@ export const contactStore = create<ContactStoreState>((set) => ({
   setAllContactPerPage: (state) => set(() => ({ allContactPerPage: state })),
   setAllContactList: (contactData) =>
     set(() => ({ allContactList: contactData })),
+  setAllGroupList: (groupsData) => set(() => ({ allGroupList: groupsData })),
   setCsvData: (csvData: any[]) => set(() => ({ csvData: csvData })),
   setHasData: (state: boolean) => set(() => ({ hasData: state })),
   setGroupData: (groupData) => set(() => ({ groupData: groupData })),

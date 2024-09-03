@@ -55,6 +55,7 @@ export type TemplateType = {
     amp: {} | null;
   };
 };
+
 export type ContactType = {
   id: number;
   json: {
@@ -65,12 +66,17 @@ export type ContactType = {
   userID: number;
 };
 
+export type GroupType = {
+  group: string | null;
+};
+
 export type ContactStoreState = {
   hasData: boolean;
   csvData: any[] | null;
   groupData: [string] | null;
   groupContacts: [ContactType] | null;
   allContactList: [ContactType] | null;
+  allGroupList: [GroupType] | null;
   totalPages: number;
   groupTotalPages: number;
   currentPage: number;
@@ -78,6 +84,7 @@ export type ContactStoreState = {
   allContactPerPage: number;
   setAllContactPerPage: (state: number) => void;
   setAllContactList: (contactData: [ContactType] | null) => void;
+  setAllGroupList: (contactData: [GroupType] | null) => void;
   setCsvData: (csvData: any[]) => void;
   setHasData: (state: boolean) => void;
   setGroupData: (data: [string] | null) => void;
