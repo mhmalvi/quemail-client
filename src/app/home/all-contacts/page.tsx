@@ -89,7 +89,6 @@ const AllContacts: React.FC = () => {
     };
 
     socket.on("contacts", handleContacts);
-
     // Cleanup on component unmount or dependencies change
     return () => {
       socket.off("contacts", handleContacts);
