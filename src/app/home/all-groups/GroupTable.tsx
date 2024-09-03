@@ -1,11 +1,7 @@
 "use client";
 import Image from "next/image";
 import Images from "@/components/utils/images";
-import {
-  Checkbox,
-  Pagination,
-  Table,
-} from "flowbite-react";
+import { Checkbox, Pagination, Table } from "flowbite-react";
 import React, { useCallback, useState } from "react";
 import { contactStore } from "@/store/store";
 import {
@@ -75,17 +71,17 @@ const GroupTable = () => {
       <div className="flex flex-col gap-4 h-5/6 overflow-auto">
         <Table hoverable striped id="tableHeight">
           <Table.Head className="w-full ">
-            <Table.HeadCell className="w-1/5 sticky text-center ">
+            <Table.HeadCell className="w-1/5 sticky">
               <Checkbox
                 id="selectGroups"
                 checked={selectAllGroups}
                 onChange={handleSelectAllGroups}
               />
             </Table.HeadCell>
-            <Table.HeadCell className="w-1/5 sticky text-center ">
+            <Table.HeadCell className="w-1/5 sticky ">
               Group Name
             </Table.HeadCell>
-            <Table.HeadCell className="w-1/5 sticky text-center ">
+            <Table.HeadCell className="w-1/5 sticky text-right ">
               Date Added
             </Table.HeadCell>
           </Table.Head>
@@ -96,17 +92,17 @@ const GroupTable = () => {
                     key={index}
                     className="w-full dark:border-gray-700 dark:bg-transparent"
                   >
-                    <Table.Cell className="w-1/5 text-center">
+                    <Table.Cell className="w-1/5">
                       <Checkbox
                         id="selectGroup"
                         checked={selectedGroups.includes(items.json.group)}
                         onChange={() => handleSelectGroup(items.json.group)}
                       />
                     </Table.Cell>
-                    <Table.Cell className="w-1/5 text-center">
+                    <Table.Cell className="w-1/5">
                       {items.json.group}
                     </Table.Cell>
-                    <Table.Cell className="w-1/5 text-center">
+                    <Table.Cell className="w-1/5 text-right">
                       {" "}
                       {items.updatedAt.split("T")[0]}
                     </Table.Cell>
@@ -119,17 +115,15 @@ const GroupTable = () => {
                       key={index}
                       className="dark:border-gray-700 dark:bg-gray-800"
                     >
-                      <Table.Cell className="w-1/5 text-center">
+                      <Table.Cell className="w-1/5">
                         <Checkbox
                           id="selectGroup"
                           checked={selectedGroups.includes(group.group)}
                           onChange={() => handleSelectGroup(group.group)}
                         />
                       </Table.Cell>
-                      <Table.Cell className="w-1/5 text-center">
-                        {group?.group}
-                      </Table.Cell>
-                      <Table.Cell className="w-1/5 text-center">
+                      <Table.Cell className="w-1/5">{group?.group}</Table.Cell>
+                      <Table.Cell className="w-1/5 text-right">
                         {group.updatedAt?.split("T")[0]}
                       </Table.Cell>
                     </Table.Row>

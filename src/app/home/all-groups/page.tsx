@@ -15,6 +15,7 @@ import {
 } from "@/components/styles/button";
 import ManualContact from "./ManualContact";
 import { io } from "socket.io-client";
+import Image from "next/image";
 
 const AllContacts: React.FC = () => {
   const groupContacts = contactStore((state) => state.groupContacts);
@@ -110,27 +111,36 @@ const AllContacts: React.FC = () => {
       {Images.Edit && allGroupList && allGroupList !== null ? (
         <div id="tableHeight" className={COL_CONTAINER_STYLES}>
           <div className="w-full flex items-center justify-between">
-            <div className="flex items-center justify-center gap-4">
               {/* <Groups /> */}
-              <h1 className="flex gap-2 m-0 px-4 py-2 xl:text-base text-sm text-dark-black dark:text-slate-300">
-                Showing:
-                {groupContacts !== null ? (
-                  <span className="text-brand-color">
-                    {groupContacts[0].json.group}
-                  </span>
-                ) : (
-                  <span className="text-brand-color">All Groups</span>
-                )}
-              </h1>
-              <div className="flex justify-center items-center border border-violet-200 dark:border-light-black rounded-md">
-                <input
-                  className="w-full bg-transparent p-2 placeholder:text-xs rounded-md text-xs xl:text-base focus:outline-none focus:border-violet-500 focus:ring-1 focus:ring-brand-color outline-none"
-                  placeholder="Search by Group"
-                  value={searchKeyword}
-                  onChange={(e) => setSearchKeyword(e.target.value)} // Update search keyword
-                />
+              <div className="flex items-center justify-center gap-4">
+                <h1 className="flex gap-2 m-0 px-4 py-2 xl:text-base text-sm text-dark-black dark:text-slate-300">
+                  Showing:
+                  {groupContacts !== null ? (
+                    <span className="text-brand-color">
+                      {groupContacts[0].json.group}
+                    </span>
+                  ) : (
+                    <span className="text-brand-color">All Groups</span>
+                  )}
+                </h1>
+                <div className="flex justify-center items-center border border-violet-200 dark:border-light-black rounded-md">
+                  <input
+                    className="w-full bg-transparent p-2 placeholder:text-xs rounded-md text-xs xl:text-base focus:outline-none focus:border-violet-500 focus:ring-1 focus:ring-brand-color outline-none"
+                    placeholder="Search by Group"
+                    value={searchKeyword}
+                    onChange={(e) => setSearchKeyword(e.target.value)} // Update search keyword
+                  />
+                </div>
               </div>
-            </div>
+              <button className="px-4 py-2 bg-brand-color rounded-md flex items-center justify-center gap-2">
+                <Image
+                  src={Images.Delete}
+                  width={20}
+                  alt="deleteContact"
+                  className="cursor-pointer"
+                />
+                Delete Group
+              </button>
           </div>
 
           <GroupTable />
