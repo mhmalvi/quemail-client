@@ -4,10 +4,10 @@ import { Modal, Dropdown } from "flowbite-react";
 import NoContacts from "../HomeLayoutUI/NoContacts";
 import ImportCSV from "./ImportCSV";
 import { contactStore } from "@/store/store";
-import { fetchContact } from "@/app/api/contact";
+import { fetchGroups } from "@/app/api/groups";
 import Images from "@/components/utils/images";
 import Groups from "./Groups";
-import ContactTable from "./ContactTable";
+import GroupTable from "./GroupTable";
 import { COL_CONTAINER_STYLES } from "@/components/styles/flex_col_container";
 import {
   BIG_BUTTON_STYLES,
@@ -18,8 +18,8 @@ import { io } from "socket.io-client";
 
 const AllContacts: React.FC = () => {
   const groupContacts = contactStore((state) => state.groupContacts);
-  const allContactList = contactStore((state) => state.allContactList);
-  const setAllContactList = contactStore((state) => state.setAllContactList);
+  const allGroupList = contactStore((state) => state.allGroupList);
+  const setAllGroupList = contactStore((state) => state.setAllGroupList);
   const setTotalPages = contactStore((state) => state.setTotalPages);
   const userID =
     typeof window !== "undefined" && localStorage.getItem("userID");
@@ -46,9 +46,11 @@ const AllContacts: React.FC = () => {
 
     (async () => {
       try {
-        const res = await fetchContact(currentPage, revisedHeight);
+        const res = await fetchGroups(currentPage, revisedHeight);
+        console.log(res?.groups);
+
         if (res.status === 200) {
-          setAllContactList(res?.contact);
+          setAllGroupList(res?.groups);
           setTotalPages(res?.totalPages);
         }
       } catch (error) {
@@ -58,61 +60,54 @@ const AllContacts: React.FC = () => {
   }, [
     allContactPerPage,
     currentPage,
-    setAllContactList,
+    setAllGroupList,
     setAllContactPerPage,
     setTotalPages,
   ]);
 
   // Handle search functionality via socket
   useEffect(() => {
-    socket.connect();
+    // Ensure the socket is connected only once at the start
+    if (!socket.connected) {
+      socket.connect();
+    }
 
     const handleSearch = () => {
       socket.emit("contacts", {
-        keyword: searchKeyword, // Sending the search keyword
-        userID: userID && userID,
+        keyword: searchKeyword || "", // Use an empty string if searchKeyword is undefined
+        userID: userID || "",
         page: currentPage,
         per_page: 8,
       });
     };
 
-    // Trigger search whenever the search keyword changes
-    if (searchKeyword) {
-      handleSearch();
-    } else {
-      // Fetch all contacts when search is cleared
-      socket.emit("contacts", {
-        keyword: "", // Sending the search keyword
-        userID: userID && userID,
-        page: currentPage,
-        per_page: 8,
-      });
-    }
+    // Trigger the search
+    handleSearch();
 
-    // Listen for search results from the server
-    socket.on("contacts", (data) => {
-      console.log("emitting :", data);
-      setAllContactList(data.paginatedData);
+    // Listen for the server's response
+    const handleContacts = (data: any) => {
+      // setAllGroupList(data.paginatedData);
       setTotalPages(data.totalPages);
-    });
+    };
 
-    // Cleanup on component unmount
+    socket.on("contacts", handleContacts);
+    // Cleanup on component unmount or dependencies change
     return () => {
-      socket.disconnect();
+      socket.off("contacts", handleContacts);
+      socket.disconnect(); // Optional, if you want to close the socket on unmount
     };
   }, [
     currentPage,
     searchKeyword,
     socket,
     userID,
-    setAllContactList,
+    setAllGroupList,
     setTotalPages,
-    allContactList,
   ]);
 
   return (
     <>
-      {Images.Edit && allContactList && allContactList !== null ? (
+      {Images.Edit && allGroupList && allGroupList !== null ? (
         <div id="tableHeight" className={COL_CONTAINER_STYLES}>
           <div className="w-full flex items-center justify-between">
             <div className="flex items-center justify-center gap-4">
@@ -136,39 +131,9 @@ const AllContacts: React.FC = () => {
                 />
               </div>
             </div>
-            <div className="flex items-center gap-4">
-              <Dropdown
-                label=""
-                placement="bottom"
-                renderTrigger={() => (
-                  <h1 className={`${BIG_BUTTON_STYLES} cursor-pointer`}>
-                    + Add Groups
-                  </h1>
-                )}
-              >
-                <Dropdown.Item
-                  className="dark:text-slate-300 text-black"
-                  onClick={() => {
-                    setOpenModal({
-                      show: "importContacts",
-                    });
-                  }}
-                >
-                  Import Groups
-                </Dropdown.Item>
-                <Dropdown.Item
-                  onClick={() => {
-                    setOpenAddContactModal(true);
-                  }}
-                  className="dark:text-slate-300 text-black"
-                >
-                  Add manually
-                </Dropdown.Item>
-              </Dropdown>
-            </div>
           </div>
 
-          <ContactTable />
+          <GroupTable />
         </div>
       ) : (
         <div className="relative w-full h-full rounded-md p-4 flex flex-col items-center justify-center gap-8 overflow-hidden">
