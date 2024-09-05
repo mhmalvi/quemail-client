@@ -94,7 +94,7 @@ const Login = () => {
   };
 
   const handleGoogleClick = async () => {
-    const googleLoginUrl = "https://backend.quemailer.com/google/login";
+    const googleLoginUrl = `${process.env.NEXT_PUBLIC_BASE_URL}/google/login`;
     window.open(googleLoginUrl, "_self");
   };
 
