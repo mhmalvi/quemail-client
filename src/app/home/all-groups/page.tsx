@@ -131,14 +131,7 @@ const AllGroups: React.FC = () => {
             {/* Other elements */}
             <div className="flex items-center justify-center gap-4">
               <h1 className="flex gap-2 m-0 px-4 py-2 xl:text-base text-sm text-dark-black dark:text-slate-300">
-                Showing:
-                {groupContacts !== null ? (
-                  <span className="text-brand-color">
-                    {groupContacts[0].json.group}
-                  </span>
-                ) : (
-                  <span className="text-brand-color">All Groups</span>
-                )}
+                Showing: <span className="text-brand-color">All Groups</span>
               </h1>
               <div className="flex justify-center items-center border border-violet-200 dark:border-light-black rounded-md">
                 <input
