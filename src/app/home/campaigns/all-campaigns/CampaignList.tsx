@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import { fetchCampaign } from "@/app/api/campaign";
 import { Pagination, Tooltip, Table, Checkbox } from "flowbite-react"; // Ensure these imports are correct
-import { showCampaignStore } from "@/store/store"; // Make sure this import is correct
+import { showCampaignStore, contactStore } from "@/store/store"; // Make sure this import is correct
 import NoContacts from "../../HomeLayoutUI/NoContacts"; // Ensure this is correctly exported from its module
 import { useRouter } from "next/navigation"; // Correct import for Next.js router
 
@@ -112,14 +112,6 @@ const CampaignList = () => {
               <h1 className="flex gap-2 m-0 px-4 py-2 xl:text-base text-sm text-dark-black dark:text-slate-300">
                 Showing: <span className="text-brand-color">All Campaigns</span>
               </h1>
-              <div className="flex justify-center items-center border border-violet-200 dark:border-light-black rounded-md">
-                <input
-                  className="w-96 bg-transparent p-2 placeholder:text-xs rounded-md text-xs xl:text-base focus:outline-none focus:border-violet-500 focus:ring-1 focus:ring-brand-color outline-none"
-                  placeholder="Search by Campaign/Sender Name, Sender Email"
-                  value={searchKeyword}
-                  onChange={(e) => setSearchKeyword(e.target.value)} // Update search keyword
-                />
-              </div>
             </div>
             {/* Delete Button */}
             <button
