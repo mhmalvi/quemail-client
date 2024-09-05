@@ -112,7 +112,7 @@ const CampaignItems = () => {
           </div>
         </div>
       </div>
-      <div className="h-1/4 z-10">
+      <div className="h-[230px] z-10">
         <SummaryRate />
       </div>
       <div className="h-3/4">
