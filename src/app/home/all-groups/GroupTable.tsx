@@ -1,17 +1,18 @@
 "use client";
-import Image from "next/image";
-import Images from "@/components/utils/images";
 import { Checkbox, Pagination, Table } from "flowbite-react";
-import React, { useCallback, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { contactStore } from "@/store/store";
-import {
-  successNotification,
-  warningNotification,
-} from "@/components/utils/utility";
-import { destroyContact, updateContact } from "@/app/api/contact";
 
-const GroupTable = () => {
-  const [selectedGroups, setSelectedGroups] = useState<string[]>([]);
+// Define the types for the props
+interface GroupTableProps {
+  setSelectedGroups: React.Dispatch<React.SetStateAction<string[]>>; // Function to set selected groups
+  selectedGroups: string[]; // Array of selected group names
+}
+
+const GroupTable: React.FC<GroupTableProps> = ({
+  setSelectedGroups,
+  selectedGroups,
+}) => {
   const [selectAllGroups, setSelectAllGroups] = useState(false);
 
   const groupContacts = contactStore((state) => state.groupContacts);
@@ -22,42 +23,13 @@ const GroupTable = () => {
     (state) => state.setCurrentGroupPage
   );
   const currentPage = contactStore((state) => state.currentPage);
-  const currentGroupPage = contactStore((state) => state.currentGroupPage);
   const onGroupPageChange = (page: number) => setCurrentGroupPage(page);
 
   const totalPages = contactStore((state) => state.totalPages);
   const groupTotalPages = contactStore((state) => state.groupTotalPages);
-  const userID =
-    typeof window !== "undefined" && localStorage.getItem("userID");
   const onPageChange = (page: number) => setCurrentPage(page);
-  const [updateLoading, setUpdateLoading] = useState(false);
 
-  const onDelete = async (data: number) => {
-    const res = await destroyContact(data);
-    if (res.status === 201) {
-      successNotification(res.message);
-
-      window.location.href =
-        window.location.pathname + "?reload=" + new Date().getTime();
-    } else {
-      warningNotification("Something went wrong. Please try again.");
-    }
-  };
-
-  const handleSelectAllGroups = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const isChecked = e.target.checked;
-    setSelectAllGroups(isChecked);
-
-    if (isChecked) {
-      const allGroupNames = groupContacts
-        ? groupContacts.map((item) => item.json.group)
-        : allGroupList?.map((group) => group.group) || []; // Fallback to an empty array
-      setSelectedGroups(allGroupNames.filter((group) => group !== null));
-    } else {
-      setSelectedGroups([]);
-    }
-  };
-
+  // Handle individual group selection
   const handleSelectGroup = (groupName: string) => {
     setSelectedGroups((prevSelected) =>
       prevSelected.includes(groupName)
@@ -66,19 +38,46 @@ const GroupTable = () => {
     );
   };
 
+  // Handle Select All checkbox
+  const handleSelectAllGroups = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const isChecked = e.target.checked;
+    setSelectAllGroups(isChecked);
+
+    if (isChecked) {
+      const allGroupNames = groupContacts
+        ? groupContacts.map((item) => item.json.group)
+        : allGroupList?.map((group) => group.group) || [];
+      setSelectedGroups(allGroupNames.filter((group) => group !== null));
+    } else {
+      setSelectedGroups([]);
+    }
+  };
+
+  // Update selectAllGroups when individual checkboxes change
+  useEffect(() => {
+    const allGroupNames = groupContacts
+      ? groupContacts.map((item) => item.json.group)
+      : allGroupList?.map((group) => group.group) || [];
+
+    // If all individual checkboxes are checked, selectAllGroups should be true
+    setSelectAllGroups(
+      selectedGroups.length === allGroupNames.length && allGroupNames.length > 0
+    );
+  }, [selectedGroups, groupContacts, allGroupList]);
+
   return (
     <>
       <div className="flex flex-col gap-4 h-5/6 overflow-auto">
         <Table hoverable striped id="tableHeight">
           <Table.Head className="w-full ">
-            <Table.HeadCell className="w-1/5 sticky">
+            <Table.HeadCell className="w-1/5 sticky text-center">
               <Checkbox
                 id="selectGroups"
                 checked={selectAllGroups}
                 onChange={handleSelectAllGroups}
               />
             </Table.HeadCell>
-            <Table.HeadCell className="w-1/5 sticky ">
+            <Table.HeadCell className="w-1/5 sticky text-center">
               Group Name
             </Table.HeadCell>
             <Table.HeadCell className="w-1/5 sticky text-right ">
@@ -92,14 +91,14 @@ const GroupTable = () => {
                     key={index}
                     className="w-full dark:border-gray-700 dark:bg-transparent"
                   >
-                    <Table.Cell className="w-1/5">
+                    <Table.Cell className="w-1/5 text-center">
                       <Checkbox
                         id="selectGroup"
                         checked={selectedGroups.includes(items.json.group)}
                         onChange={() => handleSelectGroup(items.json.group)}
                       />
                     </Table.Cell>
-                    <Table.Cell className="w-1/5">
+                    <Table.Cell className="w-1/5 text-center">
                       {items.json.group}
                     </Table.Cell>
                     <Table.Cell className="w-1/5 text-right">
@@ -115,14 +114,14 @@ const GroupTable = () => {
                       key={index}
                       className="dark:border-gray-700 dark:bg-gray-800"
                     >
-                      <Table.Cell className="w-1/5">
+                      <Table.Cell className="w-1/5 text-center">
                         <Checkbox
                           id="selectGroup"
                           checked={selectedGroups.includes(group.group)}
                           onChange={() => handleSelectGroup(group.group)}
                         />
                       </Table.Cell>
-                      <Table.Cell className="w-1/5">{group?.group}</Table.Cell>
+                      <Table.Cell className="w-1/5 text-center">{group?.group}</Table.Cell>
                       <Table.Cell className="w-1/5 text-right">
                         {group.updatedAt?.split("T")[0]}
                       </Table.Cell>
