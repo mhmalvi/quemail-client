@@ -130,7 +130,7 @@ export const campaignStore = create<CampaignStoreState>((set) => ({
 export const showCampaignStore = create<ShowCampaignStore>((set) => ({
   campaignList: {
     status: null,
-    campaigns: null,
+    paginatedData: null,
     current_page: null,
     total: null,
     totalPages: null,
