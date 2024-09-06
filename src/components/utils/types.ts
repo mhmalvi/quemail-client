@@ -162,7 +162,7 @@ export interface CampaignListType {
 }
 interface CampaignListResponse {
   status: number | null;
-  campaigns: CampaignListType[] | null;
+  paginatedData: CampaignListType[] | null;
   current_page: number | null;
   total: number | null;
   totalPages: number | null;
