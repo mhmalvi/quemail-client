@@ -32,7 +32,6 @@ export const subscription = async (
     );
     if (result) {
       const response = await result.json();
-      console.log(response.data.id);
       if (response.data.id) {
         successNotification("Subscription Started!");
         return "success";

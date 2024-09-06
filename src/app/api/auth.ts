@@ -78,13 +78,11 @@ export const verifyPassword = async (email: string, password: string) => {
 };
 
 export const subadminToCompany = async (userID: number) => {
-  console.log("useID:", userID);
 
   const token = typeof window !== "undefined" && localStorage.getItem("satok");
   const parsedToken = token && JSON.parse(token);
   const subAdminID =
     typeof window !== "undefined" && localStorage.getItem("subUserID");
-  console.log("subAdminID: ", subAdminID);
   try {
     const result = await fetch(
       `${process.env.NEXT_PUBLIC_BASE_URL}/api/subadminToCompany`,
