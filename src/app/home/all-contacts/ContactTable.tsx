@@ -168,6 +168,9 @@ const ContactTable = () => {
         <Table hoverable striped id="tableHeight">
           <Table.Head className="w-full ">
             <Table.HeadCell className="w-1/5 sticky text-center ">
+              Batch No
+            </Table.HeadCell>
+            <Table.HeadCell className="w-1/5 sticky text-center ">
               Name
             </Table.HeadCell>
             <Table.HeadCell className="w-1/5 sticky text-center ">
@@ -175,6 +178,9 @@ const ContactTable = () => {
             </Table.HeadCell>
             <Table.HeadCell className="w-1/5 sticky text-center ">
               Group
+            </Table.HeadCell>
+            <Table.HeadCell className="w-1/5 sticky text-center ">
+              company
             </Table.HeadCell>
             <Table.HeadCell className="w-1/5 sticky text-center ">
               Date Added
@@ -191,6 +197,9 @@ const ContactTable = () => {
                     className="w-full dark:border-gray-700 dark:bg-transparent"
                   >
                     <Table.Cell className="w-1/5 font-medium text-gray-900 dark:text-white text-center">
+                      {items.batchID}
+                    </Table.Cell>
+                    <Table.Cell className="w-1/5 font-medium text-gray-900 dark:text-white text-center">
                       {items.json.name}
                     </Table.Cell>
                     <Table.Cell className="w-1/5 text-center">
@@ -199,6 +208,9 @@ const ContactTable = () => {
 
                     <Table.Cell className="w-1/5 text-center">
                       {items.json.group}
+                    </Table.Cell>
+                    <Table.Cell className="w-1/5 text-center">
+                      {items.company}
                     </Table.Cell>
                     <Table.Cell className="w-1/5 text-center">
                       {" "}
