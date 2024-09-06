@@ -29,7 +29,7 @@ const ContactTable = () => {
   const allContactList = contactStore((state) => state.allContactList);
   const setCurrentPage = contactStore((state) => state.setCurrentPage);
   console.log(allContactList);
-  
+
   const setCurrentGroupPage = contactStore(
     (state) => state.setCurrentGroupPage
   );
@@ -173,9 +173,6 @@ const ContactTable = () => {
               Batch No
             </Table.HeadCell>
             <Table.HeadCell className="w-1/5 sticky text-center ">
-              Batch No
-            </Table.HeadCell>
-            <Table.HeadCell className="w-1/5 sticky text-center ">
               Name
             </Table.HeadCell>
             <Table.HeadCell className="w-1/5 sticky text-center ">
@@ -183,9 +180,6 @@ const ContactTable = () => {
             </Table.HeadCell>
             <Table.HeadCell className="w-1/5 sticky text-center ">
               Group
-            </Table.HeadCell>
-            <Table.HeadCell className="w-1/5 sticky text-center ">
-              company
             </Table.HeadCell>
             <Table.HeadCell className="w-1/5 sticky text-center ">
               Company
@@ -208,10 +202,6 @@ const ContactTable = () => {
                       {items.batchID}
                     </Table.Cell>
                     <Table.Cell className="font-medium text-gray-900 dark:text-white text-center">
-                    <Table.Cell className="w-1/5 font-medium text-gray-900 dark:text-white text-center">
-                      {items.batchID}
-                    </Table.Cell>
-                    <Table.Cell className="w-1/5 font-medium text-gray-900 dark:text-white text-center">
                       {items.json.name}
                     </Table.Cell>
                     <Table.Cell className="text-center">
@@ -221,10 +211,6 @@ const ContactTable = () => {
                     <Table.Cell className="text-center">
                       {items.json.group}
                     </Table.Cell>
-                    <Table.Cell className="w-1/5 text-center">
-                      {items.company}
-                    </Table.Cell>
-                    <Table.Cell className="w-1/5 text-center">
                     <Table.Cell className="text-center">
                       {items.company || "Empty"}
                     </Table.Cell>
