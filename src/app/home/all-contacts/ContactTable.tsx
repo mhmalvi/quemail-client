@@ -28,6 +28,8 @@ const ContactTable = () => {
   const groupContacts = contactStore((state) => state.groupContacts);
   const allContactList = contactStore((state) => state.allContactList);
   const setCurrentPage = contactStore((state) => state.setCurrentPage);
+  console.log(allContactList);
+  
   const setCurrentGroupPage = contactStore(
     (state) => state.setCurrentGroupPage
   );
@@ -171,6 +173,9 @@ const ContactTable = () => {
               Batch No
             </Table.HeadCell>
             <Table.HeadCell className="w-1/5 sticky text-center ">
+              Batch No
+            </Table.HeadCell>
+            <Table.HeadCell className="w-1/5 sticky text-center ">
               Name
             </Table.HeadCell>
             <Table.HeadCell className="w-1/5 sticky text-center ">
@@ -181,6 +186,9 @@ const ContactTable = () => {
             </Table.HeadCell>
             <Table.HeadCell className="w-1/5 sticky text-center ">
               company
+            </Table.HeadCell>
+            <Table.HeadCell className="w-1/5 sticky text-center ">
+              Company
             </Table.HeadCell>
             <Table.HeadCell className="w-1/5 sticky text-center ">
               Date Added
@@ -196,27 +204,35 @@ const ContactTable = () => {
                     key={index}
                     className="w-full dark:border-gray-700 dark:bg-transparent"
                   >
+                    <Table.Cell className="font-medium text-gray-900 dark:text-white text-center">
+                      {items.batchID}
+                    </Table.Cell>
+                    <Table.Cell className="font-medium text-gray-900 dark:text-white text-center">
                     <Table.Cell className="w-1/5 font-medium text-gray-900 dark:text-white text-center">
                       {items.batchID}
                     </Table.Cell>
                     <Table.Cell className="w-1/5 font-medium text-gray-900 dark:text-white text-center">
                       {items.json.name}
                     </Table.Cell>
-                    <Table.Cell className="w-1/5 text-center">
+                    <Table.Cell className="text-center">
                       {items.json.email}
                     </Table.Cell>
 
-                    <Table.Cell className="w-1/5 text-center">
+                    <Table.Cell className="text-center">
                       {items.json.group}
                     </Table.Cell>
                     <Table.Cell className="w-1/5 text-center">
                       {items.company}
                     </Table.Cell>
                     <Table.Cell className="w-1/5 text-center">
+                    <Table.Cell className="text-center">
+                      {items.company || "Empty"}
+                    </Table.Cell>
+                    <Table.Cell className="text-center">
                       {" "}
                       {items.updatedAt.split("T")[0]}
                     </Table.Cell>
-                    <Table.Cell className="w-1/5 flex items-center justify-center gap-8">
+                    <Table.Cell className="flex items-center justify-center gap-8">
                       <Image
                         className="cursor-pointer"
                         src={Images.Edit}
@@ -279,19 +295,25 @@ const ContactTable = () => {
                     key={index}
                     className="dark:border-gray-700 dark:bg-gray-800"
                   >
-                    <Table.Cell className="w-1/5 font-medium text-center text-gray-900 dark:text-white">
+                    <Table.Cell className="font-medium text-gray-900 dark:text-white text-center">
+                      {contact.batchID}
+                    </Table.Cell>
+                    <Table.Cell className="font-medium text-center text-gray-900 dark:text-white">
                       {contact.json.name}
                     </Table.Cell>
-                    <Table.Cell className="w-1/5 text-center">
+                    <Table.Cell className="text-center">
                       {contact.json.email}
                     </Table.Cell>
-                    <Table.Cell className="w-1/5 text-center">
+                    <Table.Cell className="text-center">
                       {contact.json.group}
                     </Table.Cell>
-                    <Table.Cell className="w-1/5 text-center">
+                    <Table.Cell className="text-center">
+                      {contact.company || "Empty"}
+                    </Table.Cell>
+                    <Table.Cell className="text-center">
                       {contact.updatedAt.split("T")[0]}
                     </Table.Cell>
-                    <Table.Cell className="w-full flex items-center justify-center gap-8">
+                    <Table.Cell className="w-60 flex items-center justify-center gap-8">
                       <Tooltip
                         content={"Edit Contact"}
                         className="bg-brand-color text-center"
