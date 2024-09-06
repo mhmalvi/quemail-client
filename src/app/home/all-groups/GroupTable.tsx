@@ -47,7 +47,9 @@ const GroupTable: React.FC<GroupTableProps> = ({
       const allGroupNames = groupContacts
         ? groupContacts.map((item) => item.json.group)
         : allGroupList?.map((group) => group.group) || [];
-      setSelectedGroups(allGroupNames.filter((group) => group !== null));
+      setSelectedGroups(
+        allGroupNames.filter((group): group is string => group !== null)
+      );
     } else {
       setSelectedGroups([]);
     }
@@ -121,7 +123,9 @@ const GroupTable: React.FC<GroupTableProps> = ({
                           onChange={() => handleSelectGroup(group.group)}
                         />
                       </Table.Cell>
-                      <Table.Cell className="w-1/5 text-center">{group?.group}</Table.Cell>
+                      <Table.Cell className="w-1/5 text-center">
+                        {group?.group}
+                      </Table.Cell>
                       <Table.Cell className="w-1/5 text-right">
                         {group.updatedAt?.split("T")[0]}
                       </Table.Cell>
