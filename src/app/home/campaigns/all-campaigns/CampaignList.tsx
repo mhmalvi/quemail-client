@@ -1,10 +1,11 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { fetchCampaign } from "@/app/api/campaign";
 import { Pagination, Tooltip, Table, Checkbox } from "flowbite-react"; // Ensure these imports are correct
 import { showCampaignStore, contactStore } from "@/store/store"; // Make sure this import is correct
 import NoContacts from "../../HomeLayoutUI/NoContacts"; // Ensure this is correctly exported from its module
 import { useRouter } from "next/navigation"; // Correct import for Next.js router
+import { io } from "socket.io-client";
 
 import {
   successNotification,
@@ -21,6 +22,9 @@ const CampaignList = () => {
   const [selectedCampaigns, setSelectedCampaigns] = useState<number[]>([]);
   const [selectAll, setSelectAll] = useState(false);
   const [searchKeyword, setSearchKeyword] = useState<string>("");
+  const userID =
+    typeof window !== "undefined" && localStorage.getItem("userID");
+  const socket = useMemo(() => io("https://backend.quemailer.com"), []);
 
   const campaignList = showCampaignStore((state) => state.campaignList);
   const setCampaignList = showCampaignStore((state) => state.setCampaignList);
@@ -30,20 +34,6 @@ const CampaignList = () => {
   const setCampaignDetails = showCampaignStore(
     (state) => state.setCampaignDetails
   );
-
-  // Debounce handler for search input
-  const [debouncedKeyword, setDebouncedKeyword] =
-    useState<string>(searchKeyword);
-
-  useEffect(() => {
-    const handler = setTimeout(() => {
-      setDebouncedKeyword(searchKeyword);
-    }, 300); // Delay in ms
-
-    return () => {
-      clearTimeout(handler);
-    };
-  }, [searchKeyword]);
 
   // Fetch campaign data
   useEffect(() => {
@@ -66,8 +56,7 @@ const CampaignList = () => {
       userID: userID,
       page: currentPage,
       per_page: revisedHeight,
-      keyword: debouncedKeyword, // Use debounced keyword here
-      searchFields: ["campaignName", "fromName", "fromMail"], // Added search fields
+      name: searchKeyword, // Use debounced keyword here
     };
 
     (async () => {
@@ -83,7 +72,49 @@ const CampaignList = () => {
         console.log(err);
       }
     })();
-  }, [campaignsPerPage, currentPage, setCampaignList, debouncedKeyword]);
+  }, [campaignsPerPage, currentPage, setCampaignList, searchKeyword]);
+
+  // Handle search functionality via socket
+  useEffect(() => {
+    // Ensure the socket is connected only once at the start
+    if (!socket.connected) {
+      socket.connect();
+    }
+
+    const handleSearch = () => {
+      socket.emit("campaigns", {
+        name: searchKeyword || "", // Use an empty string if searchKeyword is undefined
+        userID: userID || "",
+        page: currentPage,
+        per_page: 8,
+      });
+    };
+
+    // Trigger the search
+    handleSearch();
+
+    // Listen for the server's response
+    const handleCampaigns = (data: any) => {
+      console.log(data);
+      
+      setCampaignList(data);
+      setTotalPage(data.totalPages);
+    };
+
+    socket.on("campaigns", handleCampaigns);
+    // Cleanup on component unmount or dependencies change
+    return () => {
+      socket.off("campaigns", handleCampaigns);
+      socket.disconnect(); // Optional, if you want to close the socket on unmount
+    };
+  }, [
+    currentPage,
+    searchKeyword,
+    socket,
+    userID,
+    setCampaignList,
+    setTotalPage,
+  ]);
 
   // Handle create campaign button click
   const handleCreateCampaign = () => {
@@ -105,7 +136,7 @@ const CampaignList = () => {
       setSelectedCampaigns([]);
     } else {
       const allCampaignIds =
-        campaignList?.campaigns?.map((campaign: any) => campaign.id) || [];
+        campaignList?.paginatedData?.map((campaign: any) => campaign.id) || [];
       setSelectedCampaigns(allCampaignIds);
     }
     setSelectAll(!selectAll);
@@ -114,7 +145,7 @@ const CampaignList = () => {
   // Use useEffect to dynamically update "Select All" checkbox state
   useEffect(() => {
     const allCampaignIds =
-      campaignList?.campaigns?.map((campaign: any) => campaign.id) || [];
+      campaignList?.paginatedData?.map((campaign: any) => campaign.id) || [];
     if (
       selectedCampaigns.length === allCampaignIds.length &&
       allCampaignIds.length > 0
@@ -130,7 +161,7 @@ const CampaignList = () => {
     if (selectedCampaigns.length > 0) {
       const res = await destroyCampaign(selectedCampaigns);
       console.log(res);
-      
+
       if (res.status === 201) {
         successNotification(res.message);
 
@@ -146,7 +177,7 @@ const CampaignList = () => {
 
   return (
     <>
-      {campaignList?.campaigns ? (
+      {campaignList?.paginatedData ? (
         <>
           <div className="flex justify-between items-center mb-4">
             {/* Search Bar */}
@@ -195,8 +226,8 @@ const CampaignList = () => {
                 <Table.HeadCell className="w-1/6">Action</Table.HeadCell>
               </Table.Head>
               <Table.Body className="divide-y">
-                {campaignList?.campaigns !== null &&
-                  campaignList?.campaigns.map((items, index) => (
+                {campaignList?.paginatedData !== null &&
+                  campaignList?.paginatedData.map((items, index) => (
                     <Table.Row
                       key={index}
                       className="w-full dark:border-gray-700 dark:bg-transparent"
