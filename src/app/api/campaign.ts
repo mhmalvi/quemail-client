@@ -56,7 +56,7 @@ export const fetchAddedMail = async () => {
           Authorization: parsedToken,
         },
         body: JSON.stringify({
-          userID: userID
+          userID: userID,
         }),
       }
     );
@@ -146,7 +146,7 @@ export const destroyMail = async (id: number | null) => {
 export const recipientsByGroup = async (
   data: string | null,
   page: number,
-  per_page:number | null
+  per_page: number | null
 ) => {
   const token = typeof window !== "undefined" && localStorage.getItem("token");
   const parsedToken = token && JSON.parse(token);
@@ -287,3 +287,33 @@ export const fetchAllItems = async (data: {}) => {
   }
 };
 
+export const destroyCampaign = async (data: number[]) => {
+  const token = typeof window !== "undefined" && localStorage.getItem("token");
+  const parsedToken = token && JSON.parse(token);
+  const userID =
+    typeof window !== "undefined" && localStorage.getItem("userID");
+  try {
+    const result = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/campaign-destroy`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: parsedToken,
+        },
+        body: JSON.stringify({
+          userID: userID,
+          campaignIDs: data,
+        }),
+      }
+    );
+    if (result) {
+      const responseData = await result.json();
+      return responseData;
+    } else {
+      return null;
+    }
+  } catch (error: any) {
+    return error.response;
+  }
+};

@@ -6,6 +6,12 @@ import { showCampaignStore, contactStore } from "@/store/store"; // Make sure th
 import NoContacts from "../../HomeLayoutUI/NoContacts"; // Ensure this is correctly exported from its module
 import { useRouter } from "next/navigation"; // Correct import for Next.js router
 
+import {
+  successNotification,
+  warningNotification,
+} from "@/components/utils/utility";
+import { destroyCampaign } from "@/app/api/campaign";
+
 const CampaignList = () => {
   const router = useRouter();
   const [currentPage, setCurrentPage] = useState(1);
@@ -24,6 +30,20 @@ const CampaignList = () => {
   const setCampaignDetails = showCampaignStore(
     (state) => state.setCampaignDetails
   );
+
+  // Debounce handler for search input
+  const [debouncedKeyword, setDebouncedKeyword] =
+    useState<string>(searchKeyword);
+
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setDebouncedKeyword(searchKeyword);
+    }, 300); // Delay in ms
+
+    return () => {
+      clearTimeout(handler);
+    };
+  }, [searchKeyword]);
 
   // Fetch campaign data
   useEffect(() => {
@@ -46,13 +66,16 @@ const CampaignList = () => {
       userID: userID,
       page: currentPage,
       per_page: revisedHeight,
-      keyword: searchKeyword, // Add search keyword
+      keyword: debouncedKeyword, // Use debounced keyword here
+      searchFields: ["campaignName", "fromName", "fromMail"], // Added search fields
     };
+
     (async () => {
       try {
         const res = await fetchCampaign(data);
         if (res.status === 200) {
           console.log(res);
+
           setCampaignList(res);
           setTotalPage(res.totalPages);
         }
@@ -60,7 +83,7 @@ const CampaignList = () => {
         console.log(err);
       }
     })();
-  }, [campaignsPerPage, currentPage, setCampaignList, searchKeyword]);
+  }, [campaignsPerPage, currentPage, setCampaignList, debouncedKeyword]);
 
   // Handle create campaign button click
   const handleCreateCampaign = () => {
@@ -102,6 +125,25 @@ const CampaignList = () => {
     }
   }, [selectedCampaigns, campaignList]);
 
+  // Function to handle deleting selected groups
+  const handleDeleteCampaign = async () => {
+    if (selectedCampaigns.length > 0) {
+      const res = await destroyCampaign(selectedCampaigns);
+      console.log(res);
+      
+      if (res.status === 201) {
+        successNotification(res.message);
+
+        window.location.href =
+          window.location.pathname + "?reload=" + new Date().getTime();
+      } else {
+        warningNotification("Something went wrong. Please try again.");
+      }
+    } else {
+      console.log("No groups selected for deletion");
+    }
+  };
+
   return (
     <>
       {campaignList?.campaigns ? (
@@ -112,19 +154,19 @@ const CampaignList = () => {
               <h1 className="flex gap-2 m-0 px-4 py-2 xl:text-base text-sm text-dark-black dark:text-slate-300">
                 Showing: <span className="text-brand-color">All Campaigns</span>
               </h1>
+              <div className="flex justify-center items-center border border-violet-200 dark:border-light-black rounded-md">
+                <input
+                  className="w-full bg-transparent p-2 placeholder:text-xs rounded-md text-xs xl:text-base focus:outline-none focus:border-violet-500 focus:ring-1 focus:ring-brand-color outline-none"
+                  placeholder="Search by Campaign Name / Sender Name / Email"
+                  value={searchKeyword}
+                  onChange={(e) => setSearchKeyword(e.target.value)} // Search keyword updated on keystroke
+                />
+              </div>
             </div>
             {/* Delete Button */}
             <button
               className="px-4 py-2 bg-red-500 text-white rounded"
-              onClick={() => {
-                // Handle deletion of selected campaigns here (API call can be made)
-                console.log(
-                  "Selected campaigns to delete: ",
-                  selectedCampaigns
-                );
-                // After deletion, clear selected campaigns
-                setSelectedCampaigns([]);
-              }}
+              onClick={handleDeleteCampaign}
             >
               Delete Selected
             </button>
@@ -135,32 +177,22 @@ const CampaignList = () => {
             id="tableHeight"
           >
             <Table hoverable striped>
-              <Table.Head className="w-full ">
+              <Table.Head className="w-full">
                 <Table.HeadCell className="w-1/12 text-center">
                   <Checkbox
                     checked={selectAll}
                     onChange={handleSelectAllCampaigns}
                   />
                 </Table.HeadCell>
-                <Table.HeadCell className="w-1/6 sticky ">
-                  Campaign Name
-                </Table.HeadCell>
-                <Table.HeadCell className="w-1/6 sticky ">
-                  Sender Name
-                </Table.HeadCell>
-                <Table.HeadCell className="w-1/6 sticky ">
-                  Sender Email
-                </Table.HeadCell>
-                <Table.HeadCell className="w-1/6 sticky ">
+                <Table.HeadCell className="w-1/6">Campaign Name</Table.HeadCell>
+                <Table.HeadCell className="w-1/6">Sender Name</Table.HeadCell>
+                <Table.HeadCell className="w-1/6">Sender Email</Table.HeadCell>
+                <Table.HeadCell className="w-1/6">
                   No. of recipients
                 </Table.HeadCell>
-                <Table.HeadCell className="w-1/6 sticky">
-                  Created At
-                </Table.HeadCell>
-                <Table.HeadCell className="w-1/6 sticky">
-                  Scheduled At
-                </Table.HeadCell>
-                <Table.HeadCell className="w-1/6 sticky">Action</Table.HeadCell>
+                <Table.HeadCell className="w-1/6">Created At</Table.HeadCell>
+                <Table.HeadCell className="w-1/6">Scheduled At</Table.HeadCell>
+                <Table.HeadCell className="w-1/6">Action</Table.HeadCell>
               </Table.Head>
               <Table.Body className="divide-y">
                 {campaignList?.campaigns !== null &&
@@ -187,7 +219,6 @@ const CampaignList = () => {
                       <Table.Cell className="w-1/6">
                         {items.fromName}
                       </Table.Cell>
-
                       <Table.Cell className="w-1/6">
                         <Tooltip
                           content={items.fromMail}
@@ -198,20 +229,10 @@ const CampaignList = () => {
                         </Tooltip>
                       </Table.Cell>
                       <Table.Cell className="w-1/6">{items.count}</Table.Cell>
-                      <Table.Cell
-                        onClick={() => {
-                          console.log("schedule time: ", items.updatedAt);
-                        }}
-                        className="w-1/6 gap-4"
-                      >
+                      <Table.Cell className="w-1/6">
                         {items.updatedAt.split("T")[0]}
                       </Table.Cell>
-                      <Table.Cell
-                        onClick={() => {
-                          console.log("items: ", items);
-                        }}
-                        className="w-1/6"
-                      >
+                      <Table.Cell className="w-1/6">
                         {new Date(items.schedule).toLocaleString()}
                       </Table.Cell>
                       <Table.Cell>
@@ -226,7 +247,7 @@ const CampaignList = () => {
                               senderEmail: items.fromMail,
                               count: items.count,
                             });
-                          }} // Call delete handler
+                          }}
                         >
                           View
                         </button>
