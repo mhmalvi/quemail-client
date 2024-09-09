@@ -17,6 +17,7 @@ interface AddContactData {
   name: string | null;
   email: string | null;
   group: string | null;
+  company: string | null;
 }
 
 const ManualContact: React.FC<ManualContactProps> = ({
@@ -30,6 +31,7 @@ const ManualContact: React.FC<ManualContactProps> = ({
     name: null,
     email: null,
     group: null,
+    company: null,
   });
 
   const [updateLoading, setUpdateLoading] = useState(false);
@@ -51,6 +53,8 @@ const ManualContact: React.FC<ManualContactProps> = ({
   const validateEmail = (email: string) => /\S+@\S+\.\S+/.test(email);
   const validateGroup = (group: string) =>
     /^[a-zA-Z0-9]+(\s?[a-zA-Z0-9]+)*$/.test(group.trim());
+  const validateCompany = (group: string) =>
+    /^[a-zA-Z0-9]+(\s?[a-zA-Z0-9]+)*$/.test(group.trim());
 
   const addContactsManually = async () => {
     const res = await currentResourcesStatus();
@@ -61,7 +65,7 @@ const ManualContact: React.FC<ManualContactProps> = ({
         return;
       }
     }
-    const { name, email, group } = addContactData;
+    const { name, email, group, company } = addContactData;
 
     if (!name || !validateName(name)) {
       warningNotification("Invalid name. Only letters and spaces are allowed.");
@@ -106,7 +110,7 @@ const ManualContact: React.FC<ManualContactProps> = ({
   return (
     <div>
       <div>
-        <Label htmlFor="name" value="Edit name" />
+        <Label htmlFor="name" value="Name" />
         <TextInput
           id="name"
           placeholder="John Doe"
@@ -119,7 +123,7 @@ const ManualContact: React.FC<ManualContactProps> = ({
         />
       </div>
       <div>
-        <Label htmlFor="email" value="Edit email" />
+        <Label htmlFor="email" value="Email" />
         <TextInput
           id="email"
           placeholder="name@company.com"
@@ -132,13 +136,26 @@ const ManualContact: React.FC<ManualContactProps> = ({
         />
       </div>
       <div>
-        <Label htmlFor="group" value="Edit group" />
+        <Label htmlFor="group" value="Group" />
         <TextInput
           id="group"
           placeholder="Group Name"
           value={addContactData.group || ""}
           onChange={(event) =>
             handleEditContactDataChange("group", event.target.value)
+          }
+          className="bg-transparent"
+          required
+        />
+      </div>
+      <div>
+        <Label htmlFor="company" value="Company" />
+        <TextInput
+          id="company"
+          placeholder="Company Name"
+          value={addContactData.company || ""}
+          onChange={(event) =>
+            handleEditContactDataChange("company", event.target.value)
           }
           className="bg-transparent"
           required

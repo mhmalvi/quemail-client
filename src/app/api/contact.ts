@@ -38,6 +38,7 @@ export const importContactManually = async (data: {
   name: string | null;
   email: string | null;
   group: string | null;
+  company: string | null;
 }) => {
   const token = typeof window !== "undefined" && localStorage.getItem("token");
   const parsedToken = token && JSON.parse(token);
@@ -55,6 +56,7 @@ export const importContactManually = async (data: {
           name: data.name,
           email: data.email,
           group: data.group,
+          company: data.company,
         }),
       }
     );
