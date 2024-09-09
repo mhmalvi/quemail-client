@@ -65,7 +65,7 @@ const ManualContact: React.FC<ManualContactProps> = ({
         return;
       }
     }
-    const { name, email, group,company } = addContactData;
+    const { name, email, group, company } = addContactData;
 
     if (!name || !validateName(name)) {
       warningNotification("Invalid name. Only letters and spaces are allowed.");
