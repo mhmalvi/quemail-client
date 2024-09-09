@@ -106,6 +106,9 @@ const GroupTable: React.FC<GroupTableProps> = ({
                     <Table.Cell className="w-1/5 text-center">
                       {items.json.group}
                     </Table.Cell>
+                    <Table.Cell className="w-1/5 text-center">
+                      {items.json.group}
+                    </Table.Cell>
                     <Table.Cell className="w-1/5 text-right">
                       {" "}
                       {items.updatedAt.split("T")[0]}
@@ -125,6 +128,9 @@ const GroupTable: React.FC<GroupTableProps> = ({
                           checked={selectedGroups.includes(group.group)}
                           onChange={() => handleSelectGroup(group.group)}
                         />
+                      </Table.Cell>
+                      <Table.Cell className="w-1/5 text-center">
+                        {group?.group}
                       </Table.Cell>
                       <Table.Cell className="w-1/5 text-center">
                         {group?.group}
