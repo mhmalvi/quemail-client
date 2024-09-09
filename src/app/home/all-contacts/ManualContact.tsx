@@ -53,8 +53,8 @@ const ManualContact: React.FC<ManualContactProps> = ({
   const validateEmail = (email: string) => /\S+@\S+\.\S+/.test(email);
   const validateGroup = (group: string) =>
     /^[a-zA-Z0-9]+(\s?[a-zA-Z0-9]+)*$/.test(group.trim());
-  const validateCompany = (company: string) =>
-    /^[a-zA-Z0-9]+(\s?[a-zA-Z0-9]+)*$/.test(company.trim());
+  // const validateCompany = (company: string) =>
+  //   /^[a-zA-Z0-9]+(\s?[a-zA-Z0-9]+)*$/.test(company.trim());
 
   const addContactsManually = async () => {
     const res = await currentResourcesStatus();
@@ -65,7 +65,7 @@ const ManualContact: React.FC<ManualContactProps> = ({
         return;
       }
     }
-    const { name, email, group, company } = addContactData;
+    const { name, email, group } = addContactData;
 
     if (!name || !validateName(name)) {
       warningNotification("Invalid name. Only letters and spaces are allowed.");
