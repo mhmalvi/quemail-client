@@ -150,7 +150,8 @@ const ContactTable = () => {
     return (
       editContactData.json.name !== initialEditContactData.json.name ||
       editContactData.json.email !== initialEditContactData.json.email ||
-      editContactData.json.group !== initialEditContactData.json.group
+      editContactData.json.group !== initialEditContactData.json.group ||
+      editContactData.json.company !== initialEditContactData.json.company
     );
   }, [editContactData, initialEditContactData]);
 
@@ -447,6 +448,19 @@ const ContactTable = () => {
               value={editContactData.json.group || ""}
               onChange={(event) =>
                 handleEditContactDataChange("group", event.target.value)
+              }
+              className="bg-tranparent"
+              required
+            />
+          </div>
+          <div>
+            <Label htmlFor="company" value="Edit Company" />
+            <TextInput
+              id="company"
+              placeholder="company"
+              value={editContactData.json.company || ""}
+              onChange={(event) =>
+                handleEditContactDataChange("company", event.target.value)
               }
               className="bg-tranparent"
               required
