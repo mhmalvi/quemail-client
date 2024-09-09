@@ -50,6 +50,7 @@ const ContactTable = () => {
       name: "",
       email: "",
       group: "",
+      company: "",
     },
   });
 
@@ -67,6 +68,7 @@ const ContactTable = () => {
         name: "",
         email: "",
         group: "",
+        company: "",
       },
     });
   const [openDeletePopover, setOpenDeletePopover] = useState<null | number>(
@@ -394,6 +396,7 @@ const ContactTable = () => {
               name: "",
               email: "",
               group: "",
+              company: "",
             },
           }));
           setInitialEditContactData((prevData) => ({
@@ -403,6 +406,7 @@ const ContactTable = () => {
               name: "",
               email: "",
               group: "",
+              company: "",
             },
           }));
         }}

@@ -21,6 +21,7 @@ export type EditContactData = {
     name: string | null;
     email: string | null;
     group: string | null;
+    company: string | null;
   };
 };
 
@@ -62,6 +63,7 @@ export type ContactType = {
     name: string | null;
     email: string | null;
     group: string | null;
+    company: string | null;
   };
   userID: number;
 };
