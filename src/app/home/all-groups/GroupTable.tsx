@@ -80,6 +80,9 @@ const GroupTable: React.FC<GroupTableProps> = ({
               />
             </Table.HeadCell>
             <Table.HeadCell className="w-1/5 sticky text-center">
+              Batch No
+            </Table.HeadCell>
+            <Table.HeadCell className="w-1/5 sticky text-center">
               Group Name
             </Table.HeadCell>
             <Table.HeadCell className="w-1/5 sticky text-right ">

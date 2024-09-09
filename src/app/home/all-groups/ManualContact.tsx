@@ -17,6 +17,7 @@ interface AddContactData {
   name: string | null;
   email: string | null;
   group: string | null;
+  company: string | null;
 }
 
 const ManualContact: React.FC<ManualContactProps> = ({
@@ -30,6 +31,7 @@ const ManualContact: React.FC<ManualContactProps> = ({
     name: null,
     email: null,
     group: null,
+    company: null,
   });
 
   const [updateLoading, setUpdateLoading] = useState(false);
