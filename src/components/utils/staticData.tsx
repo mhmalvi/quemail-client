@@ -137,11 +137,21 @@ export const fields = [
   {
     label: "Group",
     key: "group",
-    alternateMatches: ["group", "tag", "companies", "company"],
+    alternateMatches: ["group", "tag"],
     fieldType: {
       type: "input",
     },
     example: "Group1",
+    validations: [],
+  },
+  {
+    label: "Company",
+    key: "company",
+    alternateMatches: ["company"],
+    fieldType: {
+      type: "input",
+    },
+    example: "Company1",
     validations: [],
   },
 ] as const;
