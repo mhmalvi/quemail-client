@@ -87,13 +87,13 @@ const ManualContact: React.FC<ManualContactProps> = ({
       return;
     }
 
-    if (company && !validateCompany(company)) {
-      warningNotification(
-        "Invalid company name. Only letters, numbers, and spaces are allowed."
-      );
-      setUpdateLoading(false);
-      return;
-    }
+    // if (company && !validateCompany(company)) {
+    //   warningNotification(
+    //     "Invalid company name. Only letters, numbers, and spaces are allowed."
+    //   );
+    //   setUpdateLoading(false);
+    //   return;
+    // }
 
     setUpdateLoading(true);
 
