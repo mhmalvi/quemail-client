@@ -53,8 +53,8 @@ const ManualContact: React.FC<ManualContactProps> = ({
   const validateEmail = (email: string) => /\S+@\S+\.\S+/.test(email);
   const validateGroup = (group: string) =>
     /^[a-zA-Z0-9]+(\s?[a-zA-Z0-9]+)*$/.test(group.trim());
-  const validateCompany = (group: string) =>
-    /^[a-zA-Z0-9]+(\s?[a-zA-Z0-9]+)*$/.test(group.trim());
+  const validateCompany = (company: string) =>
+    /^[a-zA-Z0-9]+(\s?[a-zA-Z0-9]+)*$/.test(company.trim());
 
   const addContactsManually = async () => {
     const res = await currentResourcesStatus();
