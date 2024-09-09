@@ -50,6 +50,7 @@ const ContactTable = () => {
       name: "",
       email: "",
       group: "",
+      company: "",
     },
   });
 
@@ -67,6 +68,7 @@ const ContactTable = () => {
         name: "",
         email: "",
         group: "",
+        company: "",
       },
     });
   const [openDeletePopover, setOpenDeletePopover] = useState<null | number>(
