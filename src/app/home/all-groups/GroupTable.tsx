@@ -18,6 +18,9 @@ const GroupTable: React.FC<GroupTableProps> = ({
   const groupContacts = contactStore((state) => state.groupContacts);
   const allGroupList = contactStore((state) => state.allGroupList);
 
+  console.log(allGroupList, groupContacts);
+  
+
   const setCurrentPage = contactStore((state) => state.setCurrentPage);
   const setCurrentGroupPage = contactStore(
     (state) => state.setCurrentGroupPage
@@ -104,7 +107,7 @@ const GroupTable: React.FC<GroupTableProps> = ({
                       />
                     </Table.Cell>
                     <Table.Cell className="w-1/5 text-center">
-                      {items.json.group}
+                      {items.json.batchID}
                     </Table.Cell>
                     <Table.Cell className="w-1/5 text-center">
                       {items.json.group}
@@ -130,7 +133,7 @@ const GroupTable: React.FC<GroupTableProps> = ({
                         />
                       </Table.Cell>
                       <Table.Cell className="w-1/5 text-center">
-                        {group?.group}
+                        {group?.batchID}
                       </Table.Cell>
                       <Table.Cell className="w-1/5 text-center">
                         {group?.group}
