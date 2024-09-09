@@ -56,7 +56,7 @@ export const importContactManually = async (data: {
           name: data.name,
           email: data.email,
           group: data.group,
-          company: data.company,
+          company: data.company ? data.company : null,
         }),
       }
     );
