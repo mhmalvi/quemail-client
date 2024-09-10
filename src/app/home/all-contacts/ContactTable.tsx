@@ -188,6 +188,18 @@ const ContactTable = () => {
               Company
             </Table.HeadCell>
             <Table.HeadCell className="w-1/5 sticky text-center ">
+              Level 1
+            </Table.HeadCell>
+            <Table.HeadCell className="w-1/5 sticky text-center ">
+              Level 2
+            </Table.HeadCell>
+            <Table.HeadCell className="w-1/5 sticky text-center ">
+              Level 3
+            </Table.HeadCell>
+            <Table.HeadCell className="w-1/5 sticky text-center ">
+              Level 4
+            </Table.HeadCell>
+            <Table.HeadCell className="w-1/5 sticky text-center ">
               Date Added
             </Table.HeadCell>
             <Table.HeadCell className="w-1/5 sticky text-center">
@@ -216,6 +228,18 @@ const ContactTable = () => {
                     </Table.Cell>
                     <Table.Cell className="text-center">
                       {items.company || "Empty"}
+                    </Table.Cell>
+                    <Table.Cell className="text-center">
+                      {items.json.level1 || "Empty"}
+                    </Table.Cell>
+                    <Table.Cell className="text-center">
+                      {items.json.level2 || "Empty"}
+                    </Table.Cell>
+                    <Table.Cell className="text-center">
+                      {items.json.level3 || "Empty"}
+                    </Table.Cell>
+                    <Table.Cell className="text-center">
+                      {items.json.level4 || "Empty"}
                     </Table.Cell>
                     <Table.Cell className="text-center">
                       {" "}
@@ -298,6 +322,18 @@ const ContactTable = () => {
                     </Table.Cell>
                     <Table.Cell className="text-center">
                       {contact.company || "Empty"}
+                    </Table.Cell>
+                    <Table.Cell className="text-center">
+                      {contact.json.level1 || "Empty"}
+                    </Table.Cell>
+                    <Table.Cell className="text-center">
+                      {contact.json.level2 || "Empty"}
+                    </Table.Cell>
+                    <Table.Cell className="text-center">
+                      {contact.json.level3 || "Empty"}
+                    </Table.Cell>
+                    <Table.Cell className="text-center">
+                      {contact.json.level4 || "Empty"}
                     </Table.Cell>
                     <Table.Cell className="text-center">
                       {contact.updatedAt.split("T")[0]}
