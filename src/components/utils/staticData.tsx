@@ -154,6 +154,47 @@ export const fields = [
     example: "Company1",
     validations: [],
   },
+  {
+    label: "Level1",
+    key: "level1",
+    alternateMatches: ["level1"],
+    fieldType: {
+      type: "input",
+    },
+    example: "level1",
+    validations: [],
+  },
+  {
+    label: "Level2",
+    key: "level2",
+    alternateMatches: ["level2"],
+    fieldType: {
+      type: "input",
+    },
+    example: "level2",
+    validations: [],
+  },
+  {
+    label: "Level3",
+    key: "level3",
+    alternateMatches: ["level3"],
+    fieldType: {
+      type: "input",
+    },
+    example: "level3",
+    validations: [],
+  },
+  {
+    label: "Level4",
+    key: "level4",
+    alternateMatches: ["level4"],
+    fieldType: {
+      type: "input",
+    },
+    example: "level4",
+    validations: [],
+  },
+ 
 ] as const;
 
 export const pricingplan1 = [
