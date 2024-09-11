@@ -18,6 +18,7 @@ import {
   landingState,
   passwordState,
   campaignStatus,
+  PaymentDueStoreState
 } from "@/components/utils/types";
 import { create } from "zustand";
 
@@ -60,6 +61,11 @@ export const sideBarStore = create<utilState>((set) => ({
 export const themeStore = create<themeState & themeAction>((set) => ({
   theme: "",
   setTheme: (theme) => set(() => ({ theme: theme })),
+}));
+
+export const paymentDue = create<PaymentDueStoreState>((set) => ({
+  hasDue: false,
+  setHasDue: (state: boolean) => set(() => ({ hasDue: state })),
 }));
 
 export const contactStore = create<ContactStoreState>((set) => ({

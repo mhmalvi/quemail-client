@@ -151,6 +151,7 @@ const HomeCard = () => {
       console.log(error);
     }
   };
+
   useEffect(() => {
     setTimeout(() => {
       (async () => {
