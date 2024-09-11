@@ -28,8 +28,7 @@ const ContactTable = () => {
   const groupContacts = contactStore((state) => state.groupContacts);
   const allContactList = contactStore((state) => state.allContactList);
   const setCurrentPage = contactStore((state) => state.setCurrentPage);
-  console.log(allContactList);
-
+  
   const setCurrentGroupPage = contactStore(
     (state) => state.setCurrentGroupPage
   );
@@ -172,37 +171,37 @@ const ContactTable = () => {
       <div className="flex flex-col gap-4 h-5/6 overflow-auto">
         <Table hoverable striped id="tableHeight">
           <Table.Head className="w-full ">
-            <Table.HeadCell className="w-1/5 sticky text-center ">
+            <Table.HeadCell className="sticky text-center ">
               Batch No
             </Table.HeadCell>
-            <Table.HeadCell className="w-1/5 sticky text-center ">
+            <Table.HeadCell className="sticky text-center ">
               Name
             </Table.HeadCell>
-            <Table.HeadCell className="w-1/5 sticky text-center ">
+            <Table.HeadCell className="sticky text-center ">
               Email
             </Table.HeadCell>
-            <Table.HeadCell className="w-1/5 sticky text-center ">
+            <Table.HeadCell className="sticky text-center ">
               Group
             </Table.HeadCell>
-            <Table.HeadCell className="w-1/5 sticky text-center ">
+            <Table.HeadCell className="sticky text-center ">
               Company
             </Table.HeadCell>
-            <Table.HeadCell className="w-1/5 sticky text-center ">
+            <Table.HeadCell className="sticky text-center ">
               Level 1
             </Table.HeadCell>
-            <Table.HeadCell className="w-1/5 sticky text-center ">
+            <Table.HeadCell className="sticky text-center ">
               Level 2
             </Table.HeadCell>
-            <Table.HeadCell className="w-1/5 sticky text-center ">
+            <Table.HeadCell className="sticky text-center ">
               Level 3
             </Table.HeadCell>
-            <Table.HeadCell className="w-1/5 sticky text-center ">
+            <Table.HeadCell className="sticky text-center ">
               Level 4
             </Table.HeadCell>
-            <Table.HeadCell className="w-1/5 sticky text-center ">
+            <Table.HeadCell className="sticky text-center ">
               Date Added
             </Table.HeadCell>
-            <Table.HeadCell className="w-1/5 sticky text-center">
+            <Table.HeadCell className="sticky text-center">
               Action
             </Table.HeadCell>
           </Table.Head>

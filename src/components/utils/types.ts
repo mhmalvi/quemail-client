@@ -72,6 +72,11 @@ export type GroupType = {
   group: string | null;
 };
 
+export type PaymentDueStoreState = {
+  hasDue: boolean;
+  setHasDue: (state: boolean) => void;
+};
+
 export type ContactStoreState = {
   hasData: boolean;
   csvData: any[] | null;

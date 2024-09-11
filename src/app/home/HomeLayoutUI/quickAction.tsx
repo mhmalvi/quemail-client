@@ -7,8 +7,12 @@ import Link from "next/link";
 import dynamic from "next/dynamic";
 import { Modal } from "flowbite-react";
 import ManualContact from "@/app/home/all-contacts/ManualContact";
+import { paymentDue } from "@/store/store";
 
 const QuickActions = () => {
+  const hasDue = paymentDue((state) => state.hasDue);
+  console.log("coming from quickaction", hasDue);
+
   const [actionClick, setActionClick] = useState({
     show: "",
   });
@@ -17,7 +21,7 @@ const QuickActions = () => {
   });
   const [openAddContactModal, setOpenAddContactModal] = useState(false);
   return (
-    <div className="step-4 border dark:border-none border-violet-200 xl:w-full w-full h-full dark:bg-light-glass bg-white shadow-md backdrop-blur-xl rounded-md p-4 flex flex-col gap-4 overflow-hidden">
+    <div className="relative step-4 border dark:border-none border-violet-200 xl:w-full w-full h-full dark:bg-light-glass bg-white shadow-md backdrop-blur-xl rounded-md p-4 flex flex-col gap-4 overflow-hidden">
       <h1 className="xl:text-xl text-base m-0 p-0 dark:text-white text-dark-black">
         Quick actions
       </h1>
@@ -103,6 +107,19 @@ const QuickActions = () => {
           </div>
         </Link>
       </div>
+      {hasDue && 
+      <div className="absolute top-0 left-0 xl:w-full w-full h-full flex items-center justify-center dark:bg-[#212121bf] bg-[#ffffffbf]">
+        <p className="text-red-600 dark:text-red-600 font-semibold">
+          You have Payment Deu, Please go to
+          <Link
+            href="/home/billing"
+            className="px-4 py-2 mt-3 font-normal bg-brand-color text-white rounded-md flex items-center justify-center gap-2"
+          >
+            Billing Dashboard
+          </Link>
+        </p>
+      </div>
+      }
 
       {actionClick.show === "importContacts" && (
         <ImportCSV openModal={actionClick} setOpenModal={setActionClick} />
