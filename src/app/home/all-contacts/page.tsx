@@ -15,8 +15,12 @@ import {
 } from "@/components/styles/button";
 import ManualContact from "./ManualContact";
 import { io } from "socket.io-client";
+import { paymentDue } from "@/store/store";
+import Link from "next/link";
 
 const AllContacts: React.FC = () => {
+  const hasDue = paymentDue((state) => state.hasDue);
+  const setHasDue = paymentDue((state) => state.setHasDue);
   const groupContacts = contactStore((state) => state.groupContacts);
   const allContactList = contactStore((state) => state.allContactList);
   const setAllContactList = contactStore((state) => state.setAllContactList);
@@ -62,6 +66,35 @@ const AllContacts: React.FC = () => {
     setAllContactPerPage,
     setTotalPages,
   ]);
+
+  // Handle payment due via socket
+  useEffect(() => {
+    // Ensure the socket is connected only once at the start
+    if (!socket.connected) {
+      socket.connect();
+    }
+
+    const handleSearch = () => {
+      socket.emit("due", {
+        userID: userID || "",
+      });
+    };
+
+    // Trigger the search
+    handleSearch();
+
+    // Listen for the server's response
+    const handleDue = (data: any) => {
+      setHasDue(data);
+    };
+
+    socket.on("due", handleDue);
+    // Cleanup on component unmount or dependencies change
+    return () => {
+      socket.off("due", handleDue);
+      socket.disconnect(); // Optional, if you want to close the socket on unmount
+    };
+  }, [socket, userID, setHasDue]);
 
   // Handle search functionality via socket
   useEffect(() => {
@@ -130,34 +163,44 @@ const AllContacts: React.FC = () => {
               </div>
             </div>
             <div className="flex items-center gap-4">
-              <Dropdown
-                label=""
-                placement="bottom"
-                renderTrigger={() => (
-                  <h1 className={`${BIG_BUTTON_STYLES} cursor-pointer`}>
-                    Add Contacts +
-                  </h1>
-                )}
-              >
-                <Dropdown.Item
-                  className="dark:text-slate-300 text-black"
-                  onClick={() => {
-                    setOpenModal({
-                      show: "importContacts",
-                    });
-                  }}
+              {hasDue && (
+                <p className="text-red-600 dark:text-red-600 font-semibold">
+                  You have Payment Due, Please go to{" "}
+                  <Link href="/home/billing" className="underline">
+                    Billing Dashboard
+                  </Link>
+                </p>
+              )}
+              {!hasDue && (
+                <Dropdown
+                  label=""
+                  placement="bottom"
+                  renderTrigger={() => (
+                    <h1 className={`${BIG_BUTTON_STYLES} cursor-pointer`}>
+                      Add Contacts +
+                    </h1>
+                  )}
                 >
-                  Import Contacts
-                </Dropdown.Item>
-                <Dropdown.Item
-                  onClick={() => {
-                    setOpenAddContactModal(true);
-                  }}
-                  className="dark:text-slate-300 text-black"
-                >
-                  Add manually
-                </Dropdown.Item>
-              </Dropdown>
+                  <Dropdown.Item
+                    className="dark:text-slate-300 text-black"
+                    onClick={() => {
+                      setOpenModal({
+                        show: "importContacts",
+                      });
+                    }}
+                  >
+                    Import Contacts
+                  </Dropdown.Item>
+                  <Dropdown.Item
+                    onClick={() => {
+                      setOpenAddContactModal(true);
+                    }}
+                    className="dark:text-slate-300 text-black"
+                  >
+                    Add manually
+                  </Dropdown.Item>
+                </Dropdown>
+              )}
             </div>
           </div>
 

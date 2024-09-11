@@ -1,10 +1,18 @@
 import { stripeINFO, stripeSubscriptionInfo } from "@/app/api/billing";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { subscriptionDetails } from "@/app/api/billing";
 import { Spinner } from "flowbite-react";
 import PackageCard from "./packageCard";
+import { paymentDue } from "@/store/store";
+import { io } from "socket.io-client";
 
 const CardPlan = () => {
+  const hasDue = paymentDue((state) => state.hasDue);
+  const setHasDue = paymentDue((state) => state.setHasDue);
+  const userID = typeof window !== "undefined" && localStorage.getItem("userID");
+  const socket = useMemo(() => io("https://backend.quemailer.com"), []);
+  console.log("coming from billing page", hasDue);
+
   const [packageName, setPackageName] = useState<string | null>(null);
   const [createdTime, setCreatedTime] = useState<Date | string | null>(null);
   const [endTime, setEndTime] = useState<Date | string | null>(null);
@@ -65,6 +73,35 @@ const CardPlan = () => {
     checkIfSubscriptionExist();
   }, []);
 
+  // Handle payment due via socket
+  useEffect(() => {
+    // Ensure the socket is connected only once at the start
+    if (!socket.connected) {
+      socket.connect();
+    }
+
+    const handleSearch = () => {
+      socket.emit("due", {
+        userID: userID || "",
+      });
+    };
+
+    // Trigger the search
+    handleSearch();
+
+    // Listen for the server's response
+    const handleDue = (data: any) => {
+      setHasDue(data);
+    };
+
+    socket.on("due", handleDue);
+    // Cleanup on component unmount or dependencies change
+    return () => {
+      socket.off("due", handleDue);
+      socket.disconnect(); // Optional, if you want to close the socket on unmount
+    };
+  }, [socket, userID, setHasDue]);
+
   // useEffect(() => {
   //   if (staticEndTime) {
   //     const interval = setInterval(() => {
@@ -110,6 +147,14 @@ const CardPlan = () => {
                 {endTime.toLocaleString()}
               </div>
             </div>
+            {hasDue && (
+              <div className="xl:text-base m-0 p-0 text-brand-color lg:text-sm">
+                Payment Stats:{" "}
+                <div className="xl:text-base m-0 p-0 dark:text-slate-300 text-dark-black lg:text-sm ">
+                  Due
+                </div>
+              </div>
+            )}
           </div>
         </div>
       ) : (
