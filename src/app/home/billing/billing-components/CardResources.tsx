@@ -70,7 +70,7 @@ const CardResources = () => {
                 </span>
                 <span className="text-base m-0 p-0 dark:text-white text-dark-black text-center">
                   {currentResources?.currentContacts}/
-                  {totalResources?.currentContacts}
+                  {totalResources?.currentContacts} &nbsp; per day
                 </span>
                 {currentResources?.currentContacts &&
                 totalResources?.currentContacts ? (
@@ -95,7 +95,7 @@ const CardResources = () => {
                   {currentResources?.currentEmails
                     ? currentResources?.currentEmails
                     : "0"}
-                  /{totalResources?.currentEmails}
+                  /{totalResources?.currentEmails} &nbsp; per day
                 </span>
                 {currentResources?.currentEmails &&
                 totalResources?.currentEmails ? (

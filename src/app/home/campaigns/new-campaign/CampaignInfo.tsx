@@ -1,15 +1,19 @@
 "use client";
 import { fetchAddedMail } from "@/app/api/campaign";
 import { fields } from "@/components/utils/staticData";
+import Link from "next/link";
 import {
   successNotification,
   warningNotification,
 } from "@/components/utils/utility";
 import { campaignStore } from "@/store/store";
 import { Dropdown, Tooltip } from "flowbite-react";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import Image from "next/image";
 import Images from "@/components/utils/images";
+import { paymentDue } from "@/store/store";
+import { io } from "socket.io-client";
+
 interface MailAdded {
   google?: {
     email: string;
@@ -18,6 +22,14 @@ interface MailAdded {
   };
 }
 const CampaignInfo = ({ tabsRef }: any) => {
+  const hasDue = paymentDue((state) => state.hasDue);
+  const setHasDue = paymentDue((state) => state.setHasDue);
+  const socket = useMemo(() => io("https://backend.quemailer.com"), []);
+  const userID =
+    typeof window !== "undefined" && localStorage.getItem("userID");
+
+  console.log("coming from campaigninfo", hasDue);
+
   const [mailAdded, setMailAdded] = useState<MailAdded | null>(null);
 
   const newCampaign = campaignStore((state) => state.newCampaign);
@@ -99,6 +111,35 @@ const CampaignInfo = ({ tabsRef }: any) => {
       },
     }));
   };
+
+  // Handle search functionality via socket
+  useEffect(() => {
+    // Ensure the socket is connected only once at the start
+    if (!socket.connected) {
+      socket.connect();
+    }
+
+    const handleSearch = () => {
+      socket.emit("due", {
+        userID: userID || "",
+      });
+    };
+
+    // Trigger the search
+    handleSearch();
+
+    // Listen for the server's response
+    const handleDue = (data: any) => {
+      setHasDue(data);
+    };
+
+    socket.on("due", handleDue);
+    // Cleanup on component unmount or dependencies change
+    return () => {
+      socket.off("due", handleDue);
+      socket.disconnect(); // Optional, if you want to close the socket on unmount
+    };
+  }, [socket, userID, setHasDue]);
 
   useEffect(() => {
     (async () => {
@@ -291,6 +332,19 @@ const CampaignInfo = ({ tabsRef }: any) => {
           </button>
         </div>
       </div>
+      {hasDue && (
+        <div className="absolute top-0 left-0 xl:w-full w-full h-full flex items-center justify-center dark:bg-[#212121bf] bg-[#ffffffbf]">
+          <p className="text-red-600 dark:text-red-600 font-semibold">
+            You have Payment Due, Please go to
+            <Link
+              href="/home/billing"
+              className="px-4 py-2 mt-3 font-normal bg-brand-color text-white rounded-md flex items-center justify-center gap-2"
+            >
+              Billing Dashboard
+            </Link>
+          </p>
+        </div>
+      )}
     </div>
   );
 };
