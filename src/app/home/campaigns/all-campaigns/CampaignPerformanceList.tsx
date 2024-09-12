@@ -23,6 +23,9 @@ const CampaignPerformanceList = () => {
   );
   const campaignItemList = showCampaignStore((state) => state.campaignItemList);
 
+  console.log('ami ashchi cpl', campaignItemList);
+  
+
   //currently selected campaign
   const currentCampaign = showCampaignStore(
     (state) => state.campaignDetails?.campaignName
@@ -119,6 +122,9 @@ const CampaignPerformanceList = () => {
                     <Table.HeadCell className="w-1/4 text-center">
                       Opened
                     </Table.HeadCell>
+                    <Table.HeadCell className="w-1/4 text-center">
+                      Bounced
+                    </Table.HeadCell>
                     {/* <Table.HeadCell className="w-1/4 text-center">
                       Clicked
                     </Table.HeadCell> */}
@@ -170,6 +176,14 @@ const CampaignPerformanceList = () => {
                               } w-full text-center flex justify-center`}
                             >
                               {items.open === 0 ? <TbX /> : <TbCheck />}
+                            </div>
+                          </Table.Cell>
+                          <Table.Cell className="w-1/4">
+                            <div
+                              className={`${items.bounce === 0 && "text-red-400"} ${items.bounce === 1 && "text-green-500"} w-full text-center flex justify-center`}
+                            >
+                              {items.bounce === 0 && <TbX /> }
+                              {items.bounce === 1 && <TbCheck />}
                             </div>
                           </Table.Cell>
                           {/* <Table.Cell className="w-1/5 text-center">
