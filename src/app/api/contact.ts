@@ -32,7 +32,6 @@ export const importContact = async (data: {}) => {
     return error.response;
   }
 };
-
 export const importContactManually = async (data: {
   userID: string | false | null;
   name: string | null;
