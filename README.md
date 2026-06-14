@@ -1,4 +1,6 @@
 <!-- repo-card -->
+![quemail-client](docs/assets/screenshot.png)
+
 ![quemail-client](docs/assets/social-card.png)
 
 ![quemail-client — architecture](docs/assets/architecture.png)
