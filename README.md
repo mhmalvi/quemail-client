@@ -1,3 +1,6 @@
+<!-- repo-card -->
+![quemail-client](docs/assets/social-card.png)
+
 # QueMail Client
 
 The frontend application for the QueMail email marketing platform. Built with Next.js 14 and TypeScript, it provides a modern dashboard for managing email campaigns, contacts, templates, and analytics.
